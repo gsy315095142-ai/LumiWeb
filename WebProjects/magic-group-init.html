@@ -1,0 +1,138 @@
+<!-- 数据初始化流程 + 错误处理 + API 汇总（从 magic-group.html 拆分） -->
+
+<!-- 6. 数据初始化流程 -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="1 2 1 14 5 14 5 22"/><polyline points="23 2 23 14 19 14 19 22"/><line x1="5" y1="14" x2="19" y2="14"/>
+      </svg>
+    </div>
+    数据初始化流程
+  </div>
+
+  <div class="feature-card">
+    <h4>页面加载流程</h4>
+    <div class="flow-steps">
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <h4>获取 group_code</h4>
+          <p>从页面参数中获取 <code>group_code</code>，为空则直接返回上一页。</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <h4>等待登录</h4>
+          <p>轮询 <code>user_info</code>（每 300ms），确保静默登录完成。未主动登录则弹出手机号授权。</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <h4>加载占位数据</h4>
+          <p>调用 <code>/mz/getGroupSeatData</code>（POST），传入 <code>group_code</code>。</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <h4>数据组装</h4>
+          <p>后端返回 <code>rounds</code>（场次列表）和 <code>roles</code>（角色列表）。前端按 <code>round_id</code> 分组，补齐虚拟位和空白格。</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot"></div></div>
+        <div class="flow-content">
+          <h4>页面渲染</h4>
+          <p>设置日期、星期、团队人数统计、门店信息、店员权限标记等。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="feature-card">
+    <h4>后端返回数据结构</h4>
+    <table class="info-table">
+      <thead><tr><th>字段</th><th>类型</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td><code>selectData</code></td><td>String</td><td>预约日期（YYYY-MM-DD）</td></tr>
+        <tr><td><code>rounds</code></td><td>Array</td><td>场次列表（id, time_start, time_end, player_max, status, room_show_name）</td></tr>
+        <tr><td><code>roles</code></td><td>Array</td><td>角色列表（id, round_id, nickname, gender, actived_phone, created_by, status）</td></tr>
+        <tr><td><code>groupNum</code></td><td>Number</td><td>团票可预约总人数上限</td></tr>
+        <tr><td><code>groupMaster</code></td><td>Number</td><td>团队负责人用户 ID</td></tr>
+        <tr><td><code>store_name</code></td><td>String</td><td>所属门店名称</td></tr>
+        <tr><td><code>store_id</code></td><td>Number</td><td>所属门店 ID</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="feature-card">
+    <h4>时间格式化</h4>
+    <p>场次时间（<code>time_start</code>、<code>time_end</code>）后端返回含秒数（如 <code>10:00:00</code>），前端自动截取为 <code>HH:MM</code> 格式。</p>
+  </div>
+</div>
+
+<!-- 7. 错误处理与特殊场景 -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+      </svg>
+    </div>
+    错误处理与特殊场景
+  </div>
+
+  <div class="feature-card">
+    <h4>错误码处理</h4>
+    <table class="info-table">
+      <thead><tr><th>错误码</th><th>处理方式</th></tr></thead>
+      <tbody>
+        <tr><td><code>code > 0</code>（通用）</td><td>Toast 提示后端返回的 message</td></tr>
+        <tr><td><code>code = 700</code></td><td>数据已失效/过期，Toast 后延迟 2 秒自动跳回首页（<code>reLaunch</code>）</td></tr>
+        <tr><td>数据为空（<code>!data</code>）</td><td>Toast「数据为空」后跳回首页</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="feature-card">
+    <h4>门店自动切换</h4>
+    <p>如果入口参数包含 <code>switch_store_id</code>，页面加载时自动写入 <code>currentStoreId</code>，实现跨门店团票的无感切换。</p>
+  </div>
+
+  <div class="feature-card">
+    <h4>页面生命周期保护</h4>
+    <p><code>onHide</code> 和 <code>onUnload</code> 时自动清除登录轮询定时器（<code>setInterval</code>），防止内存泄漏。</p>
+  </div>
+</div>
+
+<!-- 8. API 汇总 -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+      </svg>
+    </div>
+    API 接口汇总
+  </div>
+
+  <div class="feature-card">
+    <table class="info-table">
+      <thead><tr><th>接口</th><th>方法</th><th>用途</th></tr></thead>
+      <tbody>
+        <tr><td><code>/mz/getGroupSeatData</code></td><td>POST</td><td>获取团票占位网格数据</td></tr>
+        <tr><td><code>/mz/reserveGroupSeat</code></td><td>POST</td><td>占位（创建/更新角色）</td></tr>
+        <tr><td><code>/mz/deleteGroupSeat</code></td><td>POST</td><td>删除角色占位</td></tr>
+        <tr><td><code>/mz/adjustGroupSeat</code></td><td>POST</td><td>换位调整</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tip-box">
+    <div class="tip-box-title">📌 管理端团队接口</div>
+    <p>中控台的团队批量预约相关接口（<code>/mz-admin/orderGameRoundByGroup</code>、<code>/mz-admin/cancelGroupRound</code>、<code>/mz-admin/getGroupFile</code>）详见模块 08「中控台」。</p>
+  </div>
+</div>

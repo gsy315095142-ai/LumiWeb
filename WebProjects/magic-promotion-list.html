@@ -1,0 +1,119 @@
+<!-- 活动列表管理（从 magic-promotion.html 拆分） -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/>
+      </svg>
+    </div>
+    活动列表管理
+  </div>
+
+  <div class="feature-card">
+    <h4>列表数据加载</h4>
+    <p>调用 <code>/mz-admin/promotionList</code>，返回所有活动列表。每个活动包含：</p>
+    <table class="info-table">
+      <thead><tr><th>字段</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td><code>id</code></td><td>活动 ID</td></tr>
+        <tr><td><code>name</code></td><td>活动名称</td></tr>
+        <tr><td><code>status</code></td><td>状态（0=未启用/1=已启用）</td></tr>
+        <tr><td><code>store_ids</code></td><td>适用门店 ID 数组</td></tr>
+        <tr><td><code>start_at</code> / <code>end_at</code></td><td>活动期限（起止日期时间）</td></tr>
+        <tr><td><code>valid_type</code></td><td>优惠券有效期类型（0=固定日期，1=固定天数）</td></tr>
+        <tr><td><code>valid_from</code> / <code>valid_to</code></td><td>优惠券有效期（固定日期模式）</td></tr>
+        <tr><td><code>valid_days</code></td><td>领取后有效天数（固定天数模式）</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="feature-card">
+    <h4>搜索功能</h4>
+    <p>支持按活动名称搜索：</p>
+    <ul class="detail-list" style="margin-top:8px;">
+      <li>输入关键词后过滤 <code>originalPromotionLists</code>（原始数据备份）</li>
+      <li>空关键词时恢复显示全部</li>
+      <li>清除按钮一键恢复</li>
+    </ul>
+  </div>
+
+  <div class="feature-card">
+    <h4>列表配置项（每个活动卡片）</h4>
+    <p>每个活动卡片可独立配置以下参数（仅未启用状态可编辑）：</p>
+    <div class="two-col" style="margin-top:12px;">
+      <div class="sub-card">
+        <h5>门店选择</h5>
+        <ul>
+          <li>多选门店（<code>store_ids</code>）</li>
+          <li>从本地存储的 <code>placeLists</code> 获取门店列表</li>
+          <li>必选至少一个门店</li>
+        </ul>
+      </div>
+      <div class="sub-card">
+        <h5>活动期限</h5>
+        <ul>
+          <li>开始时间 <code>start_at</code></li>
+          <li>结束时间 <code>end_at</code></li>
+          <li>结束不能早于开始</li>
+          <li>自定义日期时间选择器（picker-view）</li>
+        </ul>
+      </div>
+    </div>
+    <div class="sub-card" style="margin-top:12px;">
+      <h5>优惠券有效期</h5>
+      <ul>
+        <li><strong>固定日期</strong>（valid_type=0）：设置 <code>valid_from</code> 和 <code>valid_to</code></li>
+        <li><strong>固定天数</strong>（valid_type=1）：设置领取后 N 天有效（<code>valid_days</code>）</li>
+        <li>点击切换有效期类型，数据联动清空</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="feature-card">
+    <h4>启用 / 禁用</h4>
+    <p>启用前进行严格的校验：</p>
+    <div class="flow-steps">
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <h4>前置校验</h4>
+          <p>① 至少选择一个门店 → ② 活动期限起止时间已填 → ③ 优惠券有效期已配置（固定日期需起止时间，固定天数需 > 0 天）。</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <h4>二次确认</h4>
+          <p>弹窗「确定要启用/禁用当前活动吗？」</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot"></div></div>
+        <div class="flow-content">
+          <h4>提交更新</h4>
+          <p>调用 <code>/mz-admin/updatePromotionStatus</code>，传入完整配置：id、status、store_ids、活动期限、有效期类型和值。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="feature-card">
+    <h4>编辑活动</h4>
+    <ul class="detail-list">
+      <li>仅 <code>status=0</code>（未启用）的活动可编辑，已启用时提示「已启用，无法编辑！」</li>
+      <li>调用 <code>/mz-admin/promotionDetail</code> 获取活动详情</li>
+      <li>回填表单数据，切换到「新增」Tab（<code>promotionId > 0</code> 表示编辑模式）</li>
+      <li>保存时调用 <code>/mz-admin/savePromotion</code>（带 id 参数）</li>
+    </ul>
+  </div>
+
+  <div class="feature-card">
+    <h4>删除活动</h4>
+    <ul class="detail-list">
+      <li>仅 <code>status=0</code> 的活动可删除</li>
+      <li>弹窗确认「是否删除该优惠活动？（若有正在进行中的活动，请先关闭）」</li>
+      <li>调用 <code>/mz-admin/deletePromotion</code>，传入 <code>id</code></li>
+      <li>成功后刷新活动列表</li>
+    </ul>
+  </div>
+</div>

@@ -41,7 +41,7 @@ body { font-family:'Inter',-apple-system,"PingFang SC","Microsoft YaHei",sans-se
 .section-block:nth-child(1){animation-delay:.2s;} .section-block:nth-child(2){animation-delay:.35s;}
 .section-block:nth-child(3){animation-delay:.5s;} .section-block:nth-child(4){animation-delay:.65s;}
 .section-block:nth-child(5){animation-delay:.8s;} .section-block:nth-child(6){animation-delay:.95s;}
-.section-block:nth-child(7){animation-delay:1.1s;}
+.section-block:nth-child(7){animation-delay:1.1s;} .section-block:nth-child(8){animation-delay:1.25s;}
 .section-title { font-size:18px; font-weight:700; margin-bottom:16px; display:flex; align-items:center; gap:10px; }
 .section-title-icon { width:28px; height:28px; border-radius:8px; background:var(--project-color-bg); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
 .section-title-icon svg { width:16px; height:16px; color:var(--project-color-light); }
@@ -122,408 +122,441 @@ code { background:rgba(124,58,237,.12); color:var(--project-color-light); paddin
     <p class="page-header-desc">登录系统分为两个层次：应用启动时的静默登录（获取 Token），以及用户主动登录（完善资料 + 手机号授权）。整体采用 JWT Token 鉴权，支持 Token 过期自动刷新、多环境切换和全局错误处理。</p>
   </div>
 
-  <div class="content">
+  <div class="content" id="content-area">
+<!-- 登录架构总览 + 静默登录（从 magic-login.html 拆分） -->
 
-    <!-- 1. 整体架构 -->
-    <div class="section-block">
-      <div class="section-title">
-        <div class="section-title-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/>
-          </svg>
-        </div>
-        登录架构总览
-      </div>
-
-      <div class="flow-steps">
-        <div class="flow-step">
-          <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
-          <div class="flow-content">
-            <h4>应用启动（app.js → onLaunch）</h4>
-            <p>小程序启动时自动调用 <code>wxLogin()</code>，静默换取 Token。用户无感知。</p>
-          </div>
-        </div>
-        <div class="flow-step">
-          <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
-          <div class="flow-content">
-            <h4>Token 写入本地存储</h4>
-            <p>登录成功后 Token 写入 <code>access_token</code>，同时存储用户信息、门店列表、角色等。</p>
-          </div>
-        </div>
-        <div class="flow-step">
-          <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
-          <div class="flow-content">
-            <h4>请求自动携带 Token</h4>
-            <p>所有 API 请求通过 <code>requestPromise</code> 统一封装，自动在 Header 中附加 <code>Authorization: Bearer {token}</code>。</p>
-          </div>
-        </div>
-        <div class="flow-step">
-          <div class="flow-line"><div class="flow-dot"></div></div>
-          <div class="flow-content">
-            <h4>用户主动登录（login 页）</h4>
-            <p>需要身份的操作（预约、查看订单等）触发登录页，用户填写头像昵称、授权手机号后完成登录。</p>
-          </div>
-        </div>
-      </div>
+<!-- 1. 登录架构总览 -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/>
+      </svg>
     </div>
-
-    <!-- 2. 静默登录 -->
-    <div class="section-block">
-      <div class="section-title">
-        <div class="section-title-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-          </svg>
-        </div>
-        静默登录（wxLogin）
-      </div>
-
-      <div class="feature-card">
-        <h4>触发时机</h4>
-        <p><code>wxLogin()</code> 在以下场景自动触发：</p>
-        <ul class="detail-list" style="margin-top:8px;">
-          <li><strong>应用启动</strong>：<code>app.js → onLaunch</code> 中调用</li>
-          <li><strong>登录页加载</strong>：<code>login.js → onShow</code> 中调用</li>
-          <li><strong>Token 过期</strong>：401 响应后自动调用重新登录</li>
-          <li><strong>注销账号</strong>：注销后重新执行登录流程</li>
-        </ul>
-      </div>
-
-      <div class="feature-card">
-        <h4>登录流程</h4>
-        <div class="flow-steps">
-          <div class="flow-step">
-            <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
-            <div class="flow-content">
-              <h4>调用 wx.login() 获取 code</h4>
-              <p>微信 SDK 返回临时登录凭证 <code>code</code>。</p>
-            </div>
-          </div>
-          <div class="flow-step">
-            <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
-            <div class="flow-content">
-              <h4>发送 code 到后端</h4>
-              <p>调用 <code>/mz/login</code>，后端通过 code 换取用户 OpenID，返回 Token 和用户数据。</p>
-            </div>
-          </div>
-          <div class="flow-step">
-            <div class="flow-line"><div class="flow-dot"></div></div>
-            <div class="flow-content">
-              <h4>写入本地存储</h4>
-              <p>登录成功后批量写入以下数据：</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="feature-card">
-        <h4>登录返回数据</h4>
-        <table class="info-table">
-          <thead><tr><th>存储 Key</th><th>数据内容</th></tr></thead>
-          <tbody>
-            <tr><td><code>user_info</code></td><td>用户 ID、头像、昵称、手机号、是否新用户</td></tr>
-            <tr><td><code>access_token</code></td><td>JWT Token（后续所有请求携带）</td></tr>
-            <tr><td><code>expire_at</code></td><td>Token 过期时间</td></tr>
-            <tr><td><code>service_phone</code></td><td>默认客服电话</td></tr>
-            <tr><td><code>placeLists</code></td><td>门店列表（用户可用的门店）</td></tr>
-            <tr><td><code>store_staff</code></td><td>门店员工角色列表（管理端用）</td></tr>
-            <tr><td><code>super_man</code></td><td>是否超级管理员（role == 1）</td></tr>
-            <tr><td><code>current_role</code></td><td>当前用户角色类型</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="feature-card">
-        <h4>超时与容错机制</h4>
-        <p><code>wxLogin()</code> 内置了完善的重试机制：</p>
-        <ul class="detail-list" style="margin-top:8px;">
-          <li><strong>5 秒慢提示</strong>：登录超过 5 秒时 Toast 提示「登录较慢，请稍候…」</li>
-          <li><strong>12 秒超时</strong>：登录超过 12 秒弹窗询问「登录请求超时，是否重试？」</li>
-          <li><strong>重复保护</strong>：使用 <code>finished</code> 标志位防止超时回调和正常回调同时执行</li>
-          <li><strong>失败处理</strong>：网络错误时 Toast 提示「登录失败，请检查网络」</li>
-        </ul>
-      </div>
-
-      <div class="feature-card">
-        <h4>清除旧数据</h4>
-        <p>登录时自动清除 <code>placeLists</code>（门店列表），确保每次启动获取最新的门店数据。</p>
-      </div>
-    </div>
-
-    <!-- 3. 用户主动登录 -->
-    <div class="section-block">
-      <div class="section-title">
-        <div class="section-title-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/>
-          </svg>
-        </div>
-        用户主动登录（login 页）
-      </div>
-
-      <div class="feature-card">
-        <h4>登录页面结构</h4>
-        <p>登录页（<code>/pages/login/login</code>）包含以下元素：</p>
-        <ul class="detail-list" style="margin-top:8px;">
-          <li><strong>背景图</strong>：CDN 加载的登录背景大图（<code>cdn.lixiaoqian.com/magic-space/login-bg.jpg</code>）</li>
-          <li><strong>头像选择</strong>：通过微信 <code>chooseAvatar</code> 组件选择头像</li>
-          <li><strong>昵称输入</strong>：通过 <code>input type=nickname</code> 组件输入（微信自动填充建议）</li>
-          <li><strong>手机号授权按钮</strong>：新用户必须授权手机号</li>
-          <li><strong>进入小程序按钮</strong>：老用户可直接进入</li>
-          <li><strong>协议勾选</strong>：须同意《服务条款》和《隐私政策》</li>
-        </ul>
-      </div>
-
-      <div class="feature-card">
-        <h4>双轨登录策略</h4>
-        <p>根据用户是否为新用户（<code>is_new</code>）提供不同的登录路径：</p>
-        <table class="info-table">
-          <thead><tr><th>用户类型</th><th>操作流程</th></tr></thead>
-          <tbody>
-            <tr><td>新用户（<code>is_new = true</code>）</td><td>选择头像 → 输入昵称 → 授权手机号 → 勾选协议 → 进入</td></tr>
-            <tr><td>老用户（<code>is_new = false</code>）</td><td>勾选协议 → 点击「进入小程序」→ 自动跳转首页</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="feature-card">
-        <h4>头像与昵称</h4>
-        <p>微信提供了两种获取用户资料的方式（按基础库版本自动适配）：</p>
-        <ul class="detail-list" style="margin-top:8px;">
-          <li><strong>新方式</strong>：使用 <code>button open-type=chooseAvatar</code> 选择头像 + <code>input type=nickname</code> 输入昵称（基础库 2.21.2+）</li>
-          <li><strong>旧方式</strong>：使用 <code>wx.getUserProfile</code> 弹窗获取头像昵称（已逐步废弃）</li>
-          <li>通过 <code>canIUseNicknameComp</code> 和 <code>canIUseGetUserProfile</code> 自动判断可用方式</li>
-        </ul>
-      </div>
-
-      <div class="feature-card">
-        <h4>手机号授权</h4>
-        <p>新用户必须授权手机号，流程：</p>
-        <ul class="detail-list" style="margin-top:8px;">
-          <li>点击「手机号授权」按钮，触发 <code>open-type=getPhoneNumber</code></li>
-          <li>微信返回 <code>encryptedData</code>、<code>iv</code>、<code>code</code></li>
-          <li>调用 <code>/mz/updatePhone</code> 解密手机号并绑定</li>
-          <li>成功后 Token 从临时存储（<code>tem_token</code>）转正为 <code>access_token</code></li>
-          <li>更新 <code>user_info</code> 中的手机号字段</li>
-        </ul>
-      </div>
-
-      <div class="feature-card">
-        <h4>临时 Token 机制</h4>
-        <p>登录页使用双 Token 策略解决「先登录后授权」的问题：</p>
-        <ul class="detail-list" style="margin-top:8px;">
-          <li><code>tem_token</code>：静默登录后的临时 Token，用于手机号授权请求</li>
-          <li><code>access_token</code>：手机号授权成功后转正的正式 Token</li>
-          <li>点击「进入小程序」时，将 <code>tem_token</code> 转存为 <code>access_token</code> 并清空临时 Token</li>
-          <li>Token 为空时提示错误并自动刷新页面</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- 4. 协议与合规 -->
-    <div class="section-block">
-      <div class="section-title">
-        <div class="section-title-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
-          </svg>
-        </div>
-        协议与合规
-      </div>
-
-      <div class="feature-card">
-        <h4>服务条款 & 隐私政策</h4>
-        <p>登录页底部提供协议勾选框：</p>
-        <ul class="detail-list" style="margin-top:8px;">
-          <li>默认未勾选（<code>agreeDeal = false</code>）</li>
-          <li>点击勾选框切换状态</li>
-          <li>点击「服务条款」或「隐私政策」跳转对应页面</li>
-          <li>未勾选时点击任何操作按钮均提示「请阅读并同意《服务条款》和《隐私政策》」</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- 5. Token 鉴权 -->
-    <div class="section-block">
-      <div class="section-title">
-        <div class="section-title-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-          </svg>
-        </div>
-        Token 鉴权与请求封装
-      </div>
-
-      <div class="feature-card">
-        <h4>请求统一封装（requestPromise）</h4>
-        <p>所有 API 请求通过 <code>requestPromise</code> 函数统一处理：</p>
-        <table class="info-table">
-          <thead><tr><th>请求头</th><th>说明</th></tr></thead>
-          <tbody>
-            <tr><td><code>Authorization</code></td><td><code>Bearer {access_token}</code> 或 <code>Bearer {tem_token}</code></td></tr>
-            <tr><td><code>mz-store-id</code></td><td>当前选中的门店 ID（<code>currentStoreId</code>）</td></tr>
-            <tr><td><code>content-type</code></td><td><code>application/json</code></td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="feature-card">
-        <h4>Token 过期处理（401）</h4>
-        <p>当后端返回 401 状态码时，触发以下流程：</p>
-        <div class="flow-steps">
-          <div class="flow-step">
-            <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
-            <div class="flow-content">
-              <h4>弹窗提示</h4>
-              <p>「登录信息已过期，即将退出！」</p>
-            </div>
-          </div>
-          <div class="flow-step">
-            <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
-            <div class="flow-content">
-              <h4>标记未登录</h4>
-              <p>设置 <code>user_login = false</code>。</p>
-            </div>
-          </div>
-          <div class="flow-step">
-            <div class="flow-line"><div class="flow-dot"></div></div>
-            <div class="flow-content">
-              <h4>重新登录</h4>
-              <p>调用 <code>wxLogin()</code> 静默获取新 Token，然后 <code>reLaunch</code> 首页刷新。</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="feature-card">
-        <h4>非 401 错误处理</h4>
-        <p>其他网络错误（非 401）：</p>
-        <ul class="detail-list" style="margin-top:8px;">
-          <li>隐藏 Loading 动画</li>
-          <li>返回兜底响应：<code>{code: 501, message: '请求错误，重试', data: null}</code></li>
-          <li>不中断用户流程，由各页面自行处理错误码</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- 6. 多环境配置 -->
-    <div class="section-block">
-      <div class="section-title">
-        <div class="section-title-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9c.26.604.852.997 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-          </svg>
-        </div>
-        多环境配置
-      </div>
-
-      <div class="feature-card">
-        <h4>环境划分</h4>
-        <p>根据微信小程序的 <code>__wxConfig.envVersion</code> 自动切换后端地址：</p>
-        <table class="info-table">
-          <thead><tr><th>环境</th><th>API 地址</th><th>CDN 地址</th></tr></thead>
-          <tbody>
-            <tr><td><span class="status-tag orange">develop</span></td><td><code>http://lumi.local.com/mpapi</code></td><td><code>cdn.lixiaoqian.com</code></td></tr>
-            <tr><td><span class="status-tag blue">trial</span></td><td><code>https://test-magic-space.lixiaoqian.com/mpapi</code></td><td><code>cdn.lixiaoqian.com</code></td></tr>
-            <tr><td><span class="status-tag green">release</span></td><td><code>https://magic-space.lixiaoqian.com/mpapi</code></td><td><code>develop.lixiaoqian.com</code></td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="feature-card">
-        <h4>文件上传/下载</h4>
-        <p>文件操作也统一携带 Token 和门店 ID：</p>
-        <ul class="detail-list" style="margin-top:8px;">
-          <li><strong>上传</strong>（<code>wxFileUpload</code>）：通过 <code>wx.uploadFile</code> 上传，路径为 <code>baseUrl + /mz-admin/{url}</code></li>
-          <li><strong>下载</strong>（<code>wxFileDownload</code>）：通过 <code>wx.downloadFile</code> 下载，支持完整 URL 或相对路径</li>
-          <li>下载后默认通过 <code>wx.shareFileMessage</code> 以文件消息分享</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- 7. 本地存储 -->
-    <div class="section-block">
-      <div class="section-title">
-        <div class="section-title-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
-          </svg>
-        </div>
-        本地存储体系
-      </div>
-
-      <div class="feature-card">
-        <h4>存储工具函数（storage.js）</h4>
-        <p>基于 <code>wx.setStorageSync / getStorageSync</code> 封装，提供以下功能：</p>
-        <table class="info-table">
-          <thead><tr><th>函数</th><th>说明</th></tr></thead>
-          <tbody>
-            <tr><td><code>setItem(key, value)</code></td><td>存储数据，对象/数组自动 JSON 序列化</td></tr>
-            <tr><td><code>getItem(key)</code></td><td>读取数据，自动尝试 JSON 反序列化（仅对合法 JSON 字符串）</td></tr>
-            <tr><td><code>removeItem(key)</code></td><td>删除指定 key</td></tr>
-            <tr><td><code>removeAllItem()</code></td><td>清空所有本地缓存</td></tr>
-            <tr><td><code>setItemInExpire(key, value, {expire})</code></td><td>带过期时间的存储，默认 7 天</td></tr>
-            <tr><td><code>getItemInExpire(key)</code></td><td>读取带过期时间的存储，过期自动删除</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="feature-card">
-        <h4>核心存储 Key 清单</h4>
-        <table class="info-table">
-          <thead><tr><th>Key</th><th>类型</th><th>用途</th></tr></thead>
-          <tbody>
-            <tr><td><code>access_token</code></td><td>String</td><td>正式 Token（API 鉴权）</td></tr>
-            <tr><td><code>tem_token</code></td><td>String</td><td>临时 Token（登录页使用）</td></tr>
-            <tr><td><code>expire_at</code></td><td>String</td><td>Token 过期时间</td></tr>
-            <tr><td><code>user_info</code></td><td>Object</td><td>用户资料（ID/头像/昵称/手机号/是否新用户）</td></tr>
-            <tr><td><code>user_login</code></td><td>Boolean</td><td>用户是否已主动登录</td></tr>
-            <tr><td><code>user_type</code></td><td>String</td><td>用户角色类型</td></tr>
-            <tr><td><code>currentStoreId</code></td><td>Number</td><td>当前选中的门店 ID</td></tr>
-            <tr><td><code>placeLists</code></td><td>Array</td><td>门店列表</td></tr>
-            <tr><td><code>service_phone</code></td><td>String</td><td>客服电话</td></tr>
-            <tr><td><code>super_man</code></td><td>Boolean</td><td>是否超级管理员</td></tr>
-            <tr><td><code>store_staff</code></td><td>Array</td><td>门店员工角色</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- 8. 登录态判断 -->
-    <div class="section-block">
-      <div class="section-title">
-        <div class="section-title-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M9 12l2 2 4-4"/><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
-          </svg>
-        </div>
-        登录态判断与页面守卫
-      </div>
-
-      <div class="feature-card">
-        <h4>全局登录判断逻辑</h4>
-        <p>各页面通过以下模式判断用户登录状态：</p>
-        <ul class="detail-list" style="margin-top:8px;">
-          <li><strong>检查 <code>user_login</code></strong>：用户是否已主动完成登录（头像+昵称+手机号）</li>
-          <li><strong>未登录弹窗</strong>：弹出手机号授权组件（<code>open-type=getPhoneNumber</code>）</li>
-          <li><strong>授权成功</strong>：调用 <code>/mz/updatePhone</code> 绑定手机号，标记 <code>user_login = true</code>，刷新页面数据</li>
-          <li><strong>拒绝授权</strong>：用户关闭弹窗后不强制跳转，但功能受限</li>
-        </ul>
-      </div>
-
-      <div class="feature-card">
-        <h4>管理端权限判断</h4>
-        <p>管理端页面额外检查：</p>
-        <ul class="detail-list" style="margin-top:8px;">
-          <li><strong>员工角色</strong>：<code>store_staff</code> 数组中是否有当前门店的管理权限</li>
-          <li><strong>超级管理员</strong>：<code>super_man = true</code> 时拥有所有权限</li>
-          <li><strong>功能权限</strong>：通过 <code>getUserPermissions()</code> 检查具体功能权限</li>
-          <li>无权限的操作按钮隐藏或提示「无操作权限」</li>
-        </ul>
-      </div>
-    </div>
-
+    登录架构总览
   </div>
+
+  <div class="flow-steps">
+    <div class="flow-step">
+      <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+      <div class="flow-content">
+        <h4>应用启动（app.js → onLaunch）</h4>
+        <p>小程序启动时自动调用 <code>wxLogin()</code>，静默换取 Token。用户无感知。</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+      <div class="flow-content">
+        <h4>Token 写入本地存储</h4>
+        <p>登录成功后 Token 写入 <code>access_token</code>，同时存储用户信息、门店列表、角色等。</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+      <div class="flow-content">
+        <h4>请求自动携带 Token</h4>
+        <p>所有 API 请求通过 <code>requestPromise</code> 统一封装，自动在 Header 中附加 <code>Authorization: Bearer {token}</code>。</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-line"><div class="flow-dot"></div></div>
+      <div class="flow-content">
+        <h4>用户主动登录（login 页）</h4>
+        <p>需要身份的操作（预约、查看订单等）触发登录页，用户填写头像昵称、授权手机号后完成登录。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 2. 静默登录 -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+      </svg>
+    </div>
+    静默登录（wxLogin）
+  </div>
+
+  <div class="feature-card">
+    <h4>触发时机</h4>
+    <p><code>wxLogin()</code> 在以下场景自动触发：</p>
+    <ul class="detail-list" style="margin-top:8px;">
+      <li><strong>应用启动</strong>：<code>app.js → onLaunch</code> 中调用</li>
+      <li><strong>登录页加载</strong>：<code>login.js → onShow</code> 中调用</li>
+      <li><strong>Token 过期</strong>：401 响应后自动调用重新登录</li>
+      <li><strong>注销账号</strong>：注销后重新执行登录流程</li>
+    </ul>
+  </div>
+
+  <div class="feature-card">
+    <h4>登录流程</h4>
+    <div class="flow-steps">
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <h4>调用 wx.login() 获取 code</h4>
+          <p>微信 SDK 返回临时登录凭证 <code>code</code>。</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <h4>发送 code 到后端</h4>
+          <p>调用 <code>/mz/login</code>，后端通过 code 换取用户 OpenID，返回 Token 和用户数据。</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot"></div></div>
+        <div class="flow-content">
+          <h4>写入本地存储</h4>
+          <p>登录成功后批量写入以下数据：</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="feature-card">
+    <h4>登录返回数据</h4>
+    <table class="info-table">
+      <thead><tr><th>存储 Key</th><th>数据内容</th></tr></thead>
+      <tbody>
+        <tr><td><code>user_info</code></td><td>用户 ID、头像、昵称、手机号、是否新用户</td></tr>
+        <tr><td><code>access_token</code></td><td>JWT Token（后续所有请求携带）</td></tr>
+        <tr><td><code>expire_at</code></td><td>Token 过期时间</td></tr>
+        <tr><td><code>service_phone</code></td><td>默认客服电话</td></tr>
+        <tr><td><code>placeLists</code></td><td>门店列表（用户可用的门店）</td></tr>
+        <tr><td><code>store_staff</code></td><td>门店员工角色列表（管理端用）</td></tr>
+        <tr><td><code>super_man</code></td><td>是否超级管理员（role == 1）</td></tr>
+        <tr><td><code>current_role</code></td><td>当前用户角色类型</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="feature-card">
+    <h4>超时与容错机制</h4>
+    <p><code>wxLogin()</code> 内置了完善的重试机制：</p>
+    <ul class="detail-list" style="margin-top:8px;">
+      <li><strong>5 秒慢提示</strong>：登录超过 5 秒时 Toast 提示「登录较慢，请稍候…」</li>
+      <li><strong>12 秒超时</strong>：登录超过 12 秒弹窗询问「登录请求超时，是否重试？」</li>
+      <li><strong>重复保护</strong>：使用 <code>finished</code> 标志位防止超时回调和正常回调同时执行</li>
+      <li><strong>失败处理</strong>：网络错误时 Toast 提示「登录失败，请检查网络」</li>
+    </ul>
+  </div>
+
+  <div class="feature-card">
+    <h4>清除旧数据</h4>
+    <p>登录时自动清除 <code>placeLists</code>（门店列表），确保每次启动获取最新的门店数据。</p>
+  </div>
+</div>
+
+
+<!-- 用户主动登录 + 协议与合规（从 magic-login.html 拆分） -->
+
+<!-- 3. 用户主动登录 -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/>
+      </svg>
+    </div>
+    用户主动登录（login 页）
+  </div>
+
+  <div class="feature-card">
+    <h4>登录页面结构</h4>
+    <p>登录页（<code>/pages/login/login</code>）包含以下元素：</p>
+    <ul class="detail-list" style="margin-top:8px;">
+      <li><strong>背景图</strong>：CDN 加载的登录背景大图（<code>cdn.lixiaoqian.com/magic-space/login-bg.jpg</code>）</li>
+      <li><strong>头像选择</strong>：通过微信 <code>chooseAvatar</code> 组件选择头像</li>
+      <li><strong>昵称输入</strong>：通过 <code>input type=nickname</code> 组件输入（微信自动填充建议）</li>
+      <li><strong>手机号授权按钮</strong>：新用户必须授权手机号</li>
+      <li><strong>进入小程序按钮</strong>：老用户可直接进入</li>
+      <li><strong>协议勾选</strong>：须同意《服务条款》和《隐私政策》</li>
+    </ul>
+  </div>
+
+  <div class="feature-card">
+    <h4>双轨登录策略</h4>
+    <p>根据用户是否为新用户（<code>is_new</code>）提供不同的登录路径：</p>
+    <table class="info-table">
+      <thead><tr><th>用户类型</th><th>操作流程</th></tr></thead>
+      <tbody>
+        <tr><td>新用户（<code>is_new = true</code>）</td><td>选择头像 → 输入昵称 → 授权手机号 → 勾选协议 → 进入</td></tr>
+        <tr><td>老用户（<code>is_new = false</code>）</td><td>勾选协议 → 点击「进入小程序」→ 自动跳转首页</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="feature-card">
+    <h4>头像与昵称</h4>
+    <p>微信提供了两种获取用户资料的方式（按基础库版本自动适配）：</p>
+    <ul class="detail-list" style="margin-top:8px;">
+      <li><strong>新方式</strong>：使用 <code>button open-type=chooseAvatar</code> 选择头像 + <code>input type=nickname</code> 输入昵称（基础库 2.21.2+）</li>
+      <li><strong>旧方式</strong>：使用 <code>wx.getUserProfile</code> 弹窗获取头像昵称（已逐步废弃）</li>
+      <li>通过 <code>canIUseNicknameComp</code> 和 <code>canIUseGetUserProfile</code> 自动判断可用方式</li>
+    </ul>
+  </div>
+
+  <div class="feature-card">
+    <h4>手机号授权</h4>
+    <p>新用户必须授权手机号，流程：</p>
+    <ul class="detail-list" style="margin-top:8px;">
+      <li>点击「手机号授权」按钮，触发 <code>open-type=getPhoneNumber</code></li>
+      <li>微信返回 <code>encryptedData</code>、<code>iv</code>、<code>code</code></li>
+      <li>调用 <code>/mz/updatePhone</code> 解密手机号并绑定</li>
+      <li>成功后 Token 从临时存储（<code>tem_token</code>）转正为 <code>access_token</code></li>
+      <li>更新 <code>user_info</code> 中的手机号字段</li>
+    </ul>
+  </div>
+
+  <div class="feature-card">
+    <h4>临时 Token 机制</h4>
+    <p>登录页使用双 Token 策略解决「先登录后授权」的问题：</p>
+    <ul class="detail-list" style="margin-top:8px;">
+      <li><code>tem_token</code>：静默登录后的临时 Token，用于手机号授权请求</li>
+      <li><code>access_token</code>：手机号授权成功后转正的正式 Token</li>
+      <li>点击「进入小程序」时，将 <code>tem_token</code> 转存为 <code>access_token</code> 并清空临时 Token</li>
+      <li>Token 为空时提示错误并自动刷新页面</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 4. 协议与合规 -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
+      </svg>
+    </div>
+    协议与合规
+  </div>
+
+  <div class="feature-card">
+    <h4>服务条款 & 隐私政策</h4>
+    <p>登录页底部提供协议勾选框：</p>
+    <ul class="detail-list" style="margin-top:8px;">
+      <li>默认未勾选（<code>agreeDeal = false</code>）</li>
+      <li>点击勾选框切换状态</li>
+      <li>点击「服务条款」或「隐私政策」跳转对应页面</li>
+      <li>未勾选时点击任何操作按钮均提示「请阅读并同意《服务条款》和《隐私政策》」</li>
+    </ul>
+  </div>
+</div>
+
+
+<!-- Token 鉴权与请求封装 + 多环境配置（从 magic-login.html 拆分） -->
+
+<!-- 5. Token 鉴权 -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+      </svg>
+    </div>
+    Token 鉴权与请求封装
+  </div>
+
+  <div class="feature-card">
+    <h4>请求统一封装（requestPromise）</h4>
+    <p>所有 API 请求通过 <code>requestPromise</code> 函数统一处理：</p>
+    <table class="info-table">
+      <thead><tr><th>请求头</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td><code>Authorization</code></td><td><code>Bearer {access_token}</code> 或 <code>Bearer {tem_token}</code></td></tr>
+        <tr><td><code>mz-store-id</code></td><td>当前选中的门店 ID（<code>currentStoreId</code>）</td></tr>
+        <tr><td><code>content-type</code></td><td><code>application/json</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="feature-card">
+    <h4>Token 过期处理（401）</h4>
+    <p>当后端返回 401 状态码时，触发以下流程：</p>
+    <div class="flow-steps">
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <h4>弹窗提示</h4>
+          <p>「登录信息已过期，即将退出！」</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <h4>标记未登录</h4>
+          <p>设置 <code>user_login = false</code>。</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot"></div></div>
+        <div class="flow-content">
+          <h4>重新登录</h4>
+          <p>调用 <code>wxLogin()</code> 静默获取新 Token，然后 <code>reLaunch</code> 首页刷新。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="feature-card">
+    <h4>非 401 错误处理</h4>
+    <p>其他网络错误（非 401）：</p>
+    <ul class="detail-list" style="margin-top:8px;">
+      <li>隐藏 Loading 动画</li>
+      <li>返回兜底响应：<code>{code: 501, message: '请求错误，重试', data: null}</code></li>
+      <li>不中断用户流程，由各页面自行处理错误码</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 6. 多环境配置 -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9c.26.604.852.997 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+      </svg>
+    </div>
+    多环境配置
+  </div>
+
+  <div class="feature-card">
+    <h4>环境划分</h4>
+    <p>根据微信小程序的 <code>__wxConfig.envVersion</code> 自动切换后端地址：</p>
+    <table class="info-table">
+      <thead><tr><th>环境</th><th>API 地址</th><th>CDN 地址</th></tr></thead>
+      <tbody>
+        <tr><td><span class="status-tag orange">develop</span></td><td><code>http://lumi.local.com/mpapi</code></td><td><code>cdn.lixiaoqian.com</code></td></tr>
+        <tr><td><span class="status-tag blue">trial</span></td><td><code>https://test-magic-space.lixiaoqian.com/mpapi</code></td><td><code>cdn.lixiaoqian.com</code></td></tr>
+        <tr><td><span class="status-tag green">release</span></td><td><code>https://magic-space.lixiaoqian.com/mpapi</code></td><td><code>develop.lixiaoqian.com</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="feature-card">
+    <h4>文件上传/下载</h4>
+    <p>文件操作也统一携带 Token 和门店 ID：</p>
+    <ul class="detail-list" style="margin-top:8px;">
+      <li><strong>上传</strong>（<code>wxFileUpload</code>）：通过 <code>wx.uploadFile</code> 上传，路径为 <code>baseUrl + /mz-admin/{url}</code></li>
+      <li><strong>下载</strong>（<code>wxFileDownload</code>）：通过 <code>wx.downloadFile</code> 下载，支持完整 URL 或相对路径</li>
+      <li>下载后默认通过 <code>wx.shareFileMessage</code> 以文件消息分享</li>
+    </ul>
+  </div>
+</div>
+
+
+<!-- 本地存储体系 + 登录态判断 + API 汇总（从 magic-login.html 拆分） -->
+
+<!-- 7. 本地存储 -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+      </svg>
+    </div>
+    本地存储体系
+  </div>
+
+  <div class="feature-card">
+    <h4>存储工具函数（storage.js）</h4>
+    <p>基于 <code>wx.setStorageSync / getStorageSync</code> 封装，提供以下功能：</p>
+    <table class="info-table">
+      <thead><tr><th>函数</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td><code>setItem(key, value)</code></td><td>存储数据，对象/数组自动 JSON 序列化</td></tr>
+        <tr><td><code>getItem(key)</code></td><td>读取数据，自动尝试 JSON 反序列化（仅对合法 JSON 字符串）</td></tr>
+        <tr><td><code>removeItem(key)</code></td><td>删除指定 key</td></tr>
+        <tr><td><code>removeAllItem()</code></td><td>清空所有本地缓存</td></tr>
+        <tr><td><code>setItemInExpire(key, value, {expire})</code></td><td>带过期时间的存储，默认 7 天</td></tr>
+        <tr><td><code>getItemInExpire(key)</code></td><td>读取带过期时间的存储，过期自动删除</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="feature-card">
+    <h4>核心存储 Key 清单</h4>
+    <table class="info-table">
+      <thead><tr><th>Key</th><th>类型</th><th>用途</th></tr></thead>
+      <tbody>
+        <tr><td><code>access_token</code></td><td>String</td><td>正式 Token（API 鉴权）</td></tr>
+        <tr><td><code>tem_token</code></td><td>String</td><td>临时 Token（登录页使用）</td></tr>
+        <tr><td><code>expire_at</code></td><td>String</td><td>Token 过期时间</td></tr>
+        <tr><td><code>user_info</code></td><td>Object</td><td>用户资料（ID/头像/昵称/手机号/是否新用户）</td></tr>
+        <tr><td><code>user_login</code></td><td>Boolean</td><td>用户是否已主动登录</td></tr>
+        <tr><td><code>user_type</code></td><td>String</td><td>用户角色类型</td></tr>
+        <tr><td><code>currentStoreId</code></td><td>Number</td><td>当前选中的门店 ID</td></tr>
+        <tr><td><code>placeLists</code></td><td>Array</td><td>门店列表</td></tr>
+        <tr><td><code>service_phone</code></td><td>String</td><td>客服电话</td></tr>
+        <tr><td><code>super_man</code></td><td>Boolean</td><td>是否超级管理员</td></tr>
+        <tr><td><code>store_staff</code></td><td>Array</td><td>门店员工角色</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 8. 登录态判断 -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 12l2 2 4-4"/><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+      </svg>
+    </div>
+    登录态判断与页面守卫
+  </div>
+
+  <div class="feature-card">
+    <h4>全局登录判断逻辑</h4>
+    <p>各页面通过以下模式判断用户登录状态：</p>
+    <ul class="detail-list" style="margin-top:8px;">
+      <li><strong>检查 <code>user_login</code></strong>：用户是否已主动完成登录（头像+昵称+手机号）</li>
+      <li><strong>未登录弹窗</strong>：弹出手机号授权组件（<code>open-type=getPhoneNumber</code>）</li>
+      <li><strong>授权成功</strong>：调用 <code>/mz/updatePhone</code> 绑定手机号，标记 <code>user_login = true</code>，刷新页面数据</li>
+      <li><strong>拒绝授权</strong>：用户关闭弹窗后不强制跳转，但功能受限</li>
+    </ul>
+  </div>
+
+  <div class="feature-card">
+    <h4>管理端权限判断</h4>
+    <p>管理端页面额外检查：</p>
+    <ul class="detail-list" style="margin-top:8px;">
+      <li><strong>员工角色</strong>：<code>store_staff</code> 数组中是否有当前门店的管理权限</li>
+      <li><strong>超级管理员</strong>：<code>super_man = true</code> 时拥有所有权限</li>
+      <li><strong>功能权限</strong>：通过 <code>getUserPermissions()</code> 检查具体功能权限</li>
+      <li>无权限的操作按钮隐藏或提示「无操作权限」</li>
+    </ul>
+  </div>
+</div>
+
+<!-- API 汇总 -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+      </svg>
+    </div>
+    API 接口汇总
+  </div>
+
+  <div class="feature-card">
+    <table class="info-table">
+      <thead><tr><th>接口</th><th>方法</th><th>用途</th></tr></thead>
+      <tbody>
+        <tr><td><code>/mz/login</code></td><td>POST</td><td>微信 code 换取 Token + 用户数据</td></tr>
+        <tr><td><code>/mz/updatePhone</code></td><td>POST</td><td>解密并绑定手机号（encryptedData + iv + code）</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+</div>
 
   <div class="page-nav">
     <a href="magic-user.html" class="page-nav-link">
@@ -544,5 +577,9 @@ code { background:rgba(124,58,237,.12); color:var(--project-color-light); paddin
 
   <footer class="footer"><p class="footer-text">© 2026 Lumi (lumiclaw) · 探索无限可能</p></footer>
 </div>
+
+
+
+
 </body>
 </html>

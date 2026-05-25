@@ -1,0 +1,79 @@
+<!-- 功能总览 + 筛选条件（从 magic-stats.html 拆分） -->
+<div class="completion-banner">
+  <h3>🎊 全部 12 个模块文档已完成！</h3>
+  <p>从首页定位到数据统计，Lumi 魔法学院小程序的完整功能说明文档已全部编写完毕。</p>
+</div>
+
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+      </svg>
+    </div>
+    功能总览
+  </div>
+
+  <div class="feature-card">
+    <h4>页面结构</h4>
+    <p>数据统计页面（<code>/pages/stat/stat</code>）由以下区域组成：</p>
+    <ul class="detail-list" style="margin-top:8px;">
+      <li><strong>页面标题</strong>：「数据统计」</li>
+      <li><strong>筛选条件区</strong>：日期范围选择器 + 门店下拉选择器</li>
+      <li><strong>导出按钮</strong>：导出对账单 Excel（仅超级管理员可见）</li>
+      <li><strong>汇总统计卡片</strong>：展示整体票券数据概览</li>
+      <li><strong>分项统计卡片</strong>：按渠道/类型分别展示详细数据</li>
+      <li><strong>底部导航栏</strong>：管理端 TabBar（ticket-bar 组件）</li>
+    </ul>
+  </div>
+
+  <div class="feature-card">
+    <h4>权限控制</h4>
+    <p>通过 <code>getUserPermissions('stat')</code> 检查统计模块权限：</p>
+    <table class="info-table">
+      <thead><tr><th>权限 Key</th><th>说明</th><th>影响范围</th></tr></thead>
+      <tbody>
+        <tr><td><code>view-stat-hotel</code></td><td>查看跨门店统计 + 切换门店 + 导出对账单</td><td>可见门店下拉选择器和导出按钮；可查所有门店数据</td></tr>
+        <tr><td>无此权限</td><td>仅查看当前门店数据</td><td>门店选择器隐藏；<code>store_id</code> 自动使用 <code>currentStoreId</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
+      </svg>
+    </div>
+    筛选条件
+  </div>
+
+  <div class="feature-card">
+    <h4>日期范围选择（search-date 组件）</h4>
+    <p>使用自定义 <code>search-date</code> 组件选择日期范围：</p>
+    <ul class="detail-list" style="margin-top:8px;">
+      <li><strong>日期索引</strong>：<code>dataIndex=3</code>，对应组件内的第 4 个快捷选项（通常为「近7天」或自定义）</li>
+      <li><strong>选择后触发</strong>：<code>bind:search</code> → <code>onSearch(e)</code>，获取 <code>ticketDates</code> 数组（[开始日期, 结束日期]）</li>
+      <li><strong>最大日期</strong>：<code>pickerEnd</code> 设置为当天，不可选择未来日期</li>
+      <li>选择日期后自动触发数据加载（<code>handleGetStatData</code>）</li>
+    </ul>
+  </div>
+
+  <div class="feature-card">
+    <h4>门店选择</h4>
+    <p>仅拥有 <code>view-stat-hotel</code> 权限的用户可见：</p>
+    <ul class="detail-list" style="margin-top:8px;">
+      <li><strong>数据来源</strong>：本地存储 <code>placeLists</code>（静默登录时写入）</li>
+      <li><strong>额外选项</strong>：列表头部插入「当前选择：全部」（<code>id: 0</code>）</li>
+      <li><strong>切换门店</strong>：<code>onHotelChange</code> → <code>handleGetStatData</code>，切换后自动刷新统计数据</li>
+      <li><strong>无权限时</strong>：隐藏门店选择器，<code>store_id</code> 自动使用当前门店 ID</li>
+    </ul>
+  </div>
+
+  <div class="feature-card">
+    <h4>初始化等待</h4>
+    <p>页面加载时轮询检查 <code>placeLists</code>（每 100ms），确保门店数据已从登录接口写入本地存储后才初始化选择器。门店列表为空时，数据加载函数也会延迟 100ms 后自动重试。</p>
+  </div>
+</div>

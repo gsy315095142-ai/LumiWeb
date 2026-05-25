@@ -1,0 +1,74 @@
+<!-- 我的场次（从 magic-user.html 拆分） -->
+
+<!-- 2. 我的场次 -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+      </svg>
+    </div>
+    我的场次
+  </div>
+
+  <div class="feature-card">
+    <h4>数据加载</h4>
+    <p>调用 <code>/mz/getUserRounds</code> 获取用户所有场次数据（每页 100 条），包含：</p>
+    <ul class="detail-list" style="margin-top:8px;">
+      <li>场次信息：日期、开始时间、所属门店</li>
+      <li>订单信息：预约人数、订单号、是否为团购订单</li>
+      <li>票券信息：关联的票券名称和面值</li>
+      <li>签到状态：<code>is_checked_in</code></li>
+      <li>场次状态：<code>status</code>（0-5）</li>
+    </ul>
+  </div>
+
+  <div class="feature-card">
+    <h4>列表分组与排序</h4>
+    <p>场次按状态分为两组：</p>
+    <div class="status-tags" style="margin-bottom:12px;">
+      <span class="status-tag blue">待体验 (0)</span>
+      <span class="status-tag blue">已激活 (1)</span>
+      <span class="status-tag green">游戏中 (2)</span>
+      <span class="status-tag green">已体验 (3)</span>
+      <span class="status-tag grey">已取消 (4)</span>
+      <span class="status-tag grey">已过期 (5)</span>
+    </div>
+    <ul class="detail-list">
+      <li><strong>待体验（status < 2）</strong>：按日期升序 → 时间升序排列，最近的场次排在前面</li>
+      <li><strong>已体验（status ≥ 2）</strong>：按日期降序 → 时间降序排列，最近的已完成场次排在前面</li>
+    </ul>
+  </div>
+
+  <div class="feature-card">
+    <h4>场次卡片操作</h4>
+    <p>每个场次卡片显示门店名称、日期时间、人数、订单号，并提供以下操作：</p>
+    <ul class="detail-list" style="margin-top:8px;">
+      <li><strong>点击卡片</strong>：跳转完成页（<code>/pages/complete/complete</code>），仅 status < 2 时可跳转</li>
+      <li><strong>撤销场次</strong>：左滑出现撤销按钮（仅 <code>platform=lumi</code> 的票券支持左滑）
+        <ul class="detail-list" style="margin-top:4px;">
+          <li>开场前 3 小时以上才可撤销</li>
+          <li>确认弹窗提示：撤销后票券将重置为待使用状态</li>
+          <li>调用 <code>/mz/cancelGameRoundOrder</code></li>
+        </ul>
+      </li>
+      <li><strong>复制订单号</strong>：点击订单号一键复制</li>
+    </ul>
+  </div>
+
+  <div class="feature-card">
+    <h4>场次状态视觉</h4>
+    <p>不同状态的场次卡片有不同的视觉样式：</p>
+    <table class="info-table">
+      <thead><tr><th>状态</th><th>卡片样式</th><th>背景图标</th></tr></thead>
+      <tbody>
+        <tr><td>待体验</td><td>默认样式</td><td>—</td></tr>
+        <tr><td>已激活</td><td>默认样式</td><td>—</td></tr>
+        <tr><td>游戏中</td><td>蓝色阴影 + 蓝色背景</td><td>game 图标</td></tr>
+        <tr><td>已体验</td><td>绿色阴影 + 绿色背景</td><td>expired 图标</td></tr>
+        <tr><td>已取消</td><td>灰色阴影 + 灰色背景</td><td>cancel 图标</td></tr>
+        <tr><td>已过期</td><td>灰色阴影 + 灰色背景</td><td>overdate 图标</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>

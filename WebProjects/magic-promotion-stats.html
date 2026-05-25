@@ -1,0 +1,52 @@
+<!-- 活动统计（从 magic-promotion.html 拆分） -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
+      </svg>
+    </div>
+    活动统计
+  </div>
+
+  <div class="feature-card">
+    <h4>筛选条件</h4>
+    <p>统计 Tab 提供多维度筛选：</p>
+    <table class="info-table">
+      <thead><tr><th>筛选维度</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td><strong>日期范围</strong></td><td>选择起止日期（默认截止到当月最后一天）</td></tr>
+        <tr><td><strong>门店</strong></td><td>下拉选择门店，含「全部」选项</td></tr>
+        <tr><td><strong>活动</strong></td><td>下拉选择具体优惠活动，含「全部」选项</td></tr>
+        <tr><td><strong>优惠券名</strong></td><td>选择活动后可进一步选择券名</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="feature-card">
+    <h4>统计指标</h4>
+    <p>调用 <code>/mz-admin/promotionStats</code>，返回以下核心数据：</p>
+    <table class="info-table">
+      <thead><tr><th>指标</th><th>字段</th></tr></thead>
+      <tbody>
+        <tr><td>优惠券发放数量</td><td><code>promo_code_total</code></td></tr>
+        <tr><td>优惠券过期数量</td><td><code>promo_code_expired_total</code></td></tr>
+        <tr><td>优惠券使用数量</td><td><code>promo_code_used_total</code></td></tr>
+        <tr><td>优惠券使用对应票券数量</td><td><code>coupon_total</code></td></tr>
+        <tr><td>票券已核销且未退票数量</td><td><code>coupon_used_total</code></td></tr>
+        <tr><td>票券已核销且未退票对应人数</td><td><code>coupon_used_value_total</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="feature-card">
+    <h4>导出 Excel</h4>
+    <p>点击导出按钮：</p>
+    <ul class="detail-list" style="margin-top:8px;">
+      <li>拼接当前筛选条件为 URL 参数</li>
+      <li>调用 <code>/mz-admin/downloadPromoExcel</code> 下载统计 Excel</li>
+      <li>文件名格式：<code>优惠活动统计-{开始日期}-{结束日期}.xlsx</code></li>
+      <li>同一天时文件名简化为 <code>优惠活动统计-{日期}.xlsx</code></li>
+    </ul>
+  </div>
+</div>

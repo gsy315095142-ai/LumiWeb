@@ -1,0 +1,124 @@
+<!-- 确认页 · 票券选择与支付 + 支付流程（从 magic-order.html 拆分） -->
+
+<!-- 1. 确认页 -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+      </svg>
+    </div>
+    确认页 · 票券选择与支付
+  </div>
+
+  <div class="feature-card">
+    <h4>页面入口</h4>
+    <p>从预约页（<code>/pages/book/book</code>）选择完场次后跳转进入。携带参数：门店 ID、日期、人数、场次 JSON 对象、预约开始时间戳。</p>
+  </div>
+
+  <div class="feature-card">
+    <h4>票券选择</h4>
+    <p>确认页会调用 <code>/mz/getCouponStat</code> 加载用户已有的票券（已兑换但未使用的票券），按类型分组展示。每类票券可通过 +/- 调整使用数量：</p>
+    <ul class="detail-list" style="margin-top: 8px;">
+      <li>每张票券对应不同的人数价值（如 1人券、2人券、3人券等）</li>
+      <li>使用票券的总人数不能超过预约人数</li>
+      <li>当一张票券已满足预约人数时，会提示建议取消其他票券</li>
+      <li>已用票券人数从应付金额中扣除</li>
+    </ul>
+  </div>
+
+  <div class="feature-card">
+    <h4>系统票券自动计算</h4>
+    <p>扣除已选票券后，剩余需要购买的人数由系统自动匹配票券方案：</p>
+    <ul class="detail-list" style="margin-top: 8px;">
+      <li>系统票券按面值从大到小排列（贪心算法）</li>
+      <li>自动拆分为最少张数组合（如 4 人 = 1张3人券 + 1张1人券）</li>
+      <li>页面上显示购买明细，如「1张3人券，1张1人券」</li>
+      <li>实时计算应付总额</li>
+    </ul>
+  </div>
+
+  <div class="feature-card">
+    <h4>优惠券（折扣券）选择</h4>
+    <p>确认页支持使用一张优惠券进行额外折扣：</p>
+    <ul class="detail-list" style="margin-top: 8px;">
+      <li>调用 <code>/mz/promoCodeList</code> 获取当前门店可用的优惠券</li>
+      <li>三种折扣类型：按比例折扣（如 8 折）、固定金额折扣、满减</li>
+      <li>不满足条件的券自动置灰（如满 200 可用，但总额仅 150）</li>
+      <li>按优惠力度排序，自动推荐最划算的券（标星标记）</li>
+      <li>选择后实时显示折后价格</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 2. 支付流程 -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/>
+      </svg>
+    </div>
+    支付流程
+  </div>
+
+  <div class="feature-card">
+    <h4>前置校验</h4>
+    <p>点击「确认支付」前需通过以下校验：</p>
+    <ul class="detail-list" style="margin-top: 8px;">
+      <li>必须阅读并同意「退改签规定协议」</li>
+      <li>如果存在可使用但未使用的已兑换票券，弹窗提醒是否返回选择</li>
+      <li>必须绑定手机号（未绑定时弹出授权组件）</li>
+    </ul>
+  </div>
+
+  <div class="flow-steps" style="margin-top: 16px;">
+    <div class="flow-step">
+      <div class="flow-line">
+        <div class="flow-dot"></div>
+        <div class="flow-connector"></div>
+      </div>
+      <div class="flow-content">
+        <h4>创建支付订单</h4>
+        <p>调用 <code>/mz/placePayOrder</code>，传入票券类型、场次 ID、总人数、票券使用明细、优惠券码。返回 <code>out_trade_no</code>（订单号）和 <code>pay_data</code>（微信支付参数）。</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-line">
+        <div class="flow-dot"></div>
+        <div class="flow-connector"></div>
+      </div>
+      <div class="flow-content">
+        <h4>微信支付</h4>
+        <p>如果 <code>pay_data</code> 不为空（需支付金额 > 0），调用 <code>wx.requestPayment</code> 唤起微信支付。支付参数包含 timeStamp、nonceStr、package、signType、paySign。</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-line">
+        <div class="flow-dot"></div>
+        <div class="flow-connector"></div>
+      </div>
+      <div class="flow-content">
+        <h4>免支付场景</h4>
+        <p>如果 <code>pay_data</code> 为空（全部使用已兑换票券，金额为 0），跳过支付直接进入下单确认。</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-line">
+        <div class="flow-dot"></div>
+      </div>
+      <div class="flow-content">
+        <h4>下单确认</h4>
+        <p>支付成功后调用 <code>/mz/orderGameRound</code>，传入订单号、场次 ID、总人数、票券使用明细。返回 <code>order_id</code>，跳转到订单完成页。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <div class="tip-box-title">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      支付失败处理
+    </div>
+    <p>如果用户取消支付或支付失败，调用 <code>/mz/closePayOrder</code> 关闭该支付订单，释放占用的场次名额。页面恢复可操作状态。</p>
+  </div>
+</div>

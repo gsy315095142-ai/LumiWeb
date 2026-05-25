@@ -1,0 +1,70 @@
+<!-- 自定义日期时间选择器 + API 汇总（从 magic-promotion.html 拆分） -->
+
+<!-- 6. 自定义日期时间选择器 -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+      </svg>
+    </div>
+    自定义日期时间选择器
+  </div>
+
+  <div class="feature-card">
+    <h4>选择器设计</h4>
+    <p>活动列表中使用自定义 <code>picker-view</code> 选择器设置时间，支持：</p>
+    <ul class="detail-list" style="margin-top:8px;">
+      <li><strong>五列滚动</strong>：年、月、日、时、分</li>
+      <li><strong>动态天数</strong>：根据选中年月自动计算当月天数（处理 28/29/30/31 天）</li>
+      <li><strong>防越界</strong>：月份切换时自动调整日期索引防止越界</li>
+      <li><strong>时间校验</strong>：关闭选择器时校验：开始时间 ≤ 结束时间</li>
+      <li>用于设置活动期限（<code>start_at</code>、<code>end_at</code>）和优惠券有效期（<code>valid_from</code>、<code>valid_to</code>）</li>
+      <li>已启用的活动（status ≠ 0）点击时间字段不弹出选择器</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 7. API 汇总 -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+      </svg>
+    </div>
+    API 接口汇总
+  </div>
+
+  <div class="feature-card">
+    <h4>管理端接口</h4>
+    <table class="info-table">
+      <thead><tr><th>接口</th><th>方法</th><th>用途</th></tr></thead>
+      <tbody>
+        <tr><td><code>/mz-admin/promotionPageOpts</code></td><td>GET</td><td>获取表单选项（条件/次数/类型/限制）</td></tr>
+        <tr><td><code>/mz-admin/createPromotion</code></td><td>POST</td><td>创建优惠活动</td></tr>
+        <tr><td><code>/mz-admin/savePromotion</code></td><td>POST</td><td>编辑保存优惠活动</td></tr>
+        <tr><td><code>/mz-admin/promotionList</code></td><td>GET</td><td>获取活动列表</td></tr>
+        <tr><td><code>/mz-admin/promotionDetail</code></td><td>GET</td><td>获取活动详情</td></tr>
+        <tr><td><code>/mz-admin/updatePromotionStatus</code></td><td>POST</td><td>启用/禁用活动 + 配置门店/期限/有效期</td></tr>
+        <tr><td><code>/mz-admin/deletePromotion</code></td><td>POST</td><td>删除活动</td></tr>
+        <tr><td><code>/mz-admin/promotionStats</code></td><td>GET</td><td>活动统计数据</td></tr>
+        <tr><td><code>/mz-admin/downloadPromoExcel</code></td><td>GET</td><td>导出统计 Excel</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="feature-card">
+    <h4>用户端接口</h4>
+    <table class="info-table">
+      <thead><tr><th>接口</th><th>方法</th><th>用途</th></tr></thead>
+      <tbody>
+        <tr><td><code>/mz/getCouponList</code></td><td>GET</td><td>获取用户优惠券列表（分页）</td></tr>
+        <tr><td><code>/mz/exchangeCoupon</code></td><td>POST</td><td>扫码兑换优惠券</td></tr>
+        <tr><td><code>/mz/receiveCoupon</code></td><td>POST</td><td>分享链接领取优惠券</td></tr>
+        <tr><td><code>/mz/joinGroup</code></td><td>POST</td><td>加入团队（团票）</td></tr>
+        <tr><td><code>/mz/receiveTransferredGroup</code></td><td>POST</td><td>接收转赠的团队票</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,88 @@
+<!-- 预约确认页 complete（从 magic-central.html 拆分） -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+      </svg>
+    </div>
+    预约确认页（complete 页）
+  </div>
+
+  <div class="feature-card">
+    <h4>页面用途</h4>
+    <p>用户预约成功后跳转到的确认页面，也支持通过分享链接进入。展示预约详情并提供操作入口。</p>
+  </div>
+
+  <div class="feature-card">
+    <h4>预约详情展示</h4>
+    <table class="info-table">
+      <thead><tr><th>信息</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td>预约日期</td><td>场次日期</td></tr>
+        <tr><td>时段场次</td><td>time_start - time_end</td></tr>
+        <tr><td>预定人数</td><td>已预约人数</td></tr>
+        <tr><td>联系电话</td><td>可修改（仅团长）</td></tr>
+        <tr><td>门店信息</td><td>门店名称和地址</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="feature-card">
+    <h4>可用操作</h4>
+    <div class="two-col" style="margin-top:12px;">
+      <div class="sub-card">
+        <h5>团长（is_owner=1）</h5>
+        <ul>
+          <li>创建角色</li>
+          <li>撤销预约（进入后厅前）</li>
+          <li>改签（修改场次时间）</li>
+          <li>修改预定人数</li>
+          <li>修改联系电话</li>
+          <li>分享激活码给团员</li>
+          <li>扫码签到</li>
+        </ul>
+      </div>
+      <div class="sub-card">
+        <h5>团员</h5>
+        <ul>
+          <li>创建角色</li>
+          <li>查看预约详情</li>
+          <li>扫码签到</li>
+          <li>分享邀请</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="feature-card">
+    <h4>分享功能</h4>
+    <p>预约确认页支持微信分享，分享时：</p>
+    <ul class="detail-list" style="margin-top:8px;">
+      <li><strong>生成分享图</strong>：Canvas 绘制含门店地址、日期、时段、人数、电话的分享卡片</li>
+      <li><strong>分享标题</strong>：「一封来自魔法学院的入学邀请函」</li>
+      <li><strong>分享路径</strong>：带 order_id、status、share 参数的 complete 页路径</li>
+      <li><strong>切换门店</strong>：分享链接带 <code>switch_store_id</code>，打开后自动切换门店</li>
+    </ul>
+  </div>
+
+  <div class="feature-card">
+    <h4>改签逻辑</h4>
+    <ul class="detail-list" style="margin-top:8px;">
+      <li>仅团长可操作，且有剩余改签次数（<code>reorder_times ≥ 1</code>）</li>
+      <li>场次状态必须 ≤ 1（未进入后厅）</li>
+      <li>团队预约（group_id > 0）不支持改签</li>
+      <li>点击改签跳转到预约页面（带 order_id 和 orderDate 参数）</li>
+    </ul>
+  </div>
+
+  <div class="feature-card">
+    <h4>修改人数</h4>
+    <ul class="detail-list" style="margin-top:8px;">
+      <li>弹出选择器（1/2/3/4 人），当前人数高亮</li>
+      <li>新人数不能超过已使用票券总人数上限（<code>coupon_value_sum</code>）</li>
+      <li>调用 <code>/mz/changeOrderPlayerNum</code>，传入 <code>order_id</code> 和新人数</li>
+      <li>人数减少无需修改，现场告知即可（弹窗提示）</li>
+    </ul>
+  </div>
+</div>

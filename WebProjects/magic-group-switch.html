@@ -1,0 +1,67 @@
+<!-- 换位调整（从 magic-group.html 拆分） -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/>
+      </svg>
+    </div>
+    换位调整
+  </div>
+
+  <div class="feature-card">
+    <h4>换位功能说明</h4>
+    <p>团队负责人和门店店员可将角色在不同位置之间调换，用于优化团队分组。仅管理员可操作。</p>
+  </div>
+
+  <div class="feature-card">
+    <h4>换位流程（三步操作）</h4>
+    <div class="flow-steps">
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <h4>Step 0 → 点击「占位调整」</h4>
+          <p>底部出现「占位调整」按钮（仅负责人/店员可见）。点击进入换位模式，<code>switchStep = 1</code>。</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <h4>Step 1 → 选择源角色 <span class="status-tag orange">请选择需要换位的角色</span></h4>
+          <p>点击网格中一个已有角色（<code>created_by ≠ 0</code>）作为源位置。点击空位提示「该位置未有选择」。选中后高亮显示（<code>currentRoleId</code> 匹配），<code>switchStep = 2</code>。</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <h4>Step 2 → 选择目标位置 <span class="status-tag purple">请选择交换的位置</span></h4>
+          <p>点击另一个格子作为目标（可以是已有角色或空位）。弹窗确认「是否交换位置？」。</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot"></div></div>
+        <div class="flow-content">
+          <h4>提交换位</h4>
+          <p>调用 <code>/mz/adjustGroupSeat</code>（POST），传入 <code>group_code</code>、<code>role_id</code>（源）、<code>target_role_id</code> 或 <code>target_round_id</code>（目标）。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="feature-card">
+    <h4>换位参数路由</h4>
+    <table class="info-table">
+      <thead><tr><th>目标位置类型</th><th>参数</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td>目标为已有角色</td><td><code>target_role_id</code></td><td>两个角色互换位置</td></tr>
+        <tr><td>目标为空位（虚拟位）</td><td><code>target_round_id</code></td><td>角色移到该场次的空位</td></tr>
+        <tr><td>目标异常</td><td>—</td><td>提示「目标位置异常」并取消操作</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="feature-card">
+    <h4>取消换位</h4>
+    <p>换位过程中随时可点击「取消」按钮，重置 <code>switchStep = 0</code> 并清除选中状态。</p>
+  </div>
+</div>

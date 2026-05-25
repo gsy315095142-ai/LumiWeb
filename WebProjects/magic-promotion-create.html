@@ -1,0 +1,97 @@
+<!-- 创建优惠活动（从 magic-promotion.html 拆分） -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+      </svg>
+    </div>
+    创建优惠活动
+  </div>
+
+  <div class="feature-card">
+    <h4>表单配置项</h4>
+    <table class="info-table">
+      <thead><tr><th>配置项</th><th>说明</th><th>校验规则</th></tr></thead>
+      <tbody>
+        <tr><td><strong>活动名称</strong></td><td>活动的显示名称</td><td>必填，中文字符 ≤ 15 字（英文算 0.5）</td></tr>
+        <tr><td><strong>触发条件</strong></td><td>从后端获取的条件选项（如"不限制条件"）</td><td>必选，下拉选择</td></tr>
+        <tr><td><strong>活动形式</strong></td><td>目前仅支持「发放优惠券」</td><td>默认值</td></tr>
+        <tr><td><strong>赠送次数</strong></td><td>每个用户可领取的次数限制</td><td>从后端获取的次数选项</td></tr>
+        <tr><td><strong>优惠券名称</strong></td><td>券的显示名称</td><td>必填，中文字符 ≤ 6 字（英文算 0.5）</td></tr>
+        <tr><td><strong>折扣类型</strong></td><td>折扣比例 / 固定金额折扣 / 满减</td><td>必选，切换类型时清空折扣值</td></tr>
+        <tr><td><strong>折扣值</strong></td><td>具体的折扣数值</td><td>比例 ≤ 100%；满减时减免 ≤ 满足金额</td></tr>
+        <tr><td><strong>满足金额</strong></td><td>满减类型的门槛金额</td><td>满减时必填</td></tr>
+        <tr><td><strong>每日限制</strong></td><td>每天可领取的次数上限</td><td>从后端获取的限制选项</td></tr>
+        <tr><td><strong>支持转赠</strong></td><td>优惠券是否可以转让给他人</td><td>开关，默认开启</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="feature-card">
+    <h4>三种折扣类型</h4>
+    <div class="two-col">
+      <div class="sub-card">
+        <h5><span class="status-tag purple">折扣比例</span></h5>
+        <ul>
+          <li>type = 0</li>
+          <li>输入百分比（如 80 = 8折）</li>
+          <li>不可超过 100%</li>
+          <li>仅整数，不支持小数</li>
+        </ul>
+      </div>
+      <div class="sub-card">
+        <h5><span class="status-tag blue">固定金额折扣</span></h5>
+        <ul>
+          <li>type = 1</li>
+          <li>直接减免固定金额</li>
+          <li>最多保留 2 位小数</li>
+          <li>无满足金额要求</li>
+        </ul>
+      </div>
+    </div>
+    <div class="sub-card" style="margin-top:12px;">
+      <h5><span class="status-tag orange">满减</span></h5>
+      <ul>
+        <li>type = 2</li>
+        <li>需同时填写满足金额和减免金额</li>
+        <li>减免金额不能大于满足金额</li>
+        <li>最多保留 2 位小数</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="feature-card">
+    <h4>创建流程</h4>
+    <div class="flow-steps">
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <h4>加载页面配置</h4>
+          <p>调用 <code>/mz-admin/promotionPageOpts</code>，获取触发条件、发放次数、折扣类型、每日限制等下拉选项。</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <h4>填写表单</h4>
+          <p>管理员填写活动名称、选择条件、配置优惠券参数。</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <h4>表单校验</h4>
+          <p>活动名称和优惠券名称必填、折扣值必须 > 0、满减时减免不能大于满足金额、折扣比例不能超过 100%。</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot"></div></div>
+        <div class="flow-content">
+          <h4>提交保存</h4>
+          <p>调用 <code>/mz-admin/createPromotion</code>（新建）或 <code>/mz-admin/savePromotion</code>（编辑），成功后重置表单。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

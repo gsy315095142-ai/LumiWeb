@@ -1,0 +1,43 @@
+<!-- 功能总览（从 magic-central.html 拆分） -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+      </svg>
+    </div>
+    功能总览
+  </div>
+
+  <div class="feature-card">
+    <h4>双模式切换</h4>
+    <p>中控台通过顶部 Tab 切换两个核心模式：</p>
+    <div class="two-col" style="margin-top:12px;">
+      <div class="sub-card">
+        <h5>📋 预约管理（book）</h5>
+        <ul>
+          <li>按日期查看所有场次排期</li>
+          <li>A/B 厅切换</li>
+          <li>展开场次详情（角色列表）</li>
+          <li>签到、创角、电话联系</li>
+          <li>转入后厅操作</li>
+          <li>团队批量预约</li>
+        </ul>
+      </div>
+      <div class="sub-card">
+        <h5>🎮 游戏监控（monitor）</h5>
+        <ul>
+          <li>查看当日进行中的游戏场次</li>
+          <li>启动游戏（status 1 → 2）</li>
+          <li>结束游戏（status 2/3 → 5）</li>
+          <li>实时状态展示</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="feature-card">
+    <h4>权限控制</h4>
+    <p>中控台通过 <code>getUserPermissions('ticket')</code> 检查当前用户是否拥有票券管理权限。无权限的功能按钮会被隐藏或禁用。</p>
+  </div>
+</div>

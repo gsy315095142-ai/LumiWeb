@@ -1,0 +1,58 @@
+<!-- 团队批量预约（从 magic-central.html 拆分） -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+      </svg>
+    </div>
+    团队批量预约
+  </div>
+
+  <div class="feature-card">
+    <h4>导入团队文件</h4>
+    <p>管理员可从 Excel 文件批量导入团队预约数据：</p>
+    <div class="flow-steps">
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <h4>选择文件</h4>
+          <p>调用 <code>wx.chooseMessageFile</code>，仅允许 <code>.xlsx / .xls</code> 格式。</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <h4>解析文件</h4>
+          <p>调用 <code>wxFileUpload</code> 上传到 <code>/mz-admin/getGroupFile</code> 接口，后端解析返回成员列表 <code>memberTeam</code> 和错误行数 <code>error_line</code>。</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <h4>选择日期和时段</h4>
+          <p>选择预约日期 → 调用 <code>/mz/getGameRoundList</code> 获取可用时段 → 选择起始时段，系统自动计算结束时段（按团队人数 / 4 向上取整确定所需连续场次数）。</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <h4>提交预约</h4>
+          <p>调用 <code>/mz-admin/orderGameRoundByGroup</code>，传入日期、起始/结束 round_id、玩家列表。</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot"></div></div>
+        <div class="flow-content">
+          <h4>撤销团队场次</h4>
+          <p>调用 <code>/mz-admin/cancelGroupRound</code>，传入 <code>round_id</code>，二次确认后撤销整个团队预约。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="feature-card">
+    <h4>模板下载与分享</h4>
+    <p>提供团队预约模板文件下载（<code>cdn.lixiaoqian.com/magic-space/a_teamfile.xlsx</code>），通过 <code>wx.downloadFile + wx.shareFileMessage</code> 以文件消息形式分享给用户填写。</p>
+  </div>
+</div>

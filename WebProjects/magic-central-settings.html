@@ -1,0 +1,123 @@
+<!-- 系统设置 + API 汇总（从 magic-central.html 拆分） -->
+
+<!-- 10. 系统设置 -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9c.26.604.852.997 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+      </svg>
+    </div>
+    系统设置
+  </div>
+
+  <div class="feature-card">
+    <h4>设置弹窗</h4>
+    <p>点击设置按钮打开弹窗，包含两个 Tab：</p>
+    <div class="two-col" style="margin-top:12px;">
+      <div class="sub-card">
+        <h5>场次与票价设置</h5>
+        <ul>
+          <li>选择门店</li>
+          <li>设置起止日期</li>
+          <li>是否开启预约</li>
+          <li>设置营业时间段</li>
+          <li>场次间隔时间（分钟）</li>
+          <li>票价设置（1-4人券）</li>
+        </ul>
+      </div>
+      <div class="sub-card">
+        <h5>调整开放预约</h5>
+        <ul>
+          <li>按门店查看所有厅</li>
+          <li>开启/关闭各厅预约</li>
+          <li>实时切换厅的 status</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="feature-card">
+    <h4>场次与票价设置流程</h4>
+    <div class="flow-steps">
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <h4>加载数据</h4>
+          <p>打开弹窗时调用 <code>/mz-admin/getRoundPriceConf</code>，传入日期范围和门店 ID，回显当前配置。</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <h4>编辑配置</h4>
+          <p>修改日期、门店、开关、时间、间隔、票价等。修改日期/门店时自动重新加载配置。</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <h4>表单校验</h4>
+          <p>必须选择门店；开启状态时必须填写时间段和间隔；日期不能早于今天；结束日期不能早于开始日期。</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot"></div></div>
+        <div class="flow-content">
+          <h4>二次确认并保存</h4>
+          <p>弹出确认弹窗展示修改内容。调用 <code>/mz-admin/saveRoundPriceConf</code> 提交。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="feature-card">
+    <h4>开放预约切换</h4>
+    <p>对每个厅的预约状态单独控制：</p>
+    <ul class="detail-list" style="margin-top:8px;">
+      <li>调用 <code>/mz-admin/saveStoreRoomStatus</code>，传入 <code>store_room_id</code> 和 <code>status</code></li>
+      <li>status=1 表示开启，status=2 表示关闭</li>
+      <li>切换前弹出确认框「确定打开/关闭 xxx？」</li>
+      <li>切换后刷新列表状态</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 11. API 汇总 -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+      </svg>
+    </div>
+    API 接口汇总
+  </div>
+
+  <div class="feature-card">
+    <table class="info-table">
+      <thead><tr><th>接口</th><th>方法</th><th>用途</th></tr></thead>
+      <tbody>
+        <tr><td><code>/mz-admin/getGameRoundsOrdering</code></td><td>GET</td><td>获取场次排期（预约管理）</td></tr>
+        <tr><td><code>/mz-admin/getPlayingGameRoundList</code></td><td>GET</td><td>获取进行中的游戏（监控）</td></tr>
+        <tr><td><code>/mz-admin/updateGameRoleInfo</code></td><td>POST</td><td>创建/更新角色信息</td></tr>
+        <tr><td><code>/mz-admin/makeOrderCheckIn</code></td><td>POST</td><td>手动签到</td></tr>
+        <tr><td><code>/mz-admin/getPhoneByOrder</code></td><td>GET</td><td>通过订单获取手机号</td></tr>
+        <tr><td><code>/mz-admin/gameRoundEnterScene</code></td><td>POST</td><td>转入后厅</td></tr>
+        <tr><td><code>/mz-admin/startGame</code></td><td>POST</td><td>启动游戏</td></tr>
+        <tr><td><code>/mz-admin/endGame</code></td><td>POST</td><td>结束游戏</td></tr>
+        <tr><td><code>/mz-admin/searchCoupon</code></td><td>GET</td><td>票券/订单/手机号查询</td></tr>
+        <tr><td><code>/mz-admin/orderGameRoundByGroup</code></td><td>POST</td><td>团队批量预约</td></tr>
+        <tr><td><code>/mz-admin/cancelGroupRound</code></td><td>POST</td><td>撤销团队场次</td></tr>
+        <tr><td><code>/mz-admin/getGroupFile</code></td><td>POST</td><td>解析团队预约 Excel</td></tr>
+        <tr><td><code>/mz-admin/getRoundPriceConf</code></td><td>GET</td><td>获取场次票价配置</td></tr>
+        <tr><td><code>/mz-admin/saveRoundPriceConf</code></td><td>POST</td><td>保存场次票价配置</td></tr>
+        <tr><td><code>/mz-admin/saveStoreRoomStatus</code></td><td>POST</td><td>切换厅预约开放状态</td></tr>
+        <tr><td><code>/mz/getGameRoundOrder</code></td><td>GET</td><td>获取预约订单详情（complete 页）</td></tr>
+        <tr><td><code>/mz/cancelGameRoundOrder</code></td><td>POST</td><td>撤销预约</td></tr>
+        <tr><td><code>/mz/changeOrderPlayerNum</code></td><td>POST</td><td>修改预定人数</td></tr>
+        <tr><td><code>/mz/changeOrderPhone</code></td><td>POST</td><td>修改订单联系电话</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
