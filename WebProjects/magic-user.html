@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumi 魔法学院 - 用户中心</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --primary: #7C3AED; --primary-light: #A78BFA; --accent: #FBBF24;
+  --bg-dark: #0F0A1A; --bg-card: rgba(255,255,255,0.04); --bg-card-hover: rgba(255,255,255,0.06);
+  --text-primary: #F8FAFC; --text-secondary: rgba(248,250,252,0.6); --text-tertiary: rgba(248,250,252,0.4);
+  --card-border: rgba(255,255,255,0.08); --card-border-hover: rgba(255,255,255,0.14);
+  --project-color: #7C3AED; --project-color-light: #A78BFA;
+  --project-color-bg: rgba(124,58,237,0.1); --project-color-border: rgba(124,58,237,0.2);
+}
+body { font-family:'Inter',-apple-system,"PingFang SC","Microsoft YaHei",sans-serif; background:var(--bg-dark); color:var(--text-primary); min-height:100vh; overflow-x:hidden; position:relative; }
+.bg-glow { position:fixed; top:0; left:0; right:0; bottom:0; pointer-events:none; z-index:0; }
+.glow-orb { position:absolute; border-radius:50%; filter:blur(80px); animation:pulse 8s ease-in-out infinite alternate; }
+.glow-orb-1 { width:400px; height:400px; background:rgba(124,58,237,0.08); top:-100px; left:-100px; }
+.glow-orb-2 { width:300px; height:300px; background:rgba(251,191,36,0.05); bottom:-50px; right:-50px; animation-delay:4s; }
+@keyframes pulse { 0%{transform:scale(1);opacity:0.5;} 100%{transform:scale(1.3);opacity:1;} }
+.container { position:relative; z-index:1; max-width:860px; margin:0 auto; padding:0 24px; }
+.topbar { display:flex; align-items:center; justify-content:space-between; padding:28px 0 20px; animation:fadeInDown .6s ease; }
+.back-link { display:inline-flex; align-items:center; gap:8px; color:var(--text-secondary); text-decoration:none; font-size:14px; font-weight:500; transition:color .3s; }
+.back-link:hover { color:var(--text-primary); }
+.back-link svg { width:18px; height:18px; transition:transform .3s; }
+.back-link:hover svg { transform:translateX(-3px); }
+.topbar-nav { display:flex; gap:6px; }
+.nav-btn { padding:6px 14px; border-radius:8px; font-size:13px; font-weight:500; text-decoration:none; color:var(--text-secondary); background:var(--bg-card); border:1px solid var(--card-border); transition:all .3s; }
+.nav-btn:hover { color:var(--text-primary); background:var(--bg-card-hover); border-color:var(--card-border-hover); }
+.nav-btn.active { color:var(--project-color-light); background:var(--project-color-bg); border-color:var(--project-color-border); }
+.page-header { padding:20px 0 40px; animation:fadeInUp .8s ease .1s both; }
+.page-header-top { display:flex; align-items:center; gap:16px; margin-bottom:12px; }
+.page-num { font-size:13px; font-weight:700; color:var(--project-color-light); background:var(--project-color-bg); padding:4px 12px; border-radius:6px; letter-spacing:1px; }
+.page-header h1 { font-size:32px; font-weight:800; letter-spacing:-.5px; }
+.page-header-desc { font-size:15px; color:var(--text-secondary); line-height:1.7; max-width:600px; }
+.content { padding-bottom:80px; }
+.section-block { margin-bottom:48px; animation:fadeInUp .8s ease both; }
+.section-block:nth-child(1){animation-delay:.2s;} .section-block:nth-child(2){animation-delay:.35s;}
+.section-block:nth-child(3){animation-delay:.5s;} .section-block:nth-child(4){animation-delay:.65s;}
+.section-block:nth-child(5){animation-delay:.8s;} .section-block:nth-child(6){animation-delay:.95s;}
+.section-block:nth-child(7){animation-delay:1.1s;}
+.section-title { font-size:18px; font-weight:700; margin-bottom:16px; display:flex; align-items:center; gap:10px; }
+.section-title-icon { width:28px; height:28px; border-radius:8px; background:var(--project-color-bg); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.section-title-icon svg { width:16px; height:16px; color:var(--project-color-light); }
+.feature-card { background:var(--bg-card); border:1px solid var(--card-border); border-radius:14px; padding:24px; margin-bottom:12px; transition:all .3s; }
+.feature-card:hover { background:var(--bg-card-hover); border-color:var(--card-border-hover); }
+.feature-card h4 { font-size:15px; font-weight:600; margin-bottom:8px; color:var(--text-primary); }
+.feature-card p { font-size:14px; color:var(--text-secondary); line-height:1.7; }
+.flow-steps { display:flex; flex-direction:column; gap:0; }
+.flow-step { display:flex; gap:16px; position:relative; }
+.flow-line { display:flex; flex-direction:column; align-items:center; width:32px; flex-shrink:0; }
+.flow-dot { width:12px; height:12px; border-radius:50%; background:var(--primary); border:2px solid var(--project-color-light); flex-shrink:0; position:relative; z-index:1; }
+.flow-connector { width:2px; flex:1; min-height:20px; background:linear-gradient(to bottom,var(--project-color-border),transparent); }
+.flow-content { padding-bottom:24px; flex:1; }
+.flow-content h4 { font-size:14px; font-weight:600; margin-bottom:6px; }
+.flow-content p { font-size:13px; color:var(--text-secondary); line-height:1.6; }
+.detail-list { list-style:none; display:flex; flex-direction:column; gap:8px; }
+.detail-list li { font-size:14px; color:var(--text-secondary); line-height:1.6; padding-left:20px; position:relative; }
+.detail-list li::before { content:''; position:absolute; left:0; top:9px; width:6px; height:6px; border-radius:50%; background:var(--project-color-light); opacity:.6; }
+code { background:rgba(124,58,237,.12); color:var(--project-color-light); padding:2px 6px; border-radius:4px; font-size:13px; font-family:'SF Mono','Consolas',monospace; }
+.tip-box { background:rgba(124,58,237,.06); border:1px solid var(--project-color-border); border-radius:12px; padding:16px 20px; margin-top:16px; }
+.tip-box-title { font-size:13px; font-weight:600; color:var(--project-color-light); margin-bottom:6px; display:flex; align-items:center; gap:6px; }
+.tip-box p { font-size:13px; color:var(--text-secondary); line-height:1.6; }
+.info-table { width:100%; border-collapse:collapse; margin-top:12px; font-size:13px; }
+.info-table th,.info-table td { padding:10px 14px; text-align:left; border-bottom:1px solid var(--card-border); }
+.info-table th { font-weight:600; color:var(--project-color-light); background:rgba(124,58,237,.04); }
+.info-table td { color:var(--text-secondary); }
+.status-tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+.status-tag { font-size:12px; padding:4px 12px; border-radius:100px; font-weight:500; }
+.status-tag.red { background:rgba(239,68,68,.1); color:#FCA5A5; border:1px solid rgba(239,68,68,.2); }
+.status-tag.blue { background:rgba(59,130,246,.1); color:#93C5FD; border:1px solid rgba(59,130,246,.2); }
+.status-tag.green { background:rgba(16,185,129,.1); color:#6EE7B7; border:1px solid rgba(16,185,129,.2); }
+.status-tag.orange { background:rgba(251,191,36,.1); color:#FBBF24; border:1px solid rgba(251,191,36,.2); }
+.status-tag.grey { background:rgba(255,255,255,.05); color:var(--text-tertiary); border:1px solid rgba(255,255,255,.1); }
+.status-tag.purple { background:rgba(124,58,237,.1); color:#A78BFA; border:1px solid rgba(124,58,237,.2); }
+.page-nav { display:flex; justify-content:space-between; align-items:center; padding:32px 0; border-top:1px solid var(--card-border); animation:fadeInUp .8s ease .8s both; }
+.page-nav-link { display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text-secondary); transition:color .3s; max-width:45%; }
+.page-nav-link:hover { color:var(--text-primary); }
+.page-nav-link.next { text-align:right; margin-left:auto; }
+.page-nav-link svg { width:18px; height:18px; flex-shrink:0; }
+.page-nav-info { display:flex; flex-direction:column; }
+.page-nav-label { font-size:12px; color:var(--text-tertiary); margin-bottom:2px; }
+.page-nav-title { font-size:14px; font-weight:600; color:var(--project-color-light); }
+.page-nav-link:hover .page-nav-title { color:var(--text-primary); }
+.footer { text-align:center; padding:20px 0 40px; }
+.footer-text { font-size:13px; color:var(--text-secondary); opacity:.5; }
+@keyframes fadeInUp { from{opacity:0;transform:translateY(20px);} to{opacity:1;transform:translateY(0);} }
+@keyframes fadeInDown { from{opacity:0;transform:translateY(-15px);} to{opacity:1;transform:translateY(0);} }
+@media(max-width:600px){ .page-header h1{font-size:24px;} .topbar-nav{display:none;} .info-table{font-size:12px;} .info-table th,.info-table td{padding:8px 10px;} }
+</style>
+</head>
+<body>
+<div class="bg-glow"><div class="glow-orb glow-orb-1"></div><div class="glow-orb glow-orb-2"></div></div>
+<div class="container">
+
+  <div class="topbar">
+    <a href="lumi-magic.html" class="back-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      返回文档列表
+    </a>
+    <div class="topbar-nav">
+      <a href="magic-home.html" class="nav-btn">首页</a>
+      <a href="magic-booking.html" class="nav-btn">预约</a>
+      <a href="magic-order.html" class="nav-btn">订单</a>
+      <a href="magic-ticket.html" class="nav-btn">票券</a>
+      <a href="magic-role.html" class="nav-btn">角色</a>
+      <a href="magic-user.html" class="nav-btn active">用户</a>
+      <a href="magic-login.html" class="nav-btn">登录</a>
+      <a href="magic-central.html" class="nav-btn">中控</a>
+      <a href="magic-promotion.html" class="nav-btn">优惠</a>
+      <a href="magic-group.html" class="nav-btn">团队</a>
+      <a href="magic-stats.html" class="nav-btn">统计</a>
+    </div>
+  </div>
+
+  <div class="page-header">
+    <div class="page-header-top"><span class="page-num">模块 06</span></div>
+    <h1>用户中心</h1>
+    <p class="page-header-desc">用户中心是小程序的底部 Tab 页之一，聚合了用户的所有核心数据：我的场次、我的票券、优惠券，以及团购兑换、转赠、撤销场次等操作入口。同时包含设置页的个人资料管理。</p>
+  </div>
+
+  <div class="content">
+
+    <!-- 1. 页面结构 -->
+    <div class="section-block">
+      <div class="section-title">
+        <div class="section-title-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/>
+          </svg>
+        </div>
+        页面整体结构
+      </div>
+
+      <div class="feature-card">
+        <h4>顶部用户信息区</h4>
+        <p>页面顶部展示用户状态信息：</p>
+        <ul class="detail-list" style="margin-top:8px;">
+          <li><strong>头像 & 昵称</strong>：显示微信头像和昵称（未登录时显示默认头像 +「微信用户」）</li>
+          <li><strong>登录按钮</strong>：未登录时显示「登录」按钮，点击弹出手机号授权弹窗</li>
+          <li><strong>团购兑换入口</strong>：已登录用户可点击团购兑换图片，弹出兑换弹窗输入团购码</li>
+          <li><strong>联系客服</strong>：点击拨打当前门店或默认客服电话</li>
+          <li><strong>设置入口</strong>：右上角齿轮图标进入设置页</li>
+        </ul>
+      </div>
+
+      <div class="feature-card">
+        <h4>功能导航区（5 个入口 + 角标）</h4>
+        <p>用户信息下方为功能入口网格，每项带数字角标：</p>
+        <table class="info-table">
+          <thead><tr><th>入口</th><th>角标来源</th><th>跳转目标</th></tr></thead>
+          <tbody>
+            <tr><td>待使用票券</td><td><code>coupon_pending_count</code></td><td><code>/pages/coupons/coupons?type=1</code></td></tr>
+            <tr><td>我的票券</td><td><code>coupon_count</code></td><td>票券 Tab</td></tr>
+            <tr><td>创建角色</td><td><code>order_un_role_count</code></td><td><code>/pages/role/role?order={id}</code></td></tr>
+            <tr><td>待体验场次</td><td><code>order_un_check_count</code></td><td><code>/pages/orders/orders?type=0</code></td></tr>
+            <tr><td>我的订单</td><td><code>order_count</code></td><td>场次 Tab</td></tr>
+          </tbody>
+        </table>
+        <p style="margin-top:8px;">角标为 0 时点击提示「暂无更多数据」。创建角色入口会自动携带待创角订单 ID。</p>
+      </div>
+
+      <div class="feature-card">
+        <h4>三个 Tab 内容区</h4>
+        <p>功能导航下方为三个 Tab 切换：</p>
+        <ul class="detail-list" style="margin-top:8px;">
+          <li><strong>场次（round）</strong>：我的场次列表，按待体验/已体验分组</li>
+          <li><strong>票券（coupon）</strong>：我的票券列表，按待使用/其他分组</li>
+          <li><strong>优惠券（promotion）</strong>：我的优惠券列表</li>
+        </ul>
+        <p style="margin-top:8px;">可通过外部参数 <code>jumpToTicket</code> 跳转后默认显示票券 Tab。</p>
+      </div>
+    </div>
+
+    <!-- 2. 我的场次 -->
+    <div class="section-block">
+      <div class="section-title">
+        <div class="section-title-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+          </svg>
+        </div>
+        我的场次
+      </div>
+
+      <div class="feature-card">
+        <h4>数据加载</h4>
+        <p>调用 <code>/mz/getUserRounds</code> 获取用户所有场次数据（每页 100 条），包含：</p>
+        <ul class="detail-list" style="margin-top:8px;">
+          <li>场次信息：日期、开始时间、所属门店</li>
+          <li>订单信息：预约人数、订单号、是否为团购订单</li>
+          <li>票券信息：关联的票券名称和面值</li>
+          <li>签到状态：<code>is_checked_in</code></li>
+          <li>场次状态：<code>status</code>（0-5）</li>
+        </ul>
+      </div>
+
+      <div class="feature-card">
+        <h4>列表分组与排序</h4>
+        <p>场次按状态分为两组：</p>
+        <div class="status-tags" style="margin-bottom:12px;">
+          <span class="status-tag blue">待体验 (0)</span>
+          <span class="status-tag blue">已激活 (1)</span>
+          <span class="status-tag green">游戏中 (2)</span>
+          <span class="status-tag green">已体验 (3)</span>
+          <span class="status-tag grey">已取消 (4)</span>
+          <span class="status-tag grey">已过期 (5)</span>
+        </div>
+        <ul class="detail-list">
+          <li><strong>待体验（status < 2）</strong>：按日期升序 → 时间升序排列，最近的场次排在前面</li>
+          <li><strong>已体验（status ≥ 2）</strong>：按日期降序 → 时间降序排列，最近的已完成场次排在前面</li>
+        </ul>
+      </div>
+
+      <div class="feature-card">
+        <h4>场次卡片操作</h4>
+        <p>每个场次卡片显示门店名称、日期时间、人数、订单号，并提供以下操作：</p>
+        <ul class="detail-list" style="margin-top:8px;">
+          <li><strong>点击卡片</strong>：跳转完成页（<code>/pages/complete/complete</code>），仅 status < 2 时可跳转</li>
+          <li><strong>撤销场次</strong>：左滑出现撤销按钮（仅 <code>platform=lumi</code> 的票券支持左滑）
+            <ul class="detail-list" style="margin-top:4px;">
+              <li>开场前 3 小时以上才可撤销</li>
+              <li>确认弹窗提示：撤销后票券将重置为待使用状态</li>
+              <li>调用 <code>/mz/cancelGameRoundOrder</code></li>
+            </ul>
+          </li>
+          <li><strong>复制订单号</strong>：点击订单号一键复制</li>
+        </ul>
+      </div>
+
+      <div class="feature-card">
+        <h4>场次状态视觉</h4>
+        <p>不同状态的场次卡片有不同的视觉样式：</p>
+        <table class="info-table">
+          <thead><tr><th>状态</th><th>卡片样式</th><th>背景图标</th></tr></thead>
+          <tbody>
+            <tr><td>待体验</td><td>默认样式</td><td>—</td></tr>
+            <tr><td>已激活</td><td>默认样式</td><td>—</td></tr>
+            <tr><td>游戏中</td><td>蓝色阴影 + 蓝色背景</td><td>game 图标</td></tr>
+            <tr><td>已体验</td><td>绿色阴影 + 绿色背景</td><td>expired 图标</td></tr>
+            <tr><td>已取消</td><td>灰色阴影 + 灰色背景</td><td>cancel 图标</td></tr>
+            <tr><td>已过期</td><td>灰色阴影 + 灰色背景</td><td>overdate 图标</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 3. 我的票券 -->
+    <div class="section-block">
+      <div class="section-title">
+        <div class="section-title-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="4" width="20" height="16" rx="2"/><path d="M12 4v16"/><path d="M2 12h20"/>
+          </svg>
+        </div>
+        我的票券
+      </div>
+
+      <div class="feature-card">
+        <h4>数据加载</h4>
+        <p>调用 <code>/mz/getCouponList</code> 获取用户所有票券。每张票券包含：</p>
+        <ul class="detail-list" style="margin-top:8px;">
+          <li>票券名称、面值（value）、所属门店</li>
+          <li>票券码（code）、平台类型（inner/group）</li>
+          <li>创建时间、过期时间、剩余天数</li>
+          <li>使用状态、转让状态（<code>transfer_status</code>）</li>
+        </ul>
+      </div>
+
+      <div class="feature-card">
+        <h4>智能分组逻辑</h4>
+        <p>票券按使用状态分为「待使用」和「其他」两组，分组逻辑较复杂：</p>
+        <table class="info-table">
+          <thead><tr><th>类型</th><th>待使用条件</th><th>其他</th></tr></thead>
+          <tbody>
+            <tr><td>普通票</td><td>status=0、未过期、未被转让出去</td><td>status≠0、已过期、已转让</td></tr>
+            <tr><td>团购票</td><td>status 为 0/1、未过期、非本人转出</td><td>已使用、已过期、已转出</td></tr>
+            <tr><td>转让接收</td><td>transfer_status=2 且当前用户是接收方</td><td>—</td></tr>
+          </tbody>
+        </table>
+        <p style="margin-top:8px;">排序规则：普通票按兑换时间降序，团购票按预约日期降序。</p>
+      </div>
+
+      <div class="feature-card">
+        <h4>票券状态流转</h4>
+        <div class="status-tags" style="margin-bottom:12px;">
+          <span class="status-tag blue">待使用 (0)</span>
+          <span class="status-tag orange">待核销 (1)</span>
+          <span class="status-tag green">已核销 (2)</span>
+          <span class="status-tag grey">已过期 (3)</span>
+          <span class="status-tag red">已失效 (4)</span>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <h4>票券操作</h4>
+        <p>票券卡片支持多种操作：</p>
+        <ul class="detail-list" style="margin-top:8px;">
+          <li><strong>一键预约</strong>：点击「预约」跳转预约页，携带票券 ID 和面值，自动切换门店</li>
+          <li><strong>赠送票券</strong>：点击「赠送」弹出确认框，确认后通过微信分享给好友
+            <ul class="detail-list" style="margin-top:4px;">
+              <li>调用 <code>/mz/markCouponTransferable</code> 标记可转让</li>
+              <li>生成 Canvas 海报（含票券类型、兑换时间、门店）作为分享封面</li>
+              <li>分享链接：<code>/pages/vouchersShareJump?share_code=1&qrcode={code}</code></li>
+              <li>注意：赠送后自己无法再使用</li>
+            </ul>
+          </li>
+          <li><strong>团购票分享</strong>：将团购票分享给团队成员预约场次</li>
+          <li><strong>团购票转赠</strong>：将整个团购票转让给他人
+            <ul class="detail-list" style="margin-top:4px;">
+              <li>调用 <code>/mz/markGroupTransferable</code> 标记可转让</li>
+              <li>离屏 Canvas 生成分享海报（门店名 + 团队人数 + 预约日期）</li>
+            </ul>
+          </li>
+          <li><strong>退票</strong>：左滑出现退票按钮（仅 <code>platform=lumi</code>）
+            <ul class="detail-list" style="margin-top:4px;">
+              <li>确认弹窗：退掉后不可撤销</li>
+              <li>调用 <code>/mz/refundCouponWithPayOrder</code></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 4. 优惠券 -->
+    <div class="section-block">
+      <div class="section-title">
+        <div class="section-title-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/>
+          </svg>
+        </div>
+        我的优惠券
+      </div>
+
+      <div class="feature-card">
+        <h4>优惠券列表</h4>
+        <p>调用 <code>/mz/promoCodeList</code> 获取用户的优惠码列表，每张优惠券显示：</p>
+        <ul class="detail-list" style="margin-top:8px;">
+          <li><strong>折扣信息</strong>：支持三种类型
+            <ul class="detail-list" style="margin-top:4px;">
+              <li>按比例折扣：如「8折」「6.5折」</li>
+              <li>固定金额折扣：如「20元折扣」</li>
+              <li>满减：如「满100减30元」</li>
+            </ul>
+          </li>
+          <li><strong>有效期</strong>：显示截止日期 <code>valid_to</code></li>
+          <li><strong>使用状态</strong>：未使用 / 已使用 / 已过期</li>
+          <li><strong>所属门店</strong></li>
+        </ul>
+      </div>
+
+      <div class="feature-card">
+        <h4>优惠券赠送</h4>
+        <p>优惠券支持通过微信分享赠送给好友，流程与票券赠送类似：</p>
+        <ul class="detail-list" style="margin-top:8px;">
+          <li>Canvas 生成分享海报（不同背景图 + 优惠券类型 + 截止时间 + 门店）</li>
+          <li>分享标题：「赠送你一张魔法学院优惠券，请查收~」</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 5. 团购兑换 -->
+    <div class="section-block">
+      <div class="section-title">
+        <div class="section-title-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/>
+          </svg>
+        </div>
+        团购兑换
+      </div>
+
+      <div class="feature-card">
+        <h4>兑换入口</h4>
+        <p>用户中心顶部有团购兑换入口（图片按钮），点击后弹出兑换弹窗：</p>
+        <ul class="detail-list" style="margin-top:8px;">
+          <li>输入团购码（group_code）</li>
+          <li>调用兑换接口验证团购码有效性</li>
+          <li>兑换成功后票券自动添加到用户的票券列表</li>
+          <li>关闭弹窗后自动刷新数据</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 6. 设置页 -->
+    <div class="section-block">
+      <div class="section-title">
+        <div class="section-title-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+        </div>
+        设置页（settings）
+      </div>
+
+      <div class="feature-card">
+        <h4>个人资料</h4>
+        <p>设置页（<code>/pages/settings/settings</code>）展示和管理用户的个人信息：</p>
+        <table class="info-table">
+          <thead><tr><th>字段</th><th>说明</th></tr></thead>
+          <tbody>
+            <tr><td>头像</td><td>支持通过 <code>chooseAvatar</code> 组件选择新头像</td></tr>
+            <tr><td>昵称</td><td>支持通过 <code>input type=nickname</code> 组件修改</td></tr>
+            <tr><td>手机号</td><td>脱敏显示（138****1234），不可直接修改</td></tr>
+            <tr><td>版本号</td><td>正式环境显示小程序版本号，开发环境不显示</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="feature-card">
+        <h4>退出登录</h4>
+        <p>点击退出登录按钮，确认后将 <code>user_login</code> 设为 false，2 秒后跳转首页（<code>reLaunch</code>）。</p>
+      </div>
+
+      <div class="feature-card">
+        <h4>注销账号</h4>
+        <p>点击注销账号按钮，二次确认后调用 <code>/mz/closeAccount</code>：</p>
+        <ul class="detail-list" style="margin-top:8px;">
+          <li>确认弹窗内容：「账号注销后将无法恢复，确认继续？」</li>
+          <li>调用注销接口成功后清除本地用户信息</li>
+          <li>自动重新执行微信登录流程（<code>wxLogin</code>）</li>
+          <li>2 秒后跳转首页</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 7. 左滑交互 -->
+    <div class="section-block">
+      <div class="section-title">
+        <div class="section-title-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </div>
+        左滑交互机制
+      </div>
+
+      <div class="feature-card">
+        <h4>触发条件</h4>
+        <p>用户在场次/票券列表中左滑可触发操作按钮：</p>
+        <ul class="detail-list" style="margin-top:8px;">
+          <li><strong>水平阈值</strong>：X 轴左滑超过 100px 时激活，右滑超过 20px 时关闭</li>
+          <li><strong>垂直过滤</strong>：Y 轴移动距离 > X 轴时判定为垂直滚动，不触发左滑</li>
+          <li><strong>平台限制</strong>：仅 <code>platform=lumi</code>（内部票券）的票券支持左滑操作</li>
+          <li><strong>互斥</strong>：同时只允许一个卡片处于展开状态</li>
+        </ul>
+      </div>
+
+      <div class="feature-card">
+        <h4>可用操作</h4>
+        <table class="info-table">
+          <thead><tr><th>列表</th><th>左滑操作</th><th>说明</th></tr></thead>
+          <tbody>
+            <tr><td>场次列表</td><td>撤销场次</td><td>开场前 3h+ 可撤销，调用 cancelGameRoundOrder</td></tr>
+            <tr><td>票券列表</td><td>退票</td><td>调用 refundCouponWithPayOrder，不可撤销</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 8. 联系客服 -->
+    <div class="section-block">
+      <div class="section-title">
+        <div class="section-title-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+        </div>
+        联系客服
+      </div>
+
+      <div class="feature-card">
+        <h4>拨打电话</h4>
+        <p>用户中心提供「联系客服」按钮，点击后弹出操作面板：</p>
+        <ul class="detail-list" style="margin-top:8px;">
+          <li><strong>已选门店</strong>：拨打当前门店的客服电话（<code>placeLists[storeId].phone</code>）</li>
+          <li><strong>未选门店</strong>：拨打默认客服电话（<code>service_phone</code>）</li>
+          <li><strong>无号码</strong>：提示「无客服信息」</li>
+          <li>通过 <code>wx.makePhoneCall</code> 发起通话</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="page-nav">
+    <a href="magic-role.html" class="page-nav-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      <div class="page-nav-info">
+        <span class="page-nav-label">上一模块</span>
+        <span class="page-nav-title">角色创建</span>
+      </div>
+    </a>
+    <a href="magic-login.html" class="page-nav-link next">
+      <div class="page-nav-info">
+        <span class="page-nav-label">下一模块</span>
+        <span class="page-nav-title">登录与身份验证 →</span>
+      </div>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+
+  <footer class="footer"><p class="footer-text">© 2026 Lumi (lumiclaw) · 探索无限可能</p></footer>
+</div>
+</body>
+</html>

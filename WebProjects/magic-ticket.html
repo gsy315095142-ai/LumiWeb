@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumi 魔法学院 - 票券系统</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --primary: #7C3AED; --primary-light: #A78BFA; --accent: #FBBF24;
+  --bg-dark: #0F0A1A; --bg-card: rgba(255,255,255,0.04); --bg-card-hover: rgba(255,255,255,0.06);
+  --text-primary: #F8FAFC; --text-secondary: rgba(248,250,252,0.6); --text-tertiary: rgba(248,250,252,0.4);
+  --card-border: rgba(255,255,255,0.08); --card-border-hover: rgba(255,255,255,0.14);
+  --project-color: #7C3AED; --project-color-light: #A78BFA;
+  --project-color-bg: rgba(124,58,237,0.1); --project-color-border: rgba(124,58,237,0.2);
+}
+body { font-family:'Inter',-apple-system,"PingFang SC","Microsoft YaHei",sans-serif; background:var(--bg-dark); color:var(--text-primary); min-height:100vh; overflow-x:hidden; position:relative; }
+.bg-glow { position:fixed; top:0; left:0; right:0; bottom:0; pointer-events:none; z-index:0; }
+.glow-orb { position:absolute; border-radius:50%; filter:blur(80px); animation:pulse 8s ease-in-out infinite alternate; }
+.glow-orb-1 { width:400px; height:400px; background:rgba(124,58,237,0.08); top:-100px; left:-100px; }
+.glow-orb-2 { width:300px; height:300px; background:rgba(251,191,36,0.05); bottom:-50px; right:-50px; animation-delay:4s; }
+@keyframes pulse { 0%{transform:scale(1);opacity:0.5;} 100%{transform:scale(1.3);opacity:1;} }
+.container { position:relative; z-index:1; max-width:860px; margin:0 auto; padding:0 24px; }
+.topbar { display:flex; align-items:center; justify-content:space-between; padding:28px 0 20px; animation:fadeInDown .6s ease; }
+.back-link { display:inline-flex; align-items:center; gap:8px; color:var(--text-secondary); text-decoration:none; font-size:14px; font-weight:500; transition:color .3s; }
+.back-link:hover { color:var(--text-primary); }
+.back-link svg { width:18px; height:18px; transition:transform .3s; }
+.back-link:hover svg { transform:translateX(-3px); }
+.topbar-nav { display:flex; gap:6px; }
+.nav-btn { padding:6px 14px; border-radius:8px; font-size:13px; font-weight:500; text-decoration:none; color:var(--text-secondary); background:var(--bg-card); border:1px solid var(--card-border); transition:all .3s; }
+.nav-btn:hover { color:var(--text-primary); background:var(--bg-card-hover); border-color:var(--card-border-hover); }
+.nav-btn.active { color:var(--project-color-light); background:var(--project-color-bg); border-color:var(--project-color-border); }
+.page-header { padding:20px 0 40px; animation:fadeInUp .8s ease .1s both; }
+.page-header-top { display:flex; align-items:center; gap:16px; margin-bottom:12px; }
+.page-num { font-size:13px; font-weight:700; color:var(--project-color-light); background:var(--project-color-bg); padding:4px 12px; border-radius:6px; letter-spacing:1px; }
+.page-header h1 { font-size:32px; font-weight:800; letter-spacing:-.5px; }
+.page-header-desc { font-size:15px; color:var(--text-secondary); line-height:1.7; max-width:600px; }
+.content { padding-bottom:80px; }
+.section-block { margin-bottom:48px; animation:fadeInUp .8s ease both; }
+.section-block:nth-child(1){animation-delay:.2s;} .section-block:nth-child(2){animation-delay:.35s;}
+.section-block:nth-child(3){animation-delay:.5s;} .section-block:nth-child(4){animation-delay:.65s;}
+.section-block:nth-child(5){animation-delay:.8s;} .section-block:nth-child(6){animation-delay:.95s;}
+.section-block:nth-child(7){animation-delay:1.1s;}
+.section-title { font-size:18px; font-weight:700; margin-bottom:16px; display:flex; align-items:center; gap:10px; }
+.section-title-icon { width:28px; height:28px; border-radius:8px; background:var(--project-color-bg); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.section-title-icon svg { width:16px; height:16px; color:var(--project-color-light); }
+.feature-card { background:var(--bg-card); border:1px solid var(--card-border); border-radius:14px; padding:24px; margin-bottom:12px; transition:all .3s; }
+.feature-card:hover { background:var(--bg-card-hover); border-color:var(--card-border-hover); }
+.feature-card h4 { font-size:15px; font-weight:600; margin-bottom:8px; color:var(--text-primary); }
+.feature-card p { font-size:14px; color:var(--text-secondary); line-height:1.7; }
+.flow-steps { display:flex; flex-direction:column; gap:0; }
+.flow-step { display:flex; gap:16px; position:relative; }
+.flow-line { display:flex; flex-direction:column; align-items:center; width:32px; flex-shrink:0; }
+.flow-dot { width:12px; height:12px; border-radius:50%; background:var(--primary); border:2px solid var(--project-color-light); flex-shrink:0; position:relative; z-index:1; }
+.flow-connector { width:2px; flex:1; min-height:20px; background:linear-gradient(to bottom,var(--project-color-border),transparent); }
+.flow-content { padding-bottom:24px; flex:1; }
+.flow-content h4 { font-size:14px; font-weight:600; margin-bottom:6px; }
+.flow-content p { font-size:13px; color:var(--text-secondary); line-height:1.6; }
+.detail-list { list-style:none; display:flex; flex-direction:column; gap:8px; }
+.detail-list li { font-size:14px; color:var(--text-secondary); line-height:1.6; padding-left:20px; position:relative; }
+.detail-list li::before { content:''; position:absolute; left:0; top:9px; width:6px; height:6px; border-radius:50%; background:var(--project-color-light); opacity:.6; }
+code { background:rgba(124,58,237,.12); color:var(--project-color-light); padding:2px 6px; border-radius:4px; font-size:13px; font-family:'SF Mono','Consolas',monospace; }
+.tip-box { background:rgba(124,58,237,.06); border:1px solid var(--project-color-border); border-radius:12px; padding:16px 20px; margin-top:16px; }
+.tip-box-title { font-size:13px; font-weight:600; color:var(--project-color-light); margin-bottom:6px; display:flex; align-items:center; gap:6px; }
+.tip-box p { font-size:13px; color:var(--text-secondary); line-height:1.6; }
+.info-table { width:100%; border-collapse:collapse; margin-top:12px; font-size:13px; }
+.info-table th,.info-table td { padding:10px 14px; text-align:left; border-bottom:1px solid var(--card-border); }
+.info-table th { font-weight:600; color:var(--project-color-light); background:rgba(124,58,237,.04); }
+.info-table td { color:var(--text-secondary); }
+.status-tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+.status-tag { font-size:12px; padding:4px 12px; border-radius:100px; font-weight:500; }
+.status-tag.red { background:rgba(239,68,68,.1); color:#FCA5A5; border:1px solid rgba(239,68,68,.2); }
+.status-tag.blue { background:rgba(59,130,246,.1); color:#93C5FD; border:1px solid rgba(59,130,246,.2); }
+.status-tag.green { background:rgba(16,185,129,.1); color:#6EE7B7; border:1px solid rgba(16,185,129,.2); }
+.status-tag.orange { background:rgba(251,191,36,.1); color:#FBBF24; border:1px solid rgba(251,191,36,.2); }
+.status-tag.grey { background:rgba(255,255,255,.05); color:var(--text-tertiary); border:1px solid rgba(255,255,255,.1); }
+.status-tag.purple { background:rgba(124,58,237,.1); color:#A78BFA; border:1px solid rgba(124,58,237,.2); }
+.page-nav { display:flex; justify-content:space-between; align-items:center; padding:32px 0; border-top:1px solid var(--card-border); animation:fadeInUp .8s ease .8s both; }
+.page-nav-link { display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text-secondary); transition:color .3s; max-width:45%; }
+.page-nav-link:hover { color:var(--text-primary); }
+.page-nav-link.next { text-align:right; margin-left:auto; }
+.page-nav-link svg { width:18px; height:18px; flex-shrink:0; }
+.page-nav-info { display:flex; flex-direction:column; }
+.page-nav-label { font-size:12px; color:var(--text-tertiary); margin-bottom:2px; }
+.page-nav-title { font-size:14px; font-weight:600; color:var(--project-color-light); }
+.page-nav-link:hover .page-nav-title { color:var(--text-primary); }
+.footer { text-align:center; padding:20px 0 40px; }
+.footer-text { font-size:13px; color:var(--text-secondary); opacity:.5; }
+@keyframes fadeInUp { from{opacity:0;transform:translateY(20px);} to{opacity:1;transform:translateY(0);} }
+@keyframes fadeInDown { from{opacity:0;transform:translateY(-15px);} to{opacity:1;transform:translateY(0);} }
+@media(max-width:600px){ .page-header h1{font-size:24px;} .topbar-nav{display:none;} .info-table{font-size:12px;} .info-table th,.info-table td{padding:8px 10px;} }
+</style>
+</head>
+<body>
+<div class="bg-glow"><div class="glow-orb glow-orb-1"></div><div class="glow-orb glow-orb-2"></div></div>
+<div class="container">
+
+  <div class="topbar">
+    <a href="lumi-magic.html" class="back-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      返回文档列表
+    </a>
+    <div class="topbar-nav">
+      <a href="magic-home.html" class="nav-btn">首页</a>
+      <a href="magic-booking.html" class="nav-btn">预约</a>
+      <a href="magic-order.html" class="nav-btn">订单</a>
+      <a href="magic-ticket.html" class="nav-btn active">票券</a>
+      <a href="magic-role.html" class="nav-btn">角色</a>
+      <a href="magic-user.html" class="nav-btn">用户</a>
+      <a href="magic-login.html" class="nav-btn">登录</a>
+      <a href="magic-central.html" class="nav-btn">中控</a>
+      <a href="magic-promotion.html" class="nav-btn">优惠</a>
+      <a href="magic-group.html" class="nav-btn">团队</a>
+      <a href="magic-stats.html" class="nav-btn">统计</a>
+    </div>
+  </div>
+
+  <div class="page-header">
+    <div class="page-header-top"><span class="page-num">模块 04</span></div>
+    <h1>票券系统</h1>
+    <p class="page-header-desc">票券系统是连接管理端和用户端的核心纽带。工作人员在管理端生成票券（散客票或团购票），生成二维码后引导用户扫码领取；用户端可查看自己拥有的票券、使用状态、有效期，并在预约时使用票券抵扣。</p>
+  </div>
+
+  <div class="content">
+
+    <!-- 1. 票券类型 -->
+    <div class="section-block">
+      <div class="section-title">
+        <div class="section-title-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="4" width="20" height="16" rx="2"/><path d="M12 4v16"/><path d="M2 12h20"/>
+          </svg>
+        </div>
+        票券类型总览
+      </div>
+
+      <div class="feature-card">
+        <h4>内部票券（散客票）</h4>
+        <p>由工作人员在管理端手动生成，面向散客用户。根据后台配置的 <code>coupon_types</code>（<code>platform=inner</code>）动态生成选项：</p>
+        <table class="info-table">
+          <thead><tr><th>属性</th><th>说明</th></tr></thead>
+          <tbody>
+            <tr><td>票券名称</td><td>如「1人券」「2人券」「3人券」等</td></tr>
+            <tr><td>面值（人数）</td><td>每张券可供 N 人游玩</td></tr>
+            <tr><td>套餐类型</td><td>由 <code>package_types</code> 配置，如普通套餐、魔法袍换装套餐等</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="feature-card">
+        <h4>团购票</h4>
+        <p>面向团队客户，按档位配置（<code>platform=group</code>），与散客票分开管理：</p>
+        <ul class="detail-list" style="margin-top:8px;">
+          <li><strong>档位划分</strong>：按人数划分多个档位（如 12人档、16人档、20人档），每档有对应单价和人数范围</li>
+          <li><strong>价格展示</strong>：如「128元/人(12-15人)」格式</li>
+          <li><strong>预约天数限制</strong>：团购票可预约的未来天数由 <code>group_data_day_limit</code> 控制</li>
+          <li><strong>最小人数</strong>：<code>minPlayerNum</code>，低于此人数无法生成团购票</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 2. 生成票券流程 -->
+    <div class="section-block">
+      <div class="section-title">
+        <div class="section-title-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+          </svg>
+        </div>
+        生成票券流程（管理端）
+      </div>
+
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+          <div class="flow-content">
+            <h4>选择套餐类型</h4>
+            <p>从 <code>package_types</code> 列表中选择（普通套餐、团购票、魔法袍换装套餐等）。选择团购票时会切换到团票表单。</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+          <div class="flow-content">
+            <h4>选择票券类型</h4>
+            <p>散客票：选择票券档位（1人/2人/3人等），自动显示可供游玩人数。</p>
+            <p>团购票：选择档位后自动填充人数和价格信息。</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+          <div class="flow-content">
+            <h4>填写备注（可选）</h4>
+            <p>文字备注限 40 字，可上传 1 张图片附件（如换装套餐需上传照片确认）。图片通过 <code>wx.chooseMedia</code> 选取后上传至服务器。</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+          <div class="flow-content">
+            <h4>团购票额外步骤</h4>
+            <p>填写团队名称、选择预约日期/时间、系统自动排场（详见下方团票场次管理）。</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+          <div class="flow-content">
+            <h4>确认生成</h4>
+            <p>弹窗确认信息（票券类型 + 可供人数），调用 <code>/mz-admin/couponInnerGenerate</code> 生成票券。</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-line"><div class="flow-dot"></div></div>
+          <div class="flow-content">
+            <h4>生成二维码</h4>
+            <p>成功后自动生成二维码，使用前端 QRCode 库在 Canvas 绘制。二维码链接格式：<code>scan-inner-code?switch_store_id={storeId}&qrcode={code}</code>。可保存到相册或分享给用户。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. 团购票场次管理 -->
+    <div class="section-block">
+      <div class="section-title">
+        <div class="section-title-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/>
+          </svg>
+        </div>
+        团购票场次管理
+      </div>
+
+      <div class="feature-card">
+        <h4>场次表格视图</h4>
+        <p>团购票选择完日期和时间后，系统调用 <code>/mz-admin/getGameRoundsByTimeStart</code> 获取场次数据，渲染为一个二维表格：</p>
+        <ul class="detail-list" style="margin-top:8px;">
+          <li><strong>表头</strong>：各厅名称和容量（如「A厅(4人)」「B厅(2人)」）</li>
+          <li><strong>行头</strong>：时间段（如 14:00、14:30、15:00…）</li>
+          <li><strong>单元格</strong>：显示「已预约/最大人数」，如「2/4」</li>
+          <li><strong>单元格状态</strong>：空场可选、已满不可选、锁场（被其他团队占用）、原选（修改模式下标识原占用场次）</li>
+        </ul>
+      </div>
+
+      <div class="feature-card">
+        <h4>自动排场算法</h4>
+        <p>系统根据人数自动勾选场次，有两种模式：</p>
+        <ul class="detail-list" style="margin-top:8px;">
+          <li><strong>新增模式</strong>：按时间段顺序贪心填充，累计可容纳人数 ≥ 团票总人数即停止</li>
+          <li><strong>修改模式</strong>：先按厅型需求（大厅优先）排场，满足后再按总人数贪心补齐</li>
+        </ul>
+      </div>
+
+      <div class="feature-card">
+        <h4>手动调整</h4>
+        <p>工作人员可在自动排场基础上手动点击单元格取消或增加场次：</p>
+        <ul class="detail-list" style="margin-top:8px;">
+          <li>取消勾选：减少对应场次的容量</li>
+          <li>增加勾选：已满人数时提示「已经分配好人数了」</li>
+          <li>修改模式下需满足大厅数量需求，否则提示「大厅数量未满足需求」</li>
+        </ul>
+      </div>
+
+      <div class="feature-card">
+        <h4>修改团购票场次</h4>
+        <p>工作人员可修改已生成的团购票场次安排：</p>
+        <ul class="detail-list" style="margin-top:8px;">
+          <li>限制：开场前 15 分钟内不可修改，退票审核中不可修改</li>
+          <li>人数限制：不可低于原人数的 80%，不可低于已占位人数</li>
+          <li>调用 <code>/mz-admin/setNewGroupRounds</code> 提交修改</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 4. 团购票分享与兑换 -->
+    <div class="section-block">
+      <div class="section-title">
+        <div class="section-title-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+          </svg>
+        </div>
+        团购票分享与兑换
+      </div>
+
+      <div class="feature-card">
+        <h4>团队邀请函分享</h4>
+        <p>生成团购票后，系统自动使用 Canvas 绘制分享海报：</p>
+        <ul class="detail-list" style="margin-top:8px;">
+          <li>背景图来自 CDN，叠加门店名称（半透明黑底白字）</li>
+          <li>底部显示团队人数和预约日期</li>
+          <li>分享标题：「请查收您的团队邀请函~」</li>
+          <li>分享路径：<code>/pages/vouchersShareJump/vouchersShareJump?group_code={code}&switch_store_id={storeId}</code></li>
+        </ul>
+      </div>
+
+      <div class="feature-card">
+        <h4>用户扫码领取（首页团购兑换）</h4>
+        <p>用户从首页点击「团购兑换」，输入团购码完成兑换。兑换后票券会出现在用户的票券列表中，可在预约时使用。</p>
+      </div>
+    </div>
+
+    <!-- 5. 用户票券管理 -->
+    <div class="section-block">
+      <div class="section-title">
+        <div class="section-title-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+          </svg>
+        </div>
+        用户端票券管理
+      </div>
+
+      <div class="feature-card">
+        <h4>我的票券列表</h4>
+        <p>用户可在「我的票券」页面（<code>/pages/coupons/coupons</code>）查看拥有的所有票券：</p>
+        <ul class="detail-list" style="margin-top:8px;">
+          <li>分页加载，每页 10 条</li>
+          <li>显示票券名称、面值、创建时间、有效期</li>
+          <li>自动计算剩余有效天数</li>
+        </ul>
+      </div>
+
+      <div class="feature-card">
+        <h4>票券状态流转</h4>
+        <div class="status-tags" style="margin-bottom:12px;">
+          <span class="status-tag blue">待使用 (0)</span>
+          <span class="status-tag orange">待核销 (1)</span>
+          <span class="status-tag green">已核销 (2)</span>
+          <span class="status-tag grey">已过期 (3)</span>
+          <span class="status-tag red">已失效 (4/5)</span>
+        </div>
+        <ul class="detail-list">
+          <li><strong>待使用</strong>：用户已领取，可在预约时使用</li>
+          <li><strong>待核销</strong>：已在预约中锁定，等待实际游玩</li>
+          <li><strong>已核销</strong>：已使用完毕</li>
+          <li><strong>已过期</strong>：超过有效期</li>
+          <li><strong>已失效</strong>：退票后失效</li>
+        </ul>
+      </div>
+
+      <div class="feature-card">
+        <h4>待使用票券快捷入口</h4>
+        <p>用户中心提供「待使用票券」快捷入口（<code>type=1</code>），仅筛选 <code>status=0</code> 的可用票券，方便用户快速查看并预约。</p>
+      </div>
+    </div>
+
+    <!-- 6. 管理端票券查询 -->
+    <div class="section-block">
+      <div class="section-title">
+        <div class="section-title-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+        </div>
+        管理端票券查询
+      </div>
+
+      <div class="feature-card">
+        <h4>查询条件</h4>
+        <p>管理端票券列表支持多维筛选：</p>
+        <table class="info-table">
+          <thead><tr><th>筛选维度</th><th>说明</th></tr></thead>
+          <tbody>
+            <tr><td>日期范围</td><td>选择起止日期（必填），默认当月</td></tr>
+            <tr><td>门店筛选</td><td>下拉选择门店（含「全部」选项）</td></tr>
+            <tr><td>操作人筛选</td><td>按生成票券的工作人员手机号筛选</td></tr>
+            <tr><td>仅看待审核</td><td>勾选后只显示退票审核中的票券</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="feature-card">
+        <h4>列表功能</h4>
+        <p>查询结果以分页列表展示（每页 20 条，滚动加载更多），每条票券显示：</p>
+        <ul class="detail-list" style="margin-top:8px;">
+          <li>票券码（可一键复制）</li>
+          <li>套餐类型 + 票券类型</li>
+          <li>面值（可游玩人数）</li>
+          <li>领取用户手机号（脱敏显示）</li>
+          <li>当前状态（颜色标签）</li>
+          <li>二维码查看按钮</li>
+        </ul>
+      </div>
+
+      <div class="feature-card">
+        <h4>数据统计</h4>
+        <p>查询结果顶部显示统计概要：</p>
+        <table class="info-table">
+          <thead><tr><th>指标</th><th>说明</th></tr></thead>
+          <tbody>
+            <tr><td>总生成数</td><td>查询范围内的票券总数</td></tr>
+            <tr><td>已领取数</td><td>用户已扫码领取的数量</td></tr>
+            <tr><td>已使用数</td><td>已核销的票券数量</td></tr>
+            <tr><td>已使用面值</td><td>已使用票券对应的总人数</td></tr>
+          </tbody>
+        </table>
+        <p style="margin-top:8px;">同时按「票券」和「赠票」两个维度分别统计生成量、领取量及面值，支持展开/折叠。</p>
+      </div>
+    </div>
+
+    <!-- 7. 退票与审核 -->
+    <div class="section-block">
+      <div class="section-title">
+        <div class="section-title-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>
+          </svg>
+        </div>
+        退票与审核
+      </div>
+
+      <div class="feature-card">
+        <h4>管理端票券状态</h4>
+        <div class="status-tags" style="margin-bottom:12px;">
+          <span class="status-tag red">顾客未领取 (0)</span>
+          <span class="status-tag blue">待结算 (1)</span>
+          <span class="status-tag green">已结算 (2)</span>
+          <span class="status-tag orange">退票审核中 (3)</span>
+          <span class="status-tag grey">已退票 (4)</span>
+          <span class="status-tag blue">已驳回 (5)</span>
+          <span class="status-tag grey">已过期 (6)</span>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <h4>申请退票</h4>
+        <p>在票券列表中左滑票券卡片（状态为 0/1/5 时可操作），出现「退票」按钮，点击后跳转退票页：</p>
+        <ul class="detail-list" style="margin-top:8px;">
+          <li><strong>选择退票类别</strong>：如改签退票、顾客取消等</li>
+          <li><strong>填写退票原因</strong>：必填，限 100 字</li>
+          <li><strong>上传附件</strong>：可选上传 1 张图片</li>
+          <li>调用 <code>/mz-admin/couponInnerRefund</code> 提交申请</li>
+          <li>散客票传 <code>coupon_code</code>，团购票传 <code>group_code</code></li>
+        </ul>
+      </div>
+
+      <div class="feature-card">
+        <h4>退票审核</h4>
+        <p>有审核权限的工作人员可查看退票申请列表，在消息对话框中：</p>
+        <ul class="detail-list" style="margin-top:8px;">
+          <li>查看退票申请记录和评论列表</li>
+          <li>输入审核意见后点击「同意」或「驳回」</li>
+          <li>调用 <code>/mz-admin/couponInnerRefundAudit</code>，传入 <code>audit_agree=1/0</code></li>
+          <li>同意退票 → 释放场次名额，票券状态变为「已退票」</li>
+          <li>驳回退票 → 票券恢复为「待结算」</li>
+          <li>退票审核红点提示：<code>/mz-admin/getRefundSummary</code> 返回是否有待审核退票</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="page-nav">
+    <a href="magic-order.html" class="page-nav-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      <div class="page-nav-info">
+        <span class="page-nav-label">上一模块</span>
+        <span class="page-nav-title">订单与支付</span>
+      </div>
+    </a>
+    <a href="magic-role.html" class="page-nav-link next">
+      <div class="page-nav-info">
+        <span class="page-nav-label">下一模块</span>
+        <span class="page-nav-title">角色创建 →</span>
+      </div>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+
+  <footer class="footer"><p class="footer-text">© 2026 Lumi (lumiclaw) · 探索无限可能</p></footer>
+</div>
+</body>
+</html>
