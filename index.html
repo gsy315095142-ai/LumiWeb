@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumi - 探索无限可能</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --primary: #7C3AED;
+  --primary-dark: #5B21B6;
+  --primary-light: #A78BFA;
+  --accent: #FBBF24;
+  --accent-glow: rgba(251, 191, 36, 0.4);
+  --bg-dark: #0F0A1A;
+  --bg-card: rgba(255, 255, 255, 0.05);
+  --text-primary: #F8FAFC;
+  --text-secondary: rgba(248, 250, 252, 0.7);
+  --card-border: rgba(255, 255, 255, 0.1);
+}
+
+body {
+  font-family: 'Inter', -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: var(--bg-dark);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* ========== 背景动画粒子 ========== */
+.bg-particles {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  animation: float linear infinite;
+  opacity: 0;
+}
+
+@keyframes float {
+  0% { transform: translateY(100vh) scale(0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+}
+
+/* ========== 背景渐变光晕 ========== */
+.bg-glow {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  animation: pulse 8s ease-in-out infinite alternate;
+}
+
+.glow-orb-1 {
+  width: 500px; height: 500px;
+  background: rgba(124, 58, 237, 0.15);
+  top: -100px; right: -100px;
+}
+
+.glow-orb-2 {
+  width: 400px; height: 400px;
+  background: rgba(251, 191, 36, 0.08);
+  bottom: -50px; left: -50px;
+  animation-delay: 4s;
+}
+
+.glow-orb-3 {
+  width: 300px; height: 300px;
+  background: rgba(124, 58, 237, 0.1);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  animation-delay: 2s;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.5; }
+  100% { transform: scale(1.3); opacity: 1; }
+}
+
+/* ========== 主容器 ========== */
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ========== 导航栏 ========== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 0;
+  animation: fadeInDown 0.8s ease;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.nav-logo {
+  width: 40px; height: 40px;
+  position: relative;
+}
+
+.nav-logo svg { width: 100%; height: 100%; }
+
+.nav-brand-text {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, var(--text-primary), var(--primary-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.3s;
+  letter-spacing: 0.3px;
+}
+
+.nav-links a:hover {
+  color: var(--text-primary);
+}
+
+/* ========== Hero 区域 ========== */
+.hero {
+  text-align: center;
+  padding: 80px 0 60px;
+  animation: fadeInUp 1s ease 0.2s both;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-card);
+  border: 1px solid var(--card-border);
+  border-radius: 100px;
+  padding: 8px 20px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 32px;
+  backdrop-filter: blur(10px);
+}
+
+.hero-badge-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: blink 2s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.hero-title {
+  font-size: 72px;
+  font-weight: 900;
+  letter-spacing: -2px;
+  line-height: 1.05;
+  margin-bottom: 24px;
+}
+
+.hero-title-gradient {
+  background: linear-gradient(135deg, var(--primary-light), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+  font-size: 20px;
+  color: var(--text-secondary);
+  max-width: 560px;
+  margin: 0 auto 40px;
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  padding: 14px 36px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.3);
+}
+
+.hero-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(124, 58, 237, 0.5);
+}
+
+.hero-cta svg {
+  transition: transform 0.3s;
+}
+
+.hero-cta:hover svg {
+  transform: translateX(4px);
+}
+
+/* ========== 项目卡片区域 ========== */
+.section-header {
+  text-align: center;
+  margin-bottom: 48px;
+  animation: fadeInUp 1s ease 0.4s both;
+}
+
+.section-label {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--primary-light);
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.projects {
+  padding: 20px 0 100px;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.project-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  padding: 40px 32px;
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: fadeInUp 1s ease both;
+}
+
+.project-card:nth-child(1) { animation-delay: 0.5s; }
+.project-card:nth-child(2) { animation-delay: 0.65s; }
+.project-card:nth-child(3) { animation-delay: 0.8s; }
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  border-radius: 20px 20px 0 0;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.project-card:nth-child(1)::before { background: linear-gradient(90deg, #7C3AED, #A78BFA); }
+.project-card:nth-child(2)::before { background: linear-gradient(90deg, #F59E0B, #FBBF24); }
+.project-card:nth-child(3)::before { background: linear-gradient(90deg, #10B981, #6EE7B7); }
+
+.project-card:hover::before { opacity: 1; }
+
+.project-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+/* 卡片背景光晕 */
+.project-card .card-glow {
+  position: absolute;
+  top: -50%; right: -50%;
+  width: 200%; height: 200%;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.4s;
+  pointer-events: none;
+}
+
+.project-card:nth-child(1) .card-glow { background: radial-gradient(circle, rgba(124,58,237,0.06) 0%, transparent 70%); }
+.project-card:nth-child(2) .card-glow { background: radial-gradient(circle, rgba(245,158,11,0.06) 0%, transparent 70%); }
+.project-card:nth-child(3) .card-glow { background: radial-gradient(circle, rgba(16,185,129,0.06) 0%, transparent 70%); }
+
+.project-card:hover .card-glow { opacity: 1; }
+
+.project-icon {
+  width: 56px; height: 56px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.project-card:nth-child(1) .project-icon { background: rgba(124, 58, 237, 0.15); }
+.project-card:nth-child(2) .project-icon { background: rgba(245, 158, 11, 0.15); }
+.project-card:nth-child(3) .project-icon { background: rgba(16, 185, 129, 0.15); }
+
+.project-icon svg {
+  width: 28px; height: 28px;
+}
+
+.project-card:nth-child(1) .project-icon svg { color: #A78BFA; }
+.project-card:nth-child(2) .project-icon svg { color: #FBBF24; }
+.project-card:nth-child(3) .project-icon svg { color: #6EE7B7; }
+
+.project-name {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  letter-spacing: -0.3px;
+  position: relative;
+  z-index: 1;
+}
+
+.project-desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 24px;
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.project-tag {
+  font-size: 12px;
+  padding: 4px 12px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-secondary);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.project-card:nth-child(1) .project-tag { border-color: rgba(124,58,237,0.2); color: #C4B5FD; background: rgba(124,58,237,0.08); }
+.project-card:nth-child(2) .project-tag { border-color: rgba(245,158,11,0.2); color: #FDE68A; background: rgba(245,158,11,0.08); }
+.project-card:nth-child(3) .project-tag { border-color: rgba(16,185,129,0.2); color: #A7F3D0; background: rgba(16,185,129,0.08); }
+
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+  transition: gap 0.3s;
+}
+
+.project-card:nth-child(1) .project-link { color: #A78BFA; }
+.project-card:nth-child(2) .project-link { color: #FBBF24; }
+.project-card:nth-child(3) .project-link { color: #6EE7B7; }
+
+.project-card:hover .project-link { gap: 10px; }
+
+/* ========== 底部 Footer ========== */
+.footer {
+  text-align: center;
+  padding: 40px 0;
+  border-top: 1px solid var(--card-border);
+  animation: fadeInUp 1s ease 1s both;
+}
+
+.footer-text {
+  font-size: 13px;
+  color: var(--text-secondary);
+  opacity: 0.5;
+}
+
+/* ========== 动画 ========== */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ========== 响应式 ========== */
+@media (max-width: 900px) {
+  .project-grid {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  .hero-title { font-size: 48px; }
+  .hero-subtitle { font-size: 17px; }
+}
+
+@media (max-width: 600px) {
+  .hero { padding: 50px 0 40px; }
+  .hero-title { font-size: 36px; letter-spacing: -1px; }
+  .hero-subtitle { font-size: 15px; }
+  .section-title { font-size: 28px; }
+  .nav-links { display: none; }
+  .project-card { padding: 32px 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- 背景光晕 -->
+<div class="bg-glow">
+  <div class="glow-orb glow-orb-1"></div>
+  <div class="glow-orb glow-orb-2"></div>
+  <div class="glow-orb glow-orb-3"></div>
+</div>
+
+<!-- 背景粒子 -->
+<div class="bg-particles" id="particles"></div>
+
+<!-- 主内容 -->
+<div class="container">
+
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <a href="/" class="nav-brand">
+      <div class="nav-logo">
+        <svg viewBox="0 0 40 40" fill="none">
+          <defs>
+            <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#A78BFA"/>
+              <stop offset="100%" style="stop-color:#FBBF24"/>
+            </linearGradient>
+          </defs>
+          <path d="M20 2L24.5 14.5L37 14.5L27 22.5L30.5 35L20 27.5L9.5 35L13 22.5L3 14.5L15.5 14.5Z" fill="url(#logoGrad)"/>
+          <circle cx="20" cy="18" r="4" fill="white" opacity="0.9"/>
+        </svg>
+      </div>
+      <span class="nav-brand-text">Lumi</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#projects">项目</a></li>
+      <li><a href="#about">关于</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero 区域 -->
+  <section class="hero">
+    <div class="hero-badge">
+      <span class="hero-badge-dot"></span>
+      探索无限可能
+    </div>
+    <h1 class="hero-title">
+      Welcome to<br>
+      <span class="hero-title-gradient">Lumi World</span>
+    </h1>
+    <p class="hero-subtitle">
+      我们创造沉浸式互动体验，用科技与魔法连接现实与想象，让每一位参与者都能感受前所未有的奇妙旅程。
+    </p>
+    <a href="#projects" class="hero-cta">
+      探索项目
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </section>
+
+  <!-- 项目卡片区域 -->
+  <section class="projects" id="projects">
+    <div class="section-header">
+      <div class="section-label">Our Projects</div>
+      <h2 class="section-title">探索我们的世界</h2>
+    </div>
+
+    <div class="project-grid">
+
+      <!-- 项目 1：Lumi魔法学院 -->
+      <a href="/LumiSportWeb/web/" class="project-card">
+        <div class="card-glow"></div>
+        <div class="project-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+            <path d="M2 17l10 5 10-5"/>
+            <path d="M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <h3 class="project-name">Lumi 魔法学院</h3>
+        <p class="project-desc">
+          走进魔法的世界，化身学院新生，在奇幻的场景中学习魔法、挑战关卡，体验沉浸式魔法冒险之旅。
+        </p>
+        <div class="project-tags">
+          <span class="project-tag">XR体验</span>
+          <span class="project-tag">沉浸式</span>
+          <span class="project-tag">魔法冒险</span>
+        </div>
+        <span class="project-link">
+          了解更多
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </a>
+
+      <!-- 项目 2：Lumi竞技大空间 -->
+      <a href="/LumiSportWeb/web/" class="project-card">
+        <div class="card-glow"></div>
+        <div class="project-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none"/>
+          </svg>
+        </div>
+        <h3 class="project-name">Lumi 竞技大空间</h3>
+        <p class="project-desc">
+          大空间多人竞技对战平台，支持实时赛事管理与观赛互动，打造线下大空间电竞新体验。
+        </p>
+        <div class="project-tags">
+          <span class="project-tag">多人竞技</span>
+          <span class="project-tag">赛事管理</span>
+          <span class="project-tag">大空间</span>
+        </div>
+        <span class="project-link">
+          进入控制中心
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </a>
+
+      <!-- 项目 3：Lumi魔法学院第二季 -->
+      <a href="#" class="project-card">
+        <div class="card-glow"></div>
+        <div class="project-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/>
+          </svg>
+        </div>
+        <h3 class="project-name">Lumi 魔法学院 · 第二季</h3>
+        <p class="project-desc">
+          全新篇章，全新冒险。更多魔法、更大世界、更强沉浸感，敬请期待魔法学院的全新进化。
+        </p>
+        <div class="project-tags">
+          <span class="project-tag">全新篇章</span>
+          <span class="project-tag">敬请期待</span>
+          <span class="project-tag">Coming Soon</span>
+        </div>
+        <span class="project-link">
+          敬请期待
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer" id="about">
+    <p class="footer-text">© 2026 Lumi (lumiclaw) · 探索无限可能</p>
+  </footer>
+
+</div>
+
+<script>
+// 生成背景粒子
+(function() {
+  const container = document.getElementById('particles');
+  const count = 30;
+  const colors = ['rgba(124,58,237,0.3)', 'rgba(251,191,36,0.2)', 'rgba(167,139,250,0.2)', 'rgba(255,255,255,0.1)'];
+
+  for (let i = 0; i < count; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = Math.random() * 4 + 2;
+    p.style.width = size + 'px';
+    p.style.height = size + 'px';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.background = colors[Math.floor(Math.random() * colors.length)];
+    p.style.animationDuration = (Math.random() * 15 + 10) + 's';
+    p.style.animationDelay = (Math.random() * 15) + 's';
+    container.appendChild(p);
+  }
+})();
+</script>
+
+</body>
+</html>
