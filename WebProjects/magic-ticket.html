@@ -27,10 +27,10 @@ body { font-family:'Inter',-apple-system,"PingFang SC","Microsoft YaHei",sans-se
 .back-link:hover { color:var(--text-primary); }
 .back-link svg { width:18px; height:18px; transition:transform .3s; }
 .back-link:hover svg { transform:translateX(-3px); }
-.topbar-nav { display:flex; gap:6px; }
-.nav-btn { padding:6px 14px; border-radius:8px; font-size:13px; font-weight:500; text-decoration:none; color:var(--text-secondary); background:var(--bg-card); border:1px solid var(--card-border); transition:all .3s; }
-.nav-btn:hover { color:var(--text-primary); background:var(--bg-card-hover); border-color:var(--card-border-hover); }
-.nav-btn.active { color:var(--project-color-light); background:var(--project-color-bg); border-color:var(--project-color-border); }
+
+
+
+
 .page-header { padding:20px 0 40px; animation:fadeInUp .8s ease .1s both; }
 .page-header-top { display:flex; align-items:center; gap:16px; margin-bottom:12px; }
 .page-num { font-size:13px; font-weight:700; color:var(--project-color-light); background:var(--project-color-bg); padding:4px 12px; border-radius:6px; letter-spacing:1px; }
@@ -38,6 +38,7 @@ body { font-family:'Inter',-apple-system,"PingFang SC","Microsoft YaHei",sans-se
 .page-header-desc { font-size:15px; color:var(--text-secondary); line-height:1.7; max-width:600px; }
 .content { padding-bottom:80px; }
 .section-block { margin-bottom:48px; animation:fadeInUp .8s ease both; }
+.section-block-sep::after { content:""; display:block; height:1px; margin-top:48px; background:linear-gradient(to right,transparent,rgba(255,255,255,.06),transparent); }
 .section-block:nth-child(1){animation-delay:.2s;} .section-block:nth-child(2){animation-delay:.35s;}
 .section-block:nth-child(3){animation-delay:.5s;} .section-block:nth-child(4){animation-delay:.65s;}
 .section-block:nth-child(5){animation-delay:.8s;} .section-block:nth-child(6){animation-delay:.95s;}
@@ -60,12 +61,14 @@ body { font-family:'Inter',-apple-system,"PingFang SC","Microsoft YaHei",sans-se
 .detail-list { list-style:none; display:flex; flex-direction:column; gap:8px; }
 .detail-list li { font-size:14px; color:var(--text-secondary); line-height:1.6; padding-left:20px; position:relative; }
 .detail-list li::before { content:''; position:absolute; left:0; top:9px; width:6px; height:6px; border-radius:50%; background:var(--project-color-light); opacity:.6; }
-code { background:rgba(124,58,237,.12); color:var(--project-color-light); padding:2px 6px; border-radius:4px; font-size:13px; font-family:'SF Mono','Consolas',monospace; }
+code { background:rgba(124,58,237,.12); color:var(--project-color-light); padding:2px 6px; border-radius:4px; font-size:13px; font-family:"SF Mono","Consolas","Courier New",monospace; }
 .tip-box { background:rgba(124,58,237,.06); border:1px solid var(--project-color-border); border-radius:12px; padding:16px 20px; margin-top:16px; }
 .tip-box-title { font-size:13px; font-weight:600; color:var(--project-color-light); margin-bottom:6px; display:flex; align-items:center; gap:6px; }
 .tip-box p { font-size:13px; color:var(--text-secondary); line-height:1.6; }
 .info-table { width:100%; border-collapse:collapse; margin-top:12px; font-size:13px; }
-.info-table th,.info-table td { padding:10px 14px; text-align:left; border-bottom:1px solid var(--card-border); }
+.info-table th,.info-table td { color:var(--text-secondary); }
+.info-table tbody tr:nth-child(even) td { background:rgba(255,255,255,.02); }
+.info-table tbody tr:hover td { background:rgba(124,58,237,.06); transition:background .2s; }
 .info-table th { font-weight:600; color:var(--project-color-light); background:rgba(124,58,237,.04); }
 .info-table td { color:var(--text-secondary); }
 .status-tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
@@ -89,7 +92,118 @@ code { background:rgba(124,58,237,.12); color:var(--project-color-light); paddin
 .footer-text { font-size:13px; color:var(--text-secondary); opacity:.5; }
 @keyframes fadeInUp { from{opacity:0;transform:translateY(20px);} to{opacity:1;transform:translateY(0);} }
 @keyframes fadeInDown { from{opacity:0;transform:translateY(-15px);} to{opacity:1;transform:translateY(0);} }
-@media(max-width:600px){ .page-header h1{font-size:24px;} .topbar-nav{display:none;} .info-table{font-size:12px;} .info-table th,.info-table td{padding:8px 10px;} }
+@media(max-width:600px){ .page-header h1{font-size:24px;} 
+    .topbar-nav::-webkit-scrollbar { height: 0; } .info-table{font-size:12px;} .info-table th,.info-table td{padding:8px 10px;} }
+
+/* === 导航栏下拉菜单 === */
+.topbar-nav { display:flex; gap:8px; position:relative; }
+.nav-group { position:relative; }
+.nav-group-btn {
+  padding:6px 14px; border-radius:8px; font-size:13px; font-weight:500;
+  text-decoration:none; color:var(--text-secondary); border:1px solid transparent;
+  display:flex; align-items:center; gap:5px; cursor:pointer;
+  background:transparent; font-family:inherit;
+  transition:all .2s;
+}
+.nav-group-btn:hover { color:var(--text-primary); background:var(--bg-card-hover); border-color:var(--card-border-hover); }
+.nav-group-btn.active-group { color:var(--project-color-light); background:var(--project-color-bg); border-color:var(--project-color-border); }
+.nav-group-btn svg { width:14px; height:14px; transition:transform .2s; }
+.nav-group-btn.open svg { transform:rotate(180deg); }
+.nav-dropdown {
+  position:absolute; top:calc(100% + 8px); right:0; min-width:140px;
+  background:rgba(20,14,36,0.98); border:1px solid var(--card-border);
+  border-radius:12px; padding:6px; z-index:200;
+  opacity:0; visibility:hidden; transform:translateY(-8px);
+  transition:all .2s; backdrop-filter:blur(12px);
+  box-shadow:0 12px 40px rgba(0,0,0,0.4);
+}
+.nav-dropdown.open { opacity:1; visibility:visible; transform:translateY(0); }
+.nav-dropdown a {
+  display:block; padding:8px 14px; border-radius:8px; font-size:13px;
+  text-decoration:none; color:var(--text-secondary); font-weight:500;
+  transition:all .15s;
+}
+.nav-dropdown a:hover { color:var(--text-primary); background:var(--bg-card-hover); }
+.nav-dropdown a.current { color:var(--project-color-light); background:var(--project-color-bg); }
+
+/* 响应式：小屏下拉靠左 */
+@media (max-width: 600px) {
+  .nav-dropdown { right:auto; left:0; }
+}
+
+/* === TOC 目录 === */
+.toc-float {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 70vh;
+  overflow-y: auto;
+  padding: 8px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s;
+}
+.toc-float.visible { opacity: 1; pointer-events: auto; }
+.toc-float::-webkit-scrollbar { width: 2px; }
+.toc-float::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+.toc-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  cursor: pointer;
+  transition: all .2s;
+  position: relative;
+}
+.toc-dot:hover { background: rgba(255,255,255,0.3); transform: scale(1.3); }
+.toc-dot.active { background: var(--primary-light); transform: scale(1.4); box-shadow: 0 0 8px rgba(167,139,250,0.4); }
+.toc-dot::after {
+  content: attr(data-title);
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  background: rgba(15,10,26,0.95);
+  color: var(--text-primary);
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s;
+  border: 1px solid var(--card-border);
+}
+.toc-dot:hover::after { opacity: 1; }
+
+/* === 回到顶部 === */
+.back-top {
+  position: fixed;
+  bottom: 32px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--card-border);
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: all .3s;
+  z-index: 100;
+}
+.back-top.visible { opacity: 1; pointer-events: auto; }
+.back-top:hover { background: var(--bg-card-hover); color: var(--text-primary); transform: translateY(-2px); }
+.back-top svg { width: 20px; height: 20px; }
 </style>
 </head>
 <body>
@@ -101,18 +215,28 @@ code { background:rgba(124,58,237,.12); color:var(--project-color-light); paddin
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
       返回文档列表
     </a>
-          <div class="topbar-nav">
-        <a href="magic-home.html" class="nav-btn">首页</a>
-        <a href="magic-login.html" class="nav-btn">登录</a>
-        <a href="magic-booking.html" class="nav-btn">预约</a>
-        <a href="magic-order.html" class="nav-btn">订单</a>
-        <a href="magic-ticket.html" class="nav-btn active">票券</a>
-        <a href="magic-role.html" class="nav-btn">激活</a>
-        <a href="magic-user.html" class="nav-btn">用户</a>
-        <a href="magic-promotion.html" class="nav-btn">优惠</a>
-        <a href="magic-central.html" class="nav-btn">中控</a>
-        <a href="magic-group.html" class="nav-btn">团队</a>
-        <a href="magic-stats.html" class="nav-btn">统计</a>
+                      <div class="topbar-nav">
+      <div class="nav-group">
+        <button class="nav-group-btn active-group">用户端 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="nav-dropdown">
+        <a href="magic-home.html" class="">首页</a>
+        <a href="magic-login.html" class="">登录</a>
+        <a href="magic-booking.html" class="">预约</a>
+        <a href="magic-order.html" class="">订单</a>
+        <a href="magic-ticket.html" class="current">票券</a>
+        <a href="magic-role.html" class="">激活</a>
+        <a href="magic-user.html" class="">用户</a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button class="nav-group-btn">管理端 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="nav-dropdown">
+        <a href="magic-central.html" class="">中控</a>
+        <a href="magic-promotion.html" class="">优惠</a>
+        <a href="magic-group.html" class="">团队</a>
+        <a href="magic-stats.html" class="">统计</a>
+        </div>
+      </div>
       </div>
   </div>
 
@@ -125,7 +249,7 @@ code { background:rgba(124,58,237,.12); color:var(--project-color-light); paddin
   <div class="content">
 
     <!-- 1. 票券类型 -->
-    <div class="section-block">
+    <div class="section-block section-block-sep">
       <div class="section-title">
         <div class="section-title-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -161,7 +285,7 @@ code { background:rgba(124,58,237,.12); color:var(--project-color-light); paddin
     </div>
 
     <!-- 2. 生成票券流程 -->
-    <div class="section-block">
+    <div class="section-block section-block-sep">
       <div class="section-title">
         <div class="section-title-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -219,7 +343,7 @@ code { background:rgba(124,58,237,.12); color:var(--project-color-light); paddin
     </div>
 
     <!-- 3. 团购票场次管理 -->
-    <div class="section-block">
+    <div class="section-block section-block-sep">
       <div class="section-title">
         <div class="section-title-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -271,7 +395,7 @@ code { background:rgba(124,58,237,.12); color:var(--project-color-light); paddin
     </div>
 
     <!-- 4. 团购票分享与兑换 -->
-    <div class="section-block">
+    <div class="section-block section-block-sep">
       <div class="section-title">
         <div class="section-title-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -299,7 +423,7 @@ code { background:rgba(124,58,237,.12); color:var(--project-color-light); paddin
     </div>
 
     <!-- 5. 用户票券管理 -->
-    <div class="section-block">
+    <div class="section-block section-block-sep">
       <div class="section-title">
         <div class="section-title-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -344,7 +468,7 @@ code { background:rgba(124,58,237,.12); color:var(--project-color-light); paddin
     </div>
 
     <!-- 6. 管理端票券查询 -->
-    <div class="section-block">
+    <div class="section-block section-block-sep">
       <div class="section-title">
         <div class="section-title-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -448,8 +572,8 @@ code { background:rgba(124,58,237,.12); color:var(--project-color-light); paddin
     </div>
 
   </div>
-
-    <div class="page-nav">
+  <!-- 底部翻页导航 -->
+  <div class="page-nav">
     <a href="magic-order.html" class="page-nav-link">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
       <div class="page-nav-info">
@@ -465,17 +589,85 @@ code { background:rgba(124,58,237,.12); color:var(--project-color-light); paddin
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </a>
   </div>
-    </a>
-    <a href="magic-role.html" class="page-nav-link next">
-      <div class="page-nav-info">
-        <span class="page-nav-label">下一模块</span>
-        <span class="page-nav-title">角色创建 →</span>
-      </div>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-    </a>
-  </div>
 
   <footer class="footer"><p class="footer-text">© 2026 Lumi (lumiclaw) · 探索无限可能</p></footer>
 </div>
+
+  <!-- TOC 浮动目录 -->
+  <div class="toc-float" id="toc-float"></div>
+
+  <!-- 回到顶部 -->
+  <button class="back-top" id="back-top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+  </button>
+
+<script>
+// === TOC: 给 section 加 id ===
+(function(){
+  var sections = document.querySelectorAll(".section-block");
+  sections.forEach(function(s, i){ s.id = "sec-" + i; });
+
+  // Build TOC dots
+  var toc = document.getElementById("toc-float");
+  if (!toc || sections.length === 0) return;
+  sections.forEach(function(s, i){
+    var titleEl = s.querySelector(".section-title");
+    if (!titleEl) return;
+    var title = titleEl.textContent.trim().substring(0, 20);
+    var dot = document.createElement("div");
+    dot.className = "toc-dot";
+    dot.setAttribute("data-title", title);
+    dot.onclick = function(){ s.scrollIntoView({ behavior: "smooth", block: "start" }); };
+    toc.appendChild(dot);
+  });
+  var dots = toc.querySelectorAll(".toc-dot");
+
+  // Show TOC on scroll
+  var backTop = document.getElementById("back-top");
+  window.addEventListener("scroll", function(){
+    var scrolled = window.scrollY > 200;
+    toc.classList.toggle("visible", scrolled);
+    if (backTop) backTop.classList.toggle("visible", scrolled);
+
+    // Highlight active section
+    var current = -1;
+    sections.forEach(function(s, i){
+      var rect = s.getBoundingClientRect();
+      if (rect.top < window.innerHeight / 3) current = i;
+    });
+    dots.forEach(function(d, i){ d.classList.toggle("active", i === current); });
+  });
+
+  // Back to top
+  if (backTop) backTop.onclick = function(){ window.scrollTo({ top: 0, behavior: "smooth" }); };
+})();
+</script>
+
+<script>
+// === Nav dropdown ===
+(function(){
+  var groups = document.querySelectorAll(".nav-group");
+  groups.forEach(function(g){
+    var btn = g.querySelector(".nav-group-btn");
+    var dd = g.querySelector(".nav-dropdown");
+    btn.addEventListener("click", function(e){
+      e.stopPropagation();
+      var isOpen = dd.classList.contains("open");
+      // Close all
+      groups.forEach(function(g2){
+        g2.querySelector(".nav-dropdown").classList.remove("open");
+        g2.querySelector(".nav-group-btn").classList.remove("open");
+      });
+      if (!isOpen) { dd.classList.add("open"); btn.classList.add("open"); }
+    });
+  });
+  document.addEventListener("click", function(){
+    groups.forEach(function(g){
+      g.querySelector(".nav-dropdown").classList.remove("open");
+      g.querySelector(".nav-group-btn").classList.remove("open");
+    });
+  });
+})();
+</script>
 </body>
 </html>
