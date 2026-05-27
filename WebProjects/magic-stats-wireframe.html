@@ -1,0 +1,307 @@
+<!-- 数据统计线框图（参考真实代码 stat.wxml/wxss/js） -->
+
+<!-- 1. 筛选条件区 + 未加载状态 -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
+      </svg>
+    </div>
+    筛选条件区 + 空状态
+  </div>
+
+  <div class="ui-demo-row">
+    <div class="ui-demo-item">
+      <div class="phone-wireframe"><div class="phone-notch"></div><div class="phone-screen" style="min-height:520px">
+        <div class="phone-bar"><span>9:41</span><div class="phone-bar-r"><i></i><i></i><i></i></div></div>
+        <div style="padding:6px;min-height:484px;font-family:PingFang SC,sans-serif;background-image:url(https://cdn.lixiaoqian.com/magic-space/bg.jpg);background-size:cover;position:relative">
+          <!-- 导出按钮(右上角固定) -->
+          <div style="position:absolute;top:4px;right:8px;z-index:99;text-align:center">
+            <span style="font-size:12px;display:block">📤</span>
+            <span style="font-size:7px;color:#666">导出</span>
+          </div>
+
+          <!-- 页面标题 -->
+          <div style="padding:14px 16px 8px;font-size:14px;font-weight:700;color:#323232;text-align:center">数据统计</div>
+
+          <!-- 搜索日期区域 -->
+          <div style="background:#fff;border-radius:10px;padding:10px;margin:0 8px;border-bottom:1px solid #e0e0e0">
+            <!-- 日期选择 -->
+            <div style="display:flex;align-items:center;margin-bottom:6px">
+              <span style="font-size:8px;padding:3px 8px;background:#EFF5FB;border-radius:10px;color:#666;border:1px solid #3B82F6">2026-07-01</span>
+              <span style="font-size:7px;margin:0 2px;color:#999">至</span>
+              <span style="font-size:8px;padding:3px 8px;background:#EFF5FB;border-radius:10px;color:#666;border:1px solid #3B82F6">2026-07-20</span>
+              <div style="margin-left:auto;background:linear-gradient(90deg,#5788FD,#57ADFD);color:#fff;font-size:7px;padding:3px 8px;border-radius:10px">查询</div>
+            </div>
+            <!-- 酒店选择（仅 view-stat-hotel 权限可见） -->
+            <div style="display:flex;align-items:center">
+              <span style="font-size:9px;font-weight:700;color:#333;margin-right:6px">查询酒店：</span>
+              <div style="flex:1;background:#EFF5FB;border:1px solid #3B82F6;border-radius:6px;padding:4px 8px;font-size:8px;color:#666;display:flex;justify-content:space-between;align-items:center">
+                <span>当前选择：全部</span>
+                <span style="font-size:6px">▼</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 未加载状态 -->
+          <div style="padding:60px 0;text-align:center">
+            <div style="font-size:12px;color:#999;margin-bottom:4px">数据未加载</div>
+            <div style="font-size:10px;color:#bbb">请选择日期和酒店</div>
+          </div>
+
+          <!-- 底部 Tab 栏 -->
+          <div style="position:absolute;bottom:0;left:0;right:0;display:flex;background:#fff;border-top:1px solid #eee;padding:6px 0 10px">
+            <div style="flex:1;text-align:center;font-size:8px;color:#999"><div style="font-size:12px;margin-bottom:2px">🎫</div>票券</div>
+            <div style="flex:1;text-align:center;font-size:8px;color:#999"><div style="font-size:12px;margin-bottom:2px">📋</div>订单</div>
+            <div style="flex:1;text-align:center;font-size:8px;color:#2B84FD;font-weight:700"><div style="font-size:12px;margin-bottom:2px">📊</div>统计</div>
+          </div>
+        </div>
+      </div></div>
+      <div class="ui-desc">
+        <h5>🔍 筛选条件区</h5>
+        <p><code>/pages/stat/stat</code>，CDN 深色背景，底部 <code>ticket-bar</code> 导航。</p>
+        <ul>
+          <li><strong>页面标题</strong>：「数据统计」，<code>padding:30rpx</code>，<code>font-size:32rpx bold</code></li>
+          <li><strong>日期搜索</strong>：<code>search-date</code> 子组件（<code>dataIndex=3</code>），返回 <code>ticketDates[]</code> 起止日期</li>
+          <li><strong>酒店选择</strong>：仅 <code>view-stat-hotel</code> 权限可见，<code>picker mode="selector"</code>，数据源 <code>getItem('placeLists')</code></li>
+          <li><strong>未加载状态</strong>：<code>dataLoaded=false</code> 时显示「数据未加载，请选择日期和酒店」</li>
+          <li><strong>导出按钮</strong>：<code>position:absolute</code> 右上角，仅 <code>view-stat-hotel</code> + <code>selectedHotel > 0</code>（非全部）时显示</li>
+          <li><strong>底部 Tab</strong>：<code>ticket-bar</code> 组件，当前页 <code>pageTab='stat'</code>，蓝色高亮，切换时 <code>wx.redirectTo</code></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 2. 汇总统计 + 分项统计（已加载） -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/>
+      </svg>
+    </div>
+    数据加载后 — 汇总 + 分项统计卡片
+  </div>
+
+  <div class="ui-demo-row">
+    <div class="ui-demo-item">
+      <div class="phone-wireframe"><div class="phone-notch"></div><div class="phone-screen" style="min-height:620px">
+        <div class="phone-bar"><span>9:41</span><div class="phone-bar-r"><i></i><i></i><i></i></div></div>
+        <div style="padding:6px;min-height:584px;font-family:PingFang SC,sans-serif;background-image:url(https://cdn.lixiaoqian.com/magic-space/bg.jpg);background-size:cover;position:relative">
+          <!-- 页面标题 -->
+          <div style="padding:14px 16px 8px;font-size:14px;font-weight:700;color:#323232;text-align:center">数据统计</div>
+
+          <!-- 搜索区(紧凑) -->
+          <div style="background:#fff;border-radius:10px;padding:8px 10px;margin:0 8px 6px;border-bottom:1px solid #e0e0e0">
+            <div style="display:flex;align-items:center">
+              <span style="font-size:7px;padding:2px 6px;background:#EFF5FB;border-radius:8px;color:#666;border:1px solid #3B82F6">2026-07-01</span>
+              <span style="font-size:6px;margin:0 2px;color:#999">至</span>
+              <span style="font-size:7px;padding:2px 6px;background:#EFF5FB;border-radius:8px;color:#666;border:1px solid #3B82F6">2026-07-20</span>
+              <span style="font-size:7px;margin-left:4px;color:#999">全部</span>
+            </div>
+          </div>
+
+          <!-- 汇总统计卡片 totalStatData -->
+          <div style="background:#fff;border-radius:10px;padding:10px 14px;margin:6px 8px;box-shadow:0 0 9px 0 #E5E5E5">
+            <!-- 标题 -->
+            <div style="display:flex;align-items:center;margin-bottom:8px">
+              <div style="width:4px;height:14px;background:#007bff;border-radius:2px;margin-right:4px"></div>
+              <span style="font-size:11px;font-weight:700;color:#0D295B">汇总统计</span>
+            </div>
+            <!-- 主数据行 -->
+            <div style="background:linear-gradient(180deg,#CDE7FF,#F9F9FF);border-radius:10px;padding:8px 12px;margin-bottom:8px">
+              <div style="font-size:9px;font-weight:700;text-align:center;color:#4C4C4C;margin-bottom:6px">总订场票券</div>
+              <div style="display:flex;justify-content:space-between">
+                <div style="font-size:8px;font-weight:700;color:#808080">数量：<span style="font-family:Impact;font-size:13px;color:#4A8CFD">256</span> 张</div>
+                <div style="font-size:8px;font-weight:700;color:#808080">人数：<span style="font-family:Impact;font-size:13px;color:#4A8CFD">198</span> 人</div>
+              </div>
+            </div>
+            <!-- 子指标 -->
+            <div style="display:flex;gap:4%;flex-wrap:wrap">
+              <div style="width:45%;background:#EFF5FB;border-radius:10px;padding:8px;margin-bottom:4px;box-sizing:border-box">
+                <div style="font-family:Impact;font-size:14px;color:#4A8CFD;font-weight:700">12</div>
+                <div style="font-size:7px;color:#979797;margin-top:2px">已退票数量</div>
+              </div>
+              <div style="width:45%;background:#EFF5FB;border-radius:10px;padding:8px;margin-bottom:4px;box-sizing:border-box">
+                <div style="font-family:Impact;font-size:14px;color:#4A8CFD;font-weight:700">8</div>
+                <div style="font-size:7px;color:#979797;margin-top:2px">已过期数量</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 分项统计卡片1: 酒店票券统计 -->
+          <div style="background:#fff;border-radius:10px;padding:10px 14px;margin:6px 8px;box-shadow:0 0 9px 0 #E5E5E5">
+            <div style="display:flex;align-items:center;margin-bottom:8px">
+              <div style="width:4px;height:14px;background:#007bff;border-radius:2px;margin-right:4px"></div>
+              <span style="font-size:11px;font-weight:700;color:#0D295B">酒店票券统计</span>
+            </div>
+            <div style="background:linear-gradient(180deg,#CDE7FF,#F9F9FF);border-radius:10px;padding:8px 12px;margin-bottom:8px">
+              <div style="font-size:9px;font-weight:700;text-align:center;color:#4C4C4C;margin-bottom:6px">酒店订场票券</div>
+              <div style="display:flex;justify-content:space-between">
+                <div style="font-size:8px;font-weight:700;color:#808080">数量：<span style="font-family:Impact;font-size:13px;color:#4A8CFD">180</span> 张</div>
+                <div style="font-size:8px;font-weight:700;color:#808080">人数：<span style="font-family:Impact;font-size:13px;color:#4A8CFD">145</span> 人</div>
+              </div>
+            </div>
+            <!-- 多个子指标(3列) -->
+            <div style="display:flex;gap:3%;flex-wrap:wrap">
+              <div style="width:30%;background:#EFF5FB;border-radius:10px;padding:6px;margin-bottom:4px;box-sizing:border-box">
+                <div style="font-family:Impact;font-size:12px;color:#4A8CFD;font-weight:700">6</div>
+                <div style="font-size:6px;color:#979797;margin-top:2px">已领未下单</div>
+              </div>
+              <div style="width:30%;background:#EFF5FB;border-radius:10px;padding:6px;margin-bottom:4px;box-sizing:border-box">
+                <div style="font-family:Impact;font-size:12px;color:#4A8CFD;font-weight:700">10</div>
+                <div style="font-size:6px;color:#979797;margin-top:2px">已退票数量</div>
+              </div>
+              <div style="width:30%;background:#EFF5FB;border-radius:10px;padding:6px;margin-bottom:4px;box-sizing:border-box">
+                <div style="font-family:Impact;font-size:12px;color:#4A8CFD;font-weight:700">5</div>
+                <div style="font-size:6px;color:#979797;margin-top:2px">已过期数量</div>
+              </div>
+              <div style="width:30%;background:#EFF5FB;border-radius:10px;padding:6px;margin-bottom:4px;box-sizing:border-box">
+                <div style="font-family:Impact;font-size:12px;color:#4A8CFD;font-weight:700">3</div>
+                <div style="font-size:6px;color:#979797;margin-top:2px">二维码已扫码</div>
+              </div>
+              <div style="width:30%;background:#EFF5FB;border-radius:10px;padding:6px;margin-bottom:4px;box-sizing:border-box">
+                <div style="font-family:Impact;font-size:12px;color:#4A8CFD;font-weight:700">1</div>
+                <div style="font-size:6px;color:#979797;margin-top:2px">二维码已失效</div>
+              </div>
+            </div>
+            <!-- 展开/收起 套餐包 -->
+            <div style="border-top:1px solid #f0f0f0;margin-top:8px;padding-top:6px;text-align:center">
+              <span style="font-size:8px;font-weight:700;color:#BABABA">展开 ▼</span>
+            </div>
+          </div>
+
+          <!-- 分项统计卡片2: 团购票统计 (展开状态) -->
+          <div style="background:#fff;border-radius:10px;padding:10px 14px;margin:6px 8px;box-shadow:0 0 9px 0 #E5E5E5">
+            <div style="display:flex;align-items:center;margin-bottom:8px">
+              <div style="width:4px;height:14px;background:#007bff;border-radius:2px;margin-right:4px"></div>
+              <span style="font-size:11px;font-weight:700;color:#0D295B">团购票统计</span>
+            </div>
+            <div style="background:linear-gradient(180deg,#CDE7FF,#F9F9FF);border-radius:10px;padding:8px 12px;margin-bottom:8px">
+              <div style="font-size:9px;font-weight:700;text-align:center;color:#4C4C4C;margin-bottom:6px">团购订场票券</div>
+              <div style="display:flex;justify-content:space-between">
+                <div style="font-size:8px;font-weight:700;color:#808080">数量：<span style="font-family:Impact;font-size:13px;color:#4A8CFD">76</span> 张</div>
+                <div style="font-size:8px;font-weight:700;color:#808080">人数：<span style="font-family:Impact;font-size:13px;color:#4A8CFD">53</span> 人</div>
+              </div>
+            </div>
+            <!-- 已展开：套餐包列表 -->
+            <div style="margin-bottom:6px">
+              <div style="background:#EFF5FB;border-radius:10px;padding:6px 10px;margin-bottom:4px">
+                <div style="font-size:8px;font-weight:800;color:#4C4C4C;text-align:center">基础团购套餐（3人）</div>
+                <div style="display:flex;justify-content:space-between;font-size:7px;color:#808080">
+                  <span>数量：<span style="font-family:Impact;color:#4A8CFD;font-size:9px">45</span>张</span>
+                  <span>人数：<span style="font-family:Impact;color:#4A8CFD;font-size:9px">45</span>人</span>
+                </div>
+              </div>
+              <div style="background:#EFF5FB;border-radius:10px;padding:6px 10px;margin-bottom:4px">
+                <div style="font-size:8px;font-weight:800;color:#4C4C4C;text-align:center">豪华团购套餐（5人）</div>
+                <div style="display:flex;justify-content:space-between;font-size:7px;color:#808080">
+                  <span>数量：<span style="font-family:Impact;color:#4A8CFD;font-size:9px">31</span>张</span>
+                  <span>人数：<span style="font-family:Impact;color:#4A8CFD;font-size:9px">31</span>人</span>
+                </div>
+              </div>
+            </div>
+            <!-- 收起 -->
+            <div style="border-top:1px solid #f0f0f0;margin-top:4px;padding-top:6px;text-align:center">
+              <span style="font-size:8px;font-weight:700;color:#BABABA">收起 ▲</span>
+            </div>
+          </div>
+
+          <!-- 底部 Tab 栏 -->
+          <div style="position:absolute;bottom:0;left:0;right:0;display:flex;background:#fff;border-top:1px solid #eee;padding:6px 0 10px">
+            <div style="flex:1;text-align:center;font-size:8px;color:#999"><div style="font-size:12px;margin-bottom:2px">🎫</div>票券</div>
+            <div style="flex:1;text-align:center;font-size:8px;color:#999"><div style="font-size:12px;margin-bottom:2px">📋</div>订单</div>
+            <div style="flex:1;text-align:center;font-size:8px;color:#2B84FD;font-weight:700"><div style="font-size:12px;margin-bottom:2px">📊</div>统计</div>
+          </div>
+        </div>
+      </div></div>
+      <div class="ui-desc">
+        <h5>📊 数据加载后</h5>
+        <p>选择日期+酒店后调用 <code>/mz-admin/getStoreDataStats</code>，返回 <code>totalStatData</code> + <code>newStatsData[]</code>。</p>
+        <ul>
+          <li><strong>汇总统计</strong>：<code>totalStatData</code>，蓝竖条标题「汇总统计」</li>
+          <li><strong>主数据行</strong>：<code>linear-gradient(180deg, #CDE7FF, #F9F9FF)</code> 渐变背景，显示昵称+数量+人数</li>
+          <li><strong>子指标网格</strong>：<code>.statistics-info-txt</code>，蓝底 <code>#EFF5FB</code>，30% 宽度，数字用 <code>Impact</code> 字体 <code>#4A8CFD</code></li>
+          <li><strong>分项卡片</strong>：<code>newStatsData[]</code>，每个含标题 + 主数据行 + 子指标（按条件显示）</li>
+          <li><strong>子指标字段</strong>：已领未下单 / 已退票 / 已过期 / 二维码已扫码 / 二维码已失效 / 套餐退票 / 套餐数量（按返回数据动态显示）</li>
+          <li><strong>套餐包展开</strong>：<code>packages[]</code> 数据存在时显示展开/收起，<code>handleShowPackage</code> 切换 <code>expanded</code>，箭头 <code>rotate-180</code></li>
+          <li><strong>导出</strong>：右上角 <code>position:absolute</code>，<code>wxFileDownload</code> 导出 Excel 对账单，文件名 <code>{storeName}对账单-{start}至{end}.xlsx</code></li>
+          <li><strong>底部 Tab</strong>：<code>ticket-bar</code>，activeTab='stat' 高亮，切换走 <code>wx.redirectTo</code></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 3. 数据流程 & API -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+      </svg>
+    </div>
+    数据加载流程 &amp; API
+  </div>
+
+  <div class="feature-card">
+    <h4>数据加载流程</h4>
+    <table class="info-table">
+      <thead><tr><th>步骤</th><th>触发</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td>1. 初始化</td><td><code>onShow</code></td><td>读取 <code>placeLists</code>（轮询 100ms），初始化酒店列表 + 用户权限</td></tr>
+        <tr><td>2. 选日期</td><td><code>search-date</code> 组件</td><td>返回 <code>ticketDates[]</code>（起止日期），触发 <code>handleGetStatData</code></td></tr>
+        <tr><td>3. 选酒店</td><td><code>onHotelChange</code></td><td>更新 <code>selectedHotel</code>，触发 <code>handleGetStatData</code></td></tr>
+        <tr><td>4. 请求数据</td><td><code>handleGetStatData</code></td><td>参数：<code>date_start / date_end / store_id</code></td></tr>
+        <tr><td>5. 无权限</td><td>非 <code>view-stat-hotel</code></td><td><code>storeId</code> 取 <code>getItem('currentStoreId')</code>（当前用户所属门店）</td></tr>
+        <tr><td>6. 渲染</td><td>接口返回</td><td>设置 <code>totalStatData</code> + <code>newStatsData</code> + <code>dataLoaded=true</code></td></tr>
+        <tr><td>7. 展开/收起</td><td><code>handleShowPackage</code></td><td>切换 <code>expanded</code>，显示 <code>packages[]</code> 套餐包明细</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="feature-card" style="margin-top:16px">
+    <h4>API 接口</h4>
+    <table class="info-table">
+      <thead><tr><th>接口</th><th>方法</th><th>参数</th><th>用途</th></tr></thead>
+      <tbody>
+        <tr><td><code>/mz-admin/getStoreDataStats</code></td><td>POST</td><td><code>date_start / date_end / store_id</code></td><td>获取统计卡片数据（汇总 + 分项）</td></tr>
+        <tr><td><code>/mz-admin/downloadStatements</code></td><td>GET</td><td><code>date_start / date_end / store_id</code></td><td>导出对账单 Excel</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="feature-card" style="margin-top:16px">
+    <h4>newStatsData 分项卡片字段</h4>
+    <table class="info-table">
+      <thead><tr><th>字段</th><th>含义</th><th>显示条件</th></tr></thead>
+      <tbody>
+        <tr><td><code>name</code></td><td>卡片标题（如"酒店票券统计"）</td><td>始终</td></tr>
+        <tr><td><code>nickname</code></td><td>主数据行标题（如"酒店订场票券"）</td><td>始终</td></tr>
+        <tr><td><code>ticketNum / ticketValue</code></td><td>数量（张）/ 人数</td><td>始终</td></tr>
+        <tr><td><code>receiveNum</code></td><td>已领未下单</td><td>字段存在时</td></tr>
+        <tr><td><code>receiveNoOrderNum</code></td><td>已领未下单(重复)</td><td>字段存在时</td></tr>
+        <tr><td><code>refundNum</code></td><td>已退票数量</td><td>字段存在时</td></tr>
+        <tr><td><code>overdueNum</code></td><td>已过期数量</td><td>字段存在时</td></tr>
+        <tr><td><code>qrcodeNum</code></td><td>二维码已扫码</td><td>字段存在时</td></tr>
+        <tr><td><code>qrcodeInvalidNum</code></td><td>二维码已失效</td><td>字段存在时</td></tr>
+        <tr><td><code>packageRefundNum</code></td><td>套餐退票数量</td><td>字段存在时（值>100000 缩小字号）</td></tr>
+        <tr><td><code>packageNum</code></td><td>套餐数量</td><td>字段存在时</td></tr>
+        <tr><td><code>packages[]</code></td><td>套餐包明细（name/num/value）</td><td>字段存在时，展开/收起</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="feature-card" style="margin-top:16px">
+    <h4>权限说明</h4>
+    <table class="info-table">
+      <thead><tr><th>权限 Key</th><th>可见内容</th></tr></thead>
+      <tbody>
+        <tr><td><code>view-stat-hotel</code></td><td>酒店选择器 + 导出按钮（管理员/老板角色）</td></tr>
+        <tr><td>无此权限</td><td>自动使用 <code>currentStoreId</code> 查询本门店数据，不显示酒店选择器</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
