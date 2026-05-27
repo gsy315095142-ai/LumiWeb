@@ -1,0 +1,356 @@
+<!-- 首页线框图（参考真实代码 index.wxml/wxss/js） -->
+
+<!-- 1. 首页主页面 -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+      </svg>
+    </div>
+    首页主页面
+  </div>
+
+  <div class="ui-demo-row">
+    <div class="ui-demo-item">
+      <div class="phone-wireframe"><div class="phone-notch"></div><div class="phone-screen" style="min-height:680px">
+        <div class="phone-bar"><span>9:41</span><div class="phone-bar-r"><i></i><i></i><i></i></div></div>
+        <div style="min-height:644px;font-family:PingFang SC,sans-serif;background-image:url(https://cdn.lixiaoqian.com/magic-space/bg.jpg);background-size:100% 100%;position:relative;overflow:hidden">
+          <!-- 左上角定位 -->
+          <div style="position:absolute;left:7px;top:10px;z-index:10000;display:flex;align-items:center;padding:4px 10px;background:rgba(255,255,255,.8);border-radius:13px">
+            <span style="font-size:9px;margin-right:3px">📍</span>
+            <span style="font-size:10px;color:#000">LUMI朝阳店</span>
+            <span style="font-size:7px;margin-left:3px">▼</span>
+          </div>
+          <!-- 右上角管理按钮(userType>0时显示) -->
+          <div style="position:absolute;right:10px;top:12px;z-index:10000;width:26px;height:26px;background:rgba(33,33,33,.8);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px">管理</div>
+
+          <!-- Swiper Banner -->
+          <div style="width:100%;height:200px;position:relative">
+            <div style="width:100%;height:200px;background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460);display:flex;align-items:center;justify-content:center">
+              <span style="font-size:11px;color:rgba(255,255,255,.3)">📷 Banner 轮播图</span>
+            </div>
+            <!-- Banner 底部地址条 -->
+            <div style="position:absolute;left:-5px;right:-5px;bottom:12px;display:flex;align-items:center;padding:5px 12px;background:rgba(0,0,0,.2);box-shadow:0 0 15px rgba(0,0,0,.15)">
+              <span style="font-size:9px;margin-right:3px">📍</span>
+              <span style="font-size:9px;color:#fff">北京市朝阳区建国路88号SOHO现代城</span>
+            </div>
+            <!-- 指示点 -->
+            <div style="position:absolute;bottom:4px;left:50%;transform:translateX(-50%);display:flex;gap:3px">
+              <div style="width:5px;height:5px;border-radius:50%;background:rgba(46,29,29,.5)"></div>
+              <div style="width:5px;height:5px;border-radius:50%;background:#fff"></div>
+              <div style="width:5px;height:5px;border-radius:50%;background:rgba(46,29,29,.5)"></div>
+            </div>
+          </div>
+
+          <!-- 功能卡片(上浮 -25px) -->
+          <div style="width:calc(100% - 25px);margin:-25px auto 0;background:#fff;box-shadow:0 4px 5px rgba(0,0,0,.05);padding:10px;border-radius:12px;position:relative;z-index:99;display:flex;justify-content:space-between">
+            <!-- 预约体验 -->
+            <div style="width:48%;padding:6px;display:flex;align-items:center;justify-content:center">
+              <div style="width:120px;height:100px;border-radius:8px;background:linear-gradient(135deg,#e8f4fd,#cce7ff);display:flex;align-items:center;justify-content:center;font-size:8px;color:#00aeff">预约体验卡片图</div>
+            </div>
+            <!-- 团购兑换 -->
+            <div style="width:48%;padding:6px;display:flex;align-items:center;justify-content:center">
+              <div style="width:120px;height:100px;border-radius:8px;background:linear-gradient(135deg,#fff3e8,#ffe8cc);display:flex;align-items:center;justify-content:center;font-size:8px;color:#fc6a35">团购兑换卡片图</div>
+            </div>
+          </div>
+
+          <!-- 最近预约场次 -->
+          <div style="padding:10px">
+            <div style="display:flex;align-items:center;margin-bottom:8px">
+              <span style="font-size:12px;margin-right:4px">⏰</span>
+              <span style="font-size:12px;font-weight:800;color:#333">最近预约场次</span>
+            </div>
+
+            <!-- 场次卡片1: booked -->
+            <div style="position:relative;padding:12px;border-radius:8px 8px 0 0;margin-bottom:10px;padding-bottom:24px;background:radial-gradient(circle at 75% 70%,rgba(130,251,255,.2) 0%,transparent 40%),linear-gradient(155deg,#6eb8fd -60%,#fff 30%);box-shadow:0 0 7px 0 #e5e5e5,0 6px 4px -3px #94d7ff,0 12px 4px -7px #94d7ff">
+              <div style="display:flex;margin:6px 0;font-size:10px">
+                <span style="color:#999;width:56px">预约日期：</span>
+                <span style="color:#4d4d4d;font-weight:700;flex:1;text-align:right">2026-07-20 10:00</span>
+              </div>
+              <div style="display:flex;margin:6px 0;font-size:10px">
+                <span style="color:#999;width:56px">场次地点：</span>
+                <span style="color:#4d4d4d;font-weight:700;flex:1;text-align:right">LUMI朝阳店</span>
+              </div>
+              <div style="display:flex;margin:6px 0;font-size:10px;align-items:center">
+                <span style="color:#999;width:56px">预约人数：</span>
+                <span style="color:#4d4d4d;font-weight:700;flex:1;text-align:right">3人</span>
+                <span style="margin-left:4px;padding:1px 5px;font-size:8px;border-radius:10px;background:linear-gradient(90deg,#FFD28D,#FFB347);color:#7A3E00">团购</span>
+              </div>
+              <div style="position:absolute;right:10px;bottom:10px;width:60px;background:radial-gradient(#57B2FD 0%,#3F95FF 100%);color:#fff;padding:3px 8px;font-size:9px;font-weight:700;border-radius:5px;text-align:center">查看详情</div>
+            </div>
+
+            <!-- 场次卡片2: completed -->
+            <div style="position:relative;padding:12px;border-radius:8px 8px 0 0;margin-bottom:10px;background:radial-gradient(circle at 75% 70%,rgba(130,251,255,.1) 0%,transparent 40%),linear-gradient(155deg,#a8d8a8 -60%,#fff 30%);box-shadow:0 0 7px 0 #e5e5e5">
+              <div style="display:flex;margin:6px 0;font-size:10px">
+                <span style="color:#999;width:56px">预约日期：</span>
+                <span style="color:#4d4d4d;font-weight:700;flex:1;text-align:right">2026-07-18 14:00</span>
+              </div>
+              <div style="display:flex;margin:6px 0;font-size:10px">
+                <span style="color:#999;width:56px">场次地点：</span>
+                <span style="color:#4d4d4d;font-weight:700;flex:1;text-align:right">LUMI海淀店</span>
+              </div>
+              <div style="display:flex;margin:6px 0;font-size:10px;align-items:center">
+                <span style="color:#999;width:56px">预约人数：</span>
+                <span style="color:#4d4d4d;font-weight:700;flex:1;text-align:right">2人</span>
+              </div>
+              <div style="position:absolute;right:10px;top:10px;padding:3px 8px;font-size:9px;border-radius:20px;background:#f6ffed;color:#52c41a">已完成</div>
+            </div>
+          </div>
+
+          <!-- 项目介绍 Poster -->
+          <div style="padding:0 12px;padding-bottom:60px">
+            <div style="width:100%;height:80px;border-radius:10px;background:linear-gradient(135deg,#2c3e50,#3498db);display:flex;align-items:center;justify-content:center">
+              <span style="font-size:10px;color:rgba(255,255,255,.3)">📷 项目介绍海报图</span>
+            </div>
+          </div>
+        </div>
+      </div></div>
+      <div class="ui-desc">
+        <h5>🏠 首页主页面</h5>
+        <p><code>/pages/index/index</code>，CDN 背景 + Swiper Banner + 功能卡片 + 场次列表 + 海报。</p>
+        <ul>
+          <li><strong>定位区</strong>：<code>position:absolute; left:14rpx; top:18rpx</code>，白底半透明 <code>rgba(255,255,255,.8)</code>，圆角 26rpx，点击展开门店列表或引导开启定位</li>
+          <li><strong>管理按钮</strong>：<code>userType > 0</code> 时右上角黑底圆 <code>rgba(33,33,33,.8)</code>，<code>userType==3</code> 跳中控台，否则跳票券页</li>
+          <li><strong>Swiper Banner</strong>：<code>autoplay / interval:3000 / circular / indicator-dots</code>，高度 480rpx，每张含地址栏 <code>rgba(0,0,0,.2)</code></li>
+          <li><strong>功能卡片</strong>：<code>margin:-50rpx auto 0</code> 上浮覆盖 Banner，白底圆角 24rpx，两列布局（预约体验 + 团购兑换），图片 <code>index-reservation.png / index-exchange.png</code></li>
+          <li><strong>预约体验</strong>：<code>navigateToAppointment</code> → <code>/pages/book/book</code>，需 <code>currentStoreId</code></li>
+          <li><strong>团购兑换</strong>：<code>handleGroupBuy</code> → 需登录 + <code>exchangeModal</code> 组件</li>
+          <li><strong>场次卡片</strong>：<code>/mz/getGameRoundOrdersForHomePage</code>，渐变背景 <code>linear-gradient(155deg, #6eb8fd -60%, #fff 30%)</code>，团购标签金色 <code>linear-gradient(90deg, #FFD28D, #FFB347)</code></li>
+          <li><strong>场次状态</strong>：0=未创角、1=已创角（可查看详情）、2=游戏中、3=已完成、4=已取消</li>
+          <li><strong>项目海报</strong>：底部 <code>poster</code> 图片（全局配置），点击跳 <code>/pages/intro/intro</code></li>
+          <li><strong>分享</strong>：<code>onShareAppMessage</code>，标题「体验沉浸式MR魔法大空间乐园」，带 <code>switch_store_id</code></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 2. 门店下拉列表 -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+      </svg>
+    </div>
+    门店下拉列表
+  </div>
+
+  <div class="ui-demo-row">
+    <div class="ui-demo-item">
+      <div class="phone-wireframe"><div class="phone-notch"></div><div class="phone-screen" style="min-height:320px">
+        <div class="phone-bar"><span>9:41</span><div class="phone-bar-r"><i></i><i></i><i></i></div></div>
+        <div style="padding:8px;min-height:284px;font-family:PingFang SC,sans-serif;background:#f5f5f5;position:relative">
+          <!-- 定位触发区 -->
+          <div style="display:flex;align-items:center;padding:5px 10px;background:rgba(255,255,255,.8);border-radius:13px;width:fit-content;margin-bottom:6px">
+            <span style="font-size:9px;margin-right:3px">📍</span>
+            <span style="font-size:10px;color:#000">LUMI朝阳店</span>
+            <span style="font-size:7px;margin-left:3px">▼</span>
+          </div>
+          <!-- 下拉列表 -->
+          <div style="width:88%;max-height:200px;background:#fff;border-radius:4px;box-shadow:0 2px 6px rgba(0,0,0,.1)">
+            <div style="padding:8px;font-size:10px;border-bottom:1px solid #eee;color:#2B84FD;font-weight:700">LUMI朝阳店 <span style="font-size:8px;color:#999;margin-left:4px">1.2km</span></div>
+            <div style="padding:8px;font-size:10px;border-bottom:1px solid #eee;color:#333">LUMI海淀店 <span style="font-size:8px;color:#999;margin-left:4px">8.5km</span></div>
+            <div style="padding:8px;font-size:10px;color:#333">LUMI国贸店 <span style="font-size:8px;color:#999;margin-left:4px">15.2km</span></div>
+          </div>
+        </div>
+      </div></div>
+      <div class="ui-desc">
+        <h5>📍 门店下拉列表</h5>
+        <ul>
+          <li><strong>触发</strong>：点击定位区 <code>handleLocation</code>，已授权时切换 <code>showPlaceList</code></li>
+          <li><strong>列表</strong>：<code>placeLists[]</code>，<code>scroll-view scroll-y</code>，max-height 400rpx，每项 <code>name_display</code> + 计算距离</li>
+          <li><strong>选择</strong>：<code>handleSelectPlace</code> → <code>selectPlace(id)</code>，更新 Banner + 重新加载数据 + 切换门店提示</li>
+          <li><strong>未授权</strong>：显示「开启定位权限」，点击走 <code>getUserPosition</code> → <code>getUserPromise('scope.userLocation')</code></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 3. 地址不一致 / 无法定位弹窗 -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+      </svg>
+    </div>
+    地址不一致 / 无法定位弹窗
+  </div>
+
+  <div class="ui-demo-row">
+    <div class="ui-demo-item">
+      <div class="phone-wireframe"><div class="phone-notch"></div><div class="phone-screen" style="min-height:320px">
+        <div class="phone-bar"><span>9:41</span><div class="phone-bar-r"><i></i><i></i><i></i></div></div>
+        <div style="min-height:284px;font-family:PingFang SC,sans-serif;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center">
+          <div style="width:260px;background:#fff;border-radius:12px;padding:16px;position:relative;background-image:radial-gradient(circle at top left,rgba(81,220,255,.37) 0%,white 30%)">
+            <div style="text-align:center;font-size:14px;font-weight:800;color:#000;margin-bottom:12px;position:relative">
+              地址不一致
+              <span style="position:absolute;right:0;top:50%;transform:translateY(-50%);font-size:11px;color:#999">✕</span>
+            </div>
+            <div style="font-size:11px;color:#333;text-align:center;line-height:1.6;margin-bottom:20px;padding:0 4px">
+              您当前所在地址与【小程序地址】不一致，请手动在【界面左上角】调整。
+            </div>
+            <div style="display:flex;justify-content:space-around">
+              <div style="width:90px;height:32px;line-height:32px;text-align:center;border-radius:6px;font-size:12px;font-weight:700;background:#eee;color:#666">取 消</div>
+              <div style="width:90px;height:32px;line-height:32px;text-align:center;border-radius:6px;font-size:12px;font-weight:700;background:#2B84FD;color:#fff">自动定位</div>
+            </div>
+          </div>
+        </div>
+      </div></div>
+      <div class="ui-desc">
+        <h5>⚠️ 地址不一致 / 无法定位弹窗</h5>
+        <p>通用弹窗组件 <code>common-modal-*</code>，左上角蓝色径向渐变装饰。</p>
+        <ul>
+          <li><strong>地址不一致</strong>：<code>showDistanceWarning</code>，距离 >100km 时弹出，选项：「取消」/「自动定位」(重试定位)</li>
+          <li><strong>无法定位</strong>：<code>showLocationError</code>，GPS 未开启或权限未授予，选项：「获取地址」/「确定」</li>
+          <li><strong>样式</strong>：<code>600rpx</code> 宽，圆角 <code>24rpx</code>，<code>radial-gradient(circle at top left, rgba(81,220,255,.37), white 30%)</code></li>
+          <li><strong>重试</strong>：<code>handleRetryLocation</code> → 检查权限 → 有则 <code>getCurrentLocation</code>，无则 <code>getUserPosition</code> 授权流程</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 4. 优惠券弹窗 -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/>
+      </svg>
+    </div>
+    优惠券弹窗
+  </div>
+
+  <div class="ui-demo-row">
+    <div class="ui-demo-item">
+      <div class="phone-wireframe"><div class="phone-notch"></div><div class="phone-screen" style="min-height:500px">
+        <div class="phone-bar"><span>9:41</span><div class="phone-bar-r"><i></i><i></i><i></i></div></div>
+        <div style="min-height:464px;font-family:PingFang SC,sans-serif;background:rgba(0,0,0,.7);display:flex;flex-direction:column;align-items:center;justify-content:center">
+          <!-- 优惠券容器 700rpx -->
+          <div style="width:280px;position:relative">
+            <!-- 顶部装饰图 -->
+            <div style="width:280px;height:180px;border-radius:12px 12px 0 0;background:linear-gradient(135deg,#ff6b35,#ff2448);display:flex;align-items:center;justify-content:center;overflow:hidden">
+              <span style="font-size:10px;color:rgba(255,255,255,.3)">📷 promotion-header.png</span>
+            </div>
+            <!-- 优惠券主体 -->
+            <div style="position:absolute;bottom:50px;left:50%;transform:translateX(-50%);width:190px">
+              <!-- 金额行 -->
+              <div style="display:flex;align-items:center;width:100%;height:52px">
+                <div style="width:50%;text-align:right;padding-right:10px">
+                  <span style="font-size:13px;font-weight:700;color:#FB654C">￥</span>
+                  <span style="font-size:36px;font-weight:700;background:linear-gradient(-1deg,#FF733C 20%,#FFEC9E 38%,#FF923A 62%,#FF2448 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent">50</span>
+                </div>
+                <div style="width:50%;text-align:left">
+                  <div style="font-size:12px;font-weight:700;background:linear-gradient(5deg,#FF7A45,#FF9C39);-webkit-background-clip:text;-webkit-text-fill-color:transparent">新人福利优惠</div>
+                  <div style="font-size:8px;color:#FB654C;margin-top:2px">满100元使用</div>
+                </div>
+              </div>
+              <!-- 有效期 -->
+              <div style="text-align:center;font-size:9px;color:#454545;margin-top:4px">有效期至2026-08-31</div>
+            </div>
+          </div>
+          <!-- 按钮区 -->
+          <div style="margin-top:-30px;position:relative;z-index:99999;display:flex;flex-direction:column;align-items:center">
+            <div style="width:166px;height:68px;border-radius:34px;background:linear-gradient(135deg,#ff6b35,#ff923a);box-shadow:0 5px 9px rgba(255,253,231,.44);display:flex;align-items:center;justify-content:center">
+              <span style="font-size:12px;color:#fff;font-weight:700">去使用</span>
+            </div>
+            <div style="width:40px;height:24px;margin-top:16px;display:flex;align-items:center;justify-content:center">
+              <span style="font-size:14px;color:rgba(255,255,255,.6)">✕</span>
+            </div>
+          </div>
+        </div>
+      </div></div>
+      <div class="ui-desc">
+        <h5>🎫 优惠券弹窗</h5>
+        <p><code>showPromotionModalStatus</code>，进入首页后 <code>/mz/checkPromotions</code> 自动检测。</p>
+        <ul>
+          <li><strong>触发</strong>：进入首页 → <code>handleCheckPromotions</code> → 查找 <code>is_notified==0 && status==0 && valid_to > now</code> 的优惠券</li>
+          <li><strong>装饰图</strong>：<code>promotion-header.png</code>，700×621rpx</li>
+          <li><strong>金额</strong>：渐变文字 <code>linear-gradient(-1deg, #FF733C, #FFEC9E, #FF923A, #FF2448)</code>，整数时去掉小数，浮点保留</li>
+          <li><strong>折扣类型</strong>：满减(￥XX)/按比例折扣(X折)/固定金额</li>
+          <li><strong>满减提示</strong>：<code>condition_value</code> →「满XX元使用」</li>
+          <li><strong>去使用</strong>：<code>handleToBookFromPromotion</code> → 未登录弹出登录 → 跳预约页</li>
+          <li><strong>关闭</strong>：<code>handleClosePromotionModal</code> → 500ms 后再次 <code>handleCheckPromotions</code>（可连续展示多张券）</li>
+          <li><strong>已读标记</strong>：<code>/mz/receivePromoNotified {promo_code}</code></li>
+          <li><strong>过期券</strong>：点击「去使用」时二次校验 <code>valid_to</code>，过期则 Toast 提示</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 5. 数据流程 & API -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+      </svg>
+    </div>
+    数据流程 &amp; API
+  </div>
+
+  <div class="feature-card">
+    <h4>首页加载流程</h4>
+    <table class="info-table">
+      <thead><tr><th>步骤</th><th>触发</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td>1. 初始化</td><td><code>onLoad(options)</code></td><td>轮询等待 <code>placeLists</code> 就绪（50ms 间隔），处理扫码参数</td></tr>
+        <tr><td>2. 扫码处理</td><td><code>recordCode(options)</code></td><td>解析 <code>options.q / open_method</code>，设置门店ID，扫码打点 <code>/mz/updateQrCodeLog</code></td></tr>
+        <tr><td>3. 定位检查</td><td><code>checkLocationPermission</code></td><td><code>wx.getSetting</code> 检查定位权限 → 获取位置 → 计算距离 → 选择最近门店</td></tr>
+        <tr><td>4. 数据轮询</td><td><code>onShow → startPolling</code></td><td>1 秒间隔轮询 <code>placeLists</code>，最多 10 次，就绪后加载数据</td></tr>
+        <tr><td>5. 加载场次</td><td><code>loadData</code></td><td><code>/mz/getGameRoundOrdersForHomePage</code>，需 <code>user_login</code></td></tr>
+        <tr><td>6. 加载优惠券</td><td><code>handleCheckPromotions</code></td><td><code>/mz/checkPromotions</code>，有券时自动弹窗</td></tr>
+        <tr><td>7. 用户类型</td><td><code>checkUserType</code></td><td>判断 <code>current_role / store_staff</code>，决定是否显示管理按钮</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="feature-card" style="margin-top:16px">
+    <h4>API 接口</h4>
+    <table class="info-table">
+      <thead><tr><th>接口</th><th>方法</th><th>参数</th><th>用途</th></tr></thead>
+      <tbody>
+        <tr><td><code>/mz/getGameRoundOrdersForHomePage</code></td><td>POST</td><td>—</td><td>获取首页最近预约场次列表</td></tr>
+        <tr><td><code>/mz/checkPromotions</code></td><td>POST</td><td>—</td><td>检查可用优惠券（自动弹窗）</td></tr>
+        <tr><td><code>/mz/receivePromoNotified</code></td><td>POST</td><td><code>{promo_code}</code></td><td>标记优惠券已通知</td></tr>
+        <tr><td><code>/mz/updateQrCodeLog</code></td><td>POST</td><td><code>{store_id, code_mark}</code></td><td>扫码打点记录</td></tr>
+        <tr><td><code>/wechat/login</code></td><td>POST</td><td><code>{code}</code></td><td>登录接口</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="feature-card" style="margin-top:16px">
+    <h4>场次状态说明</h4>
+    <table class="info-table">
+      <thead><tr><th>status</th><th>含义</th><th>操作按钮</th><th>颜色</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>未创角</td><td>查看详情 → <code>/pages/complete/complete?order=&status=0</code></td><td>蓝色渐变卡片</td></tr>
+        <tr><td>1</td><td>已创角</td><td>查看详情 → <code>/pages/complete/complete?order=&status=1</code></td><td>蓝色渐变卡片</td></tr>
+        <tr><td>2</td><td>游戏中</td><td>无按钮，Toast「游戏中」</td><td>灰色</td></tr>
+        <tr><td>3</td><td>已完成</td><td>无按钮，显示状态标签</td><td><code>#f6ffed / #52c41a</code></td></tr>
+        <tr><td>4</td><td>已取消</td><td>无按钮，显示状态标签</td><td><code>#f5f5f5 / #8c8c8c</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="feature-card" style="margin-top:16px">
+    <h4>关键交互说明</h4>
+    <table class="info-table">
+      <thead><tr><th>交互</th><th>条件</th><th>行为</th></tr></thead>
+      <tbody>
+        <tr><td>管理按钮跳转</td><td><code>userType==3 && current_role==0</code></td><td><code>reLaunch('/pages/central/central')</code> 中控台</td></tr>
+        <tr><td>管理按钮跳转</td><td>其他 userType > 0</td><td><code>reLaunch('/pages/ticket/ticket')</code> 票券页</td></tr>
+        <tr><td>团购兑换</td><td>未登录</td><td>弹出 <code>phoneModal</code> 登录组件</td></tr>
+        <tr><td>团购兑换</td><td>已登录</td><td>弹出 <code>exchangeModal</code> 兑换码组件</td></tr>
+        <tr><td>Banner 地址点击</td><td>有 address</td><td><code>wx.openLocation</code> 打开地图导航</td></tr>
+        <tr><td>定位距离 >100km</td><td>自动定位后</td><td>弹出「地址不一致」弹窗</td></tr>
+        <tr><td>扫码进入</td><td><code>options.q / open_method</code></td><td>解析门店ID，跳过定位检查</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
