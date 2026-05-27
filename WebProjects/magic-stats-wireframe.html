@@ -78,21 +78,18 @@
         <h5>🔍 筛选条件区</h5>
         <p><code>/pages/stat/stat</code>，CDN 深色背景，底部 <code>ticket-bar</code> 导航。</p>
         <ul>
-          <li><strong>页面标题</strong>：「数据统计」，<code>padding:30rpx</code>，<code>font-size:32rpx bold</code></li>
-          <li><strong>search-date 组件</strong>：<code>dataIndex=3</code>（默认选中「本月」），<code>pickerEnd</code> 为当天</li>
-          <li><strong>日期选择器</strong>：两个 <code>picker mode="date"</code>，结束日期不可早于开始日期，选满两个自动触发查询</li>
-          <li><strong>快捷选项</strong>：昨天 / 今天 / 上个月 / 本月，4 个按钮横排 <code>ticket-option-tips</code>，选中态 <code>linear-gradient(90deg, #5788FD, #71CCFF)</code> 白字</li>
-          <li><strong>酒店选择</strong>：仅 <code>view-stat-hotel</code> 权限可见（管理员/老板），<code>picker mode="selector"</code>，列表首位为「当前选择：全部」（id=0）</li>
-          <li><strong>未加载状态</strong>：<code>dataLoaded=false</code> 时显示「数据未加载，请选择日期和酒店」</li>
-          <li><strong>导出按钮</strong>：<code>position:absolute</code> 右上角，仅 <code>view-stat-hotel + selectedHotel > 0</code>（非全部）时显示</li>
-          <li><strong>底部 Tab</strong>：<code>ticket-bar</code> 组件，<code>getManagerBar()</code> 动态生成 Tab（票券/数据/中控/身份），当前 <code>pageTab='stat'</code>，切换走 <code>wx.redirectTo</code></li>
+          <li><strong>search-date 组件</strong>：<code>dataIndex=3</code>（默认选中「本月」），选满起止日期自动触发查询</li>
+          <li><strong>快捷选项</strong>：昨天 / 今天 / 上个月 / 本月，选中态蓝白渐变</li>
+          <li><strong>酒店选择</strong>：仅 <code>view-stat-hotel</code> 权限可见，首位「全部」（id=0）</li>
+          <li><strong>导出按钮</strong>：右上角，仅选中具体酒店（非全部）时显示</li>
+          <li><strong>底部 Tab</strong>：<code>ticket-bar</code>，<code>getManagerBar()</code> 按角色动态生成</li>
         </ul>
       </div>
     </div>
   </div>
 </div>
 
-<!-- 2. 汇总统计卡片（totalStatData）-->
+<!-- 2. 汇总统计卡片 — 带字段标注 -->
 <div class="section-block">
   <div class="section-title">
     <div class="section-title-icon">
@@ -100,18 +97,19 @@
         <path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/>
       </svg>
     </div>
-    汇总统计卡片 — totalStatData
+    汇总统计卡片 — totalStatData（字段标注版）
   </div>
 
   <div class="ui-demo-row">
     <div class="ui-demo-item">
+      <!-- 左侧：真实手机线框图 -->
       <div class="phone-wireframe"><div class="phone-notch"></div><div class="phone-screen" style="min-height:360px">
         <div class="phone-bar"><span>9:41</span><div class="phone-bar-r"><i></i><i></i><i></i></div></div>
         <div style="padding:6px;min-height:324px;font-family:PingFang SC,sans-serif;background-image:url(https://cdn.lixiaoqian.com/magic-space/bg.jpg);background-size:cover">
 
           <!-- 汇总统计卡片 totalStatData -->
           <div style="width:94vw;margin:8px auto;background:#fff;border-radius:20px;padding:16px;box-sizing:border-box;box-shadow:0 0 9px 0 #E5E5E5">
-            <!-- 标题: 蓝竖线 + 名称 -->
+            <!-- 标题: 蓝竖线 + name -->
             <div style="display:flex;align-items:center;padding-bottom:8px;margin-bottom:8px">
               <div style="width:5px;height:16px;background:#007bff;border-radius:2px;margin-right:4px"></div>
               <span style="font-size:14px;font-weight:700;color:#0D295B">汇总统计</span>
@@ -143,26 +141,90 @@
 
         </div>
       </div></div>
+
+      <!-- 右侧：字段标注解剖图 -->
       <div class="ui-desc">
-        <h5>📊 汇总统计 — totalStatData</h5>
-        <p>接口 <code>/mz-admin/getStoreDataStats</code> 返回的 <code>data.totalStatData</code>，汇总所有票券类型。</p>
-        <ul>
-          <li><strong>name</strong> = "汇总统计" — 卡片标题，蓝竖线 <code>border-left:10rpx solid #007bff</code></li>
-          <li><strong>nickname</strong> = "总订场票券" — 渐变区域标题</li>
-          <li><strong>ticketNum（数量）</strong>：选定日期范围内的<strong>总订场票券张数</strong>（包含所有类型：酒店订场 + 团购，包含已使用和未使用的票券，不包含已退票和已过期）</li>
-          <li><strong>ticketValue（人数）</strong>：选定日期范围内的<strong>总订场人数</strong>（每张票券对应的人数之和）</li>
-          <li><strong>refundNum（已退票数量）</strong>：选定日期范围内<strong>已退票的票券张数</strong>（退票申请已通过的票券）</li>
-          <li><strong>overdueNum（已过期数量）</strong>：选定日期范围内<strong>已过期的票券张数</strong>（超过有效期未使用的票券）</li>
-        </ul>
-        <div style="background:#f0f7ff;border-radius:8px;padding:10px;margin-top:8px;font-size:12px;color:#333">
-          <strong>对账关系：</strong><code>生成总票券 = ticketNum + refundNum + overdueNum</code>（正常使用 + 退票 + 过期 = 全部生成的票券）
+        <h5>📊 totalStatData 字段 — 直接对照左边看</h5>
+        <p style="font-size:11px;color:#888;margin-bottom:12px">数据来源：<code>/mz-admin/getStoreDataStats</code> → <code>data.totalStatData</code></p>
+
+        <!-- 解剖图：用带连线的卡片展示每个区域对应的字段 -->
+        <div style="border:2px solid #2B84FD;border-radius:12px;overflow:hidden;font-family:PingFang SC,sans-serif">
+
+          <!-- 标题行 → name -->
+          <div style="background:#007bff;color:#fff;padding:6px 10px;display:flex;align-items:center;gap:6px">
+            <span style="font-size:10px">📌</span>
+            <code style="background:rgba(255,255,255,.2);padding:1px 6px;border-radius:4px;font-size:11px">name</code>
+            <span style="font-size:10px">= "汇总统计"</span>
+            <span style="font-size:9px;opacity:.7;margin-left:auto">卡片标题，蓝竖线左边</span>
+          </div>
+
+          <!-- 渐变区 → nickname + ticketNum + ticketValue -->
+          <div style="background:linear-gradient(180deg,#CDE7FF,#F9F9FF);padding:10px;border-bottom:1px dashed #ccc">
+            <div style="background:#fff;border-radius:8px;padding:8px 10px;margin-bottom:6px;display:flex;align-items:center;gap:6px">
+              <span style="font-size:10px">📝</span>
+              <code style="background:#E8F4FF;padding:1px 6px;border-radius:4px;font-size:11px;color:#2B84FD">nickname</code>
+              <span style="font-size:10px">= "总订场票券"</span>
+              <span style="font-size:9px;color:#999;margin-left:auto">渐变区标题</span>
+            </div>
+            <div style="display:flex;gap:8px">
+              <div style="flex:1;background:#fff;border-radius:8px;padding:8px 10px;display:flex;align-items:center;gap:6px">
+                <span style="font-size:10px">🎫</span>
+                <code style="background:#E8F4FF;padding:1px 6px;border-radius:4px;font-size:11px;color:#2B84FD">ticketNum</code>
+              </div>
+              <div style="flex:1;background:#fff;border-radius:8px;padding:8px 10px;display:flex;align-items:center;gap:6px">
+                <span style="font-size:10px">👥</span>
+                <code style="background:#E8F4FF;padding:1px 6px;border-radius:4px;font-size:11px;color:#2B84FD">ticketValue</code>
+              </div>
+            </div>
+          </div>
+
+          <!-- 子指标区 → refundNum + overdueNum -->
+          <div style="background:#EFF5FB;padding:10px;display:flex;gap:8px">
+            <div style="flex:1;background:#fff;border-radius:8px;padding:8px 10px;display:flex;align-items:center;gap:6px">
+              <span style="font-size:10px">↩️</span>
+              <code style="background:#FFF3E0;padding:1px 6px;border-radius:4px;font-size:11px;color:#E65100">refundNum</code>
+            </div>
+            <div style="flex:1;background:#fff;border-radius:8px;padding:8px 10px;display:flex;align-items:center;gap:6px">
+              <span style="font-size:10px">⏰</span>
+              <code style="background:#FFF3E0;padding:1px 6px;border-radius:4px;font-size:11px;color:#E65100">overdueNum</code>
+            </div>
+          </div>
+        </div>
+
+        <!-- 字段一句话说明 -->
+        <div style="margin-top:12px;font-size:12px;line-height:1.8">
+          <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:4px">
+            <code style="background:#E8F4FF;padding:1px 6px;border-radius:4px;font-size:11px;flex-shrink:0">ticketNum</code>
+            <span style="color:#555">该时段内<strong>正常使用中</strong>的票券总张数（酒店+团购，不含退票和过期）</span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:4px">
+            <code style="background:#E8F4FF;padding:1px 6px;border-radius:4px;font-size:11px;flex-shrink:0">ticketValue</code>
+            <span style="color:#555">对应的<strong>实际到场人数</strong>（每张票面值之和）</span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:4px">
+            <code style="background:#FFF3E0;padding:1px 6px;border-radius:4px;font-size:11px;flex-shrink:0">refundNum</code>
+            <span style="color:#555">退票申请<strong>已通过</strong>的票券张数</span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:6px">
+            <code style="background:#FFF3E0;padding:1px 6px;border-radius:4px;font-size:11px;flex-shrink:0">overdueNum</code>
+            <span style="color:#555">超过有效期<strong>未使用</strong>的票券张数</span>
+          </div>
+        </div>
+
+        <!-- 对账公式 -->
+        <div style="margin-top:12px;background:linear-gradient(135deg,#FFF8E1,#FFF3E0);border:1px solid #FFB74D;border-radius:10px;padding:12px 14px">
+          <div style="font-size:11px;font-weight:700;color:#E65100;margin-bottom:6px">📐 对账公式</div>
+          <div style="font-size:13px;font-family:monospace;color:#333;text-align:center;padding:4px 0">
+            生成总票券 = <code style="color:#2B84FD">ticketNum</code> + <code style="color:#E65100">refundNum</code> + <code style="color:#E65100">overdueNum</code>
+          </div>
+          <div style="font-size:10px;color:#888;text-align:center;margin-top:4px">正常使用 + 已退票 + 已过期 = 该时段内生成的全部票券</div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- 3. 分项统计卡片 — 酒店票券统计（收起状态）-->
+<!-- 3. 分项统计卡片 — 酒店票券（收起）+ 团购票（展开）并排展示字段标注 -->
 <div class="section-block">
   <div class="section-title">
     <div class="section-title-icon">
@@ -170,11 +232,12 @@
         <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/>
       </svg>
     </div>
-    分项统计卡片 — 酒店票券统计（收起状态）
+    分项统计卡片 — newStatsData[]（字段标注版）
   </div>
 
   <div class="ui-demo-row">
     <div class="ui-demo-item">
+      <!-- 左侧：酒店票券统计（收起状态） -->
       <div class="phone-wireframe"><div class="phone-notch"></div><div class="phone-screen" style="min-height:520px">
         <div class="phone-bar"><span>9:41</span><div class="phone-bar-r"><i></i><i></i><i></i></div></div>
         <div style="padding:6px;min-height:484px;font-family:PingFang SC,sans-serif;background-image:url(https://cdn.lixiaoqian.com/magic-space/bg.jpg);background-size:cover">
@@ -200,32 +263,26 @@
             </div>
             <!-- 子指标: 6个指标, 3列排列 -->
             <div style="display:flex;gap:3%;flex-wrap:wrap">
-              <!-- receiveNum -->
               <div style="width:30%;background:#EFF5FB;border-radius:10px;padding:8px;box-sizing:border-box;margin-bottom:6px">
                 <div style="font-family:Impact;font-size:14px;color:#4A8CFD;font-weight:700">28</div>
                 <div style="font-size:7px;color:#979797;margin-top:2px">已领取票券</div>
               </div>
-              <!-- receiveNoOrderNum -->
               <div style="width:30%;background:#EFF5FB;border-radius:10px;padding:8px;box-sizing:border-box;margin-bottom:6px">
                 <div style="font-family:Impact;font-size:14px;color:#4A8CFD;font-weight:700">6</div>
                 <div style="font-size:7px;color:#979797;margin-top:2px">已领未下单</div>
               </div>
-              <!-- refundNum -->
               <div style="width:30%;background:#EFF5FB;border-radius:10px;padding:8px;box-sizing:border-box;margin-bottom:6px">
                 <div style="font-family:Impact;font-size:14px;color:#4A8CFD;font-weight:700">10</div>
                 <div style="font-size:7px;color:#979797;margin-top:2px">已退票数量</div>
               </div>
-              <!-- overdueNum -->
               <div style="width:30%;background:#EFF5FB;border-radius:10px;padding:8px;box-sizing:border-box;margin-bottom:6px">
                 <div style="font-family:Impact;font-size:14px;color:#4A8CFD;font-weight:700">5</div>
                 <div style="font-size:7px;color:#979797;margin-top:2px">已过期数量</div>
               </div>
-              <!-- qrcodeNum -->
               <div style="width:30%;background:#EFF5FB;border-radius:10px;padding:8px;box-sizing:border-box;margin-bottom:6px">
                 <div style="font-family:Impact;font-size:14px;color:#4A8CFD;font-weight:700">15</div>
                 <div style="font-size:7px;color:#979797;margin-top:2px">二维码已扫码</div>
               </div>
-              <!-- qrcodeInvalidNum -->
               <div style="width:30%;background:#EFF5FB;border-radius:10px;padding:8px;box-sizing:border-box;margin-bottom:6px">
                 <div style="font-family:Impact;font-size:14px;color:#4A8CFD;font-weight:700">2</div>
                 <div style="font-size:7px;color:#979797;margin-top:2px">二维码已失效</div>
@@ -240,28 +297,164 @@
 
         </div>
       </div></div>
+
+      <!-- 右侧：字段标注解剖图（对照左边的酒店票券卡片） -->
       <div class="ui-desc">
-        <h5>📋 酒店票券统计 — newStatsData[0]</h5>
-        <p>每个分项卡片结构相同，由后端 <code>newStatsData[]</code> 数组驱动。字段按条件显示（<code>wx:if</code>）。</p>
-        <ul>
-          <li><strong>name</strong> = "酒店票券统计" — 卡片标题</li>
-          <li><strong>nickname</strong> = "酒店订场票券" — 渐变区标题</li>
-          <li><strong>ticketNum</strong>：酒店订场票券<strong>张数</strong>（用户通过酒店直接预约/购票生成的票券）</li>
-          <li><strong>ticketValue</strong>：酒店订场<strong>人数</strong>（票券面值之和）</li>
-          <li><strong>receiveNum（已领取票券）</strong>：已被用户领取（关联到 coupon）的票券数量</li>
-          <li><strong>receiveNoOrderNum（已领未下单）</strong>：已领取但<strong>尚未创建预约订单</strong>的票券数量（领了券但还没约场次）</li>
-          <li><strong>refundNum（已退票数量）</strong>：退票申请已通过的票券张数</li>
-          <li><strong>overdueNum（已过期数量）</strong>：超过有效期未使用的票券张数</li>
-          <li><strong>qrcodeNum（二维码已扫码）</strong>：通过二维码扫码方式核销/使用的票券数</li>
-          <li><strong>qrcodeInvalidNum（二维码已失效）</strong>：二维码已超过有效期或已被作废的票券数</li>
-          <li><strong>packages[]</strong>：套餐包明细数据，展开后显示每个套餐的名称、数量、人数</li>
-        </ul>
+        <h5>📋 newStatsData[] 字段 — 对照左边卡片看</h5>
+        <p style="font-size:11px;color:#888;margin-bottom:12px">每个分项卡片结构相同，字段按 <code>wx:if</code> 条件显示</p>
+
+        <!-- 解剖图 -->
+        <div style="border:2px solid #2B84FD;border-radius:12px;overflow:hidden;font-family:PingFang SC,sans-serif">
+
+          <!-- 标题行 → name -->
+          <div style="background:#007bff;color:#fff;padding:6px 10px;display:flex;align-items:center;gap:6px">
+            <span style="font-size:10px">📌</span>
+            <code style="background:rgba(255,255,255,.2);padding:1px 6px;border-radius:4px;font-size:11px">name</code>
+            <span style="font-size:10px">= "酒店票券统计" / "团购票统计"</span>
+          </div>
+
+          <!-- 渐变区 → nickname + ticketNum + ticketValue -->
+          <div style="background:linear-gradient(180deg,#CDE7FF,#F9F9FF);padding:10px;border-bottom:1px dashed #ccc">
+            <div style="background:#fff;border-radius:8px;padding:6px 10px;margin-bottom:6px;display:flex;align-items:center;gap:6px">
+              <span style="font-size:10px">📝</span>
+              <code style="background:#E8F4FF;padding:1px 6px;border-radius:4px;font-size:11px;color:#2B84FD">nickname</code>
+              <span style="font-size:10px;color:#666">渐变区标题</span>
+            </div>
+            <div style="display:flex;gap:8px">
+              <div style="flex:1;background:#fff;border-radius:8px;padding:6px 10px;display:flex;align-items:center;gap:6px">
+                <span style="font-size:10px">🎫</span>
+                <code style="background:#E8F4FF;padding:1px 6px;border-radius:4px;font-size:11px;color:#2B84FD">ticketNum</code>
+              </div>
+              <div style="flex:1;background:#fff;border-radius:8px;padding:6px 10px;display:flex;align-items:center;gap:6px">
+                <span style="font-size:10px">👥</span>
+                <code style="background:#E8F4FF;padding:1px 6px;border-radius:4px;font-size:11px;color:#2B84FD">ticketValue</code>
+              </div>
+            </div>
+          </div>
+
+          <!-- 蓝色子指标区：分两排，每个带标注 -->
+          <div style="background:#EFF5FB;padding:10px">
+            <!-- 第一排 -->
+            <div style="display:flex;gap:6px;margin-bottom:6px">
+              <div style="flex:1;background:#fff;border-radius:6px;padding:6px 8px;font-size:10px">
+                <code style="background:#E8F4FF;padding:1px 4px;border-radius:3px;font-size:10px;color:#2B84FD">receiveNum</code>
+                <div style="color:#888;font-size:9px;margin-top:2px">已领取票券</div>
+              </div>
+              <div style="flex:1;background:#fff;border-radius:6px;padding:6px 8px;font-size:10px">
+                <code style="background:#E8F4FF;padding:1px 4px;border-radius:3px;font-size:10px;color:#2B84FD">receiveNoOrderNum</code>
+                <div style="color:#888;font-size:9px;margin-top:2px">已领未下单</div>
+              </div>
+              <div style="flex:1;background:#fff;border-radius:6px;padding:6px 8px;font-size:10px">
+                <code style="background:#FFF3E0;padding:1px 4px;border-radius:3px;font-size:10px;color:#E65100">refundNum</code>
+                <div style="color:#888;font-size:9px;margin-top:2px">已退票</div>
+              </div>
+            </div>
+            <!-- 第二排 -->
+            <div style="display:flex;gap:6px;margin-bottom:6px">
+              <div style="flex:1;background:#fff;border-radius:6px;padding:6px 8px;font-size:10px">
+                <code style="background:#FFF3E0;padding:1px 4px;border-radius:3px;font-size:10px;color:#E65100">overdueNum</code>
+                <div style="color:#888;font-size:9px;margin-top:2px">已过期</div>
+              </div>
+              <div style="flex:1;background:#fff;border-radius:6px;padding:6px 8px;font-size:10px">
+                <code style="background:#F3E5F5;padding:1px 4px;border-radius:3px;font-size:10px;color:#7B1FA2">qrcodeNum</code>
+                <div style="color:#888;font-size:9px;margin-top:2px">二维码已扫码</div>
+              </div>
+              <div style="flex:1;background:#fff;border-radius:6px;padding:6px 8px;font-size:10px">
+                <code style="background:#F3E5F5;padding:1px 4px;border-radius:3px;font-size:10px;color:#7B1FA2">qrcodeInvalidNum</code>
+                <div style="color:#888;font-size:9px;margin-top:2px">二维码已失效</div>
+              </div>
+            </div>
+            <!-- 第三排：团购专属 -->
+            <div style="display:flex;gap:6px">
+              <div style="flex:1;background:#fff;border-radius:6px;padding:6px 8px;font-size:10px;border:1px dashed #FF9800">
+                <code style="background:#FFF3E0;padding:1px 4px;border-radius:3px;font-size:10px;color:#E65100">packageRefundNum</code>
+                <div style="color:#888;font-size:9px;margin-top:2px">套餐退票（团购专属）</div>
+              </div>
+              <div style="flex:1;background:#fff;border-radius:6px;padding:6px 8px;font-size:10px;border:1px dashed #FF9800">
+                <code style="background:#FFF3E0;padding:1px 4px;border-radius:3px;font-size:10px;color:#E65100">packageNum</code>
+                <div style="color:#888;font-size:9px;margin-top:2px">套餐总数量（团购专属）</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 展开区 → packages[] -->
+          <div style="background:#F5F5F5;padding:8px 10px;border-top:1px dashed #ccc;display:flex;align-items:center;gap:6px">
+            <span style="font-size:9px">▼ 展开</span>
+            <code style="background:#E0E0E0;padding:1px 4px;border-radius:3px;font-size:10px;color:#555">packages[]</code>
+            <span style="font-size:9px;color:#888">→ 每个套餐的 name / num / value</span>
+          </div>
+        </div>
+
+        <!-- 一句话字段说明 -->
+        <div style="margin-top:12px;font-size:12px;line-height:1.8">
+          <div style="font-weight:700;font-size:11px;color:#2B84FD;margin-bottom:4px">🔵 通用字段（酒店 & 团购都有）</div>
+          <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:3px;padding-left:8px">
+            <code style="background:#E8F4FF;padding:1px 6px;border-radius:4px;font-size:11px;flex-shrink:0">ticketNum</code>
+            <span style="color:#555">该渠道正常使用中的票券张数</span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:3px;padding-left:8px">
+            <code style="background:#E8F4FF;padding:1px 6px;border-radius:4px;font-size:11px;flex-shrink:0">ticketValue</code>
+            <span style="color:#555">该渠道的到场人数</span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:3px;padding-left:8px">
+            <code style="background:#E8F4FF;padding:1px 6px;border-radius:4px;font-size:11px;flex-shrink:0">receiveNum</code>
+            <span style="color:#555">已被用户领取/绑定到 coupon 的票券</span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:3px;padding-left:8px">
+            <code style="background:#E8F4FF;padding:1px 6px;border-radius:4px;font-size:11px;flex-shrink:0">receiveNoOrderNum</code>
+            <span style="color:#555">领了券但<strong>还没约场次</strong>的票券</span>
+          </div>
+
+          <div style="font-weight:700;font-size:11px;color:#E65100;margin:8px 0 4px">🟠 异常/退出指标</div>
+          <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:3px;padding-left:8px">
+            <code style="background:#FFF3E0;padding:1px 6px;border-radius:4px;font-size:11px;flex-shrink:0">refundNum</code>
+            <span style="color:#555">退票已通过的票券</span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:3px;padding-left:8px">
+            <code style="background:#FFF3E0;padding:1px 6px;border-radius:4px;font-size:11px;flex-shrink:0">overdueNum</code>
+            <span style="color:#555">超期未使用的票券</span>
+          </div>
+
+          <div style="font-weight:700;font-size:11px;color:#7B1FA2;margin:8px 0 4px">🟣 二维码指标</div>
+          <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:3px;padding-left:8px">
+            <code style="background:#F3E5F5;padding:1px 6px;border-radius:4px;font-size:11px;flex-shrink:0">qrcodeNum</code>
+            <span style="color:#555">通过扫码核销的票券</span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:3px;padding-left:8px">
+            <code style="background:#F3E5F5;padding:1px 6px;border-radius:4px;font-size:11px;flex-shrink:0">qrcodeInvalidNum</code>
+            <span style="color:#555">二维码过期或作废的票券</span>
+          </div>
+
+          <div style="font-weight:700;font-size:11px;color:#FF9800;margin:8px 0 4px">🔶 团购专属（虚线框）</div>
+          <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:3px;padding-left:8px">
+            <code style="background:#FFF3E0;padding:1px 6px;border-radius:4px;font-size:11px;flex-shrink:0">packageRefundNum</code>
+            <span style="color:#555">团购套餐退票数</span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:3px;padding-left:8px">
+            <code style="background:#FFF3E0;padding:1px 6px;border-radius:4px;font-size:11px;flex-shrink:0">packageNum</code>
+            <span style="color:#555">团购套餐总生成数</span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:6px;padding-left:8px">
+            <code style="background:#E0E0E0;padding:1px 6px;border-radius:4px;font-size:11px;flex-shrink:0">packages[]</code>
+            <span style="color:#555">展开后每个套餐的 name/num/value</span>
+          </div>
+        </div>
+
+        <!-- 对账关系 -->
+        <div style="margin-top:12px;background:linear-gradient(135deg,#FFF8E1,#FFF3E0);border:1px solid #FFB74D;border-radius:10px;padding:12px 14px">
+          <div style="font-size:11px;font-weight:700;color:#E65100;margin-bottom:6px">📐 对账关系</div>
+          <div style="font-size:11px;color:#555;line-height:1.8">
+            <code style="color:#2B84FD">ticketNum</code>（正常）+ <code style="color:#E65100">refundNum</code>（退票）+ <code style="color:#E65100">overdueNum</code>（过期）= 该渠道总生成票券<br>
+            <code style="color:#2B84FD">receiveNum</code> ≥ <code style="color:#2B84FD">receiveNoOrderNum</code>（领了才能不下单）<br>
+            <code style="color:#7B1FA2">qrcodeNum</code> + <code style="color:#7B1FA2">qrcodeInvalidNum</code> = 二维码渠道的总票券数
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- 4. 分项统计卡片 — 团购票统计（展开状态）-->
+<!-- 4. 团购票统计（展开状态）— 手机线框图 -->
 <div class="section-block">
   <div class="section-title">
     <div class="section-title-icon">
@@ -269,7 +462,7 @@
         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
       </svg>
     </div>
-    分项统计卡片 — 团购票统计（展开状态）
+    团购票统计（展开状态）
   </div>
 
   <div class="ui-demo-row">
@@ -311,12 +504,10 @@
                 <div style="font-family:Impact;font-size:14px;color:#4A8CFD;font-weight:700">2</div>
                 <div style="font-size:7px;color:#979797;margin-top:2px">已过期数量</div>
               </div>
-              <!-- packageRefundNum -->
               <div style="width:30%;background:#EFF5FB;border-radius:10px;padding:8px;box-sizing:border-box;margin-bottom:6px">
                 <div style="font-family:Impact;font-size:14px;color:#4A8CFD;font-weight:700">5</div>
                 <div style="font-size:7px;color:#979797;margin-top:2px">套餐退票数量</div>
               </div>
-              <!-- packageNum -->
               <div style="width:30%;background:#EFF5FB;border-radius:10px;padding:8px;box-sizing:border-box;margin-bottom:6px">
                 <div style="font-family:Impact;font-size:14px;color:#4A8CFD;font-weight:700">120</div>
                 <div style="font-size:7px;color:#979797;margin-top:2px">套餐总数量</div>
@@ -350,29 +541,20 @@
         </div>
       </div></div>
       <div class="ui-desc">
-        <h5>👥 团购票统计（展开状态）— newStatsData[1+]</h5>
-        <p>团购票的分项统计，额外包含 <code>packageRefundNum</code> 和 <code>packageNum</code> 两个套餐指标。</p>
+        <h5>👥 团购票统计（展开状态）</h5>
+        <p>展开后显示 <code>packages[]</code> 套餐包明细。每个套餐卡片显示名称、数量（num）、人数（value）。</p>
         <ul>
-          <li><strong>ticketNum</strong>：团购渠道生成的<strong>票券张数</strong>（通过团购码兑换生成的票券）</li>
-          <li><strong>ticketValue</strong>：团购<strong>人数</strong>（团购票面值之和）</li>
-          <li><strong>packageRefundNum（套餐退票数量）</strong>：团购套餐中<strong>退票的票券张数</strong>（团购票券的特殊退票统计，与 refundNum 可能不同）</li>
-          <li><strong>packageNum（套餐总数量）</strong>：团购套餐<strong>生成的总票券张数</strong>（包含所有状态的团购票券）</li>
-          <li><strong>packages[] 套餐包明细</strong>：
-            <ul>
-              <li><code>name</code>：套餐名称（如"基础团购套餐（3人）"）</li>
-              <li><code>num</code>：该套餐的票券张数</li>
-              <li><code>value</code>：该套餐的人数</li>
-            </ul>
-          </li>
-          <li><strong>展开/收起</strong>：<code>handleShowPackage</code> 切换 <code>expanded</code>，箭头图标 <code>rotate-180</code>。无数据时显示「暂无数据」</li>
-          <li><strong>packageRefundNum 大值</strong>：当值 >100000 时，数字缩小字号（<code>statistics-num-mini</code>）</li>
+          <li><strong>展开/收起</strong>：<code>handleShowPackage</code> 切换 <code>expanded</code>，箭头旋转 180°</li>
+          <li><strong>packages[]</strong>：每项 <code>name</code>（套餐名）/ <code>num</code>（张数）/ <code>value</code>（人数）</li>
+          <li><strong>无数据</strong>：展开后列表为空时显示「暂无数据」</li>
+          <li><strong>大数字</strong>：<code>packageRefundNum.value > 100000</code> 时自动缩小字号</li>
         </ul>
       </div>
     </div>
   </div>
 </div>
 
-<!-- 5. 数据流程 & API & 字段定义 -->
+<!-- 5. 数据流程 & API & 权限 -->
 <div class="section-block">
   <div class="section-title">
     <div class="section-title-icon">
@@ -380,7 +562,7 @@
         <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
       </svg>
     </div>
-    数据流程 &amp; API &amp; 字段定义
+    数据流程 &amp; API &amp; 权限
   </div>
 
   <div class="feature-card">
@@ -388,15 +570,14 @@
     <table class="info-table">
       <thead><tr><th>步骤</th><th>触发</th><th>说明</th></tr></thead>
       <tbody>
-        <tr><td>1. 初始化</td><td><code>onShow</code></td><td>轮询读取 <code>placeLists</code>（100ms 间隔），酒店列表首位插入「当前选择：全部」（id=0）</td></tr>
-        <tr><td>2. 日期快捷</td><td><code>search-date</code> 组件 <code>attached</code></td><td><code>dataIndex=3</code> 默认选中「本月」，自动计算起止日期并触发查询</td></tr>
-        <tr><td>3. 选日期</td><td><code>onTicketDateChange</code></td><td>手动选起止日期，结束日期 ≥ 开始日期，两个日期都填满后自动触发 <code>onSearch</code></td></tr>
-        <tr><td>4. 选酒店</td><td><code>onHotelChange</code></td><td>更新 <code>selectedHotel</code>，触发 <code>handleGetStatData</code></td></tr>
-        <tr><td>5. 请求数据</td><td><code>handleGetStatData</code></td><td><code>POST /mz-admin/getStoreDataStats {date_start, date_end, store_id}</code></td></tr>
-        <tr><td>6. 权限判断</td><td>无 <code>view-stat-hotel</code></td><td><code>storeId</code> 取 <code>getItem('currentStoreId')</code>（当前用户所属门店），酒店选择器不显示</td></tr>
-        <tr><td>7. 渲染</td><td>接口返回 code=0</td><td>设置 <code>totalStatData</code> + <code>newStatsData</code> + <code>dataLoaded=true</code></td></tr>
-        <tr><td>8. 展开/收起</td><td><code>handleShowPackage</code></td><td>切换 <code>expanded</code>，显示 <code>packages[]</code> 套餐包明细</td></tr>
-        <tr><td>9. 导出</td><td><code>handleExport</code></td><td>仅 <code>view-stat-hotel + selectedHotel > 0</code> 时可见，调用 <code>wxFileDownload</code></td></tr>
+        <tr><td>1. 初始化</td><td><code>onShow</code></td><td>轮询 <code>placeLists</code>（100ms），酒店列表首位插入「全部」（id=0）</td></tr>
+        <tr><td>2. 默认日期</td><td><code>search-date</code> <code>attached</code></td><td><code>dataIndex=3</code> 默认「本月」，自动计算起止并触发查询</td></tr>
+        <tr><td>3. 手动选日期</td><td><code>onTicketDateChange</code></td><td>选满两个日期自动触发 <code>onSearch</code></td></tr>
+        <tr><td>4. 选酒店</td><td><code>onHotelChange</code></td><td>更新 <code>selectedHotel</code> → <code>handleGetStatData</code></td></tr>
+        <tr><td>5. 请求</td><td><code>handleGetStatData</code></td><td><code>POST /mz-admin/getStoreDataStats</code></td></tr>
+        <tr><td>6. 渲染</td><td>返回 code=0</td><td>设置 <code>totalStatData + newStatsData + dataLoaded</code></td></tr>
+        <tr><td>7. 展开</td><td><code>handleShowPackage</code></td><td>切换 <code>expanded</code> 显示 <code>packages[]</code></td></tr>
+        <tr><td>8. 导出</td><td><code>handleExport</code></td><td>仅非全部酒店时可见，<code>wxFileDownload</code> 导出 Excel</td></tr>
       </tbody>
     </table>
   </div>
@@ -406,62 +587,8 @@
     <table class="info-table">
       <thead><tr><th>接口</th><th>方法</th><th>参数</th><th>用途</th></tr></thead>
       <tbody>
-        <tr><td><code>/mz-admin/getStoreDataStats</code></td><td>POST</td><td><code>{date_start, date_end, store_id}</code></td><td>获取统计卡片数据（汇总 + 分项）</td></tr>
-        <tr><td><code>/mz-admin/downloadStatements</code></td><td>GET</td><td><code>date_start &amp; date_end &amp; store_id</code></td><td>导出对账单 Excel，文件名 <code>{storeName}对账单-{start}至{end}.xlsx</code></td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="feature-card" style="margin-top:16px">
-    <h4>totalStatData（汇总统计）字段定义</h4>
-    <table class="info-table">
-      <thead><tr><th>字段</th><th>类型</th><th>含义</th><th>对账说明</th></tr></thead>
-      <tbody>
-        <tr><td><code>name</code></td><td>String</td><td>卡片标题：固定 "汇总统计"</td><td>—</td></tr>
-        <tr><td><code>nickname</code></td><td>String</td><td>主数据行标题：固定 "总订场票券"</td><td>—</td></tr>
-        <tr><td><code>ticketNum</code></td><td>Number</td><td>总订场票券张数（选定日期范围内的有效票券总量）</td><td>正常使用中的票券</td></tr>
-        <tr><td><code>ticketValue</code></td><td>Number</td><td>总订场人数（每张票券对应的人数之和）</td><td>实际到场人次</td></tr>
-        <tr><td><code>refundNum</code></td><td><code>{value, label}</code></td><td>已退票数量</td><td>退票申请已通过的票券</td></tr>
-        <tr><td><code>overdueNum</code></td><td><code>{value, label}</code></td><td>已过期数量</td><td>超过有效期未使用的票券</td></tr>
-      </tbody>
-    </table>
-    <div style="background:#fff3e0;border-radius:8px;padding:10px;margin-top:10px;font-size:12px;color:#333">
-      <strong>对账公式：</strong><code>生成总票券 = ticketNum + refundNum.value + overdueNum.value</code><br>
-      即：正常使用的票 + 已退票 + 已过期 = 该时段内生成的全部票券
-    </div>
-  </div>
-
-  <div class="feature-card" style="margin-top:16px">
-    <h4>newStatsData[]（分项统计）字段定义</h4>
-    <table class="info-table">
-      <thead><tr><th>字段</th><th>类型</th><th>含义</th><th>显示条件</th></tr></thead>
-      <tbody>
-        <tr><td><code>name</code></td><td>String</td><td>卡片标题（如"酒店票券统计"、"团购票统计"）</td><td>始终</td></tr>
-        <tr><td><code>nickname</code></td><td>String</td><td>主数据行标题（如"酒店订场票券"、"团购订场票券"）</td><td>始终</td></tr>
-        <tr><td><code>ticketNum</code></td><td>Number</td><td>该类别的票券张数</td><td>始终</td></tr>
-        <tr><td><code>ticketValue</code></td><td>Number</td><td>该类别的人数</td><td>始终</td></tr>
-        <tr><td><code>receiveNum</code></td><td><code>{value, label}</code></td><td>已领取票券：已被用户领取/绑定到 coupon 的票券</td><td>字段存在时</td></tr>
-        <tr><td><code>receiveNoOrderNum</code></td><td><code>{value, label}</code></td><td>已领未下单：已领取但尚未创建预约订单的票券（领了券还没约场次）</td><td>字段存在时</td></tr>
-        <tr><td><code>refundNum</code></td><td><code>{value, label}</code></td><td>已退票数量：退票申请已通过的票券张数</td><td>字段存在时</td></tr>
-        <tr><td><code>overdueNum</code></td><td><code>{value, label}</code></td><td>已过期数量：超过有效期未使用的票券张数</td><td>字段存在时</td></tr>
-        <tr><td><code>qrcodeNum</code></td><td><code>{value, label}</code></td><td>二维码已扫码：通过二维码扫码方式核销/使用的票券数</td><td>字段存在时</td></tr>
-        <tr><td><code>qrcodeInvalidNum</code></td><td><code>{value, label}</code></td><td>二维码已失效：二维码超过有效期或被作废的票券数</td><td>字段存在时</td></tr>
-        <tr><td><code>packageRefundNum</code></td><td><code>{value, label}</code></td><td>套餐退票数量：团购套餐中的退票票券数（value>100000 时缩小字号）</td><td>字段存在时（团购）</td></tr>
-        <tr><td><code>packageNum</code></td><td><code>{value, label}</code></td><td>套餐总数量：团购套餐生成的总票券张数</td><td>字段存在时（团购）</td></tr>
-        <tr><td><code>packages[]</code></td><td>Array</td><td>套餐包明细（name/num/value），展开/收起显示</td><td>字段存在时</td></tr>
-        <tr><td><code>expanded</code></td><td>Boolean</td><td>套餐包列表展开状态，默认 false</td><td>前端控制</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="feature-card" style="margin-top:16px">
-    <h4>packages[] 套餐包明细字段</h4>
-    <table class="info-table">
-      <thead><tr><th>字段</th><th>含义</th></tr></thead>
-      <tbody>
-        <tr><td><code>name</code></td><td>套餐名称（如"基础团购套餐（3人）"、"豪华团购套餐（5人）"）</td></tr>
-        <tr><td><code>num</code></td><td>该套餐的票券张数</td></tr>
-        <tr><td><code>value</code></td><td>该套餐的人数（通常等于套餐限定人数 × 张数）</td></tr>
+        <tr><td><code>/mz-admin/getStoreDataStats</code></td><td>POST</td><td><code>{date_start, date_end, store_id}</code></td><td>统计卡片数据（汇总 + 分项）</td></tr>
+        <tr><td><code>/mz-admin/downloadStatements</code></td><td>GET</td><td><code>date_start &amp; date_end &amp; store_id</code></td><td>导出对账单 Excel</td></tr>
       </tbody>
     </table>
   </div>
@@ -471,9 +598,9 @@
     <table class="info-table">
       <thead><tr><th>权限 Key</th><th>适用角色</th><th>可见内容</th></tr></thead>
       <tbody>
-        <tr><td><code>view-stat-hotel</code></td><td>管理员（current_role=1）</td><td>酒店选择器 + 导出按钮，可查询所有门店数据</td></tr>
+        <tr><td><code>view-stat-hotel</code></td><td>管理员（current_role=1）</td><td>酒店选择器 + 导出按钮，可查所有门店</td></tr>
         <tr><td><code>create-stat-account</code></td><td>管理员（current_role=1）</td><td>生成对账单（导出功能）</td></tr>
-        <tr><td>无 <code>view-stat-hotel</code></td><td>门店员工</td><td>自动使用 <code>currentStoreId</code> 查本门店，不显示酒店选择器</td></tr>
+        <tr><td>无 <code>view-stat-hotel</code></td><td>门店员工</td><td>自动用 <code>currentStoreId</code> 查本店，不显示选择器</td></tr>
       </tbody>
     </table>
   </div>
@@ -481,14 +608,14 @@
   <div class="feature-card" style="margin-top:16px">
     <h4>底部 Tab 栏（ticket-bar）</h4>
     <table class="info-table">
-      <thead><tr><th>Tab Key</th><th>标题</th><th>跳转页面</th><th>可见角色</th></tr></thead>
+      <thead><tr><th>Tab</th><th>标题</th><th>跳转</th><th>可见角色</th></tr></thead>
       <tbody>
         <tr><td>ticket</td><td>票券</td><td><code>/pages/ticket/ticket</code></td><td>管理员 + 员工(staff_role 1,2,4)</td></tr>
         <tr><td>stat</td><td>数据</td><td><code>/pages/stat/stat</code></td><td>管理员 + 员工(staff_role 1)</td></tr>
         <tr><td>central</td><td>中控</td><td><code>/pages/central/central</code></td><td>管理员 + 员工(staff_role 1,3,4)</td></tr>
-        <tr><td>identity</td><td>身份</td><td><code>/pages/identity/identity</code></td><td>管理员 + 所有员工(any staff_role)</td></tr>
+        <tr><td>identity</td><td>身份</td><td><code>/pages/identity/identity</code></td><td>管理员 + 所有员工</td></tr>
       </tbody>
     </table>
-    <p style="font-size:12px;color:#666;margin-top:8px">Tab 由 <code>getManagerBar()</code> 根据用户角色动态生成，切换走 <code>wx.redirectTo</code>。票券 Tab 有红点（退票审核待处理时）。</p>
+    <p style="font-size:12px;color:#666;margin-top:8px">Tab 由 <code>getManagerBar()</code> 动态生成，切换走 <code>wx.redirectTo</code>。票券 Tab 红点 = 退票审核待处理。</p>
   </div>
 </div>
