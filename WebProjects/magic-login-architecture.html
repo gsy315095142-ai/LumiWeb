@@ -37,7 +37,7 @@
       <div class="flow-line"><div class="flow-dot"></div></div>
       <div class="flow-content">
         <h4>用户主动登录（login 页）</h4>
-        <p>需要身份的操作（预约、查看订单等）触发登录页，用户填写头像昵称、授权手机号后完成登录。</p>
+        <p>需要身份的操作（预约、查看订单等）触发登录页，用户授权手机号后完成登录。</p>
       </div>
     </div>
   </div>
@@ -93,20 +93,26 @@
   </div>
 
   <div class="feature-card">
-    <h4>登录返回数据</h4>
+    <h4>登录返回数据 & 核心存储 Key</h4>
+    <p>登录接口返回的数据会存入本地，以下是完整的存储 Key 清单：</p>
     <table class="info-table">
-      <thead><tr><th>存储 Key</th><th>数据内容</th></tr></thead>
+      <thead><tr><th>存储 Key</th><th>类型</th><th>数据内容</th></tr></thead>
       <tbody>
-        <tr><td><code>user_info</code></td><td>用户 ID、头像、昵称、手机号、是否新用户</td></tr>
-        <tr><td><code>access_token</code></td><td>JWT Token（后续所有请求携带）</td></tr>
-        <tr><td><code>expire_at</code></td><td>Token 过期时间</td></tr>
-        <tr><td><code>service_phone</code></td><td>默认客服电话</td></tr>
-        <tr><td><code>placeLists</code></td><td>门店列表（用户可用的门店）</td></tr>
-        <tr><td><code>store_staff</code></td><td>门店员工角色列表（管理端用）</td></tr>
-        <tr><td><code>super_man</code></td><td>是否超级管理员（role == 1）</td></tr>
-        <tr><td><code>current_role</code></td><td>当前用户角色类型</td></tr>
+        <tr><td><code>access_token</code></td><td>String</td><td>正式 Token（API 鉴权）</td></tr>
+        <tr><td><code>tem_token</code></td><td>String</td><td>临时 Token（登录页使用）</td></tr>
+        <tr><td><code>expire_at</code></td><td>String</td><td>Token 过期时间</td></tr>
+        <tr><td><code>user_info</code></td><td>Object</td><td>用户资料（ID、头像、昵称、手机号、是否新用户）</td></tr>
+        <tr><td><code>user_login</code></td><td>Boolean</td><td>用户是否已主动登录</td></tr>
+        <tr><td><code>user_type</code></td><td>String</td><td>用户角色类型</td></tr>
+        <tr><td><code>currentStoreId</code></td><td>Number</td><td>当前选中的门店 ID</td></tr>
+        <tr><td><code>placeLists</code></td><td>Array</td><td>门店列表</td></tr>
+        <tr><td><code>service_phone</code></td><td>String</td><td>客服电话</td></tr>
+        <tr><td><code>super_man</code></td><td>Boolean</td><td>是否超级管理员（role == 1）</td></tr>
+        <tr><td><code>store_staff</code></td><td>Array</td><td>门店员工角色列表（管理端用）</td></tr>
+        <tr><td><code>current_role</code></td><td>String</td><td>当前用户角色类型</td></tr>
       </tbody>
     </table>
+    <p style="margin-top:8px;font-size:12px;color:var(--text-secondary)">存储工具基于 <code>wx.setStorageSync / getStorageSync</code> 封装，支持 JSON 自动序列化/反序列化、带过期时间的存取（默认 7 天）、一键清空等功能。</p>
   </div>
 
   <div class="feature-card">
@@ -123,5 +129,16 @@
   <div class="feature-card">
     <h4>清除旧数据</h4>
     <p>登录时自动清除 <code>placeLists</code>（门店列表），确保每次启动获取最新的门店数据。</p>
+  </div>
+
+  <div class="feature-card">
+    <h4>相关 API 接口</h4>
+    <table class="info-table">
+      <thead><tr><th>接口</th><th>方法</th><th>用途</th></tr></thead>
+      <tbody>
+        <tr><td><code>/mz/login</code></td><td>POST</td><td>微信 code 换取 Token + 用户数据</td></tr>
+        <tr><td><code>/mz/updatePhone</code></td><td>POST</td><td>解密并绑定手机号（encryptedData + iv + code）</td></tr>
+      </tbody>
+    </table>
   </div>
 </div>
