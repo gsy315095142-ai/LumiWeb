@@ -10,14 +10,38 @@
         功能入口卡片
       </div>
 
+      <!-- 用户端入口 -->
       <div class="ui-demo-row">
         <div class="ui-demo-item">
-          <div class="phone-wireframe"><div class="phone-notch"></div><div class="phone-screen" style="min-height:170px">
+          <div class="phone-wireframe"><div class="phone-notch"></div><div class="phone-screen" style="min-height:540px">
             <div class="phone-bar"><span>9:41</span><div class="phone-bar-r"><i></i><i></i><i></i></div></div>
-            <div class="wf-banner" style="height:75px"></div>
-            <div class="wf-cards">
-              <div class="wf-card wf-card-blue">预约体验</div>
-              <div class="wf-card wf-card-orange">团购兑换</div>
+            <div style="padding:0 6px;opacity:0.35">
+              <div class="wf-loc"><div class="wf-pin"></div>魔法学院·朝阳店<span class="wf-arr"></span></div>
+            </div>
+            <div style="padding:0 6px;opacity:0.35">
+              <div style="height:90px;background:linear-gradient(135deg,#5B21B6,#7C3AED,#A78BFA);border-radius:8px"></div>
+            </div>
+            <!-- 红框：功能入口卡片 -->
+            <div style="border:2px solid #EF4444;border-radius:4px;margin:4px 6px;position:relative">
+              <span style="position:absolute;top:-8px;right:4px;background:#EF4444;color:#fff;font-size:7px;padding:1px 5px;border-radius:3px;font-weight:600">当前模块</span>
+              <div class="wf-cards">
+                <div class="wf-card wf-card-blue">预约体验</div>
+                <div class="wf-card wf-card-orange">团购兑换</div>
+              </div>
+            </div>
+            <!-- 其余界面（灰色示意） -->
+            <div style="padding:6px 10px;opacity:0.35">
+              <div style="margin-top:6px;font-size:9px;font-weight:700;color:rgba(255,255,255,.4)">近期场次</div>
+              <div style="margin-top:6px;padding:10px;background:rgba(255,255,255,.06);border-radius:8px">
+                <div style="height:8px;width:60%;background:rgba(255,255,255,.1);border-radius:4px;margin-bottom:6px"></div>
+                <div style="height:8px;width:40%;background:rgba(255,255,255,.08);border-radius:4px;margin-bottom:6px"></div>
+                <div style="height:14px;width:28%;background:rgba(63,149,255,.3);border-radius:4px;float:right"></div>
+              </div>
+              <div style="margin-top:6px;padding:10px;background:rgba(255,255,255,.06);border-radius:8px">
+                <div style="height:8px;width:55%;background:rgba(255,255,255,.1);border-radius:4px;margin-bottom:6px"></div>
+                <div style="height:8px;width:35%;background:rgba(255,255,255,.08);border-radius:4px;margin-bottom:6px"></div>
+                <div style="height:14px;width:28%;background:rgba(63,149,255,.3);border-radius:4px;float:right"></div>
+              </div>
             </div>
           </div></div>
           <div class="ui-desc">
@@ -31,20 +55,41 @@
             </ul>
           </div>
         </div>
+      </div>
+
+      <!-- 管理端入口 -->
+      <div class="ui-demo-row">
         <div class="ui-demo-item">
-          <div class="phone-wireframe"><div class="phone-notch"></div><div class="phone-screen" style="min-height:170px">
+          <div class="phone-wireframe"><div class="phone-notch"></div><div class="phone-screen" style="min-height:540px">
             <div class="phone-bar"><span>9:41</span><div class="phone-bar-r"><i></i><i></i><i></i></div></div>
-            <div class="wf-loc"><div class="wf-pin"></div>魔法学院·朝阳店<span class="wf-arr"></span></div>
-            <div class="wf-mgr">管理</div>
-            <div class="wf-banner" style="height:60px"></div>
-            <div class="wf-cards">
-              <div class="wf-card wf-card-blue">预约体验</div>
-              <div class="wf-card wf-card-orange">团购兑换</div>
+            <!-- 红框：定位栏+管理按钮 -->
+            <div style="border:2px solid #EF4444;border-radius:4px;margin:4px 6px;position:relative">
+              <span style="position:absolute;top:-8px;right:4px;background:#EF4444;color:#fff;font-size:7px;padding:1px 5px;border-radius:3px;font-weight:600">当前模块</span>
+              <div style="display:flex;align-items:center;justify-content:space-between">
+                <div class="wf-loc"><div class="wf-pin"></div>魔法学院·朝阳店<span class="wf-arr"></span></div>
+                <div class="wf-mgr">管理</div>
+              </div>
+            </div>
+            <div style="padding:0 6px;opacity:0.35">
+              <div style="height:90px;background:linear-gradient(135deg,#5B21B6,#7C3AED,#A78BFA);border-radius:8px"></div>
+            </div>
+            <div style="padding:0 6px;opacity:0.35">
+              <div class="wf-cards">
+                <div class="wf-card wf-card-blue">预约体验</div>
+                <div class="wf-card wf-card-orange">团购兑换</div>
+              </div>
+            </div>
+            <div style="padding:6px 10px;opacity:0.35">
+              <div style="margin-top:6px;font-size:9px;font-weight:700;color:rgba(255,255,255,.4)">近期场次</div>
+              <div style="margin-top:6px;padding:10px;background:rgba(255,255,255,.06);border-radius:8px">
+                <div style="height:8px;width:60%;background:rgba(255,255,255,.1);border-radius:4px;margin-bottom:6px"></div>
+                <div style="height:14px;width:28%;background:rgba(63,149,255,.3);border-radius:4px;float:right"></div>
+              </div>
             </div>
           </div></div>
           <div class="ui-desc">
             <h5>⚙️ 管理端入口</h5>
-            <p>管理员（<code>userType > 0</code>）右上角多出「管理」按钮</p>
+            <p>管理员（<code>userType &gt; 0</code>）右上角多出「管理」按钮</p>
             <ul>
               <li>点击「管理」跳转到 <code>/pages/central/central</code> 中控台</li>
               <li>同时仍然保留预约体验入口</li>
@@ -66,7 +111,7 @@
 
       <div class="feature-card">
         <h4>管理入口（仅管理端可见）</h4>
-        <p>当 <code>userType > 0</code>（门店员工或管理员）时，首页顶部右侧显示「管理」按钮。点击跳转逻辑：</p>
+        <p>当 <code>userType &gt; 0</code>（门店员工或管理员）时，首页顶部右侧显示「管理」按钮。点击跳转逻辑：</p>
         <ul class="detail-list" style="margin-top: 8px;">
           <li><strong>中控管理员</strong>（<code>userType == 3</code> 且非自定义角色）→ 跳转中控台 <code>/pages/central/central</code></li>
           <li><strong>其他管理角色</strong> → 跳转票券管理 <code>/pages/ticket/ticket</code></li>
