@@ -1,0 +1,50 @@
+<!-- 订单操作（从 magic-order.html 拆分） -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+      </svg>
+    </div>
+    订单操作
+  </div>
+
+  <div class="feature-card">
+    <h4>改签场次</h4>
+    <p>仅创建者可操作，需满足以下条件：</p>
+    <ul class="detail-list" style="margin-top: 8px;">
+      <li><code>reorder_times ≥ 1</code>：有剩余改签次数</li>
+      <li><code>canEdit = true</code>：当前时间未超过场次开始时间</li>
+      <li><code>is_owner = 1</code>：当前用户是订单创建者</li>
+      <li><code>group_id = 0</code>：非团购订单</li>
+      <li><code>status ≤ 1</code>：场次未开始</li>
+    </ul>
+    <p style="margin-top: 8px;">点击后跳转到预约页（改签模式），详见「预约体验」模块的改签逻辑。</p>
+  </div>
+
+  <div class="feature-card">
+    <h4>修改预约人数</h4>
+    <p>在订单详情页可直接修改预约人数：</p>
+    <ul class="detail-list" style="margin-top: 8px;">
+      <li>只能增加人数（减少无需修改，现场说明即可）</li>
+      <li>新人数不能超过已使用票券的总人数上限</li>
+      <li>当前已有 4 人时不可修改</li>
+      <li>调用 <code>/mz/changeOrderPlayerNum</code> 接口</li>
+    </ul>
+  </div>
+
+  <div class="feature-card">
+    <h4>修改联系电话</h4>
+    <p>仅创建者可操作。通过微信手机号授权组件获取新号码，调用 <code>/mz/changeOrderPhone</code> 更新。</p>
+  </div>
+
+  <div class="feature-card">
+    <h4>撤销预约</h4>
+    <p>仅创建者可操作。弹出确认弹窗「确定要撤销当前预约吗？」，确认后调用 <code>/mz/cancelGameRoundOrder</code>。成功后自动返回首页。</p>
+  </div>
+
+  <div class="feature-card">
+    <h4>扫码签到</h4>
+    <p>在订单详情页可点击扫码，调用 <code>wx.scanCode</code> 扫描现场签到码，然后跳转到角色码页面。</p>
+  </div>
+</div>

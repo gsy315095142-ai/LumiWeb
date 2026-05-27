@@ -1,0 +1,47 @@
+<!-- 导出对账单（从 magic-stats.html 拆分） -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+      </svg>
+    </div>
+    导出对账单
+  </div>
+
+  <div class="feature-card">
+    <h4>显示条件</h4>
+    <p>导出按钮仅在以下条件同时满足时显示：</p>
+    <ul class="detail-list" style="margin-top:8px;">
+      <li><strong>有 <code>view-stat-hotel</code> 权限</strong>（超级管理员）</li>
+      <li><strong>选中了具体门店</strong>（<code>selectedHotel > 0</code>，「全部」选项 index=0 时不显示）</li>
+    </ul>
+  </div>
+
+  <div class="feature-card">
+    <h4>导出流程</h4>
+    <div class="flow-steps">
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <h4>前置校验</h4>
+          <p>检查 <code>ticketDates.length ≥ 2</code>，否则提示「请先选择查询日期」。</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <h4>构建下载 URL</h4>
+          <p><code>/mz-admin/downloadStatements?date_start={start}&date_end={end}&store_id={id}</code></p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot"></div></div>
+        <div class="flow-content">
+          <h4>下载文件</h4>
+          <p>调用 <code>wxFileDownload(fileUrl, fileName)</code>，文件名格式：<code>{门店名}对账单-{开始日期}至{结束日期}.xlsx</code></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

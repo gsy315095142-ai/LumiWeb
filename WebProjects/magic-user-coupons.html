@@ -1,78 +1,37 @@
-<!-- 我的票券（从 magic-user.html 拆分） -->
-
-<!-- 3. 我的票券 -->
+<!-- 我的优惠券（从 magic-user.html 拆分） -->
 <div class="section-block">
   <div class="section-title">
     <div class="section-title-icon">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="2" y="4" width="20" height="16" rx="2"/><path d="M12 4v16"/><path d="M2 12h20"/>
+        <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/>
       </svg>
     </div>
-    我的票券
+    我的优惠券
   </div>
 
   <div class="feature-card">
-    <h4>数据加载</h4>
-    <p>调用 <code>/mz/getCouponList</code> 获取用户所有票券。每张票券包含：</p>
+    <h4>优惠券列表</h4>
+    <p>调用 <code>/mz/promoCodeList</code> 获取用户的优惠码列表，每张优惠券显示：</p>
     <ul class="detail-list" style="margin-top:8px;">
-      <li>票券名称、面值（value）、所属门店</li>
-      <li>票券码（code）、平台类型（inner/group）</li>
-      <li>创建时间、过期时间、剩余天数</li>
-      <li>使用状态、转让状态（<code>transfer_status</code>）</li>
+      <li><strong>折扣信息</strong>：支持三种类型
+        <ul class="detail-list" style="margin-top:4px;">
+          <li>按比例折扣：如「8折」「6.5折」</li>
+          <li>固定金额折扣：如「20元折扣」</li>
+          <li>满减：如「满100减30元」</li>
+        </ul>
+      </li>
+      <li><strong>有效期</strong>：显示截止日期 <code>valid_to</code></li>
+      <li><strong>使用状态</strong>：未使用 / 已使用 / 已过期</li>
+      <li><strong>所属门店</strong></li>
     </ul>
   </div>
 
   <div class="feature-card">
-    <h4>智能分组逻辑</h4>
-    <p>票券按使用状态分为「待使用」和「其他」两组，分组逻辑较复杂：</p>
-    <table class="info-table">
-      <thead><tr><th>类型</th><th>待使用条件</th><th>其他</th></tr></thead>
-      <tbody>
-        <tr><td>普通票</td><td>status=0、未过期、未被转让出去</td><td>status≠0、已过期、已转让</td></tr>
-        <tr><td>团购票</td><td>status 为 0/1、未过期、非本人转出</td><td>已使用、已过期、已转出</td></tr>
-        <tr><td>转让接收</td><td>transfer_status=2 且当前用户是接收方</td><td>—</td></tr>
-      </tbody>
-    </table>
-    <p style="margin-top:8px;">排序规则：普通票按兑换时间降序，团购票按预约日期降序。</p>
-  </div>
-
-  <div class="feature-card">
-    <h4>票券状态流转</h4>
-    <div class="status-tags" style="margin-bottom:12px;">
-      <span class="status-tag blue">待使用 (0)</span>
-      <span class="status-tag orange">待核销 (1)</span>
-      <span class="status-tag green">已核销 (2)</span>
-      <span class="status-tag grey">已过期 (3)</span>
-      <span class="status-tag red">已失效 (4)</span>
-    </div>
-  </div>
-
-  <div class="feature-card">
-    <h4>票券操作</h4>
-    <p>票券卡片支持多种操作：</p>
+    <h4>优惠券赠送</h4>
+    <p>优惠券支持通过微信分享赠送给好友，流程与票券赠送类似：</p>
     <ul class="detail-list" style="margin-top:8px;">
-      <li><strong>一键预约</strong>：点击「预约」跳转预约页，携带票券 ID 和面值，自动切换门店</li>
-      <li><strong>赠送票券</strong>：点击「赠送」弹出确认框，确认后通过微信分享给好友
-        <ul class="detail-list" style="margin-top:4px;">
-          <li>调用 <code>/mz/markCouponTransferable</code> 标记可转让</li>
-          <li>生成 Canvas 海报（含票券类型、兑换时间、门店）作为分享封面</li>
-          <li>分享链接：<code>/pages/vouchersShareJump?share_code=1&qrcode={code}</code></li>
-          <li>注意：赠送后自己无法再使用</li>
-        </ul>
-      </li>
-      <li><strong>团购票分享</strong>：将团购票分享给团队成员预约场次</li>
-      <li><strong>团购票转赠</strong>：将整个团购票转让给他人
-        <ul class="detail-list" style="margin-top:4px;">
-          <li>调用 <code>/mz/markGroupTransferable</code> 标记可转让</li>
-          <li>离屏 Canvas 生成分享海报（门店名 + 团队人数 + 预约日期）</li>
-        </ul>
-      </li>
-      <li><strong>退票</strong>：左滑出现退票按钮（仅 <code>platform=lumi</code>）
-        <ul class="detail-list" style="margin-top:4px;">
-          <li>确认弹窗：退掉后不可撤销</li>
-          <li>调用 <code>/mz/refundCouponWithPayOrder</code></li>
-        </ul>
-      </li>
+      <li>Canvas 生成分享海报（不同背景图 + 优惠券类型 + 截止时间 + 门店）</li>
+      <li>分享标题：「赠送你一张魔法学院优惠券，请查收~」</li>
     </ul>
   </div>
 </div>

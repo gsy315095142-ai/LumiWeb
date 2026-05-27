@@ -1,0 +1,33 @@
+<!-- 登录态判断与页面守卫（从 magic-login.html 拆分） -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 12l2 2 4-4"/><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+      </svg>
+    </div>
+    登录态判断与页面守卫
+  </div>
+
+  <div class="feature-card">
+    <h4>全局登录判断逻辑</h4>
+    <p>各页面通过以下模式判断用户登录状态：</p>
+    <ul class="detail-list" style="margin-top:8px;">
+      <li><strong>检查 <code>user_login</code></strong>：用户是否已主动完成登录（头像+昵称+手机号）</li>
+      <li><strong>未登录弹窗</strong>：弹出手机号授权组件（<code>open-type=getPhoneNumber</code>）</li>
+      <li><strong>授权成功</strong>：调用 <code>/mz/updatePhone</code> 绑定手机号，标记 <code>user_login = true</code>，刷新页面数据</li>
+      <li><strong>拒绝授权</strong>：用户关闭弹窗后不强制跳转，但功能受限</li>
+    </ul>
+  </div>
+
+  <div class="feature-card">
+    <h4>管理端权限判断</h4>
+    <p>管理端页面额外检查：</p>
+    <ul class="detail-list" style="margin-top:8px;">
+      <li><strong>员工角色</strong>：<code>store_staff</code> 数组中是否有当前门店的管理权限</li>
+      <li><strong>超级管理员</strong>：<code>super_man = true</code> 时拥有所有权限</li>
+      <li><strong>功能权限</strong>：通过 <code>getUserPermissions()</code> 检查具体功能权限</li>
+      <li>无权限的操作按钮隐藏或提示「无操作权限」</li>
+    </ul>
+  </div>
+</div>
