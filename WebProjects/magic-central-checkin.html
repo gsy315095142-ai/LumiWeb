@@ -1,0 +1,33 @@
+<!-- 签到与电话联系（从 magic-central.html 拆分） -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+      </svg>
+    </div>
+    签到与电话联系
+  </div>
+
+  <div class="feature-card">
+    <h4>手动签到</h4>
+    <p>管理员在场次详情中点击签到按钮：</p>
+    <ul class="detail-list" style="margin-top:8px;">
+      <li>仅对 <code>is_checked_in = false</code> 且 <code>status = 0</code> 的角色生效</li>
+      <li>弹出确认框「是否对此订单进行签到」</li>
+      <li>调用 <code>/mz-admin/makeOrderCheckIn</code>，传入 <code>order_id</code></li>
+      <li>签到成功后刷新场次列表</li>
+    </ul>
+  </div>
+
+  <div class="feature-card">
+    <h4>电话联系</h4>
+    <p>管理员可直接拨打用户电话：</p>
+    <ul class="detail-list" style="margin-top:8px;">
+      <li>如果角色已有 <code>actived_phone</code>，直接拨打</li>
+      <li>否则调用 <code>/mz-admin/getPhoneByOrder</code>，传入 <code>order_id</code> 获取手机号</li>
+      <li>获取后缓存到 <code>orderPhone</code> 对象中，避免重复请求</li>
+      <li>使用 <code>wx.makePhoneCall</code> 发起电话</li>
+    </ul>
+  </div>
+</div>

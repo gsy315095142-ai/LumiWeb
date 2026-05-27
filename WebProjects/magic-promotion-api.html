@@ -1,0 +1,43 @@
+<!-- API 接口汇总（从 magic-promotion.html 拆分） -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+      </svg>
+    </div>
+    API 接口汇总
+  </div>
+
+  <div class="feature-card">
+    <h4>管理端接口</h4>
+    <table class="info-table">
+      <thead><tr><th>接口</th><th>方法</th><th>用途</th></tr></thead>
+      <tbody>
+        <tr><td><code>/mz-admin/promotionPageOpts</code></td><td>GET</td><td>获取表单选项（条件/次数/类型/限制）</td></tr>
+        <tr><td><code>/mz-admin/createPromotion</code></td><td>POST</td><td>创建优惠活动</td></tr>
+        <tr><td><code>/mz-admin/savePromotion</code></td><td>POST</td><td>编辑保存优惠活动</td></tr>
+        <tr><td><code>/mz-admin/promotionList</code></td><td>GET</td><td>获取活动列表</td></tr>
+        <tr><td><code>/mz-admin/promotionDetail</code></td><td>GET</td><td>获取活动详情</td></tr>
+        <tr><td><code>/mz-admin/updatePromotionStatus</code></td><td>POST</td><td>启用/禁用活动 + 配置门店/期限/有效期</td></tr>
+        <tr><td><code>/mz-admin/deletePromotion</code></td><td>POST</td><td>删除活动</td></tr>
+        <tr><td><code>/mz-admin/promotionStats</code></td><td>GET</td><td>活动统计数据</td></tr>
+        <tr><td><code>/mz-admin/downloadPromoExcel</code></td><td>GET</td><td>导出统计 Excel</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="feature-card">
+    <h4>用户端接口</h4>
+    <table class="info-table">
+      <thead><tr><th>接口</th><th>方法</th><th>用途</th></tr></thead>
+      <tbody>
+        <tr><td><code>/mz/getCouponList</code></td><td>GET</td><td>获取用户优惠券列表（分页）</td></tr>
+        <tr><td><code>/mz/exchangeCoupon</code></td><td>POST</td><td>扫码兑换优惠券</td></tr>
+        <tr><td><code>/mz/receiveCoupon</code></td><td>POST</td><td>分享链接领取优惠券</td></tr>
+        <tr><td><code>/mz/joinGroup</code></td><td>POST</td><td>加入团队（团票）</td></tr>
+        <tr><td><code>/mz/receiveTransferredGroup</code></td><td>POST</td><td>接收转赠的团队票</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
