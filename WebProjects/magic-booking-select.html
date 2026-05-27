@@ -1,41 +1,60 @@
 <!-- 场次选择交互（从 magic-booking.html 拆分） -->
 <div class="section-block">
-      <div class="section-title">
-        <div class="section-title-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
-          </svg>
-        </div>
-        场次选择交互
-      </div>
-
-      <div class="feature-card">
-        <h4>推荐/全部切换</h4>
-        <p>默认展示推荐的 4 个场次。用户可点击「查看更多」展开当天所有场次列表（<code>showAllSlots</code>），再次点击收起。</p>
-      </div>
-
-      <div class="feature-card">
-        <h4>场次卡片信息</h4>
-        <p>每个场次卡片展示：</p>
-        <table class="info-table">
-          <thead>
-            <tr><th>字段</th><th>说明</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>时间范围</td><td>场次开始 ~ 结束时间（如 14:00 - 14:30）</td></tr>
-            <tr><td>已预约 / 总人数</td><td>当前已预约人数与场容量上限</td></tr>
-            <tr><td>剩余名额</td><td>还可预约的人数（<code>player_num_remain</code>）</td></tr>
-            <tr><td>锁定人数</td><td>被团队预约锁定的名额（<code>player_num_lock</code>）</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="feature-card">
-        <h4>选择限制</h4>
-        <ul class="detail-list">
-          <li><strong>已售罄</strong>：剩余名额 &lt; 1 时，提示「当前场次已售罄」，无法选中</li>
-          <li><strong>已过期</strong>：选择今天时，开始时间已过的场次提示「无法选取之前的场次」</li>
-          <li>选中后高亮显示，底部「下一步」按钮激活</li>
-        </ul>
-      </div>
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+      </svg>
     </div>
+    场次选择交互
+  </div>
+
+  <div class="feature-card">
+    <h4>场次卡片样式</h4>
+    <p>白色圆角卡片，选中时蓝色边框高亮（<code>border: 2rpx solid #00aeff</code>），每张卡片展示：</p>
+    <table class="info-table">
+      <thead><tr><th>字段</th><th>样式</th></tr></thead>
+      <tbody>
+        <tr><td>时间范围</td><td>左侧显示（如 <code>14:00-14:30</code>）</td></tr>
+        <tr><td>状态标签</td><td>右侧绿色背景「可约」标签（<code>#EEFBEE</code> 底 + <code>#6ECBB9</code> 字），有名额时显示</td></tr>
+        <tr><td>已满状态</td><td>红色标签（<code>#ff4d4f</code>），整张卡片降低透明度</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="feature-card">
+    <h4>选择限制与提示</h4>
+    <table class="info-table">
+      <thead><tr><th>场景</th><th>触发条件</th><th>Toast 提示</th></tr></thead>
+      <tbody>
+        <tr><td>已售罄</td><td><code>remain < 1</code></td><td>「当前场次已售罄」</td></tr>
+        <tr><td>已过期</td><td>今天是选中日期 且 开始时间已过</td><td>「无法选取之前的场次」</td></tr>
+        <tr><td>未选人数</td><td>已选时间但 <code>selectedPlayerIndex < 0</code></td><td>列表显示「选择预约人数」</td></tr>
+        <tr><td>无合适场次</td><td>筛选后为空</td><td>列表显示「暂无合适的场次」</td></tr>
+        <tr><td>无场次数据</td><td>该日期无任何场次</td><td>列表显示「该日期暂无场次」</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="feature-card">
+    <h4>3D 翻转动画</h4>
+    <p>场次卡片初始状态 <code>opacity: 0; transform: rotateX(-90deg)</code>，推荐列表就绪后通过 CSS 变量 <code>--i</code> 逐个延迟翻转入场：</p>
+    <ul class="detail-list" style="margin-top:8px;">
+      <li>每个卡片延迟 = <code>index × 0.2s</code>（<code>transition-delay: calc(var(--i) * 0.2s)</code>）</li>
+      <li>收起时反向动画（<code>transition-delay: calc(var(--i) * -1s)</code>）</li>
+      <li>使用 <code>cubic-bezier(0.39, 0.575, 0.565, 1)</code> 缓动函数</li>
+    </ul>
+  </div>
+
+  <div class="feature-card">
+    <h4>相关 API</h4>
+    <table class="info-table">
+      <thead><tr><th>接口</th><th>方法</th><th>用途</th></tr></thead>
+      <tbody>
+        <tr><td><code>/mz/getGameRoundList</code></td><td>POST</td><td>获取指定日期的场次列表（参数：<code>date</code>、<code>time_start</code>、<code>time_end</code>）</td></tr>
+        <tr><td><code>/mz/changeGameRoundForOrder</code></td><td>POST</td><td>修改订单场次（参数：<code>order_id</code>、<code>round_id</code>）</td></tr>
+        <tr><td><code>/mz/getGameRoundOrder</code></td><td>POST</td><td>获取订单详情含场次信息（参数：<code>order_id</code>）</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>

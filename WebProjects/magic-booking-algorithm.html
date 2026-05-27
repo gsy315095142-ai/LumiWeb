@@ -1,58 +1,61 @@
 <!-- 场次推荐算法（从 magic-booking.html 拆分） -->
 <div class="section-block">
-      <div class="section-title">
-        <div class="section-title-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/>
-          </svg>
-        </div>
-        场次推荐算法
-      </div>
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/>
+      </svg>
+    </div>
+    场次推荐算法
+  </div>
 
-      <div class="feature-card">
-        <h4>推荐逻辑</h4>
-        <p>当用户选择了时间点和人数后，系统执行以下推荐算法，生成最多 4 个推荐场次：</p>
-      </div>
+  <div class="feature-card">
+    <h4>推荐逻辑</h4>
+    <p>当用户选择了「想玩时间」和「人数」后，执行以下算法，从当天所有场次中筛选并推荐最多 <strong>4 个</strong>最匹配的场次：</p>
+  </div>
 
-      <div class="flow-steps" style="margin-top: 16px;">
-        <div class="flow-step">
-          <div class="flow-line">
-            <div class="flow-dot"></div>
-            <div class="flow-connector"></div>
-          </div>
-          <div class="flow-content">
-            <h4>筛选符合条件的场次</h4>
-            <p>从当天所有场次中筛选：剩余名额 ≥ 所需人数、不早于当前时间（如果是今天）、开始时间 ≥ 所选时间点。</p>
-          </div>
-        </div>
-        <div class="flow-step">
-          <div class="flow-line">
-            <div class="flow-dot"></div>
-            <div class="flow-connector"></div>
-          </div>
-          <div class="flow-content">
-            <h4>向后取 2 个场次</h4>
-            <p>从筛选后的场次中，取所选时间点之后的最近 2 个场次作为核心推荐。</p>
-          </div>
-        </div>
-        <div class="flow-step">
-          <div class="flow-line">
-            <div class="flow-dot"></div>
-            <div class="flow-connector"></div>
-          </div>
-          <div class="flow-content">
-            <h4>向前补齐</h4>
-            <p>如果向后场次不足 4 个，从所选时间点之前的场次中倒序取，补齐总数到 4。如果所选时间已超过最后一场，则总数减 1。</p>
-          </div>
-        </div>
-        <div class="flow-step">
-          <div class="flow-line">
-            <div class="flow-dot"></div>
-          </div>
-          <div class="flow-content">
-            <h4>去重输出</h4>
-            <p>最终去重后展示推荐列表。每个场次显示：时间范围、已预约/总人数、剩余名额。</p>
-          </div>
-        </div>
+  <div class="flow-steps" style="margin-top: 16px;">
+    <div class="flow-step">
+      <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+      <div class="flow-content">
+        <h4>① 数据源加载</h4>
+        <p>选择日期后调用 <code>/mz/getGameRoundList</code> 获取该日期全部场次。根据场次的最早/最晚开始时间，按 30 分钟间隔生成时间段列表（<code>timeSlots</code>）。如果选择的是今天，自动跳过已过去的时间段。</p>
       </div>
     </div>
+    <div class="flow-step">
+      <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+      <div class="flow-content">
+        <h4>② 筛选符合条件的场次</h4>
+        <p>从全部场次中筛选出三个条件同时满足的：</p>
+        <ul class="detail-list" style="margin-top:6px">
+          <li>剩余名额 ≥ 所需人数（<code>remain >= needPlayers</code>）</li>
+          <li>不早于当前时间（如果选择的是今天）</li>
+          <li>开始时间 ≥ 用户选择的「想玩时间」</li>
+        </ul>
+        <p style="margin-top:6px">满足条件的归入 <code>afterSessions</code>，不满足最后一条（开始时间 < 所选时间但名额足够）归入 <code>beforeSessions</code>。</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+      <div class="flow-content">
+        <h4>③ 向后取 2 个 + 向前补齐</h4>
+        <p>从 <code>afterSessions</code> 取前 2 个作为核心推荐；不足 4 个时，从 <code>beforeSessions</code> 倒序补齐到 4 个。如果所选时间已超过最后一场的结束时间，总数减 1。</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-line"><div class="flow-dot"></div></div>
+      <div class="flow-content">
+        <h4>④ 去重输出 + 动画</h4>
+        <p>去重后设置 <code>recommendSessions</code>，延迟 50ms 将 <code>recommendStatus</code> 设为 true，触发场次的 3D 翻转入场动画（<code>rotateX</code> + CSS <code>--i</code> 变量逐个延迟）。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <div class="tip-box-title">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      场次数据结构
+    </div>
+    <p>每个场次对象包含：<code>id</code>（场次ID）、<code>time_start</code> / <code>time_end</code>（时间范围）、<code>booked</code>（已预约人数）、<code>total</code>（容量上限）、<code>locked</code>（团队锁定名额）、<code>remain</code>（剩余名额 = <code>player_max - player_num_order - player_num_lock</code>）。</p>
+  </div>
+</div>
