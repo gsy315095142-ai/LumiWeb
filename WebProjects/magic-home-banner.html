@@ -50,26 +50,14 @@
           </div></div>
           <div class="ui-desc">
             <h5>🖼️ Banner 轮播区</h5>
-            <p>全宽轮播图，底部含导航指示点和门店地址</p>
+            <p>全宽轮播图，与当前选中的门店绑定。每个门店可配置多张 Banner 图片（后台通过 <code>banner_img_url</code> 字段配置，逗号分隔多张图）。切换门店时，轮播图会同步更新。</p>
             <ul>
-              <li>使用 <code>&lt;swiper&gt;</code> 组件自动轮播，间隔 3 秒</li>
-              <li>底部导航指示点标识当前页</li>
+              <li>使用 <code>&lt;swiper&gt;</code> 组件自动轮播，间隔 3 秒，循环播放</li>
+              <li>底部指示点标识当前页</li>
               <li>地址栏可点击，调用 <code>wx.openLocation</code> 打开地图导航</li>
               <li>图片从 CDN 加载：<code>cdn.lixiaoqian.com</code></li>
             </ul>
           </div>
         </div>
       </div>
-
-      <div class="feature-card">
-        <h4>门店关联轮播</h4>
-        <p>轮播图与当前选中的门店绑定。每个门店可配置多张 Banner 图片（后台通过 <code>banner_img_url</code> 字段配置，逗号分隔多张图）。切换门店时，轮播图会同步更新。</p>
-      </div>
-
-      <ul class="detail-list" style="margin-top: 12px;">
-        <li>自动轮播，间隔 3 秒，循环播放</li>
-        <li>底部带指示点（indicator dots），白色高亮当前页</li>
-        <li>每张图片右下角显示门店地址，点击可调用 <code>wx.openLocation</code> 打开地图导航</li>
-        <li>图片加载自 CDN：<code>cdn.lixiaoqian.com</code></li>
-      </ul>
     </div>

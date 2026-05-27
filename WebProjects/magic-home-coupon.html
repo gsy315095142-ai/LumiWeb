@@ -53,36 +53,16 @@
           </div></div>
           <div class="ui-desc">
             <h5>🎁 优惠券弹窗</h5>
-            <p>进入首页时自动弹出可领取的优惠券</p>
+            <p>进入首页时自动检测并弹出可领取的优惠券。调用 <code>/mz/checkPromotions</code> 检查是否有未通知的券，有则弹窗并调用 <code>/mz/receivePromoNotified</code> 标记已通知，避免重复弹出。如无可领券则不弹窗。</p>
+            <p>弹窗顶部为活动头图，中间展示优惠信息：</p>
             <ul>
-              <li>页面 <code>onShow</code> 时调用 <code>/mz/checkPromotions</code> 获取待领取券</li>
-              <li>弹窗上半部分为渐变橙色装饰区</li>
-              <li>「立即领取」调用 <code>/mz/receivePromoNotified</code> 标记已通知</li>
-              <li>点击关闭按钮或遮罩层关闭弹窗</li>
-              <li>如无可领券则不弹窗</li>
+              <li><b>满减</b>：显示金额 + 满X元使用条件</li>
+              <li><b>固定金额</b>：显示优惠金额</li>
+              <li><b>按比例折扣</b>：显示折扣数（如 8 折）</li>
+              <li>底部显示有效期至 X 日期</li>
             </ul>
+            <p>用户可点击活动按钮直接跳转预约页（需登录），或关闭弹窗。关闭后会继续检查是否有下一张未通知的优惠券，依次弹出。过期优惠券会提示已过期。</p>
           </div>
         </div>
-      </div>
-
-      <div class="feature-card">
-        <h4>自动弹窗逻辑</h4>
-        <p>进入首页后，调用接口 <code>/mz/checkPromotions</code> 检查用户是否有未通知的优惠券。如果有，自动弹出优惠券弹窗，并调用接口标记为已通知（<code>/mz/receivePromoNotified</code>），避免重复弹窗。</p>
-      </div>
-
-      <div class="feature-card">
-        <h4>弹窗内容</h4>
-        <p>弹窗顶部为活动头图，中间展示优惠信息：</p>
-        <ul class="detail-list" style="margin-top: 8px;">
-          <li><strong>满减</strong>：显示金额 + 满X元使用条件</li>
-          <li><strong>固定金额</strong>：显示优惠金额</li>
-          <li><strong>按比例折扣</strong>：显示折扣数（如 8 折）</li>
-          <li>底部显示有效期至 X 日期</li>
-        </ul>
-      </div>
-
-      <div class="feature-card">
-        <h4>弹窗交互</h4>
-        <p>用户可点击活动按钮直接跳转预约页（需登录），或关闭弹窗。关闭后会继续检查是否有下一张未通知的优惠券，依次弹出。过期优惠券会提示已过期。</p>
       </div>
     </div>

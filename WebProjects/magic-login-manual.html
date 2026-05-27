@@ -9,61 +9,120 @@
     用户主动登录（login 页）
   </div>
 
-  <div class="feature-card">
-    <h4>登录页面结构</h4>
-    <p>登录页（<code>/pages/login/login</code>）包含以下元素：</p>
-    <ul class="detail-list" style="margin-top:8px;">
-      <li><strong>背景图</strong>：CDN 加载的登录背景大图（<code>cdn.lixiaoqian.com/magic-space/login-bg.jpg</code>）</li>
-      <li><strong>头像选择</strong>：通过微信 <code>chooseAvatar</code> 组件选择头像</li>
-      <li><strong>昵称输入</strong>：通过 <code>input type=nickname</code> 组件输入（微信自动填充建议）</li>
-      <li><strong>手机号授权按钮</strong>：新用户必须授权手机号</li>
-      <li><strong>进入小程序按钮</strong>：老用户可直接进入</li>
-      <li><strong>协议勾选</strong>：须同意《服务条款》和《隐私政策》</li>
-    </ul>
+  <!-- 登录页主界面 -->
+  <div class="ui-demo-row">
+    <div class="ui-demo-item">
+      <div class="phone-wireframe"><div class="phone-notch"></div><div class="phone-screen" style="min-height:540px">
+        <div class="phone-bar"><span>9:41</span><div class="phone-bar-r"><i></i><i></i><i></i></div></div>
+        <!-- 完整登录页：全屏背景大图 -->
+        <div style="border:2px solid #EF4444;border-radius:4px;margin:4px 6px;position:relative;height:480px;background:linear-gradient(180deg,#0f0524 0%,#1a0a3e 30%,#2d1b69 60%,#4c1d95 100%);overflow:hidden">
+          <span style="position:absolute;top:-8px;right:4px;background:#EF4444;color:#fff;font-size:7px;padding:1px 5px;border-radius:3px;font-weight:600;z-index:2">登录页</span>
+          <!-- 背景装饰元素 -->
+          <div style="position:absolute;top:40px;left:50%;transform:translateX(-50%);text-align:center;opacity:0.15">
+            <div style="width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(167,139,250,.4),transparent);margin:0 auto"></div>
+          </div>
+          <div style="position:absolute;top:80px;left:50%;transform:translateX(-50%);text-align:center">
+            <div style="font-size:14px;color:rgba(255,255,255,.7);font-weight:700;letter-spacing:2px">LUMI</div>
+            <div style="font-size:8px;color:rgba(255,255,255,.35);margin-top:4px;letter-spacing:1px">探索无限可能</div>
+          </div>
+          <!-- 星星装饰 -->
+          <div style="position:absolute;top:30px;right:40px;width:3px;height:3px;background:rgba(255,255,255,.3);border-radius:50%"></div>
+          <div style="position:absolute;top:60px;left:30px;width:2px;height:2px;background:rgba(255,255,255,.2);border-radius:50%"></div>
+          <div style="position:absolute;top:120px;right:25px;width:4px;height:4px;background:rgba(255,255,255,.15);border-radius:50%"></div>
+          <div style="position:absolute;top:90px;left:60px;width:2px;height:2px;background:rgba(255,255,255,.25);border-radius:50%"></div>
+          <!-- 底部固定区域：微信登录按钮 -->
+          <div style="position:absolute;bottom:80px;left:50%;transform:translateX(-50%);width:75%">
+            <div style="background:linear-gradient(135deg,#07C160,#06AD56);border-radius:22px;padding:10px;text-align:center;display:flex;align-items:center;justify-content:center;gap:6px;box-shadow:0 4px 15px rgba(7,193,96,.3)">
+              <div style="width:16px;height:16px;display:flex;align-items:center;justify-content:center">
+                <svg viewBox="0 0 24 24" fill="#fff" width="14" height="14"><path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 0 1 .213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 0 0 .167-.054l1.903-1.114a.864.864 0 0 1 .717-.098 10.16 10.16 0 0 0 2.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-4.972 1.932-6.446C13.193 8.862 15.8 7.497 19 7.497c.424 0 .834.04 1.247.076C19.228 4.463 14.424 2.188 8.691 2.188z"/></svg>
+              </div>
+              <span style="font-size:10px;color:#fff;font-weight:600">微信登录</span>
+            </div>
+          </div>
+          <!-- 底部固定：协议勾选 -->
+          <div style="position:absolute;bottom:30px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:6px;white-space:nowrap">
+            <div style="width:14px;height:14px;border:1px solid rgba(255,255,255,.3);border-radius:50%;flex-shrink:0"></div>
+            <div style="font-size:7px;color:rgba(255,255,255,.5)">我已阅读并同意<span style="color:#818CF8">《服务条款》</span>和<span style="color:#818CF8">《隐私政策》</span></div>
+          </div>
+        </div>
+      </div></div>
+      <div class="ui-desc">
+        <h5>🔐 登录页主界面</h5>
+        <p>页面路径：<code>/pages/login/login</code>。整体为全屏背景大图设计（<code>login-bg.jpg</code>），背景图撑满整个屏幕。</p>
+        <ul>
+          <li><b>背景</b>：全屏大图，通过 CSS <code>background-size: auto 100%</code> 纵向撑满</li>
+          <li><b>微信登录按钮</b>：固定在底部（<code>position: fixed; bottom: 260rpx</code>），实际是一张图片（<code>login-weixin.png</code>）覆盖在透明按钮上，点击触发 <code>handleToIndex</code></li>
+          <li><b>协议勾选</b>：固定在页面最底部（<code>position: fixed; bottom: 150rpx</code>），圆形勾选框 + 文案，点击切换 <code>agreeDeal</code> 状态</li>
+        </ul>
+        <p><b>进入流程</b>：进入页面 → 自动调用 <code>wxLogin()</code> 获取临时 Token → 勾选协议 → 点击微信登录按钮 → 将 <code>tem_token</code> 转存为 <code>access_token</code> → <code>reLaunch</code> 跳转首页</p>
+      </div>
+    </div>
   </div>
 
-  <div class="feature-card">
-    <h4>双轨登录策略</h4>
-    <p>根据用户是否为新用户（<code>is_new</code>）提供不同的登录路径：</p>
-    <table class="info-table">
-      <thead><tr><th>用户类型</th><th>操作流程</th></tr></thead>
-      <tbody>
-        <tr><td>新用户（<code>is_new = true</code>）</td><td>选择头像 → 输入昵称 → 授权手机号 → 勾选协议 → 进入</td></tr>
-        <tr><td>老用户（<code>is_new = false</code>）</td><td>勾选协议 → 点击「进入小程序」→ 自动跳转首页</td></tr>
-      </tbody>
-    </table>
+  <!-- 协议未勾选提示 -->
+  <div class="ui-demo-row">
+    <div class="ui-demo-item">
+      <div class="phone-wireframe"><div class="phone-notch"></div><div class="phone-screen" style="min-height:540px">
+        <div class="phone-bar"><span>9:41</span><div class="phone-bar-r"><i></i><i></i><i></i></div></div>
+        <!-- 登录页背景（灰色） -->
+        <div style="padding:4px 6px;height:480px;background:linear-gradient(180deg,#0f0524 0%,#1a0a3e 30%,#2d1b69 60%,#4c1d95 100%);position:relative;opacity:0.4">
+          <div style="position:absolute;top:80px;left:50%;transform:translateX(-50%);text-align:center">
+            <div style="font-size:14px;color:rgba(255,255,255,.7);font-weight:700;letter-spacing:2px">LUMI</div>
+          </div>
+          <div style="position:absolute;bottom:80px;left:50%;transform:translateX(-50%);width:75%">
+            <div style="background:linear-gradient(135deg,#07C160,#06AD56);border-radius:22px;padding:10px;text-align:center">
+              <span style="font-size:10px;color:#fff;font-weight:600">微信登录</span>
+            </div>
+          </div>
+          <div style="position:absolute;bottom:30px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:6px">
+            <div style="width:14px;height:14px;border:1px solid rgba(255,255,255,.3);border-radius:50%"></div>
+            <div style="font-size:7px;color:rgba(255,255,255,.5)">我已阅读并同意...</div>
+          </div>
+        </div>
+        <!-- Toast 提示 -->
+        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:5;border:2px solid #EF4444;border-radius:10px;background:rgba(0,0,0,.8);padding:12px 20px;text-align:center">
+          <span style="position:absolute;top:-8px;right:4px;background:#EF4444;color:#fff;font-size:7px;padding:1px 5px;border-radius:3px;font-weight:600">Toast 提示</span>
+          <div style="font-size:8px;color:rgba(255,255,255,.8);max-width:180px">请阅读并同意《服务条款》和《隐私政策》</div>
+        </div>
+      </div></div>
+      <div class="ui-desc">
+        <h5>⚠️ 协议校验</h5>
+        <p>点击登录按钮时，若协议未勾选（<code>agreeDeal = false</code>），弹出 Toast 提示。</p>
+        <ul>
+          <li>Toast 内容：「请阅读并同意《服务条款》和《隐私政策》」</li>
+          <li>点击「服务条款」跳转 <code>/pages/static/index?type=1</code></li>
+          <li>点击「隐私政策」跳转 <code>/pages/static/index?type=2</code></li>
+          <li>加载中时点击按钮也会提示「加载中...」</li>
+        </ul>
+      </div>
+    </div>
   </div>
 
-  <div class="feature-card">
-    <h4>头像与昵称</h4>
-    <p>微信提供了两种获取用户资料的方式（按基础库版本自动适配）：</p>
-    <ul class="detail-list" style="margin-top:8px;">
-      <li><strong>新方式</strong>：使用 <code>button open-type=chooseAvatar</code> 选择头像 + <code>input type=nickname</code> 输入昵称（基础库 2.21.2+）</li>
-      <li><strong>旧方式</strong>：使用 <code>wx.getUserProfile</code> 弹窗获取头像昵称（已逐步废弃）</li>
-      <li>通过 <code>canIUseNicknameComp</code> 和 <code>canIUseGetUserProfile</code> 自动判断可用方式</li>
-    </ul>
-  </div>
-
-  <div class="feature-card">
-    <h4>手机号授权</h4>
-    <p>新用户必须授权手机号，流程：</p>
-    <ul class="detail-list" style="margin-top:8px;">
-      <li>点击「手机号授权」按钮，触发 <code>open-type=getPhoneNumber</code></li>
-      <li>微信返回 <code>encryptedData</code>、<code>iv</code>、<code>code</code></li>
-      <li>调用 <code>/mz/updatePhone</code> 解密手机号并绑定</li>
-      <li>成功后 Token 从临时存储（<code>tem_token</code>）转正为 <code>access_token</code></li>
-      <li>更新 <code>user_info</code> 中的手机号字段</li>
-    </ul>
-  </div>
-
-  <div class="feature-card">
-    <h4>临时 Token 机制</h4>
-    <p>登录页使用双 Token 策略解决「先登录后授权」的问题：</p>
-    <ul class="detail-list" style="margin-top:8px;">
-      <li><code>tem_token</code>：静默登录后的临时 Token，用于手机号授权请求</li>
-      <li><code>access_token</code>：手机号授权成功后转正的正式 Token</li>
-      <li>点击「进入小程序」时，将 <code>tem_token</code> 转存为 <code>access_token</code> 并清空临时 Token</li>
-      <li>Token 为空时提示错误并自动刷新页面</li>
-    </ul>
+  <!-- Token 异常处理 -->
+  <div class="ui-demo-row">
+    <div class="ui-demo-item">
+      <div class="phone-wireframe"><div class="phone-notch"></div><div class="phone-screen" style="min-height:540px">
+        <div class="phone-bar"><span>9:41</span><div class="phone-bar-r"><i></i><i></i><i></i></div></div>
+        <div style="padding:4px 6px;height:480px;background:linear-gradient(180deg,#0f0524 0%,#1a0a3e 30%,#2d1b69 60%,#4c1d95 100%);position:relative;opacity:0.4">
+          <div style="position:absolute;top:80px;left:50%;transform:translateX(-50%);text-align:center">
+            <div style="font-size:14px;color:rgba(255,255,255,.7);font-weight:700;letter-spacing:2px">LUMI</div>
+          </div>
+        </div>
+        <!-- Token 异常 Toast -->
+        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:5;border:2px solid #EF4444;border-radius:10px;background:rgba(0,0,0,.8);padding:12px 20px;text-align:center">
+          <span style="position:absolute;top:-8px;right:4px;background:#EF4444;color:#fff;font-size:7px;padding:1px 5px;border-radius:3px;font-weight:600">异常处理</span>
+          <div style="font-size:8px;color:rgba(255,255,255,.8);max-width:180px">获取用户信息错误, 即将刷新！</div>
+        </div>
+      </div></div>
+      <div class="ui-desc">
+        <h5>🔄 Token 异常处理</h5>
+        <p>点击登录按钮时，若 <code>tem_token</code> 为空：</p>
+        <ul>
+          <li>Toast 提示「获取用户信息错误, 即将刷新！」</li>
+          <li>2.5 秒后自动 <code>reLaunch</code> 刷新到首页</li>
+          <li>同样逻辑在手机号授权接口中也会触发</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </div>

@@ -49,25 +49,16 @@
           </div></div>
           <div class="ui-desc">
             <h5>📋 场次列表</h5>
-            <p>展示用户近期的预约场次，支持查看详情</p>
+            <p>首页下半部分展示用户当前门店下的近期预约场次。数据来自接口 <code>/mz/getGameRoundOrdersForHomePage</code>，展示内容包括：</p>
             <ul>
+              <li><b>预约日期</b>：场次日期 + 开始时间</li>
+              <li><b>场次地点</b>：所属门店名称</li>
+              <li><b>预约人数</b>：该订单的预约人数，团购票会显示团购标签</li>
               <li>仅当用户有未完成的预约时显示</li>
-              <li>数据来自 <code>/mz/getGameRoundOrdersForHomePage</code> 接口</li>
               <li>点击「查看详情」跳转到场次详情页</li>
-              <li>卡片使用渐变蓝白背景区分层级</li>
             </ul>
           </div>
         </div>
-      </div>
-
-      <div class="feature-card">
-        <h4>场次列表展示</h4>
-        <p>首页下半部分展示用户当前门店下的近期预约场次。数据来自接口 <code>/mz/getGameRoundOrdersForHomePage</code>，展示内容包括：</p>
-        <ul class="detail-list" style="margin-top: 8px;">
-          <li><strong>预约日期</strong>：场次日期 + 开始时间</li>
-          <li><strong>场次地点</strong>：所属门店名称</li>
-          <li><strong>预约人数</strong>：该订单的预约人数，团购票会显示团购标签</li>
-        </ul>
       </div>
 
       <div class="feature-card">

@@ -39,11 +39,12 @@
           </div></div>
           <div class="ui-desc">
             <h5>📱 扫码入口</h5>
-            <p>通过微信扫一扫直接进入指定门店首页</p>
+            <p>通过微信扫一扫直接进入指定门店首页，支持两种二维码入口：</p>
             <ul>
-              <li>二维码由中控台生成，携带 <code>switch_store_id</code> 参数</li>
-              <li>扫码后自动切换到对应门店</li>
+              <li><b>普通生成二维码</b>：URL 参数 <code>q</code> 中编码了门店ID等信息，进入后自动解码并选中门店</li>
+              <li><b>官方生成二维码</b>：直接携带 <code>switch_store_id</code> 和 <code>open_method</code> 参数</li>
               <li>扫码路径：<code>/pages/index/index?switch_store_id=5</code></li>
+              <li>扫码进入时调用 <code>/mz/updateQrCodeLog</code> 进行扫码打点记录</li>
             </ul>
           </div>
         </div>
@@ -83,33 +84,14 @@
           </div></div>
           <div class="ui-desc">
             <h5>↗️ 分享卡片</h5>
-            <p>用户转发小程序给好友时的分享卡片样式</p>
+            <p>用户转发小程序给好友时的分享卡片样式，通过 <code>onShareAppMessage</code> 配置：</p>
             <ul>
-              <li>通过 <code>onShareAppMessage</code> 配置分享内容</li>
-              <li>分享携带当前门店参数</li>
+              <li><b>标题</b>：体验沉浸式MR魔法大空间乐园</li>
+              <li><b>路径</b>：<code>/pages/index/index?switch_store_id=当前门店ID</code></li>
+              <li><b>图片</b>：分享封面图，来自 CDN</li>
               <li>好友点击后直接进入对应门店首页</li>
             </ul>
           </div>
         </div>
-      </div>
-
-      <div class="feature-card">
-        <h4>扫码进入</h4>
-        <p>支持两种二维码入口：</p>
-        <ul class="detail-list" style="margin-top: 8px;">
-          <li><strong>普通生成二维码</strong>：URL 参数 <code>q</code> 中编码了门店ID等信息，进入后自动解码并选中门店</li>
-          <li><strong>官方生成二维码</strong>：直接携带 <code>switch_store_id</code> 和 <code>open_method</code> 参数</li>
-        </ul>
-        <p>扫码进入时会调用 <code>/mz/updateQrCodeLog</code> 进行扫码打点记录。</p>
-      </div>
-
-      <div class="feature-card">
-        <h4>分享功能</h4>
-        <p>用户可将小程序分享给好友，分享卡片信息：</p>
-        <ul class="detail-list" style="margin-top: 8px;">
-          <li><strong>标题</strong>：体验沉浸式MR魔法大空间乐园</li>
-          <li><strong>路径</strong>：<code>/pages/index/index?switch_store_id=当前门店ID</code></li>
-          <li><strong>图片</strong>：分享封面图，来自 CDN</li>
-        </ul>
       </div>
     </div>
