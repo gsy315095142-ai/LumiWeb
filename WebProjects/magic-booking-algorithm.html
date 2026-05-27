@@ -1,0 +1,58 @@
+<!-- 场次推荐算法（从 magic-booking.html 拆分） -->
+<div class="section-block">
+      <div class="section-title">
+        <div class="section-title-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/>
+          </svg>
+        </div>
+        场次推荐算法
+      </div>
+
+      <div class="feature-card">
+        <h4>推荐逻辑</h4>
+        <p>当用户选择了时间点和人数后，系统执行以下推荐算法，生成最多 4 个推荐场次：</p>
+      </div>
+
+      <div class="flow-steps" style="margin-top: 16px;">
+        <div class="flow-step">
+          <div class="flow-line">
+            <div class="flow-dot"></div>
+            <div class="flow-connector"></div>
+          </div>
+          <div class="flow-content">
+            <h4>筛选符合条件的场次</h4>
+            <p>从当天所有场次中筛选：剩余名额 ≥ 所需人数、不早于当前时间（如果是今天）、开始时间 ≥ 所选时间点。</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-line">
+            <div class="flow-dot"></div>
+            <div class="flow-connector"></div>
+          </div>
+          <div class="flow-content">
+            <h4>向后取 2 个场次</h4>
+            <p>从筛选后的场次中，取所选时间点之后的最近 2 个场次作为核心推荐。</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-line">
+            <div class="flow-dot"></div>
+            <div class="flow-connector"></div>
+          </div>
+          <div class="flow-content">
+            <h4>向前补齐</h4>
+            <p>如果向后场次不足 4 个，从所选时间点之前的场次中倒序取，补齐总数到 4。如果所选时间已超过最后一场，则总数减 1。</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-line">
+            <div class="flow-dot"></div>
+          </div>
+          <div class="flow-content">
+            <h4>去重输出</h4>
+            <p>最终去重后展示推荐列表。每个场次显示：时间范围、已预约/总人数、剩余名额。</p>
+          </div>
+        </div>
+      </div>
+    </div>

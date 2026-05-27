@@ -1,0 +1,77 @@
+<!-- 近期预约场次（从 magic-home.html 拆分） -->
+<!-- 4. 近期预约场次 -->
+    <div class="section-block">
+      <div class="section-title">
+        <div class="section-title-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
+        </div>
+        近期预约场次
+      </div>
+
+      <div class="ui-demo-row">
+        <div class="ui-demo-item">
+          <div class="phone-wireframe"><div class="phone-notch"></div><div class="phone-screen" style="min-height:190px">
+            <div class="phone-bar"><span>9:41</span><div class="phone-bar-r"><i></i><i></i><i></i></div></div>
+            <div class="wf-sec-hd"><div class="wf-dot"></div>最近预约场次</div>
+            <div class="wf-item">
+              <div class="wf-row"><span>预约日期</span><b>2026-03-20 14:00</b></div>
+              <div class="wf-row"><span>场次地点</span><b>魔法学院·朝阳店</b></div>
+              <div class="wf-row"><span>预约人数</span><b>2 人</b></div>
+              <div class="wf-btn">查看详情</div>
+            </div>
+            <div class="wf-item">
+              <div class="wf-row"><span>预约日期</span><b>2026-03-22 10:00</b></div>
+              <div class="wf-row"><span>场次地点</span><b>魔法学院·朝阳店</b></div>
+              <div class="wf-row"><span>预约人数</span><b>4 人</b></div>
+              <div class="wf-btn">查看详情</div>
+            </div>
+          </div></div>
+          <div class="ui-desc">
+            <h5>📋 场次列表</h5>
+            <p>展示用户近期的预约场次，支持查看详情</p>
+            <ul>
+              <li>仅当用户有未完成的预约时显示</li>
+              <li>数据来自 <code>/mz/getGameRoundOrdersForHomePage</code> 接口</li>
+              <li>点击「查看详情」跳转到场次详情页</li>
+              <li>卡片使用渐变蓝白背景区分层级</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <h4>场次列表展示</h4>
+        <p>首页下半部分展示用户当前门店下的近期预约场次。数据来自接口 <code>/mz/getGameRoundOrdersForHomePage</code>，展示内容包括：</p>
+        <ul class="detail-list" style="margin-top: 8px;">
+          <li><strong>预约日期</strong>：场次日期 + 开始时间</li>
+          <li><strong>场次地点</strong>：所属门店名称</li>
+          <li><strong>预约人数</strong>：该订单的预约人数，团购票会显示团购标签</li>
+        </ul>
+      </div>
+
+      <div class="feature-card">
+        <h4>场次状态流转</h4>
+        <p>每条场次记录有一个状态值，不同状态有不同的展示与交互逻辑：</p>
+        <div class="status-tags">
+          <span class="status-tag pending">未创角 (0)</span>
+          <span class="status-tag active">已创角 (1)</span>
+          <span class="status-tag playing">游戏中 (2)</span>
+          <span class="status-tag done">已完成 (3)</span>
+          <span class="status-tag cancel">已取消 (4)</span>
+        </div>
+        <ul class="detail-list" style="margin-top: 12px;">
+          <li><strong>未创角 / 已创角</strong>：显示「查看详情」按钮，点击跳转到场次详情页</li>
+          <li><strong>游戏中 / 已完成 / 已取消</strong>：点击时 Toast 提示当前状态，不可进入详情</li>
+        </ul>
+      </div>
+
+      <div class="tip-box">
+        <div class="tip-box-title">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          数据加载机制
+        </div>
+        <p>首页采用轮询机制加载门店数据。启动后每秒检查一次 <code>placeLists</code> 是否就绪（来自登录接口返回），最多轮询 10 次（10 秒超时）。门店数据就绪后，加载场次列表、检查用户权限、检查优惠券弹窗。</p>
+      </div>
+    </div>

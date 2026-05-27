@@ -1,0 +1,73 @@
+<!-- 扫码与分享（从 magic-home.html 拆分） -->
+<!-- 6. 扫码与分享 -->
+    <div class="section-block">
+      <div class="section-title">
+        <div class="section-title-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"/>
+          </svg>
+        </div>
+        扫码入口与分享
+      </div>
+
+      <div class="ui-demo-row">
+        <div class="ui-demo-item">
+          <div class="phone-wireframe"><div class="phone-notch"></div><div class="phone-screen" style="min-height:140px">
+            <div class="phone-bar"><span>9:41</span><div class="phone-bar-r"><i></i><i></i><i></i></div></div>
+            <div class="wf-qr">
+              <div class="wf-qr-box"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+              <div style="font-size:9px;color:rgba(255,255,255,.5)">扫码进入小程序</div>
+              <div style="font-size:7px;color:rgba(255,255,255,.25)">携带参数: switch_store_id=5</div>
+            </div>
+          </div></div>
+          <div class="ui-desc">
+            <h5>📱 扫码入口</h5>
+            <p>通过微信扫一扫直接进入指定门店首页</p>
+            <ul>
+              <li>二维码由中控台生成，携带 <code>switch_store_id</code> 参数</li>
+              <li>扫码后自动切换到对应门店</li>
+              <li>扫码路径：<code>/pages/index/index?switch_store_id=5</code></li>
+            </ul>
+          </div>
+        </div>
+        <div class="ui-demo-item">
+          <div class="phone-wireframe"><div class="phone-notch"></div><div class="phone-screen" style="min-height:110px">
+            <div class="phone-bar"><span>9:41</span><div class="phone-bar-r"><i></i><i></i><i></i></div></div>
+            <div class="wf-share">
+              <div style="font-size:9px;color:rgba(255,255,255,.4);margin-bottom:6px">💬 微信聊天 · 分享卡片预览</div>
+              <div class="wf-share-card">体验沉浸式MR魔法大空间乐园</div>
+              <div style="font-size:7px;color:rgba(255,255,255,.25);margin-top:4px">标题: Lumi魔法学院 | 路径: /pages/index/index</div>
+            </div>
+          </div></div>
+          <div class="ui-desc">
+            <h5>↗️ 分享卡片</h5>
+            <p>用户转发小程序给好友时的分享卡片样式</p>
+            <ul>
+              <li>通过 <code>onShareAppMessage</code> 配置分享内容</li>
+              <li>分享携带当前门店参数</li>
+              <li>好友点击后直接进入对应门店首页</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <h4>扫码进入</h4>
+        <p>支持两种二维码入口：</p>
+        <ul class="detail-list" style="margin-top: 8px;">
+          <li><strong>普通生成二维码</strong>：URL 参数 <code>q</code> 中编码了门店ID等信息，进入后自动解码并选中门店</li>
+          <li><strong>官方生成二维码</strong>：直接携带 <code>switch_store_id</code> 和 <code>open_method</code> 参数</li>
+        </ul>
+        <p>扫码进入时会调用 <code>/mz/updateQrCodeLog</code> 进行扫码打点记录。</p>
+      </div>
+
+      <div class="feature-card">
+        <h4>分享功能</h4>
+        <p>用户可将小程序分享给好友，分享卡片信息：</p>
+        <ul class="detail-list" style="margin-top: 8px;">
+          <li><strong>标题</strong>：体验沉浸式MR魔法大空间乐园</li>
+          <li><strong>路径</strong>：<code>/pages/index/index?switch_store_id=当前门店ID</code></li>
+          <li><strong>图片</strong>：分享封面图，来自 CDN</li>
+        </ul>
+      </div>
+    </div>

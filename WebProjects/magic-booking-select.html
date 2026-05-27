@@ -1,0 +1,41 @@
+<!-- 场次选择交互（从 magic-booking.html 拆分） -->
+<div class="section-block">
+      <div class="section-title">
+        <div class="section-title-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+          </svg>
+        </div>
+        场次选择交互
+      </div>
+
+      <div class="feature-card">
+        <h4>推荐/全部切换</h4>
+        <p>默认展示推荐的 4 个场次。用户可点击「查看更多」展开当天所有场次列表（<code>showAllSlots</code>），再次点击收起。</p>
+      </div>
+
+      <div class="feature-card">
+        <h4>场次卡片信息</h4>
+        <p>每个场次卡片展示：</p>
+        <table class="info-table">
+          <thead>
+            <tr><th>字段</th><th>说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>时间范围</td><td>场次开始 ~ 结束时间（如 14:00 - 14:30）</td></tr>
+            <tr><td>已预约 / 总人数</td><td>当前已预约人数与场容量上限</td></tr>
+            <tr><td>剩余名额</td><td>还可预约的人数（<code>player_num_remain</code>）</td></tr>
+            <tr><td>锁定人数</td><td>被团队预约锁定的名额（<code>player_num_lock</code>）</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="feature-card">
+        <h4>选择限制</h4>
+        <ul class="detail-list">
+          <li><strong>已售罄</strong>：剩余名额 &lt; 1 时，提示「当前场次已售罄」，无法选中</li>
+          <li><strong>已过期</strong>：选择今天时，开始时间已过的场次提示「无法选取之前的场次」</li>
+          <li>选中后高亮显示，底部「下一步」按钮激活</li>
+        </ul>
+      </div>
+    </div>

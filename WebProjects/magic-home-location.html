@@ -1,0 +1,135 @@
+<!-- 定位与门店选择（从 magic-home.html 拆分） -->
+<!-- 1. 定位与门店选择 -->
+    <div class="section-block">
+      <div class="section-title">
+        <div class="section-title-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+        </div>
+        定位与门店选择
+      </div>
+
+      <div class="ui-demo-row">
+        <div class="ui-demo-item">
+          <div class="phone-wireframe"><div class="phone-notch"></div><div class="phone-screen" style="min-height:80px">
+            <div class="phone-bar"><span>9:41</span><div class="phone-bar-r"><i></i><i></i><i></i></div></div>
+            <div class="wf-loc"><div class="wf-pin"></div>魔法学院·朝阳店<span class="wf-arr"></span></div>
+          </div></div>
+          <div class="ui-desc">
+            <h5>📍 正常状态</h5>
+            <p>左上角显示当前门店名称，点击可展开门店下拉列表切换</p>
+            <ul>
+              <li><code>locationGranted = true</code> 时显示门店名</li>
+              <li>根据 GPS 坐标自动匹配最近门店</li>
+              <li>点击触发 <code>handleLocation</code> 展开下拉</li>
+            </ul>
+          </div>
+        </div>
+        <div class="ui-demo-item">
+          <div class="phone-wireframe"><div class="phone-notch"></div><div class="phone-screen" style="min-height:140px">
+            <div class="phone-bar"><span>9:41</span><div class="phone-bar-r"><i></i><i></i><i></i></div></div>
+            <div class="wf-loc"><div class="wf-pin"></div>开启定位权限<span class="wf-arr"></span></div>
+            <div style="padding:8px 10px"><div class="wf-err">
+              <h5>⚠️ 无法定位</h5>
+              <p>当前无法获取您的地址，请开启定位或留意左上角定位是否准确</p>
+              <div class="wf-btns"><div class="wf-btn-blue">获取地址</div><div class="wf-btn-blue">确定</div></div>
+            </div></div>
+          </div></div>
+          <div class="ui-desc">
+            <h5>⚠️ 无定位权限</h5>
+            <p>用户未授权定位时，弹窗引导开启权限</p>
+            <ul>
+              <li>左上角文案变为「开启定位权限」</li>
+              <li>弹窗含「获取地址」和「确定」两个按钮</li>
+              <li>获取地址调用 <code>wx.getLocation</code></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="ui-demo-row">
+        <div class="ui-demo-item">
+          <div class="phone-wireframe"><div class="phone-notch"></div><div class="phone-screen" style="min-height:150px">
+            <div class="phone-bar"><span>9:41</span><div class="phone-bar-r"><i></i><i></i><i></i></div></div>
+            <div class="wf-loc"><div class="wf-pin"></div>魔法学院·朝阳店<span class="wf-arr"></span></div>
+            <div class="wf-dd">
+              <div class="wf-dd-i active">✓ 魔法学院·朝阳店 (1.2km)</div>
+              <div class="wf-dd-i">魔法学院·望京店 (3.5km)</div>
+              <div class="wf-dd-i">魔法学院·三里屯店 (5.8km)</div>
+              <div class="wf-dd-i">魔法学院·国贸店 (8.1km)</div>
+            </div>
+          </div></div>
+          <div class="ui-desc">
+            <h5>🏪 下拉切换门店</h5>
+            <p>点击定位按钮展开门店列表，按距离排序</p>
+            <ul>
+              <li>当前门店高亮显示 ✓</li>
+              <li>每个选项显示门店名 + 距离</li>
+              <li>切换门店后页面数据自动刷新</li>
+              <li>门店列表来自 <code>/store/list</code> 接口</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <h4>定位流程</h4>
+        <p>小程序启动后，会自动检测用户定位权限状态。根据不同情况走不同分支：</p>
+      </div>
+
+      <div class="flow-steps" style="margin-top: 16px;">
+        <div class="flow-step">
+          <div class="flow-line">
+            <div class="flow-dot"></div>
+            <div class="flow-connector"></div>
+          </div>
+          <div class="flow-content">
+            <h4>扫码进入（带门店参数）</h4>
+            <p>通过扫线下二维码进入小程序时，URL 参数中会携带 <code>switch_store_id</code>，系统直接选中该门店，跳过定位校验。</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-line">
+            <div class="flow-dot"></div>
+            <div class="flow-connector"></div>
+          </div>
+          <div class="flow-content">
+            <h4>有定位权限 → 自动定位</h4>
+            <p>调用 <code>wx.getLocation</code>（gcj02 坐标系）获取用户当前位置，计算与所有门店的距离，自动选择最近的门店。同时将距离数据写入本地存储。</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-line">
+            <div class="flow-dot"></div>
+            <div class="flow-connector"></div>
+          </div>
+          <div class="flow-content">
+            <h4>无定位权限 → 提示弹窗</h4>
+            <p>显示「无法定位」弹窗，提示用户开启定位权限。若用户已有门店记录（本地存储中有 <code>currentStoreId</code>），则先选中该门店，再提示。</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-line">
+            <div class="flow-dot"></div>
+          </div>
+          <div class="flow-content">
+            <h4>距离过远 → 地址不一致警告</h4>
+            <p>当用户与选中门店距离超过 100 米时，弹出「地址不一致」弹窗，用户可选择「自动定位」重试，或手动在左上角切换门店。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="feature-card" style="margin-top: 16px;">
+        <h4>手动切换门店</h4>
+        <p>页面左上角始终显示当前门店名称（定位未开启时显示「开启定位权限」）。点击后展开下拉菜单，列出所有可用门店，用户可手动选择切换。切换后会刷新轮播图、场次列表、优惠信息等所有数据。</p>
+      </div>
+
+      <div class="tip-box">
+        <div class="tip-box-title">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          技术细节
+        </div>
+        <p>距离计算使用 Haversine 公式，通过经纬度计算两点间球面距离，结果精确到米级。关闭了高精度定位（<code>isHighAccuracy: false</code>）以节省电量。数据以 km 为单位保留两位小数存入 <code>placeLists</code>。</p>
+      </div>
+    </div>

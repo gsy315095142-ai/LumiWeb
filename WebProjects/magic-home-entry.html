@@ -1,0 +1,75 @@
+<!-- 功能入口（从 magic-home.html 拆分） -->
+<!-- 3. 功能入口 -->
+    <div class="section-block">
+      <div class="section-title">
+        <div class="section-title-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>
+          </svg>
+        </div>
+        功能入口卡片
+      </div>
+
+      <div class="ui-demo-row">
+        <div class="ui-demo-item">
+          <div class="phone-wireframe"><div class="phone-notch"></div><div class="phone-screen" style="min-height:170px">
+            <div class="phone-bar"><span>9:41</span><div class="phone-bar-r"><i></i><i></i><i></i></div></div>
+            <div class="wf-banner" style="height:75px"></div>
+            <div class="wf-cards">
+              <div class="wf-card wf-card-blue">预约体验</div>
+              <div class="wf-card wf-card-orange">团购兑换</div>
+            </div>
+          </div></div>
+          <div class="ui-desc">
+            <h5>🎯 用户端入口</h5>
+            <p>两张卡片浮于 Banner 下方，作为核心功能入口</p>
+            <ul>
+              <li><b>预约体验</b>：跳转到 <code>/pages/book/book</code> 选择场次</li>
+              <li><b>团购兑换</b>：弹出团购兑换弹窗</li>
+              <li>卡片使用负 margin 浮于 Banner 上方</li>
+              <li>仅当 <code>userType == 0</code> 时显示（普通用户）</li>
+            </ul>
+          </div>
+        </div>
+        <div class="ui-demo-item">
+          <div class="phone-wireframe"><div class="phone-notch"></div><div class="phone-screen" style="min-height:170px">
+            <div class="phone-bar"><span>9:41</span><div class="phone-bar-r"><i></i><i></i><i></i></div></div>
+            <div class="wf-loc"><div class="wf-pin"></div>魔法学院·朝阳店<span class="wf-arr"></span></div>
+            <div class="wf-mgr">管理</div>
+            <div class="wf-banner" style="height:60px"></div>
+            <div class="wf-cards">
+              <div class="wf-card wf-card-blue">预约体验</div>
+              <div class="wf-card wf-card-orange">团购兑换</div>
+            </div>
+          </div></div>
+          <div class="ui-desc">
+            <h5>⚙️ 管理端入口</h5>
+            <p>管理员（<code>userType > 0</code>）右上角多出「管理」按钮</p>
+            <ul>
+              <li>点击「管理」跳转到 <code>/pages/central/central</code> 中控台</li>
+              <li>同时仍然保留预约体验入口</li>
+              <li><code>userType</code> 由登录接口返回</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <h4>预约体验</h4>
+        <p>点击后跳转预约页面（<code>/pages/book/book</code>）。前置校验：若未选择门店（无 <code>currentStoreId</code>），会提示「请开启定位权限，选择对应的服务门店」。</p>
+      </div>
+
+      <div class="feature-card">
+        <h4>团购兑换</h4>
+        <p>点击后弹出团购兑换弹窗（exchange 组件）。前置校验：需要先选择门店，且需要登录（未登录时先弹出手机号授权）。兑换成功后刷新首页场次数据。同时会记录「团购兑换」页面日志。</p>
+      </div>
+
+      <div class="feature-card">
+        <h4>管理入口（仅管理端可见）</h4>
+        <p>当 <code>userType > 0</code>（门店员工或管理员）时，首页顶部右侧显示「管理」按钮。点击跳转逻辑：</p>
+        <ul class="detail-list" style="margin-top: 8px;">
+          <li><strong>中控管理员</strong>（<code>userType == 3</code> 且非自定义角色）→ 跳转中控台 <code>/pages/central/central</code></li>
+          <li><strong>其他管理角色</strong> → 跳转票券管理 <code>/pages/ticket/ticket</code></li>
+        </ul>
+      </div>
+    </div>

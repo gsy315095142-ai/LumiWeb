@@ -1,0 +1,29 @@
+<!-- 页面入口与两种模式（从 magic-booking.html 拆分） -->
+<div class="section-block">
+      <div class="section-title">
+        <div class="section-title-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 15l-2 5L9 9l11 4-5 2z"/><path d="M2 2l7.586 7.586"/>
+          </svg>
+        </div>
+        页面入口与两种模式
+      </div>
+
+      <div class="feature-card">
+        <h4>新建预约</h4>
+        <p>从首页点击「预约体验」进入，<code>orderId</code> 为 0。用户需完整选择日期、时间、人数和场次，然后跳转到确认页完成下单。</p>
+      </div>
+
+      <div class="feature-card">
+        <h4>修改场次</h4>
+        <p>从场次详情页点击修改场次进入，携带 <code>order</code>（订单ID）和 <code>orderDate</code> 参数。页面进入后自动加载原订单信息，用户重新选择场次后直接调用接口修改，无需二次确认。</p>
+        <ul class="detail-list" style="margin-top: 8px;">
+          <li>原场次信息自动回填（日期、时间、人数）</li>
+          <li>人数不可修改（保持原订单人数）</li>
+          <li>修改后调用 <code>/mz/changeGameRoundForOrder</code> 接口</li>
+          <li>若新场次与原场次一致，提示「场次未变化」</li>
+          <li>修改成功后 2 秒自动返回上一页</li>
+          <li>有剩余修改次数限制（显示在页面上）</li>
+        </ul>
+      </div>
+    </div>

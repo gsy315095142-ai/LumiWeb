@@ -1,0 +1,29 @@
+<!-- 人数选择（从 magic-booking.html 拆分） -->
+<div class="section-block">
+      <div class="section-title">
+        <div class="section-title-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        人数选择
+      </div>
+
+      <div class="feature-card">
+        <h4>可选人数</h4>
+        <p>人数选项固定为 <code>[1, 2, 3, 4]</code>，对应每个场次最多 4 名玩家。用户以按钮组的形式点选。</p>
+      </div>
+
+      <div class="feature-card">
+        <h4>人数与场次联动</h4>
+        <p>人数变化后，推荐场次会重新计算。只有剩余人数 ≥ 选择人数的场次才会出现在推荐列表中。</p>
+      </div>
+
+      <div class="tip-box">
+        <div class="tip-box-title">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          团购票入口
+        </div>
+        <p>从团购兑换进入时，URL 参数可携带 <code>num</code>（人数），会自动预设人数选项。团购票相关功能详见「票券系统」模块。</p>
+      </div>
+    </div>

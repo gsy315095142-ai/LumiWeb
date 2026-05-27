@@ -1,0 +1,57 @@
+<!-- 生成票券流程（管理端）（从 magic-ticket.html 拆分） -->
+<div class="section-block">
+      <div class="section-title">
+        <div class="section-title-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+          </svg>
+        </div>
+        生成票券流程（管理端）
+      </div>
+
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+          <div class="flow-content">
+            <h4>选择套餐类型</h4>
+            <p>从 <code>package_types</code> 列表中选择（普通套餐、团购票、魔法袍换装套餐等）。选择团购票时会切换到团票表单。</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+          <div class="flow-content">
+            <h4>选择票券类型</h4>
+            <p>散客票：选择票券档位（1人/2人/3人等），自动显示可供游玩人数。</p>
+            <p>团购票：选择档位后自动填充人数和价格信息。</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+          <div class="flow-content">
+            <h4>填写备注（可选）</h4>
+            <p>文字备注限 40 字，可上传 1 张图片附件（如换装套餐需上传照片确认）。图片通过 <code>wx.chooseMedia</code> 选取后上传至服务器。</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+          <div class="flow-content">
+            <h4>团购票额外步骤</h4>
+            <p>填写团队名称、选择预约日期/时间、系统自动排场（详见下方团票场次管理）。</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+          <div class="flow-content">
+            <h4>确认生成</h4>
+            <p>弹窗确认信息（票券类型 + 可供人数），调用 <code>/mz-admin/couponInnerGenerate</code> 生成票券。</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-line"><div class="flow-dot"></div></div>
+          <div class="flow-content">
+            <h4>生成二维码</h4>
+            <p>成功后自动生成二维码，使用前端 QRCode 库在 Canvas 绘制。二维码链接格式：<code>scan-inner-code?switch_store_id={storeId}&qrcode={code}</code>。可保存到相册或分享给用户。</p>
+          </div>
+        </div>
+      </div>
+    </div>

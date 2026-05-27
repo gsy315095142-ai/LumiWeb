@@ -1,0 +1,59 @@
+<!-- 激活码页面（code）（从 magic-role.html 拆分） -->
+<div class="section-block">
+      <div class="section-title">
+        <div class="section-title-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="4" width="20" height="16" rx="2"/><line x1="6" y1="8" x2="6.01" y2="8"/><line x1="10" y1="8" x2="10.01" y2="8"/><line x1="14" y1="8" x2="14.01" y2="8"/><line x1="18" y1="8" x2="18.01" y2="8"/><line x1="6" y1="12" x2="6.01" y2="12"/><line x1="18" y1="12" x2="18.01" y2="12"/><line x1="10" y1="16" x2="14" y2="16"/>
+          </svg>
+        </div>
+        激活码页面（code）
+      </div>
+
+      <div class="feature-card">
+        <h4>页面入口</h4>
+        <p>激活码页面（<code>/pages/code/code</code>）有两个入口：</p>
+        <ul class="detail-list" style="margin-top:8px;">
+          <li><strong>订单详情扫码</strong>：用户在订单完成页点击扫码，扫描线下签到二维码后跳转</li>
+          <li><strong>直接导航</strong>：从其他页面导航进入</li>
+        </ul>
+      </div>
+
+      <div class="feature-card">
+        <h4>可激活订单列表</h4>
+        <p>页面加载时调用 <code>/mz/getGameRoundOrdersAvailable</code>，获取用户可激活的订单列表（自己的订单 + 分享给自己的订单）：</p>
+        <ul class="detail-list" style="margin-top:8px;">
+          <li>每个订单显示：日期、时段、预约人数、激活码（6 位数字）</li>
+          <li>区分来源：自己的订单（<code>share=false</code>）和分享的订单（<code>share=true</code>）</li>
+          <li>按日期排序展示</li>
+          <li>点击已有激活码可自动填入输入框</li>
+        </ul>
+      </div>
+
+      <div class="feature-card">
+        <h4>输入激活码</h4>
+        <p>页面顶部为 6 位数字输入框，交互设计：</p>
+        <ul class="detail-list" style="margin-top:8px;">
+          <li>6 个独立格子，输入时自动跳到下一格</li>
+          <li>输入满 6 位后自动收起键盘</li>
+          <li>点击已有订单的激活码可一键填入</li>
+          <li>输入完成后「激活」按钮变为可用状态</li>
+        </ul>
+      </div>
+
+      <div class="feature-card">
+        <h4>激活流程</h4>
+        <p>点击激活后调用 <code>/mz/activeGameOrderByCode</code>，传入 6 位激活码：</p>
+        <ul class="detail-list" style="margin-top:8px;">
+          <li><strong>成功</strong>：Toast 提示成功，1.8 秒后跳转角色创建页</li>
+          <li><strong>失败</strong>：弹窗显示错误信息（如激活码无效、已过期等）</li>
+        </ul>
+      </div>
+
+      <div class="tip-box">
+        <div class="tip-box-title">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          前置登录校验
+        </div>
+        <p>进入激活码页面前会检查登录状态。未登录时弹出手机号授权组件，授权成功后继续加载数据。未授权则跳转回首页。</p>
+      </div>
+    </div>
