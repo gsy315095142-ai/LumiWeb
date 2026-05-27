@@ -1,0 +1,33 @@
+<!-- 错误处理与特殊场景（从 magic-group.html 拆分） -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+      </svg>
+    </div>
+    错误处理与特殊场景
+  </div>
+
+  <div class="feature-card">
+    <h4>错误码处理</h4>
+    <table class="info-table">
+      <thead><tr><th>错误码</th><th>处理方式</th></tr></thead>
+      <tbody>
+        <tr><td><code>code > 0</code>（通用）</td><td>Toast 提示后端返回的 message</td></tr>
+        <tr><td><code>code = 700</code></td><td>数据已失效/过期，Toast 后延迟 2 秒自动跳回首页（<code>reLaunch</code>）</td></tr>
+        <tr><td>数据为空（<code>!data</code>）</td><td>Toast「数据为空」后跳回首页</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="feature-card">
+    <h4>门店自动切换</h4>
+    <p>如果入口参数包含 <code>switch_store_id</code>，页面加载时自动写入 <code>currentStoreId</code>，实现跨门店团票的无感切换。</p>
+  </div>
+
+  <div class="feature-card">
+    <h4>页面生命周期保护</h4>
+    <p><code>onHide</code> 和 <code>onUnload</code> 时自动清除登录轮询定时器（<code>setInterval</code>），防止内存泄漏。</p>
+  </div>
+</div>

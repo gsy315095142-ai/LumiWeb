@@ -1,0 +1,28 @@
+<!-- API 接口汇总（从 magic-group.html 拆分） -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+      </svg>
+    </div>
+    API 接口汇总
+  </div>
+
+  <div class="feature-card">
+    <table class="info-table">
+      <thead><tr><th>接口</th><th>方法</th><th>用途</th></tr></thead>
+      <tbody>
+        <tr><td><code>/mz/getGroupSeatData</code></td><td>POST</td><td>获取团票占位网格数据</td></tr>
+        <tr><td><code>/mz/reserveGroupSeat</code></td><td>POST</td><td>占位（创建/更新角色）</td></tr>
+        <tr><td><code>/mz/deleteGroupSeat</code></td><td>POST</td><td>删除角色占位</td></tr>
+        <tr><td><code>/mz/adjustGroupSeat</code></td><td>POST</td><td>换位调整</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tip-box">
+    <div class="tip-box-title">📌 管理端团队接口</div>
+    <p>中控台的团队批量预约相关接口（<code>/mz-admin/orderGameRoundByGroup</code>、<code>/mz-admin/cancelGroupRound</code>、<code>/mz-admin/getGroupFile</code>）详见模块 08「中控台」。</p>
+  </div>
+</div>
