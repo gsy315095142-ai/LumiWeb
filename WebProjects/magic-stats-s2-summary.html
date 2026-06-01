@@ -1,0 +1,150 @@
+<!-- 2. 汇总统计卡片 — 带字段标注（中英文对照） -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/>
+      </svg>
+    </div>
+    汇总统计卡片 — totalStatData（字段标注版）
+  </div>
+
+  <div class="ui-demo-row">
+    <div class="ui-demo-item">
+      <!-- 左侧：真实手机线框图 -->
+      <div class="phone-wireframe"><div class="phone-notch"></div><div class="phone-screen" style="min-height:360px">
+        <div class="phone-bar"><span>9:41</span><div class="phone-bar-r"><i></i><i></i><i></i></div></div>
+        <div style="padding:6px;min-height:324px;font-family:PingFang SC,sans-serif;background-image:url(https://cdn.lixiaoqian.com/magic-space/bg.jpg);background-size:cover">
+
+          <!-- 汇总统计卡片 totalStatData -->
+          <div style="width:94vw;margin:8px auto;background:#fff;border-radius:20px;padding:16px;box-sizing:border-box;box-shadow:0 0 9px 0 #E5E5E5">
+            <!-- 标题: 蓝竖线 + name -->
+            <div style="display:flex;align-items:center;padding-bottom:8px;margin-bottom:8px">
+              <div style="width:5px;height:16px;background:#007bff;border-radius:2px;margin-right:4px"></div>
+              <span style="font-size:14px;font-weight:700;color:#0D295B">汇总统计</span>
+            </div>
+            <!-- 主数据行: 渐变背景 -->
+            <div style="background:linear-gradient(180deg,#CDE7FF 0%,#F9F9FF 100%);border-radius:10px;padding:10px 14px;margin-bottom:10px">
+              <div style="font-size:11px;font-weight:700;text-align:center;color:#4C4C4C;margin-bottom:8px;border-radius:14px">总订场票券</div>
+              <div style="display:flex;justify-content:space-between">
+                <div style="width:45%;font-size:10px;font-weight:700;color:#808080;padding:4px">
+                  数量：<span style="font-family:Impact;font-size:16px;color:#4A8CFD;font-weight:700">256</span> 张
+                </div>
+                <div style="width:45%;font-size:10px;font-weight:700;color:#808080;padding:4px">
+                  人数：<span style="font-family:Impact;font-size:16px;color:#4A8CFD;font-weight:700">198</span> 人
+                </div>
+              </div>
+            </div>
+            <!-- 子指标: refundNum + overdueNum -->
+            <div style="display:flex;gap:5%;flex-wrap:wrap">
+              <div style="width:47%;background:#EFF5FB;border-radius:10px;padding:12px;box-sizing:border-box;margin-bottom:6px">
+                <div style="font-family:Impact;font-size:18px;color:#4A8CFD;font-weight:700">12</div>
+                <div style="font-size:9px;color:#979797;margin-top:4px">已退票数量</div>
+              </div>
+              <div style="width:47%;background:#EFF5FB;border-radius:10px;padding:12px;box-sizing:border-box;margin-bottom:6px">
+                <div style="font-family:Impact;font-size:18px;color:#4A8CFD;font-weight:700">8</div>
+                <div style="font-size:9px;color:#979797;margin-top:4px">已过期数量</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div></div>
+
+      <!-- 右侧：字段标注解剖图 -->
+      <div class="ui-desc">
+        <h5>📊 totalStatData 字段 — 直接对照左边看</h5>
+        <p style="font-size:11px;color:#888;margin-bottom:12px">数据来源：<code>/mz-admin/getStoreDataStats</code> → <code>data.totalStatData</code></p>
+
+        <!-- 解剖图 -->
+        <div style="border:2px solid #2B84FD;border-radius:12px;overflow:hidden;font-family:PingFang SC,sans-serif">
+
+          <!-- 标题行 → name 卡片标题 -->
+          <div style="background:#007bff;color:#fff;padding:6px 10px;display:flex;align-items:center;gap:6px">
+            <span style="font-size:10px">📌</span>
+            <code style="background:rgba(255,255,255,.2);padding:1px 6px;border-radius:4px;font-size:11px">name</code>
+            <span style="font-weight:700;font-size:10px">「卡片标题」</span>
+            <span style="font-size:9px;opacity:.7;margin-left:auto">= "汇总统计"</span>
+          </div>
+
+          <!-- 渐变区 → nickname + ticketNum + ticketValue -->
+          <div style="background:linear-gradient(180deg,#CDE7FF,#F9F9FF);padding:10px;border-bottom:1px dashed #ccc">
+            <div style="background:#fff;border-radius:8px;padding:8px 10px;margin-bottom:6px;display:flex;align-items:center;gap:6px">
+              <span style="font-size:10px">📝</span>
+              <code style="background:#E8F4FF;padding:1px 6px;border-radius:4px;font-size:11px;color:#2B84FD">nickname</code>
+              <span style="font-weight:700;font-size:10px">「渐变区标题」</span>
+              <span style="font-size:9px;color:#999;margin-left:auto">= "总订场票券"</span>
+            </div>
+            <div style="display:flex;gap:8px">
+              <div style="flex:1;background:#fff;border-radius:8px;padding:8px 10px;display:flex;flex-direction:column;gap:2px">
+                <div style="display:flex;align-items:center;gap:4px">
+                  <span style="font-size:10px">🎫</span>
+                  <code style="background:#E8F4FF;padding:1px 6px;border-radius:4px;font-size:11px;color:#2B84FD">ticketNum</code>
+                </div>
+                <span style="font-weight:700;font-size:10px;color:#333">「有效票券数」</span>
+              </div>
+              <div style="flex:1;background:#fff;border-radius:8px;padding:8px 10px;display:flex;flex-direction:column;gap:2px">
+                <div style="display:flex;align-items:center;gap:4px">
+                  <span style="font-size:10px">👥</span>
+                  <code style="background:#E8F4FF;padding:1px 6px;border-radius:4px;font-size:11px;color:#2B84FD">ticketValue</code>
+                </div>
+                <span style="font-weight:700;font-size:10px;color:#333">「实际到场人数」</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 子指标区 → refundNum + overdueNum -->
+          <div style="background:#EFF5FB;padding:10px;display:flex;gap:8px">
+            <div style="flex:1;background:#fff;border-radius:8px;padding:8px 10px;display:flex;flex-direction:column;gap:2px">
+              <div style="display:flex;align-items:center;gap:4px">
+                <span style="font-size:10px">↩️</span>
+                <code style="background:#FFF3E0;padding:1px 6px;border-radius:4px;font-size:11px;color:#E65100">refundNum</code>
+              </div>
+              <span style="font-weight:700;font-size:10px;color:#333">「已退票数」</span>
+            </div>
+            <div style="flex:1;background:#fff;border-radius:8px;padding:8px 10px;display:flex;flex-direction:column;gap:2px">
+              <div style="display:flex;align-items:center;gap:4px">
+                <span style="font-size:10px">⏰</span>
+                <code style="background:#FFF3E0;padding:1px 6px;border-radius:4px;font-size:11px;color:#E65100">overdueNum</code>
+              </div>
+              <span style="font-weight:700;font-size:10px;color:#333">「已过期数」</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 字段详细说明 -->
+        <div style="margin-top:12px;font-size:12px;line-height:1.8">
+          <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:4px">
+            <code style="background:#E8F4FF;padding:1px 6px;border-radius:4px;font-size:11px;flex-shrink:0">ticketNum</code>
+            <span style="font-weight:700;color:#333">有效票券数</span>
+            <span style="color:#888">— 该时段内正常使用中的票券总张数（酒店+团购，不含退票和过期）</span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:4px">
+            <code style="background:#E8F4FF;padding:1px 6px;border-radius:4px;font-size:11px;flex-shrink:0">ticketValue</code>
+            <span style="font-weight:700;color:#333">实际到场人数</span>
+            <span style="color:#888">— 每张票面值之和（多少人实际来消费了）</span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:4px">
+            <code style="background:#FFF3E0;padding:1px 6px;border-radius:4px;font-size:11px;flex-shrink:0">refundNum</code>
+            <span style="font-weight:700;color:#333">已退票数</span>
+            <span style="color:#888">— 退票申请已通过的票券张数</span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:6px">
+            <code style="background:#FFF3E0;padding:1px 6px;border-radius:4px;font-size:11px;flex-shrink:0">overdueNum</code>
+            <span style="font-weight:700;color:#333">已过期数</span>
+            <span style="color:#888">— 超过有效期未使用的票券张数</span>
+          </div>
+        </div>
+
+        <!-- 对账公式 -->
+        <div style="margin-top:12px;background:linear-gradient(135deg,#FFF8E1,#FFF3E0);border:1px solid #FFB74D;border-radius:10px;padding:12px 14px">
+          <div style="font-size:11px;font-weight:700;color:#E65100;margin-bottom:6px">📐 对账公式</div>
+          <div style="font-size:13px;font-family:monospace;color:#333;text-align:center;padding:4px 0">
+            生成总票券 = <code style="color:#2B84FD">ticketNum</code>（有效）+ <code style="color:#E65100">refundNum</code>（退票）+ <code style="color:#E65100">overdueNum</code>（过期）
+          </div>
+          <div style="font-size:10px;color:#888;text-align:center;margin-top:4px">正常使用 + 已退票 + 已过期 = 该时段内生成的全部票券</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

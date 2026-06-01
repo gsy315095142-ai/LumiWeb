@@ -1,0 +1,90 @@
+<!-- 数据统计线框图（参考真实代码 stat.wxml/wxss/js + search-date 组件 + ticket-bar 组件） -->
+
+<!-- 1. 筛选条件区 + 日期快捷选择 + 未加载状态 -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
+      </svg>
+    </div>
+    筛选条件区 + 日期快捷选择 + 空状态
+  </div>
+
+  <div class="ui-demo-row">
+    <div class="ui-demo-item">
+      <div class="phone-wireframe"><div class="phone-notch"></div><div class="phone-screen" style="min-height:580px">
+        <div class="phone-bar"><span>9:41</span><div class="phone-bar-r"><i></i><i></i><i></i></div></div>
+        <div style="padding:6px;min-height:544px;font-family:PingFang SC,sans-serif;background-image:url(https://cdn.lixiaoqian.com/magic-space/bg.jpg);background-size:cover;position:relative">
+          <!-- 导出按钮(右上角固定, 仅 view-stat-hotel + selectedHotel>0) -->
+          <div style="position:absolute;top:4px;right:8px;z-index:99;text-align:center">
+            <span style="font-size:12px;display:block">📤</span>
+            <span style="font-size:7px;color:#666">导出</span>
+          </div>
+
+          <!-- 页面标题 -->
+          <div style="padding:14px 16px 8px;font-size:14px;font-weight:700;color:#323232;text-align:center">数据统计</div>
+
+          <!-- 搜索日期区域 search-date 组件 -->
+          <div style="background:#fff;border-radius:10px;padding:10px 12px;margin:0 8px;border-bottom:1px solid #e0e0e0">
+            <!-- 标签 -->
+            <div style="font-size:9px;font-weight:700;color:#333;margin-bottom:6px">查询日期：</div>
+            <!-- 日期选择器行 -->
+            <div style="display:flex;align-items:center;gap:4px;margin-bottom:8px">
+              <!-- 开始日期 -->
+              <div style="flex:1;background:#EFF5FB;border-radius:6px;padding:5px 8px;font-size:8px;color:#666;display:flex;align-items:center;justify-content:space-between">
+                <span>2026-07-01</span>
+                <span style="font-size:5px">📅</span>
+              </div>
+              <span style="font-size:9px;font-weight:700;color:#000">至</span>
+              <!-- 结束日期 -->
+              <div style="flex:1;background:#EFF5FB;border-radius:6px;padding:5px 8px;font-size:8px;color:#666;display:flex;align-items:center;justify-content:space-between">
+                <span>2026-07-20</span>
+                <span style="font-size:5px">📅</span>
+              </div>
+            </div>
+            <!-- 快捷日期选项: 昨天/今天/上个月/本月 -->
+            <div style="display:flex;gap:4px">
+              <div style="flex:1;text-align:center;border:1px solid #98C4FF;padding:4px 0;font-size:8px;border-radius:10px;color:#2B84FD;background:#EFF5FB">昨天</div>
+              <div style="flex:1;text-align:center;border:1px solid #98C4FF;padding:4px 0;font-size:8px;border-radius:10px;color:#fff;background:linear-gradient(90deg,#5788FD,#71CCFF)">今天</div>
+              <div style="flex:1;text-align:center;border:1px solid #98C4FF;padding:4px 0;font-size:8px;border-radius:10px;color:#2B84FD;background:#EFF5FB">上个月</div>
+              <div style="flex:1;text-align:center;border:1px solid #98C4FF;padding:4px 0;font-size:8px;border-radius:10px;color:#2B84FD;background:#EFF5FB">本月</div>
+            </div>
+            <!-- 酒店选择（仅 view-stat-hotel 权限可见） -->
+            <div style="display:flex;align-items:center;margin-top:8px">
+              <span style="font-size:9px;font-weight:700;color:#333;margin-right:6px">查询酒店：</span>
+              <div style="flex:1;background:#EFF5FB;border-radius:6px;padding:4px 8px;font-size:8px;color:#666;display:flex;justify-content:space-between;align-items:center">
+                <span>当前选择：全部</span>
+                <span style="font-size:6px">▼</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 未加载状态 -->
+          <div style="padding:60px 0;text-align:center">
+            <div style="font-size:12px;color:#999;margin-bottom:4px">数据未加载</div>
+            <div style="font-size:10px;color:#bbb">请选择日期和酒店</div>
+          </div>
+
+          <!-- 底部 ticket-bar 栏 -->
+          <div style="position:absolute;bottom:0;left:0;right:0;display:flex;background:#fff;border-top:1px solid #eee;padding:6px 0 10px">
+            <div style="flex:1;text-align:center;font-size:8px;color:#999"><div style="font-size:12px;margin-bottom:2px">🎫</div>票券</div>
+            <div style="flex:1;text-align:center;font-size:8px;color:#2B84FD;font-weight:700"><div style="font-size:12px;margin-bottom:2px">📊</div>数据</div>
+            <div style="flex:1;text-align:center;font-size:8px;color:#999"><div style="font-size:12px;margin-bottom:2px">🖥️</div>中控</div>
+          </div>
+        </div>
+      </div></div>
+      <div class="ui-desc">
+        <h5>🔍 筛选条件区</h5>
+        <p><code>/pages/stat/stat</code>，CDN 深色背景，底部 <code>ticket-bar</code> 导航。</p>
+        <ul>
+          <li><strong>search-date 组件</strong>：<code>dataIndex=3</code>（默认选中「本月」），选满起止日期自动触发查询</li>
+          <li><strong>快捷选项</strong>：昨天 / 今天 / 上个月 / 本月，选中态蓝白渐变</li>
+          <li><strong>酒店选择</strong>：仅 <code>view-stat-hotel</code> 权限可见，首位「全部」（id=0）</li>
+          <li><strong>导出按钮</strong>：右上角，仅选中具体酒店（非全部）时显示</li>
+          <li><strong>底部 Tab</strong>：<code>ticket-bar</code>，<code>getManagerBar()</code> 按角色动态生成</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
