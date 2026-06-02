@@ -1,0 +1,1 @@
+window.__magic_user_s2 = window.__magic_user_s2p1+window.__magic_user_s2p2+window.__magic_user_s2p3+window.__magic_user_s2p4+window.__magic_user_s2p5+window.__magic_user_s2p6;

@@ -1,0 +1,1 @@
+window.__magic_central_s2 = window.__magic_central_s2p1+window.__magic_central_s2p2+window.__magic_central_s2p3+window.__magic_central_s2p4+window.__magic_central_s2p5+window.__magic_central_s2p6+window.__magic_central_s2p7;
