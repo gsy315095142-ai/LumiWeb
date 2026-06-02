@@ -11,22 +11,4 @@
     sections.forEach(function(sec) { container.appendChild(sec); });
   })();
 
-  // --- magic-order-refund.html ---
-  (function() {
-    var html = window.__magic_order_s2;
-    var div = document.createElement('div');
-    div.innerHTML = html;
-    var sections = div.querySelectorAll('.section-block');
-    sections.forEach(function(sec) { container.appendChild(sec); });
-  })();
-
-  // --- magic-order-share.html ---
-  (function() {
-    var html = window.__magic_order_s3;
-    var div = document.createElement('div');
-    div.innerHTML = html;
-    var sections = div.querySelectorAll('.section-block');
-    sections.forEach(function(sec) { container.appendChild(sec); });
-  })();
-
 })();
