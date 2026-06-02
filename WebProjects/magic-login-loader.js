@@ -1,1 +1,22 @@
-(function(){var d=document.getElementById("content-area");if(!d)return;d.innerHTML=window.__magic_login_s1+window.__magic_login_s2+window.__magic_login_s3;window.dispatchEvent(new Event("content-ready"));})();
+// Auto-generated loader for magic-login.html
+(function() {
+  var container = document.getElementById('content-area');
+  if (!container) return;
+
+  (function() {
+    var html = window.__magic_login_s1;
+    var div = document.createElement('div');
+    div.innerHTML = html;
+    var sections = div.querySelectorAll('.section-block');
+    sections.forEach(function(sec) { container.appendChild(sec); });
+  })();
+
+  (function() {
+    var html = window.__magic_login_s2;
+    var div = document.createElement('div');
+    div.innerHTML = html;
+    var sections = div.querySelectorAll('.section-block');
+    sections.forEach(function(sec) { container.appendChild(sec); });
+  })();
+
+})();
