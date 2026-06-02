@@ -1,1 +1,99 @@
-window.__magic_ticket_s2 = '<!-- 团购票分享与兑换（从 magic-ticket.html 拆分） -->\n<div class="section-block">\n      <div class="section-title">\n        <div class="section-title-icon">\n          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">\n            <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>\n          </svg>\n        </div>\n        团购票分享与兑换\n      </div>\n\n  <div class="ui-demo-row">\n    <div class="ui-demo-item">\n      <div class="phone-wireframe"><div class="phone-notch"></div><div class="phone-screen" style="min-height:480px">\n        <div class="phone-bar"><span>9:41</span><div class="phone-bar-r"><i></i><i></i><i></i></div></div>\n        <div style="min-height:440px;font-family:PingFang SC,sans-serif;background:#1a1a2e;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px">\n          <div style="width:100%;background:linear-gradient(135deg,#0f3460,#16213e);border-radius:12px;overflow:hidden">\n            <div style="height:120px;background:linear-gradient(135deg,#5788FD,#54FFF3);display:flex;align-items:center;justify-content:center">\n              <span style="font-size:16px;color:#fff;font-weight:700;text-shadow:0 2px 8px rgba(0,0,0,.3)">✨ LUMI 魔法学院 ✨</span>\n            </div>\n            <div style="padding:12px 16px;text-align:center">\n              <div style="font-size:11px;color:#fff;font-weight:700;margin-bottom:8px">🎯 团队邀请函</div>\n              <div style="font-size:9px;color:rgba(255,255,255,.7);margin-bottom:10px">您的好友邀请您一起探索魔法世界</div>\n              <div style="background:rgba(255,255,255,.1);border-radius:8px;padding:8px;margin:6px 0">\n                <div style="font-size:9px;color:rgba(255,255,255,.6);margin-bottom:4px">团队人数</div>\n                <div style="font-size:14px;color:#54FFF3;font-weight:700;font-family:Impact">8 人</div>\n              </div>\n              <div style="display:flex;justify-content:space-between;gap:6px;margin-top:6px">\n                <div style="flex:1;background:rgba(255,255,255,.1);border-radius:8px;padding:6px;text-align:center">\n                  <div style="font-size:8px;color:rgba(255,255,255,.6)">预约日期</div>\n                  <div style="font-size:9px;color:#fff;font-weight:700">2026-07-20</div>\n                </div>\n                <div style="flex:1;background:rgba(255,255,255,.1);border-radius:8px;padding:6px;text-align:center">\n                  <div style="font-size:8px;color:rgba(255,255,255,.6)">团队名称</div>\n                  <div style="font-size:9px;color:#fff;font-weight:700">小明队</div>\n                </div>\n              </div>\n              <div style="margin-top:10px;padding:6px;background:rgba(84,255,243,.15);border-radius:8px">\n                <div style="font-size:8px;color:rgba(255,255,255,.5);margin-bottom:4px">团购码</div>\n                <div style="font-size:10px;color:#54FFF3;font-weight:700;letter-spacing:1px">GRP-2026-0720-ABCD</div>\n              </div>\n            </div>\n          </div>\n          <div style="margin-top:8px;font-size:8px;color:rgba(255,255,255,.3)">长按识别小程序码查看详情</div>\n        </div>\n      </div></div>\n      <div class="ui-desc">\n        <h5>📱 团队邀请函分享海报</h5>\n        <p>生成团购票后，系统自动使用 Canvas 绘制分享海报：</p>\n        <ul>\n          <li>背景图来自 CDN，叠加门店名称（半透明黑底白字）</li>\n          <li>底部显示团队人数和预约日期</li>\n          <li>分享标题：「请查收您的团队邀请函~」</li>\n          <li>分享路径：<code>/pages/vouchersShareJump?group_code={code}&switch_store_id={storeId}</code></li>\n        </ul>\n      </div>\n    </div>\n  </div>\n\n  <div class="ui-demo-row">\n    <div class="ui-demo-item">\n      <div class="phone-wireframe"><div class="phone-notch"></div><div class="phone-screen" style="min-height:440px">\n        <div class="phone-bar"><span>9:41</span><div class="phone-bar-r"><i></i><i></i><i></i></div></div>\n        <div style="min-height:400px;font-family:PingFang SC,sans-serif;background-image:url(https://cdn.lixiaoqian.com/magic-space/bg.jpg);background-size:100% 100%;display:flex;flex-direction:column;align-items:center;padding:16px 12px">\n          <div style="font-size:12px;color:#fff;font-weight:700;margin-bottom:16px">团购兑换</div>\n          <div style="width:100%;background:#fff;border-radius:16px;padding:20px;box-shadow:0 4px 16px rgba(0,0,0,.1)">\n            <div style="text-align:center;margin-bottom:16px">\n              <div style="font-size:10px;color:#333;font-weight:700;margin-bottom:12px">请输入团购码</div>\n              <div style="display:flex;justify-content:center;gap:6px">\n                <div style="width:28px;height:32px;border:1.5px solid #BCE8EE;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;color:#333;font-weight:700">G</div>\n                <div style="width:28px;height:32px;border:1.5px solid #BCE8EE;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;color:#333;font-weight:700">R</div>\n                <div style="width:28px;height:32px;border:1.5px solid #BCE8EE;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;color:#333;font-weight:700">P</div>\n                <div style="width:28px;height:32px;border:1.5px solid #4A88FD;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;color:#4A88FD;background:#EFF5FB"></div>\n                <div style="width:28px;height:32px;border:1.5px solid #ddd;border-radius:6px"></div>\n                <div style="width:28px;height:32px;border:1.5px solid #ddd;border-radius:6px"></div>\n              </div>\n            </div>\n            <div style="text-align:center;font-size:9px;color:#999;margin-bottom:12px">向购票人索取团购码，输入后点击兑换</div>\n            <div style="background:linear-gradient(0deg,#577BFE,#54FFF3);color:#fff;border-radius:24px;padding:8px 0;text-align:center;font-size:11px;font-weight:700">确认兑换</div>\n          </div>\n          <div style="margin-top:12px;font-size:8px;color:rgba(255,255,255,.5)">兑换成功后，票券将出现在您的票券列表中</div>\n        </div>\n      </div></div>\n      <div class="ui-desc">\n        <h5>📱 用户端 · 团购兑换</h5>\n        <p>用户从首页点击「团购兑换」，输入团购码完成兑换：</p>\n        <ul>\n          <li>6 位字母数字混合的团购码输入框</li>\n          <li>兑换成功后票券出现在用户的票券列表中</li>\n          <li>可在预约时使用该票券抵扣</li>\n          <li>团购码由管理端生成团购票时自动分配</li>\n        </ul>\n      </div>\n    </div>\n  </div>\n</div>\n';
+window.__magic_ticket_s2 = `
+<!-- 团购票分享与兑换 -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+      </svg>
+    </div>
+    团购票分享与兑换
+  </div>
+
+  <div class="ui-demo-row">
+    <div class="ui-demo-item">
+      <div class="phone-wireframe"><div class="phone-notch"></div><div class="phone-screen" style="min-height:480px">
+        <div class="phone-bar"><span>9:41</span><div class="phone-bar-r"><i></i><i></i><i></i></div></div>
+        <div style="min-height:440px;font-family:PingFang SC,sans-serif;background:#1a1a2e;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px">
+          <div style="width:100%;background:linear-gradient(135deg,#0f3460,#16213e);border-radius:12px;overflow:hidden">
+            <div style="height:120px;background:linear-gradient(135deg,#5788FD,#54FFF3);display:flex;align-items:center;justify-content:center">
+              <span style="font-size:16px;color:#fff;font-weight:700;text-shadow:0 2px 8px rgba(0,0,0,.3)">✨ LUMI 魔法学院 ✨</span>
+            </div>
+            <div style="padding:12px 16px;text-align:center">
+              <div style="font-size:11px;color:#fff;font-weight:700;margin-bottom:8px">🎯 团队邀请函</div>
+              <div style="font-size:9px;color:rgba(255,255,255,.7);margin-bottom:10px">您的好友邀请您一起探索魔法世界</div>
+              <div style="background:rgba(255,255,255,.1);border-radius:8px;padding:8px;margin:6px 0">
+                <div style="font-size:9px;color:rgba(255,255,255,.6);margin-bottom:4px">团队人数</div>
+                <div style="font-size:14px;color:#54FFF3;font-weight:700;font-family:Impact">8 人</div>
+              </div>
+              <div style="display:flex;justify-content:space-between;gap:6px;margin-top:6px">
+                <div style="flex:1;background:rgba(255,255,255,.1);border-radius:8px;padding:6px;text-align:center">
+                  <div style="font-size:8px;color:rgba(255,255,255,.6)">预约日期</div>
+                  <div style="font-size:9px;color:#fff;font-weight:700">2026-07-20</div>
+                </div>
+                <div style="flex:1;background:rgba(255,255,255,.1);border-radius:8px;padding:6px;text-align:center">
+                  <div style="font-size:8px;color:rgba(255,255,255,.6)">团队名称</div>
+                  <div style="font-size:9px;color:#fff;font-weight:700">小明队</div>
+                </div>
+              </div>
+              <div style="margin-top:10px;padding:6px;background:rgba(84,255,243,.15);border-radius:8px">
+                <div style="font-size:8px;color:rgba(255,255,255,.5);margin-bottom:4px">团购码</div>
+                <div style="font-size:10px;color:#54FFF3;font-weight:700;letter-spacing:1px">GRP-2026-0720-ABCD</div>
+              </div>
+            </div>
+          </div>
+          <div style="margin-top:8px;font-size:8px;color:rgba(255,255,255,.3)">长按识别小程序码查看详情</div>
+        </div>
+      </div></div>
+      <div class="ui-desc">
+        <h5>📱 团队邀请函分享海报</h5>
+        <p>生成团购票后，系统自动使用 Canvas 绘制分享海报：</p>
+        <ul>
+          <li><strong>背景图</strong>：来自云端，叠加门店名称（半透明黑底白字）</li>
+          <li><strong>信息展示</strong>：底部显示团队人数、预约日期、团队名称</li>
+          <li><strong>团购码</strong>：青色高亮显示</li>
+          <li><strong>分享标题</strong>：「请查收您的团队邀请函~」</li>
+          <li><strong>分享路径</strong>：携带团购码和门店参数，点击后跳转团购兑换页</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="ui-demo-row">
+    <div class="ui-demo-item">
+      <div class="phone-wireframe"><div class="phone-notch"></div><div class="phone-screen" style="min-height:440px">
+        <div class="phone-bar"><span>9:41</span><div class="phone-bar-r"><i></i><i></i><i></i></div></div>
+        <div style="min-height:400px;font-family:PingFang SC,sans-serif;background-image:url(https://cdn.lixiaoqian.com/magic-space/bg.jpg);background-size:100% 100%;display:flex;flex-direction:column;align-items:center;padding:16px 12px">
+          <div style="font-size:12px;color:#fff;font-weight:700;margin-bottom:16px">团购兑换</div>
+          <div style="width:100%;background:#fff;border-radius:16px;padding:20px;box-shadow:0 4px 16px rgba(0,0,0,.1)">
+            <div style="text-align:center;margin-bottom:16px">
+              <div style="font-size:10px;color:#333;font-weight:700;margin-bottom:12px">请输入团购码</div>
+              <div style="display:flex;justify-content:center;gap:6px">
+                <div style="width:28px;height:32px;border:1.5px solid #BCE8EE;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;color:#333;font-weight:700">G</div>
+                <div style="width:28px;height:32px;border:1.5px solid #BCE8EE;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;color:#333;font-weight:700">R</div>
+                <div style="width:28px;height:32px;border:1.5px solid #BCE8EE;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;color:#333;font-weight:700">P</div>
+                <div style="width:28px;height:32px;border:1.5px solid #4A88FD;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;color:#4A88FD;background:#EFF5FB"></div>
+                <div style="width:28px;height:32px;border:1.5px solid #ddd;border-radius:6px"></div>
+                <div style="width:28px;height:32px;border:1.5px solid #ddd;border-radius:6px"></div>
+              </div>
+            </div>
+            <div style="text-align:center;font-size:9px;color:#999;margin-bottom:12px">向购票人索取团购码，输入后点击兑换</div>
+            <div style="background:linear-gradient(0deg,#577BFE,#54FFF3);color:#fff;border-radius:24px;padding:8px 0;text-align:center;font-size:11px;font-weight:700">确认兑换</div>
+          </div>
+          <div style="margin-top:12px;font-size:8px;color:rgba(255,255,255,.5)">兑换成功后，票券将出现在您的票券列表中</div>
+        </div>
+      </div></div>
+      <div class="ui-desc">
+        <h5>📱 用户端 · 团购兑换</h5>
+        <p>用户从首页点击「团购兑换」，输入团购码完成兑换：</p>
+        <ul>
+          <li><strong>输入框</strong>：6 位字母数字混合的方块式输入框，自动跳格</li>
+          <li><strong>兑换成功</strong>：票券出现在用户的票券列表中</li>
+          <li><strong>预约抵扣</strong>：可在预约时使用该票券抵扣</li>
+          <li><strong>团购码来源</strong>：由管理端生成团购票时自动分配</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+`;
