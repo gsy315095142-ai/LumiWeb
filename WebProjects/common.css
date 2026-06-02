@@ -198,6 +198,28 @@ body {
   color: var(--text-primary);
 }
 
+
+/* 标题+描述 横排布局 */
+.feature-item {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(124,58,237,0.08);
+}
+.feature-item:last-child { border-bottom: none; }
+.feature-item-title {
+  flex-shrink: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--project-color-light);
+  min-width: 80px;
+}
+.feature-item-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
 .feature-card p {
   font-size: 14px;
   color: var(--text-secondary);
@@ -311,6 +333,7 @@ code { background:rgba(124,58,237,.12); color:var(--project-color-light); paddin
 }
 
 .info-table td { color: var(--text-secondary); }
+.info-table th, .info-table td { padding: 8px 10px; }
 
 /* 底部翻页 */
 .page-nav {
