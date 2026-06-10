@@ -26,9 +26,36 @@ th{background:#f8f9fb}
 .figure{margin:16px 0;text-align:center}
 .figure img{max-width:100%;border-radius:8px;border:1px solid #e2e6ed}
 .figure .caption{font-size:.85rem;color:#8c9ba8;margin-top:6px}
+
+/* ===== 顶部导航栏 ===== */
+.warmup-nav{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid #e2e6ed;padding:0 16px;display:flex;align-items:center;gap:4px;margin:0 -20px 24px;box-shadow:0 1px 4px rgba(0,0,0,.04);flex-wrap:wrap}
+.warmup-nav .nav-back{display:inline-flex;align-items:center;gap:4px;color:#8c9ba8;text-decoration:none;font-size:13px;font-weight:500;padding:10px 8px 10px 0;white-space:nowrap;transition:color .2s}
+.warmup-nav .nav-back:hover{color:#4f6ef7}
+.warmup-nav .nav-back svg{width:16px;height:16px}
+.warmup-nav .nav-sep{width:1px;height:18px;background:#e2e6ed;margin:0 6px;flex-shrink:0}
+.warmup-nav .nav-links{display:flex;align-items:center;gap:2px;flex-wrap:wrap}
+.warmup-nav .nav-links a{display:inline-block;padding:10px 12px;font-size:13px;font-weight:500;color:#5a6c7d;text-decoration:none;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap}
+.warmup-nav .nav-links a:hover{color:#4f6ef7;background:#f5f7fa}
+.warmup-nav .nav-links a.active{color:#4f6ef7;border-bottom-color:#4f6ef7;font-weight:600}
 </style>
 </head>
 <body>
+
+<!-- 顶部导航栏 -->
+<nav class="warmup-nav">
+  <a href="../lumi-sport.html" class="nav-back">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    返回
+  </a>
+  <div class="nav-sep"></div>
+  <div class="nav-links">
+    <a href="通用规则.html" class="active">通用规则</a>
+    <a href="烈焰拳王.html">烈焰拳王</a>
+    <a href="疾速冰球.html">疾速冰球</a>
+    <a href="雷霆击剑.html">雷霆击剑</a>
+    <a href="魔法派对.html">魔法派对</a>
+  </div>
+</nav>
 
 <h2 id="sec1">一、通用热身流程</h2>
 

@@ -7,6 +7,7 @@
 body{font-family:PingFang SC,Microsoft YaHei,sans-serif;max-width:900px;margin:20px auto;line-height:1.8}
 h2{color:#4f6ef7}
 h3{color:#2c3e50}
+h4{color:#e67e22;margin:16px 0 8px}
 table{border-collapse:collapse;width:100%;margin:10px 0}
 td,th{border:1px solid #e2e6ed;padding:8px 12px;text-align:left}
 th{background:#f8f9fb}
@@ -17,209 +18,156 @@ th{background:#f8f9fb}
 .proto-tag{font-size:.75rem;padding:1px 6px;border-radius:3px}
 .proto-tag.image{background:#fff8e6;color:#e67e22}
 .proto-tag.interact{background:#eaf7ee;color:#4caf84}
-.art-section{background:#fdf6f0;border-left:4px solid #e67e22;padding:16px 20px;margin:16px 0;border-radius:6px}
-.art-section h4{margin-top:0;color:#d35400}
-.art-table{margin:8px 0}
-.art-table th{background:#fdebd0;color:#d35400;font-size:.9rem}
-.art-table td{font-size:.9rem}
-.voice-block{background:#f0f4ff;border-left:4px solid #4f6ef7;padding:12px 18px;margin:14px 0;border-radius:6px;font-size:.9rem;line-height:1.7}
-.voice-block .voice-label{font-weight:700;color:#4f6ef7;margin-bottom:4px}
-.voice-block .voice-line{margin:2px 0;padding-left:8px}
-.voice-block .voice-line .v-tag{display:inline-block;min-width:70px;font-size:.78rem;font-weight:600;color:#2c3e50}
+.callout{background:#fff8e6;border-left:4px solid #e67e22;padding:12px 16px;margin:16px 0;border-radius:4px}
+.callout .icon{margin-right:6px}
+.info-callout{background:#eaf0ff;border-left:4px solid #4f6ef7;padding:12px 16px;margin:16px 0;border-radius:4px}
+.info-callout .icon{margin-right:6px}
+.parallel-callout{background:#eaf7ee;border-left:4px solid #4caf84;padding:12px 16px;margin:16px 0;border-radius:4px}
+.parallel-callout .icon{margin-right:6px}
+.figure{margin:16px 0;text-align:center}
+.figure img{max-width:100%;border-radius:8px;border:1px solid #e2e6ed}
+.figure .caption{font-size:.85rem;color:#8c9ba8;margin-top:6px}
+.doc-footer{margin-top:40px;padding:16px 0;border-top:1px solid #e2e6ed;font-size:.8rem;color:#8c9ba8;text-align:center}
+
+/* ===== 顶部导航栏 ===== */
+.warmup-nav{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid #e2e6ed;padding:0 16px;display:flex;align-items:center;gap:4px;margin:0 -20px 24px;box-shadow:0 1px 4px rgba(0,0,0,.04);flex-wrap:wrap}
+.warmup-nav .nav-back{display:inline-flex;align-items:center;gap:4px;color:#8c9ba8;text-decoration:none;font-size:13px;font-weight:500;padding:10px 8px 10px 0;white-space:nowrap;transition:color .2s}
+.warmup-nav .nav-back:hover{color:#4f6ef7}
+.warmup-nav .nav-back svg{width:16px;height:16px}
+.warmup-nav .nav-sep{width:1px;height:18px;background:#e2e6ed;margin:0 6px;flex-shrink:0}
+.warmup-nav .nav-links{display:flex;align-items:center;gap:2px;flex-wrap:wrap}
+.warmup-nav .nav-links a{display:inline-block;padding:10px 12px;font-size:13px;font-weight:500;color:#5a6c7d;text-decoration:none;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap}
+.warmup-nav .nav-links a:hover{color:#4f6ef7;background:#f5f7fa}
+.warmup-nav .nav-links a.active{color:#4f6ef7;border-bottom-color:#4f6ef7;font-weight:600}
 </style>
 </head>
 <body>
 
-<h2 id="sec5">五、派对热身（音符→连线→姿态墙→躲避）</h2>
+<!-- 顶部导航栏 -->
+<nav class="warmup-nav">
+  <a href="../lumi-sport.html" class="nav-back">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    返回
+  </a>
+  <div class="nav-sep"></div>
+  <div class="nav-links">
+    <a href="通用规则.html">通用规则</a>
+    <a href="烈焰拳王.html">烈焰拳王</a>
+    <a href="疾速冰球.html">疾速冰球</a>
+    <a href="雷霆击剑.html">雷霆击剑</a>
+    <a href="魔法派对.html" class="active">魔法派对</a>
+  </div>
+</nav>
 
-<div class="step-flow"><div class="step-item" style="font-size:.75rem">📖</div><span class="step-arrow">→</span><div class="step-item" style="font-size:.75rem">📋</div><span class="step-arrow">→</span><div class="step-item" style="font-size:.75rem">🎵L</div><span class="step-arrow">→</span><div class="step-item" style="font-size:.75rem">🎵R</div><span class="step-arrow">→</span><div class="step-item" style="font-size:.75rem">🎵双</div><span class="step-arrow">→</span><div class="step-item" style="font-size:.75rem">🔗L</div><span class="step-arrow">→</span><div class="step-item" style="font-size:.75rem">🔗R</div><span class="step-arrow">→</span><div class="step-item" style="font-size:.75rem">🔗双</div><span class="step-arrow">→</span><div class="step-item" style="font-size:.75rem">🃏墙</div><span class="step-arrow">→</span><div class="step-item" style="font-size:.75rem">🚧躲避</div></div>
+<h2>魔法派对 · 热身设计</h2>
+<p><span class="proto-tag image">示意图</span> <span class="proto-tag interact">交互原型</span></p>
 
-<div class="step-detail"><div class="step-label">步骤1·场景介绍 <span class="proto-tag image">参考图</span></div><div class="step-desc">欢迎来到魔法派对！这是一个音乐节奏游戏，你需要跟随节拍击打飞来的音符、沿着光路连线、并摆出各种姿态。准备好用你的双手创造魔法了吗？</div>
+<div class="callout"><span class="icon">🎯</span><strong>热身目标</strong>：让玩家掌握<strong>左/右手识别、元素抓取、节奏打击</strong>三大核心操作，理解魔法元素从远到近的飞行轨迹。</div>
 
-<div class="voice-block">
-<div class="voice-label">🔊 语音播报</div>
-<div class="voice-line"><span class="v-tag">进入语：</span>魔法派对！跟着音乐的节拍——握拳竖起大拇指，击打飞来的音符，像按喇叭一样。手指沿着光路滑过去，看准姿态墙摆姿势。用你的双手创造魔法，开跳！</div>
-</div>
-
-<div class="step-img"><img src="魔法派对示意图/步骤1.png" style="width:100%;max-width:700px;margin-top:10px;border-radius:6px;border:1px solid #e0e0e0;" alt="魔法派对步骤1示意图"></div></div>
-
-<h4>阶段一：音符（步骤2~5）</h4>
-
-<div class="step-detail"><div class="step-label">2·规则 <span class="proto-tag image">参考图</span></div><div class="step-desc">展示音符+评级。确认后进入下一步。</div>
-
-<div class="voice-block">
-<div class="voice-label">🔊 语音播报</div>
-<div class="voice-line"><span class="v-tag">进入语：</span>玩法简单——音符从远处飞来，击打时机会弹出 Perfect、Good 或 Miss。伸手确认，开始！</div>
-<div class="voice-line"><span class="v-tag">完成语：</span>清楚了！</div>
-</div>
-
-<div class="step-img"><img src="魔法派对示意图/步骤2.png" style="width:100%;max-width:700px;margin-top:10px;border-radius:6px;border:1px solid #e0e0e0;" alt="魔法派对步骤2示意图"></div></div>
-
-<div class="step-detail"><div class="step-label">3·单手L <span class="proto-tag interact">交互</span></div><div class="step-desc">单个音符飞来(3.5s)，标记「👈左手」。左手击打。3次通过。</div>
-
-<div class="voice-block">
-<div class="voice-label">🔊 语音播报</div>
-<div class="voice-line"><span class="v-tag">进入语：</span>左手音符——看蓝色左手标签，握拳竖大拇指击打。三次过。</div>
-<div class="voice-line"><span class="v-tag">超时复播：</span>左手握拳竖拇指，击打音符！</div>
-<div class="voice-line"><span class="v-tag">完成语：</span>左手音符拿下！</div>
-</div>
-
-<div class="step-img"><img src="魔法派对示意图/步骤3.png" style="width:100%;max-width:700px;margin-top:10px;border-radius:6px;border:1px solid #e0e0e0;" alt="魔法派对步骤3示意图"></div></div>
-
-<div class="step-detail"><div class="step-label">4·单手R <span class="proto-tag interact">交互</span></div><div class="step-desc">标记「👉右手」。右手击打。3次通过。</div>
-
-<div class="voice-block">
-<div class="voice-label">🔊 语音播报</div>
-<div class="voice-line"><span class="v-tag">进入语：</span>右手音符——粉色右手标签，握拳竖拇指击打。三次过。</div>
-<div class="voice-line"><span class="v-tag">超时复播：</span>右手握拳竖拇指，击打音符！</div>
-<div class="voice-line"><span class="v-tag">完成语：</span>右手音符拿下！</div>
-</div>
-
-<div class="step-img"><img src="魔法派对示意图/步骤4.png" style="width:100%;max-width:700px;margin-top:10px;border-radius:6px;border:1px solid #e0e0e0;" alt="魔法派对步骤4示意图"></div></div>
-
-<div class="step-detail"><div class="step-label">5·双手 <span class="proto-tag interact">交互</span></div><div class="step-desc">2个音符同时飞来。双手同时击打。3次通过。</div>
-
-<div class="voice-block">
-<div class="voice-label">🔊 语音播报</div>
-<div class="voice-line"><span class="v-tag">进入语：</span>双手音符——左右同时飞来，双手握拳竖拇指一起打。三次过。</div>
-<div class="voice-line"><span class="v-tag">超时复播：</span>双手同时击打！</div>
-<div class="voice-line"><span class="v-tag">完成语：</span>双手配合有了，接下来连线。</div>
-</div>
-
-<div class="step-img"><img src="魔法派对示意图/步骤5.png" style="width:100%;max-width:700px;margin-top:10px;border-radius:6px;border:1px solid #e0e0e0;" alt="魔法派对步骤5示意图"></div></div>
-
-<h4>阶段二：连线（步骤6~8）</h4>
-
-<div class="step-detail"><div class="step-label">6·连线L <span class="proto-tag interact">交互</span></div><div class="step-desc">连线路径出现，标记「👈左手」。左手沿路径滑过。2条通过。</div>
-
-<div class="voice-block">
-<div class="voice-label">🔊 语音播报</div>
-<div class="voice-line"><span class="v-tag">进入语：</span>左手连线——蓝色光路，左手从起点沿路滑到终点。两条过。</div>
-<div class="voice-line"><span class="v-tag">超时复播：</span>左手沿光路滑过去！</div>
-<div class="voice-line"><span class="v-tag">完成语：</span>左手连线拿下！</div>
-</div>
-
-<div class="step-img"><img src="魔法派对示意图/步骤6.png" style="width:100%;max-width:700px;margin-top:10px;border-radius:6px;border:1px solid #e0e0e0;" alt="魔法派对步骤6示意图"></div></div>
-
-<div class="step-detail"><div class="step-label">7·连线R <span class="proto-tag interact">交互</span></div><div class="step-desc">标记「👉右手」。右手沿路径滑过。2条通过。</div>
-
-<div class="voice-block">
-<div class="voice-label">🔊 语音播报</div>
-<div class="voice-line"><span class="v-tag">进入语：</span>右手连线——粉色光路，右手从起点滑到终点。两条过。</div>
-<div class="voice-line"><span class="v-tag">超时复播：</span>右手沿光路滑过去！</div>
-<div class="voice-line"><span class="v-tag">完成语：</span>右手连线拿下！</div>
-</div>
-
-<div class="step-img"><img src="魔法派对示意图/步骤7.png" style="width:100%;max-width:700px;margin-top:10px;border-radius:6px;border:1px solid #e0e0e0;" alt="魔法派对步骤7示意图"></div></div>
-
-<div class="step-detail"><div class="step-label">8·双连线 <span class="proto-tag interact">交互</span></div><div class="step-desc">两条路径同时出现。双手同时滑过。2组通过。</div>
-
-<div class="voice-block">
-<div class="voice-label">🔊 语音播报</div>
-<div class="voice-line"><span class="v-tag">进入语：</span>双手连线——两条光路同时出现，双手一起沿各自路径滑。两组过。</div>
-<div class="voice-line"><span class="v-tag">超时复播：</span>双手同时沿光路滑动！</div>
-<div class="voice-line"><span class="v-tag">完成语：</span>双手连线拿下，接下来姿态墙。</div>
-</div>
-
-<div class="step-img"><img src="魔法派对示意图/步骤8.png" style="width:100%;max-width:700px;margin-top:10px;border-radius:6px;border:1px solid #e0e0e0;" alt="魔法派对步骤8示意图"></div></div>
-
-<h4>阶段三：姿态墙（步骤9）</h4>
-<div class="step-detail"><div class="step-label">9·姿态墙 <span class="proto-tag interact">交互</span></div><div class="step-desc">姿态墙飞来(3.5s)，镂空轮廓+双手标记点。摆出与墙一致的姿势对齐标记点。姿势库随机。3次通过，循环回步骤4。</div>
-
-<div class="voice-block">
-<div class="voice-label">🔊 语音播报</div>
-<div class="voice-line"><span class="v-tag">进入语：</span>姿态墙——光墙飞来，看人形轮廓和金色标记点。摆出对应姿势，双手对准金色点。姿势随机，平举、上举、一手上一手下都有。三次过。</div>
-<div class="voice-line"><span class="v-tag">超时复播：</span>摆姿势，对准金色标记点！</div>
-<div class="voice-line"><span class="v-tag">完成语：</span>姿态墙拿下！小心——可能有炸弹要来了。</div>
-</div>
-
-<div class="step-img"><img src="魔法派对示意图/步骤9.png" style="width:100%;max-width:700px;margin-top:10px;border-radius:6px;border:1px solid #e0e0e0;" alt="魔法派对步骤9示意图"></div></div>
-
-<h4>阶段四：躲避障碍（步骤10）</h4>
-<div class="step-detail"><div class="step-label">10·躲避障碍 <span class="proto-tag interact">交互</span></div><div class="step-desc">障碍物从远处飞来。左右移动身体躲避。成功躲避即可加分。3次通过。</div>
-
-<div class="voice-block">
-<div class="voice-label">🔊 语音播报</div>
-<div class="voice-line"><span class="v-tag">进入语：</span>炸弹来了——燃烧的炸弹从远处飞来，别打它，左右闪避！躲开加分，被炸扣血。三次过。</div>
-<div class="voice-line"><span class="v-tag">超时复播：</span>炸弹来了，左右闪避！</div>
-<div class="voice-line"><span class="v-tag">完成语：</span>全掌握了！接下来多练练，越来越顺手。</div>
-</div>
-
-<div class="step-img"><img src="魔法派对示意图/步骤10.png" style="width:100%;max-width:700px;margin-top:10px;border-radius:6px;border:1px solid #e0e0e0;" alt="魔法派对步骤10示意图"></div></div>
-
-<h4>姿势库（随机）</h4>
-<table><thead><tr><th>姿势</th><th>左手</th><th>右手</th></tr></thead>
-<tbody><tr><td>双手平举</td><td>左上方</td><td>右上方</td></tr><tr><td>双手上举</td><td>居中上</td><td>居中上</td></tr><tr><td>左手举起</td><td>左上方</td><td>右下方</td></tr><tr><td>右手举起</td><td>左下方</td><td>右上方</td></tr></tbody></table>
-</div>
-
-<div class="art-section">
-<h3 style="color:#d35400;margin-top:0">美术需求说明</h3>
-<p>以下为「魔法派对」场景介绍及全局 UI 所需的美术资源清单，供美术团队制作参考。VR 第一人称视角，游戏引擎实时渲染风格，整体追求<strong>深紫魔法 + 节奏律动 + 霓虹美学</strong>的视觉调性。</p>
-
-<h4>一、场景环境</h4>
-<table class="art-table">
-<thead><tr><th style="width:15%">类别</th><th style="width:25%">资源</th><th>制作说明</th></tr></thead>
+<h3>1. 热身步骤总览</h3>
+<table>
+<thead><tr><th>步骤</th><th>名称</th><th>核心动作</th><th>通过条件</th><th>原型</th></tr></thead>
 <tbody>
-<tr><td>空间主体</td><td>深紫色魔法空间</td><td>无边界的深渊式空间，背景由深紫到暗黑的径向渐变构成，中心略亮、四周渐暗。空中大量漂浮星尘粒子缓慢旋转，呈银河旋涡感。无地面、无墙壁，玩家仿佛悬浮于宇宙魔法空间之中</td></tr>
-<tr><td>星尘粒子</td><td>漂浮光点系统</td><td>空间内散布大量大小不一的星尘粒子（1~5px），颜色为紫色系渐变（淡紫→品红→冷白），缓慢飘浮旋转，部分粒子有微弱的拖尾光晕。粒子密度适中，不遮挡前方飞来的游戏元素</td></tr>
-<tr><td>节拍光效</td><td>环境脉冲</td><td>空间背景随着 BGM 节拍有微弱的环境光脉冲——每次重拍时背景亮度微微提升（约 10% 增幅），营造空间「随音乐呼吸」的沉浸感</td></tr>
+<tr><td><span class="step-item">步骤 1</span></td><td>左右手识别</td><td>用对应颜色的手触碰飞行元素</td><td>正确命中 3 次</td><td><span class="proto-tag image">示意图</span></td></tr>
+<tr><td><span class="step-item">步骤 2</span></td><td>元素抓取</td><td>在正确时机伸手抓取元素</td><td>成功抓取 3 次</td><td><span class="proto-tag image">示意图</span></td></tr>
+<tr><td><span class="step-item">步骤 3</span></td><td>节奏打击</td><td>按节拍依次击打飞来的元素</td><td>连续命中 5 个</td><td><span class="proto-tag image">示意图</span></td></tr>
+<tr><td><span class="step-item">步骤 4</span></td><td>综合练习</td><td>识别 → 抓取 → 节奏打击</td><td>完成 1 套完整流程</td><td><span class="proto-tag interact">交互</span></td></tr>
+</tbody>
+</table>
+<p><span class="step-arrow">→</span> 步骤之间为<strong>顺序锁定</strong>：完成当前步骤后自动进入下一步。</p>
+
+<h3>2. 步骤详细设计</h3>
+
+<h4>步骤 1：左右手识别</h4>
+<div class="step-label">🎯 目标</div>
+<div class="step-desc">学会区分左手和右手——魔法派对中元素会标注需要用哪只手接。</div>
+
+<div class="step-label">📝 VR 场景描述</div>
+<div class="step-desc">玩家身处霓虹魔法舞台中央。远处有元素发射器，会依次向玩家发射<strong>彩色光球</strong>。每个光球带有明确的<strong>左/右标识</strong>：左侧蓝色光球需用左手触碰，右侧红色光球需用右手触碰。顶部提示板文字：「看准光球的颜色，用<strong>对应的手</strong>去触碰它！」</div>
+
+<div class="figure">
+<img src="魔法派对示意图/步骤1.png" alt="魔法派对 步骤1 左右手识别">
+<div class="caption">▲ 步骤 1：左右手识别训练场景示意图</div>
+</div>
+
+<div class="step-label">🎮 交互流程</div>
+<table>
+<thead><tr><th>阶段</th><th>玩家行为</th><th>系统反馈</th></tr></thead>
+<tbody>
+<tr><td>1. 提示</td><td>阅读顶部提示板</td><td>提示板展示操作说明</td></tr>
+<tr><td>2. 确认</td><td>双手伸出就位（确认手势）</td><td>提示板消失，第一颗光球发射（3 秒延迟）</td></tr>
+<tr><td>3. 触碰</td><td>用对应颜色的手触碰飞来的光球</td><td>正确：光球爆裂为对应颜色烟花特效 + 计数（1/3）；错误：光球弹开 + 提示「注意颜色对应的手」</td></tr>
+<tr><td>4. 完成</td><td>正确命中 3 次</td><td>白闪 0.6 秒 → ✅ → 暂停 2 秒 → 切入步骤 2</td></tr>
 </tbody>
 </table>
 
-<h4>二、核心道具</h4>
-<table class="art-table">
-<thead><tr><th style="width:15%">类别</th><th style="width:25%">资源</th><th>制作说明</th></tr></thead>
+<h4>步骤 2：元素抓取</h4>
+<div class="step-label">🎯 目标</div>
+<div class="step-desc">学会在正确时机伸手抓取从远处飞来的魔法元素。</div>
+
+<div class="step-label">📝 VR 场景描述</div>
+<div class="step-desc">发射器现在发出<strong>完整的魔法元素</strong>（火球、冰晶、风刃），元素沿 3.5 秒飞行轨迹从远处飞向玩家。元素到达最佳抓取位置时会有<strong>光圈脉冲提示</strong>。顶部提示板文字：「等元素飞到<strong>最近处</strong>时伸手抓住它！」</div>
+
+<div class="figure">
+<img src="魔法派对示意图/步骤2.png" alt="魔法派对 步骤2 元素抓取">
+<div class="caption">▲ 步骤 2：元素抓取训练场景示意图</div>
+</div>
+
+<div class="step-label">🎮 交互流程</div>
+<table>
+<thead><tr><th>阶段</th><th>玩家行为</th><th>系统反馈</th></tr></thead>
 <tbody>
-<tr><td>音符</td><td>圆形音符元素</td><td>直径约 40cm 的圆形音符，主体为半透明霓虹材质。音符从远处沿正前方由小变大飞来，飞行时间固定 3.5 秒。音符正面中央为<strong>点赞手势图标</strong>（👍握拳伸出大拇指的样式），边缘有发光环脉动。<strong>左手音符</strong>标记蓝色 👈 标签，<strong>右手音符</strong>标记粉色 👉 标签，<strong>双手音符</strong>两个同时出现各带对应标签</td></tr>
-<tr><td>连线路径</td><td>霓虹光路</td><td>空中出现一条弯曲的发光路径（霓虹蓝紫渐变），路径由一系列小光点连成虚线或实线光带，长约 1.5~2m。路径起点有对应的左右手标签脉冲闪烁。玩家手沿路径滑动时，手经过的段落依次点亮变白，滑完全程后终点爆发完成粒子特效</td></tr>
-<tr><td>双连线路径</td><td>双光路</td><td>两条不同形状的路径同时出现（一左一右），各自带有对应标签，与单连线视觉规格一致。两条路径的颜色略有区分——左手路径偏蓝紫、右手路径偏粉紫</td></tr>
-<tr><td>姿态墙</td><td>镂空人形剪影墙</td><td>一面半透明的矩形光墙从远处飞来（3.5 秒），墙中央是一个<strong>镂空的人体轮廓剪影</strong>，整体霓虹紫色边框发光。双手位置有两个金色标记点脉冲闪烁，提示玩家将手对齐。玩家摆出对应姿势后标记点变绿确认，评级文字（Perfect/Good/Miss）弹出</td></tr>
-<tr><td>障碍物</td><td>炸弹/障碍</td><td>暗铁色外壳带有红色裂纹熔岩纹路的炸弹，表面有橙红色火焰包裹燃烧，尾部拖曳黑烟和火星粒子。从远处正前方飞来，飞行轨迹和速度（3.5 秒）与音符/姿态墙一致。用于躲避教学，玩家被击中扣血，成功闪避加分</td></tr>
+<tr><td>1. 提示</td><td>阅读顶部提示板</td><td>提示板展示操作说明</td></tr>
+<tr><td>2. 确认</td><td>双手伸出就位（确认手势）</td><td>提示板消失，第一个元素发射</td></tr>
+<tr><td>3. 抓取</td><td>在元素到达最近处时伸手触碰</td><td>成功：元素吸附到手中 + 对应属性光芒特效 + 计数（1/3）；太早/太晚：元素穿过 + 提示「注意光圈提示的时机」</td></tr>
+<tr><td>4. 完成</td><td>成功抓取 3 次</td><td>白闪 0.6 秒 → ✅ → 暂停 2 秒 → 切入步骤 3</td></tr>
 </tbody>
 </table>
 
-<h4>三、HUD / UI</h4>
-<table class="art-table">
-<thead><tr><th style="width:15%">类别</th><th style="width:25%">资源</th><th>制作说明</th></tr></thead>
+<h4>步骤 3：节奏打击</h4>
+<div class="step-label">🎯 目标</div>
+<div class="step-desc">学会按节奏连续击打飞来的元素，体验魔法派对的核心玩法。</div>
+
+<div class="step-label">📝 VR 场景描述</div>
+<div class="step-desc">元素开始按<strong>固定节拍</strong>（约 1.2 秒间隔）从远处依次飞来，形成 3 条飞行轨迹（左/中/右）。每个元素带有左/右手标识和颜色。背景音乐开始播放，节拍与元素飞行同步。右侧 HUD 显示连击计数器。顶部提示板文字：「按节拍用<strong>对应的手击打</strong>飞来的元素，连续命中 5 个！」</div>
+
+<div class="figure">
+<img src="魔法派对示意图/步骤3.png" alt="魔法派对 步骤3 节奏打击">
+<div class="caption">▲ 步骤 3：节奏打击训练场景示意图</div>
+</div>
+
+<div class="step-label">🎮 交互流程</div>
+<table>
+<thead><tr><th>阶段</th><th>玩家行为</th><th>系统反馈</th></tr></thead>
 <tbody>
-<tr><td>顶部提示板</td><td>文字提示板</td><td>屏幕顶部中央，半透明深色圆角矩形底（80% 不透明黑底 + 霓虹紫微弱描边），白色文字居中。进入场景时从上方滑入 + 淡入动画（约 0.5 秒）</td></tr>
-<tr><td>右侧步骤面板</td><td>垂直步骤列表</td><td>屏幕右侧纵向排列，仅当前步骤高亮（霓虹紫色发光边框 + 文字高亮），其余步骤暗隐。每步完成打 ✅ 并消失</td></tr>
-<tr><td>得分区域</td><td>HUD 得分显示</td><td>屏幕右上角显示当前得分数字和连击数（Combo），数字变化时有放大 + 回弹动画和金色微光。Combo 数达到一定数值时数字变为彩虹渐变特效</td></tr>
-<tr><td>手势提示</td><td>左右手图标</td><td>屏幕中下方两侧各有一个半透明手形图标（👈 左 / 👉 右），当前需要操作的手图标高亮脉冲，另一侧暗隐。双手操作时两侧同时高亮</td></tr>
+<tr><td>1. 提示</td><td>阅读顶部提示板</td><td>提示板展示操作说明</td></tr>
+<tr><td>2. 确认</td><td>双手伸出就位（确认手势）</td><td>提示板消失，节拍倒计时 3 拍后开始</td></tr>
+<tr><td>3. 打击</td><td>按节拍用对应手击打飞来的元素</td><td>命中：烟花爆裂 + 连击计数 +1（Perfect/Good）；漏击：连击中断归零 + 提示「继续，重新计数」</td></tr>
+<tr><td>4. 完成</td><td>连续命中 5 个</td><td>白闪 0.6 秒 → ✅ → 暂停 2 秒 → 切入步骤 4</td></tr>
 </tbody>
 </table>
 
-<h4>四、特效清单</h4>
-<table class="art-table">
-<thead><tr><th style="width:15%">类别</th><th style="width:25%">资源</th><th>制作说明</th></tr></thead>
+<h4>步骤 4：综合练习</h4>
+<div class="step-label">🎯 目标</div>
+<div class="step-desc">将识别、抓取、节奏打击串联为完整体验。</div>
+
+<div class="step-label">📝 VR 场景描述</div>
+<div class="step-desc">场景升级为正式魔法派对舞台，霓虹灯效全开。元素以更高频率和更复杂轨迹飞来，同时混合不同属性和左右手标识。右侧 HUD 显示完整流程进度。顶部提示板文字：「现在是真正的挑战——尽情享受魔法派对吧！」</div>
+
+<div class="step-label">🎮 交互流程</div>
+<table>
+<thead><tr><th>阶段</th><th>玩家行为</th><th>系统反馈</th></tr></thead>
 <tbody>
-<tr><td>音符命中</td><td>涟漪波纹扩散</td><td>手击中音符瞬间，碰撞点向外扩散圆形涟漪波纹（霓虹紫光），约 0.5 秒完成扩散并消散。同时音符碎裂为星尘粒子向外飞散</td></tr>
-<tr><td>评级弹出</td><td>评级文字特效</td><td>命中判定后，评级文字（Perfect / Good / Miss）从命中点向上浮出，Perfect 为金色带光晕，Good 为绿色，Miss 为灰色。文字上浮过程中逐渐放大再缩小 + 淡出，持续约 1 秒</td></tr>
-<tr><td>连线完成</td><td>路径点亮 + 终点爆发</td><td>手指沿路径滑动时，已滑过的路径段从霓虹紫变为亮白色并留有短暂残光（约 0.3 秒后恢复）。滑到终点时终点位置爆发星尘粒子向上飞散，同时弹出评级文字</td></tr>
-<tr><td>姿态匹配</td><td>标记点变绿 + 轮廓闪白</td><td>玩家双手对齐金色标记点时，标记点从金色脉冲变为绿色常亮，同时整个镂空轮廓短暂闪白一次（约 0.3 秒），确认匹配成功。之后姿态墙碎裂消散，弹出评级文字</td></tr>
-<tr><td>炸弹躲避</td><td>炸弹爆炸 / 闪避成功</td><td>玩家被炸弹击中时，炸弹原地爆炸——橙红色火焰粒子爆发 + 屏幕震动 + 红色闪屏（约 0.5 秒），HUD 扣血。成功闪避时，炸弹从玩家身旁飞过后方爆炸（远处爆炸光效），屏幕弹出 "+1" 加分文字</td></tr>
+<tr><td>1. 提示</td><td>阅读顶部提示板</td><td>提示板展示操作说明</td></tr>
+<tr><td>2. 确认</td><td>双手伸出就位（确认手势）</td><td>提示板消失，音乐响起，第一波元素发射</td></tr>
+<tr><td>3. 连续打击</td><td>识别左右手 → 抓取元素 → 按节奏连续击打 8 个</td><td>每次命中：连击计数 + 评级动画（Perfect/Good/Miss）</td></tr>
+<tr><td>4. 完成</td><td>完成 1 套完整流程（累计 8 个有效命中）</td><td>白闪 0.6 秒 → ✅ → 暂停 2 秒 → 自动循环回步骤 1</td></tr>
 </tbody>
 </table>
 
-<h4>五、色彩体系</h4>
-<table class="art-table">
-<thead><tr><th style="width:15%">用途</th><th style="width:20%">色值参考</th><th>说明</th></tr></thead>
-<tbody>
-<tr><td>场景主调</td><td>深紫/暗黑 #1a0033 ~ #2d004d</td><td>空间背景径向渐变主要色域</td></tr>
-<tr><td>霓虹紫</td><td>紫→品红 #8e44ad → #c39bd3</td><td>音符发光环、连线路径主色、姿态墙边框、UI 高亮</td></tr>
-<tr><td>左手标记</td><td>蓝 #3498db / #5dade2</td><td>左手音符标签、左手路径色、手势提示左</td></tr>
-<tr><td>右手标记</td><td>粉 #e91e63 / #f8bbd0</td><td>右手音符标签、右手路径色、手势提示右</td></tr>
-<tr><td>完美评级</td><td>金 #f1c40f</td><td>Perfect 文字、标记点匹配成功</td></tr>
-<tr><td>良好评级</td><td>绿 #2ecc71</td><td>Good 文字、标记点变绿</td></tr>
-<tr><td>失误评级</td><td>灰 #95a5a6</td><td>Miss 文字</td></tr>
-<tr><td>炸弹</td><td>暗铁红 #c0392b → 橙焰 #e67e22</td><td>炸弹外壳裂纹、火焰包裹</td></tr>
-<tr><td>UI 底色</td><td>半透明黑 rgba(0,0,0,0.8)</td><td>提示板、步骤面板底衬</td></tr>
-<tr><td>UI 高亮</td><td>霓虹紫 #8e44ad 发光</td><td>当前步骤边框</td></tr>
-</tbody>
-</table>
+<h3>3. 视觉风格参考</h3>
+<p>VR 第一人称视角 + 游戏引擎实时渲染；视觉基调类似《Beat Saber》的光效节奏感 + 《Synth Riders》的霓虹光效语言；背景 BGM 节拍与视觉脉冲同步，增强节奏感；核心设计原则：<strong>元素从远到近的 3.5 秒飞行轨迹清晰、左右手区分一目了然、评级反馈即时且富有满足感</strong>。</p>
 
-<h4>六、整体风格参考</h4>
-<p>VR 第一人称视角 + 游戏引擎实时渲染；视觉基调类似《Beat Saber》的霓虹美学 +《Synth Riders》的漂浮沉浸感；深紫色深渊空间中漂浮的霓虹元素为核心视觉记忆点；四种玩法元素（音符/连线/姿态墙/炸弹）需在色彩和形态上各自独立可辨，但保持统一的霓虹光效语言；背景 BGM 节拍与视觉脉冲同步，增强节奏感；核心设计原则：<strong>元素从远到近的 3.5 秒飞行轨迹清晰、左右手区分一目了然、评级反馈即时且富有满足感</strong>。</p>
 </div>
 
 <div class="doc-footer">LumiSport Space · 热身阶段设计文档 · 内部资料</div>

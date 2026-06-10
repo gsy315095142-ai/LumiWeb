@@ -7,6 +7,7 @@
 body{font-family:PingFang SC,Microsoft YaHei,sans-serif;max-width:900px;margin:20px auto;line-height:1.8}
 h2{color:#4f6ef7}
 h3{color:#2c3e50}
+h4{color:#e67e22;margin:16px 0 8px}
 table{border-collapse:collapse;width:100%;margin:10px 0}
 td,th{border:1px solid #e2e6ed;padding:8px 12px;text-align:left}
 th{background:#f8f9fb}
@@ -17,229 +18,156 @@ th{background:#f8f9fb}
 .proto-tag{font-size:.75rem;padding:1px 6px;border-radius:3px}
 .proto-tag.image{background:#fff8e6;color:#e67e22}
 .proto-tag.interact{background:#eaf7ee;color:#4caf84}
-.counter-badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:.82rem;font-weight:700;margin-left:4px}
-.counter-badge.fire{background:#fdebd0;color:#d35400}
-.counter-badge.wind{background:#e8f8f5;color:#16a085}
-.counter-badge.ice{background:#ebf5fb;color:#2980b9}
-.art-section{background:#fdf6f0;border-left:4px solid #e67e22;padding:16px 20px;margin:16px 0;border-radius:6px}
-.art-section h4{margin-top:0;color:#d35400}
-.art-table{margin:8px 0}
-.art-table th{background:#fdebd0;color:#d35400;font-size:.9rem}
-.art-table td{font-size:.9rem}
-.voice-block{background:#f0f4ff;border-left:4px solid #4f6ef7;padding:12px 18px;margin:14px 0;border-radius:6px;font-size:.9rem;line-height:1.7}
-.voice-block .voice-label{font-weight:700;color:#4f6ef7;margin-bottom:4px}
-.voice-block .voice-line{margin:2px 0;padding-left:8px}
-.voice-block .voice-line .v-tag{display:inline-block;min-width:70px;font-size:.78rem;font-weight:600;color:#2c3e50}
+.callout{background:#fff8e6;border-left:4px solid #e67e22;padding:12px 16px;margin:16px 0;border-radius:4px}
+.callout .icon{margin-right:6px}
+.info-callout{background:#eaf0ff;border-left:4px solid #4f6ef7;padding:12px 16px;margin:16px 0;border-radius:4px}
+.info-callout .icon{margin-right:6px}
+.parallel-callout{background:#eaf7ee;border-left:4px solid #4caf84;padding:12px 16px;margin:16px 0;border-radius:4px}
+.parallel-callout .icon{margin-right:6px}
+.figure{margin:16px 0;text-align:center}
+.figure img{max-width:100%;border-radius:8px;border:1px solid #e2e6ed}
+.figure .caption{font-size:.85rem;color:#8c9ba8;margin-top:6px}
+
+/* ===== 顶部导航栏 ===== */
+.warmup-nav{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid #e2e6ed;padding:0 16px;display:flex;align-items:center;gap:4px;margin:0 -20px 24px;box-shadow:0 1px 4px rgba(0,0,0,.04);flex-wrap:wrap}
+.warmup-nav .nav-back{display:inline-flex;align-items:center;gap:4px;color:#8c9ba8;text-decoration:none;font-size:13px;font-weight:500;padding:10px 8px 10px 0;white-space:nowrap;transition:color .2s}
+.warmup-nav .nav-back:hover{color:#4f6ef7}
+.warmup-nav .nav-back svg{width:16px;height:16px}
+.warmup-nav .nav-sep{width:1px;height:18px;background:#e2e6ed;margin:0 6px;flex-shrink:0}
+.warmup-nav .nav-links{display:flex;align-items:center;gap:2px;flex-wrap:wrap}
+.warmup-nav .nav-links a{display:inline-block;padding:10px 12px;font-size:13px;font-weight:500;color:#5a6c7d;text-decoration:none;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap}
+.warmup-nav .nav-links a:hover{color:#4f6ef7;background:#f5f7fa}
+.warmup-nav .nav-links a.active{color:#4f6ef7;border-bottom-color:#4f6ef7;font-weight:600}
 </style>
 </head>
 <body>
-<h2 id="sec2">二、冰球热身（发球机模式）</h2>
 
-<h3>2.1 模式区分</h3>
-<p>疾速冰球提供<strong>两套独立的新手教程</strong>，分别对应普通模式与大师模式。大师模式默认玩家已掌握普通模式基础操作，不再重复基础教学，直接进入属性克制系统学习。</p>
-<table><thead><tr><th>模式</th><th>步骤</th><th>内容</th><th>前置条件</th></tr></thead>
-<tbody><tr><td>普通</td><td>4</td><td>场景介绍 → 移动触碰 → 反弹得分 → 被拦截</td><td>无</td></tr><tr><td>大师</td><td>4</td><td>属性入门 → 🔥火盾 → 💨风盾 → ❄️冰盾</td><td>默认玩家已通晓普通模式规则（移动、触碰、得分、防守）</td></tr></tbody></table>
+<!-- 顶部导航栏 -->
+<nav class="warmup-nav">
+  <a href="../lumi-sport.html" class="nav-back">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    返回
+  </a>
+  <div class="nav-sep"></div>
+  <div class="nav-links">
+    <a href="通用规则.html">通用规则</a>
+    <a href="烈焰拳王.html">烈焰拳王</a>
+    <a href="疾速冰球.html" class="active">疾速冰球</a>
+    <a href="雷霆击剑.html">雷霆击剑</a>
+    <a href="魔法派对.html">魔法派对</a>
+  </div>
+</nav>
 
-<h3>2.2 普通模式（4步）</h3>
-<div class="step-flow"><div class="step-item current">📖场景</div><span class="step-arrow">→</span><div class="step-item current">🚶触碰</div><span class="step-arrow">→</span><div class="step-item current">🔀反弹</div><span class="step-arrow">→</span><div class="step-item current">🛡被拦</div></div>
-<div class="step-detail"><div class="step-label">步骤1·场景介绍 <span class="proto-tag image">参考图</span></div><div class="step-desc">欢迎来到疾速冰球！你身处未来科技感的冰球竞技场，手持一面能量盾牌。发球机将向你发射冰球，左右移动用盾牌触碰冰球，将其反弹至对方底线即可得分。准备好了吗？</div>
+<h2>疾速冰球 · 热身设计</h2>
+<p><span class="proto-tag image">示意图</span> <span class="proto-tag interact">交互原型</span></p>
 
-<div class="voice-block">
-<div class="voice-label">🔊 语音播报（仅首次进入时播报，后续循环自动跳过，保持练习节奏不中断）</div>
-<div class="voice-line"><span class="v-tag">进入语：</span>嘿，欢迎来到疾速冰球！你正站在一个超酷的未来冰球竞技场里，手里这面发光的能量盾牌就是你的武器。发球机会把冰球打过来，你要做的就是左右移动，用盾牌接住它、弹到对面底线。触碰底线得一分，打进中间的球门直接加十分！来试试吧！</div>
-</div>
+<div class="callout"><span class="icon">🎯</span><strong>热身目标</strong>：让玩家掌握<strong>接球、属性切换、投球</strong>三大核心操作，理解冰球属性（火/风/冰）的克制关系。</div>
 
-<div class="step-img"><img src="冰球示意图/步骤1.jpg" style="width:100%;max-width:700px;margin-top:10px;border-radius:6px;border:1px solid #e0e0e0;" alt="疾速冰球步骤1示意图"></div></div>
-
-<div class="step-detail"><div class="step-label">步骤2 · 移动触碰 <span class="proto-tag interact">交互</span></div><div class="step-desc">发球机发射冰球（50%速度）。提示：「冰球来了！左右移动，用盾牌触碰」。未接到 → 提示「再试一次！」→ 重新发射。</div>
-
-<div class="voice-block">
-<div class="voice-label">🔊 语音播报</div>
-<div class="voice-line"><span class="v-tag">进入语：</span>来啦来啦，冰球飞过来了！看准它的方向，左右挪一挪，用盾牌去碰它。很简单的，接住就行！</div>
-<div class="voice-line"><span class="v-tag">超时复播：</span>左右动一动，盾牌去碰那个冰球！</div>
-<div class="voice-line"><span class="v-tag">完成语：</span>碰到了！你看，冰球弹回去了！</div>
-</div>
-
-<div class="step-img"><img src="冰球示意图/步骤2.png" style="width:100%;max-width:700px;margin-top:10px;border-radius:6px;border:1px solid #e0e0e0;" alt="疾速冰球步骤2示意图"></div></div>
-
-<div class="step-detail"><div class="step-label">步骤3 · 反弹得分 <span class="proto-tag interact">交互</span></div><div class="step-desc">触碰后冰球反弹向对方底线。「碰到了！反弹到对方底线就能得分！」→ 冰球过底线 +1分 / 进球门 +10分。</div>
-
-<div class="voice-block">
-<div class="voice-label">🔊 语音播报</div>
-<div class="voice-line"><span class="v-tag">进入语：</span>漂亮！冰球正往对面底线飞呢。记住了——球碰到那条发光的底线，加一分；要是正好穿过中间的球门，直接加十分！</div>
-<div class="voice-line"><span class="v-tag">完成语：</span>进球了！底线碰边一分，打进球门十分，看准球门打收益更高哦。</div>
-</div>
-
-<div class="step-img"><img src="冰球示意图/步骤3.png" style="width:100%;max-width:700px;margin-top:10px;border-radius:6px;border:1px solid #e0e0e0;" alt="疾速冰球步骤3示意图"></div></div>
-
-<div class="step-detail"><div class="step-label">步骤4 · 被拦截 <span class="proto-tag interact">交互</span></div><div class="step-desc">再次发射→触碰反弹→<strong>对方持盾拦截</strong>。「被拦住了！正式比赛需要找角度绕过防守」→ 循环回步骤2。</div>
-
-<div class="voice-block">
-<div class="voice-label">🔊 语音播报</div>
-<div class="voice-line"><span class="v-tag">进入语：</span>好，再来一次！这次注意看——诶，对面也有盾牌，把你弹过去的球拦下来了。比赛的时候对手也会这样防你，所以得找角度、绕开他们的盾牌把球打进去。</div>
-<div class="voice-line"><span class="v-tag">完成语：</span>明白了！普通模式的基础操作你已经学会了，正式比赛里记得灵活走位、找角度打进去！</div>
-</div>
-
-<div class="step-img"><img src="冰球示意图/步骤4.png" style="width:100%;max-width:700px;margin-top:10px;border-radius:6px;border:1px solid #e0e0e0;" alt="疾速冰球步骤4示意图"></div></div>
-
-<h3>2.3 大师模式（4步）</h3>
-<p>大师模式新手教程<strong>独立于普通模式</strong>，默认玩家已掌握移动触碰、反弹得分、被拦截等基础操作，直接聚焦于<strong>属性克制系统</strong>的教学。不再重复普通模式的步骤1~4。</p>
-<div class="step-flow"><div class="step-item current">📖属性入门</div><span class="step-arrow">→</span><div class="step-item current">🔥火盾</div><span class="step-arrow">→</span><div class="step-item current">💨风盾</div><span class="step-arrow">→</span><div class="step-item current">❄️冰盾</div></div>
-
-<div class="step-detail"><div class="step-label">步骤1 · 属性入门 <span class="proto-tag image">参考图</span></div>
-<div class="step-desc">
-  <p>欢迎来到大师模式！你已熟悉冰球的基础操作——移动触碰、反弹得分、防守拦截。现在解锁更进阶的<strong>属性克制系统</strong>。</p>
-  <p><strong>三种属性 · 三种手势 · 一个克制循环</strong></p>
-  <p>
-    <span class="counter-badge fire">🔥 火克冰</span> 举<strong>右手</strong>切换火盾，克制冰球<br>
-    <span class="counter-badge wind">💨 风克火</span> 举<strong>左手</strong>切换风盾，克制火球<br>
-    <span class="counter-badge ice">❄️ 冰克风</span> <strong>双手交叉</strong>切换冰盾，克制风球
-  </p>
-  <p>用克制属性的盾牌拦截对应来球，即可将球转化为己方属性弹射回去，并获得额外增益。接下来逐个练习！</p>
-</div>
-
-<div class="voice-block">
-<div class="voice-label">🔊 语音播报（仅首次进入时播报，后续循环自动跳过）</div>
-<div class="voice-line"><span class="v-tag">进入语：</span>欢迎来到大师模式！你已经是冰球老手了，移动、反弹、防守这些基础动作不用再练。今天要学的是属性克制——三种手势控制三种盾牌。火克冰，举右手切火盾；风克火，举左手切风盾；冰克风，双手交叉切冰盾。用克制的盾挡住对应属性的球，球就会变成你的属性弹回去，还有额外增益！准备好了吗？一个一个来！</div>
-</div>
-
-<div class="step-img"><img src="冰球示意图/步骤1.jpg" style="width:100%;max-width:700px;margin-top:10px;border-radius:6px;border:1px solid #e0e0e0;" alt="疾速冰球大师模式步骤1示意图"></div></div>
-
-<div class="step-detail"><div class="step-label">步骤2 · 火盾 <span class="proto-tag interact">交互</span></div>
-<div class="step-desc">
-  <p><strong>AI 发射 ❄️冰球</strong>。右手举起 → 盾切换为🔥火焰形态。</p>
-  <p><span class="counter-badge fire">🔥 火克冰</span> 火盾成功拦截 ❄️冰球时触发克制——冰球被火焰吞噬，<strong>转化为 🔥火球</strong> 并向对方底线弹射。每拦截 2 颗冰球（即第 2 次成功弹反时），<strong>额外生成一颗火球</strong>一同射向对方底线。总共需要成功拦截 2 次（即弹反 2 颗冰球）才能通过。</p>
-</div>
-
-<div class="voice-block">
-<div class="voice-label">🔊 语音播报</div>
-<div class="voice-line"><span class="v-tag">进入语：</span>第一招——火克冰！对面打过来的是冰球。举起你的右手，看，盾牌变成火焰形态了吧？用火盾去接冰球——每次冰球碰到火盾都会被火焰吞掉，变成一颗火球弹回去。重点是——每拦住两颗冰球，第二颗弹回去的时候还会额外多冒出一颗火球！举右手切火盾，弹反两颗就过关。</div>
-<div class="voice-line"><span class="v-tag">超时复播：</span>举右手切火盾，拦两颗冰球会有额外火球！</div>
-<div class="voice-line"><span class="v-tag">完成语：</span>没错，火克冰！第二颗弹反的时候看到额外火球了吧？冰球被你烧成火球打回去了。</div>
-</div>
-
-<div class="step-img"><img src="冰球示意图/步骤5.png" style="width:100%;max-width:700px;margin-top:10px;border-radius:6px;border:1px solid #e0e0e0;" alt="疾速冰球大师模式步骤2示意图"></div></div>
-
-<div class="step-detail"><div class="step-label">步骤3 · 风盾 <span class="proto-tag interact">交互</span></div>
-<div class="step-desc">
-  <p><strong>AI 发射 🔥火球</strong>。左手举起 → 盾切换为💨风暴形态。</p>
-  <p><span class="counter-badge wind">💨 风克火</span> 风盾成功抵挡 🔥火球时触发克制——火球被气流包裹，<strong>转化为 💨风球</strong>，蓄力 3 秒后以最高速度弹射向对方底线（球体属性从 🔥火 → 💨风）。</p>
-  <p>成功抵挡 2 次通过。</p>
-</div>
-
-<div class="voice-block">
-<div class="voice-label">🔊 语音播报</div>
-<div class="voice-line"><span class="v-tag">进入语：</span>第二招——风克火！现在对面打来的是火球。举起左手，盾牌变成风暴形态。风盾撞上火球会把它裹住，<strong>转化成风球</strong>，蓄力三秒之后嗖的一下以最高速度弹回去！举左手切风盾，拦两次过关。</div>
-<div class="voice-line"><span class="v-tag">超时复播：</span>举左手切风盾，把火球卷成风球打回去！</div>
-<div class="voice-line"><span class="v-tag">完成语：</span>帅！风克火，蓄力弹射，最高速度！</div>
-</div>
-
-<div class="step-img"><img src="冰球示意图/步骤6.jpg" style="width:100%;max-width:700px;margin-top:10px;border-radius:6px;border:1px solid #e0e0e0;" alt="疾速冰球大师模式步骤3示意图"></div></div>
-
-<div class="step-detail"><div class="step-label">步骤4 · 冰盾 <span class="proto-tag interact">交互</span></div>
-<div class="step-desc">
-  <p><strong>AI 发射 💨风球</strong>。双手交叉 → 盾切换为❄️冰晶形态。</p>
-  <p><span class="counter-badge ice">❄️ 冰克风</span> 冰盾成功抵挡 💨风球时触发克制——风球被冻结，<strong>转化为 ❄️冰球</strong> 并向对方底线弹射，同时<strong>额外获得 +1 分</strong>（球体属性从 💨风 → ❄️冰，冰球继续飞向对方底线）。</p>
-  <p>成功抵挡 2 次通过。循环回步骤 1。</p>
-</div>
-
-<div class="voice-block">
-<div class="voice-label">🔊 语音播报</div>
-<div class="voice-line"><span class="v-tag">进入语：</span>最后一招——冰克风！对面打来风球。双手交叉，盾牌变成冰晶形态。冰盾碰到风球会瞬间把它冻住——<strong>风球变成冰球弹回去</strong>，而且还会额外加一分！双手交叉切冰盾，冻两次过关。</div>
-<div class="voice-line"><span class="v-tag">超时复播：</span>双手交叉切冰盾，冻住风球变成冰球弹回去！</div>
-<div class="voice-line"><span class="v-tag">完成语：</span>漂亮！冰克风，风球变冰球反弹得分，还额外加一分！三种属性你都学会了，接下来就是多练练手感啦。</div>
-</div>
-
-<div class="step-img"><img src="冰球示意图/步骤7.jpg" style="width:100%;max-width:700px;margin-top:10px;border-radius:6px;border:1px solid #e0e0e0;" alt="疾速冰球大师模式步骤4示意图"></div></div>
-
-<h3>2.4 手势高亮</h3>
-<table><thead><tr><th>手势</th><th>元素</th><th>高亮位置</th></tr></thead>
-<tbody><tr><td>举右手</td><td>🔥火盾</td><td>右手位置</td></tr><tr><td>举左手</td><td>💨风盾</td><td>左手位置</td></tr><tr><td>双手交叉</td><td>❄️冰盾</td><td>双手交叉位置</td></tr></tbody></table>
-
-<h3>2.5 属性克制规则</h3>
-<table><thead><tr><th>克制关系</th><th>触发条件</th><th>球体转化</th><th>增益效果</th></tr></thead>
+<h3>1. 热身步骤总览</h3>
+<table>
+<thead><tr><th>步骤</th><th>名称</th><th>核心动作</th><th>通过条件</th><th>原型</th></tr></thead>
 <tbody>
-<tr><td>🔥 火克冰</td><td>🔥火盾成功拦截 ❄️冰球</td><td>❄️冰球 → 🔥火球</td><td>每拦截 2 颗冰球（第 2 次弹反时），<strong>额外生成一颗火球</strong>一同向对方底线弹射</td></tr>
-<tr><td>❄️ 冰克风</td><td>❄️冰盾成功抵挡 💨风球</td><td>💨风球 → ❄️冰球（反弹）</td><td>冰球向对方底线弹射，并<strong>额外获得 +1 分</strong></td></tr>
-<tr><td>💨 风克火</td><td>💨风盾成功抵挡 🔥火球</td><td>🔥火球 → 💨风球</td><td>球体在盾前<strong>蓄力 3 秒</strong>后以最高速度弹射</td></tr>
-</tbody></table><h3>2.6 右侧面板 UI 行为</h3>
-<h4>普通模式</h4>
-<table><thead><tr><th>时机</th><th>右侧面板</th></tr></thead>
-<tbody><tr><td>步骤2</td><td>「🚶移动触碰」高亮，其余隐藏</td></tr><tr><td>步骤2完成</td><td>✅→消失→步骤3出现</td></tr><tr><td>步骤3完成</td><td>✅→消失→步骤4出现</td></tr><tr><td>全部完成</td><td>✅→消失→🎉→循环回步骤2</td></tr></tbody></table></div>
-<h4>大师模式</h4>
-<table><thead><tr><th>时机</th><th>右侧面板</th></tr></thead>
-<tbody><tr><td>步骤1</td><td>「📖属性入门」高亮，其余隐藏</td></tr><tr><td>步骤1完成</td><td>✅→消失→步骤2「🔥举右手切换火盾」出现 + 底部手势提示区首次出现</td></tr><tr><td>步骤2完成</td><td>✅→消失→步骤3「💨举左手切换风盾」出现</td></tr><tr><td>步骤3完成</td><td>✅→消失→步骤4「❄️双手交叉切换冰盾」出现</td></tr><tr><td>全部完成</td><td>🎉大师教学完成→循环回步骤1，手势提示区隐藏</td></tr></tbody></table>
+<tr><td><span class="step-item">步骤 1</span></td><td>接球</td><td>伸手接住飞来的冰球</td><td>成功接球 3 次</td><td><span class="proto-tag image">示意图</span></td></tr>
+<tr><td><span class="step-item">步骤 2</span></td><td>属性切换</td><td>按 A/B 键切换火/风/冰属性</td><td>正确切换属性 3 次</td><td><span class="proto-tag image">示意图</span></td></tr>
+<tr><td><span class="step-item">步骤 3</span></td><td>投球</td><td>瞄准靶标投出冰球</td><td>命中靶标 2 次</td><td><span class="proto-tag image">示意图</span></td></tr>
+<tr><td><span class="step-item">步骤 4</span></td><td>综合练习</td><td>接球 → 切换属性 → 投球</td><td>完成 1 套完整流程</td><td><span class="proto-tag interact">交互</span></td></tr>
+</tbody>
+</table>
+<p><span class="step-arrow">→</span> 步骤之间为<strong>顺序锁定</strong>：完成当前步骤后自动进入下一步。</p>
 
-<div class="art-section">
-<h3 style="color:#d35400;margin-top:0">2.7 美术需求说明</h3>
-<p>以下为「疾速冰球」场景介绍及全局 UI 所需的美术资源清单，供美术团队制作参考。VR 第一人称视角，游戏引擎实时渲染风格，整体追求<strong>未来科技 + 冰面竞技 + 属性特效</strong>的视觉调性。</p>
+<h3>2. 步骤详细设计</h3>
 
-<h4>一、场景环境</h4>
-<table class="art-table">
-<thead><tr><th style="width:15%">类别</th><th style="width:25%">资源</th><th>制作说明</th></tr></thead>
+<h4>步骤 1：接球</h4>
+<div class="step-label">🎯 目标</div>
+<div class="step-desc">学会接住从正面飞来的冰球——这是所有后续操作的基础。</div>
+
+<div class="step-label">📝 VR 场景描述</div>
+<div class="step-desc">玩家身处冰面竞技场中央，远处有一个<strong>自动发球机</strong>（半透明蓝色轮廓）。冰球从发球机沿直线飞向玩家，速度适中（约 2 秒到达）。冰球带有<strong>白色拖尾光效</strong>，轨迹清晰可见。顶部提示板文字：「伸出手<strong>接住</strong>飞来的冰球，接住 3 个即可通过！」</div>
+
+<div class="figure">
+<img src="冰球示意图/步骤1.png" alt="疾速冰球 步骤1 接球">
+<div class="caption">▲ 步骤 1：接球训练场景示意图</div>
+</div>
+
+<div class="step-label">🎮 交互流程</div>
+<table>
+<thead><tr><th>阶段</th><th>玩家行为</th><th>系统反馈</th></tr></thead>
 <tbody>
-<tr><td>竞技场主体</td><td>未来科技冰球竞技场</td><td>长方形冰面赛道，长约 30m、宽约 12m 的比例感，冰面地板晶莹透亮，有细微磨砂纹理和冰裂纹理，两侧边缘各有一条蓝红渐变发光灯带贯穿全场</td></tr>
-<tr><td>竞技场背景</td><td>暗色场馆空间</td><td>冰面上方为高挑的暗色场馆穹顶，隐约可见钢结构桁架和灯光阵列；冰面下方有微弱蓝光从底部透出，营造冰下光源感；场馆两侧有半透明能量屏障（类似力场墙），防止冰球飞出界外</td></tr>
-<tr><td>发球机区域</td><td>银灰色金属发球机</td><td>位于赛道远端（对方半场底线），银灰色金属外壳，带有蓝色能量指示灯和粒子盘旋效果；大师模式下发球机周围会根据当前属性出现对应粒子——火属性时橙色火焰粒子盘旋、风属性时青白色气旋、冰属性时蓝白冰晶漂浮</td></tr>
-<tr><td>球门底线</td><td>发光底线 + 球门</td><td>赛道两端各有一条横向发光底线，待机时白色微光；底线中央各有一个<strong>发光球门框</strong>，宽度约 2m，门框边缘有金色/蓝色呼吸灯带。冰球碰触底线（含球门两侧区域）→ +1 分，底线爆闪白光；冰球穿过球门 → +10 分，球门爆闪金色光芒 + 金色粒子庆祝</td></tr>
-<tr><td>灯光</td><td>竞技场照明</td><td>整体偏暗冷色调照明，冰面为主要光源（底部透光 + 两侧蓝红灯带），上方聚光灯呈阵列排布，色温偏冷（约 5500K），突出冰面反光质感</td></tr>
+<tr><td>1. 提示</td><td>阅读顶部提示板</td><td>提示板展示操作说明；发球机发出预警音</td></tr>
+<tr><td>2. 确认</td><td>双手伸出就位（确认手势）</td><td>提示板消失，第一颗冰球发射（3 秒延迟）</td></tr>
+<tr><td>3. 接球</td><td>伸手触碰飞来的冰球</td><td>成功：冰球吸附到手中 + 冰蓝色光环特效 + 计数（1/3）；失败：冰球穿过 + 提示「再试一次」，自动补发</td></tr>
+<tr><td>4. 完成</td><td>成功接球 3 次</td><td>白闪 0.6 秒 → ✅ → 暂停 2 秒 → 切入步骤 2</td></tr>
 </tbody>
 </table>
 
-<h4>二、核心道具</h4>
-<table class="art-table">
-<thead><tr><th style="width:15%">类别</th><th style="width:25%">资源</th><th>制作说明</th></tr></thead>
+<h4>步骤 2：属性切换</h4>
+<div class="step-label">🎯 目标</div>
+<div class="step-desc">学会使用手柄按钮在火/风/冰三种属性之间切换，理解颜色对应关系。</div>
+
+<div class="step-label">📝 VR 场景描述</div>
+<div class="step-desc">玩家手中握着一颗白色冰球，面前出现三个<strong>属性靶标</strong>：红色（火）、绿色（风）、蓝色（冰），排成一排。顶部提示板文字：「按 <strong>A 键</strong>或 <strong>B 键</strong>切换你手中冰球的属性，让它变成靶标要求的颜色！」</div>
+
+<div class="figure">
+<img src="冰球示意图/步骤2.png" alt="疾速冰球 步骤2 属性切换">
+<div class="caption">▲ 步骤 2：属性切换训练场景示意图</div>
+</div>
+
+<div class="step-label">🎮 交互流程</div>
+<table>
+<thead><tr><th>阶段</th><th>玩家行为</th><th>系统反馈</th></tr></thead>
 <tbody>
-<tr><td>冰球</td><td>基础冰球</td><td>球形，直径约 20cm，半透明冰蓝色材质，内部有微弱冷光核心，飞行时尾迹为白色冰晶粒子。从发球机发射时带有初始加速度光效</td></tr>
-<tr><td>属性冰球</td><td>火球 / 风球 / 冰球</td><td><strong>火球</strong>：橙红色包裹，表面火焰粒子燃烧，尾迹为火星+黑烟；<strong>风球</strong>：青白色气旋包裹，球体有旋转风纹，尾迹为气流涡旋；<strong>冰球</strong>：深蓝水晶质感，表面霜冻纹理，尾迹为冰晶碎片。三种属性球体大小与基础冰球一致，仅视觉特效不同</td></tr>
-<tr><td>玩家盾牌</td><td>能量盾牌</td><td>半透明能量材质，圆形或六边形，直径约 50cm，待机状态为淡蓝色蜂窝网格。正面朝向玩家视角时可见盾牌内表面有微弱 HUD 信息。盾牌随玩家手部移动实时跟随</td></tr>
-<tr><td>属性盾牌</td><td>火盾 / 风盾 / 冰盾</td><td><strong>火盾</strong>（举右手切换）：盾面变为燃烧的火焰材质，橙红色火焰包裹边缘，蜂窝网格变为火焰纹路；<strong>风盾</strong>（举左手切换）：盾面变为旋转风暴材质，青白色气旋涡流覆盖，边缘有风刃粒子；<strong>冰盾</strong>（双手交叉切换）：盾面变为冰蓝色水晶材质，霜冻纹理覆盖，边缘有冰晶尖刺</td></tr>
-<tr><td>AI 防守者</td><td>对方半场 AI 盾牌</td><td>位于赛道远端球门前，一面大型能量盾牌（约为玩家盾牌 1.5 倍），同样具备属性切换能力（与当前教学步骤的属性对应），用于演示拦截场景</td></tr>
+<tr><td>1. 提示</td><td>阅读顶部提示板</td><td>提示板展示操作说明</td></tr>
+<tr><td>2. 确认</td><td>双手伸出就位（确认手势）</td><td>提示板消失，第一个靶标亮起（随机颜色）</td></tr>
+<tr><td>3. 切换</td><td>按 A/B 键将冰球属性切换为靶标颜色</td><td>正确：冰球变色特效 + 靶标爆裂 + 计数（1/3）；错误：提示「颜色不对，再试试」</td></tr>
+<tr><td>4. 完成</td><td>正确切换 3 次</td><td>白闪 0.6 秒 → ✅ → 暂停 2 秒 → 切入步骤 3</td></tr>
 </tbody>
 </table>
 
-<h4>三、HUD / UI</h4>
-<table class="art-table">
-<thead><tr><th style="width:15%">类别</th><th style="width:25%">资源</th><th>制作说明</th></tr></thead>
+<h4>步骤 3：投球</h4>
+<div class="step-label">🎯 目标</div>
+<div class="step-desc">学会瞄准并投出冰球击中目标。</div>
+
+<div class="step-label">📝 VR 场景描述</div>
+<div class="step-desc">面前出现一个<strong>圆形靶标</strong>（类似冰球门），靶心有高亮闪烁提示。玩家手中自动获得一颗冰球。顶部提示板文字：「<strong>瞄准靶标，挥臂投出</strong>冰球，命中 2 次即可通过！」</div>
+
+<div class="figure">
+<img src="冰球示意图/步骤3.png" alt="疾速冰球 步骤3 投球">
+<div class="caption">▲ 步骤 3：投球训练场景示意图</div>
+</div>
+
+<div class="step-label">🎮 交互流程</div>
+<table>
+<thead><tr><th>阶段</th><th>玩家行为</th><th>系统反馈</th></tr></thead>
 <tbody>
-<tr><td>顶部提示板</td><td>文字提示板</td><td>屏幕顶部中央，半透明深色圆角矩形底（80% 不透明黑底 + 冰蓝色微弱描边），白色文字居中。进入场景时从上方滑入 + 淡入动画（约 0.5 秒）</td></tr>
-<tr><td>右侧步骤面板</td><td>垂直步骤列表</td><td>屏幕右侧纵向排列，仅当前步骤高亮（冰蓝色发光边框 + 文字高亮），其余步骤暗隐。每步完成打 ✅ 并消失，下一步上移</td></tr>
-<tr><td>雷达指示器</td><td>冰球方向雷达</td><td>屏幕中下方小型圆形雷达，显示冰球相对玩家的方位和距离，冰球为移动的亮点，距离越近亮点越大越亮</td></tr>
-<tr><td>底部手势提示栏</td><td>三属性图标</td><td>大师模式步骤2~4时，屏幕底部出现三个横向排列的图标（🔥火 / 💨风 / ❄️冰），当前需要切换的属性图标高亮脉冲，其余暗隐。玩家做出正确手势后对应图标变绿确认</td></tr>
-<tr><td>得分反馈</td><td>得分特效</td><td>冰球触碰底线 → 屏幕弹出 "+1" 白色文字，底线白闪，约 0.5 秒消散；冰球穿过球门 → 屏幕弹出 "+10" 金色文字（配合金色粒子爆发），球门爆闪金光，约 1 秒消散；冰盾克制成功 → 屏幕额外弹出 "+1" 蓝色文字</td></tr>
+<tr><td>1. 提示</td><td>阅读顶部提示板</td><td>提示板展示操作说明</td></tr>
+<tr><td>2. 确认</td><td>双手伸出就位（确认手势）</td><td>提示板消失，冰球自动到手，靶标出现</td></tr>
+<tr><td>3. 投球</td><td>挥臂将冰球投向靶标</td><td>命中：冰球碎裂特效 + 靶标缩小 + 计数（1/2）；未中：冰球落地消散 + 提示「再试一次」，自动补球</td></tr>
+<tr><td>4. 完成</td><td>命中 2 次</td><td>白闪 0.6 秒 → ✅ → 暂停 2 秒 → 切入步骤 4</td></tr>
 </tbody>
 </table>
 
-<h4>四、特效清单</h4>
-<table class="art-table">
-<thead><tr><th style="width:15%">类别</th><th style="width:25%">资源</th><th>制作说明</th></tr></thead>
+<h4>步骤 4：综合练习</h4>
+<div class="step-label">🎯 目标</div>
+<div class="step-desc">将接球、属性切换、投球串联为完整攻防流程。</div>
+
+<div class="step-label">📝 VR 场景描述</div>
+<div class="step-desc">场景升级为正式竞技场氛围。远处发球机发射带属性颜色的冰球（红/绿/蓝随机）。面前出现对应属性的<strong>克制靶标</strong>。右侧 HUD 显示流程进度条：「<strong>接球 → 切换属性 → 投球</strong>」。顶部提示板文字：「把所有动作组合起来，完成一套完整攻防！」</div>
+
+<div class="step-label">🎮 交互流程</div>
+<table>
+<thead><tr><th>阶段</th><th>玩家行为</th><th>系统反馈</th></tr></thead>
 <tbody>
-<tr><td>触碰反弹</td><td>碰撞火花</td><td>冰球撞击盾牌瞬间，碰撞点爆发冰蓝色火花粒子（约 0.3 秒），冰球随即改变方向弹射，弹射轨迹带发光弧线残留</td></tr>
-<tr><td>底线得分</td><td>撞线白光 + 球门金色庆祝</td><td>冰球碰触底线 → 底线白闪 + "+1"；冰球穿过球门 → 球门爆闪金色光芒 + 金色粒子向上飞散 + "+10"</td></tr>
-<tr><td>拦截碰撞</td><td>拦截火花</td><td>冰球被 AI 盾牌拦截时，碰撞点迸发橙红色火花粒子，AI 盾牌短暂高亮闪烁，冰球被弹开消失</td></tr>
-<tr><td>属性克制</td><td>克制特效 + 球体转化</td><td><strong>火克冰</strong>：❄️冰球撞击🔥火盾瞬间被火焰吞噬，球体从冰蓝色转化为橙红色🔥火球，伴随火焰爆发粒子，火球自动向对方底线弹射；每弹反 2 颗冰球（第 2 次弹反时），额外生成一颗火球一同射出；<strong>风克火</strong>：🔥火球撞击💨风盾时被气流包裹，球体从橙红色转化为青白色💨风球，周围形成旋转风涡蓄力 3 秒后以最高速度弹出；<strong>冰克风</strong>：💨风球撞击❄️冰盾瞬间冻结，球体从青白色转化为深蓝冰晶❄️冰球，冰球向对方底线弹射，屏幕弹出 "+1" 额外加分</td></tr>
-<tr><td>手势切换</td><td>盾牌切换光效</td><td>玩家做出属性手势时，盾牌从基础形态过渡到属性形态，过渡动画约 0.4 秒：基础盾面粒子消散 → 属性粒子汇聚成形 → 新盾牌稳定发光</td></tr>
+<tr><td>1. 提示</td><td>阅读顶部提示板</td><td>提示板展示操作说明</td></tr>
+<tr><td>2. 确认</td><td>双手伸出就位（确认手势）</td><td>提示板消失，第一颗属性冰球发射</td></tr>
+<tr><td>3. 接球</td><td>接住飞来的属性冰球</td><td>吸附特效 + 进度条第 1 段亮起</td></tr>
+<tr><td>4. 切换</td><td>将属性切换为克制靶标的颜色</td><td>变色特效 + 进度条第 2 段亮起</td></tr>
+<tr><td>5. 投球</td><td>瞄准克制靶标投出</td><td>命中爆炸特效 + 进度条全部亮起</td></tr>
+<tr><td>6. 完成</td><td>完成 1 套完整流程</td><td>白闪 0.6 秒 → ✅ → 暂停 2 秒 → 自动循环回步骤 1</td></tr>
 </tbody>
 </table>
 
-<h4>五、色彩体系</h4>
-<table class="art-table">
-<thead><tr><th style="width:15%">用途</th><th style="width:20%">色值参考</th><th>说明</th></tr></thead>
-<tbody>
-<tr><td>场景主调</td><td>深蓝黑 #0a1628 ~ #1a2a40</td><td>竞技场穹顶、背景空间、暗色区域</td></tr>
-<tr><td>冰面</td><td>冰蓝白 #d6eaf8 ~ #aed6f1</td><td>冰面地板主色，带底部透光感</td></tr>
-<tr><td>灯带（左蓝）</td><td>蓝 #3498db / #5dade2</td><td>左侧冰面灯带、冰属性元素</td></tr>
-<tr><td>灯带（右红）</td><td>红 #e74c3c / #ec7063</td><td>右侧冰面灯带</td></tr>
-<tr><td>火属性</td><td>橙红→金黄 #e67e22 → #f1c40f</td><td>火球、火盾、火焰粒子特效</td></tr>
-<tr><td>风属性</td><td>青白 #1abc9c → #d4efdf</td><td>风球、风盾、气旋粒子特效</td></tr>
-<tr><td>冰属性</td><td>冰蓝 #2980b9 → #d6eaf8</td><td>冰球、冰盾、冰晶粒子特效</td></tr>
-<tr><td>UI 底色</td><td>半透明黑 rgba(0,0,0,0.8)</td><td>提示板、步骤面板底衬</td></tr>
-<tr><td>UI 高亮</td><td>冰蓝 #3498db 发光</td><td>当前步骤边框、雷达指示器</td></tr>
-</tbody>
-</table>
-
-<h4>六、整体风格参考</h4>
+<h3>3. 视觉风格参考</h3>
 <p>VR 第一人称视角 + 游戏引擎实时渲染；视觉基调类似《Echo VR》的零重力竞技场氛围 + 赛博轻量级 UI 叠层；冰面反光与属性粒子特效为核心视觉记忆点；三属性（火/风/冰）的色彩对比要鲜明且各自独立可辨；核心设计原则：<strong>冰球飞行轨迹清晰可见、属性切换反馈即时明确、不因特效堆叠遮挡玩家视线</strong>。</p>
-</div>
 
-</body></html>
+</body>
+</html>

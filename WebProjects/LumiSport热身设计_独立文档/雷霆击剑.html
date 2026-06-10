@@ -7,6 +7,7 @@
 body{font-family:PingFang SC,Microsoft YaHei,sans-serif;max-width:900px;margin:20px auto;line-height:1.8}
 h2{color:#4f6ef7}
 h3{color:#2c3e50}
+h4{color:#e67e22;margin:16px 0 8px}
 table{border-collapse:collapse;width:100%;margin:10px 0}
 td,th{border:1px solid #e2e6ed;padding:8px 12px;text-align:left}
 th{background:#f8f9fb}
@@ -17,158 +18,156 @@ th{background:#f8f9fb}
 .proto-tag{font-size:.75rem;padding:1px 6px;border-radius:3px}
 .proto-tag.image{background:#fff8e6;color:#e67e22}
 .proto-tag.interact{background:#eaf7ee;color:#4caf84}
-.art-section{background:#fdf6f0;border-left:4px solid #e67e22;padding:16px 20px;margin:16px 0;border-radius:6px}
-.art-section h4{margin-top:0;color:#d35400}
-.art-table{margin:8px 0}
-.art-table th{background:#fdebd0;color:#d35400;font-size:.9rem}
-.art-table td{font-size:.9rem}
-.voice-block{background:#f0f4ff;border-left:4px solid #4f6ef7;padding:12px 18px;margin:14px 0;border-radius:6px;font-size:.9rem;line-height:1.7}
-.voice-block .voice-label{font-weight:700;color:#4f6ef7;margin-bottom:4px}
-.voice-block .voice-line{margin:2px 0;padding-left:8px}
-.voice-block .voice-line .v-tag{display:inline-block;min-width:70px;font-size:.78rem;font-weight:600;color:#2c3e50}
+.callout{background:#fff8e6;border-left:4px solid #e67e22;padding:12px 16px;margin:16px 0;border-radius:4px}
+.callout .icon{margin-right:6px}
+.info-callout{background:#eaf0ff;border-left:4px solid #4f6ef7;padding:12px 16px;margin:16px 0;border-radius:4px}
+.info-callout .icon{margin-right:6px}
+.parallel-callout{background:#eaf7ee;border-left:4px solid #4caf84;padding:12px 16px;margin:16px 0;border-radius:4px}
+.parallel-callout .icon{margin-right:6px}
+.figure{margin:16px 0;text-align:center}
+.figure img{max-width:100%;border-radius:8px;border:1px solid #e2e6ed}
+.figure .caption{font-size:.85rem;color:#8c9ba8;margin-top:6px}
+
+/* ===== 顶部导航栏 ===== */
+.warmup-nav{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid #e2e6ed;padding:0 16px;display:flex;align-items:center;gap:4px;margin:0 -20px 24px;box-shadow:0 1px 4px rgba(0,0,0,.04);flex-wrap:wrap}
+.warmup-nav .nav-back{display:inline-flex;align-items:center;gap:4px;color:#8c9ba8;text-decoration:none;font-size:13px;font-weight:500;padding:10px 8px 10px 0;white-space:nowrap;transition:color .2s}
+.warmup-nav .nav-back:hover{color:#4f6ef7}
+.warmup-nav .nav-back svg{width:16px;height:16px}
+.warmup-nav .nav-sep{width:1px;height:18px;background:#e2e6ed;margin:0 6px;flex-shrink:0}
+.warmup-nav .nav-links{display:flex;align-items:center;gap:2px;flex-wrap:wrap}
+.warmup-nav .nav-links a{display:inline-block;padding:10px 12px;font-size:13px;font-weight:500;color:#5a6c7d;text-decoration:none;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap}
+.warmup-nav .nav-links a:hover{color:#4f6ef7;background:#f5f7fa}
+.warmup-nav .nav-links a.active{color:#4f6ef7;border-bottom-color:#4f6ef7;font-weight:600}
 </style>
 </head>
 <body>
 
-<h2 id="sec4">四、击剑热身（刺击+位移）</h2>
+<!-- 顶部导航栏 -->
+<nav class="warmup-nav">
+  <a href="../lumi-sport.html" class="nav-back">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    返回
+  </a>
+  <div class="nav-sep"></div>
+  <div class="nav-links">
+    <a href="通用规则.html">通用规则</a>
+    <a href="烈焰拳王.html">烈焰拳王</a>
+    <a href="疾速冰球.html">疾速冰球</a>
+    <a href="雷霆击剑.html" class="active">雷霆击剑</a>
+    <a href="魔法派对.html">魔法派对</a>
+  </div>
+</nav>
 
-<div class="step-flow"><div class="step-item">📖场景</div><span class="step-arrow">→</span><div class="step-item">📋规则</div><span class="step-arrow">→</span><div class="step-item">🤺刺上身</div><span class="step-arrow">→</span><div class="step-item">🛡️格挡</div><span class="step-arrow">→</span><div class="step-item">↕️前后</div><span class="step-arrow">→</span><div class="step-item">↔️左右</div></div>
+<h2>雷霆击剑 · 热身设计</h2>
+<p><span class="proto-tag image">示意图</span> <span class="proto-tag interact">交互原型</span></p>
 
-<div class="step-detail"><div class="step-label">步骤1·场景介绍 <span class="proto-tag image">参考图</span></div><div class="step-desc">欢迎来到雷霆击剑！你手持光剑，面对一个训练假人。刺中假人暴露的金色部位即可得分，同时注意格挡假人的反击。通过前后站位和左右躲闪，掌握击剑的步法精髓。准备好了吗？</div>
+<div class="callout"><span class="icon">🎯</span><strong>热身目标</strong>：让玩家掌握<strong>刺击、格挡、位移</strong>三大核心操作，理解攻击窗口（金色暴露区域）与护盾机制。</div>
 
-<div class="voice-block">
-<div class="voice-label">🔊 语音播报</div>
-<div class="voice-line"><span class="v-tag">进入语：</span>雷霆击剑！握紧淡蓝色光剑，对面训练假人会攻会防。亮金色的地方刺过去得分，蓝色护盾罩着的地方别碰。练好刺击、格挡、前后走位和左右闪避，你就是击剑手。开练！</div>
-</div>
-
-<div class="step-img"><img src="击剑示意图/步骤1.png" style="width:100%;max-width:700px;margin-top:10px;border-radius:6px;border:1px solid #e0e0e0;" alt="雷霆击剑步骤1示意图"></div></div>
-
-<div class="step-detail"><div class="step-label">步骤2·规则 <span class="proto-tag image">参考图</span></div><div class="step-desc">展示假人分区。「刺中暴露部位得分，被格挡光剑失效」。确认后进入下一步。</div>
-
-<div class="voice-block">
-<div class="voice-label">🔊 语音播报</div>
-<div class="voice-line"><span class="v-tag">进入语：</span>规则简单——假人被发光条分上下半身，金色就是弱点刺中得分，蓝色护盾打上去没用。伸手确认。</div>
-<div class="voice-line"><span class="v-tag">完成语：</span>清楚了，上手！</div>
-</div>
-
-<div class="step-img"><img src="击剑示意图/步骤2.png" style="width:100%;max-width:700px;margin-top:10px;border-radius:6px;border:1px solid #e0e0e0;" alt="雷霆击剑步骤2示意图"></div></div>
-
-<div class="step-detail"><div class="step-label">步骤3·刺上身 <span class="proto-tag interact">交互</span></div><div class="step-desc">上身暴露（金色+🎯）。向前刺击上身。3次通过。</div>
-
-<div class="voice-block">
-<div class="voice-label">🔊 语音播报</div>
-<div class="voice-line"><span class="v-tag">进入语：</span>刺击——上半身金色，看靶心。光剑往前刺，三次过关。</div>
-<div class="voice-line"><span class="v-tag">超时复播：</span>往前刺，瞄准金色靶心！</div>
-<div class="voice-line"><span class="v-tag">完成语：</span>刺击手感有了。</div>
-</div>
-
-<div class="step-img"><img src="击剑示意图/步骤3.png" style="width:100%;max-width:700px;margin-top:10px;border-radius:6px;border:1px solid #e0e0e0;" alt="雷霆击剑步骤3示意图"></div></div>
-
-<div class="step-detail"><div class="step-label">步骤4·格挡 <span class="proto-tag interact">交互</span></div><div class="step-desc">假人主动刺击，玩家抬剑格挡。格挡成功则假人光剑短暂失效。3次通过。</div>
-
-<div class="voice-block">
-<div class="voice-label">🔊 语音播报</div>
-<div class="voice-line"><span class="v-tag">进入语：</span>假人要还手了——橙红剑刺过来就抬剑挡住。架住后假人光剑会灭，护盾消失趁机反击。格挡三次过。</div>
-<div class="voice-line"><span class="v-tag">超时复播：</span>假人刺过来就抬剑挡！</div>
-<div class="voice-line"><span class="v-tag">完成语：</span>格挡没问题，接下来脚步。</div>
-</div>
-
-<div class="step-img"><img src="击剑示意图/步骤4.1.png" style="width:100%;max-width:700px;margin-top:10px;border-radius:6px;border:1px solid #e0e0e0;" alt="雷霆击剑步骤4示意图 · 假人刺击"><br><img src="击剑示意图/步骤4.2.png" style="width:100%;max-width:700px;margin-top:10px;border-radius:6px;border:1px solid #e0e0e0;" alt="雷霆击剑步骤4示意图 · 玩家格挡"></div></div>
-
-<div class="step-detail"><div class="step-label">步骤5·前后站位 <span class="proto-tag interact">交互</span></div><div class="step-desc">假人攻击，地面箭头↑↓。身体前移或后撤。3次通过。</div>
-
-<div class="voice-block">
-<div class="voice-label">🔊 语音播报</div>
-<div class="voice-line"><span class="v-tag">进入语：</span>前后移动——看地上箭头。往上指前进，往下指后退。跟着箭头走，三次过。</div>
-<div class="voice-line"><span class="v-tag">超时复播：</span>看箭头，前进或后退！</div>
-<div class="voice-line"><span class="v-tag">完成语：</span>前后走位会了。</div>
-</div>
-
-<div class="step-img"><img src="击剑示意图/步骤5.png" style="width:100%;max-width:700px;margin-top:10px;border-radius:6px;border:1px solid #e0e0e0;" alt="雷霆击剑步骤5示意图"></div></div>
-
-<div class="step-detail"><div class="step-label">步骤6·左右躲闪 <span class="proto-tag interact">交互</span></div><div class="step-desc">地面箭头←→。左横移/右横移。3次通过，循环回步骤4。</div>
-
-<div class="voice-block">
-<div class="voice-label">🔊 语音播报</div>
-<div class="voice-line"><span class="v-tag">进入语：</span>左右闪避——地上左右箭头，跟着方向横移躲开假人攻击。三次过。</div>
-<div class="voice-line"><span class="v-tag">超时复播：</span>跟着箭头，左闪右闪！</div>
-<div class="voice-line"><span class="v-tag">完成语：</span>全掌握了！刺击、格挡、走位、闪避。接下来多练，越打越顺手。</div>
-</div>
-
-<div class="step-img"><img src="击剑示意图/步骤6.png" style="width:100%;max-width:700px;margin-top:10px;border-radius:6px;border:1px solid #e0e0e0;" alt="雷霆击剑步骤6示意图"></div></div>
-
-<h3>位移速查</h3>
-<table><thead><tr><th>类型</th><th>操作</th><th>提示</th></tr></thead>
-<tbody><tr><td>↕️前后站位</td><td>前移靠近/后撤远离</td><td>地面↑或↓</td></tr><tr><td>↔️左右躲闪</td><td>左横移/右横移</td><td>地面←或→</td></tr></tbody></table>
-
-<div class="art-section">
-<h3 style="color:#d35400;margin-top:0">美术需求说明</h3>
-<p>以下为「雷霆击剑」场景介绍及全局 UI 所需的美术资源清单，供美术团队制作参考。VR 第一人称视角，游戏引擎实时渲染风格，整体追求<strong>未来科技 + 光剑击剑 + 赛道竞技</strong>的视觉调性。</p>
-
-<h4>一、场景环境</h4>
-<table class="art-table">
-<thead><tr><th style="width:15%">类别</th><th style="width:25%">资源</th><th>制作说明</th></tr></thead>
+<h3>1. 热身步骤总览</h3>
+<table>
+<thead><tr><th>步骤</th><th>名称</th><th>核心动作</th><th>通过条件</th><th>原型</th></tr></thead>
 <tbody>
-<tr><td>竞技场主体</td><td>未来科技击剑赛道</td><td>直线型击剑赛道，长约 14m、宽约 2m，金属质感地板（深灰银色调），赛道中央有一条纵向中线（微弱白光），两侧边缘各有蓝红双色灯带贯穿全场。赛道表面有网格纹理，增强科技感</td></tr>
-<tr><td>竞技场背景</td><td>暗色场馆空间</td><td>赛道两侧和远端为深色暗黑背景，空中漂浮微弱光点粒子（类似悬浮灰尘在光束中），营造沉浸感。背景不设具体观众或建筑细节，保持视觉焦点在赛道和假人上</td></tr>
-<tr><td>灯光</td><td>赛道照明系统</td><td>顶部多盏条形灯沿赛道纵向排列，色温偏冷（约 5500K），灯光投射在金属地板上产生线状高光反射。赛道两侧蓝红灯带为环境主光源，左蓝右红形成冷暖对比</td></tr>
-<tr><td>地面指示</td><td>方向箭头系统</td><td>赛道地板内置发光方向箭头（↑↓←→），平时暗隐。前后站位步骤时 ↑↓ 箭头以蓝色脉冲闪烁；左右躲闪步骤时 ←→ 箭头以蓝色脉冲闪烁。玩家成功移动后对应箭头变绿确认</td></tr>
+<tr><td><span class="step-item">步骤 1</span></td><td>刺击</td><td>光剑直线前刺命中目标</td><td>命中 3 次</td><td><span class="proto-tag image">示意图</span></td></tr>
+<tr><td><span class="step-item">步骤 2</span></td><td>格挡</td><td>光剑横挡格挡来袭攻击</td><td>成功格挡 2 次</td><td><span class="proto-tag image">示意图</span></td></tr>
+<tr><td><span class="step-item">步骤 3</span></td><td>位移</td><td>前/后/左/右移动至指定区域</td><td>到位 3 次</td><td><span class="proto-tag image">示意图</span></td></tr>
+<tr><td><span class="step-item">步骤 4</span></td><td>综合练习</td><td>格挡 → 位移 → 寻找窗口 → 刺击</td><td>完成 1 套完整攻防</td><td><span class="proto-tag interact">交互</span></td></tr>
+</tbody>
+</table>
+<p><span class="step-arrow">→</span> 步骤之间为<strong>顺序锁定</strong>：完成当前步骤后自动进入下一步。</p>
+
+<h3>2. 步骤详细设计</h3>
+
+<h4>步骤 1：刺击</h4>
+<div class="step-label">🎯 目标</div>
+<div class="step-desc">学会最基本的攻击动作——用光剑直线前刺命中目标。</div>
+
+<div class="step-label">📝 VR 场景描述</div>
+<div class="step-desc">玩家手持一把蓝色光剑，面前出现一个<strong>训练人偶</strong>。人偶胸口有一个金色圆形靶标（暴露区域），周围是蓝色护盾覆盖。顶部提示板文字：「用你的光剑<strong>刺击</strong>人偶胸口的金色区域，命中 3 次即可通过！」</div>
+
+<div class="figure">
+<img src="击剑示意图/步骤1.png" alt="雷霆击剑 步骤1 刺击">
+<div class="caption">▲ 步骤 1：刺击训练场景示意图</div>
+</div>
+
+<div class="step-label">🎮 交互流程</div>
+<table>
+<thead><tr><th>阶段</th><th>玩家行为</th><th>系统反馈</th></tr></thead>
+<tbody>
+<tr><td>1. 提示</td><td>阅读顶部提示板</td><td>提示板展示操作说明；金色靶标脉冲闪烁</td></tr>
+<tr><td>2. 确认</td><td>双手伸出就位（确认手势）</td><td>提示板消失，靶标变为可攻击状态</td></tr>
+<tr><td>3. 刺击</td><td>挥动光剑刺向金色靶标</td><td>命中：电光碰撞特效 + 计数（1/3）；刺到护盾：蓝色火花弹开 + 提示「瞄准金色区域」</td></tr>
+<tr><td>4. 完成</td><td>命中 3 次</td><td>白闪 0.6 秒 → ✅ → 暂停 2 秒 → 切入步骤 2</td></tr>
 </tbody>
 </table>
 
-<h4>二、核心道具</h4>
-<table class="art-table">
-<thead><tr><th style="width:15%">类别</th><th style="width:25%">资源</th><th>制作说明</th></tr></thead>
+<h4>步骤 2：格挡</h4>
+<div class="step-label">🎯 目标</div>
+<div class="step-desc">学会用光剑格挡对手的攻击。</div>
+
+<div class="step-label">📝 VR 场景描述</div>
+<div class="step-desc">训练人偶现在手持一把红色光剑，会缓慢向玩家发起<strong>直线刺击</strong>（有红色预警线提示）。顶部提示板文字：「将你的光剑<strong>横在身前</strong>来格挡对手的攻击！」</div>
+
+<div class="figure">
+<img src="击剑示意图/步骤2.png" alt="雷霆击剑 步骤2 格挡">
+<div class="caption">▲ 步骤 2：格挡训练场景示意图</div>
+</div>
+
+<div class="step-label">🎮 交互流程</div>
+<table>
+<thead><tr><th>阶段</th><th>玩家行为</th><th>系统反馈</th></tr></thead>
 <tbody>
-<tr><td>训练假人</td><td>银灰色金属假人</td><td>人形训练假人立于赛道远端，高约 1.8m，银灰色金属材质，身体表面有发光分区线——一条横向发光线将躯干分为上下半身。假人手中持一把光剑，手臂可切换攻击/防守姿态。假人无面部细节，头部为简约几何造型</td></tr>
-<tr><td>分区标记</td><td>上身 / 下身暴露区域</td><td>假人身体上下半身可独立呈现<strong>金色暴露态</strong>（可攻击窗口）或<strong>蓝色护盾态</strong>（格挡中）。金色暴露区域带有脉冲🎯靶心标记闪烁（hologram 投射效果），蓝色护盾区域覆盖半透明能量护盾纹理。两种状态可随步骤在上下半身之间切换</td></tr>
-<tr><td>玩家光剑</td><td>光剑</td><td>剑柄为深色金属圆柱形，长约 25cm；剑刃为半透明能量光束，淡蓝色，长约 90cm，带有微弱的电弧跳动效果和低沉的嗡嗡声视觉化光晕。刺击命中时剑刃短暂闪白</td></tr>
-<tr><td>假人光剑</td><td>AI 光剑</td><td>与玩家光剑造型一致，但剑刃颜色为橙红色以区分敌我。格挡教学时假人光剑主动刺出；格挡成功后假人光剑短暂闪烁变暗（失效状态），持续约 1.5 秒后恢复</td></tr>
+<tr><td>1. 提示</td><td>阅读顶部提示板</td><td>提示板展示操作说明</td></tr>
+<tr><td>2. 确认</td><td>双手伸出就位（确认手势）</td><td>提示板消失，人偶准备攻击（3 秒延迟）</td></tr>
+<tr><td>3. 格挡</td><td>在红色预警线消失前将光剑横挡在身前</td><td>成功：光剑碰撞电光特效 + 清脆金属音效；失败：红色冲击波 + 提示「再试一次」</td></tr>
+<tr><td>4. 完成</td><td>成功格挡 2 次</td><td>白闪 0.6 秒 → ✅ → 暂停 2 秒 → 切入步骤 3</td></tr>
 </tbody>
 </table>
 
-<h4>三、HUD / UI</h4>
-<table class="art-table">
-<thead><tr><th style="width:15%">类别</th><th style="width:25%">资源</th><th>制作说明</th></tr></thead>
+<h4>步骤 3：位移</h4>
+<div class="step-label">🎯 目标</div>
+<div class="step-desc">学会在地面上快速移动到指定位置，理解位移在攻防中的作用。</div>
+
+<div class="step-label">📝 VR 场景描述</div>
+<div class="step-desc">地面出现一个<strong>发光圆环</strong>（金色），提示玩家移动过去。圆环会在不同位置依次出现（前/后/左/右）。顶部提示板文字：「<strong>移动到</strong>地面上的金色圆环内，到位 3 次即可通过！」</div>
+
+<div class="figure">
+<img src="击剑示意图/步骤3.png" alt="雷霆击剑 步骤3 位移">
+<div class="caption">▲ 步骤 3：位移训练场景示意图</div>
+</div>
+
+<div class="step-label">🎮 交互流程</div>
+<table>
+<thead><tr><th>阶段</th><th>玩家行为</th><th>系统反馈</th></tr></thead>
 <tbody>
-<tr><td>顶部提示板</td><td>文字提示板</td><td>屏幕顶部中央，半透明深色圆角矩形底（80% 不透明黑底 + 淡蓝微弱描边），白色文字居中。进入场景时从上方滑入 + 淡入动画（约 0.5 秒）</td></tr>
-<tr><td>右侧步骤面板</td><td>垂直步骤列表</td><td>屏幕右侧纵向排列，仅当前步骤高亮（淡蓝色发光边框 + 文字高亮），其余步骤暗隐。每步完成打 ✅ 并消失</td></tr>
-<tr><td>得分区域</td><td>HUD 得分显示</td><td>屏幕右上角显示当前得分数字，数字变化时有放大 + 回弹动画和金色微光</td></tr>
-<tr><td>命中反馈</td><td>✅ 确认标记</td><td>刺中有效部位后，屏幕中央出现 ✅ 图标（金色，带粒子消散），伴随白闪 0.6 秒</td></tr>
+<tr><td>1. 提示</td><td>阅读顶部提示板</td><td>提示板展示操作说明</td></tr>
+<tr><td>2. 确认</td><td>双手伸出就位（确认手势）</td><td>提示板消失，第一个圆环出现</td></tr>
+<tr><td>3. 位移</td><td>走到/侧步到圆环内</td><td>到位：圆环爆裂金色特效 + 计数（1/3）；超时（5 秒）：提示「快移动到圆环内」，圆环重置</td></tr>
+<tr><td>4. 完成</td><td>到位 3 次</td><td>白闪 0.6 秒 → ✅ → 暂停 2 秒 → 切入步骤 4</td></tr>
 </tbody>
 </table>
 
-<h4>四、特效清单</h4>
-<table class="art-table">
-<thead><tr><th style="width:15%">类别</th><th style="width:25%">资源</th><th>制作说明</th></tr></thead>
+<h4>步骤 4：综合练习</h4>
+<div class="step-label">🎯 目标</div>
+<div class="step-desc">将格挡、位移、刺击串联为完整攻防回合。</div>
+
+<div class="step-label">📝 VR 场景描述</div>
+<div class="step-desc">场景升级为正式击剑赛道。训练人偶变为<strong>完整实体对手</strong>，会发起攻击并暴露弱点。右侧 HUD 显示流程进度条：「<strong>格挡 → 位移 → 寻找窗口 → 刺击</strong>」。顶部提示板文字：「把所有动作组合起来，完成一次完整攻防！」</div>
+
+<div class="step-label">🎮 交互流程</div>
+<table>
+<thead><tr><th>阶段</th><th>玩家行为</th><th>系统反馈</th></tr></thead>
 <tbody>
-<tr><td>刺击命中</td><td>电光火花粒子</td><td>光剑刺中假人金色区域瞬间，碰撞点爆发蓝色闪电火花粒子（类似电路短路），粒子向外飞溅后快速消散（约 0.5 秒），伴随轻微屏幕震动</td></tr>
-<tr><td>格挡碰撞</td><td>光剑碰撞特效</td><td>两把光剑格挡碰撞时，碰撞点迸发蓝白+橙红混合的电流放电特效，呈放射状扩散（约 0.5 秒），伴随明显的金属碰撞音视觉化波纹</td></tr>
-<tr><td>格挡失效</td><td>假人光剑失效</td><td>格挡成功后，假人光剑剑刃从橙红色逐渐变暗→闪烁→变为灰色透明态，持续约 1.5 秒后恢复。失效期间假人上半身或下半身的护盾也会短暂消失，暴露金色区域</td></tr>
-<tr><td>位移确认</td><td>箭头变色 + 脚步光效</td><td>玩家成功移动到指定位置后，地面方向箭头从蓝色脉冲变为绿色常亮，同时玩家脚下出现一圈绿色光环确认（持续约 0.5 秒后消散）</td></tr>
+<tr><td>1. 提示</td><td>阅读顶部提示板</td><td>提示板展示操作说明</td></tr>
+<tr><td>2. 确认</td><td>双手伸出就位（确认手势）</td><td>提示板消失，对手进入准备姿态</td></tr>
+<tr><td>3. 格挡</td><td>对手攻击 → 玩家光剑横挡</td><td>格挡成功电光特效 + 进度条第 1 段亮起</td></tr>
+<tr><td>4. 位移</td><td>对手后退露出窗口 → 玩家移至攻击位</td><td>到位确认 + 进度条第 2 段亮起</td></tr>
+<tr><td>5. 刺击</td><td>对手金色暴露区域出现 → 玩家刺击</td><td>命中电光爆裂特效 + 进度条全部亮起</td></tr>
+<tr><td>6. 完成</td><td>完成 1 套攻防</td><td>白闪 0.6 秒 → ✅ → 暂停 2 秒 → 自动循环回步骤 1</td></tr>
 </tbody>
 </table>
 
-<h4>五、色彩体系</h4>
-<table class="art-table">
-<thead><tr><th style="width:15%">用途</th><th style="width:20%">色值参考</th><th>说明</th></tr></thead>
-<tbody>
-<tr><td>场景主调</td><td>暗黑/深灰 #1a1a2e ~ #2d2d44</td><td>赛道外围、背景空间、暗色区域</td></tr>
-<tr><td>赛道地板</td><td>银灰金属 #7f8c8d ~ #bdc3c7</td><td>金属质感赛道，带网格纹理</td></tr>
-<tr><td>赛道灯带（左蓝）</td><td>蓝 #3498db / #5dade2</td><td>左侧赛道灯带、方向箭头默认色</td></tr>
-<tr><td>赛道灯带（右红）</td><td>红 #e74c3c / #ec7063</td><td>右侧赛道灯带</td></tr>
-<tr><td>玩家光剑</td><td>淡蓝电光 #5dade2 → #d6eaf8</td><td>玩家光剑剑刃颜色</td></tr>
-<tr><td>假人光剑</td><td>橙红 #e74c3c → #f5b041</td><td>假人光剑剑刃颜色，区分敌我</td></tr>
-<tr><td>金色暴露区域</td><td>金 #f1c40f / #f39c12</td><td>假人可攻击区域高亮、🎯靶心</td></tr>
-<tr><td>蓝色护盾</td><td>半透明蓝 rgba(52,152,219,0.4)</td><td>假人格挡中的护盾覆盖层</td></tr>
-<tr><td>UI 底色</td><td>半透明黑 rgba(0,0,0,0.8)</td><td>提示板、步骤面板底衬</td></tr>
-<tr><td>UI 高亮</td><td>淡蓝 #3498db 发光</td><td>当前步骤边框、得分文字</td></tr>
-</tbody>
-</table>
-
-<h4>六、整体风格参考</h4>
+<h3>3. 视觉风格参考</h3>
 <p>VR 第一人称视角 + 游戏引擎实时渲染；视觉基调类似《Beat Saber》的光剑美学 + 击剑赛道竞技感；光剑碰撞的电光特效为核心视觉记忆点；金色暴露区域与蓝色护盾的色彩对比要清晰可辨，确保玩家在快速攻防中一眼识别攻击窗口；核心设计原则：<strong>攻防状态即时可辨、光剑轨迹清晰、位移方向指示明确不迟疑</strong>。</p>
-</div>
 
 </body>
 </html>

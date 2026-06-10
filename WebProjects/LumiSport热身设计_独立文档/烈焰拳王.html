@@ -18,228 +18,157 @@ th{background:#f8f9fb}
 .proto-tag{font-size:.75rem;padding:1px 6px;border-radius:3px}
 .proto-tag.image{background:#fff8e6;color:#e67e22}
 .proto-tag.interact{background:#eaf7ee;color:#4caf84}
-.art-section{background:#fdf6f0;border-left:4px solid #e67e22;padding:16px 20px;margin:16px 0;border-radius:6px}
-.art-section h4{margin-top:0;color:#d35400}
-.art-table{margin:8px 0}
-.art-table th{background:#fdebd0;color:#d35400;font-size:.9rem}
-.art-table td{font-size:.9rem}
-.voice-block{background:#f0f4ff;border-left:4px solid #4f6ef7;padding:12px 18px;margin:14px 0;border-radius:6px;font-size:.9rem;line-height:1.7}
-.voice-block .voice-label{font-weight:700;color:#4f6ef7;margin-bottom:4px}
-.voice-block .voice-line{margin:2px 0;padding-left:8px}
-.voice-block .voice-line .v-tag{display:inline-block;min-width:70px;font-size:.78rem;font-weight:600;color:#2c3e50}
+.callout{background:#fff8e6;border-left:4px solid #e67e22;padding:12px 16px;margin:16px 0;border-radius:4px}
+.callout .icon{margin-right:6px}
+.info-callout{background:#eaf0ff;border-left:4px solid #4f6ef7;padding:12px 16px;margin:16px 0;border-radius:4px}
+.info-callout .icon{margin-right:6px}
+.parallel-callout{background:#eaf7ee;border-left:4px solid #4caf84;padding:12px 16px;margin:16px 0;border-radius:4px}
+.parallel-callout .icon{margin-right:6px}
+.figure{margin:16px 0;text-align:center}
+.figure img{max-width:100%;border-radius:8px;border:1px solid #e2e6ed}
+.figure .caption{font-size:.85rem;color:#8c9ba8;margin-top:6px}
+
+/* ===== 顶部导航栏 ===== */
+.warmup-nav{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid #e2e6ed;padding:0 16px;display:flex;align-items:center;gap:4px;margin:0 -20px 24px;box-shadow:0 1px 4px rgba(0,0,0,.04);flex-wrap:wrap}
+.warmup-nav .nav-back{display:inline-flex;align-items:center;gap:4px;color:#8c9ba8;text-decoration:none;font-size:13px;font-weight:500;padding:10px 8px 10px 0;white-space:nowrap;transition:color .2s}
+.warmup-nav .nav-back:hover{color:#4f6ef7}
+.warmup-nav .nav-back svg{width:16px;height:16px}
+.warmup-nav .nav-sep{width:1px;height:18px;background:#e2e6ed;margin:0 6px;flex-shrink:0}
+.warmup-nav .nav-links{display:flex;align-items:center;gap:2px;flex-wrap:wrap}
+.warmup-nav .nav-links a{display:inline-block;padding:10px 12px;font-size:13px;font-weight:500;color:#5a6c7d;text-decoration:none;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap}
+.warmup-nav .nav-links a:hover{color:#4f6ef7;background:#f5f7fa}
+.warmup-nav .nav-links a.active{color:#4f6ef7;border-bottom-color:#4f6ef7;font-weight:600}
 </style>
 </head>
 <body>
 
-<h2 id="sec3">三、拳王热身（连招教学）</h2>
+<!-- 顶部导航栏 -->
+<nav class="warmup-nav">
+  <a href="../lumi-sport.html" class="nav-back">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    返回
+  </a>
+  <div class="nav-sep"></div>
+  <div class="nav-links">
+    <a href="通用规则.html">通用规则</a>
+    <a href="烈焰拳王.html" class="active">烈焰拳王</a>
+    <a href="疾速冰球.html">疾速冰球</a>
+    <a href="雷霆击剑.html">雷霆击剑</a>
+    <a href="魔法派对.html">魔法派对</a>
+  </div>
+</nav>
 
-<h3>3.1 护盾值与规则</h3>
+<h2>烈焰拳王 · 热身设计</h2>
+<p><span class="proto-tag image">示意图</span> <span class="proto-tag interact">交互原型</span></p>
+
+<div class="callout"><span class="icon">🎯</span><strong>热身目标</strong>：让玩家在正式对战前掌握<strong>出拳、格挡、闪避</strong>三大核心操作，并通过一次完整连招体验节奏感。</div>
+
+<h3>1. 热身步骤总览</h3>
 <table>
-<thead><tr><th>规则</th><th>说明</th></tr></thead>
+<thead><tr><th>步骤</th><th>名称</th><th>核心动作</th><th>通过条件</th><th>原型</th></tr></thead>
 <tbody>
-<tr><td>护盾值 ⚡</td><td>HUD 顶部能量条，每次成功格挡<strong>消耗 1 点</strong></td></tr>
-<tr><td>连招恢复</td><td>左左右 / 右右左成功后<strong>护盾值 +1</strong>。中断或拳法错误不恢复</td></tr>
-<tr><td>得分</td><td>击中扣血，击倒获胜</td></tr>
+<tr><td><span class="step-item">步骤 1</span></td><td>出拳</td><td>前手直拳 / 后手直拳</td><td>命中沙袋 3 次</td><td><span class="proto-tag image">示意图</span></td></tr>
+<tr><td><span class="step-item">步骤 2</span></td><td>格挡</td><td>双手举至面部前方</td><td>成功格挡 2 次</td><td><span class="proto-tag image">示意图</span></td></tr>
+<tr><td><span class="step-item">步骤 3</span></td><td>闪避</td><td>身体左 / 右侧倾</td><td>成功闪避 2 次</td><td><span class="proto-tag image">示意图</span></td></tr>
+<tr><td><span class="step-item">步骤 4</span></td><td>连招练习</td><td>出拳 → 格挡 → 闪避 → 重拳</td><td>完成 1 套连招</td><td><span class="proto-tag interact">交互</span></td></tr>
 </tbody>
 </table>
+<p><span class="step-arrow">→</span> 步骤之间为<strong>顺序锁定</strong>：完成当前步骤后自动进入下一步。</p>
 
-<h3>3.2 步骤拆分（8步）</h3>
-<div class="step-flow">
-<div class="step-item">📖场景</div><span class="step-arrow">→</span>
-<div class="step-item">📋规则</div><span class="step-arrow">→</span>
-<div class="step-item">🥊直拳</div><span class="step-arrow">→</span>
-<div class="step-item">🔄摆拳</div><span class="step-arrow">→</span>
-<div class="step-item">⬆️上勾拳</div><span class="step-arrow">→</span>
-<div class="step-item">🛡️格挡</div><span class="step-arrow">→</span>
-<div class="step-item">👈👈👉左左右</div><span class="step-arrow">→</span>
-<div class="step-item">👉👉👈右右左</div>
+<h3>2. 步骤详细设计</h3>
+
+<h4>步骤 1：出拳</h4>
+<div class="step-label">🎯 目标</div>
+<div class="step-desc">学会最基本的攻击动作——前手直拳和后手直拳。</div>
+
+<div class="step-label">📝 VR 场景描述</div>
+<div class="step-desc">玩家面前出现一个红色沙袋，悬浮在击打距离内。沙袋正面画有两个<strong>圆形靶标</strong>（左 / 右），颜色醒目。顶部提示板文字：「用你的<strong>左右手</strong>分别击打沙袋上的靶标，命中 3 次即可通过！」</div>
+
+<div class="figure">
+<img src="新拳王示意图/步骤1.png" alt="烈焰拳王 步骤1 出拳">
+<div class="caption">▲ 步骤 1：出拳训练场景示意图</div>
 </div>
 
-<div class="step-detail">
-<div class="step-label">步骤1·场景介绍 <span class="proto-tag image">参考图</span></div>
-<div class="step-desc">欢迎来到烈焰拳王！你将站在充满火焰特效的擂台上，面对一个训练假人。通过直拳、摆拳、上勾拳和格挡技巧击败对手。注意屏幕顶部的护盾值⚡能量条，合理使用连招恢复能量！准备好了吗？</div>
-
-<div class="voice-block">
-<div class="voice-label">🔊 语音播报</div>
-<div class="voice-line"><span class="v-tag">进入语：</span>烈焰拳王！脚下是燃烧的拳击擂台，对面站着训练假人。直拳、摆拳、上勾拳，还有格挡——四种拳法轮着练。屏幕上面那条金色是护盾值，连招能加回来。双手握紧拳头，摆好战斗姿势，开打！</div>
-</div>
-
-<div class="step-img"><img src="新拳王示意图/步骤1.png" style="width:100%;max-width:700px;margin-top:10px;border-radius:6px;border:1px solid #e0e0e0;" alt="烈焰拳王步骤1示意图"></div>
-</div>
-
-<div class="step-detail">
-<div class="step-label">步骤2·规则 <span class="proto-tag image">参考图</span></div>
-<div class="step-desc">擂台+假人。讲解护盾值 + 得分规则。HUD 顶部显示血条+护盾值 ⚡。</div>
-
-<div class="voice-block">
-<div class="voice-label">🔊 语音播报</div>
-<div class="voice-line"><span class="v-tag">进入语：</span>规则你清楚——打假人扣它的血，打倒算赢。每次格挡消耗一点护盾值，连招能加回来。伸手确认，继续！</div>
-<div class="voice-line"><span class="v-tag">完成语：</span>开练！</div>
-</div>
-
-<div class="step-img"><img src="新拳王示意图/步骤2.png" style="width:100%;max-width:700px;margin-top:10px;border-radius:6px;border:1px solid #e0e0e0;" alt="烈焰拳王步骤2示意图"></div>
-</div>
-
-<div class="step-detail">
-<div class="step-label">步骤3·直拳 <span class="proto-tag interact">交互</span></div>
-<div class="step-desc">任意手向前出拳。命中3次通过。假人命中点显示火花粒子。</div>
-
-<div class="voice-block">
-<div class="voice-label">🔊 语音播报</div>
-<div class="voice-line"><span class="v-tag">进入语：</span>直拳，往前打！揍到假人身上，出火花就是命中了。三次过关。</div>
-<div class="voice-line"><span class="v-tag">超时复播：</span>往前出拳，打中假人！</div>
-<div class="voice-line"><span class="v-tag">完成语：</span>直拳没问题！</div>
-</div>
-
-<div class="step-img"><img src="新拳王示意图/步骤3.png" style="width:100%;max-width:700px;margin-top:10px;border-radius:6px;border:1px solid #e0e0e0;" alt="烈焰拳王步骤3示意图"></div>
-</div>
-
-<div class="step-detail">
-<div class="step-label">步骤4·摆拳 <span class="proto-tag interact">交互</span></div>
-<div class="step-desc">假人两侧标记（左蓝右红），横向出拳3次。</div>
-
-<div class="voice-block">
-<div class="voice-label">🔊 语音播报</div>
-<div class="voice-line"><span class="v-tag">进入语：</span>摆拳——看光圈，左蓝右红。从侧面挥过去，打中三次过。</div>
-<div class="voice-line"><span class="v-tag">超时复播：</span>侧面挥摆拳，打蓝色或红色光圈！</div>
-<div class="voice-line"><span class="v-tag">完成语：</span>摆拳拿下！</div>
-</div>
-
-<div class="step-img"><img src="新拳王示意图/步骤4.png" style="width:100%;max-width:700px;margin-top:10px;border-radius:6px;border:1px solid #e0e0e0;" alt="烈焰拳王步骤4示意图"></div>
-</div>
-
-<div class="step-detail">
-<div class="step-label">步骤5·上勾拳 <span class="proto-tag interact">交互</span></div>
-<div class="step-desc">假人底部标记，上勾拳3次。</div>
-
-<div class="voice-block">
-<div class="voice-label">🔊 语音播报</div>
-<div class="voice-line"><span class="v-tag">进入语：</span>上勾拳——从下往上勾假人肚子下面的红光圈。三次过。</div>
-<div class="voice-line"><span class="v-tag">超时复播：</span>从下往上勾拳，打底部红光圈！</div>
-<div class="voice-line"><span class="v-tag">完成语：</span>上勾拳也会了！</div>
-</div>
-
-<div class="step-img"><img src="新拳王示意图/步骤5.png" style="width:100%;max-width:700px;margin-top:10px;border-radius:6px;border:1px solid #e0e0e0;" alt="烈焰拳王步骤5示意图"></div>
-</div>
-
-<div class="step-detail">
-<div class="step-label">步骤6·格挡 <span class="proto-tag interact">交互</span></div>
-<div class="step-desc">假人亮红发起攻击，抬手护头格挡假人攻击。<strong>每次格挡 ⚡ -1</strong>。成功3次通过。</div>
-
-<div class="voice-block">
-<div class="voice-label">🔊 语音播报</div>
-<div class="voice-line"><span class="v-tag">进入语：</span>假人要还手了——身体亮红就抬手挡头。护盾值会扣，连招能加回来。挡三次过。</div>
-<div class="voice-line"><span class="v-tag">超时复播：</span>假人亮红就抬手挡！</div>
-<div class="voice-line"><span class="v-tag">完成语：</span>格挡练好了，护盾值少了三点，接下来连招加回来。</div>
-</div>
-
-<div class="step-img"><img src="新拳王示意图/步骤6.png" style="width:100%;max-width:700px;margin-top:10px;border-radius:6px;border:1px solid #e0e0e0;" alt="烈焰拳王步骤6示意图"></div>
-</div>
-
-<div class="step-detail">
-<div class="step-label">步骤7·左左右 <span class="proto-tag interact">交互</span></div>
-<div class="step-desc">「左手出拳→左手出拳→右手出拳！」假人标记闪烁（蓝→蓝→红）。<strong>全部出拳</strong>。成功2组 → ⚡ +1。</div>
-
-<div class="voice-block">
-<div class="voice-label">🔊 语音播报</div>
-<div class="voice-line"><span class="v-tag">进入语：</span>左左右——蓝、蓝、红。左手、左手、右手，连起来打。两组加一护盾值。</div>
-<div class="voice-line"><span class="v-tag">超时复播：</span>左手、左手、右手！跟着光圈打！</div>
-<div class="voice-line"><span class="v-tag">完成语：</span>漂亮！护盾值加回来了，左左右拿下！</div>
-</div>
-
-<div class="step-img"><img src="新拳王示意图/步骤7.png" style="width:100%;max-width:700px;margin-top:10px;border-radius:6px;border:1px solid #e0e0e0;" alt="烈焰拳王步骤7示意图"></div>
-</div>
-
-<div class="step-detail">
-<div class="step-label">步骤8·右右左 <span class="proto-tag interact">交互</span></div>
-<div class="step-desc">「右手出拳→右手出拳→左手出拳！」假人标记闪烁（红→红→蓝）。成功2组 → ⚡ +1。循环回步骤1。</div>
-
-<div class="voice-block">
-<div class="voice-label">🔊 语音播报</div>
-<div class="voice-line"><span class="v-tag">进入语：</span>右右左——红、红、蓝。右手、右手、左手，连起来打。两组加一护盾值。</div>
-<div class="voice-line"><span class="v-tag">超时复播：</span>右手、右手、左手！跟着光圈打！</div>
-<div class="voice-line"><span class="v-tag">完成语：</span>全学会了！接下来多练练，越打越顺手。</div>
-</div>
-
-<div class="step-img"><img src="新拳王示意图/步骤8.png" style="width:100%;max-width:700px;margin-top:10px;border-radius:6px;border:1px solid #e0e0e0;" alt="烈焰拳王步骤8示意图"></div>
-</div>
-
-<h3>3.3 连招速查</h3>
+<div class="step-label">🎮 交互流程</div>
 <table>
-<thead><tr><th>连招</th><th>第1拳</th><th>第2拳</th><th>第3拳</th><th>拳法</th><th>标记</th><th>效果</th></tr></thead>
+<thead><tr><th>阶段</th><th>玩家行为</th><th>系统反馈</th></tr></thead>
 <tbody>
-<tr><td><strong>左左右</strong></td><td>👈左手</td><td>👈左手</td><td>👉右手</td><td><strong>全部出拳</strong></td><td>蓝→蓝→红</td><td>⚡ +1</td></tr>
-<tr><td><strong>右右左</strong></td><td>👉右手</td><td>👉右手</td><td>👈左手</td><td><strong>全部出拳</strong></td><td>红→红→蓝</td><td>⚡ +1</td></tr>
+<tr><td>1. 提示</td><td>阅读顶部提示板</td><td>提示板展示操作说明；靶标发光闪烁引导注意</td></tr>
+<tr><td>2. 确认</td><td>双手伸出就位（确认手势）</td><td>提示板消失，靶标变为可击打状态</td></tr>
+<tr><td>3. 击打</td><td>用左手 / 右手分别击打靶标</td><td>命中时：靶标爆裂特效 + 计数更新（1/3, 2/3, 3/3）</td></tr>
+<tr><td>4. 完成</td><td>命中 3 次</td><td>白闪 0.6 秒 → ✅ → 暂停 2 秒 → 切入步骤 2</td></tr>
 </tbody>
 </table>
 
-<div class="art-section">
-<h3 style="color:#d35400;margin-top:0">3.4 美术需求说明</h3>
-<p>以下为「烈焰拳王」场景介绍及全局 UI 所需的美术资源清单，供美术团队制作参考。VR 第一人称视角，游戏引擎实时渲染风格，整体追求<strong>暗黑 + 火焰 + 拳击</strong>的视觉调性。</p>
+<h4>步骤 2：格挡</h4>
+<div class="step-label">🎯 目标</div>
+<div class="step-desc">学会防守动作——将双手举至面部前方形成防御姿态。</div>
 
-<h4>一、场景环境</h4>
-<table class="art-table">
-<thead><tr><th style="width:15%">类别</th><th style="width:25%">资源</th><th>制作说明</th></tr></thead>
+<div class="step-label">📝 VR 场景描述</div>
+<div class="step-desc">沙袋消失，面前出现一个<strong>训练机器人</strong>（半透明蓝色轮廓）。机器人会缓慢向玩家投出拳击（拳头前方有红色光晕预警）。顶部提示板文字：「将你的<strong>双手举到面前</strong>来格挡机器人的攻击！」</div>
+
+<div class="figure">
+<img src="新拳王示意图/步骤2.png" alt="烈焰拳王 步骤2 格挡">
+<div class="caption">▲ 步骤 2：格挡训练场景示意图</div>
+</div>
+
+<div class="step-label">🎮 交互流程</div>
+<table>
+<thead><tr><th>阶段</th><th>玩家行为</th><th>系统反馈</th></tr></thead>
 <tbody>
-<tr><td>擂台主体</td><td>方形拳击擂台</td><td>标准 6×6m 擂台比例，四角立柱包裹海绵护垫（红/蓝双色），四周围绳 3 条（弹性质感的粗绳），擂台地板为帆布纹理，表面微做旧磨损</td></tr>
-<tr><td>擂台背景</td><td>暗黑竞技场</td><td>擂台外围为下沉式观众席剪影（不显具体人物），深灰色调，有薄雾/烟雾粒子在观众席上方漂浮；远处高处悬挂四面大型显示屏（比赛时显示比分，热身时可暗屏或显示拳王logo）</td></tr>
-<tr><td>灯光</td><td>聚光灯系统</td><td>顶部多盏聚光灯投向擂台中央，灯光色温暖白（约 4000K）略带戏剧性；擂台红蓝双角各有一盏彩色射灯（左蓝右红），在地面和假人上形成冷暖对比</td></tr>
-<tr><td>火焰特效</td><td>围绳火焰粒子</td><td>沿四条围绳表面有橙红色火焰粒子持续燃烧循环，火焰高度约 15-20cm，带轻微飘动感；火焰颜色从底部橙红过渡到顶部金黄；非实体火焰，为半透明粒子叠加，不遮挡假人</td></tr>
-<tr><td>地面特效</td><td>欢迎光环</td><td>假人正下方地面投射一圈金色粒子光环，向外脉冲扩散（类似水波纹，循环），用于引导玩家视线聚焦假人</td></tr>
+<tr><td>1. 提示</td><td>阅读顶部提示板</td><td>提示板展示操作说明</td></tr>
+<tr><td>2. 确认</td><td>双手伸出就位（确认手势）</td><td>提示板消失，机器人开始第一拳（3 秒延迟）</td></tr>
+<tr><td>3. 格挡</td><td>在拳头到达前将双手举至面前</td><td>成功：蓝色盾牌特效 + 清脆金属音效；失败：红色冲击波 + 提示「再试一次」</td></tr>
+<tr><td>4. 完成</td><td>成功格挡 2 次</td><td>白闪 0.6 秒 → ✅ → 暂停 2 秒 → 切入步骤 3</td></tr>
 </tbody>
 </table>
 
-<h4>二、核心道具</h4>
-<table class="art-table">
-<thead><tr><th style="width:15%">类别</th><th style="width:25%">资源</th><th>制作说明</th></tr></thead>
+<h4>步骤 3：闪避</h4>
+<div class="step-label">🎯 目标</div>
+<div class="step-desc">学会通过身体侧倾来躲避攻击。</div>
+
+<div class="step-label">📝 VR 场景描述</div>
+<div class="step-desc">训练机器人继续存在，但攻击方式改变：机器人会水平发出<strong>一道光带</strong>（类似光墙），覆盖玩家正面。光带出现前 1 秒有预警箭头指示方向（左 / 右）。顶部提示板文字：「向<strong>左或向右倾斜身体</strong>来躲避光带！」</div>
+
+<div class="figure">
+<img src="新拳王示意图/步骤3.png" alt="烈焰拳王 步骤3 闪避">
+<div class="caption">▲ 步骤 3：闪避训练场景示意图</div>
+</div>
+
+<div class="step-label">🎮 交互流程</div>
+<table>
+<thead><tr><th>阶段</th><th>玩家行为</th><th>系统反馈</th></tr></thead>
 <tbody>
-<tr><td>训练假人</td><td>人形训练假人</td><td>站立式人形假人，高约 1.8m，位于擂台中央距玩家约 1.5m 处。银灰色金属质感外壳，四肢和躯干为分段式结构（肩/肘/腕可动），头部为简约几何造型无明显面部。假人躯干中段偏上位置有一个<strong>蓝色发光标记环</strong>（对应直拳/摆拳的有效命中区域），中段偏下位置有一个<strong>红色发光标记环</strong>（对应上勾拳的有效命中区域），标记环为半透明 hologram 投射效果，非贴图。假人头顶显示其血条（HP），被玩家击中时减少</td></tr>
-<tr><td>假人攻击</td><td>假人出拳动画</td><td>假人具备主动攻击能力——双臂可模拟出拳动作（直拳/摆拳），出拳前假人身体短暂亮红（0.4 秒预警），然后手臂向前挥出。出拳速度中等（约 0.6 秒完成），给玩家留出格挡反应时间。攻击命中玩家时造成扣血效果</td></tr>
-<tr><td>假人防御</td><td>假人格挡姿态</td><td>假人可切换防御姿态——双臂回收护住躯干，此时标记环被遮挡变暗，表示当前为无效攻击窗口。防御姿态持续约 2 秒后切换回暴露姿态。连招教学时假人不设防，标记环全程暴露</td></tr>
-<tr><td>标记环发光</td><td>蓝/红标记环</td><td>待机时微脉冲（呼吸灯效果）；该区域被命中时爆闪一次（白色→对应颜色→恢复）；连招模式时按「蓝→蓝→红」或「红→红→蓝」顺序依次闪烁引导；假人进入防御姿态时标记环变暗灰色</td></tr>
-<tr><td>玩家拳头</td><td>拳击手套（可选）</td><td>VR 控制器映射为拳击手套模型（红色或黑色），第一人称视角可见拳套前部；若美术资源紧张可用半透明手部轮廓替代，保留拳头命中判定点提示</td></tr>
+<tr><td>1. 提示</td><td>阅读顶部提示板</td><td>提示板展示操作说明</td></tr>
+<tr><td>2. 确认</td><td>双手伸出就位（确认手势）</td><td>提示板消失，第一次光带（3 秒延迟）</td></tr>
+<tr><td>3. 闪避</td><td>根据预警箭头向左 / 右侧倾身体</td><td>成功：光带穿过时玩家身体呈半透明（安全）；失败：红色冲击 + 提示「再试一次」</td></tr>
+<tr><td>4. 完成</td><td>成功闪避 2 次</td><td>白闪 0.6 秒 → ✅ → 暂停 2 秒 → 切入步骤 4</td></tr>
 </tbody>
 </table>
 
-<h4>三、HUD / UI</h4>
-<table class="art-table">
-<thead><tr><th style="width:15%">类别</th><th style="width:25%">资源</th><th>制作说明</th></tr></thead>
+<h4>步骤 4：连招练习</h4>
+<div class="step-label">🎯 目标</div>
+<div class="step-desc">将出拳、格挡、闪避组合成一套完整连招，体验实战节奏。</div>
+
+<div class="step-label">📝 VR 场景描述</div>
+<div class="step-desc">场景恢复为正式比赛擂台氛围（背景变亮）。训练机器人变为<strong>完整实体形态</strong>，会依次发起：攻击（需格挡）→ 攻击（需闪避）→ 露出弱点（需出拳）→ 最终重拳。右侧 HUD 显示连招进度条：「<strong>出拳 → 格挡 → 闪避 → 重拳</strong>」。顶部提示板文字：「现在把所有动作组合起来，完成一套连招！」</div>
+
+<div class="step-label">🎮 交互流程</div>
+<table>
+<thead><tr><th>阶段</th><th>玩家行为</th><th>系统反馈</th></tr></thead>
 <tbody>
-<tr><td>顶部状态条</td><td>血条 HP + 护盾值 ⚡</td><td>屏幕顶部横向排列：左侧红色血条（HP），右侧金色能量条（⚡护盾值）。能量条以金色/琥珀色填充，未消耗时满条发光，消耗后变暗灰色，连招回复时有充能动画（金色流光从左到右增加一格）。分隔处用竖线隔开，整体半透明深色底衬</td></tr>
-<tr><td>假人血条</td><td>假人头顶 HP</td><td>假人头顶上方悬浮一条小型红色血条（约假人肩宽），被玩家击中时血条减少且有伤害数字弹出。血条归零时假人短暂倒地（约 1.5 秒）后重置站起，血条回满</td></tr>
-<tr><td>顶部提示板</td><td>文字提示板</td><td>屏幕顶部中央、状态条下方，半透明深色圆角矩形底（80%不透明黑底 + 微弱橙金描边），白色文字居中。进入场景时从上方滑入 + 淡入动画（约 0.5 秒）。文字内容为当前步骤的教学说明</td></tr>
-<tr><td>右侧步骤面板</td><td>垂直步骤列表</td><td>屏幕右侧纵向排列，<strong>仅当前步骤高亮</strong>（橙金发光边框+文字高亮），其余步骤暗隐（灰色低透明度，半透不可读状态）。每步完成时打 ✅ 并消失，下一步自动上移高亮</td></tr>
-<tr><td>命中反馈</td><td>✅ 确认标记</td><td>命中判定通过后，屏幕中央出现 ✅ 图标（金色，带粒子消散），伴随白闪 0.6 秒；白闪为全屏白色叠加层从 0% 到 40% 再到 0% 的快闪</td></tr>
+<tr><td>1. 提示</td><td>阅读顶部提示板</td><td>提示板展示操作说明</td></tr>
+<tr><td>2. 确认</td><td>双手伸出就位（确认手势）</td><td>提示板消失，机器人进入准备姿态</td></tr>
+<tr><td>3. 出拳</td><td>击打机器人弱点（高亮区域）</td><td>命中反馈 + 进度条第 1 段亮起</td></tr>
+<tr><td>4. 格挡</td><td>机器人反击 → 玩家双手举至面前</td><td>格挡成功反馈 + 进度条第 2 段亮起</td></tr>
+<tr><td>5. 闪避</td><td>机器人攻击 → 玩家侧倾</td><td>闪避成功反馈 + 进度条第 3 段亮起</td></tr>
+<tr><td>6. 重拳</td><td>击打机器人暴露的弱点</td><td>慢动作特写 + 大幅冲击特效 + 进度条全部亮起</td></tr>
+<tr><td>7. 完成</td><td>完成 1 套连招</td><td>白闪 0.6 秒 → ✅ → 暂停 2 秒 → 循环回步骤 1（10 秒无操作）</td></tr>
 </tbody>
 </table>
 
-<h4>四、特效清单</h4>
-<table class="art-table">
-<thead><tr><th style="width:15%">类别</th><th style="width:25%">资源</th><th>制作说明</th></tr></thead>
-<tbody>
-<tr><td>命中火花</td><td>打击火花粒子</td><td>拳头命中假人瞬间，碰撞点爆发橙金色火花粒子（类似铁砧打铁），粒子向外飞溅后快速消散（约 0.5 秒），伴随轻微屏幕震动</td></tr>
-<tr><td>假人攻击预警</td><td>红色脉冲</td><td>假人准备攻击时，身体短暂亮红脉冲（约 0.4 秒预警），随后手臂挥出。攻击被格挡后红色脉冲消退</td></tr>
-<tr><td>格挡特效</td><td>护盾脉冲</td><td>格挡成功时，玩家面前出现一面半透明橙色能量护盾波纹（圆形扩散），持续约 0.3 秒；格挡假人攻击时护盾颜色更深，碰撞特效更明显；同时 HUD 能量条减少 1 格</td></tr>
-<tr><td>连招完成</td><td>金色庆祝粒子</td><td>左左右/右右左连招成功后，假人周围爆发金色粒子向上飞散旋绕（类似烟花），持续约 1.5 秒；同时 HUD 能量条播放充能动画</td></tr>
-</tbody>
-</table>
-
-<h4>五、色彩体系</h4>
-<table class="art-table">
-<thead><tr><th style="width:15%">用途</th><th style="width:20%">色值参考</th><th>说明</th></tr></thead>
-<tbody>
-<tr><td>场景主调</td><td>暗黑/深灰 #1a1a2e ~ #2d2d44</td><td>擂台外围、观众席、背景空间</td></tr>
-<tr><td>火焰/能量</td><td>橙红→金黄 #e67e22 → #f1c40f</td><td>围绳火焰、能量条填充、命中火花、金色庆祝粒子</td></tr>
-<tr><td>左手标记</td><td>蓝 #3498db / #5dade2</td><td>假人蓝色标记环、HUD 左手提示</td></tr>
-<tr><td>右手标记</td><td>红 #e74c3c / #ec7063</td><td>假人红色标记环、HUD 右手提示、假人攻击预警亮红</td></tr>
-<tr><td>UI 底色</td><td>半透明黑 rgba(0,0,0,0.8)</td><td>提示板、步骤面板底衬</td></tr>
-<tr><td>UI 高亮</td><td>橙金 #e67e22 发光</td><td>当前步骤边框、能量条填充</td></tr>
-</tbody>
-</table>
-
-<h4>六、整体风格参考</h4>
+<h3>3. 视觉风格参考</h3>
 <p>VR 第一人称视角 + 游戏引擎实时渲染；视觉基调类似《Creed: Rise to Glory》的擂台氛围 + 赛博朋克轻量级 UI 叠层；火焰特效克制不浮夸，服务于功能引导而非纯装饰；核心设计原则：<strong>所有视觉效果必须服务于信息传达和操作引导，不分散玩家注意力</strong>。</p>
-</div>
 
 </body>
 </html>
