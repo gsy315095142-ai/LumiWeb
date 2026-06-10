@@ -1,1 +1,140 @@
-window.__magic_mine_s2p1 = '<!-- 用户中心线框图（参考真实代码 user / settings） -->\n\n<!-- 1. 用户中心主页 · 我的场次 -->\n<div class="section-block">\n  <div class="section-title">\n    <div class="section-title-icon">\n      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">\n        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>\n      </svg>\n    </div>\n    用户中心 · 我的场次（user）\n  </div>\n\n  <div class="ui-demo-row">\n    <div class="ui-demo-item">\n      <div class="phone-wireframe"><div class="phone-notch"></div><div class="phone-screen" style="min-height:560px">\n        <div class="phone-bar"><span>9:41</span><div class="phone-bar-r"><i></i><i></i><i></i></div></div>\n        <div style="padding:10px;background-image:url(https://cdn.lixiaoqian.com/magic-space/bg.jpg);background-size:cover;min-height:524px">\n          <!-- 用户信息头部 -->\n          <div style="display:flex;align-items:center;padding:8px 16px 14px;position:relative">\n            <div style="width:48px;height:48px;border-radius:50%;background:#e0e0e0;margin-right:10px;display:flex;align-items:center;justify-content:center;font-size:18px">👤</div>\n            <div style="font-size:12px;font-weight:500;color:#333">微信用户</div>\n            <!-- 右上角快捷按钮 -->\n            <div style="position:absolute;top:2px;right:4px;display:flex;gap:8px">\n              <div style="text-align:center"><div style="font-size:12px">📞</div><div style="font-size:6px;color:#323232">联系客服</div></div>\n              <div style="text-align:center"><div style="font-size:12px">⚙️</div><div style="font-size:6px;color:#323232">设置</div></div>\n            </div>\n          </div>\n\n          <!-- 三 Tab 切换 -->\n          <div style="display:flex;justify-content:space-around;padding:4px 10px">\n            <div style="text-align:center;padding:4px 16px;font-size:10px;color:#333;font-weight:700;position:relative">\n              我的场次\n              <div style="position:absolute;left:40%;bottom:0;width:20%;height:2px;background:#4A88FD"></div>\n            </div>\n            <div style="text-align:center;padding:4px 16px;font-size:10px;color:#A4B8C3">我的票券</div>\n            <div style="text-align:center;padding:4px 16px;font-size:10px;color:#A4B8C3">我的优惠券</div>\n          </div>\n\n          <!-- 场次列表区域（浅灰背景） -->\n          <div style="background:#f0f2f5;border-radius:10px 10px 0 0;margin-top:6px;padding:6px 8px;min-height:340px">\n            <!-- 待体验场次 标题 -->\n            <div style="text-align:center;font-size:10px;font-weight:700;color:#333;padding:4px 0">待体验场次</div>\n\n            <!-- 场次卡片1：待体验 -->\n            <div style="background:linear-gradient(135deg,#8fc9ff -160%,#fff 70%);border-radius:10px;padding:20px 10px 10px;position:relative;margin-bottom:10px;box-shadow:0 6px 4px -3px #94D7FF">\n              <!-- 左上角状态标签 -->\n              <div style="position:absolute;top:0;left:0;width:50px;text-align:center;padding:2px 0;font-size:8px;color:#fff;font-weight:700;background:linear-gradient(95deg,#5788FD,#5BD6FF);border-radius:8px 0 10px 0">待体验</div>\n              <!-- 右上角撤销 -->\n              <div style="position:absolute;top:0;right:0;width:36px;height:15px;background:linear-gradient(54deg,#FFABAB,#FA6D6D);border-radius:0 10px 0 8px;display:flex;align-items:center;justify-content:center;font-size:7px;color:#fff;font-weight:700">撤销</div>\n              <!-- 订单号 -->\n              <div style="text-align:center;font-size:7px;color:#5f5f5f;margin:6px 0 8px">【OD20260715A】</div>\n              <!-- 信息行 -->\n              <div style="font-size:7px;line-height:1.5">\n                <div style="display:flex"><span style="color:#999;width:48px">预约日期：</span><span style="color:#4D4D4D;font-weight:800">2026-07-20 14:00</span></div>\n                <div style="display:flex"><span style="color:#999;width:48px">场次地点：</span><span style="color:#4D4D4D;font-weight:800">LUMI朝阳店</span></div>\n                <div style="display:flex"><span style="color:#999;width:48px">预约人数：</span><span style="color:#4D4D4D;font-weight:800">3人</span></div>\n              </div>\n              <!-- 查看详情按钮 -->\n              <div style="display:flex;justify-content:flex-end;margin-top:6px">\n                <div style="background:#51C6FF;color:#fff;border:1px solid #00aeff;border-radius:6px;padding:2px 10px;font-size:7px">查看详情</div>\n              </div>\n            </div>\n\n            <!-- 其他场次 标题 -->\n            <div style="text-align:center;font-size:10px;font-weight:700;color:#333;padding:4px 0">其他场次</div>\n\n            <!-- 场次卡片2：已体验（绿色渐变） -->\n            <div style="background:linear-gradient(135deg,#A1DFC3 -160%,#fff 70%);border-radius:10px;padding:20px 10px 10px;position:relative;margin-bottom:10px;box-shadow:0 6px 4px -3px #A1DFC3">\n              <div style="position:absolute;top:0;left:0;width:50px;text-align:center;padding:2px 0;font-size:8px;color:#fff;font-weight:700;background:linear-gradient(95deg,#2FD589,#8AE0BF);border-radius:8px 0 10px 0">已体验</div>\n              <div style="text-align:center;font-size:7px;color:#5f5f5f;margin:6px 0 8px">【OD20260710B】</div>\n              <div style="font-size:7px;line-height:1.5">\n                <div style="display:flex"><span style="color:#999;width:48px">预约日期：</span><span style="color:#4D4D4D;font-weight:800">2026-07-10 10:00</span></div>\n                <div style="display:flex"><span style="color:#999;width:48px">场次地点：</span><span style="color:#4D4D4D;font-weight:800">LUMI朝阳店</span></div>\n                <div style="display:flex"><span style="color:#999;width:48px">预约人数：</span><span style="color:#4D4D4D;font-weight:800">2人</span></div>\n              </div>\n              <!-- 右下角状态图占位 -->\n              <div style="position:absolute;right:4px;bottom:4px;width:40px;height:40px;opacity:.3;font-size:24px">✅</div>\n            </div>\n\n            <!-- 场次卡片3：已取消（灰色） -->\n            <div style="background:linear-gradient(135deg,#fff -160%,#fff 70%);border-radius:10px;padding:20px 10px 10px;position:relative;margin-bottom:10px;box-shadow:0 6px 4px -3px #a6a6a6">\n              <div style="position:absolute;top:0;left:0;width:50px;text-align:center;padding:2px 0;font-size:8px;color:#fff;font-weight:700;background:linear-gradient(95deg,#a6a6a6,#a6a6a6);border-radius:8px 0 10px 0">已取消</div>\n              <div style="text-align:center;font-size:7px;color:#5f5f5f;margin:6px 0 8px">【OD20260708C】</div>\n              <div style="font-size:7px;line-height:1.5;opacity:.6">\n                <div style="display:flex"><span style="color:#999;width:48px">预约日期：</span><span style="color:#4D4D4D;font-weight:800">2026-07-08 15:00</span></div>\n                <div style="display:flex"><span style="color:#999;width:48px">场次地点：</span><span style="color:#4D4D4D;font-weight:800">LUMI海淀店</span></div>\n              </div>\n              <div style="position:absolute;right:4px;bottom:4px;width:40px;height:40px;opacity:.2;font-size:24px">❌</div>\n            </div>\n          </div>\n\n          <!-- 底部导航 -->\n          <div style="background:#fff;display:flex;padding:6px 0 10px;box-shadow:0 -2px 6px rgba(0,0,0,.06)">\n            <div style="flex:1;text-align:center;font-size:7px;color:#999"><div style="font-size:12px;margin-bottom:2px">🏠</div>首页</div>\n            <div style="flex:1;text-align:center;font-size:7px;color:#999"><div style="font-size:12px;margin-bottom:2px">📋</div>订单</div>\n            <div style="flex:1;text-align:center;font-size:7px;color:#999"><div style="font-size:12px;margin-bottom:2px">🎫</div>票券</div>\n            <div style="flex:1;text-align:center;font-size:7px;color:#4A88FD;font-weight:700"><div style="font-size:12px;margin-bottom:2px">👤</div>我的</div>\n          </div>\n        </div>\n      </div></div>\n      <div class="ui-desc">\n        <h5>👤 用户中心 — 我的场次 Tab</h5>\n        <p><code>/pages/user/user</code>，底部 Tab 页「我的」，CDN 深色背景图。</p>\n        <ul>\n          <li><strong>头部区域</strong>：<code>140rpx</code> 圆形头像 + 昵称（<code>36rpx / 500</code>），右上角「联系客服」+「设置」图标（<code>position: absolute</code>）</li>\n          <li><strong>三 Tab</strong>：「我的场次」/「我的票券」/「我的优惠券」，<code>justify-content: space-around</code>，选中项 <code>#333</code> + 蓝色下划线（<code>::after 6rpx #4A88FD</code>），未选中 <code>#A4B8C3</code></li>\n          <li><strong>场次卡片</strong>：<code>linear-gradient(135deg, color -160%, #fff 70%)</code> 渐变背景 + 底部彩色阴影（<code>box-shadow</code>），左上角状态标签圆角三角</li>\n          <li><strong>待体验场次</strong>（status &lt; 2）：显示「撤销」按钮 + 「查看详情」，按日期升序排列</li>\n          <li><strong>其他场次</strong>（status ≥ 2）：右下角 CDN 状态图标（游戏中/已体验/已取消/已过期），按日期降序排列</li>\n          <li><strong>团购标记</strong>：<code>isGroupOrder</code> 时显示金色标签（<code>group-order-tag</code>，渐变橙色底 <code>#FFD28D → #FFB347</code>）</li>\n          <li><strong>数据来源</strong>：<code>/mz/getUserRounds</code>，分 unCheck / checked 两组</li>\n        </ul>\n      </div>\n    </div>\n  </div>\n\n  <!-- 场次状态表 -->\n  <div class="feature-card">\n    <h4>场次状态一览</h4>\n    <table class="info-table">\n      <thead><tr><th>status</th><th>名称</th><th>卡片渐变色</th><th>阴影色</th><th>标签色</th></tr></thead>\n      <tbody>\n        <tr><td>0</td><td>待体验</td><td><code style="background:linear-gradient(135deg,#8fc9ff,#fff);padding:2px 8px;border-radius:4px">蓝白</code></td><td><code>#94D7FF</code></td><td>蓝渐变</td></tr>\n        <tr><td>1</td><td>已激活</td><td><code style="background:linear-gradient(135deg,#8fc9ff,#fff);padding:2px 8px;border-radius:4px">蓝白</code></td><td><code>#94D7FF</code></td><td>蓝渐变</td></tr>\n        <tr><td>2</td><td>游戏中</td><td><code style="background:linear-gradient(135deg,#3988ff,#fff);padding:2px 8px;border-radius:4px">深蓝</code></td><td><code>#3988ff</code></td><td>深蓝渐变</td></tr>\n        <tr><td>3</td><td>已体验</td><td><code style="background:linear-gradient(135deg,#A1DFC3,#fff);padding:2px 8px;border-radius:4px">绿白</code></td><td><code>#A1DFC3</code></td><td>绿渐变</td></tr>\n        <tr><td>4</td><td>已取消</td><td><code style="background:#fff;padding:2px 8px;border-radius:4px;border:1px solid #eee">白</code></td><td><code>#a6a6a6</code></td><td>灰色</td></tr>\n        <tr><td>5</td><td>已过期</td><td><code style="background:#fff;padding:2px 8px;border-radius:4px;border:1px solid #eee">白</code></td><td><code>#a6a6a6</code></td><td>灰色</td></tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n\n';
+window.__magic_mine_s2p1 = `
+<!-- 1. 用户中心主页 · 我的场次 -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+      </svg>
+    </div>
+    用户中心 · 我的场次
+  </div>
+
+  <div class="ui-demo-row">
+    <div class="ui-demo-item">
+      <div class="phone-wireframe"><div class="phone-notch"></div><div class="phone-screen" style="min-height:560px">
+        <div class="phone-bar"><span>9:41</span><div class="phone-bar-r"><i></i><i></i><i></i></div></div>
+        <div style="min-height:520px;font-family:PingFang SC,sans-serif;background:#f5f5f5">
+          <!-- 顶部用户信息区 -->
+          <div style="background:linear-gradient(135deg,#0f3460,#16213e);padding:14px 16px 20px">
+            <div style="display:flex;align-items:center">
+              <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#577BFE,#54FFF3);display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff;margin-right:10px">👤</div>
+              <div>
+                <div style="font-size:12px;color:#fff;font-weight:700">魔法学徒小明</div>
+                <div style="font-size:8px;color:rgba(255,255,255,.6);margin-top:2px">138****5678</div>
+              </div>
+            </div>
+            <!-- 功能导航 -->
+            <div style="display:flex;justify-content:space-around;margin-top:14px">
+              <div style="text-align:center;position:relative">
+                <div style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.15);margin:0 auto 4px;display:flex;align-items:center;justify-content:center;font-size:14px">⏳</div>
+                <div style="font-size:7px;color:rgba(255,255,255,.8)">待激活</div>
+                <div style="position:absolute;top:-2px;right:2px;width:12px;height:12px;border-radius:50%;background:#F55853;font-size:6px;color:#fff;display:flex;align-items:center;justify-content:center">2</div>
+              </div>
+              <div style="text-align:center;position:relative">
+                <div style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.15);margin:0 auto 4px;display:flex;align-items:center;justify-content:center;font-size:14px">🎫</div>
+                <div style="font-size:7px;color:rgba(255,255,255,.8)">待使用</div>
+                <div style="position:absolute;top:-2px;right:2px;width:12px;height:12px;border-radius:50%;background:#F55853;font-size:6px;color:#fff;display:flex;align-items:center;justify-content:center">1</div>
+              </div>
+              <div style="text-align:center">
+                <div style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.15);margin:0 auto 4px;display:flex;align-items:center;justify-content:center;font-size:14px">⭐</div>
+                <div style="font-size:7px;color:rgba(255,255,255,.8)">待评价</div>
+              </div>
+              <div style="text-align:center">
+                <div style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.15);margin:0 auto 4px;display:flex;align-items:center;justify-content:center;font-size:14px">🏷️</div>
+                <div style="font-size:7px;color:rgba(255,255,255,.8)">优惠券</div>
+              </div>
+              <div style="text-align:center">
+                <div style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.15);margin:0 auto 4px;display:flex;align-items:center;justify-content:center;font-size:14px">⚙️</div>
+                <div style="font-size:7px;color:rgba(255,255,255,.8)">设置</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 栏 -->
+          <div style="display:flex;background:#fff;border-bottom:1px solid #eee">
+            <div style="flex:1;text-align:center;padding:8px 0;font-size:9px;color:#4A88FD;font-weight:700;border-bottom:2px solid #4A88FD">我的场次</div>
+            <div style="flex:1;text-align:center;padding:8px 0;font-size:9px;color:#999">我的票券</div>
+            <div style="flex:1;text-align:center;padding:8px 0;font-size:9px;color:#999">优惠券</div>
+          </div>
+
+          <!-- 场次列表 -->
+          <div style="padding:8px 10px">
+            <!-- 场次卡片1 -->
+            <div style="background:#fff;border-radius:10px;padding:10px 12px;margin-bottom:8px;box-shadow:0 1px 4px rgba(0,0,0,.06)">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+                <span style="font-size:10px;color:#333;font-weight:700">2026-07-20 周日</span>
+                <span style="font-size:7px;padding:2px 8px;background:#E6F7FF;color:#1890FF;border-radius:10px">即将开始</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:8px;color:#666">
+                <span>14:00 - 14:30</span>
+                <span>3人 · 双人体验券</span>
+              </div>
+              <div style="margin-top:6px;font-size:7px;color:#999">场次编码：R2026072014</div>
+            </div>
+
+            <!-- 场次卡片2 -->
+            <div style="background:#fff;border-radius:10px;padding:10px 12px;margin-bottom:8px;box-shadow:0 1px 4px rgba(0,0,0,.06)">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+                <span style="font-size:10px;color:#333;font-weight:700">2026-07-15 周二</span>
+                <span style="font-size:7px;padding:2px 8px;background:#F6FFED;color:#52C41A;border-radius:10px">已完成</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:8px;color:#666">
+                <span>10:00 - 10:30</span>
+                <span>2人 · 单人体验券</span>
+              </div>
+            </div>
+
+            <!-- 场次卡片3 团购 -->
+            <div style="background:#fff;border-radius:10px;padding:10px 12px;box-shadow:0 1px 4px rgba(0,0,0,.06)">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+                <span style="font-size:10px;color:#333;font-weight:700">2026-07-18 周四</span>
+                <span style="font-size:7px;padding:2px 8px;background:#FFF7E6;color:#FAAD14;border-radius:10px">待开始</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:8px;color:#666">
+                <span>16:00 - 16:30</span>
+                <span>8人 · 团购票</span>
+              </div>
+              <div style="margin-top:4px;font-size:7px;color:#FAAD14">👥 团队订单</div>
+            </div>
+          </div>
+        </div>
+      </div></div>
+      <div class="ui-desc">
+        <h5>👤 用户中心 — 我的场次 Tab</h5>
+        <p>用户中心主页，顶部用户信息 + 功能导航 + Tab 内容区。</p>
+        <ul>
+          <li><strong>用户信息</strong>：头像、昵称、脱敏手机号，未登录显示默认头像 + 「点击登录」</li>
+          <li><strong>功能导航</strong>：5 个圆形图标入口，红色角标显示待处理数量</li>
+          <li><strong>场次列表</strong>：按日期展示已预约场次，显示时间、人数、票券类型</li>
+          <li><strong>团队标记</strong>：团购订单显示黄色「👥 团队订单」标签</li>
+        </ul>
+        <div class="feature-card" style="margin-top:12px">
+          <h4>场次状态一览</h4>
+          <div class="feature-item">
+            <span class="feature-item-title">待开始</span>
+            <span class="feature-item-desc">灰色标签，场次未到</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-item-title">即将开始</span>
+            <span class="feature-item-desc">蓝色标签，开场前 30 分钟</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-item-title">进行中</span>
+            <span class="feature-item-desc">蓝色标签 + 脉冲动画，场次进行中</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-item-title">已完成</span>
+            <span class="feature-item-desc">绿色标签，可点击评价</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-item-title">已取消</span>
+            <span class="feature-item-desc">灰色标签，订单已取消或退票</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;

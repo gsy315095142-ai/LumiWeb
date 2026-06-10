@@ -1,1 +1,103 @@
-window.__magic_role_s1p2 = '<!-- 2. 角色创建页（role） -->\n<div class="section-block">\n  <div class="section-title">\n    <div class="section-title-icon">\n      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">\n        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>\n      </svg>\n    </div>\n    角色创建页（role）\n  </div>\n\n  <div class="ui-demo-row">\n    <div class="ui-demo-item">\n      <div class="phone-wireframe"><div class="phone-notch"></div><div class="phone-screen" style="min-height:540px">\n        <div class="phone-bar"><span>9:41</span><div class="phone-bar-r"><i></i><i></i><i></i></div></div>\n        <div style="padding:10px;background-image:url(https://cdn.lixiaoqian.com/magic-space/role-bg.jpg);background-size:cover;min-height:506px">\n          <!-- 导航栏 -->\n          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0">\n            <div style="display:flex;align-items:center;gap:6px;font-size:8px;color:#fff">\n              <div style="width:16px;height:16px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:8px">←</div>\n              <span>返回</span>\n            </div>\n            <div style="text-align:center">\n              <div style="font-size:12px;color:#fff;font-weight:700;position:relative">\n                游戏角色\n                <span style="position:absolute;right:-14px;top:2px;font-size:8px">ℹ️</span>\n              </div>\n              <div style="font-size:8px;color:#fff;margin-top:2px">07-15 14:00-14:30</div>\n            </div>\n            <div style="font-size:7px;color:#F54932;border:1px solid #F54932;border-radius:10px;padding:2px 6px;background:#fff;opacity:0">撤销预约</div>\n          </div>\n\n          <!-- 提示 -->\n          <div style="text-align:center;font-size:7px;color:#fff;background:rgba(0,0,0,.3);padding:4px 0;margin:4px 0">角色名称和形象将显示在大空间体验过程中</div>\n\n          <!-- 角色选择 tabs -->\n          <div style="display:flex;justify-content:space-around;margin:12px 0">\n            <div style="border:1px solid #A68027;background:#A68027;padding:3px 14px;border-radius:16px;font-size:8px;color:#fff;text-shadow:0 0 4px #fff">玩家1</div>\n            <div style="border:1px solid #dcdcdc;padding:3px 14px;border-radius:16px;font-size:8px;color:#fff;text-shadow:0 0 4px #e6b238">玩家2</div>\n            <div style="border:1px solid #dcdcdc;padding:3px 14px;border-radius:16px;font-size:8px;color:#fff;text-shadow:0 0 4px #e6b238">玩家3</div>\n          </div>\n\n          <!-- 角色形象展示区 -->\n          <div style="display:flex;justify-content:center;align-items:center;position:relative;height:200px;background-image:url(https://cdn.lixiaoqian.com/magic-space/role-shadow-bg.png);background-size:contain;background-repeat:no-repeat;background-position:center">\n            <!-- 选中三角 -->\n            <div style="position:absolute;top:8px;left:50%;margin-left:-10px;width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-bottom:8px solid #A68027"></div>\n            <!-- 角色立绘占位 -->\n            <div style="width:80px;height:170px;background:linear-gradient(180deg,#E1F7FF,#F7FDFF);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:40px">\n              🧙\n            </div>\n          </div>\n\n          <!-- 性别切换 -->\n          <div style="display:flex;justify-content:center;gap:20px;padding:10px 0">\n            <div style="text-align:center;font-size:8px;color:#fff">\n              <div style="width:20px;height:20px;border-radius:50%;margin:0 auto 2px;display:flex;align-items:center;justify-content:center;font-size:12px;opacity:1">♀</div>\n              女\n            </div>\n            <div style="text-align:center;font-size:8px;color:#fff">\n              <div style="width:20px;height:20px;border-radius:50%;margin:0 auto 2px;display:flex;align-items:center;justify-content:center;font-size:12px;opacity:.3">♂</div>\n              男\n            </div>\n          </div>\n\n          <!-- 名称输入框 -->\n          <div style="width:70%;margin:0 auto;display:flex;align-items:center;background:#C3A866;border-radius:12px;padding:0 4px">\n            <div style="flex:1;text-align:center;padding:8px 4px;font-size:10px;color:#fff">聪慧的小狐狸</div>\n            <div style="width:12px;height:12px;font-size:10px;padding:6px">🎲</div>\n          </div>\n\n          <!-- 保存按钮 -->\n          <div style="text-align:center;margin-top:16px">\n            <div style="display:inline-block;background:linear-gradient(0deg,#577BFE,#54FFF3);color:#fff;border-radius:20px;padding:8px 24px;font-size:10px;font-weight:700;box-shadow:0 4px 12px rgba(24,144,255,.3)">保 存 修 改</div>\n          </div>\n        </div>\n      </div></div>\n      <div class="ui-desc">\n        <h5>🧙 角色创建页</h5>\n        <p><code>/pages/role/role</code>，CDN 背景图，深色魔法主题。</p>\n        <ul>\n          <li><strong>导航栏</strong>：左侧返回按钮（白底圆形 + 箭头），中间「游戏角色」+ 场次时间，右侧「撤销预约」（红色边框，仅 owner 显示）</li>\n          <li><strong>角色 tabs</strong>：<code>flex-evenly-center</code> 布局，选中项金色底 <code>#A68027</code>，未选中白色发光文字</li>\n          <li><strong>角色立绘</strong>：CDN 背景阴影 + 渐变角色框（<code>linear-gradient(180deg, #E1F7FF, #F7FDFF)</code>），顶部三角选中标记</li>\n          <li><strong>性别切换</strong>：女/男图标，未选中 <code>opacity: 0.3</code>，点击切换对应形象（<code>images[gender].url</code>）</li>\n          <li><strong>名称输入</strong>：金色底框 <code>#C3A866</code>，圆角 <code>20rpx</code>，右侧随机骰子图标，最多 6 个中文字符，禁止符号</li>\n          <li><strong>随机名池</strong>：聪慧的小狐狸、勇敢的小老虎、机灵的小花猫、可爱的小白兔、憨厚的大熊猫、淘气的小猴子</li>\n          <li><strong>保存修改</strong>：渐变胶囊按钮，校验 → <code>/mz/submitGameRoles</code> → 进入倒计时</li>\n        </ul>\n      </div>\n    </div>\n  </div>\n\n  <!-- API 参考 -->\n  <div class="feature-card">\n    <h4>角色数据结构</h4>\n    <table class="info-table">\n      <thead><tr><th>字段</th><th>说明</th><th>备注</th></tr></thead>\n      <tbody>\n        <tr><td><code>id</code></td><td>角色 ID</td><td>服务端生成</td></tr>\n        <tr><td><code>nickname</code></td><td>角色名称</td><td>中文≤6字，不可含符号，不可重复</td></tr>\n        <tr><td><code>gender</code></td><td>性别 0=女 / 1=男</td><td>切换形象时同步修改</td></tr>\n        <tr><td><code>image</code></td><td>形象图 CDN URL</td><td><code>roles/female.png</code> / <code>male.png</code></td></tr>\n        <tr><td><code>created_by</code></td><td>创建者 ID</td><td>订单激活者</td></tr>\n        <tr><td><code>actived_by</code></td><td>激活者 ID</td><td>编辑权限判断依据</td></tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n\n';
+window.__magic_role_s1p2 = `
+<!-- 2. 角色创建页 -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+      </svg>
+    </div>
+    角色创建页
+  </div>
+
+  <div class="ui-demo-row">
+    <div class="ui-demo-item">
+      <div class="phone-wireframe"><div class="phone-notch"></div><div class="phone-screen" style="min-height:540px">
+        <div class="phone-bar"><span>9:41</span><div class="phone-bar-r"><i></i><i></i><i></i></div></div>
+        <div style="min-height:506px;font-family:PingFang SC,sans-serif;background:linear-gradient(180deg,#E1F7FF,#F7FDFF);padding:10px">
+          <!-- 标题 -->
+          <div style="text-align:center;font-size:12px;color:#333;font-weight:700;padding:8px 0">创建角色</div>
+
+          <!-- 角色图片 -->
+          <div style="display:flex;justify-content:center;margin:8px 0">
+            <div style="width:90px;height:90px;border-radius:50%;background:linear-gradient(135deg,#577BFE,#54FFF3);display:flex;align-items:center;justify-content:center;font-size:36px;color:#fff;box-shadow:0 4px 12px rgba(87,123,254,.3)">🧙</div>
+          </div>
+
+          <!-- 性别选择 -->
+          <div style="text-align:center;margin:12px 0 8px">
+            <span style="font-size:9px;color:#666">选择性别</span>
+          </div>
+          <div style="display:flex;justify-content:center;gap:16px;margin-bottom:12px">
+            <div style="width:50px;height:50px;border-radius:12px;background:#fff;border:1px solid #ddd;display:flex;align-items:center;justify-content:center;font-size:24px">👦</div>
+            <div style="width:50px;height:50px;border-radius:12px;background:#fff;border:2px solid #577BFE;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 2px 8px rgba(87,123,254,.2)">👧</div>
+          </div>
+
+          <!-- 角色名称 -->
+          <div style="margin:10px 20px">
+            <div style="font-size:9px;color:#666;margin-bottom:6px">角色名称</div>
+            <div style="background:#fff;border:1px solid #ddd;border-radius:10px;padding:10px 14px;font-size:10px;color:#999;display:flex;justify-content:space-between;align-items:center">
+              <span>请输入角色名称</span>
+              <span style="font-size:8px;color:#ccc">0/10</span>
+            </div>
+          </div>
+
+          <!-- 确认按钮 -->
+          <div style="text-align:center;margin-top:16px">
+            <div style="display:inline-block;background:linear-gradient(0deg,#577BFE,#54FFF3);color:#fff;border-radius:24px;padding:10px 50px;font-size:11px;font-weight:700">确认创建</div>
+          </div>
+
+          <!-- 底部提示 -->
+          <div style="text-align:center;margin-top:12px;font-size:8px;color:#999">
+            <div>创建后可在场次开始前修改角色信息</div>
+            <div>每场最多创建 4 个角色</div>
+          </div>
+        </div>
+      </div></div>
+      <div class="ui-desc">
+        <h5>🧙 角色创建页</h5>
+        <p>激活码验证通过后进入角色创建页面，用户设置角色名称和性别：</p>
+        <ul>
+          <li><strong>角色图片</strong>：根据性别动态切换，圆形头像展示</li>
+          <li><strong>性别选择</strong>：男女两个图标按钮，选中时蓝色边框 + 阴影高亮</li>
+          <li><strong>角色名称</strong>：输入框，最多 10 个字符，右侧显示字数统计</li>
+          <li><strong>确认创建</strong>：渐变色按钮，名称为空时不可点击</li>
+          <li><strong>重复创建</strong>：已创建角色的用户再次进入时，可继续创建或修改已有角色</li>
+          <li><strong>场次已开启</strong>：场次开始后提示「当前场次已经开启，无法编辑」</li>
+        </ul>
+        <div class="feature-card" style="margin-top:12px">
+          <h4>角色数据字段</h4>
+          <div class="feature-item">
+            <span class="feature-item-title">角色编号</span>
+            <span class="feature-item-desc">系统自动生成的唯一标识</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-item-title">角色名称</span>
+            <span class="feature-item-desc">用户自定义，最多 10 个字符，支持多次修改</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-item-title">性别</span>
+            <span class="feature-item-desc">男/女，影响角色图片展示</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-item-title">关联订单</span>
+            <span class="feature-item-desc">创建时绑定的订单编号</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-item-title">关联场次</span>
+            <span class="feature-item-desc">角色所属的体验场次</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-item-title">创建者</span>
+            <span class="feature-item-desc">订单的激活者</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-item-title">激活者</span>
+            <span class="feature-item-desc">编辑权限判断依据</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;

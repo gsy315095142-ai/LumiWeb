@@ -1,1 +1,71 @@
-window.__magic_mine_s2p4 = '<!-- 4. 左滑退票交互 -->\n<div class="section-block">\n  <div class="section-title">\n    <div class="section-title-icon">\n      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">\n        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>\n      </svg>\n    </div>\n    左滑退票交互（仅散客票）\n  </div>\n\n  <div class="ui-demo-row">\n    <div class="ui-demo-item">\n      <div class="phone-wireframe"><div class="phone-notch"></div><div class="phone-screen" style="min-height:360px">\n        <div class="phone-bar"><span>9:41</span><div class="phone-bar-r"><i></i><i></i><i></i></div></div>\n        <div style="padding:10px;background:#f0f2f5;min-height:324px">\n          <div style="text-align:center;font-size:10px;font-weight:700;color:#333;padding:4px 0">待使用</div>\n\n          <!-- 左滑后的票券卡片 -->\n          <div style="position:relative;overflow:hidden;border-radius:12px;margin-bottom:8px">\n            <!-- 右侧删除按钮（露出） -->\n            <div style="position:absolute;top:0;right:0;width:50px;height:100%;background:#e63946;display:flex;align-items:center;justify-content:center;z-index:110">\n              <span style="color:#fff;font-size:8px;writing-mode:vertical-rl;text-orientation:upright">小程序退票</span>\n            </div>\n            <!-- 票券卡片（左移状态） -->\n            <div style="background:linear-gradient(135deg,#8fc9ff -160%,#fff 70%);border-radius:10px;padding:24px 10px 10px;position:relative;transform:translateX(-50px);transition:transform 0.3s ease;box-shadow:0 6px 4px -3px #94D7FF">\n              <!-- 半透明遮罩 -->\n              <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.7);border-radius:10px 10px 0 0;z-index:100"></div>\n              <div style="position:absolute;top:0;left:0;width:50px;text-align:center;padding:2px 0;font-size:8px;color:#fff;font-weight:700;background:linear-gradient(95deg,#5788FD,#5BD6FF);border-radius:8px 0 10px 0">待使用</div>\n              <div style="position:absolute;top:6px;right:6px;font-size:7px;color:#5f5f5f">【TK20260715A】</div>\n              <div style="font-size:7px;line-height:1.6;margin-top:4px">\n                <div style="display:flex"><span style="color:#999;width:48px">票券类型：</span><span style="color:#4D4D4D;font-weight:800">2人体验券</span></div>\n                <div style="display:flex"><span style="color:#999;width:48px">兑换时间：</span><span style="color:#4D4D4D;font-weight:800">2026-07-15</span></div>\n              </div>\n            </div>\n          </div>\n\n          <!-- 未左滑的票券卡片（对比） -->\n          <div style="position:relative;overflow:hidden;border-radius:12px">\n            <div style="background:linear-gradient(135deg,#8fc9ff -160%,#fff 70%);border-radius:10px;padding:24px 10px 10px;position:relative;box-shadow:0 6px 4px -3px #94D7FF">\n              <div style="position:absolute;top:0;left:0;width:50px;text-align:center;padding:2px 0;font-size:8px;color:#fff;font-weight:700;background:linear-gradient(95deg,#5788FD,#5BD6FF);border-radius:8px 0 10px 0">待使用</div>\n              <div style="position:absolute;top:6px;right:6px;font-size:7px;color:#5f5f5f">【TK20260716E】</div>\n              <div style="font-size:7px;line-height:1.6;margin-top:4px">\n                <div style="display:flex"><span style="color:#999;width:48px">票券类型：</span><span style="color:#4D4D4D;font-weight:800">3人体验券</span></div>\n                <div style="display:flex"><span style="color:#999;width:48px">兑换时间：</span><span style="color:#4D4D4D;font-weight:800">2026-07-16</span></div>\n              </div>\n              <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px">\n                <span style="font-size:7px;color:#2B84FD;border:1px solid #4c9aff;padding:2px 6px;border-radius:4px;background:linear-gradient(90deg,#D5EFFF,#EDF9FF);font-weight:700">转赠票券</span>\n                <span style="font-size:7px;color:#fff;background:#33D68B;padding:3px 8px;border-radius:4px">去预约</span>\n              </div>\n            </div>\n          </div>\n\n          <!-- 提示 -->\n          <div style="text-align:center;font-size:7px;color:#999;margin-top:10px;padding:4px;background:#fff;border-radius:6px">\n            ⬆ 上方：左滑后显示红色退票按钮<br/>⬇ 下方：正常状态\n          </div>\n        </div>\n      </div></div>\n      <div class="ui-desc">\n        <h5>👈 左滑退票交互</h5>\n        <p>仅 <code>platform == \'lumi\'</code> 的散客票支持左滑退票，团购票不显示。</p>\n        <ul>\n          <li><strong>触发条件</strong>：水平滑动 &gt; 100px（<code>deltaX < -100</code>），Y 轴偏移小于 X 轴时才触发</li>\n          <li><strong>卡片位移</strong>：<code>transform: translateX(-160rpx)</code>，右侧露出红色「小程序退票」按钮</li>\n          <li><strong>遮罩层</strong>：左滑后覆盖 <code>rgba(0,0,0,.7)</code> 半透明遮罩</li>\n          <li><strong>关闭条件</strong>：右滑 &gt; 20px / 垂直滚动 / 点击其他卡片</li>\n          <li><strong>退票流程</strong>：点击红色按钮 → 确认弹窗 → <code>/mz/refundCouponWithPayOrder</code> → 退票成功 → 刷新列表</li>\n          <li><strong>退票限制</strong>：仅散客票（<code>platform=lumi</code>），团购票不支持小程序退票</li>\n        </ul>\n      </div>\n    </div>\n  </div>\n</div>\n\n';
+window.__magic_mine_s2p4 = `
+<!-- 4. 左滑退票交互 -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+      </svg>
+    </div>
+    左滑退票交互（仅散客票）
+  </div>
+
+  <div class="ui-demo-row">
+    <div class="ui-demo-item">
+      <div class="phone-wireframe"><div class="phone-notch"></div><div class="phone-screen" style="min-height:360px">
+        <div class="phone-bar"><span>9:41</span><div class="phone-bar-r"><i></i><i></i><i></i></div></div>
+        <div style="min-height:320px;font-family:PingFang SC,sans-serif;background:#f5f5f5;padding:10px">
+          <!-- 正常状态 -->
+          <div style="font-size:8px;color:#999;margin-bottom:6px">← 正常状态</div>
+          <div style="background:#fff;border-radius:10px;padding:10px 12px;margin-bottom:14px;box-shadow:0 1px 4px rgba(0,0,0,.06)">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+              <span style="font-size:9px;color:#333;font-weight:700">双人体验券 (2人)</span>
+              <span style="font-size:7px;padding:2px 8px;background:#E6F7FF;color:#1890FF;border-radius:10px">待使用</span>
+            </div>
+            <div style="font-size:8px;color:#666">有效期至：2026-08-14</div>
+          </div>
+
+          <!-- 左滑状态 -->
+          <div style="font-size:8px;color:#999;margin-bottom:6px">← 左滑后露出退票按钮</div>
+          <div style="position:relative;border-radius:10px;overflow:hidden;margin-bottom:14px">
+            <div style="position:absolute;right:0;top:0;bottom:0;width:70px;background:#F55853;display:flex;align-items:center;justify-content:center;color:#fff;font-size:9px;font-weight:700;border-radius:0 10px 10px 0">
+              退票
+            </div>
+            <div style="background:#fff;border-radius:10px;padding:10px 12px;margin-right:30px;box-shadow:0 1px 4px rgba(0,0,0,.06);position:relative;z-index:1;transform:translateX(-40px)">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+                <span style="font-size:9px;color:#333;font-weight:700">双人体验券 (2人)</span>
+                <span style="font-size:7px;padding:2px 8px;background:#E6F7FF;color:#1890FF;border-radius:10px">待使用</span>
+              </div>
+              <div style="font-size:8px;color:#666">有效期至：2026-08-14</div>
+            </div>
+          </div>
+
+          <!-- 退票确认弹窗 -->
+          <div style="font-size:8px;color:#999;margin-bottom:6px">← 点击退票后弹出确认</div>
+          <div style="background:rgba(0,0,0,.7);border-radius:10px;padding:30px 16px;text-align:center">
+            <div style="background:#fff;border-radius:12px;padding:16px">
+              <div style="font-size:10px;font-weight:700;color:#333;margin-bottom:8px">确认退票？</div>
+              <div style="font-size:8px;color:#666;margin-bottom:12px;line-height:1.5">退票后将释放名额<br>票券将不可恢复</div>
+              <div style="display:flex;gap:8px">
+                <div style="flex:1;background:#f5f5f5;color:#666;border-radius:8px;padding:6px;font-size:8px;text-align:center">取消</div>
+                <div style="flex:1;background:#F55853;color:#fff;border-radius:8px;padding:6px;font-size:8px;text-align:center">确认退票</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div></div>
+      <div class="ui-desc">
+        <h5>🎫 左滑退票交互</h5>
+        <p>在票券列表中，散客票支持左滑露出「退票」按钮：</p>
+        <ul>
+          <li><strong>左滑触发</strong>：向左滑动超过一定距离后，右侧露出红色「退票」按钮</li>
+          <li><strong>确认弹窗</strong>：点击退票后弹出二次确认，防止误操作</li>
+          <li><strong>退票成功</strong>：自动刷新票券列表，票券状态变为已退票</li>
+          <li><strong>退票限制</strong>：仅散客票支持小程序端退票，团购票不支持</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;

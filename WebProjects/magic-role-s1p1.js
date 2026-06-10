@@ -1,1 +1,143 @@
-window.__magic_role_s1p1 = '<!-- 激活角色线框图（参考真实代码 code / role / identity） -->\n\n<!-- 1. 激活码输入页（code） -->\n<div class="section-block">\n  <div class="section-title">\n    <div class="section-title-icon">\n      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">\n        <rect x="2" y="4" width="20" height="16" rx="2"/><line x1="6" y1="8" x2="6.01" y2="8"/><line x1="10" y1="8" x2="10.01" y2="8"/><line x1="14" y1="8" x2="14.01" y2="8"/><line x1="18" y1="8" x2="18.01" y2="8"/><line x1="6" y1="12" x2="6.01" y2="12"/><line x1="18" y1="12" x2="18.01" y2="12"/><line x1="10" y1="16" x2="14" y2="16"/>\n      </svg>\n    </div>\n    激活码输入（code）\n  </div>\n\n  <!-- 线框图：已检测到购票信息 -->\n  <div class="ui-demo-row">\n    <div class="ui-demo-item">\n      <div class="phone-wireframe"><div class="phone-notch"></div><div class="phone-screen" style="min-height:540px">\n        <div class="phone-bar"><span>9:41</span><div class="phone-bar-r"><i></i><i></i><i></i></div></div>\n        <div style="padding:12px 10px;background-image:url(https://cdn.lixiaoqian.com/magic-space/bg.jpg);background-size:cover;min-height:506px">\n          <!-- 返回首页 -->\n          <div style="display:flex;align-items:center;gap:4px;font-size:8px;color:#fff;padding:4px 0">\n            <span>🏠</span><span>返回首页</span>\n          </div>\n\n          <!-- 提示文字 -->\n          <div style="text-align:center;padding:16px 20px 8px;font-size:9px;color:rgba(255,255,255,.8);line-height:1.6">\n            <div>请您先确认同组所有小伙伴均已到达现场</div>\n            <div>再输入角色激活码</div>\n          </div>\n\n          <!-- 标题 -->\n          <div style="text-align:center;font-size:14px;color:#fff;font-weight:700;margin:8px 0">角色激活码</div>\n\n          <!-- 6位码输入框 -->\n          <div style="display:flex;justify-content:space-around;margin:10px auto;width:85%">\n            <div style="width:36px;height:36px;border:2px solid #87CDF0;background:#E1F2F8;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;color:#333;font-weight:700">A</div>\n            <div style="width:36px;height:36px;border:2px solid #87CDF0;background:#E1F2F8;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;color:#333;font-weight:700">B</div>\n            <div style="width:36px;height:36px;border:2px solid #87CDF0;background:#E1F2F8;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;color:#333;font-weight:700">3</div>\n            <div style="width:36px;height:36px;border:2px solid #87CDF0;background:#E1F2F8;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;color:#333;font-weight:700">X</div>\n            <div style="width:36px;height:36px;border:2px solid #1890ff;background:#f0f9ff;border-radius:8px;box-shadow:0 2px 6px rgba(24,144,255,.2)"></div>\n            <div style="width:36px;height:36px;border:2px solid #87CDF0;background:#E1F2F8;border-radius:8px"></div>\n          </div>\n\n          <!-- 检测到购票信息 -->\n          <div style="border:1px solid #dcdcdc;background:#fff;border-radius:8px;margin-top:20px;padding:10px;min-height:200px">\n            <div style="text-align:center;font-size:11px;font-weight:700;color:#333;margin-bottom:2px">监测到您为购票人</div>\n            <div style="text-align:center;font-size:8px;color:#333;margin-bottom:10px">有以下场次的角色激活码, 可选择点击快速录入</div>\n\n            <!-- 场次项1：自购（已选中） -->\n            <div style="background:#51C6FF;border-radius:12px;padding:10px 12px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;font-size:7px;color:#fff">\n              <span>07-15</span><span>14:00-14:30</span><span>3人</span>\n              <span style="font-weight:600;font-size:8px">激活码：AB3X7K</span>\n              <span style="width:10px;height:10px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:6px;color:#51C6FF">✓</span>\n            </div>\n            <!-- 场次项2：自购（未选中） -->\n            <div style="background:#E1F2F8;border-radius:12px;padding:10px 12px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;font-size:7px;color:#323232">\n              <span>07-16</span><span>10:00-10:30</span><span>2人</span>\n              <span style="font-weight:500;font-size:8px">激活码：MN8P4Q</span>\n              <div style="width:10px;height:10px;border-radius:50%;border:1.5px solid #51C6FF"></div>\n            </div>\n            <!-- 场次项3：分享（红色标记） -->\n            <div style="background:#E1F2F8;border-radius:12px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;font-size:7px;color:#323232">\n              <span>07-18</span><span>15:00-15:30</span><span>4人</span>\n              <span style="font-weight:500;font-size:8px;color:red">激活码：KL5Z9W</span>\n              <div style="width:10px;height:10px;border-radius:50%;border:1.5px solid #51C6FF"></div>\n            </div>\n          </div>\n\n          <!-- 激活按钮 -->\n          <div style="text-align:center;margin-top:14px">\n            <div style="display:inline-block;background:linear-gradient(0deg,#577BFE,#54FFF3);color:#fff;border-radius:20px;padding:8px 30px;font-size:10px;font-weight:700;opacity:.5">激活并创建</div>\n          </div>\n        </div>\n      </div></div>\n      <div class="ui-desc">\n        <h5>🔑 激活码输入 — 有购票信息</h5>\n        <p><code>/pages/code/code</code>，全屏深色背景（CDN 背景图），6 格方块输入 + 购票场次快速录入。</p>\n        <ul>\n          <li><strong>6 格输入框</strong>：隐藏原生 input（<code>opacity:0</code>），自定义方块（<code>90rpx × 90rpx</code>，<code>border: 2rpx solid #87CDF0</code>，<code>background: #E1F2F8</code>），当前聚焦格有蓝色边框 + 阴影</li>\n          <li><strong>购票信息检测</strong>：调用 <code>/mz/getGameRoundOrdersAvailable</code>，返回 <code>orders</code>（自购）+ <code>orders_share</code>（分享），合并按日期排序</li>\n          <li><strong>颜色区分</strong>：自购激活码深蓝色文字，分享激活码红色文字（<code>color-red</code>）</li>\n          <li><strong>选中态</strong>：<code>background: #51C6FF; color: white</code>，显示 ✓ 勾选标记</li>\n          <li><strong>输入联动</strong>：手动输入时取消选中态（<code>selectedIndex: -1</code>）；点击场次码自动填入 6 格</li>\n          <li><strong>按钮状态</strong>：未输满 6 位时半透明（<code>opacity-5</code>），输满后激活</li>\n          <li><strong>激活成功</strong>：Toast → 1.8s 后跳转 <code>/pages/role/role?order={order_id}&status={status}</code></li>\n        </ul>\n      </div>\n    </div>\n  </div>\n\n  <!-- 线框图：未检测到购票信息 -->\n  <div class="ui-demo-row">\n    <div class="ui-demo-item">\n      <div class="phone-wireframe"><div class="phone-notch"></div><div class="phone-screen" style="min-height:540px">\n        <div class="phone-bar"><span>9:41</span><div class="phone-bar-r"><i></i><i></i><i></i></div></div>\n        <div style="padding:12px 10px;background-image:url(https://cdn.lixiaoqian.com/magic-space/bg.jpg);background-size:cover;min-height:506px">\n          <!-- 返回首页 -->\n          <div style="display:flex;align-items:center;gap:4px;font-size:8px;color:#fff;padding:4px 0">\n            <span>🏠</span><span>返回首页</span>\n          </div>\n          <div style="text-align:center;padding:16px 20px 8px;font-size:9px;color:rgba(255,255,255,.8);line-height:1.6">\n            <div>请您先确认同组所有小伙伴均已到达现场</div>\n            <div>再输入角色激活码</div>\n          </div>\n          <div style="text-align:center;font-size:14px;color:#fff;font-weight:700;margin:8px 0">角色激活码</div>\n\n          <!-- 6位码输入框（空） -->\n          <div style="display:flex;justify-content:space-around;margin:10px auto;width:85%">\n            <div style="width:36px;height:36px;border:2px solid #87CDF0;background:#E1F2F8;border-radius:8px;box-shadow:0 2px 6px rgba(24,144,255,.2)"></div>\n            <div style="width:36px;height:36px;border:2px solid #87CDF0;background:#E1F2F8;border-radius:8px"></div>\n            <div style="width:36px;height:36px;border:2px solid #87CDF0;background:#E1F2F8;border-radius:8px"></div>\n            <div style="width:36px;height:36px;border:2px solid #87CDF0;background:#E1F2F8;border-radius:8px"></div>\n            <div style="width:36px;height:36px;border:2px solid #87CDF0;background:#E1F2F8;border-radius:8px"></div>\n            <div style="width:36px;height:36px;border:2px solid #87CDF0;background:#E1F2F8;border-radius:8px"></div>\n          </div>\n\n          <!-- 未检测到购票信息 -->\n          <div style="display:flex;align-items:center;justify-content:center;margin-top:20px;min-height:200px">\n            <div style="text-align:center;font-size:8px;color:#333;line-height:1.6;padding:20px">\n              <div>暂未检测到您的购票信息，</div>\n              <div>若购票人无法到场，可以联系购票人，获取角色激活码</div>\n            </div>\n          </div>\n\n          <!-- 激活按钮（禁用） -->\n          <div style="text-align:center;margin-top:14px">\n            <div style="display:inline-block;background:linear-gradient(0deg,#577BFE,#54FFF3);color:#fff;border-radius:20px;padding:8px 30px;font-size:10px;font-weight:700;opacity:.3">激活并创建</div>\n          </div>\n        </div>\n      </div></div>\n      <div class="ui-desc">\n        <h5>🗝️ 激活码输入 — 无购票信息</h5>\n        <p>当 <code>roundLists</code> 为空时，显示提示文案而非场次列表。</p>\n        <ul>\n          <li><strong>无场次列表</strong>：容器 <code>display: flex; align-items: center; justify-content: center</code>，居中提示文案</li>\n          <li>提示：「暂未检测到您的购票信息，若购票人无法到场，可以联系购票人，获取角色激活码」</li>\n          <li>用户需手动输入 6 位激活码（购票人分享的）</li>\n          <li>激活按钮始终禁用（<code>opacity: 0.3</code>），直到输入满 6 位</li>\n        </ul>\n      </div>\n    </div>\n  </div>\n\n  <!-- 前置登录提示 -->\n  <div class="tip-box">\n    <div class="tip-box-title">\n      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>\n      前置登录校验\n    </div>\n    <p>进入页面后轮询 <code>user_info</code>（300ms 间隔）。已登录直接加载数据；未登录弹出手机号授权组件（<code>phone-btn</code>），授权成功后继续；关闭授权弹窗则跳转回首页。</p>\n  </div>\n</div>\n\n';
+window.__magic_role_s1p1 = `
+<!-- 1. 激活码输入页 -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="4" width="20" height="16" rx="2"/><line x1="6" y1="8" x2="6.01" y2="8"/><line x1="10" y1="8" x2="10.01" y2="8"/>
+      </svg>
+    </div>
+    激活码输入
+  </div>
+
+  <!-- 有购票信息 -->
+  <div class="ui-demo-row">
+    <div class="ui-demo-item">
+      <div class="phone-wireframe"><div class="phone-notch"></div><div class="phone-screen" style="min-height:540px">
+        <div class="phone-bar"><span>9:41</span><div class="phone-bar-r"><i></i><i></i><i></i></div></div>
+        <div style="min-height:506px;font-family:PingFang SC,sans-serif;background-image:url(https://cdn.lixiaoqian.com/magic-space/bg.jpg);background-size:100% 100%;padding:10px">
+          <div style="display:flex;align-items:center;gap:4px;font-size:8px;color:#fff">
+            <span>🏠</span><span>返回首页</span>
+          </div>
+
+          <div style="text-align:center;padding:16px 20px 6px;font-size:9px;color:rgba(255,255,255,.8);line-height:1.6">
+            <div>请您先确认同组所有小伙伴均已到达现场</div>
+            <div>再输入角色激活码</div>
+          </div>
+
+          <div style="text-align:center;font-size:14px;color:#fff;font-weight:700;margin:8px 0">角色激活码</div>
+
+          <!-- 6位码输入框 -->
+          <div style="display:flex;justify-content:space-around;margin:10px auto;width:82%">
+            <div style="width:36px;height:36px;border:1px solid #87CDF0;background:#E1F2F8;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;color:#333;font-weight:700">A</div>
+            <div style="width:36px;height:36px;border:1px solid #87CDF0;background:#E1F2F8;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;color:#333;font-weight:700">B</div>
+            <div style="width:36px;height:36px;border:1px solid #87CDF0;background:#E1F2F8;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;color:#333;font-weight:700">3</div>
+            <div style="width:36px;height:36px;border:1px solid #87CDF0;background:#E1F2F8;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;color:#333;font-weight:700">X</div>
+            <div style="width:36px;height:36px;border:2px solid #1890ff;background:#f0f9ff;border-radius:8px;box-shadow:0 2px 6px rgba(24,144,255,.2)"></div>
+            <div style="width:36px;height:36px;border:1px solid #87CDF0;background:#E1F2F8;border-radius:8px"></div>
+          </div>
+
+          <!-- 检测到购票信息 -->
+          <div style="border:1px solid #dcdcdc;background:#fff;border-radius:8px;margin-top:24px;padding:10px;min-height:180px">
+            <div style="text-align:center;font-size:11px;font-weight:700;color:#333;margin-bottom:4px">监测到您为购票人</div>
+            <div style="text-align:center;font-size:8px;color:#333;margin-bottom:10px">有以下场次的角色激活码，可选择点击快速录入</div>
+
+            <div style="background:#E1F2F8;border-radius:10px;padding:8px 10px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;font-size:7px;color:#323232">
+              <span>2026-07-15</span><span>14:00</span><span>3人</span>
+              <span style="color:#333;font-weight:500;font-size:8px">激活码：AB3X7K</span>
+              <span style="width:10px;height:10px;border-radius:50%;border:1px solid #51C6FF;background:#51C6FF;display:flex;align-items:center;justify-content:center;font-size:6px;color:#fff">✓</span>
+            </div>
+            <div style="background:#E1F2F8;border-radius:10px;padding:8px 10px;display:flex;justify-content:space-between;align-items:center;font-size:7px;color:#323232">
+              <span>2026-07-16</span><span>10:00</span><span>2人</span>
+              <span style="color:#333;font-weight:500;font-size:8px">激活码：MN8P4Q</span>
+              <div style="width:10px;height:10px;border-radius:50%;border:1px solid #51C6FF"></div>
+            </div>
+          </div>
+
+          <div style="text-align:center;margin-top:14px">
+            <div style="display:inline-block;background:linear-gradient(0deg,#577BFE,#54FFF3);color:#fff;border-radius:20px;padding:8px 30px;font-size:10px;font-weight:700">激活并创建</div>
+          </div>
+        </div>
+      </div></div>
+      <div class="ui-desc">
+        <h5>🔑 激活码输入 — 有购票信息</h5>
+        <p>用户已登录且有关联订单时，自动检测并展示可激活的场次：</p>
+        <ul>
+          <li><strong>6 格输入框</strong>：浅蓝色方块样式，输入后自动跳到下一格</li>
+          <li><strong>购票信息检测</strong>：自动展示关联的场次、时间、人数和激活码</li>
+          <li><strong>来源区分</strong>：分享增加的场次标记为红色，自购为深蓝色</li>
+          <li><strong>快速录入</strong>：点击场次行自动填入激活码，选中高亮（蓝色填充 + 白色 ✓ 标记）</li>
+          <li><strong>激活并创建</strong>：验证码正确后跳转角色创建页</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 无购票信息 -->
+  <div class="ui-demo-row">
+    <div class="ui-demo-item">
+      <div class="phone-wireframe"><div class="phone-notch"></div><div class="phone-screen" style="min-height:540px">
+        <div class="phone-bar"><span>9:41</span><div class="phone-bar-r"><i></i><i></i><i></i></div></div>
+        <div style="min-height:506px;font-family:PingFang SC,sans-serif;background-image:url(https://cdn.lixiaoqian.com/magic-space/bg.jpg);background-size:100% 100%;padding:10px">
+          <div style="display:flex;align-items:center;gap:4px;font-size:8px;color:#fff">
+            <span>🏠</span><span>返回首页</span>
+          </div>
+
+          <div style="text-align:center;padding:16px 20px 6px;font-size:9px;color:rgba(255,255,255,.8);line-height:1.6">
+            <div>请您先确认同组所有小伙伴均已到达现场</div>
+            <div>再输入角色激活码</div>
+          </div>
+
+          <div style="text-align:center;font-size:14px;color:#fff;font-weight:700;margin:8px 0">角色激活码</div>
+
+          <!-- 6位码输入框（空） -->
+          <div style="display:flex;justify-content:space-around;margin:10px auto;width:82%">
+            <div style="width:36px;height:36px;border:1px solid #87CDF0;background:#E1F2F8;border-radius:8px"></div>
+            <div style="width:36px;height:36px;border:1px solid #87CDF0;background:#E1F2F8;border-radius:8px"></div>
+            <div style="width:36px;height:36px;border:1px solid #87CDF0;background:#E1F2F8;border-radius:8px"></div>
+            <div style="width:36px;height:36px;border:2px solid #1890ff;background:#f0f9ff;border-radius:8px;box-shadow:0 2px 6px rgba(24,144,255,.2)"></div>
+            <div style="width:36px;height:36px;border:1px solid #87CDF0;background:#E1F2F8;border-radius:8px"></div>
+            <div style="width:36px;height:36px;border:1px solid #87CDF0;background:#E1F2F8;border-radius:8px"></div>
+          </div>
+
+          <!-- 无购票信息 -->
+          <div style="border:1px solid #dcdcdc;background:#fff;border-radius:8px;margin-top:24px;padding:20px 10px;text-align:center;min-height:160px">
+            <div style="font-size:11px;font-weight:700;color:#333;margin-bottom:6px">未检测到购票信息</div>
+            <div style="font-size:8px;color:#999;margin-bottom:12px">请向购票人获取激活码后手动输入</div>
+            <div style="font-size:24px;color:#ccc">🎫</div>
+          </div>
+
+          <div style="text-align:center;margin-top:14px">
+            <div style="display:inline-block;background:linear-gradient(0deg,#577BFE,#54FFF3);color:#fff;border-radius:20px;padding:8px 30px;font-size:10px;font-weight:700;opacity:0.4">激活并创建</div>
+          </div>
+        </div>
+      </div></div>
+      <div class="ui-desc">
+        <h5>🗝️ 激活码输入 — 无购票信息</h5>
+        <p>未登录或没有关联订单时，不展示购票信息，用户手动输入激活码：</p>
+        <ul>
+          <li><strong>提示文案</strong>：白色卡片内显示「未检测到购票信息」+ 提示向购票人获取激活码</li>
+          <li><strong>按钮状态</strong>：激活码未输完时半透明不可点击</li>
+          <li><strong>激活成功</strong>：输入正确后跳转角色创建页</li>
+        </ul>
+        <div class="feature-card" style="margin-top:12px">
+          <h4>前置登录校验</h4>
+          <div class="feature-item">
+            <span class="feature-item-title">已登录</span>
+            <span class="feature-item-desc">直接加载购票信息</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-item-title">未登录</span>
+            <span class="feature-item-desc">弹出手机号授权组件，授权成功后继续</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-item-title">拒绝授权</span>
+            <span class="feature-item-desc">关闭弹窗后跳转回首页</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;

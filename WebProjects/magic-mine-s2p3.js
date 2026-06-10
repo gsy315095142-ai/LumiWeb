@@ -1,1 +1,107 @@
-window.__magic_mine_s2p3 = '<!-- 3. 我的优惠券 Tab -->\n<div class="section-block">\n  <div class="section-title">\n    <div class="section-title-icon">\n      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">\n        <path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"/><path d="M4 6v12c0 1.1.9 2 2 2h14v-4"/><path d="M18 12a2 2 0 0 0 0 4h4v-4h-4z"/>\n      </svg>\n    </div>\n    我的优惠券（user · listType=promotion）\n  </div>\n\n  <div class="ui-demo-row">\n    <div class="ui-demo-item">\n      <div class="phone-wireframe"><div class="phone-notch"></div><div class="phone-screen" style="min-height:540px">\n        <div class="phone-bar"><span>9:41</span><div class="phone-bar-r"><i></i><i></i><i></i></div></div>\n        <div style="padding:10px;background-image:url(https://cdn.lixiaoqian.com/magic-space/bg.jpg);background-size:cover;min-height:504px">\n          <div style="display:flex;align-items:center;padding:8px 16px 10px">\n            <div style="width:40px;height:40px;border-radius:50%;background:#e0e0e0;margin-right:8px;display:flex;align-items:center;justify-content:center;font-size:14px">👤</div>\n            <div style="font-size:11px;font-weight:500;color:#333">微信用户</div>\n          </div>\n          <div style="display:flex;justify-content:space-around;padding:4px 10px">\n            <div style="padding:4px 16px;font-size:10px;color:#A4B8C3">我的场次</div>\n            <div style="padding:4px 16px;font-size:10px;color:#A4B8C3">我的票券</div>\n            <div style="text-align:center;padding:4px 16px;font-size:10px;color:#333;font-weight:700;position:relative">\n              我的优惠券\n              <div style="position:absolute;left:40%;bottom:0;width:20%;height:2px;background:#4A88FD"></div>\n            </div>\n          </div>\n\n          <div style="background:#f0f2f5;border-radius:10px 10px 0 0;margin-top:6px;padding:8px;min-height:340px">\n            <!-- 优惠券卡片1：待使用 -->\n            <div style="background:linear-gradient(135deg,#ff9c5a -160%,#fff 70%);border-radius:10px;padding:0 10px;margin-bottom:10px;box-shadow:0 4px 6px rgba(0,0,0,.06);border-left:3px solid #ff9c5a;position:relative;overflow:hidden">\n              <!-- 右上角状态标签 -->\n              <div style="position:absolute;top:0;right:0;font-size:7px;color:#fff;font-weight:700;padding:2px 8px;background:linear-gradient(90deg,#FD9D40,#FFD67F);border-radius:0 0 0 8px">待使用</div>\n              <!-- 头部 -->\n              <div style="display:flex;align-items:center;padding:10px 0 6px;border-bottom:1px dashed #FFCCAB">\n                <div style="font-size:10px;font-weight:800;color:#4D4D4D;flex:1">8折优惠券</div>\n                <div style="font-size:7px;color:#7B7B7B">【PM20260701A】</div>\n              </div>\n              <!-- 信息 -->\n              <div style="padding:6px 0;font-size:7px">\n                <div style="display:flex;justify-content:space-between;margin:3px 0">\n                  <span style="color:#999;width:60px;padding-left:10px;position:relative">优惠折扣：</span>\n                  <span style="color:#4D4D4D;font-weight:800">8折</span>\n                </div>\n                <div style="display:flex;justify-content:space-between;margin:3px 0">\n                  <span style="color:#999;width:60px;padding-left:10px;position:relative">所属门店：</span>\n                  <span style="color:#4D4D4D;font-weight:800">LUMI朝阳店</span>\n                </div>\n                <div style="display:flex;justify-content:space-between;margin:3px 0">\n                  <span style="color:#999;width:60px;padding-left:10px;position:relative">有效截止：</span>\n                  <span style="color:#4D4D4D;font-weight:800">2026-08-31</span>\n                </div>\n              </div>\n              <!-- 底部操作 -->\n              <div style="display:flex;justify-content:space-between;padding:4px 0 8px">\n                <span style="background:#FD9D40;color:#fff;font-size:7px;padding:2px 8px;border-radius:4px;font-weight:700">转赠优惠券</span>\n                <span style="background:#33D68B;color:#fff;font-size:7px;padding:2px 8px;border-radius:4px">立即使用</span>\n              </div>\n            </div>\n\n            <!-- 优惠券卡片2：已使用 -->\n            <div style="background:#fff;border-radius:10px;padding:0 10px;margin-bottom:10px;box-shadow:0 4px 6px rgba(0,0,0,.04);border-left:3px solid #dcdcdc;position:relative;overflow:hidden;opacity:.7">\n              <div style="position:absolute;top:0;right:0;font-size:7px;color:#fff;font-weight:700;padding:2px 8px;background:linear-gradient(90deg,#DEDEDC,#C1C2C3);border-radius:0 0 0 8px">已使用</div>\n              <div style="display:flex;align-items:center;padding:10px 0 6px;border-bottom:1px dashed #e0e0e0">\n                <div style="font-size:10px;font-weight:800;color:#4D4D4D;flex:1">满200减50</div>\n                <div style="font-size:7px;color:#7B7B7B">【PM20260601B】</div>\n              </div>\n              <div style="padding:6px 0;font-size:7px">\n                <div style="display:flex;justify-content:space-between;margin:3px 0">\n                  <span style="color:#999;width:60px;padding-left:10px">优惠折扣：</span>\n                  <span style="color:#4D4D4D;font-weight:800">满200元减去50元</span>\n                </div>\n                <div style="display:flex;justify-content:space-between;margin:3px 0">\n                  <span style="color:#999;width:60px;padding-left:10px">所属门店：</span>\n                  <span style="color:#4D4D4D;font-weight:800">LUMI海淀店</span>\n                </div>\n                <div style="display:flex;justify-content:space-between;margin:3px 0">\n                  <span style="color:#999;width:60px;padding-left:10px">有效截止：</span>\n                  <span style="color:#4D4D4D;font-weight:800">2026-07-01</span>\n                </div>\n              </div>\n            </div>\n\n            <!-- 优惠券卡片3：已过期 -->\n            <div style="background:#fff;border-radius:10px;padding:0 10px;margin-bottom:10px;box-shadow:0 4px 6px rgba(0,0,0,.04);border-left:3px solid #dcdcdc;position:relative;overflow:hidden;opacity:.5">\n              <div style="position:absolute;top:0;right:0;font-size:7px;color:#fff;font-weight:700;padding:2px 8px;background:linear-gradient(90deg,#DEDEDC,#C1C2C3);border-radius:0 0 0 8px">已过期</div>\n              <div style="display:flex;align-items:center;padding:10px 0 6px;border-bottom:1px dashed #e0e0e0">\n                <div style="font-size:10px;font-weight:800;color:#4D4D4D;flex:1">9折优惠券</div>\n                <div style="font-size:7px;color:#7B7B7B">【PM20260501C】</div>\n              </div>\n              <div style="padding:6px 0;font-size:7px">\n                <div style="display:flex;justify-content:space-between;margin:3px 0">\n                  <span style="color:#999;width:60px;padding-left:10px">优惠折扣：</span>\n                  <span style="color:#4D4D4D;font-weight:800">9折</span>\n                </div>\n                <div style="display:flex;justify-content:space-between;margin:3px 0">\n                  <span style="color:#999;width:60px;padding-left:10px">所属门店：</span>\n                  <span style="color:#4D4D4D;font-weight:800">LUMI朝阳店</span>\n                </div>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div></div>\n      <div class="ui-desc">\n        <h5>🏷️ 我的优惠券 Tab</h5>\n        <p>点击「我的优惠券」Tab → 调用 <code>/mz/promoCodeList</code>，返回 <code>promo_codes</code> 列表。</p>\n        <ul>\n          <li><strong>卡片样式</strong>：橙色渐变背景（待使用）/ 白色（已使用/已过期），左侧 <code>8rpx</code> 橙色边框</li>\n          <li><strong>右上角状态</strong>：橙金渐变「待使用」/ 灰色渐变「已使用」/「已过期」</li>\n          <li><strong>折扣类型</strong>：<code>discount_type</code> → 按比例折扣（8折）/ 固定金额折扣（50元折扣）/ 满减（满200减50）</li>\n          <li><strong>待使用操作</strong>：「转赠优惠券」（仅 <code>transferable=true</code> 时显示）+「立即使用」</li>\n          <li><strong>分享流程</strong>：转赠 → Canvas 绘制分享海报 → <code>onShareAppMessage</code> → 微信分享</li>\n          <li><strong>数据来源</strong>：<code>/mz/promoCodeList</code>，前端通过 <code>adjustPromotionDetail</code> 格式化折扣文案</li>\n        </ul>\n      </div>\n    </div>\n  </div>\n</div>\n\n';
+window.__magic_mine_s2p3 = `
+<!-- 3. 我的优惠券 Tab -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"/><path d="M4 6v12c0 1.1.9 2 2 2h14v-4"/><path d="M18 12a2 2 0 0 0 0 4h4v-4h-4z"/>
+      </svg>
+    </div>
+    我的优惠券
+  </div>
+
+  <div class="ui-demo-row">
+    <div class="ui-demo-item">
+      <div class="phone-wireframe"><div class="phone-notch"></div><div class="phone-screen" style="min-height:540px">
+        <div class="phone-bar"><span>9:41</span><div class="phone-bar-r"><i></i><i></i><i></i></div></div>
+        <div style="min-height:500px;font-family:PingFang SC,sans-serif;background:#f5f5f5">
+          <!-- Tab 栏 -->
+          <div style="display:flex;background:#fff;border-bottom:1px solid #eee">
+            <div style="flex:1;text-align:center;padding:8px 0;font-size:9px;color:#999">我的场次</div>
+            <div style="flex:1;text-align:center;padding:8px 0;font-size:9px;color:#999">我的票券</div>
+            <div style="flex:1;text-align:center;padding:8px 0;font-size:9px;color:#4A88FD;font-weight:700;border-bottom:2px solid #4A88FD">优惠券</div>
+          </div>
+
+          <!-- 筛选 -->
+          <div style="display:flex;padding:8px 10px;gap:6px">
+            <span style="font-size:7px;padding:3px 10px;background:#4A88FD;color:#fff;border-radius:12px">未使用</span>
+            <span style="font-size:7px;padding:3px 10px;background:#fff;color:#666;border-radius:12px;border:1px solid #ddd">已使用</span>
+            <span style="font-size:7px;padding:3px 10px;background:#fff;color:#666;border-radius:12px;border:1px solid #ddd">已过期</span>
+          </div>
+
+          <!-- 优惠券列表 -->
+          <div style="padding:4px 10px">
+            <!-- 优惠券1：折扣券 -->
+            <div style="background:#fff;border-radius:10px;margin-bottom:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.06)">
+              <div style="display:flex">
+                <div style="width:70px;background:linear-gradient(135deg,#FF6B6B,#FF8E53);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;padding:8px 4px">
+                  <div style="font-size:16px;font-weight:700">8折</div>
+                  <div style="font-size:6px;opacity:.8">满200可用</div>
+                </div>
+                <div style="flex:1;padding:8px 10px">
+                  <div style="font-size:9px;color:#333;font-weight:700;margin-bottom:3px">全场通用折扣券</div>
+                  <div style="font-size:7px;color:#999;line-height:1.5">
+                    <div>有效期至：2026-08-31</div>
+                    <div>适用：所有套餐</div>
+                  </div>
+                  <div style="display:flex;justify-content:flex-end;margin-top:4px">
+                    <span style="font-size:7px;padding:2px 8px;background:#FFF7E6;color:#FAAD14;border-radius:8px">可转赠</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 优惠券2：满减券 -->
+            <div style="background:#fff;border-radius:10px;margin-bottom:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.06)">
+              <div style="display:flex">
+                <div style="width:70px;background:linear-gradient(135deg,#577BFE,#54FFF3);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;padding:8px 4px">
+                  <div style="font-size:14px;font-weight:700">-50</div>
+                  <div style="font-size:6px;opacity:.8">满300可用</div>
+                </div>
+                <div style="flex:1;padding:8px 10px">
+                  <div style="font-size:9px;color:#333;font-weight:700;margin-bottom:3px">满减优惠券</div>
+                  <div style="font-size:7px;color:#999;line-height:1.5">
+                    <div>有效期至：2026-09-15</div>
+                    <div>适用：双人及以上套餐</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 优惠券3：已过期 -->
+            <div style="background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.06);opacity:0.5">
+              <div style="display:flex">
+                <div style="width:70px;background:#d9d9d9;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;padding:8px 4px">
+                  <div style="font-size:14px;font-weight:700">-30</div>
+                  <div style="font-size:6px;opacity:.8">满200可用</div>
+                </div>
+                <div style="flex:1;padding:8px 10px">
+                  <div style="font-size:9px;color:#999;font-weight:700;margin-bottom:3px">新人专享券</div>
+                  <div style="font-size:7px;color:#bbb;line-height:1.5">
+                    <div>已过期：2026-06-30</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div></div>
+      <div class="ui-desc">
+        <h5>🏷️ 我的优惠券 Tab</h5>
+        <p>优惠券列表，左侧色块显示优惠力度，右侧展示详情：</p>
+        <ul>
+          <li><strong>状态筛选</strong>：未使用 / 已使用 / 已过期</li>
+          <li><strong>折扣券</strong>：橙红色左侧块，显示折扣比例（如 8 折）</li>
+          <li><strong>满减券</strong>：蓝绿色左侧块，显示减免金额（如 -50）</li>
+          <li><strong>使用条件</strong>：左侧块下方小字显示门槛</li>
+          <li><strong>有效期</strong>：右侧展示到期日期</li>
+          <li><strong>转赠标记</strong>：可转赠的优惠券显示黄色「可转赠」标签</li>
+          <li><strong>已过期</strong>：灰色样式 + 降低透明度</li>
+          <li><strong>分享转赠</strong>：点击可转赠优惠券 → 生成分享海报，好友领取后绑定</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;

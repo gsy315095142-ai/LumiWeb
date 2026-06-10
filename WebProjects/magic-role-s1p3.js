@@ -1,1 +1,72 @@
-window.__magic_role_s1p3 = '<!-- 3. 倒计时与结果弹窗（role · submitDone） -->\n<div class="section-block">\n  <div class="section-title">\n    <div class="section-title-icon">\n      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">\n        <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>\n      </svg>\n    </div>\n    倒计时与结果弹窗\n  </div>\n\n  <div class="ui-demo-row">\n    <div class="ui-demo-item">\n      <div class="phone-wireframe"><div class="phone-notch"></div><div class="phone-screen" style="min-height:540px">\n        <div class="phone-bar"><span>9:41</span><div class="phone-bar-r"><i></i><i></i><i></i></div></div>\n        <div style="padding:10px;background-image:url(https://cdn.lixiaoqian.com/magic-space/role-bg.jpg);background-size:cover;min-height:506px;position:relative">\n          <!-- 角色创建区域（被遮罩覆盖） -->\n          <div style="opacity:.3">\n            <div style="display:flex;justify-content:space-around;margin:12px 0">\n              <div style="border:1px solid #A68027;background:#A68027;padding:3px 14px;border-radius:16px;font-size:8px;color:#fff">玩家1</div>\n              <div style="border:1px solid #dcdcdc;padding:3px 14px;border-radius:16px;font-size:8px;color:#fff">玩家2</div>\n              <div style="border:1px solid #dcdcdc;padding:3px 14px;border-radius:16px;font-size:8px;color:#fff">玩家3</div>\n            </div>\n          </div>\n\n          <!-- 结果弹窗 -->\n          <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.7);display:flex;justify-content:center;align-items:center;z-index:999">\n            <div style="width:90%;position:relative">\n              <!-- 背景图占位 -->\n              <div style="width:100%;height:140px;background:linear-gradient(180deg,#ffd700,#ff6b35);border-radius:16px 16px 0 0;display:flex;align-items:center;justify-content:center;font-size:20px">\n                🎉\n              </div>\n              <div style="background:#fff;padding:10px 20px 16px;text-align:center">\n                <div style="font-size:12px;font-weight:700;color:#323232">开场倒计时</div>\n                <div style="font-size:24px;font-weight:700;color:#323232;font-family:Impact,monospace;margin:6px 0">00:28:45</div>\n                <div style="display:flex;justify-content:center;gap:16px;margin-top:10px">\n                  <div style="background:linear-gradient(0deg,#577BFE,#54FFF3);color:#fff;border-radius:18px;padding:6px 16px;font-size:8px;font-weight:700">查 看 角 色</div>\n                  <div style="background:linear-gradient(0deg,#bb2727,#ffa6a6);color:#fff;border-radius:18px;padding:6px 16px;font-size:8px;font-weight:700">回 到 首 页</div>\n                </div>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div></div>\n      <div class="ui-desc">\n        <h5>⏱️ 倒计时结果弹窗</h5>\n        <p>角色提交成功后（<code>submitDone=true</code>），全屏遮罩 + 结果弹窗覆盖在角色页面上。</p>\n        <ul>\n          <li><strong>弹窗结构</strong>：<code>result-model</code> 全屏遮罩 → <code>result-success</code> 弹窗 → 背景图 <code>pop-bg</code> + 倒计时内容</li>\n          <li><strong>开场倒计时</strong>：基于 <code>data.round.time_start</code> 和当前时间差值，每秒刷新（<code>HH:MM:SS</code>）</li>\n          <li><strong>查看角色</strong>：关闭弹窗，显示角色编辑界面（首次会弹出创建提示引导图）</li>\n          <li><strong>回到首页</strong>：清除定时器 → <code>wx.reLaunch</code> 跳转首页</li>\n          <li><strong>场次已开启</strong>：<code>roundStatus > 0</code> 时提示「当前场次已经开启，无法编辑」</li>\n        </ul>\n      </div>\n    </div>\n  </div>\n</div>\n\n';
+window.__magic_role_s1p3 = `
+<!-- 3. 倒计时与结果弹窗 -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+      </svg>
+    </div>
+    倒计时与结果弹窗
+  </div>
+
+  <div class="ui-demo-row">
+    <div class="ui-demo-item">
+      <div class="phone-wireframe"><div class="phone-notch"></div><div class="phone-screen" style="min-height:540px">
+        <div class="phone-bar"><span>9:41</span><div class="phone-bar-r"><i></i><i></i><i></i></div></div>
+        <!-- 遮罩 + 倒计时弹窗 -->
+        <div style="min-height:506px;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;padding:0 8%">
+          <div style="width:100%;background:#fff;border-radius:16px;padding:20px;text-align:center;position:relative">
+            <!-- 场次信息 -->
+            <div style="font-size:9px;color:#666;margin-bottom:8px">您的场次：14:00 - 14:30</div>
+
+            <!-- 倒计时环 -->
+            <div style="width:100px;height:100px;margin:0 auto 12px;border-radius:50%;border:4px solid #E8F4FD;display:flex;align-items:center;justify-content:center;position:relative">
+              <div style="position:absolute;top:-4px;left:50%;width:4px;height:50px;background:linear-gradient(180deg,#577BFE,transparent);transform-origin:bottom center;transform:rotate(-30deg);border-radius:2px"></div>
+              <div>
+                <div style="font-size:20px;color:#333;font-weight:700;font-family:monospace">12:34</div>
+                <div style="font-size:7px;color:#999;margin-top:2px">后开始</div>
+              </div>
+            </div>
+
+            <div style="font-size:10px;color:#333;font-weight:700;margin-bottom:4px">准备进入魔法世界</div>
+            <div style="font-size:8px;color:#999;margin-bottom:16px">请耐心等待场次开启</div>
+
+            <!-- 提示 -->
+            <div style="background:#FFF7E6;border-radius:8px;padding:8px;font-size:8px;color:#8C6D1F;text-align:left">
+              <div>🔔 温馨提示：</div>
+              <div style="margin-top:4px">· 场次开启前可以修改角色信息</div>
+              <div>· 请确保所有队员已到齐</div>
+            </div>
+
+            <!-- 关闭按钮 -->
+            <div style="margin-top:14px;font-size:8px;color:#1890ff">关闭</div>
+          </div>
+        </div>
+      </div></div>
+      <div class="ui-desc">
+        <h5>⏱️ 倒计时弹窗</h5>
+        <p>角色创建成功后，自动弹出倒计时弹窗：</p>
+        <ul>
+          <li><strong>场次信息</strong>：显示用户所属的场次时间段</li>
+          <li><strong>倒计时</strong>：环形进度 + 数字倒计时（时:分:秒），倒计至场次开始时间</li>
+          <li><strong>温馨提示</strong>：黄色提示框，提醒可修改角色、确保队员到齐</li>
+          <li><strong>关闭</strong>：点击关闭按钮返回角色创建页，弹窗不会再次自动弹出</li>
+        </ul>
+        <div class="feature-card" style="margin-top:12px">
+          <h4>场次开启后</h4>
+          <div class="feature-item">
+            <span class="feature-item-title">自动跳转</span>
+            <span class="feature-item-desc">场次开启后提示用户，点击确认跳转首页</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-item-title">禁止编辑</span>
+            <span class="feature-item-desc">场次已开启时进入页面提示「当前场次已经开启，无法编辑」</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+`;

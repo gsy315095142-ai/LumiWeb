@@ -1,1 +1,76 @@
-window.__magic_mine_s2p6 = '<!-- 6. API 参考 + 联系客服 -->\n<div class="section-block">\n  <div class="section-title">\n    <div class="section-title-icon">\n      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">\n        <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>\n      </svg>\n    </div>\n    API 参考 & 辅助功能\n  </div>\n\n  <div class="feature-card">\n    <h4>相关 API</h4>\n    <table class="info-table">\n      <thead><tr><th>接口</th><th>方法</th><th>用途</th></tr></thead>\n      <tbody>\n        <tr><td><code>/mz/getUserRounds</code></td><td>POST</td><td>获取用户的所有场次列表</td></tr>\n        <tr><td><code>/mz/getCouponList</code></td><td>POST</td><td>获取用户的票券列表（散客+团购）</td></tr>\n        <tr><td><code>/mz/promoCodeList</code></td><td>POST</td><td>获取用户的优惠券列表</td></tr>\n        <tr><td><code>/mz/getUserCenterData</code></td><td>POST</td><td>获取用户中心概览数据（角标数字等）</td></tr>\n        <tr><td><code>/mz/cancelGameRoundOrder</code></td><td>POST</td><td>撤销场次（提前3小时以上）</td></tr>\n        <tr><td><code>/mz/refundCouponWithPayOrder</code></td><td>POST</td><td>小程序退票（仅散客票）</td></tr>\n        <tr><td><code>/mz/markCouponTransferable</code></td><td>POST</code></td><td>标记票券可转赠</td></tr>\n        <tr><td><code>/mz/markGroupTransferable</code></td><td>POST</td><td>标记团购票可转赠</td></tr>\n      </tbody>\n    </table>\n  </div>\n\n  <div class="feature-card">\n    <h4>联系客服</h4>\n    <p>点击「联系客服」按钮 → <code>wx.showActionSheet</code> → <code>wx.makePhoneCall</code>。</p>\n    <ul>\n      <li>未选择门店时拨打通用客服电话（<code>service_phone</code>）</li>\n      <li>已选择门店时拨打门店电话（<code>placeLists[id].phone</code>）</li>\n      <li>无客服信息时提示「无客服信息」Toast</li>\n    </ul>\n  </div>\n\n  <div class="feature-card">\n    <h4>转赠分享机制</h4>\n    <p>票券/团购票/优惠券均支持转赠（通过微信分享卡片实现）：</p>\n    <ul>\n      <li><strong>散客票转赠</strong>：Canvas 绘制分享海报（<code>share-coupon.jpg</code> 模板 + 票券信息） → <code>onShareAppMessage</code></li>\n      <li><strong>团购票转赠</strong>：OffscreenCanvas 绘制（<code>share-bg3.jpg</code> 模板 + 团队信息） → 分享标题「邀请您成为团队负责人~」</li>\n      <li><strong>团购票分享给团队</strong>：同模板，分享标题「邀请您预约场次~」，路径直接指向 <code>groupTeam</code> 页</li>\n      <li><strong>优惠券转赠</strong>：Canvas 绘制（<code>discount-coupon.png</code> 模板） → 分享标题「赠送你一张魔法学院优惠券」</li>\n      <li>所有转赠只能进行 1 次，<code>transfer_status=2</code> 后显示「已赠出」/「已获赠」</li>\n    </ul>\n  </div>\n</div>\n';
+window.__magic_mine_s2p6 = `
+<!-- 6. 相关接口与辅助功能 -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+      </svg>
+    </div>
+    相关接口与辅助功能
+  </div>
+
+  <div class="feature-card">
+    <h4>相关接口</h4>
+    <div class="feature-item">
+      <span class="feature-item-title">获取用户场次</span>
+      <span class="feature-item-desc">获取当前用户已预约的场次列表</span>
+    </div>
+    <div class="feature-item">
+      <span class="feature-item-title">获取票券列表</span>
+      <span class="feature-item-desc">获取用户的票券，按来源和转赠状态分组展示</span>
+    </div>
+    <div class="feature-item">
+      <span class="feature-item-title">获取优惠券列表</span>
+      <span class="feature-item-desc">获取用户的优惠券，前端格式化折扣文案后展示</span>
+    </div>
+    <div class="feature-item">
+      <span class="feature-item-title">散客票退票</span>
+      <span class="feature-item-desc">发起退票申请，成功后刷新票券列表</span>
+    </div>
+    <div class="feature-item">
+      <span class="feature-item-title">用户信息</span>
+      <span class="feature-item-desc">获取/更新用户头像、昵称等基本信息</span>
+    </div>
+    <div class="feature-item">
+      <span class="feature-item-title">注销账号</span>
+      <span class="feature-item-desc">二次确认后永久删除用户数据</span>
+    </div>
+  </div>
+
+  <div class="feature-card" style="margin-top:16px">
+    <h4>联系客服</h4>
+    <div class="feature-item">
+      <span class="feature-item-title">客服按钮</span>
+      <span class="feature-item-desc">点击后弹出操作菜单，可选「拨打客服电话」或「复制微信号」</span>
+    </div>
+    <div class="feature-item">
+      <span class="feature-item-title">客服电话</span>
+      <span class="feature-item-desc">直接拨打门店客服热线</span>
+    </div>
+    <div class="feature-item">
+      <span class="feature-item-title">微信号</span>
+      <span class="feature-item-desc">复制客服微信号到剪贴板，提示「已复制」</span>
+    </div>
+  </div>
+
+  <div class="feature-card" style="margin-top:16px">
+    <h4>转赠分享机制</h4>
+    <div class="feature-item">
+      <span class="feature-item-title">转赠入口</span>
+      <span class="feature-item-desc">优惠券卡片上点击转赠按钮，生成分享海报</span>
+    </div>
+    <div class="feature-item">
+      <span class="feature-item-title">海报生成</span>
+      <span class="feature-item-desc">使用 Canvas 绘制分享图片，含优惠券信息和二维码</span>
+    </div>
+    <div class="feature-item">
+      <span class="feature-item-title">分享标题</span>
+      <span class="feature-item-desc">「赠送你一张魔法学院优惠券」</span>
+    </div>
+    <div class="feature-item">
+      <span class="feature-item-title">转赠限制</span>
+      <span class="feature-item-desc">每张优惠券仅可转赠 1 次，转赠后显示「已赠出」或「已获赠」状态</span>
+    </div>
+  </div>
+</div>`;

@@ -1,1 +1,76 @@
-window.__magic_mine_s1 = '<!-- 页面整体结构（从 magic-mine.html 拆分） -->\n<div class="section-block">\n  <div class="section-title">\n    <div class="section-title-icon">\n      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">\n        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/>\n      </svg>\n    </div>\n    页面整体结构\n  </div>\n\n  <div class="feature-card">\n    <h4>顶部用户信息区</h4>\n    <p>页面顶部展示用户状态信息：</p>\n    <ul class="detail-list" style="margin-top:8px;">\n      <li><strong>头像 & 昵称</strong>：显示微信头像和昵称（未登录时显示默认头像 +「微信用户」）</li>\n      <li><strong>登录按钮</strong>：未登录时显示「登录」按钮，点击弹出手机号授权弹窗</li>\n      <li><strong>团购兑换入口</strong>：已登录用户可点击团购兑换图片，弹出兑换弹窗输入团购码</li>\n      <li><strong>联系客服</strong>：点击拨打当前门店或默认客服电话</li>\n      <li><strong>设置入口</strong>：右上角齿轮图标进入设置页</li>\n    </ul>\n  </div>\n\n  <div class="feature-card">\n    <h4>功能导航区（5 个入口 + 角标）</h4>\n    <p>用户信息下方为功能入口网格，每项带数字角标：</p>\n    <table class="info-table">\n      <thead><tr><th>入口</th><th>角标来源</th><th>跳转目标</th></tr></thead>\n      <tbody>\n        <tr><td>待使用票券</td><td><code>coupon_pending_count</code></td><td><code>/pages/coupons/coupons?type=1</code></td></tr>\n        <tr><td>我的票券</td><td><code>coupon_count</code></td><td>票券 Tab</td></tr>\n        <tr><td>创建角色</td><td><code>order_un_role_count</code></td><td><code>/pages/role/role?order={id}</code></td></tr>\n        <tr><td>待体验场次</td><td><code>order_un_check_count</code></td><td><code>/pages/orders/orders?type=0</code></td></tr>\n        <tr><td>我的订单</td><td><code>order_count</code></td><td>场次 Tab</td></tr>\n      </tbody>\n    </table>\n    <p style="margin-top:8px;">角标为 0 时点击提示「暂无更多数据」。创建角色入口会自动携带待创角订单 ID。</p>\n  </div>\n\n  <div class="feature-card">\n    <h4>三个 Tab 内容区</h4>\n    <p>功能导航下方为三个 Tab 切换：</p>\n    <ul class="detail-list" style="margin-top:8px;">\n      <li><strong>场次（round）</strong>：我的场次列表，按待体验/已体验分组</li>\n      <li><strong>票券（coupon）</strong>：我的票券列表，按待使用/其他分组</li>\n      <li><strong>优惠券（promotion）</strong>：我的优惠券列表</li>\n    </ul>\n    <p style="margin-top:8px;">可通过外部参数 <code>jumpToTicket</code> 跳转后默认显示票券 Tab。</p>\n  </div>\n</div>\n';
+window.__magic_mine_s1 = `
+<!-- 页面整体结构 -->
+<div class="section-block">
+  <div class="section-title">
+    <div class="section-title-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/>
+      </svg>
+    </div>
+    页面整体结构
+  </div>
+
+  <p>「我的」页面是用户中心主入口，由三大区域组成：</p>
+
+  <div class="feature-card" style="margin-top:12px">
+    <h4>顶部用户信息区</h4>
+    <div class="feature-item">
+      <span class="feature-item-title">头像</span>
+      <span class="feature-item-desc">圆形头像，未登录显示默认头像</span>
+    </div>
+    <div class="feature-item">
+      <span class="feature-item-title">昵称</span>
+      <span class="feature-item-desc">未登录显示「点击登录」</span>
+    </div>
+    <div class="feature-item">
+      <span class="feature-item-title">手机号</span>
+      <span class="feature-item-desc">已登录显示脱敏手机号</span>
+    </div>
+  </div>
+
+  <div class="feature-card" style="margin-top:12px">
+    <h4>功能导航区（5 个入口 + 角标）</h4>
+    <div class="feature-item">
+      <span class="feature-item-title">待激活</span>
+      <span class="feature-item-desc">跳转激活码输入页，角标显示未激活订单数</span>
+    </div>
+    <div class="feature-item">
+      <span class="feature-item-title">待使用</span>
+      <span class="feature-item-desc">跳转我的票券 Tab（待使用），角标显示待使用票券数</span>
+    </div>
+    <div class="feature-item">
+      <span class="feature-item-title">待评价</span>
+      <span class="feature-item-desc">跳转我的场次 Tab，角标显示已完成未评价场次数</span>
+    </div>
+    <div class="feature-item">
+      <span class="feature-item-title">优惠卷</span>
+      <span class="feature-item-desc">跳转我的优惠券 Tab</span>
+    </div>
+    <div class="feature-item">
+      <span class="feature-item-title">设置</span>
+      <span class="feature-item-desc">跳转设置页</span>
+    </div>
+  </div>
+
+  <div class="feature-card" style="margin-top:12px">
+    <h4>三个 Tab 内容区</h4>
+    <div class="feature-item">
+      <span class="feature-item-title">我的场次</span>
+      <span class="feature-item-desc">按日期展示已预约的体验场次</span>
+    </div>
+    <div class="feature-item">
+      <span class="feature-item-title">我的票券</span>
+      <span class="feature-item-desc">票券列表，按待使用/其他分组</span>
+    </div>
+    <div class="feature-item">
+      <span class="feature-item-title">优惠券</span>
+      <span class="feature-item-desc">我的优惠券列表</span>
+    </div>
+    <div class="feature-item" style="margin-top:4px">
+      <span class="feature-item-title">外部跳转</span>
+      <span class="feature-item-desc">支持通过参数直接定位到票券 Tab</span>
+    </div>
+  </div>
+</div>
+
+`;
