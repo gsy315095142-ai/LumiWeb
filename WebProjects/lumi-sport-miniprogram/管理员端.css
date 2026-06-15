@@ -1,7 +1,0 @@
-/* 管理员端样式入口：按模块拆分，见 管理员端-styles/ */
-@import url("管理员端-styles/base.css");
-@import url("管理员端-styles/场次.css");
-@import url("管理员端-styles/商品库.css");
-@import url("管理员端-styles/弹窗.css");
-@import url("管理员端-styles/我的.css");
-@import url("管理员端-styles/扫码兑换.css");

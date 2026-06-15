@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumi 魔法学院 - 订单与支付</title>
+<style>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');</style>
+<link rel="stylesheet" href="../../shared/common.css">
+<link rel="stylesheet" href="../../shared/wireframe.css">
+
+</head>
+<body>
+<div class="bg-glow"><div class="glow-orb glow-orb-1"></div><div class="glow-orb glow-orb-2"></div></div>
+<div class="container">
+
+  <div class="topbar">
+    <a href="../../LumiMagic_Season_01.html" class="back-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      返回文档列表
+    </a>
+                      <div class="topbar-nav">
+      <div class="nav-group">
+        <button class="nav-group-btn active-group">用户端 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="nav-dropdown">
+        <a href="../login/login.html" class="">登录</a>
+        <a href="../home/home.html" class="">首页</a>
+        <a href="../booking/booking.html" class="">预约</a>
+        <a href="../order/order.html" class="current">订单</a>
+        <a href="../ticket/ticket.html" class="">票券</a>
+        <a href="../role/role.html" class="">激活</a>
+        <a href="../mine/mine.html" class="">个人中心</a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button class="nav-group-btn">管理端 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="nav-dropdown">
+        <a href="../central/central.html" class="">中控</a>
+        <a href="../promotion/promotion.html" class="">优惠</a>
+        <a href="../group/group.html" class="">团队</a>
+        <a href="../stats/stats.html" class="">统计</a>
+        </div>
+      </div>
+      </div>
+  </div>
+
+  <div class="page-header">
+    <div class="page-header-top"><span class="page-num">模块 04</span></div>
+    <h1>订单与支付</h1>
+    <p class="page-header-desc">订单流程覆盖从确认页、支付、下单成功到订单详情的全生命周期。用户可以在确认页选择票券和优惠券，通过微信支付完成下单，在订单详情页管理预约、改签、取消和分享。</p>
+  </div>
+
+  <div class="content" id="content-area">
+  </div>
+  <!-- 底部翻页导航 -->
+  <div class="page-nav">
+    <a href="../booking/booking.html" class="page-nav-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      <div class="page-nav-info">
+        <span class="page-nav-label">上一模块</span>
+        <span class="page-nav-title">预约体验</span>
+      </div>
+    </a>
+    <a href="../ticket/ticket.html" class="page-nav-link next">
+      <div class="page-nav-info">
+        <span class="page-nav-label">下一模块</span>
+        <span class="page-nav-title">票券系统 →</span>
+      </div>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+
+  <footer class="footer"><p class="footer-text">© 2026 Lumi (lumiclaw) · 探索无限可能</p></footer>
+</div>
+
+
+
+
+  <!-- TOC 浮动目录 -->
+  <div class="toc-float" id="toc-float"></div>
+
+  <!-- 回到顶部 -->
+  <button class="back-top" id="back-top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+  </button>
+
+<script src="magic-order-s1p1.js"></script>
+<script src="magic-order-s1p2.js"></script>
+<script src="magic-order-s1p3.js"></script>
+<script src="magic-order-s1.js"></script>
+<script src="magic-order-loader.js"></script>
+<script src="../../shared/common.js"></script>
+</body>
+</html>

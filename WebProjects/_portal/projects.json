@@ -1,0 +1,27 @@
+{
+  "version": "1.0.26061501",
+  "projects": [
+    {
+      "id": "LumiMagic_Season_01",
+      "title": "Lumi 魔法学院",
+      "description": "走进魔法的世界，化身学院新生，在奇幻的场景中学习魔法、挑战关卡，体验沉浸式魔法冒险之旅。",
+      "href": "WebProjects/LumiMagic_Season_01/LumiMagic_Season_01.html",
+      "tags": ["XR体验", "沉浸式", "魔法冒险"]
+    },
+    {
+      "id": "LumiSport",
+      "title": "Lumi 竞技大空间",
+      "description": "大空间多人竞技对战平台，支持实时赛事管理与观赛互动，打造线下大空间电竞新体验。",
+      "href": "WebProjects/LumiSport/LumiSport.html",
+      "tags": ["多人竞技", "赛事管理", "大空间"]
+    },
+    {
+      "id": "LumiMagic_Season_02",
+      "title": "Lumi 魔法学院 · 第二季",
+      "description": "全新篇章，全新冒险。更多魔法、更大世界、更强沉浸感，敬请期待魔法学院的全新进化。",
+      "href": "WebProjects/LumiMagic_Season_02/LumiMagic_Season_02.html",
+      "tags": ["全新篇章", "敬请期待", "Coming Soon"],
+      "comingSoon": true
+    }
+  ]
+}
