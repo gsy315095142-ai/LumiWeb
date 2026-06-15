@@ -1,0 +1,29 @@
+/* 管理员端 - 二维码 · 个人中心 · 结算流水 */
+.qr-section { text-align:center; padding:32px 0; }
+.qr-box { width:200px; height:200px; margin:0 auto 20px; border-radius:18px; background:#fff; padding:12px; position:relative; }
+.qr-inner { width:100%; height:100%; display:grid; grid-template-columns:repeat(8,1fr); grid-template-rows:repeat(8,1fr); gap:2px; }
+.qr-cell { background:#000; border-radius:2px; }
+.qr-cell.w { background:#fff; }
+.qr-blur { position:absolute; inset:0; border-radius:18px; background:rgba(255,255,255,0.7); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); display:flex; align-items:center; justify-content:center; }
+.qr-login-btn { background:var(--accent); color:#fff; border:none; padding:12px 28px; border-radius:24px; font-size:0.85em; font-weight:700; cursor:pointer; z-index:1; }
+.status-tag { display:inline-block; padding:6px 20px; border-radius:20px; font-size:0.85em; font-weight:600; }
+.status-none { background:rgba(255,255,255,0.06); color:#888; }
+.qr-tip { color:var(--muted); font-size:0.82em; margin-top:12px; }
+.login-prompt { background:linear-gradient(135deg,#14142a,#1a1a3a); border-radius:16px; padding:32px 20px; margin-bottom:16px; border:1px solid var(--border); text-align:center; }
+
+.settle-stats { display:flex; gap:8px; margin-top:8px; }
+.settle-stat { flex:1; text-align:center; background:rgba(255,255,255,0.03); border-radius:10px; padding:10px 6px; }
+.settle-stat .s-val { font-size:1.1em; font-weight:700; }
+.settle-stat .s-lbl { font-size:0.65em; color:var(--muted); margin-top:2px; }
+.flow-row { display:flex; align-items:center; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--border); font-size:0.82em; }
+.flow-row:last-child { border-bottom:none; }
+.flow-time { color:var(--muted); width:50px; flex-shrink:0; }
+.flow-desc { flex:1; color:#fff; }
+.flow-amt { font-weight:600; }
+.flow-in { color:var(--good); }
+.flow-out { color:var(--bad); }
+.logout-btn { display:block; width:100%; text-align:center; padding:14px; margin-top:16px; color:var(--bad); font-size:0.85em; font-weight:600; cursor:pointer; background:transparent; border:none; }
+
+.coin-help{display:inline-block;width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,0.1);color:var(--muted);font-size:0.6em;text-align:center;line-height:16px;cursor:pointer;margin-left:3px}
+.profile-card .qr-section{padding:12px 0 0}.profile-card .qr-box{margin-bottom:0}
+.history-item{color:#ddd}.battle-item .battle-top{color:#ccc}

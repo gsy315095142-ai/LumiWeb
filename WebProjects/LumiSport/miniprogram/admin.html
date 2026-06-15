@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LumiSport 管理员端原型</title>
+<link rel="stylesheet" href="client.css">
+<link rel="stylesheet" href="admin.css">
+<style>
+.portal-back {
+  display: block;
+  text-align: center;
+  padding: 12px 16px;
+  font-size: 13px;
+  color: #888;
+  text-decoration: none;
+  font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  background: #0a0a14;
+}
+.portal-back:hover { color: #a78bfa; }
+</style>
+</head>
+<body>
+<a href="../LumiSport.html" class="portal-back">← 返回 LumiSport 项目</a>
+<div class="phone" id="app">
+  <div class="status-bar"><span>21:36</span><span>📱 5G 85%</span></div>
+  <div class="header" id="pageTitle">
+    <span class="back-btn" id="backBtn" onclick="goBack()">← 返回</span>
+    <span id="titleText">🏟️ LumiSport</span>
+  </div>
+  <div class="toast hidden" id="toast"></div>
+
+  <div class="content" id="contentArea">
+    <!-- ===== 客户端页面 ===== -->
+    <div class="page active" id="page-home">
+      <div class="store-switch" id="venueSwitch" onclick="toggleStoreMenu(event, this)">📍 <span class="venue-name" id="venueName">🏡 兰陵酒吧</span> <span class="venue-caret">▾</span></div>
+      <div class="store-menu hidden" id="storeMenu">
+        <div class="store-menu-item active" onclick="selectClientStore('🏡 兰陵酒吧')">🏡 兰陵酒吧</div>
+        <div class="store-menu-item" onclick="selectClientStore('🍺 啤酒公社')">🍺 啤酒公社</div>
+        <div class="store-menu-item" onclick="selectClientStore('✨ 星光酒廊')">✨ 星光酒廊</div>
+      </div>
+      <div class="banner hotel-banner">
+        <div class="zone-row">
+          <select class="zone-select zone-select-big" id="zoneSelect" onchange="onZoneChange(this)"><option value="疾速冰球厅" selected>疾速冰球厅</option><option value="雷霆击剑厅">雷霆击剑厅</option><option value="烈焰拳王厅">烈焰拳王厅</option></select>
+        </div>
+        <div class="hotel-ad" id="hotelAd">
+          <div class="hotel-ad-badge">🏨 兰陵大酒店</div>
+          <div class="hotel-ad-title">住客专享 · 入住即送1000游戏币</div>
+          <div class="hotel-ad-desc">前台领取实体筹码，扫码兑换即时到账</div>
+        </div>
+        <div class="ad-tag" id="adTag">今夜精彩赛事 · 参与竞猜赢好礼</div>
+      </div>
+      <div class="home-actions">
+        <button class="home-action-btn act-bet" onclick="goBetting()"><span class="ha-icon">🎯</span><span class="ha-text">竞猜</span><span class="ha-sub">观赛下注赢游戏币</span></button>
+        <button class="home-action-btn act-signup" onclick="openSignupModal()"><span class="ha-icon">✋</span><span class="ha-text">报名</span><span class="ha-sub">上场参赛排队</span></button>
+      </div>
+    </div>
+    <div class="page" id="page-betting">
+      <div class="store-switch" id="venueSwitch2" onclick="toggleStoreMenu(event, this)">📍 <span class="venue-name">🏡 兰陵酒吧</span> <span class="venue-caret">▾</span></div>
+      <div class="store-menu hidden" id="storeMenu2">
+        <div class="store-menu-item active" onclick="selectClientStore('🏡 兰陵酒吧')">🏡 兰陵酒吧</div>
+        <div class="store-menu-item" onclick="selectClientStore('🍺 啤酒公社')">🍺 啤酒公社</div>
+        <div class="store-menu-item" onclick="selectClientStore('✨ 星光酒廊')">✨ 星光酒廊</div>
+      </div>
+      <div class="banner hotel-banner">
+        <div class="zone-row">
+          <select class="zone-select zone-select-big" id="zoneSelect2" onchange="onZoneChange(this)"><option value="疾速冰球厅" selected>疾速冰球厅</option><option value="雷霆击剑厅">雷霆击剑厅</option><option value="烈焰拳王厅">烈焰拳王厅</option></select>
+        </div>
+        <div class="hotel-ad" id="hotelAd2"></div>
+        <div class="ad-tag" id="adTag2"></div>
+      </div>
+      <div id="bettingMatchesList"></div>
+    </div>
+    <div class="page" id="page-sign">
+      <div class="qr-section"><div class="qr-box" id="qrBox"><div class="qr-inner" id="qrGrid"></div><div class="qr-blur" id="qrBlur"><button class="qr-login-btn" onclick="showLogin()">🔐 登录后查看</button></div></div><div><span class="status-tag status-none" id="statusTag">未登录</span></div><p class="qr-tip" id="qrTip">登录后出示身份码</p></div>
+    </div>
+    <div class="page" id="page-mine">
+      <div class="login-prompt" id="loginPrompt"><div class="hint-icon">🔐</div><div class="hint-text">登录后可查看个人信息</div><button class="btn btn-primary" onclick="showLogin()" style="background:#07c160;">🔽 一键登录</button></div>
+      <div class="profile-card hidden" id="profileCard">
+        <div class="profile-top"><div class="profile-avatar">👁</div><div class="profile-info"><div class="profile-nick">战神阿飞</div><div class="profile-uid">ID: Lumi_0821</div></div></div>
+        <div class="profile-coins"><div class="profile-coin"><div class="val" id="myGameCoinVal" style="color:#fbbf24;">1,250</div><div class="lbl">💰 游戏币 <span class="coin-help" onclick="showCoinHelp('coin')">?</span></div></div><div class="profile-coin"><div class="val" style="color:#c4b5fd;">340</div><div class="lbl">💎 兑换币 <span class="coin-help" onclick="showCoinHelp('ex')">?</span></div></div></div>
+        <div class="qr-section" id="qrSection"><div class="qr-box" id="qrBox"><div class="qr-inner" id="qrGrid"></div><div class="qr-blur" id="qrBlurMine"></div></div><p class="qr-tip" id="qrTipMine">报名、兑换请出示此码</p></div>
+      </div>
+      <div class="menu-btn hidden" id="menuBet" onclick="goSub('betHistory')"><span class="menu-left">📵 竞猜记录</span><span class="menu-arrow">→</span></div>
+      <div class="menu-btn hidden" id="menuBattle" onclick="goSub('battleHistory')"><span class="menu-left">⚔️ 比赛记录</span><span class="menu-arrow">→</span></div>
+      <div class="menu-btn hidden" id="menuExchange" onclick="goSub('exchangeHistory')"><span class="menu-left">📦 兑换记录</span><span class="menu-arrow">→</span></div>
+      <button class="logout-btn hidden" id="logoutBtn" onclick="doLogout()">退出登录</button>
+    </div>
+    <div class="page" id="page-exchangeHistory"><div class="section-title">兑换记录</div><div id="exchangeHistoryList"></div></div>
+    <div class="page" id="page-betHistory"><div class="rank-card" id="prophetCard"></div><div class="section-title">竞猜记录</div><div id="betHistoryList"></div></div>
+    <div class="page" id="page-battleHistory"><div class="section-title">比赛记录</div><div class="battle-item"><div class="battle-top"><span style="font-weight:600;">⚔️ 雷霆击剑 · 雷霆击剑厅</span><span class="result-win">🎳 胜</span></div><div class="battle-detail">📅 2026-06-12 &nbsp; 🕐 20:30 &nbsp;|&nbsp; 🔴 本人 vs 🔵 <span class="player-nick-link" onclick="showPlayerStats('疾风小刀')">疾风小刀</span> &nbsp;|&nbsp; 积分 +24</div></div><div class="battle-item"><div class="battle-top"><span style="font-weight:600;">🔥 烈焰拳王 · 烈焰拳王厅</span><span class="result-lose">📃 负</span></div><div class="battle-detail">📅 2026-06-12 &nbsp; 🕐 19:15 &nbsp;|&nbsp; 🔴 本人 vs 🔵 <span class="player-nick-link" onclick="showPlayerStats('深海巨鲨')">深海巨鲨</span> &nbsp;|&nbsp; 积分 -18</div></div><div class="battle-item"><div class="battle-top"><span style="font-weight:600;">🏒 疾速冰球 · 疾速冰球厅</span><span class="result-win">🎳 胜</span></div><div class="battle-detail">📅 2026-06-11 &nbsp; 🕐 18:00 &nbsp;|&nbsp; 🔵 本人 vs 🔴 <span class="player-nick-link" onclick="showPlayerStats('荒野狼王')">荒野狼王</span> &nbsp;|&nbsp; 积分 +30</div></div></div>
+
+    <!-- ===== 管理员页面 ===== -->
+    <!-- 管理中心（所有管理功能入口） -->
+    <div class="page" id="page-admin"><div id="adminHub"></div></div>
+    <!-- 兑换物品（双扫码） -->
+    <div class="page" id="page-exchange"><div id="exchangeBody"></div></div>
+    <div class="page" id="page-adminMatches"><div id="zonesList"></div></div>
+    <div class="page" id="page-adminGiveCoin"><div id="adminGiveBody"></div></div>
+    <div class="page" id="page-adminStore"><div class="card store-card"><div class="store-header"><div><h3>📦 商品管理</h3><div class="store-venue" id="storeVenueText">🏡 兰陵酒吧</div></div><button class="btn btn-purple btn-sm" style="width:auto;" onclick="showAddProduct()">+ 添加商品</button></div><div class="store-body"><div class="store-cats" id="storeCats"></div><div class="store-list" id="storeProducts"></div></div></div></div>
+    <!-- 账单管理页面 -->
+    <div class="page" id="page-adminBills"><div class="card"><h3>📋 账单管理 · 今日流水 <span style="font-size:0.7em;color:var(--muted);">00:00 - 23:59</span></h3><div class="store-venue" id="billsVenue" style="margin-bottom:12px;">🏡 兰陵酒吧</div><div class="bills-summary"><div class="bill-stat"><div class="bs-val" style="color:#fbbf24;">128,500</div><div class="bs-lbl">💰 游戏币流入</div></div><div class="bill-stat"><div class="bs-val" style="color:#f87171;">96,200</div><div class="bs-lbl">💰 游戏币流出</div></div><div class="bill-stat"><div class="bs-val" style="color:#c4b5fd;">8,640</div><div class="bs-lbl">💎 兑换币核销</div></div></div><div class="divider"></div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><span style="color:var(--muted);font-size:0.72em;">明细记录</span><select class="select" style="font-size:0.65em;" onchange="filterBills(this.value)"><option value="全部">全部类型</option><option value="发放">发放</option><option value="下注">下注</option><option value="结算">结算</option><option value="兑换">兑换</option></select></div><div id="billsList"></div></div></div>
+  </div>
+
+  <!-- 统一Tab栏 -->
+  <div class="tab-bar" id="tabBar">
+    <div class="tab-item active" onclick="switchTab('home')" id="tabBtn-home"><span class="icon">🏔</span>首页</div>
+    <div class="tab-item hidden" onclick="switchTab('admin')" id="tabBtn-admin"><span class="icon">🛠️</span>管理</div>
+    <div class="tab-item" onclick="switchTab('mine')" id="tabBtn-mine"><span class="icon">👁</span>我的</div>
+  </div>
+
+  <!-- 弹窗 -->
+  <div class="modal-overlay hidden" id="loginModal"><div class="modal login-modal"><div class="wx-icon">📌</div><div class="login-title">微信一键登录</div><div class="login-sub">授权获取你的微信昵称和手机号<br>用于 LumiSport 身份识别</div><button class="wx-login-btn" onclick="doLogin()">🔽 微信一键登录</button><div class="login-note">点击即同意《用户协议》和《隐私政策》<br>白名单手机号自动切换管理员模式</div></div></div>
+  <div class="modal-overlay hidden" id="coinHelpModal"><div class="modal"><h3 id="coinHelpTitle"></h3><div id="coinHelpContent" style="color:#ccc;font-size:0.82em;line-height:1.8;text-align:left;padding:0 4px;"></div><button class="btn btn-primary" style="margin-top:14px;" onclick="document.getElementById('coinHelpModal').classList.add('hidden')">知道了</button></div></div>
+  <!-- 扫码弹窗（含双扫码兑换流程） -->
+  <div class="modal-overlay hidden" id="scanModal"><div class="modal"><h3>📲 扫码 · 用户信息</h3><div class="scan-user-info"><div class="avatar">👁</div><div class="name">小明</div><div class="scan-user-coins"><span style="color:#fbbf24;">💰 游戏币 <strong>1,250</strong></span><span style="color:#c4b5fd;">💎 兑换币 <strong>340</strong></span></div></div><div class="divider"></div><div class="toggle-row"><span style="color:#fff;">操作</span><select class="select" id="scanAction" onchange="onScanAction()" style="width:auto;flex:1;margin-left:8px;"><option value="">请选择操作</option><option value="signup">📵 报名</option><option value="give">💰 发放游戏币</option><option value="exchange">🛅 兑换</option></select></div><div id="scanActionContent"></div><div class="flex-row" style="margin-top:12px;"><button class="btn btn-outline btn-sm" style="flex:1;color:#fff;" onclick="document.getElementById('scanModal').classList.add('hidden')">关闭</button></div></div></div>
+  <!-- 兑换双扫码弹窗 -->
+  <div class="modal-overlay hidden" id="exchangeScanModal"><div class="modal"><h3 id="exchangeScanTitle">🛅 兑换 · 步骤 1/2</h3><div id="exchangeScanStep"><div style="text-align:center;padding:20px 0;"><div class="scan-step-icon">📦</div><p style="color:#ccc;margin:10px 0;font-size:0.85em;">请扫描<span style="color:#fbbf24;">商品条形码</span></p><button class="btn btn-purple" style="width:auto;display:inline-block;padding:10px 28px;" onclick="simulateProductScan()">📲 模拟扫商品码</button></div></div><div class="flex-row" style="margin-top:12px;"><button class="btn btn-outline btn-sm" style="flex:1;color:#fff;" onclick="document.getElementById('exchangeScanModal').classList.add('hidden');exScanStep=0;exScannedProduct=null;exScannedUser=null;">取消</button></div></div></div>
+  <div class="modal-overlay hidden" id="addProductModal"><div class="modal"><h3>📦 添加商品</h3><div style="margin-bottom:8px;"><label class="form-label">商品名称</label><input class="input" id="addProdName" placeholder="如：特调鸡尾酒"></div><div style="margin-bottom:8px;"><label class="form-label">商品图片</label><div class="img-upload" id="addProdImg" onclick="simulateUpload()"><div class="img-upload-inner" id="imgUploadPreview"><span class="img-upload-plus">+</span><span class="img-upload-text">拍照 / 上传照片</span></div></div><input type="hidden" id="addProdIcon" value=""></div><div style="margin-bottom:8px;"><label class="form-label">分类</label><select class="select" id="addProdCat"><option>酒水饮料</option><option>客房服务</option><option>周边手办</option><option>零食小吃</option><option>其他</option></select></div><div class="flex-row" style="margin-bottom:8px;"><div style="flex:1;"><label class="form-label">兑换价 💎</label><input class="input" id="addProdPrice" type="number" placeholder="80" min="1" step="1" oninput="onAddPriceInput()"><div class="bet-hint" id="addPriceHint"></div></div><div style="flex:1;"><label class="form-label">原价 ￥</label><input class="input" id="addProdOrig" type="number" placeholder="128" min="0.01" step="0.01" oninput="onAddOrigInput()"><div class="bet-hint" id="addOrigHint"></div></div></div><div style="margin-bottom:8px;"><label class="form-label">库存量</label><input class="input" id="addProdStock" type="number" placeholder="100" value="100" min="1"></div><div style="margin-bottom:8px;"><label class="form-label">描述</label><input class="input" id="addProdDesc" placeholder="简短描述"></div><div class="flex-row" style="margin-top:14px;"><button class="btn btn-outline btn-sm" style="flex:1;color:#fff;" onclick="document.getElementById('addProductModal').classList.add('hidden')">取消</button><button class="btn btn-purple btn-sm" style="flex:1;" onclick="addProduct()">✅ 确认添加</button></div></div></div>
+  <div class="modal-overlay hidden" id="confirmModal"><div class="modal confirm-modal"><div class="confirm-icon" id="confirmIcon">⚠️</div><div class="confirm-msg" id="confirmMsg"></div><div class="flex-row"><button class="btn btn-outline btn-sm" style="flex:1;color:#fff;" onclick="closeConfirm(false)">取消</button><button class="btn btn-red btn-sm" style="flex:1;" id="confirmOk" onclick="closeConfirm(true)">确认</button></div></div></div>
+  <div class="modal-overlay hidden" id="signupModal"><div class="modal signup-modal"><div class="signup-modal-head"><h3>✋ 报名</h3><span class="modal-close" onclick="closeSignupModal()">✕</span></div><div id="signupPanel"></div><button class="btn btn-outline btn-sm" style="margin-top:12px;width:100%;color:#fff;" onclick="closeSignupModal()">关闭</button></div></div>
+  <!-- 选手数据弹窗 -->
+  <div class="modal-overlay hidden" id="playerStatsModal"><div class="modal player-stats-modal"><div class="player-stats-top"><div class="player-stats-avatar" id="psAvatar">🔴</div><div class="player-stats-name" id="psName"></div><div class="player-stats-zone" id="psZone"></div></div><div class="player-stats-grid"><div class="ps-item"><div class="ps-val" id="psPoints">-</div><div class="ps-lbl">总积分</div></div><div class="ps-item"><div class="ps-val" id="psWinRate">-</div><div class="ps-lbl">胜率</div></div><div class="ps-item"><div class="ps-val" id="psWins">-</div><div class="ps-lbl">胜场</div></div><div class="ps-item"><div class="ps-val" id="psLosses">-</div><div class="ps-lbl">负场</div></div></div><div class="player-stats-recent"><div class="ps-recent-label">近5场</div><div class="ps-recent-dots" id="psRecent"></div></div><button class="btn btn-primary" style="background:#7c3aed;margin-top:14px;" onclick="document.getElementById('playerStatsModal').classList.add('hidden')">关闭</button></div></div>
+</div>
+<script src="admin.js"></script>
+<script src="client-betting-data.js"></script>
+<script src="client-betting-players.js"></script>
+<script src="client-betting-records.js"></script>
+<script src="client-betting-signup.js"></script>
+<script src="client-betting-store.js"></script>
+<script src="client-betting-place.js"></script>
+<script src="client-betting.js"></script>
+<script src="admin-zones.js"></script>
+<script src="admin-products.js"></script>
+<script src="admin-scan-data.js"></script>
+<script src="admin-scan-grant-page.js"></script>
+<script src="admin-scan-modal.js"></script>
+<script src="admin-scan-grant.js"></script>
+<script src="admin-scan-signup.js"></script>
+<script src="admin-scan-redeem.js"></script>
+<script src="admin-scan.js"></script>
+</body>
+</html>

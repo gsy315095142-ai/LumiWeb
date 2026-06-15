@@ -1,0 +1,115 @@
+/* 管理员端 - 报名队列 · 对阵 · 竞猜 · 场次流程 */
+.reg-player { display:flex; align-items:center; padding:8px 0; border-bottom:1px solid var(--border); gap:8px; }
+.reg-player:last-child { border-bottom:none; }
+.reg-player .info { flex:1; }
+.reg-player .name { font-weight:600; color:#fff; font-size:0.85em; }
+.reg-player .time { font-size:0.7em; color:var(--muted); }
+.reg-player .actions { display:flex; gap:4px; }
+.reg-player .side-btn { background:rgba(255,255,255,0.04); border:1px solid transparent; color:var(--muted); transition:all .2s; }
+.reg-player .side-btn.side-red.active { background:rgba(239,68,68,0.15); border-color:var(--bad); color:#fca5a5; }
+.reg-player .side-btn.side-blue.active { background:rgba(59,130,246,0.15); border-color:#3b82f6; color:#93c5fd; }
+.vs-preview { display:flex; align-items:center; gap:8px; padding:8px 0; justify-content:center; }
+.vs-tag { padding:6px 14px; border-radius:10px; font-size:0.82em; font-weight:600; }
+.vs-tag.red { background:rgba(239,68,68,0.15); color:#fca5a5; border:1px solid rgba(239,68,68,0.25); }
+.vs-tag.blue { background:rgba(59,130,246,0.15); color:#93c5fd; border:1px solid rgba(59,130,246,0.25); }
+.vs-tag.dim { opacity:0.4; }
+.step-btn { padding:12px; border-radius:10px; text-align:center; font-weight:700; font-size:0.85em; cursor:pointer; transition:all .2s; }
+.step-btn.signup { background:rgba(236,72,153,0.1); color:var(--pink); border:1px solid rgba(236,72,153,0.3); }
+.step-btn.betting { background:rgba(245,158,11,0.1); color:var(--gold); border:1px solid rgba(245,158,11,0.3); }
+.step-btn.start { background:rgba(239,68,68,0.1); color:#f87171; border:1px solid rgba(239,68,68,0.3); }
+
+.match-card { background:linear-gradient(135deg,#14142a,#1a1a3a); border-radius:16px; padding:16px 18px; margin-bottom:12px; border:1px solid var(--border); }
+.match-header { display:flex; justify-content:space-between; align-items:center; }
+.match-label { font-weight:700; color:#fff; font-size:0.9em; }
+.countdown { padding:3px 10px; border-radius:8px; font-size:0.7em; font-weight:600; }
+.cd-bet { background:rgba(245,158,11,0.12); color:#fbbf24; }
+.match-game { font-size:0.68em; color:#a78bfa; margin-bottom:8px; }
+.match-meta { font-size:0.68em; color:var(--muted); margin-bottom:10px; }
+.match-meta span { color:#a78bfa; }
+.vs-row { display:flex; justify-content:space-around; align-items:center; margin:8px 0; }
+.player-box { text-align:center; padding:10px 14px; border-radius:12px; border:2px solid transparent; min-width:90px; }
+.player-box.red { background:rgba(239,68,68,0.04); }
+.player-box.blue { background:rgba(59,130,246,0.04); }
+.player-avatar { width:46px; height:46px; border-radius:50%; margin:0 auto 6px; display:flex; align-items:center; justify-content:center; font-size:1.3em; }
+.player-avatar.red-av { background:rgba(239,68,68,0.15); border:2px solid rgba(239,68,68,0.3); }
+.player-avatar.blue-av { background:rgba(59,130,246,0.15); border:2px solid rgba(59,130,246,0.3); }
+.player-nick { font-weight:600; font-size:0.8em; color:#eee; }
+.player-box.red .player-nick { color:#fca5a5; }
+.player-box.blue .player-nick { color:#93c5fd; }
+.vs-divider { font-weight:700; color:var(--muted); font-size:0.75em; }
+.odds-tag { font-size:0.65em; padding:2px 6px; border-radius:5px; margin-top:3px; display:inline-block; }
+.odds-red { background:rgba(239,68,68,0.1); color:#f87171; }
+.odds-blue { background:rgba(59,130,246,0.1); color:#60a5fa; }
+.side-btn { background:rgba(255,255,255,0.05); border:2px solid var(--border); color:var(--muted); transition:all .2s; }
+.side-btn.active { color:#fff; }
+.side-red.active { background:rgba(239,68,68,0.15); border-color:var(--bad); color:#fca5a5; }
+.side-blue.active { background:rgba(59,130,246,0.15); border-color:#3b82f6; color:#93c5fd; }
+
+/* ===== 场次管理 ===== */
+.zone-step-panel { margin-top:12px; padding-top:12px; border-top:1px solid var(--border); }
+.zone-step-title { color:var(--accent2); font-size:0.82em; font-weight:700; margin-bottom:10px; }
+.give-scan-card { text-align:center; }
+.give-scan-frame { padding:24px 16px; border:2px dashed rgba(124,58,237,0.35); border-radius:14px; background:rgba(124,58,237,0.06); }
+.give-scan-icon { font-size:2.4em; margin-bottom:4px; }
+
+/* 场次流程进度条（对齐原小程序 AdminSessionFlowProgress） */
+.admin-match-head { margin-bottom:10px; }
+.admin-zone-row { display:flex; justify-content:center; margin-top:10px; }
+.flow-wrap { background:var(--card); border:1px solid rgba(0,255,255,0.22); border-radius:14px; padding:14px 10px 12px; margin-bottom:12px; }
+.flow-head { padding:0 4px 12px; border-bottom:1px solid rgba(0,255,255,0.1); margin-bottom:12px; }
+.flow-title { font-size:0.88em; font-weight:600; color:#e8fdff; margin-bottom:6px; }
+.flow-phase { font-size:0.72em; color:rgba(126,232,255,0.88); line-height:1.45; }
+.flow-steps { display:flex; justify-content:space-between; align-items:flex-start; }
+.flow-col { flex:1; display:flex; flex-direction:column; align-items:center; min-width:0; }
+.flow-node-row { display:flex; align-items:center; width:100%; margin-bottom:6px; }
+.flow-line { flex:1; height:2px; min-width:4px; border-radius:1px; }
+.flow-line-left.line-hidden, .flow-line-right.line-hidden { opacity:0; }
+.flow-line-left.line-active, .flow-line-right.line-active { background:linear-gradient(90deg, rgba(0,200,220,0.85), rgba(0,240,255,0.65)); }
+.flow-line-left.line-todo, .flow-line-right.line-todo { background:rgba(80,100,120,0.35); }
+.flow-circle-wrap { flex-shrink:0; padding:0 2px; }
+.flow-circle { width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center; box-sizing:border-box; }
+.circle-done { background:rgba(0,180,200,0.35); border:1px solid rgba(0,240,255,0.55); }
+.circle-current { background:rgba(0,100,130,0.65); border:1px solid #7ee8ff; box-shadow:0 0 8px rgba(0,255,255,0.35); }
+.circle-todo { background:rgba(20,28,40,0.9); border:1px solid rgba(100,130,150,0.35); }
+.flow-check { font-size:0.62em; color:#7ee8ff; font-weight:700; line-height:1; }
+.flow-num { font-size:0.58em; color:rgba(200,235,255,0.55); line-height:1; }
+.circle-current .flow-num { color:#7ee8ff; font-weight:600; }
+.flow-label { font-size:0.52em; color:rgba(160,200,220,0.55); text-align:center; line-height:1.25; padding:0 1px; word-break:keep-all; }
+.flow-label-on { color:#7ee8ff; font-weight:600; }
+.zone-box { background:var(--card); border:1px solid var(--border); border-radius:14px; margin-bottom:12px; overflow:hidden; }
+.zone-box-hd { padding:12px 14px; font-weight:700; font-size:0.85em; color:#fff; display:flex; align-items:center; gap:8px; border-bottom:1px solid var(--border); }
+.zone-box-body { padding:14px; cursor:pointer; transition:all .2s; }
+.zone-box-body:hover { background:rgba(255,255,255,0.02); }
+.queue-title { font-size:0.72em; color:var(--muted); margin:12px 0 6px; border-top:1px solid var(--border); padding-top:10px; }
+.queue-empty { text-align:center; padding:10px; color:var(--muted); font-size:0.75em; }
+.queue-list { display:flex; flex-direction:column; }
+.queue-item { display:flex; align-items:center; gap:8px; padding:7px 0; border-bottom:1px solid var(--border); }
+.queue-item:last-child { border-bottom:none; }
+.queue-item .q-pos { width:20px; height:20px; flex-shrink:0; border-radius:50%; background:rgba(124,58,237,0.15); color:var(--accent2); font-size:0.62em; font-weight:700; display:flex; align-items:center; justify-content:center; }
+.queue-item .q-info { flex:1; min-width:0; }
+.queue-item .q-name { font-size:0.8em; color:#fff; font-weight:600; }
+.queue-item .q-time { font-size:0.66em; color:var(--muted); }
+.q-role { font-size:0.6em; font-weight:700; padding:1px 5px; border-radius:4px; margin-left:5px; }
+.q-role.red { background:rgba(239,68,68,0.15); color:#fca5a5; }
+.q-role.blue { background:rgba(59,130,246,0.15); color:#93c5fd; }
+.queue-item .q-ctrl { display:flex; gap:3px; flex-shrink:0; }
+.q-btn { width:24px; height:22px; border-radius:5px; border:1px solid var(--border); background:rgba(255,255,255,0.03); color:var(--muted); font-size:0.6em; cursor:pointer; display:flex; align-items:center; justify-content:center; line-height:1; }
+.q-btn:not(:disabled):hover { background:rgba(124,58,237,0.15); color:var(--accent2); border-color:var(--accent2); }
+.q-btn.danger:not(:disabled):hover { background:rgba(239,68,68,0.15); color:#f87171; border-color:var(--bad); }
+.q-btn:disabled { opacity:0.25; cursor:not-allowed; }
+.zone-box-game { font-size:0.75em; color:#fff; margin-bottom:6px; }
+.zone-box-vs { font-size:0.8em; color:#fff; }.readonly-row{display:flex;align-items:center;justify-content:space-between;padding:6px 0}.readonly-val{font-weight:600;color:#fff;font-size:0.85em}
+#exchangeProducts.shop-grid{max-height:260px;overflow-y:auto;grid-template-columns:repeat(2,1fr);padding-right:4px;margin-bottom:8px}#exchangeProducts.shop-grid::-webkit-scrollbar{width:3px}#exchangeProducts.shop-grid::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}#exchangeProducts.shop-grid::-webkit-scrollbar{width:3px}#exchangeProducts.shop-grid::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+.modal.confirm-modal{max-width:280px;word-break:break-all}
+#exchangeModal .modal{display:flex;flex-direction:column;max-height:82vh}#exchangeProducts.shop-grid{max-height:260px;overflow-y:auto;grid-template-columns:repeat(2,1fr);padding-right:4px;margin-bottom:8px}#exchangeProducts.shop-grid::-webkit-scrollbar{width:3px}#exchangeProducts.shop-grid::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}#exchangeProducts.shop-grid::-webkit-scrollbar{width:3px}#exchangeProducts.shop-grid::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+.exchange-item.picked{border-color:var(--accent2)!important;box-shadow:0 0 0 2px rgba(167,139,250,0.3)}
+..venue-row{display:flex;align-items:center;justify-content:center;gap:10px}.bet-section{margin-top:10px}.bet-section label{font-size:0.74em;color:var(--muted);display:block;margin-bottom:6px}.bet-input{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:8px 10px;color:#fff;font-size:0.85em;margin-top:4px}.bet-input:focus{outline:none;border-color:var(--accent)}.bet-input::placeholder{color:#555}.bet-hint{font-size:0.65em;color:var(--bad);margin-top:2px;min-height:14px}.btn-primary{background:#07c160;color:#fff}.player-box{cursor:pointer}.player-box.selected{border-color:var(--bad)!important}
+.coin-help{display:inline-block;width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,0.1);color:var(--muted);font-size:0.6em;text-align:center;line-height:16px;cursor:pointer;margin-left:3px}
+.profile-card .qr-section{padding:12px 0 0}.profile-card .qr-box{margin-bottom:0}
+.history-item{color:#ddd}.battle-item .battle-top{color:#ccc}
+
+/* 报名队列拖拽 */
+.queue-arrows{display:flex;flex-direction:column;gap:2px;margin-right:8px;flex-shrink:0}
+.q-arrow{width:22px;height:18px;border-radius:4px;border:1px solid var(--border);background:rgba(255,255,255,0.03);color:var(--muted);font-size:0.55em;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1}
+.q-arrow:not(:disabled):hover{background:rgba(124,58,237,0.15);color:var(--accent2);border-color:var(--accent2)}
+.q-arrow:disabled{opacity:0.25;cursor:not-allowed}

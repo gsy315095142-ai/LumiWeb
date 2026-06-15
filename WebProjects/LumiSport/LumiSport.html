@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumi 竞技大空间 - 项目文档</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --primary: #7C3AED;
+  --primary-dark: #5B21B6;
+  --primary-light: #A78BFA;
+  --accent: #FBBF24;
+  --accent-light: #FDE68A;
+  --bg-dark: #0F0A1A;
+  --bg-card: rgba(255, 255, 255, 0.04);
+  --bg-card-hover: rgba(255, 255, 255, 0.07);
+  --text-primary: #F8FAFC;
+  --text-secondary: rgba(248, 250, 252, 0.6);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --card-border-hover: rgba(255, 255, 255, 0.15);
+  --project-color: #F59E0B;
+  --project-color-light: #FBBF24;
+  --project-color-bg: rgba(245, 158, 11, 0.1);
+  --project-color-border: rgba(245, 158, 11, 0.2);
+}
+
+body {
+  font-family: 'Inter', -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: var(--bg-dark);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.bg-glow {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  animation: pulse 8s ease-in-out infinite alternate;
+}
+
+.glow-orb-1 {
+  width: 400px; height: 400px;
+  background: rgba(245, 158, 11, 0.06);
+  top: -100px; right: -100px;
+}
+
+.glow-orb-2 {
+  width: 300px; height: 300px;
+  background: rgba(124, 58, 237, 0.08);
+  bottom: -50px; left: -50px;
+  animation-delay: 4s;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.5; }
+  100% { transform: scale(1.3); opacity: 1; }
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28px 0 20px;
+  animation: fadeInDown 0.6s ease;
+}
+
+.site-version {
+  font-size: 11px;
+  font-weight: 600;
+  font-family: ui-monospace, "Cascadia Code", "SF Mono", Consolas, monospace;
+  letter-spacing: 0.02em;
+  color: var(--text-secondary);
+  background: var(--bg-card);
+  border: 1px solid var(--card-border);
+  border-radius: 6px;
+  padding: 4px 8px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.back-link:hover {
+  color: var(--text-primary);
+}
+
+.back-link svg {
+  width: 18px; height: 18px;
+  transition: transform 0.3s;
+}
+
+.back-link:hover svg {
+  transform: translateX(-3px);
+}
+
+.project-header {
+  padding: 20px 0 48px;
+  animation: fadeInUp 0.8s ease 0.1s both;
+}
+
+.project-header-top {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.project-icon {
+  width: 48px; height: 48px;
+  border-radius: 14px;
+  background: var(--project-color-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.project-icon svg {
+  width: 24px; height: 24px;
+  color: var(--project-color-light);
+}
+
+.project-header h1 {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.project-header-desc {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 600px;
+}
+
+.section-label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--project-color-light);
+  margin-bottom: 20px;
+  animation: fadeInUp 0.8s ease 0.2s both;
+}
+
+.doc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-bottom: 80px;
+}
+
+.doc-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+  animation: fadeInUp 0.8s ease both;
+}
+
+.doc-card:nth-child(1) { animation-delay: 0.3s; }
+.doc-card:nth-child(2) { animation-delay: 0.35s; }
+.doc-card:nth-child(3) { animation-delay: 0.4s; }
+.doc-card:nth-child(4) { animation-delay: 0.45s; }
+.doc-card:nth-child(5) { animation-delay: 0.5s; }
+
+.doc-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--card-border-hover);
+  transform: translateX(4px);
+}
+
+.doc-card-icon {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: var(--project-color-bg);
+  border: 1px solid var(--project-color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.doc-card-icon svg {
+  width: 20px; height: 20px;
+  color: var(--project-color-light);
+}
+
+.doc-card-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.doc-card-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  line-height: 1.4;
+}
+
+.doc-card-meta {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.doc-card-arrow {
+  flex-shrink: 0;
+  color: var(--text-secondary);
+  transition: all 0.3s;
+}
+
+.doc-card-arrow svg {
+  width: 18px; height: 18px;
+}
+
+.doc-card:hover .doc-card-arrow {
+  color: var(--project-color-light);
+  transform: translateX(4px);
+}
+
+.footer {
+  text-align: center;
+  padding: 40px 0;
+  border-top: 1px solid var(--card-border);
+  animation: fadeInUp 0.8s ease 0.6s both;
+}
+
+.footer-text {
+  font-size: 13px;
+  color: var(--text-secondary);
+  opacity: 0.5;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 600px) {
+  .project-header h1 { font-size: 24px; }
+  .doc-card { padding: 16px; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-glow">
+  <div class="glow-orb glow-orb-1"></div>
+  <div class="glow-orb glow-orb-2"></div>
+</div>
+
+<div class="container">
+
+  <div class="topbar">
+    <a href="../../index.html" class="back-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      返回首页
+    </a>
+    <span class="site-version" title="页面版本号，用于确认是否加载到最新页面">v1.0.26061501</span>
+  </div>
+
+  <div class="project-header">
+    <div class="project-header-top">
+      <div class="project-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none"/>
+        </svg>
+      </div>
+      <h1>Lumi 竞技大空间</h1>
+    </div>
+    <p class="project-header-desc">大空间多人竞技对战平台，支持实时赛事管理与观赛互动。这里汇集了项目相关的文档与工具入口。</p>
+  </div>
+
+  <div class="section-label">文档列表</div>
+  <div class="doc-list">
+
+    <a href="control-center/control-center.html" class="doc-card">
+      <div class="doc-card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="16" y1="13" x2="8" y2="13"/>
+          <line x1="16" y1="17" x2="8" y2="17"/>
+          <polyline points="10 9 9 9 8 9"/>
+        </svg>
+      </div>
+      <div class="doc-card-info">
+        <div class="doc-card-title">Lumi竞技大空间小程序&服务端对接</div>
+        <div class="doc-card-meta">控制中心 · 赛事管理与观赛互动</div>
+      </div>
+      <div class="doc-card-arrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+    </a>
+
+    <a href="business-flow/business-flow.html" class="doc-card">
+      <div class="doc-card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="16" y1="13" x2="8" y2="13"/>
+          <line x1="16" y1="17" x2="8" y2="17"/>
+          <polyline points="10 9 9 9 8 9"/>
+        </svg>
+      </div>
+      <div class="doc-card-info">
+        <div class="doc-card-title">LumiSport 业务流程说明</div>
+        <div class="doc-card-meta">筹码兑换 · 报名竞猜 · 奖品兑换</div>
+      </div>
+      <div class="doc-card-arrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+    </a>
+
+    <a href="miniprogram/prototype-hub.html" class="doc-card">
+      <div class="doc-card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+          <line x1="12" y1="18" x2="12.01" y2="18"/>
+        </svg>
+      </div>
+      <div class="doc-card-info">
+        <div class="doc-card-title">LumiSport 小程序交互原型</div>
+        <div class="doc-card-meta">客户端 · 管理员端 · 竞猜报名与赛事管理</div>
+      </div>
+      <div class="doc-card-arrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+    </a>
+
+    <a href="warmup-docs/common-rules.html" class="doc-card">
+      <div class="doc-card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+          <path d="M2 17l10 5 10-5"/>
+          <path d="M2 12l10 5 10-5"/>
+        </svg>
+      </div>
+      <div class="doc-card-info">
+        <div class="doc-card-title">LumiSport 热身设计</div>
+        <div class="doc-card-meta">热身流程 · 烈焰拳王 / 疾速冰球 / 雷霆击剑 / 魔法派对</div>
+      </div>
+      <div class="doc-card-arrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+    </a>
+
+  </div>
+
+  <footer class="footer">
+    <p class="footer-text">© 2026 Lumi (lumiclaw) · 探索无限可能</p>
+  </footer>
+
+</div>
+
+</body>
+</html>

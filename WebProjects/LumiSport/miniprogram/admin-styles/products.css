@@ -1,0 +1,40 @@
+/* 管理员端 - 商品网格 · 门店管理 · 上架表单 */
+.shop-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+.shop-item { background:var(--bg); border-radius:10px; padding:12px 6px; text-align:center; border:1px solid var(--border); cursor:pointer; }
+.shop-item:hover { border-color:var(--accent2); }
+.shop-icon { font-size:1.8em; margin-bottom:4px; }
+.shop-name { font-weight:600; font-size:0.75em; color:#fff; }
+.shop-price { font-size:0.72em; color:var(--muted); margin-top:2px; }
+.shop-price span { color:var(--accent2); font-weight:600; }
+
+.store-card { padding:12px; }
+.store-card h3 { margin-bottom:0; }
+.store-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
+.store-body { display:flex; gap:0; height:520px; }
+.store-cats { width:84px; flex-shrink:0; overflow-y:auto; border-right:1px solid var(--border); padding-right:4px; }
+.store-cats::-webkit-scrollbar { width:0; }
+.store-cat { padding:10px 6px; border-radius:8px; cursor:pointer; font-size:0.72em; color:var(--muted); text-align:center; margin-bottom:4px; transition:all .2s; word-break:break-all; }
+.store-cat:hover { background:rgba(255,255,255,0.03); }
+.store-cat.active { background:rgba(124,58,237,0.1); color:var(--accent2); font-weight:600; }
+.store-list { flex:1; overflow-y:auto; padding-left:8px; }
+.store-list::-webkit-scrollbar { width:0; }
+.store-prod { display:flex; align-items:center; gap:10px; background:var(--bg); border-radius:10px; padding:10px; margin-bottom:6px; border:1px solid var(--border); }
+.store-prod .sp-icon { font-size:1.6em; width:36px; text-align:center; flex-shrink:0; }
+.store-prod .sp-info { flex:1; min-width:0; }
+.store-prod .sp-name { font-weight:600; font-size:0.8em; color:#fff; }
+.store-prod .sp-meta { font-size:0.68em; color:var(--muted); margin-top:2px; }
+.store-prod .sp-meta span { color:var(--accent2); font-weight:600; }
+.store-prod .sp-stock { text-align:right; flex-shrink:0; }
+.store-prod .sp-stock .val { font-size:0.9em; font-weight:700; }
+.store-prod .sp-stock .lbl { font-size:0.6em; color:var(--muted); }
+.stock-ok { color:var(--good); }
+.stock-low { color:var(--gold); }
+.stock-out { color:var(--bad); }
+.btn-del { width:24px; height:24px; border-radius:50%; border:1px solid var(--border); background:transparent; color:var(--muted); cursor:pointer; font-size:0.7em; flex-shrink:0; display:flex; align-items:center; justify-content:center; transition:all .2s; }
+.btn-del:hover { border-color:var(--bad); color:var(--bad); }
+.img-upload { border:2px dashed var(--border); border-radius:10px; padding:20px 10px; text-align:center; cursor:pointer; transition:all .2s; background:rgba(255,255,255,0.02); }
+.img-upload:hover { border-color:var(--accent2); background:rgba(124,58,237,0.05); }
+.img-upload-inner { display:flex; flex-direction:column; align-items:center; gap:2px; }
+.img-upload-plus { font-size:1.5em; color:var(--muted); }
+.img-upload-text { font-size:0.72em; color:var(--muted); }
+.store-venue { font-size:0.72em; color:#f9a8d4; font-weight:600; margin-top:2px; }

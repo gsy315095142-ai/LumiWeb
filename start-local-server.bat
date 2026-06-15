@@ -24,10 +24,11 @@ echo  Root: %cd%
 echo  Port: !PORT!
 echo  URL:  http://127.0.0.1:!PORT!/
 echo.
-echo  portal           !START_URL!
-echo  lumi-sport       http://127.0.0.1:!PORT!/WebProjects/lumi-sport.html
-echo  control center   http://127.0.0.1:!PORT!/WebProjects/LumiSportWeb/web/index.html
-echo  lumi-magic       http://127.0.0.1:!PORT!/WebProjects/lumi-magic.html
+echo  portal              !START_URL!
+echo  LumiMagic S1        http://127.0.0.1:!PORT!/WebProjects/LumiMagic_Season_01/LumiMagic_Season_01.html
+echo  LumiSport           http://127.0.0.1:!PORT!/WebProjects/LumiSport/LumiSport.html
+echo  control center      http://127.0.0.1:!PORT!/WebProjects/LumiSport/control-center/control-center.html
+echo  LumiMagic S2        http://127.0.0.1:!PORT!/WebProjects/LumiMagic_Season_02/LumiMagic_Season_02.html
 echo.
 echo  Ctrl+C to stop
 echo.
