@@ -133,6 +133,25 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.site-version {
+  font-size: 11px;
+  font-weight: 600;
+  font-family: ui-monospace, "Cascadia Code", "SF Mono", Consolas, monospace;
+  letter-spacing: 0.02em;
+  color: var(--text-secondary);
+  background: var(--bg-card);
+  border: 1px solid var(--card-border);
+  border-radius: 6px;
+  padding: 4px 8px;
+  line-height: 1;
+}
+
 .nav-links {
   display: flex;
   gap: 32px;
@@ -461,21 +480,24 @@ body {
 <div class="container">
 
   <nav class="navbar">
-    <a href="index.html" class="nav-brand">
-      <div class="nav-logo">
-        <svg viewBox="0 0 40 40" fill="none">
-          <defs>
-            <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style="stop-color:#A78BFA"/>
-              <stop offset="100%" style="stop-color:#FBBF24"/>
-            </linearGradient>
-          </defs>
-          <path d="M20 2L24.5 14.5L37 14.5L27 22.5L30.5 35L20 27.5L9.5 35L13 22.5L3 14.5L15.5 14.5Z" fill="url(#logoGrad)"/>
-          <circle cx="20" cy="18" r="4" fill="white" opacity="0.9"/>
-        </svg>
-      </div>
-      <span class="nav-brand-text">Lumi</span>
-    </a>
+    <div class="nav-left">
+      <a href="index.html" class="nav-brand">
+        <div class="nav-logo">
+          <svg viewBox="0 0 40 40" fill="none">
+            <defs>
+              <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#A78BFA"/>
+                <stop offset="100%" style="stop-color:#FBBF24"/>
+              </linearGradient>
+            </defs>
+            <path d="M20 2L24.5 14.5L37 14.5L27 22.5L30.5 35L20 27.5L9.5 35L13 22.5L3 14.5L15.5 14.5Z" fill="url(#logoGrad)"/>
+            <circle cx="20" cy="18" r="4" fill="white" opacity="0.9"/>
+          </svg>
+        </div>
+        <span class="nav-brand-text">Lumi</span>
+      </a>
+      <span class="site-version" title="站点版本号，用于确认是否加载到最新页面">v1.0.26061501</span>
+    </div>
     <ul class="nav-links">
       <li><a href="#projects">项目</a></li>
       <li><a href="#about">关于</a></li>
@@ -532,7 +554,7 @@ body {
         </span>
       </a>
 
-      <a href="WebProjects/lumi-sport.html" class="project-card" target="_blank">
+      <a href="WebProjects/lumi-sport.html?v=1.0.26061501" class="project-card" target="_blank">
         <div class="card-glow"></div>
         <div class="project-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

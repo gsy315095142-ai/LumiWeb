@@ -1,0 +1,3 @@
+# 独立 Git 仓库，由各自项目单独提交，不纳入 LumiWeb 父仓库
+WebProjects/Design_LumiSport/
+WebProjects/LumiSportWeb/
