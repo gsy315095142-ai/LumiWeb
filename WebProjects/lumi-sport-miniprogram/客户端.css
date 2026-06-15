@@ -1,0 +1,224 @@
+:root {
+    --bg:#0a0a14; --card:#14142a; --text:#ddd; --muted:#777;
+    --accent:#07c160; --accent2:#a78bfa; --gold:#f59e0b;
+    --good:#10b981; --bad:#ef4444; --pink:#ec4899;
+    --border:#252545;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { display:flex; justify-content:center; align-items:center; min-height:100vh; background:#12121f; font-family:'PingFang SC','Microsoft YaHei',sans-serif; }
+  .phone { width:390px; height:844px; background:var(--bg); border-radius:36px; overflow:hidden; position:relative; box-shadow:0 20px 60px rgba(0,0,0,0.5); border:3px solid #1a1a2e; display:flex; flex-direction:column; }
+  .status-bar { display:flex; justify-content:space-between; padding:12px 24px 4px; font-size:0.75em; color:#aaa; flex-shrink:0; }
+  .header { padding:12px 20px; text-align:center; font-weight:700; font-size:1.05em; color:#c4b5fd; flex-shrink:0; display:flex; align-items:center; justify-content:center; gap:8px; position:relative; }
+  .back-btn { position:absolute; left:16px; font-size:1.2em; cursor:pointer; color:var(--accent2); display:none; user-select:none; }
+  .content { flex:1; overflow-y:auto; padding:8px 16px 12px; }
+  .content::-webkit-scrollbar { width:0; }
+  .page { display:none; }
+  .page.active { display:block; }
+  .tab-bar { display:flex; border-top:1px solid var(--border); background:var(--card); padding:6px 0; flex-shrink:0; }
+  .tab-item { flex:1; text-align:center; padding:6px 0; cursor:pointer; transition:all .2s; font-size:0.7em; color:var(--muted); user-select:none; }
+  .tab-item.active { color:var(--accent2); }
+  .tab-item .icon { font-size:1.5em; display:block; margin-bottom:2px; }
+  .banner { background:linear-gradient(135deg,#1a0a1e,#0f162e); border-radius:14px; padding:20px; margin-bottom:10px; text-align:center; border:1px solid var(--border); position:relative; overflow:hidden; }
+  .banner::before { content:''; position:absolute; top:-20px; right:-20px; width:80px; height:80px; border-radius:50%; background:rgba(236,72,153,0.08); }
+  .banner .venue-row { display:flex; align-items:center; justify-content:center; gap:10px; }
+  .banner .venue { font-size:1.1em; color:#f9a8d4; font-weight:700; }
+  .banner .ad-tag { font-size:0.72em; color:var(--muted); margin-top:6px; }
+  /* 酒店广告 */
+  .hotel-banner { background:linear-gradient(135deg,#1a0a1e,#0f162e); }
+  .hotel-ad { background:linear-gradient(135deg,rgba(245,158,11,0.12),rgba(236,72,153,0.08)); border-radius:10px; padding:12px 14px; margin-top:12px; border:1px solid rgba(245,158,11,0.15); }
+  .hotel-ad-badge { display:inline-block; background:rgba(245,158,11,0.2); color:#fbbf24; font-size:0.65em; padding:3px 8px; border-radius:6px; margin-bottom:6px; }
+  .hotel-ad-title { font-size:0.82em; font-weight:700; color:#fff; margin-bottom:3px; }
+  .hotel-ad-desc { font-size:0.68em; color:var(--muted); }
+  .zone-select { background:rgba(255,255,255,0.06); border:1px solid var(--border); border-radius:8px; color:#fff; font-size:0.7em; padding:4px 8px; cursor:pointer; outline:none; appearance:none; -webkit-appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23aaa'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 6px center; padding-right:22px; }
+  .zone-select:focus { border-color:var(--accent2); }
+  .zone-select option { background:#16162e; color:#fff; }
+  /* 报名入口行 */
+  .signup-bar { display:flex; align-items:center; gap:12px; background:linear-gradient(135deg,rgba(7,193,96,0.08),rgba(167,139,250,0.06)); border-radius:14px; padding:14px 16px; margin-bottom:12px; border:1px solid var(--border); }
+  .signup-bar-info { flex:1; min-width:0; }
+  .signup-bar-zone { font-size:0.85em; font-weight:700; color:#fff; margin-bottom:3px; }
+  .signup-bar-meta { font-size:0.68em; color:var(--muted); }
+  .signup-bar-meta span { color:#a78bfa; }
+  .signup-bar-meta strong { color:#fbbf24; }
+  .signup-bar-btn { flex-shrink:0; padding:10px 20px; border-radius:10px; background:var(--accent); color:#fff; font-size:0.8em; font-weight:700; cursor:pointer; border:none; transition:all .2s; white-space:nowrap; }
+  .signup-bar-btn:hover { background:#06ad56; }
+  .signup-bar-btn.done { background:rgba(239,68,68,0.08); color:#f87171; border:1px solid rgba(239,68,68,0.2); cursor:pointer; } .signup-bar-btn.done:hover { background:rgba(239,68,68,0.18); }
+  /* 排队位置提示 */
+  .signup-my-pos { display:inline-block; background:rgba(245,158,11,0.15); color:#fbbf24; font-size:0.7em; padding:2px 8px; border-radius:6px; margin-left:6px; }
+
+  /* 门店切换（左上角地图定位风格） */
+  .store-switch { display:inline-flex; align-items:center; gap:4px; font-size:0.8em; color:#ddd; cursor:pointer; padding:6px 12px; background:rgba(255,255,255,0.05); border:1px solid var(--border); border-radius:20px; margin-bottom:10px; }
+  .venue-caret { font-size:0.7em; color:#f9a8d4; }
+  .store-menu { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:6px; margin-bottom:10px; }
+  .store-menu-item { padding:10px 12px; border-radius:8px; color:#ddd; font-size:0.82em; cursor:pointer; }
+  .store-menu-item:hover { background:rgba(255,255,255,0.06); }
+  .store-menu-item.active { background:rgba(167,139,250,0.15); color:#c4b5fd; font-weight:600; }
+
+  /* 厅切换：Banner 居中放大 */
+  .zone-row { display:flex; justify-content:center; }
+  .zone-select-big { font-size:1.05em; font-weight:700; color:#fff; padding-top:8px; padding-bottom:8px; padding-right:30px; background-color:rgba(255,255,255,0.08); }
+
+  /* 首页 竞猜/报名 入口大按钮 */
+  .home-actions { display:flex; gap:12px; margin-top:14px; }
+  .home-action-btn { flex:1; display:flex; flex-direction:column; align-items:center; gap:4px; padding:20px 12px; border-radius:16px; border:none; cursor:pointer; color:#fff; }
+  .home-action-btn .ha-icon { font-size:1.8em; }
+  .home-action-btn .ha-text { font-size:1em; font-weight:700; }
+  .home-action-btn .ha-sub { font-size:0.62em; color:rgba(255,255,255,0.75); }
+  .home-action-btn.act-bet { background:linear-gradient(135deg,#7c3aed,#a855f7); }
+  .home-action-btn.act-signup { background:linear-gradient(135deg,#07c160,#10b981); }
+
+  /* 报名弹窗 */
+  .signup-modal { text-align:left; max-height:80vh; overflow-y:auto; }
+  .signup-modal-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
+  .signup-modal-head h3 { margin:0; }
+  .modal-close { cursor:pointer; color:var(--muted); font-size:1.1em; padding:0 4px; }
+
+  /* 报名视图 */
+  .signup-panel-card { background:linear-gradient(135deg,rgba(7,193,96,0.08),rgba(167,139,250,0.06)); border:1px solid var(--border); border-radius:14px; padding:16px; }
+  .sp-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }
+  .sp-zone { font-size:1em; font-weight:700; color:#fff; }
+  .sp-game { font-size:0.78em; color:var(--muted); }
+  .sp-stats { display:flex; gap:10px; margin-bottom:12px; }
+  .sp-stat { flex:1; text-align:center; background:rgba(255,255,255,0.04); border-radius:10px; padding:10px 4px; }
+  .sp-val { font-size:1.05em; font-weight:700; color:#fff; }
+  .sp-lbl { font-size:0.65em; color:var(--muted); margin-top:2px; }
+  .sp-queue { display:flex; flex-direction:column; gap:6px; }
+  .sp-q-item { display:flex; align-items:center; gap:10px; background:var(--card); border:1px solid var(--border); border-radius:10px; padding:10px 12px; }
+  .sp-q-item.sp-q-me { border-color:#07c160; background:rgba(7,193,96,0.08); }
+  .sp-q-pos { width:22px; height:22px; flex-shrink:0; border-radius:50%; background:rgba(255,255,255,0.08); color:#ccc; font-size:0.72em; display:flex; align-items:center; justify-content:center; font-weight:700; }
+  .sp-q-name { flex:1; min-width:0; font-size:0.82em; color:#ddd; }
+  .sp-q-time { font-size:0.68em; color:var(--muted); flex-shrink:0; }
+
+  .match-card { background:linear-gradient(135deg,#14142a,#1a1a3a); border-radius:16px; padding:16px 18px; margin-bottom:12px; border:1px solid var(--border); }
+  .match-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:2px; }
+  .match-label { font-weight:700; color:#fff; font-size:0.9em; }
+  .countdown { padding:3px 10px; border-radius:8px; font-size:0.7em; font-weight:600; white-space:nowrap; }
+  .cd-wait { background:rgba(255,255,255,0.06); color:#888; }
+  .cd-bet { background:rgba(245,158,11,0.12); color:#fbbf24; }
+  .cd-live { background:rgba(239,68,68,0.12); color:#f87171; }
+  .cd-done { background:rgba(16,185,129,0.12); color:#34d399; }
+  .match-game { font-size:0.68em; color:#a78bfa; margin-bottom:8px; }
+  .match-meta { font-size:0.68em; color:var(--muted); margin-bottom:10px; }
+  .match-meta span { color:#a78bfa; }
+  .vs-row { display:flex; justify-content:space-around; align-items:center; margin:8px 0; }
+  .player-box { text-align:center; cursor:pointer; padding:10px 14px; border-radius:12px; transition:all .2s; border:2px solid transparent; min-width:90px; position:relative; }
+  .player-box:hover { border-color:rgba(124,58,237,0.3); }
+  .player-box.red { background:rgba(239,68,68,0.04); }
+  .player-box.red.selected { border-color:var(--bad); background:rgba(239,68,68,0.1); }
+  .player-box.blue { background:rgba(59,130,246,0.04); }
+  .player-box.blue.selected { border-color:#3b82f6; background:rgba(59,130,246,0.1); }
+  .player-avatar { width:46px; height:46px; border-radius:50%; margin:0 auto 6px; display:flex; align-items:center; justify-content:center; font-size:1.3em; position:relative; }
+  .player-avatar.red-av { background:rgba(239,68,68,0.15); border:2px solid rgba(239,68,68,0.3); }
+  .player-avatar.blue-av { background:rgba(59,130,246,0.15); border:2px solid rgba(59,130,246,0.3); }
+  .player-nick { font-weight:600; font-size:0.8em; color:#eee; }
+  .player-box.red .player-nick { color:#fca5a5; }
+  .player-box.blue .player-nick { color:#93c5fd; }
+  .player-nick-link { cursor:pointer; text-decoration:underline; text-decoration-style:dotted; text-underline-offset:3px; }
+  .vs-divider { font-weight:700; color:var(--muted); font-size:0.75em; }
+  .odds-tag { font-size:0.65em; padding:2px 6px; border-radius:5px; margin-top:3px; display:inline-block; }
+  .odds-red { background:rgba(239,68,68,0.1); color:#f87171; }
+  .odds-blue { background:rgba(59,130,246,0.1); color:#60a5fa; }
+  .my-bet-tag { font-size:0.62em; font-weight:700; color:#fbbf24; background:rgba(245,158,11,0.12); border:1px solid rgba(245,158,11,0.25); padding:2px 7px; border-radius:6px; margin-top:5px; display:inline-block; }
+  .bet-placed { text-align:center; padding:14px; margin-top:10px; background:rgba(124,58,237,0.08); border:1px solid rgba(124,58,237,0.28); border-radius:12px; }
+  .bet-placed-row { font-size:0.95em; font-weight:700; color:#fff; }
+  .bet-placed-amt { font-size:0.72em; color:var(--muted); margin-top:5px; }
+  .bet-placed-profit { font-size:0.82em; font-weight:700; color:#fbbf24; margin-top:6px; }
+  .bet-cancel-btn { margin-top:12px; width:100%; background:rgba(239,68,68,0.1); color:#f87171; border:1px solid rgba(239,68,68,0.28); }
+  .exh-item { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:12px 14px; margin-bottom:10px; }
+  .exh-top { display:flex; justify-content:space-between; align-items:center; }
+  .exh-name { font-size:0.9em; font-weight:600; color:#fff; }
+  .exh-cost { font-size:0.85em; font-weight:700; color:#c4b5fd; }
+  .exh-sub { font-size:0.72em; color:var(--muted); margin-top:6px; }
+  .bet-section { margin-top:10px; }
+  .bet-section label { font-size:0.74em; color:var(--muted); display:block; margin-bottom:6px; }
+  .bet-chips { display:flex; gap:5px; flex-wrap:wrap; margin-bottom:6px; }
+  .bet-chip { padding:5px 12px; border-radius:12px; background:rgba(255,255,255,0.05); border:1px solid var(--border); cursor:pointer; font-size:0.75em; color:#ccc; transition:all .2s; }
+  .bet-chip.active { background:var(--accent); border-color:var(--accent); color:#fff; }
+  .bet-input { width:100%; background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:8px 10px; color:#fff; font-size:0.85em; margin-top:4px; }
+  .bet-input:focus { outline:none; border-color:var(--accent); }
+  .bet-input::placeholder { color:#555; }
+  .bet-hint { font-size:0.65em; color:var(--bad); margin-top:2px; min-height:14px; }
+  .btn { padding:8px 20px; border-radius:10px; border:none; font-weight:600; cursor:pointer; font-size:0.82em; transition:all .2s; width:100%; }
+  .btn-primary { background:var(--accent); color:#fff; }
+  .btn-primary:hover { background:#06ad56; }
+  .qr-section { text-align:center; padding:32px 0; position:relative; }
+  .qr-box { width:200px; height:200px; margin:0 auto 20px; border-radius:18px; background:#fff; padding:12px; position:relative; }
+  .qr-inner { width:100%; height:100%; display:grid; grid-template-columns:repeat(8,1fr); grid-template-rows:repeat(8,1fr); gap:2px; }
+  .qr-cell { background:#000; border-radius:2px; }
+  .qr-cell.w { background:#fff; }
+  .qr-blur { position:absolute; inset:0; border-radius:18px; background:rgba(255,255,255,0.7); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); display:flex; align-items:center; justify-content:center; }
+  .qr-login-btn { background:var(--accent); color:#fff; border:none; padding:12px 28px; border-radius:24px; font-size:0.85em; font-weight:700; cursor:pointer; z-index:1; }
+  .qr-login-btn:hover { background:#06ad56; }
+  .status-tag { display:inline-block; padding:6px 20px; border-radius:20px; font-size:0.85em; font-weight:600; }
+  .status-none { background:rgba(255,255,255,0.06); color:#888; }
+  .qr-tip { color:var(--muted); font-size:0.82em; margin-top:12px; }
+  .profile-card { background:linear-gradient(135deg,#14142a,#1a1a3a); border-radius:16px; padding:20px; margin-bottom:16px; border:1px solid var(--border); }
+  .profile-card .qr-section { padding:12px 0 0; }
+  .profile-card .qr-box { margin-bottom:0; }
+  .profile-top { display:flex; align-items:center; gap:14px; margin-bottom:16px; }
+  .profile-avatar { width:56px; height:56px; border-radius:50%; background:linear-gradient(135deg,#7c3aed,#a78bfa); display:flex; align-items:center; justify-content:center; font-size:1.6em; flex-shrink:0; }
+  .profile-info { flex:1; }
+  .profile-nick { font-weight:700; font-size:1.05em; color:#fff; }
+  .profile-uid { font-size:0.72em; color:var(--muted); margin-top:2px; }
+  .profile-coins { display:flex; gap:0; border-top:1px solid var(--border); padding-top:14px; }
+  .profile-coin { flex:1; text-align:center; }
+  .profile-coin .val { font-size:1.3em; font-weight:700; }
+  .profile-coin .lbl { font-size:0.7em; color:var(--muted); margin-top:2px; }
+  .profile-coin:first-child { border-right:1px solid var(--border); }
+  .login-prompt { background:linear-gradient(135deg,#14142a,#1a1a3a); border-radius:16px; padding:32px 20px; margin-bottom:16px; border:1px solid var(--border); text-align:center; }
+  .login-prompt .hint-icon { font-size:3em; margin-bottom:12px; }
+  .login-prompt .hint-text { color:var(--muted); font-size:0.85em; margin-bottom:16px; }
+  .login-prompt .btn { width:auto; display:inline-block; padding:12px 40px; }
+  .menu-btn { display:flex; align-items:center; justify-content:space-between; padding:16px; background:var(--card); border:1px solid var(--border); border-radius:12px; margin-bottom:8px; cursor:pointer; transition:all .2s; }
+  .menu-btn:hover { border-color:var(--accent2); }
+  .menu-btn .menu-left { display:flex; align-items:center; gap:10px; font-weight:600; font-size:0.9em; color:#fff; }
+  .menu-btn .menu-arrow { color:var(--muted); font-size:1.2em; }
+  .logout-btn { display:block; width:100%; text-align:center; padding:14px; margin-top:20px; color:var(--bad); font-size:0.85em; font-weight:600; cursor:pointer; background:transparent; border:none; }
+  .logout-btn:hover { color:#f87171; }
+  .rank-card { text-align:center; padding:18px; background:var(--card); border-radius:14px; margin-bottom:14px; border:1px solid var(--border); }
+  .rank-icon { font-size:2.4em; }
+  .rank-name { font-size:1em; font-weight:700; color:#c4b5fd; }
+  .rank-bar { height:6px; background:#252545; border-radius:3px; margin-top:10px; overflow:hidden; }
+  .rank-fill { height:100%; background:var(--accent2); border-radius:3px; width:35%; }
+  .rank-note { color:var(--muted); font-size:0.72em; margin-top:4px; }
+  .section-title { font-weight:600; color:#ccc; margin-bottom:8px; font-size:0.88em; }
+  .history-item { color:#ddd; padding:12px; background:var(--card); border-radius:10px; margin-bottom:6px; border:1px solid var(--border); font-size:0.82em; }
+  .history-item .hist-top { display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:6px; }
+  .history-item .hist-match { min-width:0; flex:1; color:#ccc; }
+  .history-item .hist-detail { font-size:0.78em; color:var(--muted); }
+  .result-win { color:var(--good); font-weight:600; flex-shrink:0; white-space:nowrap; }
+  .result-lose { color:var(--bad); font-weight:600; flex-shrink:0; white-space:nowrap; }
+  .battle-item { padding:12px; background:var(--card); border-radius:10px; margin-bottom:6px; border:1px solid var(--border); font-size:0.82em; }
+  .battle-item .battle-top { color:#ccc;display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; }
+  .battle-item .battle-detail { font-size:0.78em; color:var(--muted); }
+  .modal-overlay { position:absolute; inset:0; background:rgba(0,0,0,0.6); z-index:50; display:flex; align-items:center; justify-content:center; }
+  .modal { background:var(--card); border-radius:18px; padding:24px; width:85%; border:1px solid var(--border); text-align:center; }
+  .modal h3 { color:#c4b5fd; margin-bottom:12px; font-size:1em; }
+  .login-modal { padding:28px 24px; }
+  .login-modal .wx-icon { font-size:2.5em; margin-bottom:12px; }
+  .login-modal .login-title { font-size:1.1em; font-weight:700; color:#fff; margin-bottom:4px; }
+  .login-modal .login-sub { font-size:0.78em; color:var(--muted); margin-bottom:20px; line-height:1.6; }
+  .login-modal .wx-login-btn { background:var(--accent); color:#fff; border:none; width:100%; padding:14px; border-radius:10px; font-size:0.95em; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; }
+  .login-modal .wx-login-btn:hover { background:#06ad56; }
+  .login-modal .login-note { font-size:0.68em; color:var(--muted); margin-top:14px; line-height:1.5; }
+  .hidden { display:none !important; }
+  .toast { position:absolute; top:60px; left:20px; right:20px; background:var(--good); color:#000; padding:12px 18px; border-radius:12px; font-weight:600; z-index:60; text-align:center; animation:toast-in .3s ease; }
+  @keyframes toast-in { from{opacity:0;transform:translateY(-20px);} to{opacity:1;transform:translateY(0);} }.coin-help{display:inline-block;width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,0.1);color:var(--muted);font-size:0.6em;text-align:center;line-height:16px;cursor:pointer;margin-left:3px}
+
+  /* 选手数据弹窗 */
+  .player-stats-modal { padding:20px; }
+  .player-stats-top { text-align:center; margin-bottom:16px; }
+  .player-stats-avatar { width:56px; height:56px; border-radius:50%; margin:0 auto 8px; display:flex; align-items:center; justify-content:center; font-size:1.6em; }
+  .player-stats-avatar.red { background:rgba(239,68,68,0.15); border:2px solid rgba(239,68,68,0.3); }
+  .player-stats-avatar.blue { background:rgba(59,130,246,0.15); border:2px solid rgba(59,130,246,0.3); }
+  .player-stats-name { font-size:1.05em; font-weight:700; color:#fff; }
+  .player-stats-zone { font-size:0.72em; color:var(--muted); margin-top:2px; }
+  .player-stats-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:14px; }
+  .ps-item { background:rgba(255,255,255,0.03); border-radius:10px; padding:12px 8px; text-align:center; border:1px solid var(--border); }
+  .ps-val { font-size:1.2em; font-weight:700; color:#c4b5fd; }
+  .ps-lbl { font-size:0.65em; color:var(--muted); margin-top:2px; }
+  .player-stats-recent { margin-bottom:4px; }
+  .ps-recent-label { font-size:0.7em; color:var(--muted); margin-bottom:6px; }
+  .ps-recent-dots { display:flex; justify-content:center; gap:8px; }
+  .ps-dot { width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.8em; }
+  .ps-dot.win { background:rgba(16,185,129,0.12); color:#34d399; }
+  .ps-dot.lose { background:rgba(239,68,68,0.12); color:#f87171; }
