@@ -2,6 +2,11 @@
  * LumiSport 客户端 - 选手数据弹窗
  */
 
+function playerNickLink(name) {
+  if (name === '本人' || !playerStats[name]) return name;
+  return '<span class="player-nick-link" onclick="showPlayerStats(\'' + name + '\')">' + name + '</span>';
+}
+
 function showPlayerStats(name) {
   var ps = playerStats[name];
   if (!ps) return;
