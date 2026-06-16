@@ -194,11 +194,29 @@ body {
   animation: fadeInUp 0.8s ease both;
 }
 
-.doc-card:nth-child(1) { animation-delay: 0.3s; }
-.doc-card:nth-child(2) { animation-delay: 0.35s; }
-.doc-card:nth-child(3) { animation-delay: 0.4s; }
-.doc-card:nth-child(4) { animation-delay: 0.45s; }
-.doc-card:nth-child(5) { animation-delay: 0.5s; }
+.doc-card:nth-child(1) { animation-delay: 0.25s; }
+.doc-card:nth-child(2) { animation-delay: 0.3s; }
+.doc-card:nth-child(3) { animation-delay: 0.35s; }
+.doc-card:nth-child(4) { animation-delay: 0.4s; }
+.doc-card:nth-child(5) { animation-delay: 0.45s; }
+
+.doc-card-featured {
+  border-color: var(--project-color-border);
+  background: var(--project-color-bg);
+}
+.doc-card-featured:hover {
+  border-color: var(--project-color-light);
+}
+.doc-card-featured .doc-card-icon {
+  background: rgba(245, 158, 11, 0.2);
+  border-color: rgba(245, 158, 11, 0.35);
+}
+.doc-card-badge {
+  display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.5px;
+  color: var(--project-color-light); background: rgba(245, 158, 11, 0.15);
+  border: 1px solid var(--project-color-border); border-radius: 999px;
+  padding: 2px 8px; margin-left: 8px; vertical-align: middle;
+}
 
 .doc-card:hover {
   background: var(--bg-card-hover);
@@ -297,7 +315,7 @@ body {
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
       返回首页
     </a>
-    <span class="site-version" title="页面版本号，用于确认是否加载到最新页面">v1.0.26061501</span>
+    <span class="site-version" data-site-version title="页面版本号，用于确认是否加载到最新页面">v1.0.26061502</span>
   </div>
 
   <div class="project-header">
@@ -315,6 +333,24 @@ body {
 
   <div class="section-label">文档列表</div>
   <div class="doc-list">
+
+    <a href="events/mock-guessing-20260618/mock-guessing-20260618.html" class="doc-card doc-card-featured">
+      <div class="doc-card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+          <line x1="16" y1="2" x2="16" y2="6"/>
+          <line x1="8" y1="2" x2="8" y2="6"/>
+          <line x1="3" y1="10" x2="21" y2="10"/>
+        </svg>
+      </div>
+      <div class="doc-card-info">
+        <div class="doc-card-title">模拟竞猜活动 · 06.18<span class="doc-card-badge">本周四</span></div>
+        <div class="doc-card-meta">活动介绍 · 赛制 · 竞猜规则 · 奖品兑换 · 18:30–20:30</div>
+      </div>
+      <div class="doc-card-arrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+    </a>
 
     <a href="control-center/control-center.html" class="doc-card">
       <div class="doc-card-icon">
@@ -395,5 +431,6 @@ body {
 
 </div>
 
+<script src="../_portal/site-version.js"></script>
 </body>
 </html>

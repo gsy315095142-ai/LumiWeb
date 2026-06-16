@@ -27,27 +27,49 @@ echo.
 echo  portal              !START_URL!
 echo  LumiMagic S1        http://127.0.0.1:!PORT!/WebProjects/LumiMagic_Season_01/LumiMagic_Season_01.html
 echo  LumiSport           http://127.0.0.1:!PORT!/WebProjects/LumiSport/LumiSport.html
+echo  mock guessing 0618  http://127.0.0.1:!PORT!/WebProjects/LumiSport/events/mock-guessing-20260618/mock-guessing-20260618.html
 echo  control center      http://127.0.0.1:!PORT!/WebProjects/LumiSport/control-center/control-center.html
 echo  LumiMagic S2        http://127.0.0.1:!PORT!/WebProjects/LumiMagic_Season_02/LumiMagic_Season_02.html
 echo.
 echo  Ctrl+C to stop
 echo.
 
-start /min cmd /c "ping 127.0.0.1 -n 2 >nul && start "" "!START_URL!""
-
-where python >nul 2>&1
+set SERVER_CMD=
+python --version >nul 2>&1
 if !errorlevel!==0 (
-  python -m http.server !PORT!
-  goto :end
+  set SERVER_CMD=python -m http.server !PORT!
+  goto :start_server
 )
 
-where py >nul 2>&1
+py --version >nul 2>&1
 if !errorlevel!==0 (
-  py -m http.server !PORT!
-  goto :end
+  set SERVER_CMD=py -m http.server !PORT!
+  goto :start_server
 )
 
-echo ERROR: Python not found. Install Python 3 and add it to PATH.
+powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0serve.ps1" -Port !PORT! -OpenBrowser
+goto :end
+
+:start_server
+start "LumiWeb Server" /min cmd /c "!SERVER_CMD!"
+
+set /a WAIT_COUNT=0
+:wait_ready
+netstat -ano | findstr ":!PORT! " | findstr LISTENING >nul 2>&1
+if !errorlevel!==0 goto :open_browser
+set /a WAIT_COUNT+=1
+if !WAIT_COUNT! GEQ 20 (
+  echo ERROR: Server did not start within 20 seconds.
+  pause
+  exit /b 1
+)
+ping 127.0.0.1 -n 2 >nul
+goto :wait_ready
+
+:open_browser
+start "" "!START_URL!"
+echo Browser opened. Server is running in the background window.
+echo Close that window or press Ctrl+C there to stop.
 pause
 
 :end

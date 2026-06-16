@@ -1,0 +1,45 @@
+/* 管理员端 - 模态框 · 登录 · 扫码用户信息 */
+.modal-overlay { position:absolute; inset:0; background:rgba(0,0,0,0.6); z-index:50; display:flex; align-items:center; justify-content:center; }
+.modal { background:var(--card); border-radius:18px; padding:24px; width:85%; border:1px solid var(--border); max-height:80vh; overflow-y:auto; }
+.modal h3 { color:#c4b5fd; margin-bottom:12px; font-size:1em; text-align:center; }
+.confirm-modal { text-align:center; }
+.confirm-modal .confirm-icon { font-size:2.5em; margin-bottom:8px; }
+.confirm-modal .confirm-msg { color:#fff; font-size:0.9em; margin-bottom:18px; line-height:1.5; white-space:pre-line; }
+.login-modal { padding:28px 24px; text-align:center; max-height:none; }
+.login-modal .wx-icon { font-size:2.5em; margin-bottom:12px; color:#07c160; }
+.login-modal .login-title { font-size:1.1em; font-weight:700; color:#fff; margin-bottom:4px; }
+.login-modal .login-sub { font-size:0.78em; color:var(--muted); margin-bottom:20px; line-height:1.6; }
+.login-modal .wx-login-btn { background:var(--accent); color:#fff; border:none; width:100%; padding:14px; border-radius:10px; font-size:0.95em; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; }
+.login-modal .login-note { font-size:0.68em; color:var(--muted); margin-top:14px; line-height:1.5; }
+.scan-user-info { text-align:center; padding:8px 0; }
+.scan-user-info .avatar { font-size:2em; }
+.scan-user-info .name { font-weight:700; margin-top:4px; color:#fff; }
+.scan-user-coins { display:flex; justify-content:center; gap:16px; margin-top:6px; font-size:0.78em; }
+.toggle-row { display:flex; align-items:center; justify-content:space-between; padding:10px 0; }
+.toggle-row span { color:#fff; }
+
+/* 报名弹窗（客户端 / 管理员端玩家视图共用） */
+.signup-modal { text-align:left; max-height:80vh; overflow-y:auto; color:#fff; }
+.signup-modal-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
+.signup-modal-head h3 { margin:0; color:#fff; text-align:left; }
+.signup-modal .sp-game,
+.signup-modal .sp-lbl,
+.signup-modal .sp-q-time,
+.signup-modal .queue-title,
+.signup-modal .queue-empty { color:rgba(255,255,255,0.85); }
+.signup-modal .player-nick-link { color:#fff; }
+.signup-modal .queue-item.signup-queue-me { background:rgba(7,193,96,0.08); border-radius:8px; padding:7px 6px; margin:0 -6px; }
+.modal-close { cursor:pointer; color:rgba(255,255,255,0.6); font-size:1.1em; padding:0 4px; }
+.signup-panel-card { background:linear-gradient(135deg,rgba(7,193,96,0.08),rgba(167,139,250,0.06)); border:1px solid var(--border); border-radius:14px; padding:16px; }
+.sp-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }
+.sp-zone { font-size:1em; font-weight:700; color:#fff; }
+.sp-game { font-size:0.78em; color:var(--muted); }
+.sp-stats { display:flex; gap:10px; margin-bottom:12px; }
+.sp-stat { flex:1; text-align:center; background:rgba(255,255,255,0.04); border-radius:10px; padding:10px 4px; }
+.sp-val { font-size:1.05em; font-weight:700; color:#fff; }
+.sp-lbl { font-size:0.65em; color:var(--muted); margin-top:2px; }
+
+/* 扫码兑换弹窗 */
+.exchange-scan-modal { text-align:left; max-height:80vh; overflow-y:auto; color:#fff; }
+.exchange-scan-modal .signup-modal-head h3 { color:#fff; text-align:left; }
+

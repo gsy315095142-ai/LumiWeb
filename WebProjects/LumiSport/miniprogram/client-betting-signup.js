@@ -71,20 +71,21 @@ function renderSignupView() {
   if (signedUp) h += '<button class="signup-bar-btn done" style="width:100%;" onclick="toggleSignup()">取消报名</button>';
   else h += '<button class="signup-bar-btn" style="width:100%;" onclick="toggleSignup()">✋ 一键报名</button>';
   h += '</div>';
-  h += '<div class="section-title" style="margin-top:14px;">📋 当前排队（' + q.length + '人）</div>';
+  h += '<div class="queue-title">📋 当前排队（' + q.length + '人）</div>';
   if (q.length > 0) {
-    h += '<div class="sp-queue">';
+    h += '<div class="queue-list">';
     q.forEach(function (p, idx) {
-      var sb = p.side === 'red' ? '🔴' : (p.side === 'blue' ? '🔵' : '⚪');
-      var me = p.name === '本人' ? ' sp-q-me' : '';
-      var nameHtml = (p.name !== '本人' && playerStats[p.name])
-        ? '<span class="player-nick-link" onclick="showPlayerStats(\'' + p.name + '\')">' + p.name + '</span>'
-        : p.name;
-      h += '<div class="sp-q-item' + me + '"><div class="sp-q-pos">' + (idx + 1) + '</div><div class="sp-q-name">' + sb + ' ' + nameHtml + '</div><div class="sp-q-time">' + p.time + '</div></div>';
+      var sb = p.side === 'red' ? ' 🔴' : (p.side === 'blue' ? ' 🔵' : '');
+      var me = p.name === '本人' ? ' signup-queue-me' : '';
+      var nameHtml = playerNickLink(p.name);
+      h += '<div class="queue-item' + me + '">';
+      h += '<div class="q-pos">' + (idx + 1) + '</div>';
+      h += '<div class="q-info"><div class="q-name">' + nameHtml + sb + '</div><div class="q-time">' + p.time + '</div></div>';
+      h += '</div>';
     });
     h += '</div>';
   } else {
-    h += '<div class="queue-empty" style="text-align:center;padding:16px;color:var(--muted);font-size:0.8em;">暂无排队选手</div>';
+    h += '<div class="queue-empty">暂无排队选手</div>';
   }
   panel.innerHTML = h;
 }

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数值推算 · Lumi 竞技大空间模拟竞猜活动</title>
+<meta name="description" content="模拟竞猜活动数值推算工具 — 玩家收益模拟、兑换币档位换算、主办方经济测算与关键洞察。">
+<link rel="stylesheet" href="value-calc.css">
+</head>
+<body>
+
+<!-- 顶部导航 -->
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a class="nav-back" href="mock-guessing-20260618.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      <span class="nav-back-text">返回活动页</span>
+    </a>
+    <span class="nav-brand">
+      <span class="brand-mark">∑</span>
+      <span class="brand-text">数值推算</span>
+    </span>
+    <nav class="nav-links" id="navLinks">
+      <a href="#formula">公式</a>
+      <a href="#player">玩家模拟</a>
+      <a href="#tiers">档位换算</a>
+      <a href="#organizer">主办测算</a>
+      <a href="#insight">关键洞察</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="菜单">☰</button>
+  </div>
+</header>
+
+<!-- 页头 -->
+<section class="head">
+  <div class="head-glow"></div>
+  <div class="head-inner">
+    <div class="head-badge">DATA LAB · 数值推算</div>
+    <h1 class="head-title">把规则变成<span class="accent">可以拨动的数字</span></h1>
+    <p class="head-sub">基于「1.8 倍固定赔率 + 游戏币 / 兑换币」体系，模拟玩家收益、推算礼品档位、测算主办方成本。所有结果均为推算，仅供活动设计参考。</p>
+    <div class="head-note">＊ 数据口径：¥10 = 1000 游戏币 · 单场下注 10–200 · 赔率 1.8× · 全场 21 场可竞猜</div>
+  </div>
+</section>
+
+<!-- 公式速查 -->
+<section class="section" id="formula">
+  <div class="section-head">
+    <span class="section-kicker">FORMULA</span>
+    <h2 class="section-title">核心公式速查</h2>
+    <p class="section-desc">所有推算都建立在这四条规则之上。</p>
+  </div>
+  <div class="formula-grid">
+    <div class="formula-card">
+      <div class="formula-icon">🎟️</div>
+      <div class="formula-name">入场领币</div>
+      <div class="formula-exp">¥10 <span>=</span> 1000 <em>游戏币</em></div>
+      <div class="formula-foot">可重复加购，按套餐叠加游戏币</div>
+    </div>
+    <div class="formula-card win">
+      <div class="formula-icon">💰</div>
+      <div class="formula-name">猜中 · 收回游戏币</div>
+      <div class="formula-exp">下注 <span>×</span> 1.8</div>
+      <div class="formula-foot">净赚游戏币 = 下注 × 0.8</div>
+    </div>
+    <div class="formula-card ex">
+      <div class="formula-icon">💎</div>
+      <div class="formula-name">猜中 · 额外兑换币</div>
+      <div class="formula-exp">下注 <span>×</span> 0.8</div>
+      <div class="formula-foot">兑换币 = 你赚到的利润，只增不减</div>
+    </div>
+    <div class="formula-card lose">
+      <div class="formula-icon">❌</div>
+      <div class="formula-name">猜错</div>
+      <div class="formula-exp">− 本次下注</div>
+      <div class="formula-foot">扣除下注游戏币，且无兑换币</div>
+    </div>
+  </div>
+</section>
+
+<!-- 玩家收益模拟器 -->
+<section class="section section-alt" id="player">
+  <div class="section-head">
+    <span class="section-kicker">PLAYER SIM</span>
+    <h2 class="section-title">玩家收益模拟器</h2>
+    <p class="section-desc">拖动下面的滑块，看看一晚下来你大概能攒多少兑换币、换到哪一档。</p>
+  </div>
+
+  <div class="sim">
+    <div class="sim-inputs">
+      <div class="field">
+        <label>入场套餐数 <b id="pkgVal">1</b> 份 <span class="field-sub">= <i id="initCoins">1,000</i> 游戏币</span></label>
+        <input type="range" id="pkg" min="1" max="10" step="1" value="1">
+      </div>
+      <div class="field">
+        <label>单场下注额 <b id="betVal">100</b> 游戏币</label>
+        <input type="range" id="bet" min="10" max="200" step="10" value="100">
+      </div>
+      <div class="field">
+        <label>计划参与场次 <b id="matchVal">10</b> 场 <span class="field-sub">（全场最多 21 场）</span></label>
+        <input type="range" id="match" min="1" max="21" step="1" value="10">
+      </div>
+      <div class="field">
+        <label>预估猜中率 <b id="winVal">55</b>%</label>
+        <input type="range" id="win" min="0" max="100" step="5" value="55">
+      </div>
+    </div>
+
+    <div class="sim-results">
+      <div class="result-row">
+        <div class="result-card">
+          <div class="result-label">期望猜中</div>
+          <div class="result-num" id="rWins">5.5</div>
+          <div class="result-unit">场</div>
+        </div>
+        <div class="result-card ex">
+          <div class="result-label">期望兑换币</div>
+          <div class="result-num" id="rEx">440</div>
+          <div class="result-unit">兑换币</div>
+        </div>
+        <div class="result-card" id="gameCard">
+          <div class="result-label">游戏币盈亏</div>
+          <div class="result-num" id="rGame">0</div>
+          <div class="result-unit">游戏币</div>
+        </div>
+      </div>
+
+      <div class="tier-reach">
+        <div class="tier-reach-head">可解锁兑换档位 <span id="reachLabel">—</span></div>
+        <div class="tier-reach-chips" id="reachChips"></div>
+      </div>
+
+      <div class="iphone-bar">
+        <div class="iphone-bar-top">
+          <span>📱 距单人理论上限（21 场全中 ×200）</span>
+          <span><b id="iphonePct">13</b>% · <i id="iphoneEx">440</i> / 3,360 兑换币</span>
+        </div>
+        <div class="iphone-track"><div class="iphone-fill" id="iphoneFill"></div></div>
+        <div class="iphone-foot">iPhone 归当晚<strong>累计兑换币最高者</strong>，活跃下注、连续猜中是关键。</div>
+      </div>
+
+      <div class="sim-tip" id="simTip"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 档位换算 -->
+<section class="section" id="tiers">
+  <div class="section-head">
+    <span class="section-kicker">TIER MATH</span>
+    <h2 class="section-title">兑换币 → 礼品档位换算</h2>
+    <p class="section-desc">档位阈值以「每场押 200」为基准推算；下注越小，达到同一档位需要猜中更多场。</p>
+  </div>
+  <div class="calc-table-wrap">
+    <table class="calc-table" id="tierTable">
+      <thead>
+        <tr>
+          <th>档位</th><th>礼品</th><th>价值</th>
+          <th>所需兑换币</th><th>押 200 需猜中</th><th>¥/兑换币</th>
+        </tr>
+      </thead>
+      <tbody id="tierBody"></tbody>
+    </table>
+  </div>
+  <p class="table-foot">＊「¥/兑换币」= 礼品价值 ÷ 所需兑换币，反映各档位「兑换效率」：越高档每枚兑换币换到的实物价值越高，是对持续累积的奖励。</p>
+</section>
+
+<!-- 主办方经济测算 -->
+<section class="section section-alt" id="organizer">
+  <div class="section-head">
+    <span class="section-kicker">ORGANIZER</span>
+    <h2 class="section-title">主办方经济测算</h2>
+    <p class="section-desc">输入到场规模与行为假设，估算入场收入与礼品成本的大致平衡。仅为粗略估算。</p>
+  </div>
+
+  <div class="sim">
+    <div class="sim-inputs">
+      <div class="field">
+        <label>到场人数 <b id="attVal">60</b> 人</label>
+        <input type="range" id="att" min="10" max="300" step="10" value="60">
+      </div>
+      <div class="field">
+        <label>人均加购套餐 <b id="oPkgVal">2</b> 份</label>
+        <input type="range" id="oPkg" min="1" max="10" step="1" value="2">
+      </div>
+      <div class="field">
+        <label>人均参与场次 <b id="oMatchVal">10</b> 场</label>
+        <input type="range" id="oMatch" min="1" max="21" step="1" value="10">
+      </div>
+      <div class="field">
+        <label>人均单场下注 <b id="oBetVal">100</b> 游戏币</label>
+        <input type="range" id="oBet" min="10" max="200" step="10" value="100">
+      </div>
+      <div class="field">
+        <label>整体押中比例 <b id="oWinVal">50</b>% <span class="field-sub">（双方对等，约 50%）</span></label>
+        <input type="range" id="oWin" min="30" max="70" step="5" value="50">
+      </div>
+      <div class="field">
+        <label>兑换币核销率 <b id="redeemVal">70</b>% <span class="field-sub">（实际拿去换礼的比例）</span></label>
+        <input type="range" id="redeem" min="0" max="100" step="5" value="70">
+      </div>
+      <div class="field">
+        <label>兑换币单位成本 <b id="coinValShow">0.040</b> 元/枚 <span class="field-sub">（各档折算 0.025–0.067）</span></label>
+        <input type="range" id="coinVal" min="25" max="67" step="1" value="40">
+      </div>
+      <div class="field">
+        <label>iPhone 成本 <b id="iphoneCostVal">5,000</b> 元</label>
+        <input type="range" id="iphoneCost" min="3000" max="8000" step="500" value="5000">
+      </div>
+    </div>
+
+    <div class="sim-results">
+      <div class="pnl">
+        <div class="pnl-row income">
+          <span class="pnl-label">＋ 入场 / 加购收入</span>
+          <span class="pnl-val" id="pRevenue">¥1,200</span>
+        </div>
+        <div class="pnl-sub">
+          <span>兑换币总产出</span><span><i id="pExCoins">42,000</i> 枚</span>
+        </div>
+        <div class="pnl-row cost">
+          <span class="pnl-label">− 竞猜兑换礼品成本</span>
+          <span class="pnl-val" id="pGiftCost">¥1,176</span>
+        </div>
+        <div class="pnl-row cost">
+          <span class="pnl-label">− 比赛名次奖（固定）</span>
+          <span class="pnl-val" id="pRankCost">¥1,200</span>
+        </div>
+        <div class="pnl-row cost">
+          <span class="pnl-label">− iPhone 大奖</span>
+          <span class="pnl-val" id="pIphone">¥5,000</span>
+        </div>
+        <div class="pnl-divider"></div>
+        <div class="pnl-row net" id="pnlNetRow">
+          <span class="pnl-label">＝ 预计净收支</span>
+          <span class="pnl-val" id="pNet">−¥6,176</span>
+        </div>
+      </div>
+      <div class="org-note">
+        ＊ 名次奖固定成本 = 冠军 3×¥160 + 亚军 3×¥80 + 四强 6×¥40 + 八强 12×¥20 = <strong>¥1,200</strong>（三项目合计 24 人次）。<br>
+        ＊ 礼品成本随玩家活跃度与档位偏好波动，本测算按「兑换币 × 核销率 × 单位成本」线性估算，实际以库存与现场兑换为准。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 关键洞察 -->
+<section class="section" id="insight">
+  <div class="section-head">
+    <span class="section-kicker">INSIGHTS</span>
+    <h2 class="section-title">关键洞察</h2>
+    <p class="section-desc">几条藏在数字背后、值得在设计与宣传时利用的结论。</p>
+  </div>
+  <div class="insight-grid">
+    <div class="insight-card">
+      <div class="insight-num">55.6%</div>
+      <div class="insight-title">游戏币盈亏平衡胜率</div>
+      <p>猜中率高于 1 ÷ 1.8 ≈ 55.6% 才能让游戏币期望为正；低于此长期会消耗游戏币，但只要在玩就持续产出兑换币。</p>
+    </div>
+    <div class="insight-card">
+      <div class="insight-num">只增不减</div>
+      <div class="insight-title">兑换币越活跃越多</div>
+      <p>猜错只扣游戏币、不动兑换币。所以「多下注、多猜中」单调增加兑换币 —— 这正是鼓励高频参与的设计核心。</p>
+    </div>
+    <div class="insight-card">
+      <div class="insight-num">3,360</div>
+      <div class="insight-title">单人理论最高兑换币</div>
+      <p>21 场全部押满 200 且全中：21 × 200 × 0.8 = 3,360 枚。这是 iPhone 争夺战的天花板，也是 E 档（2,400）之上的稀缺区间。</p>
+    </div>
+    <div class="insight-card">
+      <div class="insight-num">¥0.025→0.067</div>
+      <div class="insight-title">高档位兑换效率更高</div>
+      <p>每枚兑换币换到的实物价值，从 B 档 ¥0.025 升到 E 档 ¥0.067。越往上越「划算」，激励玩家攒着不花、冲高档与 iPhone。</p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-title">数值推算 · Lumi 竞技大空间模拟竞猜活动</div>
+  <div class="footer-sub"><a href="mock-guessing-20260618.html">← 返回活动介绍页</a></div>
+  <div class="footer-note">本页所有数值均为模型推算，用于活动设计与沟通参考，最终规则、赔率与奖品以现场公布为准。</div>
+</footer>
+
+<script src="value-calc.js"></script>
+</body>
+</html>
