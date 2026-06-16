@@ -1,0 +1,58 @@
+@import url("client-exchange.css");
+
+/* === 全局文字颜色保障（暗色主题） === */
+.phone, .content, .page, .modal, .card, .banner,
+input, select, textarea, button:not(.home-action-btn):not(.wx-login-btn):not(.qr-login-btn) {
+  color: #ddd;
+}
+input::placeholder, textarea::placeholder { color: #888; }
+select option { background: #16162e; color: #fff; }
+
+/* 兑换按钮 */
+.home-action-btn.act-exchange { background: linear-gradient(135deg,#f59e0b,#ec4899); }
+
+/* 通用按钮扩展 */
+.btn-purple { background: linear-gradient(135deg,#7c3aed,#a855f7); color: #fff; border: none; padding: 10px 20px; border-radius: 10px; font-weight: 600; cursor: pointer; font-size: 0.82em; transition: all .2s; width: 100%; }
+.btn-purple:hover { filter: brightness(1.1); }
+.btn-outline { background: transparent; color: #aaa; border: 1px solid #333; padding: 10px 20px; border-radius: 10px; font-weight: 600; cursor: pointer; font-size: 0.82em; transition: all .2s; }
+.btn-outline:hover { border-color: #a78bfa; color: #fff; }
+.btn-block { width: 100%; display: block; }
+.btn-sm { padding: 6px 14px; font-size: 0.72em; border-radius: 8px; width: auto; }
+
+/* 兑换页 - 余额卡片 */
+.ex-balance-card { text-align: center; background: linear-gradient(135deg,rgba(167,139,250,0.08),rgba(236,72,153,0.06)); border-radius: 14px; padding: 18px 20px; margin-bottom: 16px; border: 1px solid rgba(167,139,250,0.18); }
+.ex-balance-label { font-size: 0.72em; color: #888; margin-bottom: 4px; }
+.ex-balance-val { font-size: 1.8em; font-weight: 800; color: #c4b5fd; }
+
+/* 兑换页 - 扫码区（模拟扫描动画） */
+.ex-scan-area { background: linear-gradient(135deg,#0f162e,#1a0a1e); border: 2px dashed rgba(167,139,250,0.35); border-radius: 16px; padding: 32px 20px 24px; text-align: center; cursor: pointer; transition: all .25s; margin-bottom: 12px; position: relative; overflow: hidden; }
+.ex-scan-area::before { content: ''; position: absolute; inset: 0; background: linear-gradient(45deg,transparent 40%,rgba(167,139,250,0.06) 50%,transparent 60%); background-size: 220% 220%; animation: scan-line 2s linear infinite; }
+@keyframes scan-line { 0% { background-position: 220% 0; } 100% { background-position: -220% 0; } }
+.ex-scan-area:hover { border-color: #a78bfa; background: rgba(124,58,237,0.06); transform: scale(1.02); }
+.ex-scan-area:active { transform: scale(0.98); }
+.ex-scan-icon { font-size: 3em; margin-bottom: 10px; position: relative; z-index: 1; }
+.ex-scan-text { font-size: 0.92em; font-weight: 700; color: #fff; margin-bottom: 4px; position: relative; z-index: 1; }
+.ex-scan-sub { font-size: 0.7em; color: #888; position: relative; z-index: 1; }
+
+/* 已扫商品卡片 */
+.ex-scanned-card { background: linear-gradient(135deg,rgba(245,158,11,0.06),rgba(236,72,153,0.04)); border: 1px solid rgba(245,158,11,0.2); border-radius: 14px; padding: 16px; margin-bottom: 8px; }
+.ex-scanned-top { display: flex; align-items: center; gap: 12px; }
+.ex-scanned-icon { font-size: 2.2em; flex-shrink: 0; }
+.ex-scanned-details { flex: 1; min-width: 0; }
+.ex-scanned-name { font-size: 0.92em; font-weight: 700; color: #fff; margin-bottom: 2px; }
+.ex-scanned-desc { font-size: 0.68em; color: #888; margin-bottom: 6px; }
+.ex-scanned-prices { display: flex; align-items: baseline; gap: 8px; }
+.esp-cost { font-size: 1.1em; font-weight: 700; color: #fbbf24; }
+.esp-orig { font-size: 0.68em; color: #888; text-decoration: line-through; }
+
+/* 商品网格 */
+.ex-product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.ex-prod-card { background: #14142a; border: 1px solid #252545; border-radius: 14px; padding: 16px 12px; text-align: center; cursor: pointer; transition: all .2s; }
+.ex-prod-card:hover { border-color: #a78bfa; background: rgba(124,58,237,0.06); transform: translateY(-2px); }
+.ex-prod-card:active { transform: scale(0.97); }
+.ep-icon { font-size: 2em; margin-bottom: 6px; }
+.ep-name { font-size: 0.82em; font-weight: 600; color: #fff; margin-bottom: 4px; }
+.ep-price { font-size: 0.85em; font-weight: 700; color: #c4b5fd; }
+.ep-orig { font-size: 0.62em; color: #888; text-decoration: line-through; margin-top: 2px; }
+
+@keyframes pulse { from { opacity: 0.6; transform: scale(1); } to { opacity: 1; transform: scale(1.1); } }

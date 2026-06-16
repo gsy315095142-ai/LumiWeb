@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数值推算 · Lumi 竞技大空间模拟竞猜活动</title>
+<meta name="description" content="模拟竞猜活动数值推算 — 从活动时长一路推导到场次、名次奖、兑换库存、档位定价、加购引导、库存承载、经济收支与 iPhone 门槛。">
+<link rel="stylesheet" href="value-calc.css">
+</head>
+<body>
+
+<!-- 顶部导航 -->
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a class="nav-back" href="mock-guessing-20260618.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      <span class="nav-back-text">返回活动页</span>
+    </a>
+    <span class="nav-brand">
+      <span class="brand-mark">∑</span>
+      <span class="brand-text">数值推算</span>
+    </span>
+    <nav class="nav-links" id="navLinks">
+      <a href="#s1">①场次</a>
+      <a href="#s2">②名次</a>
+      <a href="#s3">③库存</a>
+      <a href="#s4">④定价</a>
+      <a href="#s5">⑤加购</a>
+      <a href="#s6">⑥承载</a>
+      <a href="#s7">⑦收支</a>
+      <a href="#s8">⑧iPhone</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="菜单">☰</button>
+  </div>
+</header>
+
+<!-- 页头 -->
+<section class="head">
+  <div class="head-glow"></div>
+  <div class="head-inner">
+    <div class="head-badge">DATA LAB · 自上而下推导链</div>
+    <h1 class="head-title">从<span class="accent">活动时长</span>，一路推导到每一份奖品</h1>
+    <p class="head-sub">这不是孤立的计算器，而是一条因果链：上一步的结论，是下一步的前提。拨动任意假设，后面所有结论都会跟着重算。</p>
+    <div class="chain-map" id="chainMap">
+      <span>① 时长→场次</span><i>→</i><span>② 赛制→名次</span><i>→</i><span>③ 名次→兑换库存</span><i>→</i><span>④ 档位定价</span>
+      <i>→</i><span>⑤ 加购引导</span><i>→</i><span>⑥ 库存承载</span><i>→</i><span>⑦ 经济收支</span><i>→</i><span>⑧ iPhone 门槛</span>
+    </div>
+  </div>
+</section>
+
+<!-- ① 时长 → 场次 -->
+<section class="stage" id="s1">
+  <div class="stage-head">
+    <span class="stage-no">①</span>
+    <div><h2>活动时长 → 可竞猜场次</h2><p>一切的起点：用总时长扣掉开场、换场、颁奖，再除以单场时长，得到能塞下多少场。</p></div>
+  </div>
+  <div class="stage-grid">
+    <div class="io-card io-in">
+      <div class="io-title">输入假设</div>
+      <div class="field"><label>活动总时长 <b id="s1_total_v">120</b> 分钟</label><input type="range" id="s1_total" min="60" max="180" step="5" value="120"></div>
+      <div class="field"><label>开场用时 <b id="s1_open_v">5</b> 分钟</label><input type="range" id="s1_open" min="0" max="20" step="1" value="5"></div>
+      <div class="field"><label>单次换项目 <b id="s1_switch_v">5</b> 分钟 <span class="field-sub">（共换 <i id="s1_switchCnt">2</i> 次）</span></label><input type="range" id="s1_switch" min="0" max="15" step="1" value="5"></div>
+      <div class="field"><label>颁奖预留 <b id="s1_award_v">0</b> 分钟</label><input type="range" id="s1_award" min="0" max="30" step="1" value="0"></div>
+      <div class="field"><label>单场时长 <b id="s1_per_v">5</b> 分钟/场</label><input type="range" id="s1_per" min="3" max="10" step="1" value="5"></div>
+      <div class="field"><label>项目数 <b id="s1_projects_v">3</b> 个</label><input type="range" id="s1_projects" min="1" max="5" step="1" value="3"></div>
+      <div class="field"><label>每项目赛制 <b id="s1_bracket_v">8</b> 强单败</label>
+        <select id="s1_bracket" class="sel"><option value="4">4 强（每项目 3 场）</option><option value="8" selected>8 强（每项目 7 场）</option><option value="16">16 强（每项目 15 场）</option></select>
+      </div>
+    </div>
+    <div class="io-card io-out">
+      <div class="io-title">推导结论</div>
+      <div class="calc-line"><span>固定开销 = 开场 + 换场×次数 + 颁奖</span><b id="s1_overhead">15 分钟</b></div>
+      <div class="calc-line"><span>正赛可用时长 = 总时长 − 固定开销</span><b id="s1_play">105 分钟</b></div>
+      <div class="calc-line"><span>场地容量 = 正赛时长 ÷ 单场时长</span><b id="s1_capacity">21 场</b></div>
+      <div class="calc-line"><span>赛事需求 = 项目数 × (强数 − 1)</span><b id="s1_demand">21 场</b></div>
+      <div class="out-hero">
+        <div class="out-hero-label">全场可竞猜场次 <span class="out-hero-tag" id="s1_fitTag">满负荷</span></div>
+        <div class="out-hero-num" id="s1_N">21</div>
+        <div class="out-hero-unit">场 · 该结论将贯穿后续所有推导</div>
+      </div>
+      <div class="io-note" id="s1_note">105 ÷ 5 = 21，赛事需求正好等于容量，时间表满负荷、无缓冲。</div>
+    </div>
+  </div>
+  <div class="connector"><span>↓ 由场次与赛制推导</span></div>
+</section>
+
+<!-- ② 赛制 → 名次结构 -->
+<section class="stage section-alt" id="s2">
+  <div class="stage-head">
+    <span class="stage-no">②</span>
+    <div><h2>赛制 → 名次获奖结构</h2><p>单败淘汰每一轮的败者构成一个名次档；乘以项目数，得到要发多少份名次奖。</p></div>
+  </div>
+  <div class="stage-grid">
+    <div class="io-card io-in">
+      <div class="io-title">名次 → 奖品档位映射 <span class="io-hint">（可调）</span></div>
+      <div class="map-list" id="s2_map"></div>
+      <div class="io-note">默认：冠军→E(¥160)、亚军→D(¥80)、四强→C(¥40)、八强→B(¥20)。改映射会联动第 ③ 步的名次占用。</div>
+    </div>
+    <div class="io-card io-out">
+      <div class="io-title">推导结论</div>
+      <div class="calc-table-wrap">
+        <table class="calc-table">
+          <thead><tr><th>名次</th><th>每项目</th><th>× 项目数</th><th>对应档位</th></tr></thead>
+          <tbody id="s2_body"></tbody>
+        </table>
+      </div>
+      <div class="out-hero">
+        <div class="out-hero-label">名次奖总人次</div>
+        <div class="out-hero-num" id="s2_total">24</div>
+        <div class="out-hero-unit">人次 · 决定名次奖要占用多少份奖品</div>
+      </div>
+    </div>
+  </div>
+  <div class="connector"><span>↓ 名次奖占用总奖品池</span></div>
+</section>
+
+<!-- ③ 名次 → 兑换库存 -->
+<section class="stage" id="s3">
+  <div class="stage-head">
+    <span class="stage-no">③</span>
+    <div><h2>总奖品池 − 名次奖 = 兑换库存</h2><p>奖品总量是固定的。名次奖先占走一部分，剩下的才是观众竞猜能兑换的库存。</p></div>
+  </div>
+  <div class="stage-grid stage-grid-wide">
+    <div class="io-card">
+      <div class="io-title">奖品分配总账 <span class="io-hint">（总池可录入）</span></div>
+      <div class="calc-table-wrap">
+        <table class="calc-table editable">
+          <thead><tr><th>档位</th><th>礼品价值</th><th>总奖品池</th><th>名次奖占用</th><th>剩余 = 兑换库存</th></tr></thead>
+          <tbody id="s3_body"></tbody>
+        </table>
+      </div>
+      <div class="io-note" id="s3_note">兑换库存 = 总池 − 名次占用，自动推导，无需手填。iPhone 不计入档位，作为全场最高累计兑换币的专属大奖（见第 ⑧ 步）。</div>
+    </div>
+  </div>
+  <div class="connector"><span>↓ 库存确定后，定义兑换门槛</span></div>
+</section>
+
+<!-- ④ 档位定价透明化 -->
+<section class="stage section-alt" id="s4">
+  <div class="stage-head">
+    <span class="stage-no">④</span>
+    <div><h2>档位定价透明化 —— 为什么要这么多兑换币</h2><p>核心模块：把每档"要这么多兑换币"的来龙去脉摊开，并证明我们其实替你打了折。</p></div>
+  </div>
+
+  <div class="anchor-bar" id="s4_anchor">
+    猜对 1 场的兑换币 = 单场下注上限 <b>200</b> × (赔率 <b>1.8</b> − 1) = <b class="hl">160 兑换币</b>。所有门槛都由"猜对几场 × 160"反推而来。
+  </div>
+
+  <div class="io-card">
+    <div class="io-title">定价对照表 <span class="io-hint">（「实际定档猜对场次」可录入）</span></div>
+    <div class="calc-table-wrap">
+      <table class="calc-table editable">
+        <thead><tr>
+          <th>档位</th><th>价值</th>
+          <th>① 线性所需<br>兑换币<span class="th-sub">1元=100币</span></th>
+          <th>② 线性所需<br>猜对场次</th>
+          <th>③ 实际定档<br>猜对场次</th>
+          <th>④ 实际所需<br>兑换币</th>
+          <th>折扣</th>
+          <th id="s4_reachTh">21 场内可达？</th>
+        </tr></thead>
+        <tbody id="s4_body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="qa-grid">
+    <div class="qa-card">
+      <div class="qa-q">Q：凭什么要这么多兑换币？</div>
+      <div class="qa-a">因为猜对 1 场（押满 200）= 160 兑换币。每档门槛 = <strong>猜对场次 × 160</strong>，每个数字都能倒推回"要猜对几场"，公开透明、有据可查。</div>
+    </div>
+    <div class="qa-card">
+      <div class="qa-q">Q：为什么不做成线性比例？</div>
+      <div class="qa-a">线性下 ¥40 要猜对 <strong id="qa_c">25</strong> 场、¥80 要 <strong id="qa_d">50</strong> 场、¥160 要 <strong id="qa_e">100</strong> 场，而当晚只有 <strong id="qa_n">21</strong> 场 —— 这些档<strong>永远换不到</strong>。所以我们改按场次定档，把高档<strong>打到 <span id="qa_disc">1.5~3</span> 折</strong>拉进可达范围。</div>
+    </div>
+  </div>
+  <div class="punchline">我们没让你换不到，而是把"本来换不到"的高档位<strong>打折拉进了可达范围</strong>。</div>
+  <div class="connector"><span>↓ 下面进入观众行为推算</span></div>
+</section>
+
+<!-- 观众行为假设 -->
+<section class="stage" id="assume">
+  <div class="stage-head">
+    <span class="stage-no">◇</span>
+    <div><h2>观众行为假设</h2><p>第 ⑤～⑧ 步共用这组假设。改这里，加购、库存、收支、iPhone 全部联动。</p></div>
+  </div>
+  <div class="io-card io-in assume-grid">
+    <div class="field"><label>到场观众 <b id="a_aud_v">60</b> 人</label><input type="range" id="a_aud" min="10" max="300" step="10" value="60"></div>
+    <div class="field"><label>人均加购套餐 <b id="a_pkg_v">1</b> 份 <span class="field-sub">= <i id="a_initCoins">1,000</i> 初始游戏币</span></label><input type="range" id="a_pkg" min="1" max="6" step="1" value="1"></div>
+    <div class="field"><label>人均单场下注 <b id="a_bet_v">200</b> 游戏币</label><input type="range" id="a_bet" min="10" max="200" step="10" value="200"></div>
+    <div class="field"><label>单场猜中率 <b id="a_win_v">50</b>%</label><input type="range" id="a_win" min="20" max="80" step="5" value="50"></div>
+  </div>
+  <div class="connector"><span>↓ 用初始币推算能否押满全场</span></div>
+</section>
+
+<!-- ⑤ 游戏币需求 → 加购引导 -->
+<section class="stage section-alt" id="s5">
+  <div class="stage-head">
+    <span class="stage-no">⑤</span>
+    <div><h2>游戏币需求 → 加购引导</h2><p>给定初始游戏币，能不能撑着押满全场？不够的话该引导加购几次？（蒙特卡洛模拟）</p></div>
+  </div>
+  <div class="stage-grid">
+    <div class="io-card io-out">
+      <div class="io-title">能否押满全场</div>
+      <div class="calc-line"><span>初始游戏币 = 套餐数 × 1000</span><b id="s5_init">1,000</b></div>
+      <div class="calc-line"><span>理论保底（押满 N 场所需）= N × 200</span><b id="s5_floor">4,200</b></div>
+      <div class="out-hero">
+        <div class="out-hero-label">押满全场概率（当前套餐）</div>
+        <div class="out-hero-num" id="s5_prob">57%</div>
+        <div class="out-hero-unit" id="s5_probSub">约四成观众中途游戏币不足，需加购</div>
+      </div>
+    </div>
+    <div class="io-card io-out">
+      <div class="io-title">加购引导建议</div>
+      <div class="ladder" id="s5_ladder"></div>
+      <div class="io-note" id="s5_rec">建议引导加购到 ≥90% 押满概率，或在下注时按余额提示降低注额。</div>
+    </div>
+  </div>
+  <div class="connector"><span>↓ 用观众规模推算兑换需求</span></div>
+</section>
+
+<!-- ⑥ 库存承载力校验 -->
+<section class="stage" id="s6">
+  <div class="stage-head">
+    <span class="stage-no">⑥</span>
+    <div><h2>库存承载力校验</h2><p>按观众规模与命中率分布，估算各档兑换需求，对照第 ③ 步的库存，看哪档会不够换。</p></div>
+  </div>
+  <div class="io-card">
+    <div class="io-title">需求 vs 库存 <span class="io-hint">（假设：每人兑换其可达的最高档位 1 份）</span></div>
+    <div class="calc-table-wrap">
+      <table class="calc-table">
+        <thead><tr><th>档位</th><th>门槛(兑换币)</th><th>可达人数比例</th><th>预计兑换需求</th><th>兑换库存</th><th>结论</th></tr></thead>
+        <tbody id="s6_body"></tbody>
+      </table>
+    </div>
+    <div class="io-note" id="s6_note">需求随下注额变化：人均押 200 时每场 +160 兑换币，押越小越难达高档。模型为简化估算，实际以现场兑换为准。</div>
+  </div>
+  <div class="connector"><span>↓ 汇总收入与成本</span></div>
+</section>
+
+<!-- ⑦ 经济收支 -->
+<section class="stage section-alt" id="s7">
+  <div class="stage-head">
+    <span class="stage-no">⑦</span>
+    <div><h2>经济收支总账</h2><p>入场加购收入，减去兑换礼品、名次奖与 iPhone 成本，得到当晚净收支。</p></div>
+  </div>
+  <div class="stage-grid">
+    <div class="io-card io-in">
+      <div class="io-title">成本假设</div>
+      <div class="field"><label>兑换核销率 <b id="s7_redeem_v">70</b>% <span class="field-sub">（达标者实际去兑换的比例）</span></label><input type="range" id="s7_redeem" min="0" max="100" step="5" value="70"></div>
+      <div class="field"><label>iPhone 成本 <b id="s7_iphone_v">5,000</b> 元</label><input type="range" id="s7_iphone" min="3000" max="8000" step="500" value="5000"></div>
+    </div>
+    <div class="io-card io-out">
+      <div class="pnl">
+        <div class="pnl-row income"><span class="pnl-label">＋ 入场 / 加购收入</span><span class="pnl-val" id="p_rev">¥600</span></div>
+        <div class="pnl-sub"><span>= 观众 × 套餐 × ¥10</span><span id="p_revCalc">60 × 1 × ¥10</span></div>
+        <div class="pnl-row cost"><span class="pnl-label">− 竞猜兑换礼品成本</span><span class="pnl-val" id="p_gift">¥0</span></div>
+        <div class="pnl-row cost"><span class="pnl-label">− 比赛名次奖（固定）</span><span class="pnl-val" id="p_rank">¥1,200</span></div>
+        <div class="pnl-row cost"><span class="pnl-label">− iPhone 大奖</span><span class="pnl-val" id="p_ip">¥5,000</span></div>
+        <div class="pnl-divider"></div>
+        <div class="pnl-row net" id="p_netRow"><span class="pnl-label">＝ 预计净收支</span><span class="pnl-val" id="p_net">−¥5,600</span></div>
+      </div>
+      <div class="io-note">名次奖成本由第 ②③ 步映射推导（各档名次占用 × 价值），随映射联动。</div>
+    </div>
+  </div>
+  <div class="connector"><span>↓ 最后看谁能拿走 iPhone</span></div>
+</section>
+
+<!-- ⑧ iPhone 门槛 -->
+<section class="stage" id="s8">
+  <div class="stage-head">
+    <span class="stage-no">⑧</span>
+    <div><h2>iPhone 夺冠门槛</h2><p>iPhone 归当晚累计兑换币最高者。推算理论上限，与本场观众规模下大概要多少才能稳拿。</p></div>
+  </div>
+  <div class="stage-grid">
+    <div class="io-card io-out">
+      <div class="out-hero gold">
+        <div class="out-hero-label">单人理论上限</div>
+        <div class="out-hero-num" id="s8_max">3,360</div>
+        <div class="out-hero-unit">N 场全中、每场押 200：N × 200 × 0.8</div>
+      </div>
+    </div>
+    <div class="io-card io-out">
+      <div class="out-hero gold">
+        <div class="out-hero-label">本场预计夺冠兑换币 <span class="out-hero-tag" id="s8_audTag">60 人</span></div>
+        <div class="out-hero-num" id="s8_champ">—</div>
+        <div class="out-hero-unit" id="s8_champSub">约相当于猜中 — 场（押 200）</div>
+      </div>
+    </div>
+  </div>
+  <div class="io-note insight-note">观众越多、命中越高，夺冠门槛越接近理论上限。把"累计兑换币榜"做成现场可见的排行榜，能持续刺激高频下注 —— 这正是 iPhone 作为钩子的设计意图。</div>
+</section>
+
+<footer class="footer">
+  <div class="footer-title">数值推算 · Lumi 竞技大空间模拟竞猜活动</div>
+  <div class="footer-sub"><a href="mock-guessing-20260618.html">← 返回活动介绍页</a></div>
+  <div class="footer-note">本页所有数值均为模型推算（含蒙特卡洛模拟），用于活动设计与对外沟通参考，最终规则、赔率与奖品以现场公布为准。</div>
+</footer>
+
+<script src="value-calc.js"></script>
+</body>
+</html>
