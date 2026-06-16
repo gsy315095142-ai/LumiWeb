@@ -20,8 +20,8 @@ function adminTitle(){ return ADMIN_TITLE + (isAdmin?' <span class="admin-badge"
 // 页面 → 底部Tab 归属（用于高亮）
 function pageToTab(p){
   if(p==='home'||p==='betting')return 'home';
-  if(p==='admin'||p==='adminMatches'||p==='adminStore'||p==='adminBills'||p==='adminGiveCoin'||p==='exchange')return 'admin';
-  if(p==='mine'||p==='betHistory'||p==='battleHistory'||p==='exchangeHistory')return 'mine';
+  if(p==='admin'||p==='adminMatches'||p==='adminStore'||p==='adminBills'||p==='adminGiveCoin')return 'admin';
+  if(p==='mine'||p==='betHistory'||p==='battleHistory'||p==='exchangeHistory'||p==='clientExchange')return 'mine';
   return null;
 }
 
@@ -35,13 +35,13 @@ function navigateTo(page, title, isSub) {
   if(tk&&document.getElementById('tabBtn-'+tk))document.getElementById('tabBtn-'+tk).classList.add('active');
   if(page==='sign')updateQRState();
   if(page==='admin')renderAdminHub();
-  if(page==='exchange')renderExchange();
   if(page==='adminGiveCoin')renderAdminGiveCoin();
   if(page==='adminMatches')renderZones();
   if(page==='adminStore')renderStore();
   if(page==='adminBills')renderBills();
   if(page==='betHistory')renderBetHistory();
   if(page==='exchangeHistory'&&typeof renderExchangeHistory==='function')renderExchangeHistory();
+  if(page==='clientExchange'&&typeof renderClientExchange==='function')renderClientExchange();
   if(page==='betting'){if(typeof syncStoreChrome==='function')syncStoreChrome();updateBannerAd();renderBettingMatches();}
   if(page==='home'){if(typeof syncStoreChrome==='function')syncStoreChrome();renderSignupView();updateBannerAd();}
 }
@@ -66,66 +66,7 @@ function renderAdminHub(){
   h+='</div>';
   h+='<div class="menu-btn" onclick="goAdminSub(\'adminGiveCoin\')"><span class="menu-left">📲 发放货币</span><span class="menu-arrow">→</span></div>';
   h+='<div class="menu-btn" onclick="goAdminSub(\'adminMatches\')"><span class="menu-left">📷 场次管理</span><span class="menu-arrow">→</span></div>';
-  h+='<div class="menu-btn" onclick="goExchange()"><span class="menu-left">📦 兑换物品</span><span class="menu-arrow">→</span></div>';
   h+='<div class="menu-btn" onclick="goAdminSub(\'adminBills\')"><span class="menu-left">📋 账单管理</span><span class="menu-arrow">→</span></div>';
-  el.innerHTML=h;
-}
-
-// ========== 兑换物品（双扫码） ==========
-var exItem = null;  // { icon,name,price,origPrice,desc }
-var exUser2 = null; // { name,id,exCoin }
-
-function goExchange(){ exItem=null; exUser2=null; pageStack.push('exchange'); navigateTo('exchange','📦 兑换物品',true); }
-
-function scanExItem(){
-  var p=products[Math.floor(Math.random()*products.length)];
-  exItem={icon:p.icon,name:p.name,price:p.price,origPrice:p.origPrice,desc:p.desc};
-  renderExchange();
-}
-function scanExUser(){
-  var name=randomNames[Math.floor(Math.random()*randomNames.length)];
-  exUser2={name:name,id:'Lumi_'+(Math.floor(Math.random()*9000)+1000),exCoin:Math.floor(Math.random()*500)+50};
-  renderExchange();
-}
-function confirmExchangeItem(){
-  if(!exItem||!exUser2)return;
-  if(exUser2.exCoin<exItem.price)return toastMsg('兑换币余额不足');
-  toastMsg('🎁 核销成功！'+exUser2.name+' 兑换 '+exItem.name+' · 扣除 '+exItem.price+' 💎');
-  exItem=null;exUser2=null;renderExchange();
-}
-
-function renderExchange(){
-  var el=document.getElementById('exchangeBody');if(!el)return;
-  var h='<p style="color:var(--muted);font-size:0.75em;margin-bottom:10px;text-align:center;">分别扫描「物品条形码」与「用户身份码」完成兑换核销</p>';
-  // 物品信息
-  h+='<div class="card"><h3>📦 物品信息</h3>';
-  if(exItem){
-    h+='<div class="ex-scanned"><div class="ex-scanned-icon">'+exItem.icon+'</div><div class="ex-scanned-info"><div class="ex-scanned-name">'+exItem.name+'</div><div class="ex-scanned-meta">售价 <span style="color:var(--accent2);font-weight:700;">'+exItem.price+' 💎</span> · 原价 ￥'+exItem.origPrice+'</div><div class="ex-scanned-desc">'+exItem.desc+'</div></div></div>';
-    h+='<button class="btn btn-outline btn-sm btn-block" style="margin-top:10px;color:#fff;" onclick="scanExItem()">🔄 重新扫描物品</button>';
-  }else{
-    h+='<div class="ex-scan-empty"><div class="scan-step-icon">📦</div><p style="color:var(--muted);font-size:0.8em;margin:6px 0 12px;">请扫描物品条形码</p><button class="btn btn-purple" style="width:auto;display:inline-block;padding:10px 28px;" onclick="scanExItem()">📲 扫描物品二维码</button></div>';
-  }
-  h+='</div>';
-  // 用户信息
-  h+='<div class="card"><h3>👤 用户信息</h3>';
-  if(exUser2){
-    h+='<div class="ex-scanned"><div class="ex-scanned-icon">👁</div><div class="ex-scanned-info"><div class="ex-scanned-name">'+exUser2.name+'</div><div class="ex-scanned-meta">ID: '+exUser2.id+'</div><div class="ex-scanned-meta">💎 兑换币余额 <strong style="color:#c4b5fd;">'+exUser2.exCoin+'</strong></div></div></div>';
-    h+='<button class="btn btn-outline btn-sm btn-block" style="margin-top:10px;color:#fff;" onclick="scanExUser()">🔄 重新扫描用户</button>';
-  }else{
-    h+='<div class="ex-scan-empty"><div class="scan-step-icon">👤</div><p style="color:var(--muted);font-size:0.8em;margin:6px 0 12px;">请扫描用户「我的」二维码</p><button class="btn btn-purple" style="width:auto;display:inline-block;padding:10px 28px;" onclick="scanExUser()">📲 扫描用户身份码</button></div>';
-  }
-  h+='</div>';
-  // 核销
-  if(exItem&&exUser2){
-    var enough=exUser2.exCoin>=exItem.price;
-    h+='<div class="card"><div class="ex-confirm-row"><span>需扣除</span><strong style="color:var(--accent2);">'+exItem.price+' 💎</strong></div><div class="ex-confirm-row"><span>用户余额</span><strong style="color:#c4b5fd;">'+exUser2.exCoin+' 💎</strong></div>';
-    if(enough){
-      h+='<button class="btn btn-purple btn-block" style="margin-top:12px;" onclick="confirmExchangeItem()">✅ 确认核销 · 扣除 '+exItem.price+' 💎</button>';
-    }else{
-      h+='<div class="bet-hint" style="text-align:center;">兑换币余额不足，无法核销</div><button class="btn btn-outline btn-block" disabled style="margin-top:4px;opacity:0.4;cursor:not-allowed;color:#fff;">余额不足</button>';
-    }
-    h+='</div>';
-  }
   el.innerHTML=h;
 }
 
@@ -134,17 +75,19 @@ function switchTab(t){
   else if(t==='admin'){pageStack=['admin'];navigateTo('admin',adminTitle(),false);}
   else if(t==='mine'){pageStack=['mine'];navigateTo('mine','👤 我的',false);}
 }
-function goSub(s){var titles={betHistory:'📋 竞猜记录',battleHistory:'⚔️ 比赛记录',betting:'🎯 竞猜',exchangeHistory:'📦 兑换记录'};pageStack.push(s);navigateTo(s,titles[s]||s,true)}
+function goSub(s){var titles={betHistory:'📋 竞猜记录',battleHistory:'⚔️ 比赛记录',betting:'🎯 竞猜',exchangeHistory:'📦 兑换记录',clientExchange:'📦 兑换商品'};pageStack.push(s);navigateTo(s,titles[s]||s,true)}
 // 从管理中心进入二级管理页
 function goAdminSub(page){
   var titles={adminGiveCoin:'📲 发放货币',adminMatches:'📷 场次管理',adminStore:'📦 商品管理',adminBills:'📋 账单管理'};
   pageStack.push(page);navigateTo(page,titles[page]||page,true);
 }
+// 客户端兑换入口
+function goClientExchange(){ goSub('clientExchange'); }
 function goBack(){
   if(pageStack.length<=1)return;
   pageStack.pop();var p=pageStack[pageStack.length-1];
-  var titles={home:'🏟️ LumiSport',mine:'👤 我的',admin:adminTitle(),betHistory:'📋 竞猜记录',battleHistory:'⚔️ 比赛记录',betting:'🎯 竞猜',exchangeHistory:'📦 兑换记录',adminGiveCoin:'📲 发放货币',adminMatches:'📷 场次管理',adminStore:'📦 商品管理',adminBills:'📋 账单管理',exchange:'📦 兑换物品'};
-  var isSub=(p==='betHistory'||p==='battleHistory'||p==='betting'||p==='exchangeHistory'||p==='adminGiveCoin'||p==='adminMatches'||p==='adminStore'||p==='adminBills'||p==='exchange');
+  var titles={home:'🏟️ LumiSport',mine:'👤 我的',admin:adminTitle(),betHistory:'📋 竞猜记录',battleHistory:'⚔️ 比赛记录',betting:'🎯 竞猜',exchangeHistory:'📦 兑换记录',adminGiveCoin:'📲 发放货币',adminMatches:'📷 场次管理',adminStore:'📦 商品管理',adminBills:'📋 账单管理',clientExchange:'📦 兑换商品'};
+  var isSub=(p==='betHistory'||p==='battleHistory'||p==='betting'||p==='exchangeHistory'||p==='adminGiveCoin'||p==='adminMatches'||p==='adminStore'||p==='adminBills'||p==='clientExchange');
   navigateTo(p,titles[p]||p,isSub);
 }
 function updateQRState(){
@@ -166,6 +109,9 @@ function doLogin(){
   var mba=document.getElementById('menuBattle');if(mba)mba.classList.remove('hidden');
   var mex=document.getElementById('menuExchange');if(mex)mex.classList.remove('hidden');
   var at=document.getElementById('tabBtn-admin');if(at)at.classList.remove('hidden');
+  // 更新兑换币显示
+  if(typeof updateClientExchangeCoinDisplay==='function')updateClientExchangeCoinDisplay();
+  if(typeof initMyExchangeCoinDisplay==='function')initMyExchangeCoinDisplay();
   if(window._pendingHome&&typeof runPendingHome==='function'){runPendingHome();}else{switchTab('admin');}
   toastMsg('管理员登录成功');
 }
@@ -184,8 +130,8 @@ function doLogout(){
   switchTab('home');toastMsg('已退出登录');
 }
 function genQR(){var grids=document.querySelectorAll('.qr-inner');for(var k=0;k<grids.length;k++){var g=grids[k];g.innerHTML='';for(var i=0;i<64;i++){var c=document.createElement('div');c.className=Math.random()>0.55?'qr-cell':'qr-cell w';g.appendChild(c)}}}genQR();setInterval(genQR,5000);
-function showConfirm(msg,cb){document.getElementById('confirmMsg').textContent=msg;document.getElementById('confirmModal').classList.remove('hidden');pendingConfirm=cb}
-function closeConfirm(ok){document.getElementById('confirmModal').classList.add('hidden');if(ok&&pendingConfirm)pendingConfirm();pendingConfirm=null}
+function showConfirm(msg,cb){document.getElementById('confirmModal').style.zIndex='100';document.getElementById('confirmMsg').textContent=msg;document.getElementById('confirmModal').classList.remove('hidden');pendingConfirm=cb}
+function closeConfirm(ok){document.getElementById('confirmModal').classList.add('hidden');document.getElementById('confirmModal').style.zIndex='';if(ok&&pendingConfirm)pendingConfirm();pendingConfirm=null}
 function toastMsg(m){var t=document.getElementById('toast');t.textContent=m;t.classList.remove('hidden');setTimeout(function(){t.classList.add('hidden')},2200)}
 function updateStoreView(){}
 function switchStore(v){currentStore=v;toastMsg('已切换到 '+v);updateVenueLabels();var cur=pageStack[pageStack.length-1];if(cur==='adminStore')renderStore();if(cur==='adminBills')renderBills();if(cur==='admin')renderAdminHub()}
@@ -210,6 +156,12 @@ function showCoinHelp(type){
   if(type==='coin'){t.innerHTML='💰 游戏币说明';c.innerHTML='<b>获得方式</b><br>• 管理员发放<br>• 竞猜获胜奖励<br><br><b>消耗途径</b><br>• 参与竞猜下注<br>• 报名支付费用'}
   else{t.innerHTML='💎 兑换币说明';c.innerHTML='<b>获得方式</b><br>• 竞猜获胜额外奖励<br>• 活动赠送<br><br><b>消耗途径</b><br>• 兑换门店商品<br>• 兑换限定道具'}
   document.getElementById('coinHelpModal').classList.remove('hidden');
+}
+
+// 初始化兑换币显示
+function initMyExchangeCoinDisplay(){
+  var el = document.getElementById('myExchangeCoinVal');
+  if(el && typeof myExchangeCoin !== 'undefined') el.textContent = myExchangeCoin.toLocaleString();
 }
 
 // ========== 账单管理 ==========

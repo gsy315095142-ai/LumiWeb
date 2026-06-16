@@ -22,11 +22,11 @@ var playerStats = {
   '鹰眼猎手':   { points:1050, wins:26, losses:24, recent:['lose','win','lose','win','win'], zone:'雷霆击剑厅', side:'blue' }
 };
 
-// 每厅报名基础信息（项目、报名费）。报名费为 0，不再扣费/退还
+// 每厅报名基础信息（项目、报名费）。报名费 100 💰，报名扣费，取消退还
 var signupInfo = {
-  '疾速冰球厅': { game:'🏒 疾速冰球', fee:0 },
-  '雷霆击剑厅': { game:'⚔️ 雷霆击剑', fee:0 },
-  '烈焰拳王厅': { game:'🔥 烈焰拳王', fee:0 }
+  '疾速冰球厅': { game:'🏒 疾速冰球', fee:100 },
+  '雷霆击剑厅': { game:'⚔️ 雷霆击剑', fee:100 },
+  '烈焰拳王厅': { game:'🔥 烈焰拳王', fee:100 }
 };
 
 // 各厅报名队列（命名选手，赛场 tab 与管理端区域管理共享同一数据源）
@@ -65,6 +65,9 @@ var mySignup = null; // { game, zone, fee }
 
 // 当前用户游戏币余额（演示用，报名扣费/取消退还）
 var myGameCoin = 1250;
+
+// 当前用户兑换币余额（演示用，兑换商品扣减）
+var myExchangeCoin = 340;
 
 // 我已下注记录（按场次累计，红/蓝分别累计），下注确认后持久显示
 var myBets = {}; // { mid: { red:金额, blue:金额 } }

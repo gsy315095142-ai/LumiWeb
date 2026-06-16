@@ -30,7 +30,6 @@ function onScanAction() {
   var ct = document.getElementById('scanActionContent');
   if (v === 'signup') renderSignupContent(ct);
   else if (v === 'give') renderGiveContent(ct);
-  else if (v === 'exchange') renderExchangeContentNew(ct);
   else ct.innerHTML = '';
 }
 

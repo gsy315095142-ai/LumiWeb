@@ -1,3 +1,5 @@
+@import url("exchange-fix.css");
+
 :root {
     --bg:#0a0a14; --card:#14142a; --text:#ddd; --muted:#777;
     --accent:#07c160; --accent2:#a78bfa; --gold:#f59e0b;
@@ -66,28 +68,6 @@
   .home-action-btn.act-bet { background:linear-gradient(135deg,#7c3aed,#a855f7); }
   .home-action-btn.act-signup { background:linear-gradient(135deg,#07c160,#10b981); }
 
-  /* 报名弹窗 */
-  .signup-modal { text-align:left; max-height:80vh; overflow-y:auto; }
-  .signup-modal-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
-  .signup-modal-head h3 { margin:0; }
-  .modal-close { cursor:pointer; color:var(--muted); font-size:1.1em; padding:0 4px; }
-
-  /* 报名视图 */
-  .signup-panel-card { background:linear-gradient(135deg,rgba(7,193,96,0.08),rgba(167,139,250,0.06)); border:1px solid var(--border); border-radius:14px; padding:16px; }
-  .sp-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }
-  .sp-zone { font-size:1em; font-weight:700; color:#fff; }
-  .sp-game { font-size:0.78em; color:var(--muted); }
-  .sp-stats { display:flex; gap:10px; margin-bottom:12px; }
-  .sp-stat { flex:1; text-align:center; background:rgba(255,255,255,0.04); border-radius:10px; padding:10px 4px; }
-  .sp-val { font-size:1.05em; font-weight:700; color:#fff; }
-  .sp-lbl { font-size:0.65em; color:var(--muted); margin-top:2px; }
-  .sp-queue { display:flex; flex-direction:column; gap:6px; }
-  .sp-q-item { display:flex; align-items:center; gap:10px; background:var(--card); border:1px solid var(--border); border-radius:10px; padding:10px 12px; }
-  .sp-q-item.sp-q-me { border-color:#07c160; background:rgba(7,193,96,0.08); }
-  .sp-q-pos { width:22px; height:22px; flex-shrink:0; border-radius:50%; background:rgba(255,255,255,0.08); color:#ccc; font-size:0.72em; display:flex; align-items:center; justify-content:center; font-weight:700; }
-  .sp-q-name { flex:1; min-width:0; font-size:0.82em; color:#ddd; }
-  .sp-q-time { font-size:0.68em; color:var(--muted); flex-shrink:0; }
-
   .match-card { background:linear-gradient(135deg,#14142a,#1a1a3a); border-radius:16px; padding:16px 18px; margin-bottom:12px; border:1px solid var(--border); }
   .match-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:2px; }
   .match-label { font-weight:700; color:#fff; font-size:0.9em; }
@@ -112,7 +92,7 @@
   .player-nick { font-weight:600; font-size:0.8em; color:#eee; }
   .player-box.red .player-nick { color:#fca5a5; }
   .player-box.blue .player-nick { color:#93c5fd; }
-  .player-nick-link { cursor:pointer; text-decoration:underline; text-decoration-style:dotted; text-underline-offset:3px; }
+  .player-nick-link { cursor:pointer; text-decoration:underline; text-decoration-style:dotted; text-underline-offset:3px; color:inherit; }
   .vs-divider { font-weight:700; color:var(--muted); font-size:0.75em; }
   .odds-tag { font-size:0.65em; padding:2px 6px; border-radius:5px; margin-top:3px; display:inline-block; }
   .odds-red { background:rgba(239,68,68,0.1); color:#f87171; }
@@ -157,7 +137,15 @@
   .profile-top { display:flex; align-items:center; gap:14px; margin-bottom:16px; }
   .profile-avatar { width:56px; height:56px; border-radius:50%; background:linear-gradient(135deg,#7c3aed,#a78bfa); display:flex; align-items:center; justify-content:center; font-size:1.6em; flex-shrink:0; }
   .profile-info { flex:1; }
-  .profile-nick { font-weight:700; font-size:1.05em; color:#fff; }
+  .profile-nick-row { display:flex; align-items:center; gap:10px; }
+  .profile-nick { font-weight:700; font-size:1.05em; color:#fff; flex:1; min-width:0; }
+  .profile-scan-btn { flex-shrink:0; width:36px; height:36px; padding:0; border-radius:10px; border:1px solid rgba(167,139,250,0.35); background:rgba(167,139,250,0.12); color:#c4b5fd; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all .2s; }
+  .profile-scan-btn:hover { background:rgba(167,139,250,0.22); border-color:#a78bfa; }
+  .profile-scan-icon { width:18px; height:18px; position:relative; display:block; }
+  .profile-scan-icon::before,
+  .profile-scan-icon::after { content:''; position:absolute; width:7px; height:7px; border:2px solid currentColor; }
+  .profile-scan-icon::before { top:0; left:0; border-right:none; border-bottom:none; border-radius:2px 0 0 0; }
+  .profile-scan-icon::after { bottom:0; right:0; border-left:none; border-top:none; border-radius:0 0 2px 0; }
   .profile-uid { font-size:0.72em; color:var(--muted); margin-top:2px; }
   .profile-coins { display:flex; gap:0; border-top:1px solid var(--border); padding-top:14px; }
   .profile-coin { flex:1; text-align:center; }
@@ -191,8 +179,11 @@
   .battle-item .battle-top { color:#ccc;display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; }
   .battle-item .battle-detail { font-size:0.78em; color:var(--muted); }
   .modal-overlay { position:absolute; inset:0; background:rgba(0,0,0,0.6); z-index:50; display:flex; align-items:center; justify-content:center; }
-  .modal { background:var(--card); border-radius:18px; padding:24px; width:85%; border:1px solid var(--border); text-align:center; }
+  .modal { background:var(--card); border-radius:18px; padding:24px; width:85%; border:1px solid var(--border); text-align:center; color:#fff; }
   .modal h3 { color:#c4b5fd; margin-bottom:12px; font-size:1em; }
+  .confirm-modal { text-align:center; }
+  .confirm-modal .confirm-icon { font-size:2.5em; margin-bottom:8px; }
+  .confirm-modal .confirm-msg { color:#fff; font-size:0.9em; margin-bottom:18px; line-height:1.5; white-space:pre-line; }
   .login-modal { padding:28px 24px; }
   .login-modal .wx-icon { font-size:2.5em; margin-bottom:12px; }
   .login-modal .login-title { font-size:1.1em; font-weight:700; color:#fff; margin-bottom:4px; }
@@ -222,3 +213,4 @@
   .ps-dot { width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.8em; }
   .ps-dot.win { background:rgba(16,185,129,0.12); color:#34d399; }
   .ps-dot.lose { background:rgba(239,68,68,0.12); color:#f87171; }
+

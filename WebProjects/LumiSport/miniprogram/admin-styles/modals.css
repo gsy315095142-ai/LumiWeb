@@ -17,3 +17,29 @@
 .scan-user-coins { display:flex; justify-content:center; gap:16px; margin-top:6px; font-size:0.78em; }
 .toggle-row { display:flex; align-items:center; justify-content:space-between; padding:10px 0; }
 .toggle-row span { color:#fff; }
+
+/* 报名弹窗（客户端 / 管理员端玩家视图共用） */
+.signup-modal { text-align:left; max-height:80vh; overflow-y:auto; color:#fff; }
+.signup-modal-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
+.signup-modal-head h3 { margin:0; color:#fff; text-align:left; }
+.signup-modal .sp-game,
+.signup-modal .sp-lbl,
+.signup-modal .sp-q-time,
+.signup-modal .queue-title,
+.signup-modal .queue-empty { color:rgba(255,255,255,0.85); }
+.signup-modal .player-nick-link { color:#fff; }
+.signup-modal .queue-item.signup-queue-me { background:rgba(7,193,96,0.08); border-radius:8px; padding:7px 6px; margin:0 -6px; }
+.modal-close { cursor:pointer; color:rgba(255,255,255,0.6); font-size:1.1em; padding:0 4px; }
+.signup-panel-card { background:linear-gradient(135deg,rgba(7,193,96,0.08),rgba(167,139,250,0.06)); border:1px solid var(--border); border-radius:14px; padding:16px; }
+.sp-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }
+.sp-zone { font-size:1em; font-weight:700; color:#fff; }
+.sp-game { font-size:0.78em; color:var(--muted); }
+.sp-stats { display:flex; gap:10px; margin-bottom:12px; }
+.sp-stat { flex:1; text-align:center; background:rgba(255,255,255,0.04); border-radius:10px; padding:10px 4px; }
+.sp-val { font-size:1.05em; font-weight:700; color:#fff; }
+.sp-lbl { font-size:0.65em; color:var(--muted); margin-top:2px; }
+
+/* 扫码兑换弹窗 */
+.exchange-scan-modal { text-align:left; max-height:80vh; overflow-y:auto; color:#fff; }
+.exchange-scan-modal .signup-modal-head h3 { color:#fff; text-align:left; }
+

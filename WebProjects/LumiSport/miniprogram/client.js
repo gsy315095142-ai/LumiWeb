@@ -11,18 +11,20 @@ function navigateTo(page, title) {
   document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active')});
   document.getElementById('page-'+page).classList.add('active');
   document.getElementById('titleText').textContent = title;
-  var isSub = ['betHistory','battleHistory','betting','exchangeHistory'].indexOf(page)!==-1;
+  var isSub = ['betHistory','battleHistory','betting','exchangeHistory','clientExchange'].indexOf(page)!==-1;
   document.getElementById('backBtn').style.display = isSub?'block':'none';
   if(!isSub){document.querySelectorAll('.tab-item').forEach(function(e){e.classList.remove('active')});document.getElementById('tabBtn-'+page).classList.add('active')}
   if(page==='sign')updateQRState();
   if(page==='betHistory')renderBetHistory();
   if(page==='exchangeHistory'&&typeof renderExchangeHistory==='function')renderExchangeHistory();
+  if(page==='clientExchange'&&typeof renderClientExchange==='function')renderClientExchange();
   if(page==='betting'){if(typeof syncStoreChrome==='function')syncStoreChrome();updateBannerAd();renderBettingMatches()}
   if(page==='home'){if(typeof syncStoreChrome==='function')syncStoreChrome();updateBannerAd();renderSignupView()}
 }
 function switchTab(t){pageStack=[t];var titles={home:'🏟️ LumiSport',mine:'👤 我的'};navigateTo(t,titles[t])}
-function goSub(s){pageStack.push(s);var titles={betHistory:'📋 竞猜记录',battleHistory:'⚔️ 比赛记录',betting:'🎯 竞猜',exchangeHistory:'📦 兑换记录'};navigateTo(s,titles[s])}
-function goBack(){if(pageStack.length<=1)return;pageStack.pop();var p=pageStack[pageStack.length-1];var titles={home:'🏟️ LumiSport',mine:'👤 我的',betHistory:'📋 竞猜记录',battleHistory:'⚔️ 比赛记录',betting:'🎯 竞猜',exchangeHistory:'📦 兑换记录'};navigateTo(p,titles[p])}
+function goSub(s){pageStack.push(s);var titles={betHistory:'📋 竞猜记录',battleHistory:'⚔️ 比赛记录',betting:'🎯 竞猜',exchangeHistory:'📦 兑换记录',clientExchange:'📦 兑换商品'};navigateTo(s,titles[s])}
+function goClientExchange(){ goSub('clientExchange'); }
+function goBack(){if(pageStack.length<=1)return;pageStack.pop();var p=pageStack[pageStack.length-1];var titles={home:'🏟️ LumiSport',mine:'👤 我的',betHistory:'📋 竞猜记录',battleHistory:'⚔️ 比赛记录',betting:'🎯 竞猜',exchangeHistory:'📦 兑换记录',clientExchange:'📦 兑换商品'};navigateTo(p,titles[p])}
 function showLogin(){document.getElementById('loginModal').classList.remove('hidden')}
 function doLogin(){
   isLoggedIn=true;document.getElementById('loginModal').classList.add('hidden');
@@ -31,6 +33,9 @@ function doLogin(){
   document.getElementById('profileCard').classList.remove('hidden');
   document.getElementById('logoutBtn').classList.remove('hidden');
   document.getElementById('menuBet').classList.remove('hidden');document.getElementById('menuBattle').classList.remove('hidden');var mex=document.getElementById('menuExchange');if(mex)mex.classList.remove('hidden');
+  // 更新兑换币显示
+  var ecv = document.getElementById('myExchangeCoinVal');
+  if(ecv && typeof myExchangeCoin !== 'undefined') ecv.textContent = myExchangeCoin.toLocaleString();
   if(window._pendingBet){doPlaceBet(window._pendingBet);window._pendingBet=null}toastMsg('登录成功');
   if(typeof runPendingHome==='function')runPendingHome();
   genQRForMine();
@@ -40,7 +45,7 @@ function doLogout(){
   var blurs=document.querySelectorAll('.qr-blur');for(var i=0;i<blurs.length;i++)blurs[i].classList.remove('hidden');
   document.getElementById('loginPrompt').classList.remove('hidden');document.getElementById('profileCard').classList.add('hidden');
   document.getElementById('logoutBtn').classList.add('hidden');document.getElementById('menuBet').classList.add('hidden');document.getElementById('menuBattle').classList.add('hidden');var mex=document.getElementById('menuExchange');if(mex)mex.classList.add('hidden');
-  var cur=pageStack[pageStack.length-1];if(cur=='betHistory'||cur=='battleHistory'||cur=='exchangeHistory')goBack();toastMsg('已退出登录');
+  var cur=pageStack[pageStack.length-1];if(cur=='betHistory'||cur=='battleHistory'||cur=='exchangeHistory'||cur=='clientExchange')goBack();toastMsg('已退出登录');
 }
 function updateQRState(){
   var blur=document.getElementById('qrBlur');if(blur){if(isLoggedIn)blur.classList.add('hidden');else blur.classList.remove('hidden')}
@@ -55,8 +60,8 @@ genQR();setInterval(function(){genQR();genQRForMine()},5000);
 function toastMsg(m){var t=document.getElementById('toast');t.textContent=m;t.classList.remove('hidden');setTimeout(function(){t.classList.add('hidden')},2000)}
 
 var pendingConfirm=null;
-function showConfirm(msg,cb){document.getElementById('confirmMsg').textContent=msg;document.getElementById('confirmModal').classList.remove('hidden');pendingConfirm=cb}
-function closeConfirm(ok){document.getElementById('confirmModal').classList.add('hidden');if(ok&&pendingConfirm)pendingConfirm();pendingConfirm=null}
+function showConfirm(msg,cb){document.getElementById('confirmModal').style.zIndex='100';document.getElementById('confirmMsg').textContent=msg;document.getElementById('confirmModal').classList.remove('hidden');pendingConfirm=cb}
+function closeConfirm(ok){document.getElementById('confirmModal').classList.add('hidden');document.getElementById('confirmModal').style.zIndex='';if(ok&&pendingConfirm)pendingConfirm();pendingConfirm=null}
 
 function showCoinHelp(type){
   var t=document.getElementById('coinHelpTitle'),c=document.getElementById('coinHelpContent');
