@@ -80,5 +80,6 @@ function showPlayerStats(name) {
 }
 
 function playerNickLink(name) {
+  if (name === '本人') return name;
   return '<span class="player-nick-link" onclick="showPlayerStats(\'' + escPlayerName(name) + '\')">' + name + '</span>';
 }
