@@ -1,0 +1,9 @@
+{
+  "name": "poster-export",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Render poster.html to a high-res long image",
+  "dependencies": {
+    "puppeteer-core": "^24.0.0"
+  }
+}

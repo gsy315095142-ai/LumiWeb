@@ -10,7 +10,7 @@ const TIER_KEYS = ['A', 'B', 'C', 'D', 'E'];
 // 档位默认配置：value 价值(¥)、hits 实际定档猜对场次、pool 总奖品池
 const TIER_DEF = {
   A: { gift: '🎫', value: 10, hits: 2, pool: 30 },
-  B: { gift: '🎁', value: 20, hits: 5, pool: 20 },
+  B: { gift: '🎁', value: 20, hits: 4, pool: 20 },
   C: { gift: '🎧', value: 40, hits: 8, pool: 10 },
   D: { gift: '🧸', value: 80, hits: 12, pool: 5 },
   E: { gift: '🏆', value: 160, hits: 15, pool: 5 },
@@ -36,7 +36,7 @@ function makeRng(seed) {
 /* ---------- 比赛奖励：上场选手按各项目名次发放（独立实物，不占竞猜库存） ---------- */
 // 默认单价（元），⑦ 收支可调；「其他参赛」绑定竞猜兑换 A 档价值（10 元档）
 const MATCH_DEF = {
-  first: { gift: '🥽', name: '高清观影眼镜', value: 1000 },
+  first: { gift: '🥽', name: '3D高清观影智能眼镜', value: 1000 },
   second: { gift: '⌚', name: '华为 NFC 手环', value: 199 },
 };
 // 累计竞猜奖励：第 1 名 iPad，第 2/3 名 高清观影眼镜（同款）

@@ -363,9 +363,9 @@ strong { color: #fff; font-weight: 700; }
 .tier-gift { font-size: 34px; margin-bottom: 4px; }
 .tier-name { font-size: 13px; color: var(--text-mute); margin-bottom: 6px; }
 .tier-value { font-size: 26px; font-weight: 800; color: var(--cyan-soft); }
-.tier-hits { margin-top: 12px; font-size: 13px; color: var(--text-dim); }
-.tier-hits b { color: var(--green); font-size: 20px; }
-.tier-coins { margin-top: 4px; font-size: 12px; color: var(--text-mute); }
+.tier-coins { margin-top: 12px; font-size: 20px; font-weight: 800; color: var(--green); }
+.tier-hits { margin-top: 5px; font-size: 11px; color: var(--text-mute); }
+.tier-hits b { color: var(--text-dim); font-size: 13px; }
 .tier-stock {
   margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border);
   font-size: 13px; color: var(--text-dim);

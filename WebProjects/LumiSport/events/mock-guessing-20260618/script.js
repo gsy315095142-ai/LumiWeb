@@ -31,13 +31,13 @@ const BRACKET = [
 ];
 
 const TIMELINE = [
-  { time: '18:30 – 18:35', name: '开场', sub: '规则、安全须知、竞猜说明', dur: '5 分钟', type: 'open' },
-  { time: '18:35 – 19:10', name: '疾速冰球 8 强', sub: '7 场对决', dur: '35 分钟', type: 'match' },
-  { time: '19:10 – 19:15', name: '换项目 → 烈焰拳王', sub: '场地与玩法切换', dur: '5 分钟', type: 'break' },
-  { time: '19:15 – 19:50', name: '烈焰拳王 8 强', sub: '7 场对决', dur: '35 分钟', type: 'match' },
-  { time: '19:50 – 19:55', name: '换项目 → 雷霆击剑', sub: '场地与玩法切换', dur: '5 分钟', type: 'break' },
-  { time: '19:55 – 20:30', name: '雷霆击剑 8 强', sub: '7 场对决', dur: '35 分钟', type: 'match' },
-  { time: '20:30', name: '活动收官', sub: '准时结束', dur: '', type: 'end' },
+  { time: '18:00 – 18:05', name: '开场', sub: '规则、安全须知、竞猜说明', dur: '5 分钟', type: 'open' },
+  { time: '18:05 – 18:40', name: '疾速冰球 8 强', sub: '7 场对决', dur: '35 分钟', type: 'match' },
+  { time: '18:40 – 18:45', name: '换项目 → 烈焰拳王', sub: '场地与玩法切换', dur: '5 分钟', type: 'break' },
+  { time: '18:45 – 19:20', name: '烈焰拳王 8 强', sub: '7 场对决', dur: '35 分钟', type: 'match' },
+  { time: '19:20 – 19:25', name: '换项目 → 雷霆击剑', sub: '场地与玩法切换', dur: '5 分钟', type: 'break' },
+  { time: '19:25 – 20:00', name: '雷霆击剑 8 强', sub: '7 场对决', dur: '35 分钟', type: 'match' },
+  { time: '20:00', name: '活动收官', sub: '准时结束', dur: '', type: 'end' },
 ];
 
 const STEPS = [
@@ -48,24 +48,24 @@ const STEPS = [
 ];
 
 const TIERS = [
-  { rank: 'A', gift: '🎫', name: '入门礼', value: '¥10', hits: 2, coins: 320, exchangeStock: 30 },
-  { rank: 'B', gift: '🎁', name: '精选礼', value: '¥20', hits: 5, coins: 800, exchangeStock: 8 },
-  { rank: 'C', gift: '🎧', name: '品质礼', value: '¥40', hits: 8, coins: 1280, exchangeStock: 4 },
-  { rank: 'D', gift: '🧸', name: '豪华礼', value: '¥80', hits: 12, coins: 1920, exchangeStock: 2 },
+  { rank: 'A', gift: '🎫', name: '入门礼', value: '¥10', hits: 2, coins: 300, exchangeStock: 30 },
+  { rank: 'B', gift: '🎁', name: '精选礼', value: '¥20', hits: 4, coins: 600, exchangeStock: 8 },
+  { rank: 'C', gift: '🎧', name: '品质礼', value: '¥40', hits: 8, coins: 1200, exchangeStock: 4 },
+  { rank: 'D', gift: '🧸', name: '豪华礼', value: '¥80', hits: 12, coins: 1900, exchangeStock: 2 },
   { rank: 'E', gift: '🏆', name: '臻选礼', value: '¥160', hits: 15, coins: 2400, exchangeStock: 2 },
 ];
 
 // 比赛奖励：上场选手按各项目名次发放（与竞猜兑换库存无关，独立实物）
 const MATCH_PRIZES = [
-  { rank: '第一名', gift: '🥽', prize: '高清观影眼镜', value: '价值千元', perProject: 1, total: 3, note: '各项目决赛胜方（冠军）' },
+  { rank: '第一名', gift: '🥽', prize: '3D高清观影智能眼镜', value: '价值千元', perProject: 1, total: 3, note: '各项目决赛胜方（冠军）' },
   { rank: '第二名', gift: '⌚', prize: '华为 NFC 手环', value: '', perProject: 1, total: 3, note: '各项目决赛负方（亚军）' },
   { rank: '其他参赛', gift: '🎫', prize: '10 元档奖励', value: '¥10', perProject: 6, total: 18, note: '各项目未进前二的参赛选手' },
 ];
 
 // 累计竞猜奖励：按当晚累计兑换币排名发放（第 1 名见页面 Hero 大奖块）
 const CUM_PRIZES = [
-  { rank: '第 2 名', gift: '🥽', prize: '高清观影眼镜', value: '价值千元', note: '累计兑换币排名第 2 名' },
-  { rank: '第 3 名', gift: '🥽', prize: '高清观影眼镜', value: '价值千元', note: '累计兑换币排名第 3 名' },
+  { rank: '第 2 名', gift: '🥽', prize: '3D高清观影智能眼镜', value: '价值千元', note: '累计兑换币排名第 2 名' },
+  { rank: '第 3 名', gift: '🥽', prize: '3D高清观影智能眼镜', value: '价值千元', note: '累计兑换币排名第 3 名' },
 ];
 
 const FAQS = [
@@ -75,8 +75,8 @@ const FAQS = [
   { q: '猜错会怎样？', a: '猜错则扣除本次下注的游戏币，且不获得兑换币；游戏币不够时可加购套餐补充。' },
   { q: '选手能不能押自己？', a: '选手上场需消耗 200 游戏币，本身就视为押注自己获胜；但不能再以观众身份押同一场。' },
   { q: '奖品什么时候发？', a: '奖励分三类：比赛奖励按各项目淘汰赛名次现场发放；累计竞猜奖励在活动结束统计累计兑换币排名后发放；竞猜兑换奖凭兑换币在奖品区随时兑换，三类互不影响。' },
-  { q: '累计竞猜奖励怎么拿？', a: '按当晚累计获得的兑换币数量排名：第 1 名独享 iPad，第 2、3 名各得价值千元的高清观影眼镜；活动结束时统计公布，若并列则现场加赛或抽签决出。' },
-  { q: '比赛奖励和竞猜兑换会抢同一份库存吗？', a: '不会。比赛奖励是独立实物（观影眼镜、NFC 手环、10 元档礼品），按比赛名次现场发放；竞猜兑换走「竞猜可兑」份数先到先得，两者完全分开、互不占用。' },
+  { q: '累计竞猜奖励怎么拿？', a: '按当晚累计获得的兑换币数量排名：第 1 名独享 iPad，第 2、3 名各得价值千元的 3D高清观影智能眼镜；活动结束时统计公布，若并列则现场加赛或抽签决出。' },
+  { q: '比赛奖励和竞猜兑换会抢同一份库存吗？', a: '不会。比赛奖励是独立实物（3D高清观影智能眼镜、NFC 手环、10 元档礼品），按比赛名次现场发放；竞猜兑换走「竞猜可兑」份数先到先得，两者完全分开、互不占用。' },
 ];
 
 function el(html) {
@@ -154,9 +154,9 @@ function renderTiers() {
         <div class="tier-gift">${t.gift}</div>
         <div class="tier-name">${t.name}</div>
         <div class="tier-value">${t.value}</div>
-        <div class="tier-hits">猜对 <b>${t.hits}</b> 场可兑</div>
         <div class="tier-coins">${t.coins} 兑换币</div>
-        <div class="tier-stock ${stockClass}">竞猜可兑 <b>${t.exchangeStock}</b> 份</div>
+        <div class="tier-hits">200 下注需猜对 <b>${t.hits}</b> 场</div>
+        <div class="tier-stock ${stockClass}">库存 <b>${t.exchangeStock}</b> 份，先兑先得</div>
       </div>`));
   });
 }
