@@ -203,13 +203,58 @@ strong, b { color: #fff; }
   .qa-grid { grid-template-columns: 1fr; }
   .assume-grid { grid-template-columns: repeat(2, 1fr); }
 }
+/* 窄屏：多列表格 → 卡片堆叠 */
+@media (max-width: 640px) {
+  .calc-table-wrap { overflow: visible; border: none; border-radius: 0; }
+  .calc-table.stack { min-width: 0; width: 100%; }
+  .calc-table.stack thead { display: none; }
+  .calc-table.stack tbody { display: block; }
+  .calc-table.stack tbody tr {
+    display: block; margin-bottom: 12px; padding: 12px 14px;
+    border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface);
+  }
+  .calc-table.stack tbody tr:last-child { margin-bottom: 0; }
+  .calc-table.stack tbody td {
+    display: flex; justify-content: space-between; align-items: center; gap: 14px;
+    padding: 7px 0; text-align: right; font-size: 13px; border: none;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .calc-table.stack tbody td:last-child { border-bottom: none; padding-bottom: 0; }
+  .calc-table.stack tbody td:first-child { padding-top: 0; }
+  .calc-table.stack tbody td::before {
+    content: attr(data-label); flex-shrink: 0; text-align: left;
+    color: var(--text-mute); font-size: 12px; font-weight: 400;
+  }
+  .calc-table.stack tbody td.dual { flex-direction: row; align-items: flex-start; }
+  .calc-table.stack tbody .td-rank { font-size: 15px; }
+  .cell-input { width: 80px; }
+}
+
 @media (max-width: 600px) {
   .nav-back .nav-back-text { display: none; }
   .nav-links { display: none; }
   .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 64px; right: 16px; left: 16px; background: var(--surface-solid); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px; gap: 14px; }
   .nav-toggle { display: block; }
+  .head { padding: 110px 18px 40px; }
+  .chain-map { gap: 6px 4px; font-size: 11px; }
+  .chain-map span { padding: 5px 10px; }
   .stage { padding: 44px 16px 0; }
   .assume-grid { grid-template-columns: 1fr; }
   .stage-head { gap: 12px; }
   .stage-no { width: 38px; height: 38px; font-size: 18px; }
+  .io-card { padding: 18px 16px; }
+  .anchor-bar { font-size: 14px; padding: 14px 16px; }
+  .anchor-bar b.hl { font-size: 16px; }
+  .punchline { font-size: 16px; padding: 16px 18px; }
+  .out-hero-num { font-size: 38px; }
+  .calc-line { font-size: 12px; }
+  .calc-line b { font-size: 14px; }
+  .pnl-row.net .pnl-val { font-size: 22px; }
+  .connector { padding: 22px 0 0; }
+}
+
+@media (max-width: 380px) {
+  .calc-table.stack tbody td { font-size: 12px; gap: 8px; }
+  .out-hero-num { font-size: 34px; }
+  .ladder-row { flex-wrap: wrap; }
 }

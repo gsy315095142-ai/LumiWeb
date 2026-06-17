@@ -376,6 +376,7 @@ strong { color: #fff; font-weight: 700; }
 .tier-foot { text-align: center; font-size: 13px; color: var(--text-mute); max-width: 720px; margin: 0 auto 48px; }
 
 .rank-prize-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 14px; }
+.rank-prize-grid-3 { grid-template-columns: repeat(3, 1fr); }
 .rank-prize {
   padding: 20px 22px; border-radius: var(--radius); background: var(--surface);
   border: 1px solid var(--border); transition: border-color 0.2s;
@@ -400,6 +401,7 @@ strong { color: #fff; font-weight: 700; }
 }
 
 .prize-types { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.prize-types-3 { grid-template-columns: repeat(3, 1fr); }
 .prize-type { padding: 24px 26px; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--border); }
 .prize-type-head { font-size: 17px; font-weight: 700; margin-bottom: 10px; }
 .prize-type p { font-size: 14px; color: var(--text-dim); }
@@ -428,6 +430,7 @@ strong { color: #fff; font-weight: 700; }
   .games-grid, .steps, .betting-cards, .format-stats { grid-template-columns: repeat(2, 1fr); }
   .tier-grid { grid-template-columns: repeat(2, 1fr); }
   .rank-prize-grid, .prize-types, .faq-grid { grid-template-columns: 1fr; }
+  .rank-prize-grid-3, .prize-types-3 { grid-template-columns: 1fr; }
   .hero-meta { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 600px) {

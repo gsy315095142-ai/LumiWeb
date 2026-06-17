@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>数值推算 · Lumi 竞技大空间模拟竞猜活动</title>
-<meta name="description" content="模拟竞猜活动数值推算 — 从活动时长一路推导到场次、名次奖、兑换库存、档位定价、加购引导、库存承载、经济收支与 iPhone 门槛。">
+<meta name="description" content="模拟竞猜活动数值推算 — 从活动时长一路推导到场次、比赛奖励、兑换库存、档位定价、加购引导、库存承载、经济收支与累计竞猜 iPad 门槛。">
 <link rel="stylesheet" href="value-calc.css">
 </head>
 <body>
@@ -22,13 +22,13 @@
     </span>
     <nav class="nav-links" id="navLinks">
       <a href="#s1">①场次</a>
-      <a href="#s2">②名次</a>
+      <a href="#s2">②比赛奖</a>
       <a href="#s3">③库存</a>
       <a href="#s4">④定价</a>
       <a href="#s5">⑤加购</a>
       <a href="#s6">⑥承载</a>
       <a href="#s7">⑦收支</a>
-      <a href="#s8">⑧iPhone</a>
+      <a href="#s8">⑧累计竞猜</a>
     </nav>
     <button class="nav-toggle" id="navToggle" aria-label="菜单">☰</button>
   </div>
@@ -42,8 +42,8 @@
     <h1 class="head-title">从<span class="accent">活动时长</span>，一路推导到每一份奖品</h1>
     <p class="head-sub">这不是孤立的计算器，而是一条因果链：上一步的结论，是下一步的前提。拨动任意假设，后面所有结论都会跟着重算。</p>
     <div class="chain-map" id="chainMap">
-      <span>① 时长→场次</span><i>→</i><span>② 赛制→名次</span><i>→</i><span>③ 名次→兑换库存</span><i>→</i><span>④ 档位定价</span>
-      <i>→</i><span>⑤ 加购引导</span><i>→</i><span>⑥ 库存承载</span><i>→</i><span>⑦ 经济收支</span><i>→</i><span>⑧ iPhone 门槛</span>
+      <span>① 时长→场次</span><i>→</i><span>② 赛制→比赛奖励</span><i>→</i><span>③ 竞猜兑换库存</span><i>→</i><span>④ 档位定价</span>
+      <i>→</i><span>⑤ 加购引导</span><i>→</i><span>⑥ 库存承载</span><i>→</i><span>⑦ 经济收支</span><i>→</i><span>⑧ 累计竞猜门槛</span>
     </div>
   </div>
 </section>
@@ -84,52 +84,56 @@
   <div class="connector"><span>↓ 由场次与赛制推导</span></div>
 </section>
 
-<!-- ② 赛制 → 名次结构 -->
+<!-- ② 赛制 → 比赛奖励结构 -->
 <section class="stage section-alt" id="s2">
   <div class="stage-head">
     <span class="stage-no">②</span>
-    <div><h2>赛制 → 名次获奖结构</h2><p>单败淘汰每一轮的败者构成一个名次档；乘以项目数，得到要发多少份名次奖。</p></div>
+    <div><h2>赛制 → 比赛奖励结构</h2><p>上场选手按各项目名次领取实物奖励：第一名、第二名各 1 人，其余参赛选手统一拿 10 元档；乘以项目数得到各奖励要发多少份。</p></div>
   </div>
   <div class="stage-grid">
     <div class="io-card io-in">
-      <div class="io-title">名次 → 奖品档位映射 <span class="io-hint">（可调）</span></div>
-      <div class="map-list" id="s2_map"></div>
-      <div class="io-note">默认：冠军→E(¥160)、亚军→D(¥80)、四强→C(¥40)、八强→B(¥20)。改映射会联动第 ③ 步的名次占用。</div>
+      <div class="io-title">名次 → 比赛奖励 <span class="io-hint">（固定规则）</span></div>
+      <div class="io-note">
+        · 第一名 → 🥽 高清观影眼镜（价值千元）<br>
+        · 第二名 → ⌚ 华为 NFC 手环<br>
+        · 其他参赛 → 🎫 10 元档奖励（绑定第 ④ 步 A 档价值）<br>
+        比赛奖励为独立实物，<b>不占用</b>第 ③ 步竞猜兑换库存；单价可在第 ⑦ 步调整。
+      </div>
     </div>
     <div class="io-card io-out">
       <div class="io-title">推导结论</div>
       <div class="calc-table-wrap">
-        <table class="calc-table">
-          <thead><tr><th>名次</th><th>每项目</th><th>× 项目数</th><th>对应档位</th></tr></thead>
+        <table class="calc-table stack">
+          <thead><tr><th>名次</th><th>每项目</th><th>× 项目数</th><th>比赛奖励</th></tr></thead>
           <tbody id="s2_body"></tbody>
         </table>
       </div>
       <div class="out-hero">
-        <div class="out-hero-label">名次奖总人次</div>
+        <div class="out-hero-label">比赛奖励总份数</div>
         <div class="out-hero-num" id="s2_total">24</div>
-        <div class="out-hero-unit">人次 · 决定名次奖要占用多少份奖品</div>
+        <div class="out-hero-unit">份 · 每位上场选手都有奖，成本计入第 ⑦ 步</div>
       </div>
     </div>
   </div>
-  <div class="connector"><span>↓ 名次奖占用总奖品池</span></div>
+  <div class="connector"><span>↓ 比赛奖励独立发放，下面看竞猜兑换库存</span></div>
 </section>
 
-<!-- ③ 名次 → 兑换库存 -->
+<!-- ③ 竞猜兑换库存 -->
 <section class="stage" id="s3">
   <div class="stage-head">
     <span class="stage-no">③</span>
-    <div><h2>总奖品池 − 名次奖 = 兑换库存</h2><p>奖品总量是固定的。名次奖先占走一部分，剩下的才是观众竞猜能兑换的库存。</p></div>
+    <div><h2>竞猜兑换库存（观众专属）</h2><p>观众用赢得的兑换币换礼品。这部分库存独立于比赛奖励：各档备多少份，直接配货录入。</p></div>
   </div>
   <div class="stage-grid stage-grid-wide">
     <div class="io-card">
-      <div class="io-title">奖品分配总账 <span class="io-hint">（总池可录入）</span></div>
+      <div class="io-title">竞猜兑换配货表 <span class="io-hint">（库存可录入）</span></div>
       <div class="calc-table-wrap">
-        <table class="calc-table editable">
-          <thead><tr><th>档位</th><th>礼品价值</th><th>总奖品池</th><th>名次奖占用</th><th>剩余 = 兑换库存</th></tr></thead>
+        <table class="calc-table editable stack">
+          <thead><tr><th>档位</th><th>礼品价值</th><th>竞猜兑换库存</th><th>可兑份数</th></tr></thead>
           <tbody id="s3_body"></tbody>
         </table>
       </div>
-      <div class="io-note" id="s3_note">兑换库存 = 总池 − 名次占用，自动推导，无需手填。iPhone 不计入档位，作为全场最高累计兑换币的专属大奖（见第 ⑧ 步）。</div>
+      <div class="io-note" id="s3_note"></div>
     </div>
   </div>
   <div class="connector"><span>↓ 库存确定后，定义兑换门槛</span></div>
@@ -149,7 +153,7 @@
   <div class="io-card">
     <div class="io-title">定价对照表 <span class="io-hint">（「实际定档猜对场次」可录入）</span></div>
     <div class="calc-table-wrap">
-      <table class="calc-table editable">
+      <table class="calc-table editable stack">
         <thead><tr>
           <th>档位</th><th>价值</th>
           <th>① 线性所需<br>兑换币<span class="th-sub">1元=100币</span></th>
@@ -182,7 +186,7 @@
 <section class="stage" id="assume">
   <div class="stage-head">
     <span class="stage-no">◇</span>
-    <div><h2>观众行为假设</h2><p>第 ⑤～⑧ 步共用这组假设。改这里，加购、库存、收支、iPhone 全部联动。</p></div>
+    <div><h2>观众行为假设</h2><p>第 ⑤～⑧ 步共用这组假设。改这里，加购、库存、收支、累计竞猜门槛 全部联动。</p></div>
   </div>
   <div class="io-card io-in assume-grid">
     <div class="field"><label>到场观众 <b id="a_aud_v">60</b> 人</label><input type="range" id="a_aud" min="10" max="300" step="10" value="60"></div>
@@ -228,7 +232,7 @@
   <div class="io-card">
     <div class="io-title">需求 vs 库存 <span class="io-hint">（假设：每人兑换其可达的最高档位 1 份）</span></div>
     <div class="calc-table-wrap">
-      <table class="calc-table">
+      <table class="calc-table stack">
         <thead><tr><th>档位</th><th>门槛(兑换币)</th><th>可达人数比例</th><th>预计兑换需求</th><th>兑换库存</th><th>结论</th></tr></thead>
         <tbody id="s6_body"></tbody>
       </table>
@@ -242,35 +246,37 @@
 <section class="stage section-alt" id="s7">
   <div class="stage-head">
     <span class="stage-no">⑦</span>
-    <div><h2>经济收支总账</h2><p>入场加购收入，减去兑换礼品、名次奖与 iPhone 成本，得到当晚净收支。</p></div>
+    <div><h2>经济收支总账</h2><p>入场加购收入，减去竞猜兑换礼品、比赛奖励与累计竞猜奖励成本，得到当晚净收支。</p></div>
   </div>
   <div class="stage-grid">
     <div class="io-card io-in">
       <div class="io-title">成本假设</div>
       <div class="field"><label>兑换核销率 <b id="s7_redeem_v">70</b>% <span class="field-sub">（达标者实际去兑换的比例）</span></label><input type="range" id="s7_redeem" min="0" max="100" step="5" value="70"></div>
-      <div class="field"><label>iPhone 成本 <b id="s7_iphone_v">5,000</b> 元</label><input type="range" id="s7_iphone" min="3000" max="8000" step="500" value="5000"></div>
+      <div class="field"><label>高清观影眼镜单价 <b id="s7_eyewear_v">1,000</b> 元 <span class="field-sub">（比赛第一名 + 累计第 2/3 名）</span></label><input type="range" id="s7_eyewear" min="500" max="2000" step="100" value="1000"></div>
+      <div class="field"><label>华为 NFC 手环单价 <b id="s7_nfc_v">199</b> 元 <span class="field-sub">（比赛第二名）</span></label><input type="range" id="s7_nfc" min="100" max="600" step="1" value="199"></div>
+      <div class="field"><label>iPad 成本 <b id="s7_ipad_v">3,000</b> 元 <span class="field-sub">（累计竞猜第 1 名）</span></label><input type="range" id="s7_ipad" min="2000" max="6000" step="500" value="3000"></div>
     </div>
     <div class="io-card io-out">
       <div class="pnl">
         <div class="pnl-row income"><span class="pnl-label">＋ 入场 / 加购收入</span><span class="pnl-val" id="p_rev">¥600</span></div>
         <div class="pnl-sub"><span>= 观众 × 套餐 × ¥10</span><span id="p_revCalc">60 × 1 × ¥10</span></div>
         <div class="pnl-row cost"><span class="pnl-label">− 竞猜兑换礼品成本</span><span class="pnl-val" id="p_gift">¥0</span></div>
-        <div class="pnl-row cost"><span class="pnl-label">− 比赛名次奖（固定）</span><span class="pnl-val" id="p_rank">¥1,200</span></div>
-        <div class="pnl-row cost"><span class="pnl-label">− iPhone 大奖</span><span class="pnl-val" id="p_ip">¥5,000</span></div>
+        <div class="pnl-row cost"><span class="pnl-label">− 比赛奖励成本</span><span class="pnl-val" id="p_rank">¥0</span></div>
+        <div class="pnl-row cost"><span class="pnl-label">− 累计竞猜奖励（iPad + 观影眼镜 ×2）</span><span class="pnl-val" id="p_ip">¥0</span></div>
         <div class="pnl-divider"></div>
-        <div class="pnl-row net" id="p_netRow"><span class="pnl-label">＝ 预计净收支</span><span class="pnl-val" id="p_net">−¥5,600</span></div>
+        <div class="pnl-row net" id="p_netRow"><span class="pnl-label">＝ 预计净收支</span><span class="pnl-val" id="p_net">¥0</span></div>
       </div>
-      <div class="io-note">名次奖成本由第 ②③ 步映射推导（各档名次占用 × 价值），随映射联动。</div>
+      <div class="io-note">比赛奖励成本 = 观影眼镜 ×3 + NFC 手环 ×3 + 10 元档 × 其他参赛人数（随第 ②④ 步联动）。</div>
     </div>
   </div>
-  <div class="connector"><span>↓ 最后看谁能拿走 iPhone</span></div>
+  <div class="connector"><span>↓ 最后看谁能拿走 iPad</span></div>
 </section>
 
-<!-- ⑧ iPhone 门槛 -->
+<!-- ⑧ 累计竞猜门槛 -->
 <section class="stage" id="s8">
   <div class="stage-head">
     <span class="stage-no">⑧</span>
-    <div><h2>iPhone 夺冠门槛</h2><p>iPhone 归当晚累计兑换币最高者。推算理论上限，与本场观众规模下大概要多少才能稳拿。</p></div>
+    <div><h2>累计竞猜门槛（前三名）</h2><p>累计兑换币第 1 名得 iPad，第 2、3 名各得高清观影眼镜。推算理论上限，与本场观众规模下大概要多少才能进前三。</p></div>
   </div>
   <div class="stage-grid">
     <div class="io-card io-out">
@@ -282,13 +288,13 @@
     </div>
     <div class="io-card io-out">
       <div class="out-hero gold">
-        <div class="out-hero-label">本场预计夺冠兑换币 <span class="out-hero-tag" id="s8_audTag">60 人</span></div>
+        <div class="out-hero-label">本场预计第 1 名兑换币 <span class="out-hero-tag" id="s8_audTag">60 人</span></div>
         <div class="out-hero-num" id="s8_champ">—</div>
-        <div class="out-hero-unit" id="s8_champSub">约相当于猜中 — 场（押 200）</div>
+        <div class="out-hero-unit" id="s8_champSub">第 1 名(iPad) ≈ — · 第 2 名 ≈ — · 第 3 名 ≈ —</div>
       </div>
     </div>
   </div>
-  <div class="io-note insight-note">观众越多、命中越高，夺冠门槛越接近理论上限。把"累计兑换币榜"做成现场可见的排行榜，能持续刺激高频下注 —— 这正是 iPhone 作为钩子的设计意图。</div>
+  <div class="io-note insight-note">观众越多、命中越高，门槛越接近理论上限。把"累计兑换币榜"做成现场可见的排行榜，能持续刺激高频下注 —— 这正是 iPad / 观影眼镜作为前三名钩子的设计意图。</div>
 </section>
 
 <footer class="footer">

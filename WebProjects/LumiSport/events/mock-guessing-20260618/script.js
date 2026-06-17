@@ -49,17 +49,23 @@ const STEPS = [
 
 const TIERS = [
   { rank: 'A', gift: '🎫', name: '入门礼', value: '¥10', hits: 2, coins: 320, exchangeStock: 30 },
-  { rank: 'B', gift: '🎁', name: '精选礼', value: '¥20', hits: 5, coins: 800, exchangeStock: 20 },
-  { rank: 'C', gift: '🎧', name: '品质礼', value: '¥40', hits: 8, coins: 1280, exchangeStock: 12 },
-  { rank: 'D', gift: '🧸', name: '豪华礼', value: '¥80', hits: 12, coins: 1920, exchangeStock: 6 },
-  { rank: 'E', gift: '🏆', name: '臻选礼', value: '¥160', hits: 15, coins: 2400, exchangeStock: 3 },
+  { rank: 'B', gift: '🎁', name: '精选礼', value: '¥20', hits: 5, coins: 800, exchangeStock: 8 },
+  { rank: 'C', gift: '🎧', name: '品质礼', value: '¥40', hits: 8, coins: 1280, exchangeStock: 4 },
+  { rank: 'D', gift: '🧸', name: '豪华礼', value: '¥80', hits: 12, coins: 1920, exchangeStock: 2 },
+  { rank: 'E', gift: '🏆', name: '臻选礼', value: '¥160', hits: 15, coins: 2400, exchangeStock: 2 },
 ];
 
-const RANK_PRIZES = [
-  { rank: '冠军', tier: 'E', gift: '🏆', value: '¥160', perProject: 1, total: 3, note: '各项目决赛胜方' },
-  { rank: '亚军', tier: 'D', gift: '🧸', value: '¥80', perProject: 1, total: 3, note: '各项目决赛负方' },
-  { rank: '四强', tier: 'C', gift: '🎧', value: '¥40', perProject: 2, total: 6, note: '各项目半决赛负方（2 人）' },
-  { rank: '八强', tier: 'B', gift: '🎁', value: '¥20', perProject: 4, total: 12, note: '各项目 1/4 决赛负方（4 人）' },
+// 比赛奖励：上场选手按各项目名次发放（与竞猜兑换库存无关，独立实物）
+const MATCH_PRIZES = [
+  { rank: '第一名', gift: '🥽', prize: '高清观影眼镜', value: '价值千元', perProject: 1, total: 3, note: '各项目决赛胜方（冠军）' },
+  { rank: '第二名', gift: '⌚', prize: '华为 NFC 手环', value: '', perProject: 1, total: 3, note: '各项目决赛负方（亚军）' },
+  { rank: '其他参赛', gift: '🎫', prize: '10 元档奖励', value: '¥10', perProject: 6, total: 18, note: '各项目未进前二的参赛选手' },
+];
+
+// 累计竞猜奖励：按当晚累计兑换币排名发放（第 1 名见页面 Hero 大奖块）
+const CUM_PRIZES = [
+  { rank: '第 2 名', gift: '🥽', prize: '高清观影眼镜', value: '价值千元', note: '累计兑换币排名第 2 名' },
+  { rank: '第 3 名', gift: '🥽', prize: '高清观影眼镜', value: '价值千元', note: '累计兑换币排名第 3 名' },
 ];
 
 const FAQS = [
@@ -68,9 +74,9 @@ const FAQS = [
   { q: '为什么赔率都是 1.8？', a: '所有选手初始积分相同，8 强对阵双方实力对等，当晚每场胜负赔率均为 1.8。' },
   { q: '猜错会怎样？', a: '猜错则扣除本次下注的游戏币，且不获得兑换币；游戏币不够时可加购套餐补充。' },
   { q: '选手能不能押自己？', a: '选手上场需消耗 200 游戏币，本身就视为押注自己获胜；但不能再以观众身份押同一场。' },
-  { q: '奖品什么时候发？', a: '比赛名次奖按淘汰赛名次现场发放，走名次专属奖池；竞猜兑换奖凭兑换币在奖品区兑换，走竞猜专属库存，两者互不影响。' },
-  { q: 'iPhone 怎么获得？', a: 'iPhone 不属于档位兑换，而是当晚全场累计兑换币数量最高的用户专属获得；活动结束时统计公布。' },
-  { q: '名次奖和竞猜兑换会抢同一份库存吗？', a: '不会。两者礼品档位相同，但分两个奖池：名次奖按比赛结果现场发放，竞猜兑换按「竞猜可兑」份数先到先得，互不影响。' },
+  { q: '奖品什么时候发？', a: '奖励分三类：比赛奖励按各项目淘汰赛名次现场发放；累计竞猜奖励在活动结束统计累计兑换币排名后发放；竞猜兑换奖凭兑换币在奖品区随时兑换，三类互不影响。' },
+  { q: '累计竞猜奖励怎么拿？', a: '按当晚累计获得的兑换币数量排名：第 1 名独享 iPad，第 2、3 名各得价值千元的高清观影眼镜；活动结束时统计公布，若并列则现场加赛或抽签决出。' },
+  { q: '比赛奖励和竞猜兑换会抢同一份库存吗？', a: '不会。比赛奖励是独立实物（观影眼镜、NFC 手环、10 元档礼品），按比赛名次现场发放；竞猜兑换走「竞猜可兑」份数先到先得，两者完全分开、互不占用。' },
 ];
 
 function el(html) {
@@ -155,9 +161,9 @@ function renderTiers() {
   });
 }
 
-function renderRankPrizes() {
-  const grid = document.getElementById('rankPrizeGrid');
-  RANK_PRIZES.forEach((r) => {
+function renderMatchPrizes() {
+  const grid = document.getElementById('matchPrizeGrid');
+  MATCH_PRIZES.forEach((r) => {
     grid.appendChild(el(`
       <div class="rank-prize reveal">
         <div class="rank-prize-head">
@@ -167,7 +173,28 @@ function renderRankPrizes() {
         <div class="rank-prize-body">
           <div class="rank-prize-gift">${r.gift}</div>
           <div class="rank-prize-info">
-            <div class="rank-prize-tier">对应 <strong>档位 ${r.tier}</strong> · ${r.value}</div>
+            <div class="rank-prize-tier"><strong>${r.prize}</strong>${r.value ? ' · ' + r.value : ''}</div>
+            <div class="rank-prize-note">${r.note}</div>
+          </div>
+        </div>
+      </div>`));
+  });
+}
+
+function renderCumPrizes() {
+  const grid = document.getElementById('cumPrizeGrid');
+  if (!grid) return;
+  CUM_PRIZES.forEach((r) => {
+    grid.appendChild(el(`
+      <div class="rank-prize reveal">
+        <div class="rank-prize-head">
+          <span class="rank-prize-rank">${r.rank}</span>
+          <span class="rank-prize-count">累计兑换币排名</span>
+        </div>
+        <div class="rank-prize-body">
+          <div class="rank-prize-gift">${r.gift}</div>
+          <div class="rank-prize-info">
+            <div class="rank-prize-tier"><strong>${r.prize}</strong>${r.value ? ' · ' + r.value : ''}</div>
             <div class="rank-prize-note">${r.note}</div>
           </div>
         </div>
@@ -216,7 +243,8 @@ document.addEventListener('DOMContentLoaded', () => {
   renderBracket();
   renderTimeline();
   renderSteps();
-  renderRankPrizes();
+  renderMatchPrizes();
+  renderCumPrizes();
   renderTiers();
   renderFaqs();
   initNav();

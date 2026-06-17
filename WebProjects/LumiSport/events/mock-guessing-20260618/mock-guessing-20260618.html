@@ -65,7 +65,7 @@
       <div class="hero-meta-item">
         <span class="meta-icon">🏆</span>
         <span class="meta-label">最高大奖</span>
-        <span class="meta-value">iPhone × 1</span>
+        <span class="meta-value">iPad × 1</span>
       </div>
     </div>
     <div class="hero-cta">
@@ -184,37 +184,48 @@
   <div class="section-head">
     <span class="section-kicker">PRIZES</span>
     <h2 class="section-title">奖品 &amp; 兑换</h2>
-    <p class="section-desc">猜中攒兑换币换好礼；上场选手按名次领档位奖；全场累计兑换币最高者独享 iPhone。</p>
+    <p class="section-desc">奖励分三类：上场选手拿<strong>比赛奖励</strong>；观众按累计兑换币排名拿<strong>累计竞猜奖励</strong>（最高得 iPad）；竞猜赢得的兑换币可换<strong>竞猜兑换奖励</strong>。</p>
   </div>
 
+  <!-- 一、比赛奖励 -->
+  <h3 class="sub-title center">① 比赛奖励 · 各项目独立发放</h3>
+  <p class="sub-desc center">三个项目各自 8 强淘汰，上场选手按名次领取实物奖励；<strong>独立实物、现场发放</strong>，与竞猜兑换库存无关。</p>
+  <div class="rank-prize-grid rank-prize-grid-3" id="matchPrizeGrid"></div>
+  <p class="rank-prize-foot">＊ 比赛奖励按淘汰赛结果现场发放，无需消耗兑换币；其他参赛选手（未进前二者）均可获得 10 元档奖励。</p>
+
+  <!-- 二、累计竞猜奖励 -->
+  <h3 class="sub-title center">② 累计竞猜奖励 · 按累计兑换币排名</h3>
+  <p class="sub-desc center">活动结束时，统计每位观众当晚<strong>累计获得的兑换币</strong>，取前三名颁发专属大奖。</p>
   <div class="grand-prize">
     <div class="grand-prize-glow"></div>
     <div class="grand-prize-icon">📱</div>
     <div class="grand-prize-body">
-      <div class="grand-prize-tag">全场最高大奖 · 独立评选</div>
-      <div class="grand-prize-name">iPhone × 1</div>
-      <div class="grand-prize-desc">当晚<strong>累计兑换币数量最高</strong>的用户获得。活动结束时统计公布；若并列则加赛或现场抽签决出（以现场规则为准）。</div>
+      <div class="grand-prize-tag">累计竞猜大奖 · 第 1 名</div>
+      <div class="grand-prize-name">iPad × 1</div>
+      <div class="grand-prize-desc">当晚<strong>累计兑换币数量最高</strong>的观众获得。活动结束时统计公布；若并列则加赛或现场抽签决出（以现场规则为准）。</div>
     </div>
   </div>
+  <div class="rank-prize-grid" id="cumPrizeGrid"></div>
+  <p class="rank-prize-foot">＊ 累计竞猜奖励按全场累计兑换币排名评选，独立于比赛奖励与竞猜兑换库存。</p>
 
-  <h3 class="sub-title center">比赛名次奖 · 各项目独立发放</h3>
-  <p class="sub-desc center">三个项目各自 8 强淘汰，名次对应同档位礼品；<strong>名次专属奖池</strong>，与下方竞猜兑换库存分开计算。</p>
-  <div class="rank-prize-grid" id="rankPrizeGrid"></div>
-  <p class="rank-prize-foot">＊ 名次奖按淘汰赛结果现场发放，无需消耗兑换币；礼品档位与竞猜兑换相同，但<strong>单独配货、独立发放</strong>，不占用竞猜可兑份数。</p>
-
-  <h3 class="sub-title center">兑换币能换什么</h3>
-  <p class="sub-desc center">猜对越多，能换的礼品越大。下方库存<strong>仅指观众竞猜兑换</strong>，与比赛名次奖无关；兑完即止。</p>
+  <!-- 三、竞猜兑换奖励 -->
+  <h3 class="sub-title center">③ 竞猜兑换奖励 · 兑换币换好礼</h3>
+  <p class="sub-desc center">猜对越多，能换的礼品越大。共 10 / 20 / 40 / 80 / 160 元五档，下方库存<strong>仅指观众竞猜兑换</strong>，兑完即止。</p>
   <div class="tier-grid" id="tierGrid"></div>
   <p class="tier-foot">＊ 兑换档位按「猜对场次」设计，而非按礼品价值等比折算 —— 因为当晚只有 21 场，确保每一档都真的能被换到。「竞猜可兑 X 份」为观众专属库存，先到先得。</p>
 
-  <div class="prize-types">
+  <div class="prize-types prize-types-3">
     <div class="prize-type">
-      <div class="prize-type-head">🏅 比赛名次奖</div>
-      <p>上场选手按各项目 8 强名次领取对应档位礼品（见上表）。走名次专属奖池，不占用竞猜兑换库存。</p>
+      <div class="prize-type-head">🏅 比赛奖励</div>
+      <p>上场选手按各项目名次领取实物：第一名高清观影眼镜、第二名华为 NFC 手环、其他参赛选手 10 元档奖励。现场发放，不占用竞猜兑换库存。</p>
     </div>
     <div class="prize-type">
-      <div class="prize-type-head">🎁 竞猜兑换奖</div>
-      <p>观众用竞猜赢得的兑换币，在奖品区按档位兑换；各档「竞猜可兑」份数有限，兑完即止。iPhone 不参与档位兑换。</p>
+      <div class="prize-type-head">📱 累计竞猜奖励</div>
+      <p>按当晚累计兑换币排名：第 1 名 iPad，第 2、3 名各得价值千元高清观影眼镜。活动结束统计公布。</p>
+    </div>
+    <div class="prize-type">
+      <div class="prize-type-head">🎁 竞猜兑换奖励</div>
+      <p>观众用竞猜赢得的兑换币，在奖品区按 10～160 元五档兑换；各档「竞猜可兑」份数有限，兑完即止。</p>
     </div>
   </div>
 </section>
