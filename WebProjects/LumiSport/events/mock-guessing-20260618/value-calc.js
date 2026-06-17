@@ -33,23 +33,14 @@ function makeRng(seed) {
   };
 }
 
-/* ---------- 名次结构：按"几强单败"推导 ---------- */
-function rankGroups(bracket) {
-  const labels = { 4: '四强', 8: '八强', 16: '十六强', 32: '三十二强' };
-  const groups = [{ name: '冠军', per: 1 }, { name: '亚军', per: 1 }];
-  let remain = 4;
-  while (remain <= bracket) {
-    groups.push({ name: labels[remain] || remain + '强', per: remain / 2 });
-    remain *= 2;
-  }
-  return groups; // [{name, per}], 合计 per = bracket
-}
-
-// 名次默认档位：冠军→E、亚军→D、四强→C、八强→B、十六强→A（从高到低）
-function defaultTierForRank(idx) {
-  const order = ['E', 'D', 'C', 'B', 'A'];
-  return order[Math.min(idx, order.length - 1)];
-}
+/* ---------- 比赛奖励：上场选手按各项目名次发放（独立实物，不占竞猜库存） ---------- */
+// 默认单价（元），⑦ 收支可调；「其他参赛」绑定竞猜兑换 A 档价值（10 元档）
+const MATCH_DEF = {
+  first: { gift: '🥽', name: '高清观影眼镜', value: 1000 },
+  second: { gift: '⌚', name: '华为 NFC 手环', value: 199 },
+};
+// 累计竞猜奖励：第 1 名 iPad，第 2/3 名 高清观影眼镜（同款）
+const CUM_IPAD = 3000; // iPad 默认成本（元），⑦ 可调
 
 /* ---------- 状态：当前各档位 value/hits/pool ---------- */
 function readTierState() {
@@ -66,8 +57,6 @@ function readTierState() {
   });
   return t;
 }
-
-let MAP_STATE = {}; // rankName -> tierKey
 
 /* ========================================================= */
 /* 推导主管线                                                 */
@@ -113,52 +102,39 @@ function recompute() {
     ? `${playMin} ÷ ${per} = 容量 ${capacity} 场，赛事需求 ${demand} 场${demand === capacity ? '，正好满负荷、无缓冲。' : '，尚余 ' + (capacity - demand) + ' 场可做缓冲或加赛。'}`
     : `容量仅 ${capacity} 场，却需要 ${demand} 场 —— 放不下！需缩短单场、减少项目或降低强数。`;
 
-  /* ② 赛制 → 名次结构 */
-  const groups = rankGroups(bracket);
+  /* ② 赛制 → 比赛奖励结构 */
   const tiers = readTierState();
-  // 同步映射状态（保留已选，新出现的名次用默认）
-  const newMap = {};
-  groups.forEach((g, i) => { newMap[g.name] = MAP_STATE[g.name] || defaultTierForRank(i); });
-  MAP_STATE = newMap;
+  const eyewearVal = +($('s7_eyewear') ? $('s7_eyewear').value : MATCH_DEF.first.value);
+  const nfcVal = +($('s7_nfc') ? $('s7_nfc').value : MATCH_DEF.second.value);
+  const otherPer = Math.max(0, bracket - 2);
+  const matchRows = [
+    { name: '第一名', gift: MATCH_DEF.first.gift, prize: MATCH_DEF.first.name, per: 1, cnt: projects, unit: eyewearVal },
+    { name: '第二名', gift: MATCH_DEF.second.gift, prize: MATCH_DEF.second.name, per: 1, cnt: projects, unit: nfcVal },
+    { name: '其他参赛', gift: '🎫', prize: '10 元档奖励', per: otherPer, cnt: projects * otherPer, unit: tiers.A.value },
+  ];
+  $('s2_body').innerHTML = matchRows.map((r) => `<tr>
+      <td class="td-rank" data-label="名次">${r.name}</td>
+      <td data-label="每项目">${r.per} 人</td>
+      <td data-label="× 项目数"><b>${r.cnt}</b> 人</td>
+      <td data-label="比赛奖励">${r.gift} ${r.prize}</td>
+    </tr>`).join('');
+  const matchTotal = matchRows.reduce((s, r) => s + r.cnt, 0);
+  $('s2_total').textContent = matchTotal;
+  // 比赛奖励总成本：观影眼镜×冠军 + NFC×亚军 + 10元档×其他参赛
+  const matchCost = matchRows.reduce((s, r) => s + r.cnt * r.unit, 0);
 
-  const s2body = $('s2_body');
-  s2body.innerHTML = groups.map((g) => {
-    const tk = MAP_STATE[g.name];
-    return `<tr>
-      <td class="td-rank">${g.name}</td>
-      <td>${g.per} 人</td>
-      <td><b>${g.per * projects}</b> 人</td>
-      <td>${tiers[tk].gift} ${tk} · ¥${tiers[tk].value}</td>
-    </tr>`;
-  }).join('');
-  const rankTotal = groups.reduce((s, g) => s + g.per * projects, 0);
-  $('s2_total').textContent = rankTotal;
-
-  // 名次占用 per tier
-  const rankUse = { A: 0, B: 0, C: 0, D: 0, E: 0 };
-  groups.forEach((g) => { rankUse[MAP_STATE[g.name]] += g.per * projects; });
-
-  /* ③ 总池 − 名次 = 兑换库存 */
+  /* ③ 竞猜兑换库存（独立于比赛奖励，不再被名次占用） */
   const exStock = {};
-  let stockWarn = false;
-  TIER_KEYS.forEach((k) => {
-    exStock[k] = tiers[k].pool - rankUse[k];
-    if (exStock[k] < 0) stockWarn = true;
-  });
+  TIER_KEYS.forEach((k) => { exStock[k] = tiers[k].pool; });
   $('s3_body').innerHTML = TIER_KEYS.map((k) => {
-    const left = exStock[k];
-    const cls = left < 0 ? 'badge bad' : 'badge ok';
     return `<tr>
-      <td class="td-rank">${tiers[k].gift} ${k}</td>
-      <td class="td-val">¥${tiers[k].value}</td>
-      <td><input type="number" class="cell-input" id="pool_${k}" value="${tiers[k].pool}" min="0" step="1"></td>
-      <td class="td-muted">− ${rankUse[k]}</td>
-      <td><span class="${cls}">${left} 份</span></td>
+      <td class="td-rank" data-label="档位">${tiers[k].gift} ${k}</td>
+      <td class="td-val" data-label="礼品价值">¥${tiers[k].value}</td>
+      <td data-label="竞猜兑换库存"><input type="number" class="cell-input" id="pool_${k}" value="${tiers[k].pool}" min="0" step="1"></td>
+      <td data-label="可兑份数"><span class="badge ok">${exStock[k]} 份</span></td>
     </tr>`;
   }).join('');
-  $('s3_note').innerHTML = stockWarn
-    ? '⚠️ 有档位名次占用超过总池，兑换库存为负 —— 请增加总池或调整名次映射。'
-    : '兑换库存 = 总池 − 名次占用，自动推导。iPhone 不计入档位，作为全场最高累计兑换币的专属大奖（见第 ⑧ 步）。';
+  $('s3_note').innerHTML = '竞猜兑换库存为观众专属，先到先得；比赛奖励（观影眼镜 / NFC 手环 / 10 元档）与累计竞猜奖励均为独立实物，不占用此库存。iPad 作为累计兑换币第 1 名的专属大奖（见第 ⑧ 步）。';
   // 重新绑定 pool 输入（innerHTML 重建后）
   TIER_KEYS.forEach((k) => $('pool_' + k).addEventListener('input', recompute));
 
@@ -175,14 +151,14 @@ function recompute() {
     const linOk = linHits <= N;
     const actOk = t.hits <= N;
     return `<tr>
-      <td class="td-rank">${t.gift} ${k}</td>
-      <td class="td-val">¥<input type="number" class="cell-input" id="val_${k}" value="${t.value}" min="1" step="1" style="width:56px"></td>
-      <td class="td-muted">${fmt(linCoins)}</td>
-      <td class="${linOk ? 'td-muted' : ''}"><span class="${linOk ? '' : 'bad-t'}" style="${linOk ? '' : 'color:var(--red);font-weight:700'}">${linHits} 场</span></td>
-      <td><input type="number" class="cell-input" id="hit_${k}" value="${t.hits}" min="1" max="${N}" step="1"></td>
-      <td class="td-coins"><b>${fmt(actCoins)}</b></td>
-      <td><span class="badge ${disc <= 0.5 ? 'warn' : ''}">${fmt1(disc * 10)} 折</span></td>
-      <td class="dual">
+      <td class="td-rank" data-label="档位">${t.gift} ${k}</td>
+      <td class="td-val" data-label="价值">¥<input type="number" class="cell-input" id="val_${k}" value="${t.value}" min="1" step="1" style="width:56px"></td>
+      <td class="td-muted" data-label="①线性所需兑换币">${fmt(linCoins)}</td>
+      <td data-label="②线性所需场次" class="${linOk ? 'td-muted' : ''}"><span class="${linOk ? '' : 'bad-t'}" style="${linOk ? '' : 'color:var(--red);font-weight:700'}">${linHits} 场</span></td>
+      <td data-label="③实际定档场次"><input type="number" class="cell-input" id="hit_${k}" value="${t.hits}" min="1" max="${N}" step="1"></td>
+      <td class="td-coins" data-label="④实际所需兑换币"><b>${fmt(actCoins)}</b></td>
+      <td data-label="折扣"><span class="badge ${disc <= 0.5 ? 'warn' : ''}">${fmt1(disc * 10)} 折</span></td>
+      <td class="dual" data-label="可达性">
         <div>线性 <span class="${linOk ? 'ok-t' : 'bad-t'}">${linOk ? '可达 ✓' : '不可达 ✗'}</span></div>
         <div>实际 <span class="${actOk ? 'ok-t' : 'bad-t'}">${actOk ? '可达 ✓' : '超 ' + (t.hits - N) + ' 场'}</span></div>
       </td>
@@ -291,71 +267,54 @@ function recompute() {
     else if (need <= stock) concl = `<span class="badge ok">充足（余 ${fmt1(stock - need)}）</span>`;
     else concl = `<span class="badge bad">缺 ${fmt1(need - stock)} 份</span>`;
     return `<tr>
-      <td class="td-rank">${tiers[k].gift} ${k}</td>
-      <td class="td-coins"><b>${fmt(tiers[k].coins)}</b></td>
-      <td>${pct(reachP)}</td>
-      <td><b style="color:var(--cyan-soft)">${fmt1(need)}</b> 份</td>
-      <td>${stock} 份</td>
-      <td>${concl}</td>
+      <td class="td-rank" data-label="档位">${tiers[k].gift} ${k}</td>
+      <td class="td-coins" data-label="门槛(兑换币)"><b>${fmt(tiers[k].coins)}</b></td>
+      <td data-label="可达人数比例">${pct(reachP)}</td>
+      <td data-label="预计兑换需求"><b style="color:var(--cyan-soft)">${fmt1(need)}</b> 份</td>
+      <td data-label="兑换库存">${stock} 份</td>
+      <td data-label="结论">${concl}</td>
     </tr>`;
   }).join('');
 
   /* ⑦ 经济收支 */
   const redeem = +$('s7_redeem').value / 100;
-  const iphoneCost = +$('s7_iphone').value;
+  const ipadCost = +$('s7_ipad').value;
   $('s7_redeem_v').textContent = round(redeem * 100);
-  $('s7_iphone_v').textContent = fmt(iphoneCost);
+  $('s7_ipad_v').textContent = fmt(ipadCost);
+  if ($('s7_eyewear_v')) $('s7_eyewear_v').textContent = fmt(eyewearVal);
+  if ($('s7_nfc_v')) $('s7_nfc_v').textContent = fmt(nfcVal);
   const revenue = aud * pkg * PKG_PRICE;
   let giftCost = 0;
   TIER_KEYS.forEach((k) => {
     const served = Math.min(demandByTier[k], Math.max(0, exStock[k])) * redeem;
     giftCost += served * tiers[k].value;
   });
-  let rankCost = 0;
-  TIER_KEYS.forEach((k) => { rankCost += rankUse[k] * tiers[k].value; });
-  const net = revenue - giftCost - rankCost - iphoneCost;
+  // 累计竞猜奖励：第 1 名 iPad + 第 2/3 名 观影眼镜 ×2
+  const cumCost = ipadCost + 2 * eyewearVal;
+  const net = revenue - giftCost - matchCost - cumCost;
   $('p_rev').textContent = money(revenue);
   $('p_revCalc').textContent = `${aud} × ${pkg} × ¥${PKG_PRICE}`;
   $('p_gift').textContent = money(giftCost);
-  $('p_rank').textContent = money(rankCost);
-  $('p_ip').textContent = money(iphoneCost);
+  $('p_rank').textContent = money(matchCost);
+  $('p_ip').textContent = money(cumCost);
   $('p_net').textContent = money(net);
   const netRow = $('p_netRow');
   netRow.classList.toggle('is-pos', net >= 0);
   netRow.classList.toggle('is-neg', net < 0);
 
-  /* ⑧ iPhone 夺冠门槛 */
+  /* ⑧ 累计竞猜门槛（前三名） */
   const theoMax = N * MAXBET * (ODDS - 1);
   $('s8_max').textContent = fmt(theoMax);
-  // 估计 aud 人中的最大兑换币：取样本的 (1 − 1/aud) 分位
+  // 估计 aud 人中第 1/2/3 名的累计兑换币：取样本的 (1 − r/aud) 分位
   const sorted = Array.from(sample).sort((a, b) => a - b);
-  const q = Math.min(0.9999, 1 - 1 / Math.max(2, aud));
-  const champ = sorted[Math.min(sorted.length - 1, Math.floor(q * sorted.length))];
-  $('s8_champ').textContent = fmt(champ);
+  const quantile = (rankFromTop) => {
+    const q = Math.min(0.9999, 1 - rankFromTop / Math.max(2, aud));
+    return sorted[Math.min(sorted.length - 1, Math.max(0, Math.floor(q * sorted.length)))];
+  };
+  const champ1 = quantile(1), champ2 = quantile(2), champ3 = quantile(3);
+  $('s8_champ').textContent = fmt(champ1);
   $('s8_audTag').textContent = aud + ' 人';
-  $('s8_champSub').textContent = `约相当于猜中 ${fmt1(champ / (bet * (ODDS - 1)))} 场（押 ${bet}）· 上限的 ${pct(champ / theoMax)}`;
-}
-
-/* ---------- ② 名次映射 UI（随赛制变化重建） ---------- */
-function renderMapUI() {
-  const bracket = +$('s1_bracket').value;
-  const groups = rankGroups(bracket);
-  const projects = +$('s1_projects').value;
-  const wrap = $('s2_map');
-  wrap.innerHTML = groups.map((g, i) => {
-    const cur = MAP_STATE[g.name] || defaultTierForRank(i);
-    const opts = TIER_KEYS.map((k) => `<option value="${k}" ${k === cur ? 'selected' : ''}>${k} · ¥${TIER_DEF[k].value}</option>`).join('');
-    return `<div class="map-row">
-      <span class="map-row-name">${g.name}<small>每项目 ${g.per} 人 · 全场 ${g.per * projects} 人</small></span>
-      <select class="cell-sel" data-rank="${g.name}">${opts}</select>
-    </div>`;
-  }).join('');
-  wrap.querySelectorAll('select[data-rank]').forEach((sel) => {
-    sel.addEventListener('change', (e) => {
-      MAP_STATE[e.target.dataset.rank] = e.target.value;
-      recompute();
-    });
-  });
+  $('s8_champSub').textContent = `第 1 名(iPad) ≈ ${fmt(champ1)} · 第 2 名 ≈ ${fmt(champ2)} · 第 3 名 ≈ ${fmt(champ3)} 兑换币（第 2、3 名得观影眼镜）· 第 1 名约相当于押 ${bet} 猜中 ${fmt1(champ1 / (bet * (ODDS - 1)))} 场`;
 }
 
 /* ---------- 导航 ---------- */
@@ -368,10 +327,11 @@ function initNav() {
 
 document.addEventListener('DOMContentLoaded', () => {
   initNav();
-  // 赛制/项目数变化时，重建映射 UI 再推导
-  ['s1_bracket', 's1_projects'].forEach((id) => $(id).addEventListener('input', () => { renderMapUI(); recompute(); }));
-  ['s1_total', 's1_open', 's1_switch', 's1_award', 's1_per',
-   'a_aud', 'a_pkg', 'a_bet', 'a_win', 's7_redeem', 's7_iphone'].forEach((id) => $(id).addEventListener('input', recompute));
-  renderMapUI();
+  ['s1_bracket', 's1_projects', 's1_total', 's1_open', 's1_switch', 's1_award', 's1_per',
+   'a_aud', 'a_pkg', 'a_bet', 'a_win',
+   's7_redeem', 's7_ipad', 's7_eyewear', 's7_nfc'].forEach((id) => {
+    const e = $(id);
+    if (e) e.addEventListener('input', recompute);
+  });
   recompute();
 });
