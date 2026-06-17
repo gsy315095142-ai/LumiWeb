@@ -1,9 +1,9 @@
 /* ============ Lumi 竞技大空间 · 模拟竞猜之夜 · 宣传海报 ============ */
 
 :root {
-  --bg: #0c0505;
-  --bg-2: #170807;
-  --surface: rgba(32, 15, 14, 0.66);
+  --bg: #160a32;
+  --bg-2: #241252;
+  --surface: rgba(34, 20, 58, 0.62);
   --border: rgba(255, 128, 48, 0.18);
   --border-strong: rgba(255, 128, 48, 0.45);
   --cyan: #00e0ff;
@@ -24,9 +24,10 @@
 body {
   font-family: var(--font);
   color: var(--text);
-  background: radial-gradient(ellipse 95% 55% at 50% 0%, rgba(255, 96, 28, 0.22), transparent 60%),
-              radial-gradient(ellipse 70% 45% at 50% 4%, rgba(255, 36, 88, 0.16), transparent 58%),
-              linear-gradient(180deg, #190a09, #0b0505 62%);
+  background: radial-gradient(ellipse 90% 50% at 50% 0%, rgba(255, 202, 112, 0.18), transparent 58%),
+              radial-gradient(ellipse 82% 50% at 100% 8%, rgba(220, 60, 158, 0.22), transparent 55%),
+              radial-gradient(ellipse 82% 55% at 0% 28%, rgba(124, 84, 255, 0.22), transparent 55%),
+              linear-gradient(180deg, #241252, #160a32 60%, #1e0c3e);
   background-attachment: fixed;
   min-height: 100vh;
   padding: 24px 12px;
@@ -40,15 +41,16 @@ body {
   width: 100%;
   max-width: 440px;
   background:
-    radial-gradient(ellipse 100% 30% at 50% 0%, rgba(255, 120, 40, 0.30), transparent 60%),
-    radial-gradient(ellipse 85% 28% at 100% 36%, rgba(255, 45, 120, 0.20), transparent 55%),
-    radial-gradient(ellipse 95% 30% at 0% 70%, rgba(255, 80, 36, 0.16), transparent 55%),
-    radial-gradient(ellipse 80% 24% at 50% 100%, rgba(255, 184, 64, 0.12), transparent 60%),
-    linear-gradient(170deg, #1e0c0a, #0d0606 58%, #170807);
+    radial-gradient(ellipse 110% 26% at 50% 0%, rgba(255, 208, 124, 0.34), transparent 60%),
+    radial-gradient(ellipse 92% 30% at 100% 18%, rgba(255, 74, 178, 0.32), transparent 55%),
+    radial-gradient(ellipse 96% 32% at 0% 42%, rgba(132, 92, 255, 0.30), transparent 55%),
+    radial-gradient(ellipse 96% 30% at 100% 68%, rgba(255, 98, 162, 0.24), transparent 55%),
+    radial-gradient(ellipse 96% 30% at 15% 100%, rgba(92, 122, 255, 0.24), transparent 60%),
+    linear-gradient(165deg, #2c1559, #190b38 55%, #2a0f44);
   border: 1px solid var(--border);
   border-radius: 26px;
   overflow: hidden;
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 120, 40, 0.08);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 200, 110, 0.10);
 }
 
 /* ---------- ① 顶部标识条 ---------- */
@@ -56,7 +58,7 @@ body {
   display: flex; align-items: center; justify-content: space-between;
   padding: 14px 18px;
   border-bottom: 1px solid rgba(255, 128, 48, 0.12);
-  background: rgba(22, 9, 8, 0.5);
+  background: rgba(26, 14, 48, 0.5);
 }
 .brand { font-weight: 800; font-size: 14px; letter-spacing: 0.5px; }
 .brand-mark { color: var(--cyan); }
@@ -84,6 +86,23 @@ body {
   color: var(--cyan-soft);
 }
 
+/* ---------- 自助餐饮 ---------- */
+.dining-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.dining-card {
+  position: relative; border-radius: var(--radius-sm); overflow: hidden;
+  border: 1px solid var(--border); background: var(--surface);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+.dining-card img {
+  display: block; width: 100%; height: 96px; object-fit: cover;
+}
+.dining-card figcaption {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 14px 6px 6px; text-align: center;
+  font-size: 12px; font-weight: 700; color: #fff;
+  background: linear-gradient(0deg, rgba(13, 6, 30, 0.92), transparent);
+}
+
 .hero-visual {
   position: relative; margin: 18px 0 0;
   border-radius: var(--radius); overflow: hidden;
@@ -94,7 +113,7 @@ body {
 .hero-visual figcaption {
   position: absolute; left: 0; right: 0; bottom: 0;
   padding: 22px 14px 10px; font-size: 12px; color: var(--cyan-soft);
-  background: linear-gradient(0deg, rgba(15, 7, 6, 0.92), transparent);
+  background: linear-gradient(0deg, rgba(20, 11, 40, 0.92), transparent);
   text-align: center;
 }
 
@@ -228,7 +247,7 @@ body {
 }
 .cta-when span {
   font-size: 13px; font-weight: 600; color: var(--text);
-  background: rgba(20, 9, 8, 0.45); border: 1px solid var(--border);
+  background: rgba(24, 13, 46, 0.45); border: 1px solid var(--border);
   padding: 7px 14px; border-radius: 999px;
 }
 
