@@ -6,6 +6,7 @@
 <title>LumiSport 客户端原型</title>
 <link rel="stylesheet" href="client.css">
 <link rel="stylesheet" href="admin.css">
+<link rel="stylesheet" href="modals.css">
 <style>
 .portal-back {
   display: block;
@@ -27,6 +28,18 @@
   <div class="header" id="pageTitle">
     <span class="back-btn" id="backBtn" onclick="goBack()">← 返回</span>
     <span id="titleText">🏟️ LumiSport</span>
+  </div>
+  <div class="coin-hud-bar hidden" id="coinHudBar">
+    <div class="coin-hud-pill coin-hud-game" onclick="showCoinHelp('coin')">
+      <span class="coin-hud-icon">💰</span>
+      <span class="coin-hud-val" id="hudGameCoinVal">1,250</span>
+      <span class="coin-hud-help">?</span>
+    </div>
+    <div class="coin-hud-pill coin-hud-ex" onclick="showCoinHelp('ex')">
+      <span class="coin-hud-icon">💎</span>
+      <span class="coin-hud-val" id="hudExchangeCoinVal">340</span>
+      <span class="coin-hud-help">?</span>
+    </div>
   </div>
   <div class="toast hidden" id="toast"></div>
   <div class="content" id="contentArea">
@@ -75,8 +88,7 @@
     <div class="page" id="page-mine">
       <div class="login-prompt" id="loginPrompt"><div class="hint-icon">🔐</div><div class="hint-text">登录后可查看个人信息</div><button class="btn btn-primary" onclick="showLogin()" style="background:#07c160;">🔽 一键登录</button></div>
       <div class="profile-card hidden" id="profileCard">
-        <div class="profile-top"><div class="profile-avatar">👁</div><div class="profile-info"><div class="profile-nick-row"><div class="profile-nick">战神阿飞</div><button type="button" class="profile-scan-btn" onclick="openExchangeScanModal()" title="扫一扫兑换" aria-label="扫一扫兑换"><span class="profile-scan-icon"></span></button></div><div class="profile-uid">ID: Lumi_0821</div></div></div>
-        <div class="profile-coins"><div class="profile-coin"><div class="val" id="myGameCoinVal" style="color:#fbbf24;">1,250</div><div class="lbl">💰 游戏币 <span class="coin-help" onclick="showCoinHelp('coin')">?</span></div></div><div class="profile-coin"><div class="val"><span id="myExchangeCoinVal" style="color:#c4b5fd;">340</span></div><div class="lbl">💎 兑换币 <span class="coin-help" onclick="showCoinHelp('ex')">?</span></div></div></div>
+        <div class="profile-top"><div class="profile-avatar">👁</div><div class="profile-info"><div class="profile-nick-row"><div class="profile-nick-block"><span class="profile-nick">战神阿飞</span><span class="profile-store" id="profileStoreName">🏡 兰陵酒吧</span></div><button type="button" class="profile-scan-btn" onclick="openExchangeScanModal()" title="扫一扫兑换" aria-label="扫一扫兑换"><span class="profile-scan-icon"></span></button></div><div class="profile-uid">ID: Lumi_0821</div></div></div>
         <div class="qr-section"><div class="qr-box" id="qrBox2"><div class="qr-inner"></div><div class="qr-blur" id="qrBlurMine"></div></div><p class="qr-tip">报名、兑换请出示此码</p></div>
       </div>
       <div class="menu-btn hidden" id="menuBet" onclick="goSub('betHistory')"><span class="menu-left">📵 竞猜记录</span><span class="menu-arrow">→</span></div>
@@ -98,6 +110,8 @@
   <div class="modal-overlay hidden" id="confirmModal"><div class="modal confirm-modal"><div class="confirm-icon" id="confirmIcon">⚠️</div><div class="confirm-msg" id="confirmMsg"></div><div class="flex-row"><button class="btn btn-outline btn-sm" style="flex:1;color:#fff;" onclick="closeConfirm(false)">取消</button><button class="btn btn-red btn-sm" style="flex:1;" id="confirmOk" onclick="closeConfirm(true)">确认</button></div></div></div>
   <div class="modal-overlay hidden" id="signupModal"><div class="modal signup-modal"><div class="signup-modal-head"><h3>✋ 报名</h3><span class="modal-close" onclick="closeSignupModal()">✕</span></div><div id="signupPanel"></div><button class="btn btn-outline btn-sm" style="margin-top:12px;width:100%;color:#fff;" onclick="closeSignupModal()">关闭</button></div></div>
   <div class="modal-overlay hidden" id="exchangeScanModal"><div class="modal exchange-scan-modal"><div class="signup-modal-head"><h3>📦 扫码兑换</h3><span class="modal-close" onclick="closeExchangeScanModal()">✕</span></div><div id="exchangeScanBody"></div><button class="btn btn-outline btn-sm" style="margin-top:12px;width:100%;color:#fff;" onclick="closeExchangeScanModal()">关闭</button></div></div>
+  <div class="modal-overlay hidden" id="exchangeSuccessModal"><div class="modal exchange-success-modal"><div class="es-icon">🎉</div><h3>兑换成功</h3><div id="exchangeSuccessBody" class="es-body"></div><button class="btn btn-primary" style="background:#7c3aed;margin-top:14px;" onclick="closeExchangeSuccessModal()">知道了</button></div></div>
+  <div class="modal-overlay hidden" id="signupSuccessModal"><div class="modal exchange-success-modal"><div class="es-icon">✅</div><h3>报名成功</h3><div id="signupSuccessBody" class="es-body"></div><button class="btn btn-primary" style="background:#7c3aed;margin-top:14px;" onclick="closeSignupSuccessModal()">知道了</button></div></div>
   <div class="modal-overlay hidden" id="playerStatsModal"><div class="modal player-stats-modal"><div class="player-stats-top"><div class="player-stats-avatar" id="psAvatar">🔴</div><div class="player-stats-name" id="psName"></div><div class="player-stats-zone" id="psZone"></div></div><div class="player-stats-grid"><div class="ps-item"><div class="ps-val" id="psPoints">-</div><div class="ps-lbl">总积分</div></div><div class="ps-item"><div class="ps-val" id="psWinRate">-</div><div class="ps-lbl">胜率</div></div><div class="ps-item"><div class="ps-val" id="psWins">-</div><div class="ps-lbl">胜场</div></div><div class="ps-item"><div class="ps-val" id="psLosses">-</div><div class="ps-lbl">负场</div></div></div><div class="player-stats-recent"><div class="ps-recent-label">近5场</div><div class="ps-recent-dots" id="psRecent"></div></div><button class="btn btn-primary" style="background:#7c3aed;margin-top:14px;" onclick="document.getElementById('playerStatsModal').classList.add('hidden')">关闭</button></div></div>
 </div>
 

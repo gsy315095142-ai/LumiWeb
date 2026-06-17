@@ -191,24 +191,42 @@ function confirmClientExchange() {
   if (!exScannedProduct) return;
   var coin = typeof myExchangeCoin !== 'undefined' ? myExchangeCoin : 340;
   if (coin < exScannedProduct.price) { toastMsg('兑换币余额不足'); return; }
-  if (typeof myExchangeCoin !== 'undefined') myExchangeCoin -= exScannedProduct.price;
+  var item = { icon: exScannedProduct.icon, name: exScannedProduct.name, price: exScannedProduct.price };
+  if (typeof myExchangeCoin !== 'undefined') myExchangeCoin -= item.price;
   var now = new Date();
   function p(n) { return n < 10 ? '0' + n : '' + n; }
   var timeStr = now.getFullYear() + '-' + p(now.getMonth() + 1) + '-' + p(now.getDate()) + ' ' + p(now.getHours()) + ':' + p(now.getMinutes());
   if (typeof exchangeRecords !== 'undefined') {
-    exchangeRecords.unshift({ time: timeStr, item: exScannedProduct.icon + ' ' + exScannedProduct.name, store: clientStore || '兰陵酒吧', cost: exScannedProduct.price });
+    exchangeRecords.unshift({ time: timeStr, item: item.icon + ' ' + item.name, store: clientStore || '兰陵酒吧', cost: item.price });
   }
-  toastMsg('🎁 兑换成功！' + exScannedProduct.icon + ' ' + exScannedProduct.name + ' · 扣除 ' + exScannedProduct.price + ' 💎');
   exScannedProduct = null;
   updateClientExchangeCoinDisplay();
-  refreshActiveExchangeScanUI();
+  if (typeof closeExchangeScanModal === 'function') closeExchangeScanModal();
+  showExchangeSuccessModal(item);
+}
+
+function showExchangeSuccessModal(item) {
+  var body = document.getElementById('exchangeSuccessBody');
+  if (body) {
+    body.innerHTML = '<div class="es-product">' + item.icon + ' ' + item.name + '</div>' +
+      '<div class="es-cost">已扣除 <b style="color:#c4b5fd;">' + item.price + ' 💎</b> 兑换币</div>' +
+      '<div class="es-hint">商品将尽快为您准备，请留意门店通知</div>';
+  }
+  var m = document.getElementById('exchangeSuccessModal');
+  if (m) {
+    m.classList.remove('hidden');
+    m.style.zIndex = '1100';
+  }
+}
+
+function closeExchangeSuccessModal() {
+  var m = document.getElementById('exchangeSuccessModal');
+  if (m) {
+    m.classList.add('hidden');
+    m.style.zIndex = '';
+  }
 }
 
 function updateClientExchangeCoinDisplay() {
-  var bal = document.getElementById('exCoinBalance');
-  if (bal && typeof myExchangeCoin !== 'undefined') bal.textContent = myExchangeCoin;
-  var balModal = document.getElementById('exCoinBalanceModal');
-  if (balModal && typeof myExchangeCoin !== 'undefined') balModal.textContent = myExchangeCoin;
-  var mc = document.getElementById('myExchangeCoinVal');
-  if (mc && typeof myExchangeCoin !== 'undefined') mc.textContent = myExchangeCoin.toLocaleString();
+  if (typeof updateAllCoinDisplays === 'function') updateAllCoinDisplays();
 }

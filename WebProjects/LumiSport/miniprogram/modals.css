@@ -43,3 +43,23 @@
 .exchange-scan-modal { text-align:left; max-height:80vh; overflow-y:auto; color:#fff; }
 .exchange-scan-modal .signup-modal-head h3 { color:#fff; text-align:left; }
 
+/* 报名排队列表（弹窗内） */
+.signup-modal .queue-title { font-size:0.72em; color:rgba(255,255,255,0.85); margin:14px 0 6px; border-top:1px solid var(--border); padding-top:10px; }
+.signup-modal .queue-list { display:flex; flex-direction:column; }
+.signup-modal .queue-item { display:flex; align-items:center; gap:8px; padding:7px 0; border-bottom:1px solid var(--border); }
+.signup-modal .queue-item:last-child { border-bottom:none; }
+.signup-modal .queue-item .q-pos { width:20px; height:20px; flex-shrink:0; border-radius:50%; background:rgba(124,58,237,0.15); color:var(--accent2); font-size:0.62em; font-weight:700; display:flex; align-items:center; justify-content:center; }
+.signup-modal .queue-item .q-info { flex:1; min-width:0; }
+.signup-modal .queue-item .q-name { font-size:0.8em; color:#fff; font-weight:600; }
+.signup-modal .queue-item .q-time { font-size:0.66em; color:var(--muted); }
+.signup-modal .queue-empty { text-align:center; padding:10px; color:rgba(255,255,255,0.85); font-size:0.75em; }
+
+/* 兑换成功弹窗 */
+.exchange-success-modal { text-align:center; color:#fff; }
+.exchange-success-modal .es-icon { font-size:2.8em; margin-bottom:8px; }
+.exchange-success-modal h3 { color:#fff; margin-bottom:14px; }
+.exchange-success-modal .es-body { text-align:center; }
+.exchange-success-modal .es-product { font-size:1.05em; font-weight:700; color:#fbbf24; margin-bottom:10px; }
+.exchange-success-modal .es-cost { font-size:0.92em; color:#ddd; margin-bottom:8px; }
+.exchange-success-modal .es-hint { font-size:0.72em; color:var(--muted); line-height:1.5; }
+

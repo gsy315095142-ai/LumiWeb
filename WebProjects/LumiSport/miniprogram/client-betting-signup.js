@@ -2,6 +2,15 @@
  * LumiSport 客户端 - 报名队列与报名流程
  */
 
+function escSignupPlayerName(n) {
+  return String(n).replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+}
+
+function signupPlayerLink(name) {
+  if (typeof showPlayerStats !== 'function') return name;
+  return '<span class="player-nick-link" onclick="showPlayerStats(\'' + escSignupPlayerName(name) + '\')">' + name + '</span>';
+}
+
 function signupNowTime() {
   var d = new Date();
   function p(n) { return n < 10 ? '0' + n : '' + n; }
@@ -9,8 +18,11 @@ function signupNowTime() {
 }
 
 function updateMyCoinDisplay() {
-  var el = document.getElementById('myGameCoinVal');
-  if (el) el.textContent = myGameCoin.toLocaleString();
+  if (typeof updateAllCoinDisplays === 'function') updateAllCoinDisplays();
+  else {
+    var el = document.getElementById('myGameCoinVal');
+    if (el && typeof myGameCoin !== 'undefined') el.textContent = myGameCoin.toLocaleString();
+  }
 }
 
 function getZoneSignupInfo(zone) {
@@ -77,7 +89,7 @@ function renderSignupView() {
     q.forEach(function (p, idx) {
       var sb = p.side === 'red' ? ' 🔴' : (p.side === 'blue' ? ' 🔵' : '');
       var me = p.name === '本人' ? ' signup-queue-me' : '';
-      var nameHtml = playerNickLink(p.name);
+      var nameHtml = signupPlayerLink(p.name);
       h += '<div class="queue-item' + me + '">';
       h += '<div class="q-pos">' + (idx + 1) + '</div>';
       h += '<div class="q-info"><div class="q-name">' + nameHtml + sb + '</div><div class="q-time">' + p.time + '</div></div>';
@@ -122,7 +134,35 @@ function doSignup() {
   updateSignupBar();
   renderSignupView();
   if (typeof refreshQueueViews === 'function') refreshQueueViews();
-  toastMsg(fee > 0 ? ('✅ 报名成功，已扣除报名费 ' + fee + ' 💰') : '✅ 报名成功，等待管理员安排上场');
+  var pos = getMyQueuePos(zone);
+  showSignupSuccessModal(zone, info, fee, pos, q.length);
+}
+
+function showSignupSuccessModal(zone, info, fee, pos, queueCount) {
+  var body = document.getElementById('signupSuccessBody');
+  var emojiMap = { '疾速冰球厅': '🏒', '雷霆击剑厅': '⚔️', '烈焰拳王厅': '🔥' };
+  var emoji = emojiMap[zone] || '🏟️';
+  if (body) {
+    var h = '<div class="es-product">' + info.game + '</div>';
+    h += '<div class="es-cost">' + emoji + ' ' + zone + '</div>';
+    if (fee > 0) h += '<div class="es-cost">已扣除 <b style="color:#fbbf24;">' + fee + ' 💰</b> 报名费</div>';
+    h += '<div class="es-hint">当前排队 <b style="color:#c4b5fd;">' + pos + '/' + queueCount + '</b>，请留意叫号通知</div>';
+    body.innerHTML = h;
+  }
+  if (typeof closeSignupModal === 'function') closeSignupModal();
+  var m = document.getElementById('signupSuccessModal');
+  if (m) {
+    m.classList.remove('hidden');
+    m.style.zIndex = '1100';
+  }
+}
+
+function closeSignupSuccessModal() {
+  var m = document.getElementById('signupSuccessModal');
+  if (m) {
+    m.classList.add('hidden');
+    m.style.zIndex = '';
+  }
 }
 
 function confirmCancelSignup() {

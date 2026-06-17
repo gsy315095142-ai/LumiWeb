@@ -14,6 +14,11 @@ function updateBannerAd() {
   for (var j = 0; j < tags.length; j++) tags[j].textContent = tagTxt;
 }
 
+function updateProfileStoreDisplay() {
+  var el = document.getElementById('profileStoreName');
+  if (el && typeof clientStore !== 'undefined') el.textContent = clientStore;
+}
+
 // 同步所有「门店名/大厅下拉」副本（首页 + 竞猜页共用）
 function syncStoreChrome() {
   var vns = document.querySelectorAll('.venue-name');
@@ -22,6 +27,7 @@ function syncStoreChrome() {
   for (var k = 0; k < zs.length; k++) zs[k].value = selectedZone;
   var items = document.querySelectorAll('.store-menu-item');
   for (var n = 0; n < items.length; n++) items[n].classList.toggle('active', items[n].textContent.trim() === clientStore);
+  updateProfileStoreDisplay();
 }
 
 function toggleStoreMenu(e, el) {
@@ -34,6 +40,15 @@ function toggleStoreMenu(e, el) {
   }
 }
 
+function syncAdminStoreViews() {
+  if (typeof updateVenueLabels === 'function') updateVenueLabels();
+  if (typeof pageStack === 'undefined' || !pageStack.length) return;
+  var cur = pageStack[pageStack.length - 1];
+  if (cur === 'admin' && typeof renderAdminHub === 'function') renderAdminHub();
+  if (cur === 'adminStore' && typeof renderStore === 'function') renderStore();
+  if (cur === 'adminBills' && typeof renderBills === 'function') renderBills();
+}
+
 function selectClientStore(name) {
   clientStore = name;
   var menus = document.querySelectorAll('.store-menu');
@@ -43,5 +58,6 @@ function selectClientStore(name) {
   renderBettingMatches();
   updateSignupBar();
   renderSignupView();
+  syncAdminStoreViews();
   toastMsg('已切换到 ' + name);
 }

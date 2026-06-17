@@ -8,7 +8,6 @@ var scannedUser = null, curProduct = null, curMatchId = null;
 var selectedSignupSide = null;
 var giveCoinAmt = 0, giveIsCustom = false;
 var selectedStoreCat = '全部';
-var currentStore = '🏡 兰陵酒吧';
 var signupRedFull = false, signupBlueFull = false;
 var isLoggedIn = false, matchState = {}, MAX_BET = 200, selectedZone = '疾速冰球厅';
 
@@ -44,12 +43,14 @@ function navigateTo(page, title, isSub) {
   if(page==='clientExchange'&&typeof renderClientExchange==='function')renderClientExchange();
   if(page==='betting'){if(typeof syncStoreChrome==='function')syncStoreChrome();updateBannerAd();renderBettingMatches();}
   if(page==='home'){if(typeof syncStoreChrome==='function')syncStoreChrome();renderSignupView();updateBannerAd();}
+  if(typeof updateCoinHudVisibility==='function')updateCoinHudVisibility();
 }
 
-// 门店下拉选项
+// 门店下拉选项（与首页 clientStores 统一）
 function storeOptions(){
-  var stores=['🏡 兰陵酒吧','🏑 啤酒公社','🖈 星光酒廊'];
-  return stores.map(function(s){return '<option'+(s===currentStore?' selected':'')+'>'+s+'</option>'}).join('');
+  var stores = typeof clientStores !== 'undefined' ? clientStores : ['🏡 兰陵酒吧', '🍺 啤酒公社', '✨ 星光酒廊'];
+  var active = typeof clientStore !== 'undefined' ? clientStore : stores[0];
+  return stores.map(function(s){return '<option'+(s===active?' selected':'')+'>'+s+'</option>'}).join('');
 }
 
 // 管理中心：所有管理功能入口
@@ -61,7 +62,8 @@ function renderAdminHub(){
   }
   var h='';
   h+='<div class="card" style="display:flex;align-items:center;justify-content:space-between;gap:10px;">';
-  h+='<div style="min-width:0;"><div style="color:var(--accent2);font-size:0.85em;font-weight:700;">🏬 当前门店</div><div class="store-venue">'+currentStore+'</div></div>';
+  var activeStore = typeof clientStore !== 'undefined' ? clientStore : '🏡 兰陵酒吧';
+  h+='<div style="min-width:0;"><div style="color:var(--accent2);font-size:0.85em;font-weight:700;">🏬 当前门店</div><div class="store-venue">'+activeStore+'</div></div>';
   h+='<select class="select" style="width:auto;flex:0 0 auto;font-size:0.78em;" onchange="switchStore(this.value)">'+storeOptions()+'</select>';
   h+='</div>';
   h+='<div class="menu-btn" onclick="goAdminSub(\'adminGiveCoin\')"><span class="menu-left">📲 发放货币</span><span class="menu-arrow">→</span></div>';
@@ -111,7 +113,9 @@ function doLogin(){
   var at=document.getElementById('tabBtn-admin');if(at)at.classList.remove('hidden');
   // 更新兑换币显示
   if(typeof updateClientExchangeCoinDisplay==='function')updateClientExchangeCoinDisplay();
-  if(typeof initMyExchangeCoinDisplay==='function')initMyExchangeCoinDisplay();
+  if(typeof updateAllCoinDisplays==='function')updateAllCoinDisplays();
+  if(typeof updateCoinHudVisibility==='function')updateCoinHudVisibility();
+  if(typeof updateProfileStoreDisplay==='function')updateProfileStoreDisplay();
   if(window._pendingHome&&typeof runPendingHome==='function'){runPendingHome();}else{switchTab('admin');}
   toastMsg('管理员登录成功');
 }
@@ -128,27 +132,27 @@ function doLogout(){
   var mex=document.getElementById('menuExchange');if(mex)mex.classList.add('hidden');
   var at=document.getElementById('tabBtn-admin');if(at)at.classList.add('hidden');
   switchTab('home');toastMsg('已退出登录');
+  if(typeof updateCoinHudVisibility==='function')updateCoinHudVisibility();
 }
 function genQR(){var grids=document.querySelectorAll('.qr-inner');for(var k=0;k<grids.length;k++){var g=grids[k];g.innerHTML='';for(var i=0;i<64;i++){var c=document.createElement('div');c.className=Math.random()>0.55?'qr-cell':'qr-cell w';g.appendChild(c)}}}genQR();setInterval(genQR,5000);
 function showConfirm(msg,cb){document.getElementById('confirmModal').style.zIndex='100';document.getElementById('confirmMsg').textContent=msg;document.getElementById('confirmModal').classList.remove('hidden');pendingConfirm=cb}
 function closeConfirm(ok){document.getElementById('confirmModal').classList.add('hidden');document.getElementById('confirmModal').style.zIndex='';if(ok&&pendingConfirm)pendingConfirm();pendingConfirm=null}
 function toastMsg(m){var t=document.getElementById('toast');t.textContent=m;t.classList.remove('hidden');setTimeout(function(){t.classList.add('hidden')},2200)}
 function updateStoreView(){}
-function switchStore(v){currentStore=v;toastMsg('已切换到 '+v);updateVenueLabels();var cur=pageStack[pageStack.length-1];if(cur==='adminStore')renderStore();if(cur==='adminBills')renderBills();if(cur==='admin')renderAdminHub()}
-var storeHotelAd={
-  '🏡 兰陵酒吧':{badge:'🏨 兰陵大酒店',title:'住客专享 · 入住即送1000游戏币',desc:'前台领取实体筹码，扫码兑换即时到账'},
-  '🏑 啤酒公社':{badge:'🏨 公社精酿酒店',title:'住客专享 · 畅饮套餐送500游戏币',desc:'凭房卡到吧台领取，竞猜赢取兑换币'},
-  '🖈 星光酒廊':{badge:'🏨 星光国际酒店',title:'住客专享 · 入住即享888游戏币',desc:'扫码即时到账，赛事竞猜赢豪礼'}
-};
-function updateVenueLabels(){
-  var ids=['homeVenue','billsVenue','storeVenueText'];
-  for(var i=0;i<ids.length;i++){var el=document.getElementById(ids[i]);if(el)el.textContent=currentStore;}
-  var ad=storeHotelAd[currentStore];
-  if(ad){
-    var b=document.getElementById('homeHotelBadge');if(b)b.textContent=ad.badge;
-    var t=document.getElementById('homeHotelTitle');if(t)t.textContent=ad.title;
-    var d=document.getElementById('homeHotelDesc');if(d)d.textContent=ad.desc;
+function switchStore(v){
+  if(typeof selectClientStore==='function') selectClientStore(v);
+  else {
+    clientStore = v;
+    if(typeof updateVenueLabels==='function') updateVenueLabels();
+    if(typeof renderAdminHub==='function') renderAdminHub();
+    toastMsg('已切换到 '+v);
   }
+}
+
+function updateVenueLabels(){
+  var store = typeof clientStore !== 'undefined' ? clientStore : '🏡 兰陵酒吧';
+  var ids=['billsVenue','storeVenueText'];
+  for(var i=0;i<ids.length;i++){var el=document.getElementById(ids[i]);if(el)el.textContent=store;}
 }
 
 function showCoinHelp(type){
@@ -158,10 +162,19 @@ function showCoinHelp(type){
   document.getElementById('coinHelpModal').classList.remove('hidden');
 }
 
-// 初始化兑换币显示
-function initMyExchangeCoinDisplay(){
-  var el = document.getElementById('myExchangeCoinVal');
-  if(el && typeof myExchangeCoin !== 'undefined') el.textContent = myExchangeCoin.toLocaleString();
+function updateCoinHudVisibility() {
+  var hud = document.getElementById('coinHudBar');
+  if (!hud) return;
+  var page = pageStack[pageStack.length - 1];
+  var tab = typeof pageToTab === 'function' ? pageToTab(page) : null;
+  var show = isLoggedIn && (tab === 'mine' || tab === 'home');
+  if (show) hud.classList.remove('hidden');
+  else hud.classList.add('hidden');
+}
+
+// 初始化兑换币显示（兼容旧调用）
+function initMyExchangeCoinDisplay() {
+  if (typeof updateAllCoinDisplays === 'function') updateAllCoinDisplays();
 }
 
 // ========== 账单管理 ==========
@@ -190,6 +203,6 @@ function renderBills(){
   });
   if(filtered.length===0)h='<div style="text-align:center;padding:20px;color:var(--muted);font-size:0.8em;">暂无记录</div>';
   document.getElementById('billsList').innerHTML=h;
-  var bv=document.getElementById('billsVenue');if(bv)bv.textContent=currentStore;
+  var bv=document.getElementById('billsVenue');if(bv)bv.textContent=typeof clientStore!=='undefined'?clientStore:'🏡 兰陵酒吧';
 }
 function filterBills(type){billFilter=type;renderBills();}

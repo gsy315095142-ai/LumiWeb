@@ -20,6 +20,7 @@ function navigateTo(page, title) {
   if(page==='clientExchange'&&typeof renderClientExchange==='function')renderClientExchange();
   if(page==='betting'){if(typeof syncStoreChrome==='function')syncStoreChrome();updateBannerAd();renderBettingMatches()}
   if(page==='home'){if(typeof syncStoreChrome==='function')syncStoreChrome();updateBannerAd();renderSignupView()}
+  if(typeof updateCoinHudVisibility==='function')updateCoinHudVisibility();
 }
 function switchTab(t){pageStack=[t];var titles={home:'🏟️ LumiSport',mine:'👤 我的'};navigateTo(t,titles[t])}
 function goSub(s){pageStack.push(s);var titles={betHistory:'📋 竞猜记录',battleHistory:'⚔️ 比赛记录',betting:'🎯 竞猜',exchangeHistory:'📦 兑换记录',clientExchange:'📦 兑换商品'};navigateTo(s,titles[s])}
@@ -33,12 +34,12 @@ function doLogin(){
   document.getElementById('profileCard').classList.remove('hidden');
   document.getElementById('logoutBtn').classList.remove('hidden');
   document.getElementById('menuBet').classList.remove('hidden');document.getElementById('menuBattle').classList.remove('hidden');var mex=document.getElementById('menuExchange');if(mex)mex.classList.remove('hidden');
-  // 更新兑换币显示
-  var ecv = document.getElementById('myExchangeCoinVal');
-  if(ecv && typeof myExchangeCoin !== 'undefined') ecv.textContent = myExchangeCoin.toLocaleString();
   if(window._pendingBet){doPlaceBet(window._pendingBet);window._pendingBet=null}toastMsg('登录成功');
   if(typeof runPendingHome==='function')runPendingHome();
   genQRForMine();
+  if(typeof updateAllCoinDisplays==='function')updateAllCoinDisplays();
+  if(typeof updateCoinHudVisibility==='function')updateCoinHudVisibility();
+  if(typeof updateProfileStoreDisplay==='function')updateProfileStoreDisplay();
 }
 function doLogout(){
   isLoggedIn=false;
@@ -46,6 +47,7 @@ function doLogout(){
   document.getElementById('loginPrompt').classList.remove('hidden');document.getElementById('profileCard').classList.add('hidden');
   document.getElementById('logoutBtn').classList.add('hidden');document.getElementById('menuBet').classList.add('hidden');document.getElementById('menuBattle').classList.add('hidden');var mex=document.getElementById('menuExchange');if(mex)mex.classList.add('hidden');
   var cur=pageStack[pageStack.length-1];if(cur=='betHistory'||cur=='battleHistory'||cur=='exchangeHistory'||cur=='clientExchange')goBack();toastMsg('已退出登录');
+  if(typeof updateCoinHudVisibility==='function')updateCoinHudVisibility();
 }
 function updateQRState(){
   var blur=document.getElementById('qrBlur');if(blur){if(isLoggedIn)blur.classList.add('hidden');else blur.classList.remove('hidden')}
@@ -68,4 +70,39 @@ function showCoinHelp(type){
   if(type==='coin'){t.innerHTML='💰 游戏币说明';c.innerHTML='<b>获得方式</b><br>• 管理员发放<br>• 竞猜获胜奖励<br><br><b>消耗途径</b><br>• 参与竞猜下注<br>• 报名支付费用'}
   else{t.innerHTML='💎 兑换币说明';c.innerHTML='<b>获得方式</b><br>• 竞猜获胜额外奖励<br>• 活动赠送<br><br><b>消耗途径</b><br>• 兑换门店商品<br>• 兑换限定道具'}
   document.getElementById('coinHelpModal').classList.remove('hidden');
+}
+
+function isMineTabPage(page) {
+  return page === 'mine' || page === 'betHistory' || page === 'battleHistory' || page === 'exchangeHistory';
+}
+
+function isHomeTabPage(page) {
+  return page === 'home' || page === 'betting';
+}
+
+function updateAllCoinDisplays() {
+  var gc = typeof myGameCoin !== 'undefined' ? myGameCoin : 0;
+  var ec = typeof myExchangeCoin !== 'undefined' ? myExchangeCoin : 0;
+  var gStr = gc.toLocaleString();
+  var eStr = ec.toLocaleString();
+  var g = document.getElementById('myGameCoinVal');
+  if (g) g.textContent = gStr;
+  var e = document.getElementById('myExchangeCoinVal');
+  if (e) e.textContent = eStr;
+  var hg = document.getElementById('hudGameCoinVal');
+  if (hg) hg.textContent = gStr;
+  var he = document.getElementById('hudExchangeCoinVal');
+  if (he) he.textContent = eStr;
+  var bal = document.getElementById('exCoinBalance');
+  if (bal) bal.textContent = ec;
+  var balModal = document.getElementById('exCoinBalanceModal');
+  if (balModal) balModal.textContent = ec;
+}
+
+function updateCoinHudVisibility() {
+  var hud = document.getElementById('coinHudBar');
+  if (!hud) return;
+  var page = pageStack[pageStack.length - 1];
+  if (isLoggedIn && (isMineTabPage(page) || isHomeTabPage(page))) hud.classList.remove('hidden');
+  else hud.classList.add('hidden');
 }

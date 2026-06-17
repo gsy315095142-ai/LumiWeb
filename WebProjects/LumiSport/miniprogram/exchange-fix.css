@@ -1,5 +1,3 @@
-@import url("client-exchange.css");
-
 /* === 全局文字颜色保障（暗色主题） === */
 .phone, .content, .page, .modal, .card, .banner,
 input, select, textarea, button:not(.home-action-btn):not(.wx-login-btn):not(.qr-login-btn) {
