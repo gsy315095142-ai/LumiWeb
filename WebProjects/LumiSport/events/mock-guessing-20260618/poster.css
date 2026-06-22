@@ -74,7 +74,8 @@ body {
   border: 1px solid var(--border-strong); border-radius: 999px; padding: 5px 14px; margin-bottom: 14px;
 }
 .hero-title {
-  font-size: 44px; font-weight: 900; line-height: 1.05; letter-spacing: 1px;
+  font-size: 34px; font-weight: 900; line-height: 1.1; letter-spacing: 0.5px;
+  white-space: nowrap;
 }
 .hero-title .accent {
   background: linear-gradient(100deg, var(--cyan), var(--magenta));
@@ -385,8 +386,14 @@ body {
   background: rgba(0, 230, 118, 0.07); border: 1px solid rgba(0, 230, 118, 0.3);
 }
 .assure-ico { font-size: 18px; flex-shrink: 0; }
+.assure-body { display: flex; flex-direction: column; min-width: 0; }
 .assure p { font-size: 12.5px; color: var(--text-dim); line-height: 1.6; }
 .assure b { color: var(--green); }
+.assure .bet-eg {
+  margin-top: 9px; padding: 8px 11px; border-radius: 9px;
+  background: rgba(255, 200, 110, 0.08); border: 1px dashed rgba(255, 200, 110, 0.32);
+  font-size: 12px; color: var(--text); line-height: 1.6;
+}
 
 @media (max-width: 360px) {
   .hero-title { font-size: 38px; }
