@@ -3,10 +3,10 @@
  * 按厅切换查看，顶部展示场次流程，内联步骤操作
  */
 var matches = [
-  { id:'m1', game:'⚔️ 雷霆击剑', time:'21:45', zone:'雷霆击剑厅', phase:'betting', guessing_open:true,  round:'第3局', customName:'雷霆对决', isMaster:false, entryFee:200, red:'战神阿飞', blue:'疾风小刀', redOdds:1.80, blueOdds:2.00, players:[{name:'战神阿飞',time:'21:25:00',side:'red'},{name:'疾风小刀',time:'21:26:05',side:'blue'},{name:'小明',time:'21:15:32',side:'red'},{name:'阿强',time:'21:16:05',side:'blue'},{name:'大飞',time:'21:17:41',side:'red'}], redBet:'4,520', blueBet:'4,040', redBettors:12, blueBettors:9, winner:null, score:'', exCoin:'0', totalBet:'8,560', winnerReward:'0' },
-  { id:'m2', game:'🔥 烈焰拳王', time:'22:15', zone:'烈焰拳王厅', phase:'waiting', guessing_open:false, configDone:false, round:'第1局', customName:'火焰对决', isMaster:false, entryFee:200, red:null, blue:null, redOdds:1.50, blueOdds:2.00, players:[], redBet:'0', blueBet:'0', redBettors:0, blueBettors:0, winner:null, score:'', exCoin:'0', totalBet:'0', winnerReward:'0' },
-  { id:'m3', game:'🏒 疾速冰球', time:'21:30', zone:'疾速冰球厅', phase:'started', guessing_open:false, round:'第2局', customName:'冰上争锋', isMaster:true, entryFee:200, red:'荒野狼王', blue:'雷霆少年', redOdds:1.65, blueOdds:2.10, players:[{name:'荒野狼王',time:'21:10:00',side:'red'},{name:'雷霆少年',time:'21:11:05',side:'blue'}], redBet:'6,800', blueBet:'5,500', redBettors:18, blueBettors:14, winner:null, score:'', exCoin:'0', totalBet:'12,300', winnerReward:'0' },
-  { id:'m4', game:'⚔️ 雷霆击剑', time:'21:00', zone:'雷霆击剑厅', phase:'settled', guessing_open:false, round:'第2局', customName:'剑影交错', isMaster:false, entryFee:200, red:'龙之影', blue:'鹰眼猎手', redOdds:1.70, blueOdds:1.95, players:[{name:'龙之影',time:'20:40:00',side:'red'},{name:'鹰眼猎手',time:'20:41:00',side:'blue'}], redBet:'4,820', blueBet:'4,300', redBettors:15, blueBettors:10, winner:'red', score:'3:2', exCoin:'4,820', totalBet:'9,120', winnerReward:'8,194' }
+  { id:'m1', game:'⚔️ 雷霆击剑', time:'21:45', zone:'雷霆击剑厅', phase:'betting', guessing_open:true,  round:'第3局', customName:'雷霆对决', isMaster:false, entryFee:200, red:'战神阿飞', blue:'疾风小刀', redOdds:1.80, blueOdds:2.00, players:[{name:'战神阿飞',time:'21:25:00',side:'red'},{name:'疾风小刀',time:'21:26:05',side:'blue'},{name:'小明',time:'21:15:32',side:'red'},{name:'阿强',time:'21:16:05',side:'blue'},{name:'大飞',time:'21:17:41',side:'red'}], redBet:'4,520', blueBet:'4,040', redBettors:12, blueBettors:9, winner:null, score:'', exCoin:'0', totalBet:'8,560', winnerReward:'0', warmupActive:false },
+  { id:'m2', game:'🔥 烈焰拳王', time:'22:15', zone:'烈焰拳王厅', phase:'waiting', guessing_open:false, configDone:false, round:'第1局', customName:'火焰对决', isMaster:false, entryFee:200, red:null, blue:null, redOdds:1.50, blueOdds:2.00, players:[], redBet:'0', blueBet:'0', redBettors:0, blueBettors:0, winner:null, score:'', exCoin:'0', totalBet:'0', winnerReward:'0', warmupActive:false },
+  { id:'m3', game:'🏒 疾速冰球', time:'21:30', zone:'疾速冰球厅', phase:'started', guessing_open:false, round:'第2局', customName:'冰上争锋', isMaster:true, entryFee:200, red:'荒野狼王', blue:'雷霆少年', redOdds:1.65, blueOdds:2.10, players:[{name:'荒野狼王',time:'21:10:00',side:'red'},{name:'雷霆少年',time:'21:11:05',side:'blue'}], redBet:'6,800', blueBet:'5,500', redBettors:18, blueBettors:14, winner:null, score:'', exCoin:'0', totalBet:'12,300', winnerReward:'0', warmupActive:false },
+  { id:'m4', game:'⚔️ 雷霆击剑', time:'21:00', zone:'雷霆击剑厅', phase:'settled', guessing_open:false, round:'第2局', customName:'剑影交错', isMaster:false, entryFee:200, red:'龙之影', blue:'鹰眼猎手', redOdds:1.70, blueOdds:1.95, players:[{name:'龙之影',time:'20:40:00',side:'red'},{name:'鹰眼猎手',time:'20:41:00',side:'blue'}], redBet:'4,820', blueBet:'4,300', redBettors:15, blueBettors:10, winner:'red', score:'3:2', exCoin:'4,820', totalBet:'9,120', winnerReward:'8,194', warmupActive:false }
 ];
 
 var adminMatchZone = '疾速冰球厅';
@@ -42,12 +42,13 @@ function getFlowPhaseHint(m){
   if(!m)return '当前：该厅暂无场次，请先配置玩法并创建首局';
   if(m.phase==='waiting'){
     if(!m.configDone)return '当前：填写玩法并在下方点「完成配置」，创建首局';
-    return '当前：等待开放报名（玩法与场次名已锁定）；可点「开始报名」';
+    return '当前：等待开放报名；玩家佩戴头显后可开启热身（无需先报名）';
   }
   if(m.phase==='betting'){
-    if(!bothPlayersReady(m))return '当前：选手报名与审核；双方就位后可「开启观众竞猜」';
-    if(!m.guessing_open)return '当前：双方选手已定，请在下方点「开启观众竞猜」；开启后观众方可投选';
-    return '当前：预测进行中；可「开始比赛」开赛';
+    var warmHint=(typeof isZoneWarmupActive==='function'&&isZoneWarmupActive(m.zone))?' · 热身进行中':' · 可对已佩戴头显开启热身';
+    if(!bothPlayersReady(m))return '当前：选手报名与审核；双方就位后可「开启观众竞猜」'+warmHint;
+    if(!m.guessing_open)return '当前：双方选手已定，请在下方点「开启观众竞猜」'+warmHint;
+    return '当前：预测进行中；可「开始比赛」开赛'+warmHint;
   }
   if(m.phase==='started')return '当前：比赛进行中，等待设备自动判定';
   if(m.phase==='settled')return '当前：本场已结算，可开启下一局';
@@ -129,12 +130,13 @@ function buildStepHtml(mid){
     h+='<button class="btn btn-outline btn-sm btn-block" style="margin-top:8px;color:var(--muted);" onclick="simulateDeviceSettle(\''+midEsc+'\')">⚡ 模拟设备结算（演示用）</button>';
   }else if(step===6){
     h+='<div style="text-align:center;padding:8px 0;"><div style="font-size:2em;">🏆</div><div style="color:var(--good);font-weight:700;font-size:1em;">'+(m.winner==='red'?m.red:m.blue)+' 获胜</div><div style="color:var(--muted);font-size:0.8em;">比分: '+m.score+'</div></div><div class="divider"></div>';
-    h+='<div class="settle-stats"><div class="settle-stat"><div class="s-val" style="color:#c4b5fd;">'+m.exCoin+'</div><div class="s-lbl">💎 兑换币产出</div></div><div class="settle-stat"><div class="s-val" style="color:#fbbf24;">'+m.winnerReward+'</div><div class="s-lbl">💰 胜方获得</div></div><div class="settle-stat"><div class="s-val">'+m.totalBet+'</div><div class="s-lbl">💰 总投入</div></div></div>';
+    h+='<div class="settle-stats"><div class="settle-stat"><div class="s-val" style="color:#c4b5fd;">'+m.exCoin+'</div><div class="s-lbl">💎 兑换值产出</div></div><div class="settle-stat"><div class="s-val" style="color:#c4b5fd;">'+m.winnerReward+'</div><div class="s-lbl">💎 猜中发放</div></div><div class="settle-stat"><div class="s-val">'+m.totalBet+'</div><div class="s-lbl">💰 总投入</div></div></div>';
     h+='<div class="divider"></div><button class="btn btn-purple btn-block" onclick="stepNextRound(\''+midEsc+'\')">🔄 下一局</button>';
   }
   if(step!==1&&step!==5&&step!==6){
     h+='<button class="btn btn-outline btn-sm btn-block" style="margin-top:10px;color:var(--bad);" onclick="stepCancel(\''+midEsc+'\')">取消比赛</button>';
   }
+  if(typeof buildWarmupPanelHtml==='function')h+=buildWarmupPanelHtml(mid);
   h+='</div>';
   return h;
 }
@@ -163,7 +165,11 @@ function renderZones(){
     else{pc='tag-done';pt='🟢 已结束';pp='🏆 胜方: '+(zm.winner==='red'?zm.red:zm.blue)}
   }else{pc='tag-wait';pt='⚪ 空闲';pp='暂无比赛'}
   h+='<div class="zone-box">';
-  h+='<div class="zone-box-hd">📷 '+(emojiMap[z]||'')+' '+z+' <span class="tag '+pc+'">'+pt+'</span></div>';
+  var warmTag='';
+  if(zm&&typeof isZoneWarmupActive==='function'&&isZoneWarmupActive(z)){
+    warmTag=' <span class="tag tag-warm">🔥 热身中</span>';
+  }
+  h+='<div class="zone-box-hd">📷 '+(emojiMap[z]||'')+' '+z+' <span class="tag '+pc+'">'+pt+'</span>'+warmTag+'</div>';
   h+='<div class="zone-box-body">';
   h+='<div class="zone-box-game">'+(game||'—')+'</div>';
   h+='<div class="zone-box-vs">'+pp+'</div>';
@@ -204,17 +210,16 @@ function kickQueue(zone,idx){
   });
 }
 
-function stepCompleteConfig(mid){var m=getMatch(mid);if(!m)return;var el=document.getElementById('editCName-'+mid);m.customName=el?el.value:m.customName;m.configDone=true;toastMsg('玩法配置已完成');renderZones()}
-function stepOpenBetting(mid){var m=getMatch(mid);if(!m)return;m.phase='betting';m.guessing_open=false;toastMsg('📋 报名已开启');renderZones()}
+function stepCompleteConfig(mid){var m=getMatch(mid);if(!m)return;var el=document.getElementById('editCName-'+mid);m.customName=el?el.value:m.customName;m.configDone=true;if(typeof onConfigCompleteWarmupDemo==='function')onConfigCompleteWarmupDemo(m.zone);toastMsg('玩法配置已完成');renderZones()}
+function stepOpenBetting(mid){var m=getMatch(mid);if(!m)return;m.phase='betting';m.guessing_open=false;if(typeof onOpenBettingWarmupDemo==='function')onOpenBettingWarmupDemo(m.zone);toastMsg('📋 报名已开启');renderZones()}
 function syncQueueSide(zone,name,side){var q=(typeof signupQueues!=='undefined')?signupQueues[zone]:null;if(!q)return;q.forEach(function(p){if(p.side===side)p.side=null;});if(name){var hit=q.find(function(p){return p.name===name});if(hit)hit.side=side;}}
 function stepAssign(mid,side,name){var m=getMatch(mid);if(!m)return;if(side==='red')m.red=name;else m.blue=name;syncQueueSide(m.zone,name,side);renderZones()}
 function stepRemovePick(mid,side){var m=getMatch(mid);if(!m)return;if(side==='red')m.red=null;else m.blue=null;syncQueueSide(m.zone,null,side);renderZones()}
 function simulateDeviceSettle(mid){var m=getMatch(mid);if(!m)return;var winner=Math.random()>0.5?'red':'blue';m.phase='settled';m.winner=winner;m.score=(winner==='red'?'3':Math.floor(Math.random()*3))+':'+(winner==='blue'?'3':Math.floor(Math.random()*3));m.exCoin=(winner==='red'?m.redBet:m.blueBet);m.winnerReward=String(Math.floor(parseInt(m.totalBet.replace(/,/g,''))*(winner==='red'?m.redOdds:m.blueOdds)));renderZones();toastMsg('📡 设备判定: '+(winner==='red'?m.red:m.blue)+' 获胜')}
 function stepSwapPlayers(mid){var m=getMatch(mid);if(!m)return;var tmp=m.red;m.red=m.blue;m.blue=tmp;tmp=m.redOdds;m.redOdds=m.blueOdds;m.blueOdds=tmp;renderZones()}
 function stepOpenGuessing(mid){var m=getMatch(mid);if(!m)return;if(!m.red||!m.blue)return toastMsg('请先选定红蓝双方选手');m.guessing_open=true;m.redBet='520';m.blueBet='430';m.redBettors=3;m.blueBettors=2;m.totalBet='950';toastMsg('📊 观众竞猜已开启');renderZones()}
-function stepStartMatch(mid){var m=getMatch(mid);if(!m)return;m.phase='started';m.guessing_open=false;toastMsg('🔴 比赛开始');renderZones()}
-function stepNextRound(mid){var m=getMatch(mid);if(!m)return;var nr='第'+(parseInt(m.round.replace('第','').replace('局',''))+1)+'局';m.phase='waiting';m.guessing_open=false;m.configDone=false;m.round=nr;m.red=null;m.blue=null;m.redBet='0';m.blueBet='0';m.redBettors=0;m.blueBettors=0;m.winner=null;m.score='';m.exCoin='0';m.totalBet='0';m.winnerReward='0';toastMsg('🔄 已进入 '+nr+'（报名队列已保留）');renderZones()}
-function stepCancel(mid){var m=getMatch(mid);if(!m)return;showConfirm('确定回到玩法配置吗？当前进度将丢失，但报名队列将保留',function(){m.phase='waiting';m.guessing_open=false;m.configDone=false;m.red=null;m.blue=null;m.redBet='0';m.blueBet='0';m.redBettors=0;m.blueBettors=0;m.winner=null;m.score='';m.exCoin='0';m.totalBet='0';m.winnerReward='0';toastMsg('已回到玩法配置（队列已保留）');renderZones()})}
+function stepNextRound(mid){var m=getMatch(mid);if(!m)return;var nr='第'+(parseInt(m.round.replace('第','').replace('局',''))+1)+'局';m.phase='waiting';m.guessing_open=false;m.configDone=false;m.round=nr;m.red=null;m.blue=null;m.redBet='0';m.blueBet='0';m.redBettors=0;m.blueBettors=0;m.winner=null;m.score='';m.exCoin='0';m.totalBet='0';m.winnerReward='0';if(typeof resetWarmupForMatch==='function')resetWarmupForMatch(m);toastMsg('🔄 已进入 '+nr+'（报名队列已保留）');renderZones()}
+function stepCancel(mid){var m=getMatch(mid);if(!m)return;showConfirm('确定回到玩法配置吗？当前进度将丢失，但报名队列将保留',function(){m.phase='waiting';m.guessing_open=false;m.configDone=false;m.red=null;m.blue=null;m.redBet='0';m.blueBet='0';m.redBettors=0;m.blueBettors=0;m.winner=null;m.score='';m.exCoin='0';m.totalBet='0';m.winnerReward='0';if(typeof resetWarmupForMatch==='function')resetWarmupForMatch(m);toastMsg('已回到玩法配置（队列已保留）');renderZones()})}
 function toggleMaster(mid){var m=getMatch(mid);if(!m)return;m.isMaster=!m.isMaster;renderZones()}
 
 renderZones();

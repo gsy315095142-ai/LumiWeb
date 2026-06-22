@@ -37,6 +37,6 @@ function updateScanBalance() {
   if (!scannedUser) return;
   var el = document.querySelector('#scanModal .scan-user-coins');
   if (el) {
-    el.innerHTML = '<span style="color:#fbbf24;">游戏币 <strong>' + scannedUser.gameCoin + '</strong></span><span style="color:#c4b5fd;">兑换币 <strong>' + scannedUser.exCoin + '</strong></span>';
+    el.innerHTML = '<span style="color:#fbbf24;">游戏币 <strong>' + scannedUser.gameCoin + '</strong></span><span style="color:#c4b5fd;">兑换值 <strong>' + scannedUser.exCoin + '</strong></span>';
   }
 }

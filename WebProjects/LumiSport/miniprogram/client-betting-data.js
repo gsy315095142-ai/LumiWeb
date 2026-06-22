@@ -66,25 +66,26 @@ var mySignup = null; // { game, zone, fee }
 // 当前用户游戏币余额（演示用，报名扣费/取消退还）
 var myGameCoin = 1250;
 
-// 当前用户兑换币余额（演示用，兑换商品扣减）
+// 当前用户兑换值余额（演示用，兑换商品扣减）
 var myExchangeCoin = 340;
 
 // 我已下注记录（按场次累计，红/蓝分别累计），下注确认后持久显示
 var myBets = {}; // { mid: { red:金额, blue:金额 } }
 
 // 竞猜记录（真实数据来源，预言家段位与胜率均由此计算）
+// coin：未猜中时消耗的游戏币（负数）；猜中时仅展示 ex（兑换值奖励，不返还游戏币）
 var betRecords = [
-  { game:'⚔️ 雷霆击剑', zone:'雷霆击剑厅', date:'2026-06-12', time:'20:32', red:'龙之影',   blue:'鹰眼猎手', result:'win',  coin:170, ex:70 },
+  { game:'⚔️ 雷霆击剑', zone:'雷霆击剑厅', date:'2026-06-12', time:'20:32', red:'龙之影',   blue:'鹰眼猎手', result:'win',  coin:-100, ex:170 },
   { game:'⚔️ 雷霆击剑', zone:'雷霆击剑厅', date:'2026-06-12', time:'20:08', red:'战神阿飞', blue:'疾风小刀', result:'lose', coin:-100, ex:0 },
-  { game:'🔥 烈焰拳王', zone:'烈焰拳王厅', date:'2026-06-12', time:'19:45', red:'北地枪王', blue:'深海巨鲨', result:'win',  coin:150, ex:50 },
-  { game:'🏒 疾速冰球', zone:'疾速冰球厅', date:'2026-06-12', time:'19:20', red:'荒野狼王', blue:'雷霆少年', result:'win',  coin:130, ex:40 },
+  { game:'🔥 烈焰拳王', zone:'烈焰拳王厅', date:'2026-06-12', time:'19:45', red:'北地枪王', blue:'深海巨鲨', result:'win',  coin:-100, ex:150 },
+  { game:'🏒 疾速冰球', zone:'疾速冰球厅', date:'2026-06-12', time:'19:20', red:'荒野狼王', blue:'雷霆少年', result:'win',  coin:-100, ex:130 },
   { game:'⚔️ 雷霆击剑', zone:'雷霆击剑厅', date:'2026-06-11', time:'21:50', red:'鹰眼猎手', blue:'龙之影',   result:'lose', coin:-80, ex:0 },
-  { game:'🔥 烈焰拳王', zone:'烈焰拳王厅', date:'2026-06-11', time:'21:10', red:'深海巨鲨', blue:'北地枪王', result:'win',  coin:160, ex:60 },
-  { game:'🏒 疾速冰球', zone:'疾速冰球厅', date:'2026-06-11', time:'20:30', red:'雷霆少年', blue:'荒野狼王', result:'win',  coin:120, ex:40 },
-  { game:'⚔️ 雷霆击剑', zone:'雷霆击剑厅', date:'2026-06-11', time:'19:55', red:'战神阿飞', blue:'疾风小刀', result:'win',  coin:140, ex:50 },
+  { game:'🔥 烈焰拳王', zone:'烈焰拳王厅', date:'2026-06-11', time:'21:10', red:'深海巨鲨', blue:'北地枪王', result:'win',  coin:-100, ex:160 },
+  { game:'🏒 疾速冰球', zone:'疾速冰球厅', date:'2026-06-11', time:'20:30', red:'雷霆少年', blue:'荒野狼王', result:'win',  coin:-100, ex:120 },
+  { game:'⚔️ 雷霆击剑', zone:'雷霆击剑厅', date:'2026-06-11', time:'19:55', red:'战神阿飞', blue:'疾风小刀', result:'win',  coin:-100, ex:140 },
   { game:'🔥 烈焰拳王', zone:'烈焰拳王厅', date:'2026-06-10', time:'21:30', red:'北地枪王', blue:'深海巨鲨', result:'lose', coin:-100, ex:0 },
-  { game:'🏒 疾速冰球', zone:'疾速冰球厅', date:'2026-06-10', time:'20:45', red:'荒野狼王', blue:'雷霆少年', result:'win',  coin:110, ex:30 },
-  { game:'⚔️ 雷霆击剑', zone:'雷霆击剑厅', date:'2026-06-10', time:'20:00', red:'龙之影',   blue:'鹰眼猎手', result:'win',  coin:180, ex:80 },
+  { game:'🏒 疾速冰球', zone:'疾速冰球厅', date:'2026-06-10', time:'20:45', red:'荒野狼王', blue:'雷霆少年', result:'win',  coin:-100, ex:110 },
+  { game:'⚔️ 雷霆击剑', zone:'雷霆击剑厅', date:'2026-06-10', time:'20:00', red:'龙之影',   blue:'鹰眼猎手', result:'win',  coin:-100, ex:180 },
   { game:'🔥 烈焰拳王', zone:'烈焰拳王厅', date:'2026-06-09', time:'21:15', red:'深海巨鲨', blue:'北地枪王', result:'lose', coin:-90, ex:0 }
 ];
 
@@ -120,7 +121,7 @@ var storeAds = {
     }
   },
   '🍺 啤酒公社': {
-    hotel: { badge:'🏨 公社精酿酒店', title:'住客专享 · 畅饮套餐送500游戏币', desc:'凭房卡到吧台领取，竞猜赢取兑换币' },
+    hotel: { badge:'🏨 公社精酿酒店', title:'住客专享 · 畅饮套餐送500游戏币', desc:'凭房卡到吧台领取，竞猜赢取兑换值' },
     tag: '畅饮 + 竞猜 · 嗨爆今夜',
     zones: {
       '疾速冰球厅': '🍺 啤酒公社 · 冰球之夜精酿特惠',

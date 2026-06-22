@@ -111,7 +111,7 @@ function doLogin(){
   var mba=document.getElementById('menuBattle');if(mba)mba.classList.remove('hidden');
   var mex=document.getElementById('menuExchange');if(mex)mex.classList.remove('hidden');
   var at=document.getElementById('tabBtn-admin');if(at)at.classList.remove('hidden');
-  // 更新兑换币显示
+  // 更新兑换值显示
   if(typeof updateClientExchangeCoinDisplay==='function')updateClientExchangeCoinDisplay();
   if(typeof updateAllCoinDisplays==='function')updateAllCoinDisplays();
   if(typeof updateCoinHudVisibility==='function')updateCoinHudVisibility();
@@ -157,8 +157,8 @@ function updateVenueLabels(){
 
 function showCoinHelp(type){
   var t=document.getElementById('coinHelpTitle'),c=document.getElementById('coinHelpContent');
-  if(type==='coin'){t.innerHTML='💰 游戏币说明';c.innerHTML='<b>获得方式</b><br>• 管理员发放<br>• 竞猜获胜奖励<br><br><b>消耗途径</b><br>• 参与竞猜下注<br>• 报名支付费用'}
-  else{t.innerHTML='💎 兑换币说明';c.innerHTML='<b>获得方式</b><br>• 竞猜获胜额外奖励<br>• 活动赠送<br><br><b>消耗途径</b><br>• 兑换门店商品<br>• 兑换限定道具'}
+  if(type==='coin'){t.innerHTML='💰 游戏币说明';c.innerHTML='<b>获得方式</b><br>• 管理员发放<br>• 活动赠送<br><br><b>消耗途径</b><br>• 参与竞猜下注（猜中不返还）<br>• 报名支付费用'}
+  else{t.innerHTML='💎 兑换值说明';c.innerHTML='<b>获得方式</b><br>• 竞猜猜中奖励<br>• 活动赠送<br><br><b>消耗途径</b><br>• 兑换门店商品<br>• 兑换限定道具'}
   document.getElementById('coinHelpModal').classList.remove('hidden');
 }
 
@@ -172,7 +172,7 @@ function updateCoinHudVisibility() {
   else hud.classList.add('hidden');
 }
 
-// 初始化兑换币显示（兼容旧调用）
+// 初始化兑换值显示（兼容旧调用）
 function initMyExchangeCoinDisplay() {
   if (typeof updateAllCoinDisplays === 'function') updateAllCoinDisplays();
 }
@@ -182,9 +182,9 @@ var billsData = [
   {date:'2026-06-12', time:'21:35', user:'小明', type:'发放', desc:'管理员发放', amt:'+200', coin:'💰'},
   {date:'2026-06-12', time:'21:30', user:'阿强', type:'下注', desc:'竞猜下注 · 雷霆击剑', amt:'-500', coin:'💰'},
   {date:'2026-06-12', time:'21:25', user:'大飞', type:'兑换', desc:'兑换 🏡鸡尾酒', amt:'-80', coin:'💎'},
-  {date:'2026-06-12', time:'21:20', user:'杰哥', type:'结算', desc:'猜中结算 · 雷霆击剑', amt:'+900', coin:'💰'},
+  {date:'2026-06-12', time:'21:20', user:'杰哥', type:'结算', desc:'猜中结算 · 雷霆击剑', amt:'+900', coin:'💎'},
   {date:'2026-06-12', time:'21:15', user:'老王', type:'发放', desc:'管理员发放', amt:'+100', coin:'💰'},
-  {date:'2026-06-12', time:'21:10', user:'小明', type:'结算', desc:'猜中结算 · 烈焰拳王', amt:'+720', coin:'💰'},
+  {date:'2026-06-12', time:'21:10', user:'小明', type:'结算', desc:'猜中结算 · 烈焰拳王', amt:'+720', coin:'💎'},
   {date:'2026-06-12', time:'21:05', user:'阿豪', type:'下注', desc:'竞猜下注 · 疾速冰球', amt:'-200', coin:'💰'},
   {date:'2026-06-12', time:'21:00', user:'杰哥', type:'兑换', desc:'兑换 🖈威士忌', amt:'-50', coin:'💎'},
   {date:'2026-06-11', time:'23:50', user:'阿强', type:'发放', desc:'签到领取', amt:'+100', coin:'💰'},

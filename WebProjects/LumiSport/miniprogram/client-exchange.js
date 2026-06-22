@@ -1,6 +1,6 @@
 /**
  * LumiSport 客户端 - 自助兑换（纯扫码版，双端通用）
- * 扫码 → 随机出商品 → 二次确认弹窗 → 扣兑换币 → 记录
+ * 扫码 → 随机出商品 → 二次确认弹窗 → 扣兑换值 → 记录
  */
 
 // 商品数据（客户端与管理端共享，客户端没有 admin-products.js 时以此为后备）
@@ -36,7 +36,7 @@ function buildExchangeScanInnerHtml(opts) {
   var coin = typeof myExchangeCoin !== 'undefined' ? myExchangeCoin : 340;
   var h = '';
   h += '<div class="ex-balance-card">';
-  h += '<div class="ex-balance-label" style="color:#888;">💎 我的兑换币</div>';
+  h += '<div class="ex-balance-label" style="color:#888;">💎 我的兑换值</div>';
   h += '<div class="ex-balance-val" id="' + exScanUI.coinBalanceId + '" style="color:#c4b5fd;">' + coin + '</div>';
   h += '</div>';
   if (opts.includeScanArea) {
@@ -151,7 +151,7 @@ function renderScannedProduct() {
   if (enough) {
     h += '<button class="btn btn-purple btn-block" style="margin-top:12px;" onclick="askConfirmExchange()">✅ 确认兑换 · 扣除 ' + exScannedProduct.price + ' 💎</button>';
   } else {
-    h += '<div style="text-align:center;padding:8px;font-size:0.78em;color:#f87171;">💎 兑换币不足，当前余额 ' + coin + '，还需 ' + (exScannedProduct.price - coin) + ' 💎</div>';
+    h += '<div style="text-align:center;padding:8px;font-size:0.78em;color:#f87171;">💎 兑换值不足，当前余额 ' + coin + '，还需 ' + (exScannedProduct.price - coin) + ' 💎</div>';
     h += '<button class="btn btn-outline btn-block" disabled style="margin-top:4px;opacity:0.4;cursor:not-allowed;color:#999;">余额不足</button>';
   }
   h += '<button class="btn btn-outline btn-sm btn-block" style="margin-top:8px;color:#aaa;" onclick="cancelScannedProduct()">🔄 重新选择</button></div>';
@@ -190,7 +190,7 @@ function confirmClientExchange() {
   document.getElementById('confirmModal').style.zIndex = '';
   if (!exScannedProduct) return;
   var coin = typeof myExchangeCoin !== 'undefined' ? myExchangeCoin : 340;
-  if (coin < exScannedProduct.price) { toastMsg('兑换币余额不足'); return; }
+  if (coin < exScannedProduct.price) { toastMsg('兑换值余额不足'); return; }
   var item = { icon: exScannedProduct.icon, name: exScannedProduct.name, price: exScannedProduct.price };
   if (typeof myExchangeCoin !== 'undefined') myExchangeCoin -= item.price;
   var now = new Date();
@@ -209,7 +209,7 @@ function showExchangeSuccessModal(item) {
   var body = document.getElementById('exchangeSuccessBody');
   if (body) {
     body.innerHTML = '<div class="es-product">' + item.icon + ' ' + item.name + '</div>' +
-      '<div class="es-cost">已扣除 <b style="color:#c4b5fd;">' + item.price + ' 💎</b> 兑换币</div>' +
+      '<div class="es-cost">已扣除 <b style="color:#c4b5fd;">' + item.price + ' 💎</b> 兑换值</div>' +
       '<div class="es-hint">商品将尽快为您准备，请留意门店通知</div>';
   }
   var m = document.getElementById('exchangeSuccessModal');

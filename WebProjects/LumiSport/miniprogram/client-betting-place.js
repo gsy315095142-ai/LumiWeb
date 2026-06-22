@@ -62,7 +62,7 @@ function renderBettingMatches() {
       var pTotal = Math.floor(st.amt * pOdds);
       html += '<div class="bet-placed"><div class="bet-placed-row">✅ 已下注 ' + pWho + '</div>';
       html += '<div class="bet-placed-amt">下注 ' + st.amt + ' 💰 · 赔率 ' + pOdds.toFixed(2) + 'x</div>';
-      html += '<div class="bet-placed-profit">预期收益：' + pTotal + ' 💰</div>';
+      html += '<div class="bet-placed-profit">猜中可获得：' + pTotal + ' 💎</div>';
       html += '<button class="btn bet-cancel-btn" onclick="cancelBet(\'' + m.id + '\')">取消下注</button></div></div>';
       return;
     }
@@ -190,6 +190,12 @@ function doPlaceBet(mid) {
   }
   if (!s.amt) return toastMsg('请选择或输入下注金额');
   if (s.amt > MAX_BET) return toastMsg('单次最高下注 ' + MAX_BET + ' 游戏币');
+  if (typeof myGameCoin !== 'undefined' && myGameCoin < s.amt) return toastMsg('游戏币余额不足');
+  if (typeof myGameCoin !== 'undefined') {
+    myGameCoin -= s.amt;
+    if (typeof updateAllCoinDisplays === 'function') updateAllCoinDisplays();
+    else if (typeof updateMyCoinDisplay === 'function') updateMyCoinDisplay();
+  }
   if (!myBets[mid]) myBets[mid] = { red: 0, blue: 0 };
   myBets[mid][s.side] += s.amt;
   s.placed = true;
@@ -198,6 +204,12 @@ function doPlaceBet(mid) {
 }
 
 function cancelBet(mid) {
+  var st = matchState[mid];
+  if (st && st.placed && st.amt > 0 && typeof myGameCoin !== 'undefined') {
+    myGameCoin += st.amt;
+    if (typeof updateAllCoinDisplays === 'function') updateAllCoinDisplays();
+    else if (typeof updateMyCoinDisplay === 'function') updateMyCoinDisplay();
+  }
   matchState[mid] = { side: null, amt: 0, isCustom: false, placed: false };
   if (myBets[mid]) myBets[mid] = { red: 0, blue: 0 };
   renderBettingMatches();

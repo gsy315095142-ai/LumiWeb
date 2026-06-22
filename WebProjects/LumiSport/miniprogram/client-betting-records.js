@@ -18,7 +18,7 @@ function renderBetHistory() {
     var html = '';
     betRecords.forEach(function (r) {
       var rs = r.result === 'win'
-        ? '<span class="result-win">+' + r.coin + ' 💰 · +' + r.ex + ' 💎</span>'
+        ? '<span class="result-win">+' + r.ex + ' 💎</span>'
         : '<span class="result-lose">' + r.coin + ' 💰</span>';
       html += '<div class="history-item"><div class="hist-top"><span class="hist-match">' + r.game + ' · ' + r.zone + '</span>' + rs + '</div>';
       html += '<div class="hist-detail">📅 ' + r.date + ' &nbsp; 🕐 ' + r.time + ' &nbsp;|&nbsp; 🔴 <span class="player-nick-link" onclick="showPlayerStats(\'' + r.red + '\')">' + r.red + '</span> vs 🔵 <span class="player-nick-link" onclick="showPlayerStats(\'' + r.blue + '\')">' + r.blue + '</span></div></div>';

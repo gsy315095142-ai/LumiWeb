@@ -113,3 +113,49 @@
 .q-arrow{width:22px;height:18px;border-radius:4px;border:1px solid var(--border);background:rgba(255,255,255,0.03);color:var(--muted);font-size:0.55em;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1}
 .q-arrow:not(:disabled):hover{background:rgba(124,58,237,0.15);color:var(--accent2);border-color:var(--accent2)}
 .q-arrow:disabled{opacity:0.25;cursor:not-allowed}
+
+/* ===== 热身控制（与场次流程并行） ===== */
+.warmup-panel{margin-top:14px;padding:12px;border-top:1px dashed rgba(251,146,60,0.35);background:rgba(251,146,60,0.04);border-radius:12px}
+.warmup-panel-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+.warmup-panel-title{font-size:0.82em;font-weight:700;color:#fdba74}
+.warmup-panel-badge{font-size:0.58em;color:rgba(251,191,36,0.75);background:rgba(251,191,36,0.1);padding:3px 8px;border-radius:999px;white-space:nowrap}
+.warmup-scene{font-size:0.72em;color:var(--muted);line-height:1.5;margin-bottom:8px}
+.warmup-scene strong{color:#fde68a;font-weight:600}
+.warmup-doc-link{color:#a78bfa;text-decoration:none;font-weight:600}
+.warmup-doc-link:hover{color:#c4b5fd}
+.warmup-stats{display:flex;gap:10px;margin-bottom:10px}
+.warmup-stat{font-size:0.68em;font-weight:600;padding:4px 10px;border-radius:8px}
+.stat-wait{background:rgba(16,185,129,0.12);color:#6ee7b7}
+.stat-warm{background:rgba(251,146,60,0.12);color:#fdba74}
+.warmup-headset-list{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
+.warmup-headset-item{padding:6px 8px;background:rgba(255,255,255,0.03);border-radius:8px;border:1px solid var(--border)}
+.warmup-headset-row{display:flex;align-items:center;gap:6px}
+.warmup-hs-label{flex:1;font-size:0.75em;color:#fff;font-weight:600;min-width:0}
+.warmup-hs-status{font-size:0.65em;font-weight:600;padding:2px 8px;border-radius:6px;white-space:nowrap}
+.hs-off{background:rgba(100,116,139,0.15);color:#94a3b8}
+.hs-wait{background:rgba(16,185,129,0.12);color:#6ee7b7}
+.hs-warm{background:rgba(251,146,60,0.15);color:#fdba74}
+.hs-play{background:rgba(239,68,68,0.12);color:#fca5a5}
+.warmup-hs-actions{flex-shrink:0}
+.warmup-sim-btn{font-size:0.62em!important;padding:4px 8px!important;color:#fff!important}
+.warmup-go-btn{font-size:0.62em!important;padding:4px 8px!important;background:rgba(251,146,60,0.2)!important;color:#fdba74!important;border:1px solid rgba(251,146,60,0.4)!important}
+.warmup-stop-btn{font-size:0.62em!important;padding:4px 8px!important;background:rgba(239,68,68,0.12)!important;color:#fca5a5!important;border:1px solid rgba(239,68,68,0.35)!important}
+.warmup-stop-all-btn{color:#fca5a5!important;border-color:rgba(239,68,68,0.4)!important;margin-top:0!important}
+.warmup-btn-row{display:flex;flex-direction:column;gap:8px}
+.warmup-active-tag{font-size:0.62em;color:#fdba74;font-weight:600}
+.warmup-muted{font-size:0.62em;color:var(--muted)}
+.warmup-note{font-size:0.68em;color:var(--muted);text-align:center;margin:0 0 8px;line-height:1.45}
+.warmup-note-active{color:#fdba74}
+.warmup-all-btn{background:linear-gradient(135deg,rgba(251,146,60,0.25),rgba(234,88,12,0.2))!important;color:#fde68a!important;border:1px solid rgba(251,146,60,0.45)!important;font-weight:700}
+.warmup-all-ready{cursor:pointer}
+.tag-warm{background:rgba(251,146,60,0.15);color:#fdba74;border:1px solid rgba(251,146,60,0.35)}
+
+/* 热身步骤点阵 */
+.warmup-step-row{display:flex;flex-direction:column;gap:6px;margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.06)}
+.warmup-step-meta{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap}
+.warmup-step-count{font-size:0.62em;font-weight:700;color:#fdba74;flex-shrink:0}
+.warmup-step-name{font-size:0.72em;font-weight:600;color:#fde68a;line-height:1.3}
+.warmup-step-dots{display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+.warmup-dot{width:8px;height:8px;border-radius:50%;background:rgba(100,116,139,0.35);border:1px solid rgba(148,163,184,0.4);flex-shrink:0;box-sizing:border-box}
+.warmup-dot.done{background:rgba(16,185,129,0.85);border-color:#34d399}
+.warmup-dot.current{background:rgba(251,146,60,0.9);border-color:#fdba74;box-shadow:0 0 6px rgba(251,146,60,0.55)}
