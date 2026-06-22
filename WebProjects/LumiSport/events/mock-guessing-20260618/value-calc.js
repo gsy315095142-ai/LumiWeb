@@ -36,7 +36,7 @@ function makeRng(seed) {
 /* ---------- 比赛奖励：上场选手按各项目名次发放（独立实物，不占竞猜库存） ---------- */
 // 默认单价（元），⑦ 收支可调；「其他参赛」绑定竞猜兑换 A 档价值（10 元档）
 const MATCH_DEF = {
-  first: { gift: '🥽', name: '3D高清观影智能眼镜', value: 1000 },
+  first: { gift: '🥽', name: 'LUMI智能眼镜', value: 1000 },
   second: { gift: '⌚', name: '华为 NFC 手环', value: 199 },
 };
 // 累计竞猜奖励：第 1 名 iPad，第 2/3 名 高清观影眼镜（同款）
