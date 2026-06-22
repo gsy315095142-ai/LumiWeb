@@ -94,7 +94,7 @@ function goBack(){
 }
 function updateQRState(){
   var blur=document.getElementById('qrBlur'),tag=document.getElementById('statusTag'),tip=document.getElementById('qrTip');
-  if(isAdmin){if(blur)blur.classList.add('hidden');if(tag)tag.textContent='未登记';if(tag)tag.className='status-tag status-none';if(tip)tip.textContent='报名、兑换请出示此码'}
+  if(isAdmin){if(blur)blur.classList.add('hidden');if(tag)tag.textContent='未登记';if(tag)tag.className='status-tag status-none';if(tip)tip.textContent='兑换请出示此码'}
   else{if(blur)blur.classList.remove('hidden');if(tag)tag.textContent='未登录';if(tag)tag.className='status-tag status-none';if(tip)tip.textContent='登录后出示身份码'}
 }
 function showLogin(){document.getElementById('loginModal').classList.remove('hidden')}
@@ -103,7 +103,7 @@ function doLogin(){
   document.getElementById('loginModal').classList.add('hidden');
   var blurs=document.querySelectorAll('.qr-blur');for(var bi=0;bi<blurs.length;bi++)blurs[bi].classList.add('hidden');
   var tag=document.getElementById('statusTag');if(tag)tag.textContent='未登记';if(tag)tag.className='status-tag status-none';
-  var tip=document.getElementById('qrTip');if(tip)tip.textContent='报名、兑换请出示此码';
+  var tip=document.getElementById('qrTip');if(tip)tip.textContent='兑换请出示此码';
   var lp=document.getElementById('loginPrompt');if(lp)lp.classList.add('hidden');
   var pc=document.getElementById('profileCard');if(pc)pc.classList.remove('hidden');
   var lo=document.getElementById('logoutBtn');if(lo)lo.classList.remove('hidden');
