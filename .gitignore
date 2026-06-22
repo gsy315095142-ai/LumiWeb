@@ -6,3 +6,7 @@ WebProjects/LumiSport/control-center/
 WebProjects/Design_LumiSport/
 WebProjects/LumiSportWeb/
 WebProjects/lumi-sport-miniprogram/
+
+# 本地临时文件（勿提交）
+_local-backup-before-pull/
+serve.js
