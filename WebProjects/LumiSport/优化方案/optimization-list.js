@@ -69,6 +69,7 @@ const SUBCATS = {
   magic: [
     { subject: '公司研学版', detail: '迭代，运营提出优化需求，过滤并确认哪些需要修改', people: ['侯涛'] },
     { subject: '门店运营', detail: '建议收集 + 迭代方案设计', people: ['侯涛'] },
+    { subject: '流程体验', detail: '优化需求汇总', people: ['林鹏', '燕鸿'] },
   ],
 };
 
