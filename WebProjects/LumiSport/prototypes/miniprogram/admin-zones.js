@@ -100,11 +100,8 @@ function buildStepHtml(mid){
     h+='<div class="readonly-row" style="margin-top:8px;"><span class="form-label">🎮 项目</span><span class="readonly-val">'+m.game+'</span></div>';
     h+='<div class="readonly-row" style="margin-top:8px;"><span class="form-label">✏️ 场次名称</span><span class="readonly-val">'+m.customName+'</span></div>';
     h+='<div class="readonly-row" style="margin-top:8px;"><span class="form-label">💰 报名费</span><span class="readonly-val">'+m.entryFee+' 💰/次</span></div>';
-    h+='<div class="divider"></div><p style="color:var(--muted);font-size:0.75em;text-align:center;margin-bottom:10px;">玩法已锁定，选择报名方式开放报名</p>';
-    h+='<div style="display:flex;gap:8px;margin-bottom:4px;">';
-    h+='<button class="btn btn-purple btn-sm" style="flex:1;" onclick="startActiveSignup(\''+midEsc+'\')">📋 主动报名</button>';
-    h+='<button class="btn btn-purple btn-sm" style="flex:1;" onclick="startMatchSignup(\''+midEsc+'\')">🎰 匹配报名</button>';
-    h+='</div>';
+    h+='<div class="divider"></div><p style="color:var(--muted);font-size:0.75em;text-align:center;margin-bottom:10px;">玩法已锁定，点击开放报名</p>';
+    h+='<button class="btn btn-purple btn-block" onclick="startActiveSignup(\''+midEsc+'\')">📋 开放报名</button>';
   }else if(step===3){
     var curMode = zoneMatchMode[m.zone] || 'active';
     if (curMode === 'active') {
@@ -117,18 +114,34 @@ function buildStepHtml(mid){
         h+='<button class="btn btn-sm side-btn side-red'+(iR?' active':'')+'\" onclick=\"'+(iR?'stepRemovePick(\''+midEsc+'\',\'red\')':'stepAssign(\''+midEsc+'\',\'red\',\''+en+'\')')+'\">'+(iR?'取消🔴':'🔴')+'</button>';
         h+='<button class="btn btn-sm side-btn side-blue'+(iB?' active':'')+'\" onclick=\"'+(iB?'stepRemovePick(\''+midEsc+'\',\'blue\')':'stepAssign(\''+midEsc+'\',\'blue\',\''+en+'\')')+'\">'+(iB?'取消🔵':'🔵')+'</button>';
         h+='</div></div>';});}else{h+='<div style="text-align:center;padding:10px;color:var(--muted);font-size:0.75em;">暂无选手报名</div>'}
+
+      // VS 预览
       h+='<div class="divider"></div><div class="vs-preview" style="margin-bottom:8px;"><span class="vs-tag red">🔴 '+(m.red||'待定')+'</span><span style="color:var(--muted);">VS</span><span class="vs-tag blue">🔵 '+(m.blue||'待定')+'</span></div>';
 
-      // ★ 一键补位匹配
-      if(m.red && !m.blue){
-        h+='<div class="quick-fill-area" id="quickFill_'+mid+'" style="text-align:center;padding:4px 0;font-size:0.85em;color:#c4b5fd;display:none;"></div>';
-        h+='<button class="btn btn-accent btn-sm btn-block" style="margin-bottom:8px;" onclick="quickFillMatch(\''+midEsc+'\',\'blue\')">🎰 一键匹配蓝方对手</button>';
-      } else if(!m.red && m.blue){
-        h+='<div class="quick-fill-area" id="quickFill_'+mid+'" style="text-align:center;padding:4px 0;font-size:0.85em;color:#c4b5fd;display:none;"></div>';
-        h+='<button class="btn btn-accent btn-sm btn-block" style="margin-bottom:8px;" onclick="quickFillMatch(\''+midEsc+'\',\'red\')">🎰 一键匹配红方对手</button>';
-      } else if(!m.red && !m.blue){
-        h+='<div class="quick-fill-area" id="quickFill_'+mid+'" style="text-align:center;padding:4px 0;font-size:0.85em;color:#c4b5fd;display:none;"></div>';
-        h+='<button class="btn btn-accent btn-sm btn-block" style="margin-bottom:8px;" onclick="quickFillMatch(\''+midEsc+'\',\'both\')">🎰 一键匹配双方选手</button>';
+      // ★ 动画区
+      h+='<div class="quick-fill-area" id="quickFill_'+mid+'" style="text-align:center;padding:4px 0;font-size:0.85em;color:#c4b5fd;display:none;"></div>';
+
+      // 第一行：红蓝方按钮
+      h+='<div style="display:flex;gap:4px;margin-bottom:4px;">';
+      if(m.red){
+        h+='<button class="btn btn-xs btn-outline" style="flex:1;font-size:0.68em;padding:3px 4px;white-space:nowrap;" onclick="quickFillMatch(\''+midEsc+'\',\'red\')">🔄 重抽红方</button>';
+      } else {
+        h+='<button class="btn btn-xs btn-outline" style="flex:1;font-size:0.68em;padding:3px 4px;white-space:nowrap;color:#f87171;border-color:#f87171;" onclick="quickFillMatch(\''+midEsc+'\',\'red\')">🔴 匹配红方</button>';
+      }
+      if(m.blue){
+        h+='<button class="btn btn-xs btn-outline" style="flex:1;font-size:0.68em;padding:3px 4px;white-space:nowrap;" onclick="quickFillMatch(\''+midEsc+'\',\'blue\')">🔄 重抽蓝方</button>';
+      } else {
+        h+='<button class="btn btn-xs btn-outline" style="flex:1;font-size:0.68em;padding:3px 4px;white-space:nowrap;color:#60a5fa;border-color:#60a5fa;" onclick="quickFillMatch(\''+midEsc+'\',\'blue\')">🔵 匹配蓝方</button>';
+      }
+      h+='</div>';
+
+      // 第二行：双方按钮
+      if(!m.red && !m.blue){
+        h+='<button class="btn btn-accent btn-sm btn-block" style="margin-bottom:8px;" onclick="quickFillMatch(\''+midEsc+'\',\'both\')">🎰 匹配双方选手</button>';
+      } else if(m.red && m.blue){
+        h+='<button class="btn btn-outline btn-sm btn-block" style="margin-bottom:8px;color:#c4b5fd;" onclick="quickFillMatch(\''+midEsc+'\',\'both\')">🔄 重新抽取双方</button>';
+      } else {
+        h+='<button class="btn btn-outline btn-sm btn-block" disabled style="margin-bottom:8px;opacity:0.35;">🎰 匹配双方选手</button>';
       }
 
       if(m.red&&m.blue){h+='<div class="readonly-row"><span class="form-label">🔴 红方奖励系数</span><span class="readonly-val">'+m.redOdds.toFixed(2)+'</span></div>';h+='<div class="readonly-row" style="margin-top:8px;"><span class="form-label">🔵 蓝方奖励系数</span><span class="readonly-val">'+m.blueOdds.toFixed(2)+'</span></div>'}
@@ -142,8 +155,6 @@ function buildStepHtml(mid){
         h+='<option value="30"'+(curLimit=='30'?' selected':'')+'>30 秒</option>';
         h+='</select></div>';
       }else{h+='<button class="btn btn-outline btn-block" disabled style="opacity:0.4;">📊 需选定双方选手</button>'}
-      h+='<div class="divider"></div>';
-      h+='<button class="btn btn-outline btn-sm btn-block" style="margin-top:4px;color:#c4b5fd;" onclick="switchToMatchSignup(\''+midEsc+'\')">🎰 切换到匹配报名</button>';
     } else {
       var pool=(typeof getPoolForZone==='function')?getPoolForZone(m.zone):[];
       var poolSize=pool.length;
@@ -227,17 +238,15 @@ function buildStepHtml(mid){
 /* === 匹配报名 === */
 function startActiveSignup(mid){var m=getMatch(mid);if(!m)return;zoneMatchMode[m.zone]='active';resetMatchState();stepOpenBetting(mid);}
 function startMatchSignup(mid){var m=getMatch(mid);if(!m)return;zoneMatchMode[m.zone]='match';resetMatchState();stepOpenBetting(mid);}
-function switchToMatchSignup(mid){
-  var m=getMatch(mid);if(!m)return;
-  resetMatchState();
-  zoneMatchMode[m.zone]='match';
-  renderZones();
-}
 function resetMatchState(){matchRedPlayer=null;matchBluePlayer=null;matchStep='pickRed';if(matchLotteryTimer){clearInterval(matchLotteryTimer);matchLotteryTimer=null;}}
 
 /* === 一键补位匹配 === */
 function quickFillMatch(mid, side){
   var m=getMatch(mid);if(!m)return;
+  if(side==='red'&&m.red){m.red=null;clearQuickFillFromQueue(m.zone);}
+  if(side==='blue'&&m.blue){m.blue=null;clearQuickFillFromQueue(m.zone);}
+  if(side==='both'&&m.red&&m.blue){m.red=null;m.blue=null;clearQuickFillFromQueue(m.zone);}
+
   var pool=(typeof getPoolForZone==='function')?getPoolForZone(m.zone):[];
   if(!pool||pool.length<1){toastMsg('玩家池不足');return;}
 
@@ -298,6 +307,11 @@ function quickFillMatch(mid, side){
     var msg=fillRed?(fillRed.name+' 🔴 VS 🔵 '+target.name):target.name;
     toastMsg('🎰 匹配完成：'+msg);
   },2500);
+}
+function clearQuickFillFromQueue(zone){
+  if(typeof signupQueues!=='undefined'&&signupQueues[zone]){
+    signupQueues[zone]=signupQueues[zone].filter(function(p){return p.matchType!=='quickFill'});
+  }
 }
 
 function startMatchLotteryForMatch(mid){

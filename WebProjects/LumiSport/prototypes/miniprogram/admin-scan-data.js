@@ -31,6 +31,21 @@ grantedPlayerPool.push({ name: 'KK',       points: 650,  coin: 300 });
 grantedPlayerPool.push({ name: '阿豪',     points: 580,  coin: 200 });
 grantedPlayerPool.push({ name: '杰哥',     points: 510,  coin: 200 });
 grantedPlayerPool.push({ name: '大飞',     points: 440,  coin: 100 });
+grantedPlayerPool.push({ name: '雷鹰',     points: 420,  coin: 90 });
+grantedPlayerPool.push({ name: '冰狼',     points: 400,  coin: 80 });
+grantedPlayerPool.push({ name: '风隼',     points: 380,  coin: 70 });
+grantedPlayerPool.push({ name: '毒蛇',     points: 350,  coin: 60 });
+grantedPlayerPool.push({ name: '狂鲨',     points: 330,  coin: 50 });
+grantedPlayerPool.push({ name: '猛虎',     points: 310,  coin: 50 });
+grantedPlayerPool.push({ name: '金刚',     points: 290,  coin: 40 });
+grantedPlayerPool.push({ name: '暴熊',     points: 270,  coin: 40 });
+grantedPlayerPool.push({ name: '野狼',     points: 250,  coin: 30 });
+grantedPlayerPool.push({ name: '灵鹿',     points: 230,  coin: 30 });
+grantedPlayerPool.push({ name: '蛮猪',     points: 210,  coin: 20 });
+grantedPlayerPool.push({ name: '飞兔',     points: 190,  coin: 20 });
+grantedPlayerPool.push({ name: '狐影',     points: 170,  coin: 10 });
+grantedPlayerPool.push({ name: '灵猫',     points: 150,  coin: 10 });
+grantedPlayerPool.push({ name: '钻地鼠',   points: 130,  coin: 5 });
 
 /**
  * 发放成功后入池

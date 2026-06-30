@@ -19,7 +19,7 @@ function adminTitle(){ return ADMIN_TITLE + (isAdmin?' <span class="admin-badge"
 // 页面 → 底部Tab 归属（用于高亮）
 function pageToTab(p){
   if(p==='home'||p==='betting')return 'home';
-  if(p==='admin'||p==='adminMatches'||p==='adminStore'||p==='adminBills'||p==='adminGiveCoin')return 'admin';
+  if(p==='admin'||p==='adminMatches'||p==='adminStore'||p==='adminBills'||p==='adminGiveCoin'||p==='playerPool')return 'admin';
   if(p==='mine'||p==='betHistory'||p==='battleHistory'||p==='exchangeHistory'||p==='clientExchange')return 'mine';
   return null;
 }
@@ -38,6 +38,7 @@ function navigateTo(page, title, isSub) {
   if(page==='adminMatches')renderZones();
   if(page==='adminStore')renderStore();
   if(page==='adminBills')renderBills();
+  if(page==='playerPool')renderPlayerPool();
   if(page==='betHistory')renderBetHistory();
   if(page==='exchangeHistory'&&typeof renderExchangeHistory==='function')renderExchangeHistory();
   if(page==='clientExchange'&&typeof renderClientExchange==='function')renderClientExchange();
@@ -46,14 +47,12 @@ function navigateTo(page, title, isSub) {
   if(typeof updateCoinHudVisibility==='function')updateCoinHudVisibility();
 }
 
-// 门店下拉选项（与首页 clientStores 统一）
 function storeOptions(){
   var stores = typeof clientStores !== 'undefined' ? clientStores : ['🏡 兰陵酒吧', '🍺 啤酒公社', '✨ 星光酒廊'];
   var active = typeof clientStore !== 'undefined' ? clientStore : stores[0];
   return stores.map(function(s){return '<option'+(s===active?' selected':'')+'>'+s+'</option>'}).join('');
 }
 
-// 管理中心：所有管理功能入口
 function renderAdminHub(){
   var el=document.getElementById('adminHub');if(!el)return;
   if(!isAdmin){
@@ -69,7 +68,65 @@ function renderAdminHub(){
   h+='<div class="menu-btn" onclick="goAdminSub(\'adminGiveCoin\')"><span class="menu-left">📲 发放货币</span><span class="menu-arrow">→</span></div>';
   h+='<div class="menu-btn" onclick="goAdminSub(\'adminMatches\')"><span class="menu-left">📷 场次管理</span><span class="menu-arrow">→</span></div>';
   h+='<div class="menu-btn" onclick="goAdminSub(\'adminBills\')"><span class="menu-left">📋 账单管理</span><span class="menu-arrow">→</span></div>';
+  h+='<div class="menu-btn" onclick="goAdminSub(\'playerPool\')"><span class="menu-left">👥 查看选手池</span><span class="menu-arrow">→</span></div>';
   el.innerHTML=h;
+}
+
+// 选手池页面：表格在滚动区域内，清空按钮在滚动区域外
+function renderPlayerPool(){
+  var pool = typeof grantedPlayerPool !== 'undefined' ? grantedPlayerPool : [];
+  document.getElementById('poolCount').textContent = pool.length;
+  document.getElementById('poolVenue').textContent = typeof clientStore !== 'undefined' ? clientStore : '🏡 兰陵酒吧';
+
+  var content = document.getElementById('playerPoolContent');
+  content.style.maxHeight = '60vh';
+  content.style.overflowY = 'auto';
+  content.style.webkitOverflowScrolling = 'touch';
+  content.style.scrollbarWidth = 'none';
+  content.style.msOverflowStyle = 'none';
+
+  if(typeof content._webkitDone === 'undefined'){
+    var style = document.createElement('style');
+    style.textContent = '#playerPoolContent::-webkit-scrollbar{display:none;}';
+    document.head.appendChild(style);
+    content._webkitDone = true;
+  }
+
+  var h = '';
+  if(pool.length === 0){
+    h = '<div style="text-align:center;padding:24px;color:#999;">暂无选手</div>';
+  } else {
+    h += '<table class="pool-table"><thead><tr><th>#</th><th>昵称</th><th style="text-align:right;">积分</th></tr></thead><tbody>';
+    pool.forEach(function(p, idx){
+      var rank = idx + 1;
+      var rankCls = rank <= 3 ? ' pool-rank top3' : ' pool-rank';
+      h += '<tr>';
+      h += '<td><span class="'+rankCls+'">'+rank+'</span></td>';
+      h += '<td>👤 '+p.name+'</td>';
+      h += '<td style="text-align:right;color:#fbbf24;">'+p.points+'</td>';
+      h += '</tr>';
+    });
+    h += '</tbody></table>';
+  }
+  content.innerHTML = h;
+
+  // 清空按钮渲染到滚动区域外
+  var actions = document.getElementById('poolActions');
+  if(actions){
+    if(pool.length > 0){
+      actions.innerHTML = '<button class="btn btn-outline btn-sm btn-block" style="margin-top:12px;color:var(--bad);" onclick="tryClearPlayerPool()">🗑️ 清空选手池</button>';
+    } else {
+      actions.innerHTML = '';
+    }
+  }
+}
+
+function tryClearPlayerPool(){
+  showConfirm('确定清空选手池？此操作不可撤销。', function(){
+    if(typeof grantedPlayerPool !== 'undefined') grantedPlayerPool = [];
+    renderPlayerPool();
+    toastMsg('选手池已清空');
+  });
 }
 
 function switchTab(t){
@@ -78,18 +135,16 @@ function switchTab(t){
   else if(t==='mine'){pageStack=['mine'];navigateTo('mine','👤 我的',false);}
 }
 function goSub(s){var titles={betHistory:'📋 预测记录',battleHistory:'⚔️ 比赛记录',betting:'🎯 预测',exchangeHistory:'📦 兑换记录',clientExchange:'📦 兑换商品'};pageStack.push(s);navigateTo(s,titles[s]||s,true)}
-// 从管理中心进入二级管理页
 function goAdminSub(page){
-  var titles={adminGiveCoin:'📲 发放货币',adminMatches:'📷 场次管理',adminStore:'📦 商品管理',adminBills:'📋 账单管理'};
+  var titles={adminGiveCoin:'📲 发放货币',adminMatches:'📷 场次管理',adminStore:'📦 商品管理',adminBills:'📋 账单管理',playerPool:'👥 选手池'};
   pageStack.push(page);navigateTo(page,titles[page]||page,true);
 }
-// 客户端兑换入口
 function goClientExchange(){ goSub('clientExchange'); }
 function goBack(){
   if(pageStack.length<=1)return;
   pageStack.pop();var p=pageStack[pageStack.length-1];
-  var titles={home:'🏟️ LumiSport',mine:'👤 我的',admin:adminTitle(),betHistory:'📋 预测记录',battleHistory:'⚔️ 比赛记录',betting:'🎯 预测',exchangeHistory:'📦 兑换记录',adminGiveCoin:'📲 发放货币',adminMatches:'📷 场次管理',adminStore:'📦 商品管理',adminBills:'📋 账单管理',clientExchange:'📦 兑换商品'};
-  var isSub=(p==='betHistory'||p==='battleHistory'||p==='betting'||p==='exchangeHistory'||p==='adminGiveCoin'||p==='adminMatches'||p==='adminStore'||p==='adminBills'||p==='clientExchange');
+  var titles={home:'🏟️ LumiSport',mine:'👤 我的',admin:adminTitle(),betHistory:'📋 预测记录',battleHistory:'⚔️ 比赛记录',betting:'🎯 预测',exchangeHistory:'📦 兑换记录',adminGiveCoin:'📲 发放货币',adminMatches:'📷 场次管理',adminStore:'📦 商品管理',adminBills:'📋 账单管理',playerPool:'👥 选手池',clientExchange:'📦 兑换商品'};
+  var isSub=(p==='betHistory'||p==='battleHistory'||p==='betting'||p==='exchangeHistory'||p==='adminGiveCoin'||p==='adminMatches'||p==='adminStore'||p==='adminBills'||p==='playerPool'||p==='clientExchange');
   navigateTo(p,titles[p]||p,isSub);
 }
 function updateQRState(){
@@ -111,7 +166,6 @@ function doLogin(){
   var mba=document.getElementById('menuBattle');if(mba)mba.classList.remove('hidden');
   var mex=document.getElementById('menuExchange');if(mex)mex.classList.remove('hidden');
   var at=document.getElementById('tabBtn-admin');if(at)at.classList.remove('hidden');
-  // 更新礼品点数显示
   if(typeof updateClientExchangeCoinDisplay==='function')updateClientExchangeCoinDisplay();
   if(typeof updateAllCoinDisplays==='function')updateAllCoinDisplays();
   if(typeof updateCoinHudVisibility==='function')updateCoinHudVisibility();
@@ -172,12 +226,10 @@ function updateCoinHudVisibility() {
   else hud.classList.add('hidden');
 }
 
-// 初始化礼品点数显示（兼容旧调用）
 function initMyExchangeCoinDisplay() {
   if (typeof updateAllCoinDisplays === 'function') updateAllCoinDisplays();
 }
 
-// ========== 账单管理 ==========
 var billsData = [
   {date:'2026-06-12', time:'21:35', user:'小明', type:'发放', desc:'管理员发放', amt:'+200', coin:'💰'},
   {date:'2026-06-12', time:'21:30', user:'阿强', type:'预测提交', desc:'预测提交 · 雷霆击剑', amt:'-500', coin:'💰'},
