@@ -1,0 +1,10 @@
+<!-- 1. 页面定位 -->
+  <div class="card">
+    <h2><span class="icon">📖</span>页面定位</h2>
+    <p style="color:#475569;font-size:15px;margin-bottom:16px;">
+      「弹幕」是<strong style="color:#1e293b;">嵌入在赛事主页（event.vue）</strong>中的实时互动层。所有已登录用户（管理员、选手、观众）在赛事进行过程中均可发送弹幕，消息以<strong style="color:#1e293b;">飘屏滑动</strong>的方式在屏幕上方展示，底部固定输入栏供用户发送新弹幕。
+    </p>
+    <p style="color:#64748b;font-size:14px;">
+      弹幕组件 <code style="background:rgba(37,99,235,0.08);color:#3b82f6;padding:2px 6px;border-radius:4px;font-size:12px;">SessionDanmakuLayer.vue</code> 以场次（Session）为维度隔离消息，切换场次时自动清空并重新拉取。采用<strong style="color:#1e293b;">HTTP 轮询</strong>方式增量获取新消息，无需 WebSocket。
+    </p>
+  </div>

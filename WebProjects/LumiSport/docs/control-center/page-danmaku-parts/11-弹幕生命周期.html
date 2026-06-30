@@ -1,0 +1,37 @@
+<!-- 11. 弹幕生命周期 -->
+  <div class="card">
+    <h2><span class="icon">⏱️</span>弹幕生命周期</h2>
+    <p style="color:#64748b;font-size:14px;margin-bottom:16px;">
+      一条弹幕从前端发送到消失的完整生命周期：
+    </p>
+    <div class="flow-strip">
+      <div class="flow-step"><span class="step-label">用户输入并发送</span></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step"><span class="step-label">前端校验（非空）</span></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step"><span class="step-label">POST /api/danmaku</span></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step"><span class="step-label">后端校验链</span></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step"><span class="step-label">写入数据库</span></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step"><span class="step-label">返回 payload</span></div>
+    </div>
+    <div class="flow-strip" style="margin-top:8px;">
+      <div class="flow-step"><span class="step-label">前端收到成功响应</span></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step"><span class="step-label">pushFlying() 飘屏</span></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step"><span class="step-label">分配泳道 + 随机时长</span></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step"><span class="step-label">CSS 动画滑动</span></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step"><span class="step-label">16s 后自动移除</span></div>
+    </div>
+    <div class="rule-box ok" style="margin-top:20px;">
+      <p class="rule-title">✅ 发送成功后立即展示</p>
+      <p class="rule-text">
+        用户发送的弹幕在 POST 成功后<strong>立即调用 pushFlying()</strong> 飘屏展示，无需等待下一轮轮询（2.8s）。这样用户体验是"发出去立刻看到"，而其他用户会在最近一次轮询中看到。
+      </p>
+    </div>
+  </div>

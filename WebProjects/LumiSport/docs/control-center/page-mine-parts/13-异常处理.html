@@ -1,0 +1,15 @@
+﻿<!-- ==================== 13. 异常处理 ==================== -->
+  <div class="card">
+    <h2><span class="icon">⚠️</span>异常处理</h2>
+    <table class="rank-table">
+      <thead><tr><th>场景</th><th>处理方式</th></tr></thead>
+      <tbody>
+        <tr><td style="font-weight:600;color:#1e293b;">钱包加载失败</td><td style="color:#64748b;"><code>wallet = null</code>，竞猜区不显示余额（不阻塞页面）</td></tr>
+        <tr><td style="font-weight:600;color:#1e293b;">签到接口失败</td><td style="color:#64748b;">Toast 展示错误信息</td></tr>
+        <tr><td style="font-weight:600;color:#1e293b;">昵称保存失败</td><td style="color:#64748b;">Toast 错误信息，弹窗保持打开</td></tr>
+        <tr><td style="font-weight:600;color:#1e293b;">子页面加载失败</td><td style="color:#64748b;">显示错误卡片 + 重试按钮</td></tr>
+        <tr><td style="font-weight:600;color:#1e293b;">子页面无数据</td><td style="color:#64748b;">显示空状态文案（「暂无历史记录」「暂无流水」「暂无排行数据」）</td></tr>
+        <tr><td style="font-weight:600;color:#1e293b;">用户资料获取失败</td><td style="color:#64748b;">自动登出（<code>logout()</code>）</td></tr>
+      </tbody>
+    </table>
+  </div>

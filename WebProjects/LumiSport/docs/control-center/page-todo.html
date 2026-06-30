@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>待开发功能清单</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Inter', -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: #f0f2f8;
+  color: #1e293b;
+  line-height: 1.7;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+}
+
+/* ── 页面标题 ── */
+.page-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+.page-header h1 {
+  font-size: 32px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 8px;
+}
+.page-header .subtitle {
+  color: #64748b;
+  font-size: 15px;
+}
+
+/* ── 卡片 ── */
+.card {
+  background: #ffffff;
+  border: 1px solid rgba(99,102,241,0.12);
+  border-top: 2px solid;
+  border-image: linear-gradient(90deg, #6366f1, #0891b2) 1;
+  border-radius: 16px;
+  padding: 32px;
+  margin-bottom: 32px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.card:hover {
+  border-color: rgba(99,102,241,0.25);
+  box-shadow: 0 2px 8px rgba(99,102,241,0.06);
+}
+.card h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.card h2 .icon { font-size: 22px; }
+
+/* ── 分类标题 ── */
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #6366f1;
+  margin: 24px 0 12px;
+  padding-left: 12px;
+  border-left: 3px solid #6366f1;
+}
+.section-title:first-of-type { margin-top: 0; }
+
+/* ── 功能项卡片 ── */
+.todo-item {
+  background: rgba(0,0,0,0.02);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 12px;
+  transition: border-color 0.2s, background 0.2s;
+}
+.todo-item:hover {
+  border-color: rgba(99,102,241,0.20);
+  background: rgba(99,102,241,0.03);
+}
+.todo-item .todo-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.todo-item .todo-num {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  background: rgba(99,102,241,0.10);
+  color: #6366f1;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.todo-item .todo-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1e293b;
+  line-height: 1.5;
+}
+.todo-item .todo-desc {
+  font-size: 14px;
+  color: #64748b;
+  line-height: 1.8;
+  margin-left: 40px;
+}
+.todo-item .todo-desc code {
+  background: rgba(99,102,241,0.08);
+  color: #6366f1;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-family: 'Consolas', 'Monaco', monospace;
+}
+
+/* ── 对比表格 ── */
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 8px;
+  font-size: 13px;
+}
+.compare-table th {
+  background: rgba(99,102,241,0.06);
+  color: #4f46e5;
+  font-weight: 600;
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  white-space: nowrap;
+}
+.compare-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+  color: #475569;
+  vertical-align: top;
+}
+.compare-table tr:hover td {
+  background: rgba(99,102,241,0.04);
+}
+.compare-table td code {
+  background: rgba(99,102,241,0.08);
+  color: #6366f1;
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-size: 12px;
+  font-family: 'Consolas', 'Monaco', monospace;
+}
+.compare-table .arrow {
+  color: #94a3b8;
+  text-align: center;
+  font-weight: 700;
+}
+.compare-table .new-tag {
+  display: inline-block;
+  background: rgba(74,222,128,0.15);
+  color: #16a34a;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: 4px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+/* ── 规则提示框 ── */
+.rule-box {
+  background: rgba(99,102,241,0.04);
+  border: 1px solid rgba(99,102,241,0.12);
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-top: 20px;
+}
+.rule-box p.rule-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.rule-box p.rule-title.blue { color: #6366f1; }
+.rule-box p.rule-title.orange { color: #fb923c; }
+.rule-box p.rule-text {
+  font-size: 13px;
+  color: #64748b;
+  line-height: 1.8;
+}
+
+/* ── 汇总统计 ── */
+.stats-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+.stat-card {
+  flex: 1;
+  min-width: 140px;
+  background: #ffffff;
+  border: 1px solid rgba(99,102,241,0.12);
+  border-top: 2px solid;
+  border-image: linear-gradient(90deg, #6366f1, #0891b2) 1;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+.stat-card .stat-num {
+  font-size: 36px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.stat-card .stat-label {
+  font-size: 13px;
+  color: #64748b;
+  margin-top: 4px;
+}
+
+/* ── 响应式 ── */
+@media (max-width: 700px) {
+  .stats-row {
+    flex-direction: column;
+  }
+  .compare-table {
+    font-size: 12px;
+  }
+  .compare-table th, .compare-table td {
+    padding: 8px 10px;
+  }
+  .todo-item .todo-desc {
+    margin-left: 0;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- 页面标题 -->
+  <div class="page-header">
+    <h1>📋 待开发功能清单</h1>
+    <p class="subtitle">项目当前已完成前端界面与后端 API，以下为尚需对接、适配与落地的功能项</p>
+  </div>
+
+  <!-- 汇总统计 -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-num">11</div>
+      <div class="stat-label">Unity 对接</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">1</div>
+      <div class="stat-label">接口兼容层</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">3</div>
+      <div class="stat-label">后端落地</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">15</div>
+      <div class="stat-label">合计</div>
+    </div>
+  </div>
+
+  <!-- ==================== 一、Unity 对接 ==================== -->
+  <div class="card">
+    <h2><span class="icon">🎮</span>一、Unity 对接</h2>
+    <p style="color:#64748b;font-size:14px;margin-bottom:20px;">
+      Unity 端的 <code>ContestSyncManager</code> 已实现竞猜后端的调用逻辑，但对接的是旧版 API。新版后端的接口路径、参数格式和认证方式均有变更，需要逐一适配。
+    </p>
+
+    <!-- 1.1 API 路径适配 -->
+    <div class="section-title">1.1 API 路径与参数适配</div>
+
+    <div class="todo-item">
+      <div class="todo-header">
+        <div class="todo-num">1</div>
+        <div class="todo-title">Unity 侧 API 路径全部切换到新版后端接口</div>
+      </div>
+      <div class="todo-desc">
+        <code>ContestSyncManager</code> 当前调用的旧版路径需要替换为新版后端接口。以下是完整的路径对照：
+      </div>
+    </div>
+
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>功能</th>
+          <th>旧版 API（Unity 当前调用）</th>
+          <th></th>
+          <th>新版 API（需切换到）</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="font-weight:600;color:#1e293b;">配置比赛</td>
+          <td><code>/api/admin/configure</code></td>
+          <td class="arrow">→</td>
+          <td><code>/api/player/admin/configure</code></td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;color:#1e293b;">开始报名</td>
+          <td>—（无旧版对应）<span class="new-tag">新增</span></td>
+          <td class="arrow">→</td>
+          <td><code>/api/player/admin/open-betting</code></td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;color:#1e293b;">开启竞猜</td>
+          <td>—（无旧版对应）<span class="new-tag">新增</span></td>
+          <td class="arrow">→</td>
+          <td><code>/api/player/admin/open-guessing</code></td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;color:#1e293b;">锁定赔率/开赛</td>
+          <td><code>/api/admin/lock</code></td>
+          <td class="arrow">→</td>
+          <td><code>/api/player/admin/start-match</code></td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;color:#1e293b;">结算比赛</td>
+          <td><code>/api/admin/settle</code></td>
+          <td class="arrow">→</td>
+          <td><code>/api/player/admin/end-match</code></td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;color:#1e293b;">退回玩法配置</td>
+          <td>—（无旧版对应）<span class="new-tag">新增</span></td>
+          <td class="arrow">→</td>
+          <td><code>/api/player/admin/return-home</code></td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;color:#1e293b;">取消本轮</td>
+          <td><code>/api/admin/cancel</code></td>
+          <td class="arrow">→</td>
+          <td><code>/api/player/admin/cancel-betting-round</code></td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;color:#1e293b;">下一轮</td>
+          <td><code>/api/admin/reset</code></td>
+          <td class="arrow">→</td>
+          <td><code>/api/player/admin/next-round</code></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="rule-box">
+      <p class="rule-title blue">💡 适配要点</p>
+      <p class="rule-text">
+        除了路径变更外，部分接口的<strong style="color:#1e293b;">请求参数格式</strong>也可能有差异（字段名、数据结构等），需要逐个接口对照新版后端的 DTO 定义进行确认和调整。
+      </p>
+    </div>
+
+    <!-- 1.2 认证方式 -->
+    <div class="section-title">1.2 认证方式对接</div>
+
+    <div class="todo-item">
+      <div class="todo-header">
+        <div class="todo-num">2</div>
+        <div class="todo-title">Unity 侧认证方式从明文 Token 改为 JWT Bearer Token</div>
+      </div>
+      <div class="todo-desc">
+        旧版 Unity 使用 <code>adminToken</code> 字段明文传递管理员凭证。新版后端使用 <strong style="color:#1e293b;">JWT Bearer Token</strong> + <strong style="color:#1e293b;">Admin Guard</strong> 进行鉴权。Unity 侧需要：
+        <br>① 在请求头中添加 <code>Authorization: Bearer &lt;jwt_token&gt;</code>
+        <br>② 实现 JWT Token 的获取、缓存与刷新逻辑
+        <br>③ 处理 Token 过期时的自动重试
+      </div>
+    </div>
+
+    <!-- 1.3 选手名同步 -->
+    <div class="section-title">1.3 数据同步验证</div>
+
+    <div class="todo-item">
+      <div class="todo-header">
+        <div class="todo-num">3</div>
+        <div class="todo-title">选手名同步接口的数据结构兼容性确认</div>
+      </div>
+      <div class="todo-desc">
+        Unity 端的 <code>ApplyContestPlayerNamesFromGameInfo</code> 方法会从竞猜后端读取选手名并同步到 Unity 游戏内显示。该方法调用 <code>/api/game</code> 接口获取数据。需确认新版后端该接口的<strong style="color:#1e293b;">返回数据结构</strong>（选手名的字段路径、红蓝方标识方式等）与 Unity 侧的解析逻辑一致。
+      </div>
+    </div>
+
+    <!-- 1.4 取消流程适配 -->
+    <div class="section-title">1.4 取消流程适配</div>
+
+    <div class="todo-item">
+      <div class="todo-header">
+        <div class="todo-num">4</div>
+        <div class="todo-title">Unity 取消流程适配：统一改用 return-home</div>
+      </div>
+      <div class="todo-desc">
+        Unity 的 <code>OnCtrlCancelContest()</code> 当前统一调用旧版 <code>/api/admin/cancel</code>。新版后端已将取消逻辑拆分为两个接口：
+        <br><br>
+        <table class="compare-table" style="margin:8px 0;">
+          <thead>
+            <tr><th>场景</th><th>新版接口</th><th>适用阶段</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>取消本局（退还竞猜币）</td>
+              <td><code>cancel-betting-round</code></td>
+              <td>仅 <code>betting</code> 阶段</td>
+            </tr>
+            <tr>
+              <td>退回玩法配置页</td>
+              <td><code>return-home</code></td>
+              <td><code>waiting</code> / <code>betting</code> / <code>started</code> / <code>settled</code> 均可用</td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <strong style="color:#fb923c;">建议</strong>：Unity 统一改为调用 <code>return-home</code>，一步覆盖所有阶段，无需根据当前状态判断调用哪个接口。
+      </div>
+    </div>
+
+    <div class="todo-item">
+      <div class="todo-header">
+        <div class="todo-num">5</div>
+        <div class="todo-title">Unity 新增 return-home 调用（退回玩法配置）</div>
+      </div>
+      <div class="todo-desc">
+        当前 Unity 没有调用 <code>return-home</code> 的逻辑。在新流程中，管理员从大屏返回玩法选择页时应调用此接口（收起当前场次、退还竞猜币）。需在 <code>ContestSyncManager</code> 中新增对应方法并在大屏 UI 操作中接入。
+      </div>
+    </div>
+
+    <!-- 1.5 操作时序对齐 -->
+    <div class="section-title">1.5 操作时序对齐</div>
+
+    <div class="todo-item">
+      <div class="todo-header">
+        <div class="todo-num">6</div>
+        <div class="todo-title">确认大屏端操作时序与新流程一致</div>
+      </div>
+      <div class="todo-desc">
+        新版后端对接口调用的<strong style="color:#1e293b;">前置状态有严格校验</strong>，需确认大屏端的操作时序已对齐：
+        <br><br>
+        <table class="compare-table" style="margin:8px 0;">
+          <thead>
+            <tr><th>操作</th><th>前置状态要求</th><th>需确认</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>start-match</code>（开赛）</td>
+              <td>必须处于 <code>betting</code> 状态</td>
+              <td>如果小程序管理端尚未点击「开始报名」（还在 <code>waiting</code>），Unity 调用会返回错误</td>
+            </tr>
+            <tr>
+              <td><code>end-match</code>（结算）</td>
+              <td>必须处于 <code>started</code> 状态</td>
+              <td>比赛进行中才能调用结算</td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <strong style="color:#fb923c;">注意</strong>：特别是 <code>start-match</code>，新版流程拆分了「开始报名 → 开启竞猜 → 开赛」三步，大屏端若直接调用开赛，需确保小程序端已完成前两步。
+      </div>
+    </div>
+
+    <!-- 1.6 大屏与小程序双端同步 -->
+    <div class="section-title">1.6 大屏与小程序双端同步</div>
+    <p style="color:#64748b;font-size:14px;margin-bottom:16px;">
+      大屏（Unity Server）与小程序管理端可同时操作同一场次，需要一套同步机制防止并发冲突。以下功能项需 Server 端与小程序端协同开发。
+    </p>
+
+    <div class="todo-item">
+      <div class="todo-header">
+        <div class="todo-num">7</div>
+        <div class="todo-title">Server 数据模型扩展：新增 configEpoch 与 displayIntentGameType</div>
+      </div>
+      <div class="todo-desc">
+        Server 端（竞猜后端）的会话数据模型需要新增两个字段：
+        <br>① <code>configEpoch</code> — <strong style="color:#1e293b;">配置版本号</strong>（整数），每次保存配置时 +1，用于并发冲突检测。小程序端保存时需携带当前版本号，Server 校验不一致则拒绝
+        <br>② <code>displayIntentGameType</code> — <strong style="color:#1e293b;">大屏当前玩法意向</strong>（字符串，如 <code>iceHockey</code>），大屏在玩法选择页切换时实时上报，小程序可据此提示管理员「大屏已切换到拳击，是否同步配置？」
+      </div>
+    </div>
+
+    <div class="todo-item">
+      <div class="todo-header">
+        <div class="todo-num">8</div>
+        <div class="todo-title">Server 新增大屏玩法意向 API</div>
+      </div>
+      <div class="todo-desc">
+        新增接口供大屏在玩法选择页切换时调用，更新 <code>displayIntentGameType</code> 字段。该接口<strong style="color:#1e293b;">不触发保存配置</strong>，仅记录大屏当前浏览的玩法意向，供小程序端读取和提示。
+      </div>
+    </div>
+
+    <div class="todo-item">
+      <div class="todo-header">
+        <div class="todo-num">9</div>
+        <div class="todo-title">保存配置接口增加并发控制（configEpoch 校验）</div>
+      </div>
+      <div class="todo-desc">
+        <code>POST /api/player/admin/configure</code> 请求体新增 <code>baseConfigEpoch</code> 字段。Server 端逻辑：
+        <br>① 收到请求后，比对 <code>baseConfigEpoch</code> 与 Server 当前 <code>configEpoch</code>
+        <br>② <strong style="color:#16a34a;">一致</strong> → 正常保存，<code>configEpoch</code> + 1
+        <br>③ <strong style="color:#dc2626;">不一致</strong> → 返回 <code>409 Conflict</code> + Server 端最新会话数据，拒绝本次写入
+      </div>
+    </div>
+
+    <div class="todo-item">
+      <div class="todo-header">
+        <div class="todo-num">10</div>
+        <div class="todo-title">小程序管理端 409 冲突处理</div>
+      </div>
+      <div class="todo-desc">
+        小程序端在调用保存配置接口时，需要处理 <code>409 Conflict</code> 响应：
+        <br>① 用响应中返回的<strong style="color:#1e293b;">最新会话数据</strong>覆盖本地表单
+        <br>② 弹出提示：<strong style="color:#1e293b;">「配置已被其他端更新，请确认后重试」</strong>
+        <br>③ 管理员确认后可重新编辑并提交（携带新的 <code>configEpoch</code>）
+      </div>
+    </div>
+
+    <div class="todo-item">
+      <div class="todo-header">
+        <div class="todo-num">11</div>
+        <div class="todo-title">GET session 接口扩展返回字段</div>
+      </div>
+      <div class="todo-desc">
+        管理端拉取会话数据时，接口需额外返回 <code>configEpoch</code> 和 <code>displayIntentGameType</code> 两个字段。小程序可据此实现：
+        <br>① 展示<strong style="color:#1e293b;">大屏当前意向提示</strong>（如「大屏正在浏览拳击页面」）
+        <br>② 判断大屏意向与已保存配置是否一致，不一致时给出<strong style="color:#1e293b;">同步提醒</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 二、接口兼容层 ==================== -->
+  <div class="card">
+    <h2><span class="icon">🔧</span>二、接口兼容层（可选方案）</h2>
+    <p style="color:#64748b;font-size:14px;margin-bottom:20px;">
+      如果 Unity 侧暂时无法全部切换到新版 API，可考虑在后端增加一层兼容路由，避免两边同时改动。两种方案二选一即可。
+    </p>
+
+    <div class="todo-item">
+      <div class="todo-header">
+        <div class="todo-num">12</div>
+        <div class="todo-title">后端增加旧版 /api/admin/* 兼容路由（或 Unity 侧全部改用新版 API）</div>
+      </div>
+      <div class="todo-desc">
+        <strong style="color:#1e293b;">方案 A：后端加兼容层</strong>（改动较小）
+        <br>在后端新增 <code>/api/admin/configure</code>、<code>/api/admin/lock</code>、<code>/api/admin/settle</code>、<code>/api/admin/cancel</code>、<code>/api/admin/reset</code> 五个路由，内部转发到新版 Service 方法。参数格式需做一层映射。
+        <br><br>
+        <strong style="color:#1e293b;">方案 B：Unity 侧全部改用新版</strong>（更干净）
+        <br>即前述「1.1 API 路径适配」中列出的路径替换，一劳永逸，不需要维护旧版兼容代码。
+        <br><br>
+        <strong style="color:#fb923c;">建议</strong>：如果 Unity 侧改动成本可控，优先选方案 B，避免后端长期维护两套路由。
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 三、后端落地 ==================== -->
+  <div class="card">
+    <h2><span class="icon">🖥️</span>三、小程序后端落地</h2>
+    <p style="color:#64748b;font-size:14px;margin-bottom:20px;">
+      后端 API 与数据库迁移脚本均已完成开发，但尚未部署到生产环境，需要在真实服务器上运行并通过微信小程序审核。
+    </p>
+
+    <div class="todo-item">
+      <div class="todo-header">
+        <div class="todo-num">13</div>
+        <div class="todo-title">生产环境部署</div>
+      </div>
+      <div class="todo-desc">
+        后端目前仅在本地开发环境运行，需要完成以下部署工作：
+        <br>① <strong style="color:#1e293b;">服务器选型与配置</strong> — 选购云服务器，安装 Node.js 运行环境与数据库（PostgreSQL）
+        <br>② <strong style="color:#1e293b;">HTTPS 配置</strong> — 申请 SSL 证书并配置 HTTPS（微信小程序强制要求）
+        <br>③ <strong style="color:#1e293b;">域名绑定</strong> — 注册域名、ICP 备案、解析到服务器
+        <br>④ <strong style="color:#1e293b;">数据库迁移</strong> — 在生产环境执行数据库迁移脚本，创建表结构
+        <br>⑤ <strong style="color:#1e293b;">环境变量配置</strong> — 生产环境的数据库连接串、JWT 密钥、微信 AppID/AppSecret 等
+      </div>
+    </div>
+
+    <div class="todo-item">
+      <div class="todo-header">
+        <div class="todo-num">14</div>
+        <div class="todo-title">微信小程序审核与上线</div>
+      </div>
+      <div class="todo-desc">
+        需要完成以下微信平台相关操作：
+        <br>① <strong style="color:#1e293b;">合法域名配置</strong> — 在微信小程序后台将后端 API 域名添加到「request 合法域名」
+        <br>② <strong style="color:#1e293b;">小程序类目选择</strong> — 选择合适的服务类目（涉及竞猜/竞技内容，需确保类目合规）
+        <br>③ <strong style="color:#1e293b;">审核材料准备</strong> — 提交小程序审核所需的功能说明、截图、隐私协议等
+        <br>④ <strong style="color:#1e293b;">合规评估</strong> — 竞猜币系统需确保不触碰微信平台关于虚拟货币/赌博的红线
+      </div>
+    </div>
+
+    <div class="todo-item">
+      <div class="todo-header">
+        <div class="todo-num">15</div>
+        <div class="todo-title">真机全链路回归测试</div>
+      </div>
+      <div class="todo-desc">
+        开发阶段主要在开发工具和模拟器中测试，上线前需要在<strong style="color:#1e293b;">真实微信环境</strong>中走通完整流程：
+        <br>① 微信登录 → 选门店 → 进入赛事
+        <br>② 管理员确认玩法 → 开始报名 → 选手报名 → 管理员审核
+        <br>③ 管理员开启竞猜 → 观众签到领币 → 下注竞猜
+        <br>④ 管理员开赛 → Unity 比赛对接 → Server 自动结算 → 竞猜赔付
+        <br>⑤ 管理员操控（中止/退回/取消/下一轮等异常路径）
+        <br><strong style="color:#1e293b;">需在多款真机</strong>（iOS + Android 各至少 2 款）上验证界面适配与性能表现。
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 备注说明 ==================== -->
+  <div class="card">
+    <h2><span class="icon">📝</span>备注说明</h2>
+    <ul style="font-size:14px;color:#475569;padding-left:20px;line-height:2.4;">
+      <li><strong style="color:#1e293b;">弹幕与竞猜状态轮询</strong> — 当前使用 HTTP 轮询方案，功能和性能均满足需求，暂不需要升级为 WebSocket</li>
+      <li><strong style="color:#1e293b;">小程序前端</strong> — 所有页面（登录/首页/报名/竞猜/赛事/结算）的 UI 与交互逻辑已开发完成，无需额外开发</li>
+      <li><strong style="color:#1e293b;">后端 API</strong> — 全部接口（含管理员 CRUD、竞猜 CRUD、弹幕、签到、排行榜等）已开发完成并通过单元测试</li>
+      <li><strong style="color:#1e293b;">Unity 竞技逻辑</strong> — 冰球/拳击/击剑三种游戏的竞技逻辑已在 Unity 端实现完成</li>
+    </ul>
+  </div>
+
+</div>
+
+</body>
+</html>

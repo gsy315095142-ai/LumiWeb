@@ -1,0 +1,28 @@
+<!-- ═══════ 全局流程概览 ═══════ -->
+  <div class="card">
+    <div class="card-title">🗺️ 全局流程概览</div>
+    <div class="overview-desc">
+      小程序启动后，用户依次经过 <strong>登录页</strong> → <strong>选择门店页</strong> → <strong>主功能页</strong> 三个阶段。所有用户（普通用户和管理员）统一通过<strong>微信一键登录</strong>进入系统，管理员身份由后端<strong>白名单机制</strong>自动判定。已登录用户下次打开时自动跳过登录页。
+    </div>
+    <div class="flow-horizontal">
+      <div class="flow-step">
+        <div class="flow-step-circle fc-login">🔐</div>
+        <div class="flow-step-title">登录页</div>
+        <div class="flow-step-sub">pages/login/index<br>微信一键登录（唯一入口）</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-step-circle fc-store">🏪</div>
+        <div class="flow-step-title">选择门店</div>
+        <div class="flow-step-sub">pages/index/index<br>门店卡片 + 进入</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-step-circle fc-main">🎮</div>
+        <div class="flow-step-title">主功能页</div>
+        <div class="flow-step-sub">pages/player/event<br>报名 / 竞猜 / 管理</div>
+      </div>
+    </div>
+    <div class="auto-skip-note">
+      <span class="note-icon">⚡</span>
+      <span><strong>自动跳过</strong>：若本地 Storage 中存在有效 token，登录页 onMounted 时直接 reLaunch 到「选择门店页」，无需再次登录。token 失效（401）时自动清除并跳回登录页。</span>
+    </div>
+  </div>

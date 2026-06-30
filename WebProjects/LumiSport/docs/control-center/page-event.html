@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>赛事流程 · 竞技大空间</title>
+<link rel="stylesheet" href="page-event.css">
+</head>
+<body>
+
+<div class="img-overlay" id="imgOverlay">
+  <img id="overlayImg" src="" alt="zoom">
+  <div class="zoom-hint">click to close</div>
+</div>
+
+<div class="container">
+
+  <div class="header">
+    <div class="header-icon">🏟️</div>
+    <h1>竞技大空间 · 赛事流程</h1>
+    <p>6 步生命周期 · 双端互斥控制 · 三角色协同</p>
+  </div>
+
+  <div id="parts-mount"></div>
+
+</div>
+
+<script src="page-event-utils.js"></script>
+<script src="page-event-p1.js"></script>
+<script src="page-event-p2.js"></script>
+<script src="page-event-p3.js"></script>
+<script src="page-event-p4.js"></script>
+<script src="page-event-p5.js"></script>
+<script>
+(function() {
+  var PARTS_COUNT = 5;
+  var mount = document.getElementById('parts-mount');
+
+  EventUtils.initOverlay();
+
+  for (var i = 0; i < PARTS_COUNT; i++) {
+    var html = window['__event_part_' + i];
+    if (!html) {
+      var err = document.createElement('p');
+      err.style.cssText = 'color:#dc2626;padding:20px;text-align:center;';
+      err.textContent = '加载失败: page-event-p' + (i + 1) + '.js';
+      mount.appendChild(err);
+      continue;
+    }
+    var div = document.createElement('div');
+    div.innerHTML = '\n' + html + '\n';
+    while (div.firstChild) {
+      mount.appendChild(div.firstChild);
+    }
+  }
+})();
+</script>
+
+</body>
+</html>

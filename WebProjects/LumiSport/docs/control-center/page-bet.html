@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>竞猜：参与押注</title>
+<link rel="stylesheet" href="page-bet.css">
+</head>
+<body>
+
+<div class="img-overlay" id="imgOverlay">
+  <img id="overlayImg" src="" alt="zoom">
+  <div class="zoom-hint">click anywhere to close</div>
+</div>
+
+<div class="container">
+
+  <div class="page-header">
+    <h1>🎰 竞猜：参与押注</h1>
+    <p class="subtitle">管理员开启竞猜后，观众在竞猜面板选择玩法、下注押注的完整流程</p>
+  </div>
+
+  <div id="parts-mount"></div>
+
+</div>
+
+<script src="page-bet-utils.js"></script>
+<script>
+(function() {
+  var PARTS = [
+    '1-页面定位.html',
+    '2-竞猜流程概览.html',
+    '3-竞猜面板各阶段提示文案.html',
+    '4-选手无法参与竞猜.html',
+    '5-观众竞猜操作界面.html',
+    '6-竞猜玩法详解.html',
+    '7-竞猜玩法与游戏对应关系.html',
+    '8-赔率计算机制.html',
+    '9-下注修改与取消.html',
+    '10-开赛校验与流局处理.html',
+    '11-管理员操作的退款连锁规则.html',
+    '12-每日签到系统.html',
+    '13-预言家段位表.html',
+    '14-关键规则汇总.html'
+  ];
+  var mount = document.getElementById('parts-mount');
+  var loaded = 0;
+
+  BetUtils.initOverlay();
+
+  PARTS.forEach(function(file, idx) {
+    fetch('page-bet-parts/' + file)
+      .then(function(r) { return r.text(); })
+      .then(function(html) {
+        window['__bet_part_' + idx] = html;
+        loaded++;
+        if (loaded === PARTS.length) {
+          for (var i = 0; i < PARTS.length; i++) {
+            var div = document.createElement('div');
+            div.innerHTML = '\n' + window['__bet_part_' + i] + '\n';
+            while (div.firstChild) {
+              mount.appendChild(div.firstChild);
+            }
+          }
+        }
+      })
+      .catch(function(err) {
+        console.error('Failed to load ' + file, err);
+        var p = document.createElement('p');
+        p.style.cssText = 'color:#dc2626;padding:20px;text-align:center;';
+        p.textContent = '加载失败: ' + file;
+        mount.appendChild(p);
+      });
+  });
+})();
+</script>
+
+</body>
+</html>

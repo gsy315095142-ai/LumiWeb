@@ -1,0 +1,57 @@
+<!-- 当前流程（Server 端三大界面） -->
+  <div class="card">
+    <div class="card-title">🖥️ Server 端三大界面</div>
+    <p style="color:#64748b;font-size:14px;margin-bottom:20px;">
+      Unity 大屏在赛事不同阶段展示三个核心界面，与小程序 6 步流程对应关系如下：
+    </p>
+    <div class="flow-pages">
+      <div class="flow-page-item">
+        <div class="flow-page-img-wrap" onclick="zoomImg('./首页.png')">
+          <img src="./首页.png" alt="Server首页">
+        </div>
+        <div class="flow-page-text">
+          <div class="flow-page-num">01</div>
+          <div class="flow-page-label">Server 端<strong>首页</strong>：管理员选择竞技玩法</div>
+          <div class="phase-tags">
+            <span class="phase-tag">对应 ① 玩法配置</span>
+            <span class="phase-tag">对应 ② 等待报名</span>
+          </div>
+          <p style="color:#64748b;font-size:13px;margin-top:6px;">
+            管理员在 Server 端选择游戏类型（冰球/拳王/击剑）并确认，小程序端同步进入等待状态。<strong style="color:#d97706;">待开发</strong>：Server 端模式切换将统一收归到首页（当前在匹配页面）。
+          </p>
+        </div>
+      </div>
+      <div class="flow-page-item">
+        <div class="flow-page-img-wrap" onclick="zoomImg('./匹配.png')">
+          <img src="./匹配.png" alt="Server匹配">
+        </div>
+        <div class="flow-page-text">
+          <div class="flow-page-num">02</div>
+          <div class="flow-page-label">Server 端<strong>匹配页面</strong>：选手就位与竞猜</div>
+          <div class="phase-tags">
+            <span class="phase-tag">对应 ③ 报名中</span>
+            <span class="phase-tag">对应 ④ 竞猜中</span>
+            <span class="phase-tag">对应 ⑤ 比赛中</span>
+          </div>
+          <p style="color:#64748b;font-size:13px;margin-top:6px;">
+            小程序端进行<strong>报名参赛</strong>、<strong>竞猜胜负</strong>；管理员审核报名、开启竞猜、开始比赛。Server 端展示匹配进度与比赛实况。
+          </p>
+        </div>
+      </div>
+      <div class="flow-page-item">
+        <div class="flow-page-img-wrap" onclick="zoomImg('./结算.png')">
+          <img src="./结算.png" alt="Server结算">
+        </div>
+        <div class="flow-page-text">
+          <div class="flow-page-num">03</div>
+          <div class="flow-page-label">Server 端<strong>结算页面</strong>：胜负与下一局</div>
+          <div class="phase-tags">
+            <span class="phase-tag">对应 ⑥ 已结算</span>
+          </div>
+          <p style="color:#64748b;font-size:13px;margin-top:6px;">
+            展示<strong>比赛结果</strong>与积分变动。管理员可选择<strong>再来一局</strong>（继承玩法配置）、<strong>切换游戏</strong>或<strong>返回首页</strong>（收起当前场次）。
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>

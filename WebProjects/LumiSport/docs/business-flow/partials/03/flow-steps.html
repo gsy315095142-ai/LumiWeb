@@ -1,0 +1,204 @@
+    <div class="flow-pages">
+
+      <div class="flow-page-item">
+        <div class="flow-page-visual">
+          <div class="scene scene-counter">
+            <span class="scene-label">Step 01 · 奖品柜台</span>
+            <div class="counter-top">🎁 奖品兑换柜台</div>
+            <div class="prize-shelf">
+              <div class="prize-item">
+                <span class="prize-emoji">🧸</span>
+                <span class="prize-name">玩偶</span>
+                <span class="prize-price">500币</span>
+              </div>
+              <div class="prize-item selected">
+                <span class="prize-emoji">🎧</span>
+                <span class="prize-name">耳机</span>
+                <span class="prize-price">800币</span>
+              </div>
+              <div class="prize-item">
+                <span class="prize-emoji">☕</span>
+                <span class="prize-name">马克杯</span>
+                <span class="prize-price">300币</span>
+              </div>
+              <div class="prize-item">
+                <span class="prize-emoji">🎽</span>
+                <span class="prize-name">周边</span>
+                <span class="prize-price">600币</span>
+              </div>
+            </div>
+            <div class="counter-user">🧑</div>
+          </div>
+        </div>
+        <div class="flow-page-text">
+          <div class="flow-page-num">01</div>
+          <div class="flow-page-label">用户来到柜台，挑选奖品</div>
+          <div class="flow-page-desc">
+            用户前往门店<strong>奖品兑换柜台</strong>，浏览陈列的实物奖品（周边、礼品等），根据喜好与自身<strong>兑换币余额</strong>挑选想要兑换的奖品，并告知工作人员意向。
+          </div>
+          <div class="flow-tags">
+            <span class="tag user">角色：用户</span>
+            <span class="tag">线下柜台</span>
+            <span class="tag coin">按标价消耗兑换币</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-page-item">
+        <div class="flow-page-visual">
+          <div class="scene scene-user-scan-redeem">
+            <span class="scene-label">Step 02 · 用户扫码兑换</span>
+            <div class="user-redeem-stage">
+              <div class="redeem-act redeem-act--staff">
+                <div class="redeem-act-badge">① 工作人员</div>
+                <div class="staff-prize-desk">
+                  <span class="staff-prize-staff">👩‍💼</span>
+                  <div class="staff-prize-box">
+                    <span class="staff-prize-emoji">🎧</span>
+                    <div class="barcode-visual" aria-hidden="true">
+                      <span></span><span></span><span></span><span></span><span></span>
+                      <span></span><span></span><span></span><span></span><span></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="redeem-act-caption">取出实物奖品</div>
+              </div>
+
+              <div class="redeem-act-arrow" aria-hidden="true">
+                <span class="redeem-act-arrow-line"></span>
+                <span class="redeem-act-arrow-label">交给用户扫码</span>
+              </div>
+
+              <div class="redeem-act redeem-act--user">
+                <div class="redeem-act-badge redeem-act-badge--user">② 用户</div>
+                <div class="user-scan-row">
+                  <span class="user-scan-avatar">🧑</span>
+                  <div class="prize-phone prize-phone--user">
+                    <div class="prize-phone-notch"></div>
+                    <div class="prize-user-screen">
+                      <div class="screen-header screen-header--user">
+                        <span class="screen-dot screen-dot--amber"></span>
+                        奖品兑换
+                      </div>
+                      <div class="scan-viewfinder">
+                        <div class="vf-corner tl"></div>
+                        <div class="vf-corner tr"></div>
+                        <div class="vf-corner bl"></div>
+                        <div class="vf-corner br"></div>
+                        <div class="vf-line"></div>
+                        <span class="vf-icon">▮▯▮</span>
+                      </div>
+                      <div class="result-pill result-pill--ok">🎧 耳机 · 800 币</div>
+                      <div class="user-redeem-btn">确认兑换</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="redeem-act-caption redeem-act-caption--user">扫码后自主确认兑换</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flow-page-text">
+          <div class="flow-page-num">02</div>
+          <div class="flow-page-label">工作人员取奖，用户扫码自主兑换</div>
+          <div class="flow-page-desc">
+            用户确认兑换意向后，工作人员从柜台或库房<strong>取出对应实物奖品</strong>并交予用户。随后由<strong>用户本人</strong>打开小程序，扫描奖品上的<strong>条形码</strong>，查看商品名称与标价，核对无误后<strong>自主点击确认兑换</strong>，系统按标价扣减兑换币。
+          </div>
+          <div class="flow-tags">
+            <span class="tag staff">工作人员仅取奖</span>
+            <span class="tag user">用户扫码</span>
+            <span class="tag highlight">用户自主确认</span>
+            <span class="tag coin">扣减兑换币</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-page-item">
+        <div class="flow-page-visual">
+          <div class="scene scene-staff-log">
+            <span class="scene-label">Step 03 · 管理端</span>
+            <div class="log-panel">
+              <div class="log-panel-header">
+                <div class="log-panel-brand">
+                  <span class="log-panel-icon">🛡️</span>
+                  <span>管理端 · 兑换日志</span>
+                </div>
+                <span class="log-panel-badge">实时</span>
+              </div>
+              <div class="log-panel-body">
+                <div class="log-entry log-entry--success">
+                  <div class="log-entry-top">
+                    <span class="log-time">刚刚</span>
+                    <span class="log-status">✓ 扣币成功</span>
+                  </div>
+                  <div class="log-entry-main">
+                    <span class="log-user">🧑 用户昵称</span>
+                    <span class="log-prize">🎧 耳机</span>
+                  </div>
+                  <div class="log-entry-foot">
+                    <span class="log-deduct">−800 兑换币</span>
+                    <span class="log-balance">余额 4,200 币</span>
+                  </div>
+                </div>
+                <div class="staff-confirm-hint">
+                  <span class="staff-confirm-icon">👁️</span>
+                  工作人员确认扣币成功
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flow-page-text">
+          <div class="flow-page-num">03</div>
+          <div class="flow-page-label">工作人员查看日志，确认扣币成功</div>
+          <div class="flow-page-desc">
+            用户完成兑换后，管理端<strong>兑换日志</strong>实时记录本次操作，展示用户、奖品与扣币明细。工作人员查看日志，<strong>确认用户兑换币已成功扣减</strong>，再准备交付实物奖品。
+          </div>
+          <div class="flow-tags">
+            <span class="tag staff">管理端查看</span>
+            <span class="tag highlight">兑换日志</span>
+            <span class="tag coin">确认扣币成功</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-page-item">
+        <div class="flow-page-visual">
+          <div class="scene scene-prize-handoff">
+            <span class="scene-label">Step 04 · 完成交付</span>
+            <div class="handoff-stage">
+              <div class="handoff-counter">
+                <div class="handoff-side handoff-side--staff">
+                  <span class="handoff-avatar">👩‍💼</span>
+                  <span class="handoff-role">工作人员</span>
+                </div>
+                <div class="handoff-center">
+                  <div class="handoff-prize">🎧</div>
+                  <div class="handoff-arrow">→</div>
+                </div>
+                <div class="handoff-side handoff-side--user">
+                  <span class="handoff-avatar">🧑</span>
+                  <span class="handoff-role">用户</span>
+                </div>
+              </div>
+              <div class="handoff-caption">用户取走奖品</div>
+              <div class="handoff-done">✓ 流程结束</div>
+            </div>
+          </div>
+        </div>
+        <div class="flow-page-text">
+          <div class="flow-page-num">04</div>
+          <div class="flow-page-label">扣币成功后，用户取走奖品</div>
+          <div class="flow-page-desc">
+            确认扣币成功后，工作人员将实物奖品<strong>交付给用户</strong>，用户取走奖品，本次兑换流程<strong>结束</strong>。
+          </div>
+          <div class="flow-tags">
+            <span class="tag user">用户取走奖品</span>
+            <span class="tag staff">工作人员交付</span>
+            <span class="tag highlight">流程结束</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>

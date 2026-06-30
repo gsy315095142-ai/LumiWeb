@@ -1,0 +1,42 @@
+<!-- ═══════ 页面跳转关系 ═══════ -->
+  <div class="card">
+    <div class="card-title">🗺️ 页面跳转关系图</div>
+    <div class="nav-section">
+      <div class="nav-map">
+        <div class="nav-node nn-login">
+          <span class="nav-node-icon">🔐</span>
+          <span class="nav-node-name">登录页</span>
+          <span class="nav-node-path">login/index</span>
+        </div>
+        <div class="nav-arrow">›<br><span class="nav-cond">reLaunch</span></div>
+        <div class="nav-node nn-store">
+          <span class="nav-node-icon">🏪</span>
+          <span class="nav-node-name">选择门店</span>
+          <span class="nav-node-path">index/index</span>
+        </div>
+        <div class="nav-arrow">›<br><span class="nav-cond">switchTab</span></div>
+        <div class="nav-node nn-event">
+          <span class="nav-node-icon">🎮</span>
+          <span class="nav-node-name">赛事主页</span>
+          <span class="nav-node-path">player/event</span>
+        </div>
+      </div>
+      <div class="nav-map" style="margin-top:8px">
+        <div class="nav-node nn-store">
+          <span class="nav-node-icon">🏪</span>
+          <span class="nav-node-name">选择门店</span>
+          <span class="nav-node-path">index/index</span>
+        </div>
+        <div class="nav-arrow">›<br><span class="nav-cond">navigateTo<br>admin only</span></div>
+        <div class="nav-node nn-admin">
+          <span class="nav-node-icon">🛡️</span>
+          <span class="nav-node-name">管理员操控</span>
+          <span class="nav-node-path">player/admin</span>
+        </div>
+      </div>
+      <div class="auto-skip-note" style="background:rgba(220,38,38,0.04); border-color:rgba(220,38,38,0.20);">
+        <span class="note-icon">🔒</span>
+        <span><strong>未登录拦截</strong>：选择门店页 onMounted 检查 userStore.isLoggedIn，若为 false 则 reLaunch 回登录页。所有 API 请求 401 时自动 scheduleAuthRedirectToLogin()。</span>
+      </div>
+    </div>
+  </div>

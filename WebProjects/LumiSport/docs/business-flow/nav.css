@@ -1,0 +1,117 @@
+/* ===== 通用顶部导航栏 ===== */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 8px rgba(15, 23, 42, 0.05);
+}
+
+.site-nav-inner {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  height: 52px;
+  gap: 6px;
+}
+
+.site-nav-brand {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-right: 20px;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.site-nav-brand .brand-icon {
+  font-size: 20px;
+}
+
+.site-nav-links {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.site-nav-links::-webkit-scrollbar {
+  display: none;
+}
+
+.site-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #64748b;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.2s, color 0.2s;
+}
+
+.site-nav-link:hover {
+  background: #f1f5f9;
+  color: #334155;
+}
+
+.site-nav-link.active {
+  background: #eef2ff;
+  color: #4f46e5;
+  font-weight: 600;
+}
+
+.site-nav-link .link-icon {
+  font-size: 15px;
+}
+
+.site-nav-back {
+  margin-left: auto;
+  flex-shrink: 0;
+  padding: 7px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #64748b;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.2s, color 0.2s;
+}
+
+.site-nav-back:hover {
+  background: #f1f5f9;
+  color: #4f46e5;
+}
+
+/* 移动端适配 */
+@media (max-width: 640px) {
+  .site-nav-inner {
+    padding: 0 12px;
+    height: 48px;
+  }
+  .site-nav-brand {
+    font-size: 13px;
+    margin-right: 12px;
+  }
+  .site-nav-link {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+  .site-nav-back {
+    padding: 6px 8px;
+    font-size: 11px;
+  }
+}

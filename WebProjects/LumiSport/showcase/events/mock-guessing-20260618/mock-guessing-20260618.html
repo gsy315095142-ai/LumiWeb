@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumi竞技大空间模拟竞猜活动</title>
+<meta name="description" content="Lumi竞技大空间模拟竞猜活动 — 三大 XR 竞技项目 8 强争霸，红蓝胜负竞猜赢兑换币换好礼。">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- 顶部导航 -->
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a class="nav-back" href="../../../LumiSport.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      <span class="nav-back-text">返回</span>
+    </a>
+    <a class="nav-brand" href="#hero">
+      <span class="brand-mark">◆</span>
+      <span class="brand-text">Lumi 竞技大空间</span>
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#games">赛事项目</a>
+      <a href="#format">赛制</a>
+      <a href="#schedule">时间表</a>
+      <a href="#betting">竞猜玩法</a>
+      <a href="#prizes">奖品</a>
+      <a href="#faq">须知</a>
+      <a href="value-calc.html" class="nav-link-calc">数值推算 ↗</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="菜单">☰</button>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero" id="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge">XR 竞技 · 模拟竞猜之夜</div>
+    <div class="hero-date">📅 本周四 06.18（周四）18:00 – 20:00</div>
+    <h1 class="hero-title">
+      Lumi 竞技大空间<br><span class="hero-title-accent">模拟竞猜活动</span>
+    </h1>
+    <p class="hero-sub">
+      戴上头显、走进大空间，真人 1v1 对战；掏出手机，押红押蓝，猜中赢币换好礼。
+    </p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <span class="meta-icon">🕖</span>
+        <span class="meta-label">活动时间</span>
+        <span class="meta-value">06.18 周四 18:00</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="meta-icon">🎮</span>
+        <span class="meta-label">竞技项目</span>
+        <span class="meta-value">3 大玩法</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="meta-icon">⚔️</span>
+        <span class="meta-label">全场赛事</span>
+        <span class="meta-value">21 场对决</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="meta-icon">🏆</span>
+        <span class="meta-label">最高大奖</span>
+        <span class="meta-value">iPad × 1</span>
+      </div>
+    </div>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#betting">竞猜怎么玩 →</a>
+      <a class="btn btn-ghost" href="#prizes">看看奖品</a>
+    </div>
+  </div>
+  <div class="hero-scroll">向下滚动 ↓</div>
+</section>
+
+<!-- 赛事项目 -->
+<section class="section" id="games">
+  <div class="section-head">
+    <span class="section-kicker">COMPETITION</span>
+    <h2 class="section-title">三大竞技项目</h2>
+    <p class="section-desc">在真实物理场地内自由移动、对抗，每个项目独立角逐出一位冠军。</p>
+  </div>
+  <div class="games-grid" id="gamesGrid"></div>
+</section>
+
+<!-- 赛制 -->
+<section class="section section-alt" id="format">
+  <div class="section-head">
+    <span class="section-kicker">FORMAT</span>
+    <h2 class="section-title">8 强单败淘汰</h2>
+    <p class="section-desc">每个项目 8 名选手，三轮淘汰决出冠军；三项目并行，共 21 场对决、3 位冠军。</p>
+  </div>
+
+  <div class="format-stats">
+    <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">竞技项目</div></div>
+    <div class="stat-card"><div class="stat-num">8</div><div class="stat-label">每项目选手</div></div>
+    <div class="stat-card"><div class="stat-num">21</div><div class="stat-label">全场赛事</div></div>
+    <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">项目冠军</div></div>
+  </div>
+
+  <div class="bracket" id="bracket"></div>
+  <p class="format-note">单项目：1/4 决赛 4 场 → 半决赛 2 场 → 决赛 1 场，合计 <strong>7 场</strong>。</p>
+</section>
+
+<!-- 时间表 -->
+<section class="section" id="schedule">
+  <div class="section-head">
+    <span class="section-kicker">SCHEDULE</span>
+    <h2 class="section-title">当晚时间表</h2>
+    <p class="section-desc">18:00 准时开场，20:00 准时收官，每场约 5 分钟，节奏紧凑。</p>
+  </div>
+  <div class="timeline" id="timeline"></div>
+</section>
+
+<!-- 竞猜玩法 -->
+<section class="section section-alt" id="betting">
+  <div class="section-head">
+    <span class="section-kicker">HOW TO PLAY</span>
+    <h2 class="section-title">竞猜怎么玩</h2>
+    <p class="section-desc">只猜一件事 —— 红方胜还是蓝方胜。简单、直接、人人能玩。</p>
+  </div>
+
+  <div class="player-note">
+    <div class="player-note-icon">🤺</div>
+    <div class="player-note-body">
+      <div class="player-note-title">上场选手 = 押注自己</div>
+      <p>选手报名上场需消耗 <strong>200 游戏币</strong>，视为押注自己获胜；获胜同样按赔率获得游戏币与兑换币，失败则扣除。已报名选手不能再以观众身份押同一场。</p>
+    </div>
+  </div>
+
+  <div class="steps" id="steps"></div>
+
+  <div class="betting-cards">
+    <div class="bet-card highlight">
+      <div class="bet-card-icon">📈</div>
+      <div class="bet-card-title">本场赔率</div>
+      <div class="bet-card-big">1.8<span>×</span></div>
+      <div class="bet-card-foot">选手初始积分相同，当晚每场胜负赔率均为 1.8</div>
+    </div>
+    <div class="bet-card">
+      <div class="bet-card-icon">🎟️</div>
+      <div class="bet-card-title">入场领币</div>
+      <div class="bet-card-big">¥10<span>= 1000币</span></div>
+      <div class="bet-card-foot">每加购 ¥10 套餐再得 1000 游戏币，可重复</div>
+    </div>
+    <div class="bet-card">
+      <div class="bet-card-icon">🎯</div>
+      <div class="bet-card-title">单场下注</div>
+      <div class="bet-card-big">10 – 200<span>币</span></div>
+      <div class="bet-card-foot">最低 10 币起，单次最高 200 币</div>
+    </div>
+  </div>
+
+  <div class="settle">
+    <h3 class="sub-title">猜对能拿什么？</h3>
+    <div class="settle-flow">
+      <div class="settle-node">
+        <div class="settle-node-label">下注</div>
+        <div class="settle-node-val">200 <span>游戏币</span></div>
+      </div>
+      <div class="settle-arrow">猜中 ×1.8 →</div>
+      <div class="settle-node win">
+        <div class="settle-node-label">收回游戏币</div>
+        <div class="settle-node-val">360 <span>游戏币</span></div>
+      </div>
+      <div class="settle-plus">＋</div>
+      <div class="settle-node ex">
+        <div class="settle-node-label">额外兑换币</div>
+        <div class="settle-node-val">160 <span>兑换币</span></div>
+      </div>
+    </div>
+    <p class="settle-tip">
+      <strong>兑换币 = 你赚到的利润</strong>（下注额 × 0.8）。猜错则扣除本次下注，不得兑换币。
+      <br><span class="muted">游戏币用来继续竞猜，兑换币用来换奖品（见下方奖品区）。</span>
+    </p>
+  </div>
+</section>
+
+<!-- 奖品 -->
+<section class="section" id="prizes">
+  <div class="section-head">
+    <span class="section-kicker">PRIZES</span>
+    <h2 class="section-title">奖品 &amp; 兑换</h2>
+    <p class="section-desc">奖励分三类：上场选手拿<strong>比赛奖励</strong>；观众按累计兑换币排名拿<strong>累计竞猜奖励</strong>（最高得 iPad）；竞猜赢得的兑换币可换<strong>竞猜兑换奖励</strong>。</p>
+  </div>
+
+  <!-- 一、比赛奖励 -->
+  <h3 class="sub-title center">① 比赛奖励 · 各项目独立发放</h3>
+  <p class="sub-desc center">三个项目各自 8 强淘汰，上场选手按名次领取实物奖励；<strong>独立实物、现场发放</strong>，与竞猜兑换库存无关。</p>
+  <div class="rank-prize-grid rank-prize-grid-3" id="matchPrizeGrid"></div>
+  <p class="rank-prize-foot">＊ 比赛奖励按淘汰赛结果现场发放，无需消耗兑换币；其他参赛选手（未进前二者）均可获得 10 元档奖励。</p>
+
+  <!-- 二、累计竞猜奖励 -->
+  <h3 class="sub-title center">② 累计竞猜奖励 · 按累计兑换币排名</h3>
+  <p class="sub-desc center">活动结束时，统计每位观众当晚<strong>累计获得的兑换币</strong>，取前三名颁发专属大奖。</p>
+  <div class="grand-prize">
+    <div class="grand-prize-glow"></div>
+    <div class="grand-prize-icon">📱</div>
+    <div class="grand-prize-body">
+      <div class="grand-prize-tag">累计竞猜大奖 · 第 1 名</div>
+      <div class="grand-prize-name">iPad × 1</div>
+      <div class="grand-prize-desc">当晚<strong>累计兑换币数量最高</strong>的观众获得。活动结束时统计公布；若并列则加赛或现场抽签决出（以现场规则为准）。</div>
+    </div>
+  </div>
+  <div class="rank-prize-grid" id="cumPrizeGrid"></div>
+  <p class="rank-prize-foot">＊ 累计竞猜奖励按全场累计兑换币排名评选，独立于比赛奖励与竞猜兑换库存。</p>
+
+  <!-- 三、竞猜兑换奖励 -->
+  <h3 class="sub-title center">③ 竞猜兑换奖励 · 兑换币换好礼</h3>
+  <p class="sub-desc center">猜对越多，能换的礼品越大。共 10 / 20 / 40 / 80 / 160 元五档，下方库存<strong>仅指观众竞猜兑换</strong>，兑完即止。</p>
+  <div class="tier-grid" id="tierGrid"></div>
+  <p class="tier-foot">＊ 兑换档位按「猜对场次」设计，而非按礼品价值等比折算 —— 因为当晚只有 21 场，确保每一档都真的能被换到。「库存 X 份」为观众专属，先兑先得。</p>
+
+  <div class="prize-types prize-types-3">
+    <div class="prize-type">
+      <div class="prize-type-head">🏅 比赛奖励</div>
+      <p>上场选手按各项目名次领取实物：第一名 LUMI智能眼镜、第二名华为 NFC 手环、其他参赛选手 10 元档奖励。现场发放，不占用竞猜兑换库存。</p>
+    </div>
+    <div class="prize-type">
+      <div class="prize-type-head">📱 累计竞猜奖励</div>
+      <p>按当晚累计兑换币排名：第 1 名 iPad，第 2、3 名各得价值千元 LUMI智能眼镜。活动结束统计公布。</p>
+    </div>
+    <div class="prize-type">
+      <div class="prize-type-head">🎁 竞猜兑换奖励</div>
+      <p>观众用竞猜赢得的兑换币，在奖品区按 10～160 元五档兑换；各档「竞猜可兑」份数有限，兑完即止。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 须知 -->
+<section class="section section-alt" id="faq">
+  <div class="section-head">
+    <span class="section-kicker">GOOD TO KNOW</span>
+    <h2 class="section-title">温馨须知</h2>
+  </div>
+  <div class="faq-grid" id="faqGrid"></div>
+</section>
+
+<footer class="footer">
+  <div class="footer-title">Lumi 竞技大空间模拟竞猜活动</div>
+  <div class="footer-sub">本周四 06.18 · 18:00 – 20:00 · 疾速冰球 · 烈焰拳王 · 雷霆击剑</div>
+  <div class="footer-note">本页面为活动介绍草案，最终规则、时间与奖品以现场公布为准。</div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

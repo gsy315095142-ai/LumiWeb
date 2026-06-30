@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LumiSport 小程序业务流程</title>
+<link rel="stylesheet" href="nav.css">
+<style>
+  body { background: #f4f6fb; }
+  .container {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 48px 24px 64px;
+  }
+  .hero {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .hero-badge {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #4f46e5;
+    background: #eef2ff;
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 16px;
+  }
+  .hero-icon { font-size: 48px; margin-bottom: 12px; }
+  .hero h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 10px;
+  }
+  .hero p {
+    font-size: 15px;
+    color: #64748b;
+    line-height: 1.7;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+  .flow-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+  }
+  .flow-card {
+    display: block;
+    background: #fff;
+    border-radius: 16px;
+    padding: 28px 24px;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 1px 4px rgba(15, 23, 42, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .flow-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.1);
+  }
+  .flow-card-icon { font-size: 36px; margin-bottom: 14px; }
+  .flow-card h2 {
+    font-size: 17px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 8px;
+  }
+  .flow-card p {
+    font-size: 13px;
+    color: #64748b;
+    line-height: 1.6;
+  }
+  .flow-card-arrow {
+    margin-top: 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #4f46e5;
+  }
+  .footer-note {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 12px;
+    color: #94a3b8;
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="site-nav-inner">
+    <a class="site-nav-brand" href="prototype-hub.html">
+      <span class="brand-icon">🎮</span> LumiSport
+    </a>
+    <div class="site-nav-links">
+      <a class="site-nav-link" href="01-客户筹码兑换流程.html">
+        <span class="link-icon">🪙</span> 筹码兑换
+      </a>
+      <a class="site-nav-link" href="02-选手报名与观众竞猜流程.html">
+        <span class="link-icon">🎮</span> 报名竞猜
+      </a>
+      <a class="site-nav-link" href="03-用户兑换奖品流程.html">
+        <span class="link-icon">🎁</span> 奖品兑换
+      </a>
+    </div>
+    <a class="site-nav-back" href="../../LumiSport.html">← 返回项目</a>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="hero">
+    <div class="hero-badge">新版小程序迭代</div>
+    <div class="hero-icon">🎮</div>
+    <h1>LumiSport 业务流程说明</h1>
+    <p>请选择要查看的流程文档。同一局域网内的同事可通过分享链接直接访问。</p>
+  </div>
+
+  <div class="flow-grid">
+    <a class="flow-card" href="01-客户筹码兑换流程.html">
+      <div class="flow-card-icon">🪙</div>
+      <h2>客户筹码兑换流程</h2>
+      <p>酒店入住领取实体筹码 → 酒吧扫码登录 → 出示身份码 → 店员核销兑换游戏币</p>
+      <div class="flow-card-arrow">查看流程 →</div>
+    </a>
+
+    <a class="flow-card" href="02-选手报名与观众竞猜流程.html">
+      <div class="flow-card-icon">🎮</div>
+      <h2>选手报名与观众竞猜流程</h2>
+      <p>小程序报名排队 → 轮到后上台 → 观众竞猜 → 比赛结果与奖励</p>
+      <div class="flow-card-arrow">查看流程 →</div>
+    </a>
+
+    <a class="flow-card" href="03-用户兑换奖品流程.html">
+      <div class="flow-card-icon">🎁</div>
+      <h2>用户兑换奖品流程</h2>
+      <p>柜台挑选奖品 → 取奖后用户扫码兑换 → 工作人员确认扣币 → 取走奖品</p>
+      <div class="flow-card-arrow">查看流程 →</div>
+    </a>
+  </div>
+
+  <p class="footer-note">通过 <a href="../../LumiSport.html" style="color:#4f46e5;text-decoration:none;">Lumi 竞技大空间</a> 项目门户访问 · <a href="../../prototypes/miniprogram/prototype-hub.html" style="color:#4f46e5;text-decoration:none;">查看小程序原型</a></p>
+</div>
+
+</body>
+</html>

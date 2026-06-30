@@ -1,0 +1,13 @@
+<!-- ═══════ 退出登录 ═══════ -->
+  <div class="card">
+    <div class="card-title">🚪 退出登录</div>
+    <div class="logout-section">
+      <div class="logout-desc">退出入口在<strong>选择门店页</strong>底部的「退出登录」按钮，仅登录状态可见。</div>
+      <div class="logout-steps">
+        <div class="logout-step"><span class="ls-num">1</span><span>调用 <strong>userStore.logout()</strong></span></div>
+        <div class="logout-step"><span class="ls-num">2</span><span>清空内存：token = '' , userInfo = null , managedStores = []</span></div>
+        <div class="logout-step"><span class="ls-num">3</span><span>清空 Storage：removeToken() + removeUserInfo() + removeManagedStores()</span></div>
+        <div class="logout-step"><span class="ls-num">4</span><span>reLaunchSafe('/pages/login/index') 跳回登录页</span></div>
+      </div>
+    </div>
+  </div>

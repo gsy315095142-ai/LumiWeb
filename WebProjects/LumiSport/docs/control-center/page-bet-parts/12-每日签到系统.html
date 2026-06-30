@@ -1,0 +1,20 @@
+<div class="card">
+    <h2><span class="icon">📅</span>每日签到系统</h2>
+    <p style="color:#64748b;font-size:14px;margin-bottom:16px;">
+      用户可通过每日签到获取竞猜币，作为参与竞猜的初始资金：
+    </p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+      <div style="background:rgba(22,163,74,0.04);border:1px solid rgba(22,163,74,0.12);border-radius:10px;padding:18px;">
+        <p style="font-size:14px;font-weight:600;color:#16a34a;margin-bottom:8px;">🪙 签到奖励</p>
+        <p style="font-size:13px;color:#64748b;line-height:1.8;">每次签到获得 <strong style="color:#16a34a;">+100 竞猜币</strong><br>常量：<code>DAILY_CHECK_IN_COINS = 100</code></p>
+      </div>
+      <div style="background:rgba(99,102,241,0.04);border:1px solid rgba(99,102,241,0.12);border-radius:10px;padding:18px;">
+        <p style="font-size:14px;font-weight:600;color:#6366f1;margin-bottom:8px;">⏰ 签到规则</p>
+        <p style="font-size:13px;color:#64748b;line-height:1.8;">按 <strong>Asia/Shanghai</strong> 时区自然日限制<br>同一用户每日仅可签到一次<br>接口：<code>POST /api/player/check-in</code></p>
+      </div>
+    </div>
+    <div class="rule-box info" style="margin-top:16px;">
+      <p class="rule-title">💡 初始状态</p>
+      <p class="rule-text">新用户首次登录后竞猜币为 <strong>0</strong>，需通过每日签到获取初始资金。竞猜币不可充值、不可提现、不可转让，仅限当前门店内使用。</p>
+    </div>
+  </div>

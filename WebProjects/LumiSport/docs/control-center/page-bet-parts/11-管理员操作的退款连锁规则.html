@@ -1,0 +1,14 @@
+<div class="card">
+    <h2><span class="icon">💰</span>管理员操作的退款连锁规则</h2>
+    <p style="color:#64748b;font-size:14px;margin-bottom:20px;">
+      管理员的以下操作会触发连锁退款，确保观众竞猜币安全：
+    </p>
+    <table class="rank-table">
+      <thead><tr><th>操作</th><th>执行阶段</th><th>退款规则</th></tr></thead>
+      <tbody>
+        <tr><td style="font-weight:600;color:#1e293b;">返回首页 / 重选玩法</td><td>报名中（betting）或 比赛中（started）</td><td>当场内存在观众押注时，<strong style="color:#d97706;">先全额退还所有观众押注</strong>，再收起当前场次</td></tr>
+        <tr><td style="font-weight:600;color:#1e293b;">剔除选手</td><td>报名中（betting）</td><td>剔除后 <code>guessingOpen</code> 自动重置为 <strong style="color:#d97706;">false</strong>，若该场已有押注则<strong style="color:#d97706;">全部退还</strong></td></tr>
+        <tr><td style="font-weight:600;color:#1e293b;">取消本局竞猜</td><td>报名中（betting）</td><td>全额退还所有观众下注，局数不变，状态不变</td></tr>
+      </tbody>
+    </table>
+  </div>

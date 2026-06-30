@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>登录与门店 · 竞技大空间</title>
+<link rel="stylesheet" href="page-login.css">
+</head>
+<body>
+
+<div class="img-overlay" id="imgOverlay">
+  <img id="overlayImg" src="" alt="zoom">
+  <div class="zoom-hint">click anywhere to close</div>
+</div>
+
+<div class="container">
+
+  <div class="header">
+    <div class="header-icon">🔐</div>
+    <h1>登录与门店选择 · 设计说明</h1>
+    <p>微信小程序端 · 用户身份认证与门店入口</p>
+    <div class="header-badge">📋 PRD v1.1 · 统一微信登录 + 白名单鉴权</div>
+  </div>
+
+  <div id="parts-mount"></div>
+
+</div>
+
+<script src="page-login-utils.js"></script>
+<script>
+(function() {
+  var PARTS = [
+    '1-全局流程概览.html',
+    '2-登录页UI.html',
+    '3-微信登录.html',
+    '4-用户角色与权限.html',
+    '5-用户初始化与经济系统.html',
+    '6-选择门店页.html',
+    '7-Token持久化.html',
+    '8-页面跳转关系.html',
+    '9-退出登录.html',
+    '10-白名单管理.html',
+    '11-相关API.html',
+    '12-页脚.html'
+  ];
+  var mount = document.getElementById('parts-mount');
+  var loaded = 0;
+
+  LoginUtils.initOverlay();
+
+  PARTS.forEach(function(file, idx) {
+    fetch('page-login-parts/' + file)
+      .then(function(r) { return r.text(); })
+      .then(function(html) {
+        window['__login_part_' + idx] = html;
+        loaded++;
+        if (loaded === PARTS.length) {
+          for (var i = 0; i < PARTS.length; i++) {
+            var div = document.createElement('div');
+            div.innerHTML = '\n' + window['__login_part_' + i] + '\n';
+            while (div.firstChild) {
+              mount.appendChild(div.firstChild);
+            }
+          }
+        }
+      })
+      .catch(function(err) {
+        console.error('Failed to load ' + file, err);
+        var p = document.createElement('p');
+        p.style.cssText = 'color:#dc2626;padding:20px;text-align:center;';
+        p.textContent = '加载失败: ' + file;
+        mount.appendChild(p);
+      });
+  });
+})();
+</script>
+
+</body>
+</html>

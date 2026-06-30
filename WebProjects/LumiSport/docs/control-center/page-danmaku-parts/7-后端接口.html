@@ -1,0 +1,80 @@
+<!-- 7. 后端接口 -->
+  <div class="card">
+    <h2><span class="icon">🔌</span>后端接口</h2>
+    <p style="color:#64748b;font-size:14px;margin-bottom:16px;">
+      弹幕模块位于后端 <code style="background:rgba(37,99,235,0.08);color:#3b82f6;padding:2px 6px;border-radius:4px;font-size:12px;">modules/danmaku</code>，提供两个 RESTful 接口，均需 JWT 认证：
+    </p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;">
+      <div style="background:rgba(22,163,74,0.04);border:1px solid rgba(22,163,74,0.12);border-radius:10px;padding:18px;">
+        <p style="font-size:14px;font-weight:600;color:#16a34a;margin-bottom:8px;">📥 GET /api/danmaku</p>
+        <p style="font-size:13px;color:#64748b;line-height:1.8;">
+          按场次增量拉取弹幕<br>
+          参数：<code>sessionId</code>、<code>afterId</code>（默认 0）、<code>limit</code>（默认 50，最大 100）
+        </p>
+      </div>
+      <div style="background:rgba(234,88,12,0.04);border:1px solid rgba(234,88,12,0.12);border-radius:10px;padding:18px;">
+        <p style="font-size:14px;font-weight:600;color:#ea580c;margin-bottom:8px;">📤 POST /api/danmaku</p>
+        <p style="font-size:13px;color:#64748b;line-height:1.8;">
+          发送弹幕<br>
+          参数：<code>sessionId</code>（int, ≥1）、<code>content</code>（string, 1~80字）
+        </p>
+      </div>
+    </div>
+
+    <h3 style="font-size:16px;font-weight:600;color:#6366f1;margin-bottom:12px;">📤 发送弹幕校验链</h3>
+    <p style="color:#64748b;font-size:14px;margin-bottom:12px;">
+      后端收到 POST 请求后依次执行以下校验，任一不通过即返回错误：
+    </p>
+    <table class="api-table">
+      <thead><tr><th>步骤</th><th>校验内容</th><th>错误提示</th></tr></thead>
+      <tbody>
+        <tr>
+          <td style="font-weight:600;color:#1e293b;">① 空内容校验</td>
+          <td><code>content.trim()</code> 为空 → 拒绝</td>
+          <td style="color:#ea580c;">弹幕内容不能为空</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;color:#1e293b;">② 长度校验</td>
+          <td><code>content.length > 80</code> → 拒绝（DTO 层 @MaxLength(80)，服务层二次校验）</td>
+          <td style="color:#ea580c;">弹幕内容过长（最多 80 字）</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;color:#1e293b;">③ 敏感词校验</td>
+          <td>匹配词库中的敏感词（子串匹配，大小写不敏感）→ 拒绝</td>
+          <td style="color:#ea580c;">弹幕内容包含敏感词，请修改后重试</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;color:#1e293b;">④ 场次存在校验</td>
+          <td><code>sessionId</code> 对应的场次不存在 → 拒绝</td>
+          <td style="color:#ea580c;">场次不存在</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;color:#1e293b;">⑤ 用户存在校验</td>
+          <td>JWT 中的 userId 对应的用户不存在 → 拒绝</td>
+          <td style="color:#ea580c;">用户不存在</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 style="font-size:16px;font-weight:600;color:#6366f1;margin:24px 0 12px;">📤 响应结构</h3>
+    <div class="rule-box code">
+      <p class="rule-title">DanmakuMessagePayload</p>
+      <p class="rule-text">
+        <strong>id</strong>: number — 弹幕唯一 ID<br>
+        <strong>sessionId</strong>: number — 所属场次 ID<br>
+        <strong>userId</strong>: number — 发送者用户 ID<br>
+        <strong>displayName</strong>: string — 发送者昵称<br>
+        <strong>content</strong>: string — 弹幕正文<br>
+        <strong>createdAt</strong>: string — 发送时间（ISO 8601）
+      </p>
+    </div>
+
+    <div class="rule-box code" style="margin-top:12px;">
+      <p class="rule-title">DanmakuListPayload（GET 响应）</p>
+      <p class="rule-text">
+        <strong>messages</strong>: DanmakuMessagePayload[] — 弹幕列表（时间正序）<br>
+        <strong>maxId</strong>: number — 当前列表中最大 ID，客户端用于下次轮询的 afterId
+      </p>
+    </div>
+  </div>

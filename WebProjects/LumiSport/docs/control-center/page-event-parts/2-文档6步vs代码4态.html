@@ -1,0 +1,63 @@
+<!-- 6 步 vs 4 态对照 -->
+  <div class="card">
+    <div class="card-title">📐 文档 6 步 vs 代码 4 态</div>
+    <p style="color:#64748b;font-size:14px;margin-bottom:16px;">
+      产品设计定义 6 个流程阶段，当前代码实现为 4 个 <code style="background:rgba(99,102,241,0.08);color:#6366f1;padding:1px 5px;border-radius:3px;font-size:13px;">SessionStatus</code>。部分阶段在代码中共享同一状态，需后续开发独立拆分。
+    </p>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>文档 6 步</th>
+          <th>代码 SessionStatus</th>
+          <th>代码区分方式</th>
+          <th>开发状态</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="step-name">① ⚙️ 玩法配置</td>
+          <td><code>waiting</code></td>
+          <td>管理员尚未点「确认玩法」<span class="merge-hint">与②共用同一状态</span></td>
+          <td><span class="tag-implemented">✅ 已实现</span></td>
+        </tr>
+        <tr>
+          <td class="step-name">② ⏳ 等待报名</td>
+          <td><code>waiting</code></td>
+          <td>管理员已点「确认玩法」，尚未「开始报名」<span class="merge-hint">与①共用同一状态</span></td>
+          <td><span class="tag-substate">🟡 子状态待独立</span></td>
+        </tr>
+        <tr>
+          <td class="step-name">③ 🤺 报名中</td>
+          <td><code>betting</code></td>
+          <td><code>guessingOpen = false</code><span class="merge-hint">选手可报名，观众不可下注</span></td>
+          <td><span class="tag-implemented">✅ 已实现</span></td>
+        </tr>
+        <tr>
+          <td class="step-name">④ 🎰 竞猜中</td>
+          <td><code>betting</code></td>
+          <td><code>guessingOpen = true</code><span class="merge-hint">管理员点「开启竞猜」后观众可下注</span></td>
+          <td><span class="tag-substate">🟡 子状态待独立</span></td>
+        </tr>
+        <tr>
+          <td class="step-name">⑤ ⚔️ 比赛中</td>
+          <td><code>started</code></td>
+          <td>—</td>
+          <td><span class="tag-implemented">✅ 已实现</span></td>
+        </tr>
+        <tr>
+          <td class="step-name">⑥ 🏆 已结算</td>
+          <td><code>settled</code></td>
+          <td>—</td>
+          <td><span class="tag-implemented">✅ 已实现</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="rule-box">
+      <p class="rule-title">⚠️ 子状态待独立说明</p>
+      <p class="rule-text">
+        <strong style="color:#1e293b;">①② 合并为 <code>waiting</code></strong>：当前靠管理员是否已点「确认玩法」来区分，但代码中无独立字段标记。<br>
+        <strong style="color:#1e293b;">③④ 合并为 <code>betting</code></strong>：通过布尔字段 <code>guessingOpen</code> 区分，已可正常工作，但若需前端根据步骤展示不同 UI（如进度条高亮第 3 步 vs 第 4 步），建议后续将 <code>guessingOpen</code> 提升为独立的 SessionStatus 枚举值。
+      </p>
+    </div>
+  </div>

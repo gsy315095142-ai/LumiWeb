@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>赛事：进行比赛</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; background: #f0f2f8; color: #1e293b; line-height: 1.7; }
+.container { max-width: 960px; margin: 0 auto; padding: 40px 24px 80px; }
+.page-header { text-align: center; margin-bottom: 48px; }
+.page-header h1 { font-size: 32px; font-weight: 700; background: linear-gradient(135deg, #6366f1, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 8px; }
+.page-header .subtitle { color: #64748b; font-size: 15px; }
+
+.card { background: #ffffff; border: 1px solid rgba(99,102,241,0.12); border-top: 2px solid; border-image: linear-gradient(90deg, #6366f1, #0891b2) 1; border-radius: 16px; padding: 32px; margin-bottom: 32px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); transition: border-color 0.3s, box-shadow 0.3s; }
+.card:hover { border-color: rgba(99,102,241,0.25); box-shadow: 0 2px 8px rgba(99,102,241,0.06); }
+.card h2 { font-size: 20px; font-weight: 600; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+.card h2 .icon { font-size: 22px; }
+
+.illus-row { display: flex; gap: 32px; align-items: flex-start; margin-bottom: 36px; }
+.illus-row:last-child { margin-bottom: 0; }
+.phone-frame { flex-shrink: 0; width: 280px; background: #e2e8f0; border-radius: 28px; border: 3px solid #cbd5e1; padding: 12px 10px 16px; box-shadow: 0 8px 32px rgba(0,0,0,0.08); position: relative; }
+.phone-frame::before { content: ''; position: absolute; top: 6px; left: 50%; transform: translateX(-50%); width: 60px; height: 5px; background: #cbd5e1; border-radius: 3px; }
+.phone-frame img { width: 100%; border-radius: 16px; display: block; cursor: zoom-in; transition: filter 0.2s; }
+.phone-frame img:hover { filter: brightness(1.04); }
+.phone-label { text-align: center; margin-top: 10px; font-size: 13px; color: #64748b; font-weight: 500; }
+.desc-area { flex: 1; min-width: 0; }
+.desc-area h3 { font-size: 17px; font-weight: 600; color: #1e293b; margin-bottom: 14px; }
+
+.anno-list { list-style: none; }
+.anno-list li { position: relative; padding: 10px 0 10px 24px; border-bottom: 1px solid rgba(0,0,0,0.04); font-size: 14px; color: #475569; transition: background 0.2s; }
+.anno-list li:last-child { border-bottom: none; }
+.anno-list li:hover { background: rgba(99,102,241,0.04); border-radius: 6px; }
+.anno-list li::before { content: attr(data-num); position: absolute; left: 0; top: 10px; width: 18px; height: 18px; background: rgba(99,102,241,0.10); color: #6366f1; border-radius: 50%; font-size: 11px; font-weight: 600; display: flex; align-items: center; justify-content: center; }
+.anno-list li strong { color: #1e293b; font-weight: 600; }
+
+.img-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.70); z-index: 9999; align-items: center; justify-content: center; cursor: zoom-out; backdrop-filter: blur(6px); animation: overlayIn 0.25s ease; }
+.img-overlay.active { display: flex; }
+@keyframes overlayIn { from { opacity: 0; } to { opacity: 1; } }
+.img-overlay img { max-width: 92vw; max-height: 90vh; border-radius: 12px; box-shadow: 0 0 60px rgba(99,102,241,0.10); animation: imgZoomIn 0.3s ease; }
+@keyframes imgZoomIn { from { transform: scale(0.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.img-overlay .zoom-hint { position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); font-size: 12px; color: rgba(255,255,255,0.5); letter-spacing: 1px; }
+
+.flow-strip { display: flex; align-items: center; justify-content: center; gap: 0; flex-wrap: wrap; margin: 16px 0 8px; }
+.flow-step { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 12px 16px; background: rgba(99,102,241,0.06); border: 1px solid rgba(99,102,241,0.10); border-radius: 10px; min-width: 100px; text-align: center; }
+.flow-step .step-label { font-size: 13px; font-weight: 600; color: #6366f1; }
+.flow-step .step-detail { font-size: 11px; color: #94a3b8; }
+.flow-arrow { font-size: 18px; color: #94a3b8; padding: 0 6px; }
+
+.role-table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 14px; }
+.role-table th { background: rgba(99,102,241,0.06); color: #4f46e5; font-weight: 600; padding: 12px 16px; text-align: left; border-bottom: 1px solid rgba(0,0,0,0.06); }
+.role-table td { padding: 12px 16px; border-bottom: 1px solid rgba(0,0,0,0.04); color: #475569; }
+.role-table tr:hover td { background: rgba(99,102,241,0.04); }
+.role-tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; }
+.role-tag.admin { background: rgba(234,88,12,0.10); color: #ea580c; }
+.role-tag.player { background: rgba(22,163,74,0.10); color: #16a34a; }
+.role-tag.viewer { background: rgba(37,99,235,0.10); color: #2563eb; }
+
+.rule-box { border-radius: 12px; padding: 16px 20px; margin-top: 20px; }
+.rule-box p.rule-title { font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+.rule-box p.rule-text { font-size: 13px; color: #64748b; line-height: 1.8; }
+.rule-box p.rule-text strong { font-weight: 600; }
+.rule-box.info { background: rgba(99,102,241,0.04); border: 1px solid rgba(99,102,241,0.12); }
+.rule-box.info p.rule-title { color: #6366f1; }
+.rule-box.info p.rule-text strong { color: #475569; }
+.rule-box.warn { background: rgba(234,88,12,0.04); border: 1px solid rgba(234,88,12,0.12); }
+.rule-box.warn p.rule-title { color: #ea580c; }
+.rule-box.warn p.rule-text strong { color: #475569; }
+
+@media (max-width: 700px) { .illus-row { flex-direction: column; align-items: center; } .phone-frame { width: 240px; } .desc-area { width: 100%; } .flow-strip { flex-direction: column; } .flow-arrow { transform: rotate(90deg); } }
+</style>
+</head>
+<body>
+
+<div class="img-overlay" id="imgOverlay"><img id="overlayImg" src="" alt="zoom"><div class="zoom-hint">click anywhere to close</div></div>
+
+<div class="container">
+
+  <div class="page-header">
+    <h1>⚔️ 赛事：进行比赛</h1>
+    <p class="subtitle">选手进入 VR 对战、观众观看对阵与弹幕互动、管理员监控赛况的全流程</p>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">📖</span>页面定位</h2>
+    <p style="color:#475569;font-size:15px;margin-bottom:16px;">
+      「进行比赛」是赛事进入<strong style="color:#1e293b;">比赛中（started）</strong>状态的核心环节。管理员在竞猜阶段点击「立即开始比赛」后，赔率锁定，选手佩戴 VR 头显进入对战，观众通过大屏投屏观赛的同时在小程序端查看对阵信息、发送弹幕互动，管理员全程监控比赛进程。
+    </p>
+    <p style="color:#64748b;font-size:14px;">
+      此阶段小程序端<strong style="color:#1e293b;">不展示实时比分变化</strong>——比分等结算数据由服务端写入、在结算阶段展示。观众在小程序上看到的是锁定赔率的对阵卡片和弹幕互动区。比赛结束后由服务端自动结算，进入结算阶段。
+    </p>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">🔄</span>比赛流程概览</h2>
+    <p style="color:#64748b;font-size:14px;margin-bottom:16px;">
+      从管理员点击「立即开始比赛」到比赛结束，经历以下阶段：
+    </p>
+    <div class="flow-strip">
+      <div class="flow-step"><span class="step-label">正式开赛</span><span class="step-detail">管理员点击开赛</span></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step"><span class="step-label">赔率锁定</span><span class="step-detail">竞猜赔率不再变动</span></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step"><span class="step-label">VR 对战</span><span class="step-detail">选手佩戴头显竞技</span></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step"><span class="step-label">比赛结束</span><span class="step-detail">服务端自动结算</span></div>
+    </div>
+    <div class="rule-box info">
+      <p class="rule-title">💡 赔率锁定机制</p>
+      <p class="rule-text">
+        管理员点击「立即开始比赛」瞬间，开赛前实时浮动的胜负盘赔率被<strong>拍快照锁定</strong>，存入字段 <code>lockedRedOdds</code> / <code>lockedBlueOdds</code>。此后赔率<strong>不再随积分变动</strong>，比赛结束后结算时以锁定的赔率为准进行赔付。其余玩法（元素之王、躺平之王、精准总分、精准分差）为固定倍率，不涉及浮动锁定。
+      </p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">📱</span>小程序端：比赛进行中</h2>
+    <p style="color:#64748b;font-size:14px;margin-bottom:24px;">
+      观众和选手在小程序端看到统一的赛事对阵卡片，展示锁定后的赔率、弹幕飘屏实时互动：
+    </p>
+    <div class="illus-row">
+      <div>
+        <div class="phone-frame"><img src="match-playing.png" alt="比赛进行中画面" onclick="zoomImg(this.src)" onerror="this.alt='截图加载失败';this.style.height='400px';this.style.background='#e2e8f0';"></div>
+        <div class="phone-label">📱 小程序端 · 比赛进行中</div>
+      </div>
+      <div class="desc-area">
+        <h3><span class="role-tag viewer">观众</span> / <span class="role-tag player">选手</span> 比赛阶段</h3>
+        <ul class="anno-list">
+          <li data-num="1"><strong>本场对阵卡片</strong> — 顶部展示比赛名称（matchName），状态行显示「第 X 局 · 对战中 · 游戏类型」</li>
+          <li data-num="2"><strong>红蓝双方 VS 展示</strong> — 蓝方选手昵称 VS 红方选手昵称，左右对称布局，阵营色区分</li>
+          <li data-num="3"><strong>锁定赔率展示</strong> — 蓝方赔率 ×X.XX、红方赔率 ×X.XX，附带「已开赛，锁定赔率」提示文字</li>
+          <li data-num="4"><strong>弹幕飘屏区</strong> — 对阵卡片上层叠加弹幕飘屏动画，观众实时发送的消息从右向左漂移，最多同时展示 3 轨</li>
+          <li data-num="5"><strong>底部弹幕输入条</strong> — 固定底部的输入框 + 发送按钮，观众输入文字后点击发送即可参与弹幕互动（限 80 字）</li>
+          <li data-num="6"><strong>子 Tab 切换</strong> — 「竞猜」Tab 可查看历史下注与排行榜（不可再下注）；「参赛」Tab 查看当前选手报名状态</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">🛡️</span>管理员：比赛监控与操控</h2>
+    <p style="color:#64748b;font-size:14px;margin-bottom:24px;">
+      管理员在比赛过程中拥有最高控制权，可实时监控赛况、在必要时进行紧急干预：
+    </p>
+    <div class="illus-row">
+      <div>
+        <div class="phone-frame"><img src="match-admin.png" alt="管理员操控画面" onclick="zoomImg(this.src)" onerror="this.alt='截图加载失败';this.style.height='400px';this.style.background='#e2e8f0';"></div>
+        <div class="phone-label">🛡️ 管理员 · 比赛中</div>
+      </div>
+      <div class="desc-area">
+        <h3><span class="role-tag admin">管理员</span> 比赛阶段</h3>
+        <ul class="anno-list">
+          <li data-num="1"><strong>流程进度条</strong> — 顶部 6 步流程条，当前停留在第 5 步「比赛中」高亮</li>
+          <li data-num="2"><strong>场次信息卡</strong> — 展示当前场次名称、游戏类型、模式、局数（比赛进行中为只读）</li>
+          <li data-num="3"><strong>选手名单卡</strong> — 展示红蓝双方正式选手信息（只读，不可审核或踢人）</li>
+          <li data-num="4"><strong>「紧急中止」按钮</strong> — 遇到设备故障、选手受伤等突发状况时，可立即中止比赛；确认后所有竞猜押注原路退还</li>
+          <li data-num="5"><strong>「临时结束比赛（联调占位）」按钮</strong> — 调用服务端结束比赛接口，使用占位比分 0:0 执行结算，正式服可移除此入口</li>
+        </ul>
+      </div>
+    </div>
+    <div class="rule-box warn">
+      <p class="rule-title">⚠️ 紧急中止的影响</p>
+      <p class="rule-text">管理员点击「紧急中止」后，会弹出二次确认弹窗。确认后本场全部竞猜币<strong>原路退还</strong>，仅结束当前比赛流程，不跳转其他页面。此操作请谨慎执行。</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">📊</span>三种游戏的结算数据字段</h2>
+    <p style="color:#64748b;font-size:14px;margin-bottom:24px;">
+      比赛结束后由服务端写入，在结算阶段展示。不同游戏类型的特有字段各不相同：
+    </p>
+    <table class="role-table">
+      <thead><tr><th>游戏</th><th>所有游戏通用</th><th>该游戏特有字段</th><th>用途</th></tr></thead>
+      <tbody>
+        <tr><td style="font-weight:600;color:#1e293b;">🏒 疾速冰球</td><td>红方得分 : 蓝方得分</td><td>冰球数 / 火球数 / 风球数；大师模式下额外展示「元素之王」结果</td><td>决定「元素之王」竞猜结果</td></tr>
+        <tr><td style="font-weight:600;color:#1e293b;">🥊 烈焰拳王</td><td>红方得分 : 蓝方得分</td><td>总倒地次数（totalKnockdowns）</td><td>决定「躺平之王」竞猜结果</td></tr>
+        <tr><td style="font-weight:600;color:#1e293b;">🤺 光影击剑</td><td>红方得分 : 蓝方得分</td><td><em>无特有字段</em></td><td>仅比分用于胜负/精准总分/精准分差结算</td></tr>
+      </tbody>
+    </table>
+    <div class="rule-box info">
+      <p class="rule-title">💡 数据用途</p>
+      <p class="rule-text">这些数据是竞猜结算的<strong>核心依据</strong>——冰/火/风球统计决定「元素之王」胜负、倒地总数决定「躺平之王」胜负。管理员通过「临时结束比赛」时，会使用占位默认值提交；正式流程由服务端自动写入。</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">📊</span>比赛阶段三角色操作对比</h2>
+    <table class="role-table">
+      <thead><tr><th>操作</th><th><span class="role-tag admin">管理员</span></th><th><span class="role-tag player">选手</span></th><th><span class="role-tag viewer">观众</span></th></tr></thead>
+      <tbody>
+        <tr><td style="font-weight:600;color:#1e293b;">观看对阵与赔率</td><td>—</td><td>✅ 查看 VS 对阵 + 锁定赔率</td><td>✅ 查看 VS 对阵 + 锁定赔率</td></tr>
+        <tr><td style="font-weight:600;color:#1e293b;">VR 对战</td><td>—</td><td>✅ 佩戴头显进行 VR 竞技</td><td>—</td></tr>
+        <tr><td style="font-weight:600;color:#1e293b;">发送弹幕</td><td>—</td><td>✅</td><td>✅ 核心互动方式</td></tr>
+        <tr><td style="font-weight:600;color:#1e293b;">查看竞猜历史</td><td>—</td><td>✅ 竞猜 Tab 只读</td><td>✅ 竞猜 Tab 只读</td></tr>
+        <tr><td style="font-weight:600;color:#1e293b;">监控赛况</td><td>✅ 查看场次信息 + 竞猜大盘池</td><td>—</td><td>—</td></tr>
+        <tr><td style="font-weight:600;color:#1e293b;">紧急中止</td><td>✅ 中止 → 二次确认 → 退还全部竞猜币</td><td>—</td><td>—</td></tr>
+        <tr><td style="font-weight:600;color:#1e293b;">临时结束比赛</td><td>✅ 联调用，占位比分结算</td><td>—</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">⚙️</span>关键规则汇总</h2>
+    <ul style="font-size:14px;color:#475569;padding-left:20px;line-height:2.2;">
+      <li><strong style="color:#1e293b;">开赛瞬间赔率锁定</strong> — 管理员点击「立即开始比赛」后，胜负盘赔率拍快照存入 <code>lockedRedOdds</code> / <code>lockedBlueOdds</code>，不再随积分变动。其余玩法为固定倍率，不受影响</li>
+      <li><strong style="color:#1e293b;">小程序不展示实时比分</strong> — 比分等结算数据由服务端写入，在结算阶段展示</li>
+      <li><strong style="color:#1e293b;">弹幕比赛期间持续开放</strong> — 观众通过底部输入条发送弹幕，飘屏区实时展示，轮询间隔 2.8 秒</li>
+      <li><strong style="color:#1e293b;">管理员拥有最高控制权</strong> — 紧急中止和临时结束比赛均以管理员操作为准</li>
+      <li><strong style="color:#1e293b;">紧急中止退还全部竞猜币</strong> — 确认中止后，所有观众本局竞猜押注原路退还，仅结束当前比赛流程，不跳转其他页面</li>
+      <li><strong style="color:#1e293b;">临时结束比赛仅联调用</strong> — 使用占位比分 0:0（冰球大师带 0/0/0，拳王带倒地 0）执行结算</li>
+      <li><strong style="color:#1e293b;">比赛结束 → 结算阶段</strong> — 服务端自动结算后，状态变为 settled，进入竞猜自动赔付和成绩归档</li>
+    </ul>
+  </div>
+
+</div>
+
+<script>
+function zoomImg(src) { var o=document.getElementById('imgOverlay');document.getElementById('overlayImg').src=src;o.classList.add('active'); }
+document.getElementById('imgOverlay').addEventListener('click',function(){this.classList.remove('active');});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')document.getElementById('imgOverlay').classList.remove('active');});
+</script>
+</body>
+</html>

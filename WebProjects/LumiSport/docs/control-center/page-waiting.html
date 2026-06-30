@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>等待：开放报名</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Inter', -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: #f0f2f8;
+  color: #1e293b;
+  line-height: 1.7;
+}
+
+.container { max-width: 960px; margin: 0 auto; padding: 40px 24px 80px; }
+
+.page-header { text-align: center; margin-bottom: 48px; }
+.page-header h1 {
+  font-size: 32px; font-weight: 700;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text; margin-bottom: 8px;
+}
+.page-header .subtitle { color: #64748b; font-size: 15px; }
+
+.card {
+  background: #ffffff; border: 1px solid rgba(99,102,241,0.12);
+  border-top: 2px solid; border-image: linear-gradient(90deg, #6366f1, #0891b2) 1;
+  border-radius: 16px; padding: 32px; margin-bottom: 32px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.card:hover {
+  border-color: rgba(99,102,241,0.25);
+  box-shadow: 0 2px 8px rgba(99,102,241,0.06);
+}
+.card h2 { font-size: 20px; font-weight: 600; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+.card h2 .icon { font-size: 22px; }
+
+.illus-row { display: flex; gap: 32px; align-items: flex-start; margin-bottom: 36px; }
+.illus-row:last-child { margin-bottom: 0; }
+
+.phone-frame {
+  flex-shrink: 0; width: 280px; background: #e2e8f0; border-radius: 28px;
+  border: 3px solid #cbd5e1; padding: 12px 10px 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08); position: relative;
+}
+.phone-frame::before {
+  content: ''; position: absolute; top: 6px; left: 50%; transform: translateX(-50%);
+  width: 60px; height: 5px; background: #cbd5e1; border-radius: 3px;
+}
+.phone-frame img { width: 100%; border-radius: 16px; display: block; cursor: zoom-in; transition: filter 0.2s; }
+.phone-frame img:hover { filter: brightness(1.04); }
+.phone-label { text-align: center; margin-top: 10px; font-size: 13px; color: #64748b; font-weight: 500; }
+
+.desc-area { flex: 1; min-width: 0; }
+.desc-area h3 { font-size: 17px; font-weight: 600; color: #1e293b; margin-bottom: 14px; }
+
+.anno-list { list-style: none; }
+.anno-list li {
+  position: relative; padding: 10px 0 10px 24px;
+  border-bottom: 1px solid rgba(0,0,0,0.04); font-size: 14px; color: #475569;
+  transition: background 0.2s;
+}
+.anno-list li:last-child { border-bottom: none; }
+.anno-list li:hover { background: rgba(99,102,241,0.04); border-radius: 6px; }
+.anno-list li::before {
+  content: attr(data-num); position: absolute; left: 0; top: 10px;
+  width: 18px; height: 18px; background: rgba(99,102,241,0.10); color: #6366f1;
+  border-radius: 50%; font-size: 11px; font-weight: 600;
+  display: flex; align-items: center; justify-content: center;
+}
+.anno-list li strong { color: #1e293b; font-weight: 600; }
+
+.img-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.70); z-index: 9999; align-items: center; justify-content: center; cursor: zoom-out; backdrop-filter: blur(6px); animation: overlayIn 0.25s ease; }
+.img-overlay.active { display: flex; }
+@keyframes overlayIn { from { opacity: 0; } to { opacity: 1; } }
+.img-overlay img { max-width: 92vw; max-height: 90vh; border-radius: 12px; box-shadow: 0 0 60px rgba(99,102,241,0.10); animation: imgZoomIn 0.3s ease; }
+@keyframes imgZoomIn { from { transform: scale(0.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.img-overlay .zoom-hint { position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); font-size: 12px; color: rgba(255,255,255,0.5); letter-spacing: 1px; }
+
+.role-table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 14px; }
+.role-table th { background: rgba(99,102,241,0.06); color: #4f46e5; font-weight: 600; padding: 12px 16px; text-align: left; border-bottom: 1px solid rgba(0,0,0,0.06); }
+.role-table td { padding: 12px 16px; border-bottom: 1px solid rgba(0,0,0,0.04); color: #475569; }
+.role-table tr:hover td { background: rgba(99,102,241,0.04); }
+.role-tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; }
+.role-tag.admin { background: rgba(234,88,12,0.10); color: #ea580c; }
+.role-tag.player { background: rgba(22,163,74,0.10); color: #16a34a; }
+.role-tag.viewer { background: rgba(37,99,235,0.10); color: #2563eb; }
+
+.rule-box { border-radius: 12px; padding: 16px 20px; margin-top: 20px; }
+.rule-box p.rule-title { font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+.rule-box p.rule-text { font-size: 13px; color: #64748b; line-height: 1.8; }
+.rule-box p.rule-text strong { font-weight: 600; }
+.rule-box.info { background: rgba(99,102,241,0.04); border: 1px solid rgba(99,102,241,0.12); }
+.rule-box.info p.rule-title { color: #6366f1; }
+.rule-box.info p.rule-text strong { color: #475569; }
+
+.progress-bar { display: flex; align-items: center; justify-content: center; gap: 0; margin: 16px 0; padding: 20px 0; }
+.progress-node { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.progress-circle { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 600; }
+.progress-circle.done { background: rgba(8,145,178,0.10); border: 2px solid rgba(8,145,178,0.30); color: #0891b2; }
+.progress-circle.current { background: rgba(8,145,178,0.12); border: 2px solid #0891b2; box-shadow: 0 0 12px rgba(8,145,178,0.15); color: #0891b2; }
+.progress-circle.todo { background: rgba(0,0,0,0.03); border: 2px solid rgba(0,0,0,0.10); color: #94a3b8; }
+.progress-label { font-size: 12px; color: #94a3b8; text-align: center; white-space: nowrap; }
+.progress-label.current { color: #0891b2; font-weight: 600; }
+.progress-label.done { color: #0891b2; }
+.progress-line { flex: 1; height: 3px; min-width: 20px; max-width: 60px; border-radius: 2px; margin: 0 4px; margin-bottom: 26px; }
+.progress-line.active { background: linear-gradient(90deg, rgba(8,145,178,0.35), rgba(8,145,178,0.20)); }
+.progress-line.inactive { background: rgba(0,0,0,0.06); }
+
+@media (max-width: 700px) {
+  .illus-row { flex-direction: column; align-items: center; }
+  .phone-frame { width: 240px; }
+  .desc-area { width: 100%; }
+  .progress-bar { flex-wrap: wrap; gap: 8px; }
+  .progress-line { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="img-overlay" id="imgOverlay">
+  <img id="overlayImg" src="" alt="zoom">
+  <div class="zoom-hint">click anywhere to close</div>
+</div>
+
+<div class="container">
+
+  <div class="page-header">
+    <h1>⏳ 等待：开放报名</h1>
+    <p class="subtitle">管理员确认玩法后、开放报名前的等待阶段，玩法与场次名已锁定</p>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">📖</span>页面定位</h2>
+    <p style="color:#475569;font-size:15px;margin-bottom:16px;">
+      「等待开放报名」是管理员在首页<strong style="color:#1e293b;">确认玩法</strong>后进入的过渡阶段。此时场次已创建（状态 <code style="color:#6366f1;">waiting</code>），玩法类型、大师模式、场次名称均已锁定，选手和观众尚无法报名或竞猜，等待管理员点击「开始报名」进入下一阶段。
+    </p>
+    <p style="color:#64748b;font-size:13px;margin-top:8px;">
+      代码中「玩法配置」和「等待报名」共用 <code style="background:rgba(99,102,241,0.08);color:#6366f1;padding:1px 5px;border-radius:3px;">SessionStatus.waiting</code> 状态，通过管理员是否已点「确认玩法」来区分。后续版本将拆分为独立子状态。
+    </p>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">📊</span>管理员页面：流程进度</h2>
+    <p style="color:#64748b;font-size:14px;margin-bottom:16px;">
+      管理员进入管理页面后，顶部会显示 6 步流程进度条，当前停留在第 2 步「等待报名」：
+    </p>
+    <div class="progress-bar">
+      <div class="progress-node">
+        <div class="progress-circle done">✓</div>
+        <div class="progress-label done">玩法配置</div>
+      </div>
+      <div class="progress-line active"></div>
+      <div class="progress-node">
+        <div class="progress-circle current">2</div>
+        <div class="progress-label current">等待报名</div>
+      </div>
+      <div class="progress-line inactive"></div>
+      <div class="progress-node">
+        <div class="progress-circle todo">3</div>
+        <div class="progress-label">报名中</div>
+      </div>
+      <div class="progress-line inactive"></div>
+      <div class="progress-node">
+        <div class="progress-circle todo">4</div>
+        <div class="progress-label">竞猜中</div>
+      </div>
+      <div class="progress-line inactive"></div>
+      <div class="progress-node">
+        <div class="progress-circle todo">5</div>
+        <div class="progress-label">比赛中</div>
+      </div>
+      <div class="progress-line inactive"></div>
+      <div class="progress-node">
+        <div class="progress-circle todo">6</div>
+        <div class="progress-label">已结算</div>
+      </div>
+    </div>
+    <p style="color:#64748b;font-size:13px;text-align:center;">
+      阶段提示：「等待开放报名（玩法与场次名已锁定）；可点「开始报名」；需重配请点「重选玩法」」
+    </p>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">🛡️</span>管理员：等待报名操作</h2>
+    <p style="color:#64748b;font-size:14px;margin-bottom:24px;">
+      管理员在此阶段可查看已锁定的玩法配置，并进行关键操作：
+    </p>
+    <div class="illus-row">
+      <div>
+        <div class="phone-frame">
+          <img src="waiting-admin.png" alt="管理员等待报名页面" onclick="zoomImg(this.src)" onerror="this.alt='截图加载失败';this.style.height='400px';this.style.background='#e2e8f0';">
+        </div>
+        <div class="phone-label">🛡️ 管理员视角（等待报名）</div>
+      </div>
+      <div class="desc-area">
+        <h3><span class="role-tag admin">管理员</span> 等待报名时</h3>
+        <ul class="anno-list">
+          <li data-num="1">
+            <strong>场次信息卡</strong> — 显示局数、状态（等待报名）、已锁定的项目类型（冰球/拳击/击剑），场次名称和玩法不可再编辑
+          </li>
+          <li data-num="2">
+            <strong>「重选玩法」按钮</strong> — 点击后请求服务端收起当前场次，退回玩法配置阶段，可重新选择游戏类型和场次名称
+          </li>
+          <li data-num="3">
+            <strong>「开始报名」按钮</strong> — 点击后状态从 waiting 变为 betting，选手端同步开放报名入口
+          </li>
+          <li data-num="4">
+            <strong>竞猜大盘池 Tab</strong> — 可切换查看但无实际数据，本场尚无竞猜记录
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="rule-box info">
+      <p class="rule-title">💡 重选玩法的影响</p>
+      <p class="rule-text">
+        点击「重选玩法」会向服务端请求收起当前场次，回到玩法配置阶段。等待报名阶段不会清除任何选手数据（因为尚未开放报名）。确认后管理员可重新选择游戏类型、大师模式和场次名称。
+      </p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">👥</span>选手与观众：等待状态</h2>
+    <p style="color:#64748b;font-size:14px;margin-bottom:24px;">
+      在管理员开放报名之前，选手和观众在小程序端看到的是等待提示：
+    </p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+      <div style="background:rgba(22,163,74,0.04);border:1px solid rgba(22,163,74,0.12);border-radius:12px;padding:20px;">
+        <h3 style="font-size:15px;color:#16a34a;margin-bottom:12px;">🤺 选手视角</h3>
+        <ul style="list-style:none;">
+          <li style="padding:8px 0;border-bottom:1px solid rgba(0,0,0,0.04);font-size:14px;color:#475569;">
+            <strong style="color:#1e293b;">状态提示</strong>：显示「新一轮报名尚未开始（待管理员开放报名）」
+          </li>
+          <li style="padding:8px 0;border-bottom:1px solid rgba(0,0,0,0.04);font-size:14px;color:#475569;">
+            <strong style="color:#1e293b;">选边按钮不可用</strong>：无法选择红/蓝方，等待管理员操作
+          </li>
+          <li style="padding:8px 0;font-size:14px;color:#475569;">
+            <strong style="color:#1e293b;">信息条</strong>：显示昵称 + 三种玩法积分（冰球/拳王/击剑）
+          </li>
+        </ul>
+      </div>
+      <div style="background:rgba(37,99,235,0.04);border:1px solid rgba(37,99,235,0.12);border-radius:12px;padding:20px;">
+        <h3 style="font-size:15px;color:#2563eb;margin-bottom:12px;">👥 观众视角</h3>
+        <ul style="list-style:none;">
+          <li style="padding:8px 0;border-bottom:1px solid rgba(0,0,0,0.04);font-size:14px;color:#475569;">
+            <strong style="color:#1e293b;">对阵模块</strong>：显示当前局数 · 等待报名 · 游戏类型，双方选手为空
+          </li>
+          <li style="padding:8px 0;border-bottom:1px solid rgba(0,0,0,0.04);font-size:14px;color:#475569;">
+            <strong style="color:#1e293b;">竞猜面板不可操作</strong>：玩法已确定但尚未开放报名和竞猜
+          </li>
+          <li style="padding:8px 0;font-size:14px;color:#475569;">
+            <strong style="color:#1e293b;">排行榜</strong>：可浏览竞猜排行榜与历史数据
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">📊</span>等待报名阶段三角色操作对比</h2>
+    <table class="role-table">
+      <thead>
+        <tr>
+          <th>操作</th>
+          <th><span class="role-tag admin">管理员</span></th>
+          <th><span class="role-tag player">选手</span></th>
+          <th><span class="role-tag viewer">观众</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="font-weight:600;color:#1e293b;">查看玩法配置</td>
+          <td>✅ 已锁定，可查看局数/状态/项目/场次名</td>
+          <td>可看到游戏类型</td>
+          <td>可看到游戏类型</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;color:#1e293b;">重选玩法</td>
+          <td>✅ 退回玩法配置阶段</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;color:#1e293b;">开始报名</td>
+          <td>✅ 进入报名阶段</td>
+          <td>等待开放</td>
+          <td>等待开放</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;color:#1e293b;">选边报名</td>
+          <td>—</td>
+          <td>❌ 尚未开放</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;color:#1e293b;">竞猜下注</td>
+          <td>—</td>
+          <td>—</td>
+          <td>❌ 尚未开放</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">⚙️</span>关键规则</h2>
+    <ul style="font-size:14px;color:#475569;padding-left:20px;line-height:2.2;">
+      <li><strong style="color:#1e293b;">玩法锁定</strong> — 确认玩法后，游戏类型、大师模式、场次名称均不可修改，直到重选玩法或进入下一轮</li>
+      <li><strong style="color:#1e293b;">重选玩法可随时操作</strong> — 等待报名阶段可随时点击「重选玩法」退回，不影响任何数据</li>
+      <li><strong style="color:#1e293b;">开始报名即进入 betting 状态</strong> — 点击「开始报名」后，选手端立即可以选边提交，不可逆</li>
+      <li><strong style="color:#1e293b;">选手和观众只能等待</strong> — 此阶段选手和观众无任何可操作项，仅能看到等待提示和已确定的游戏类型</li>
+    </ul>
+  </div>
+
+</div>
+<script>
+function zoomImg(src) {
+  var overlay = document.getElementById('imgOverlay');
+  var img = document.getElementById('overlayImg');
+  img.src = src;
+  overlay.classList.add('active');
+}
+document.getElementById('imgOverlay').addEventListener('click', function() { this.classList.remove('active'); });
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') document.getElementById('imgOverlay').classList.remove('active'); });
+</script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+﻿<!-- ==================== 8. 竞猜币流水 ==================== -->
+  <div class="card">
+    <h2><span class="icon">📒</span>竞猜币流水 · betting-coin-log</h2>
+
+    <div class="illus-row" style="gap:32px;align-items:flex-start;margin-bottom:28px;">
+      <div class="phone-frame" style="width:300px;">
+        <div class="cyber-nav">
+          <span class="cyber-back">‹ 返回</span>
+          <span class="cyber-title">竞猜币流水</span>
+          <span style="width:60px"></span>
+        </div>
+        <div class="cyber-body">
+          <!-- 门店标识 -->
+          <div class="cyber-card" style="display:flex;align-items:center;gap:6px;padding:8px 12px;margin-bottom:8px;font-size:12px;color:rgba(160,200,220,0.7);">
+            <span>🏪</span><span>朝阳店</span>
+          </div>
+          <!-- 流水条目1：收入 -->
+          <div class="cyber-card coin-sim">
+            <div class="coin-row1">
+              <span class="coin-time">2026-5-11 14:30</span>
+              <span class="coin-amt coin-gain">+100</span>
+            </div>
+            <div class="coin-reason">每日签到</div>
+            <div class="coin-bal">余额 1,200</div>
+          </div>
+          <!-- 流水条目2：支出 -->
+          <div class="cyber-card coin-sim">
+            <div class="coin-row1">
+              <span class="coin-time">2026-5-11 15:02</span>
+              <span class="coin-amt coin-spend">−200</span>
+            </div>
+            <div class="coin-reason">下注 - 胜负竞猜</div>
+            <div class="coin-bal">余额 1,000</div>
+          </div>
+          <!-- 流水条目3：收入 -->
+          <div class="cyber-card coin-sim">
+            <div class="coin-row1">
+              <span class="coin-time">2026-5-11 16:45</span>
+              <span class="coin-amt coin-gain">+350</span>
+            </div>
+            <div class="coin-reason">结算收益 - 胜负竞猜</div>
+            <div class="coin-bal">余额 1,350</div>
+          </div>
+          <!-- 流水条目4：退还 -->
+          <div class="cyber-card coin-sim">
+            <div class="coin-row1">
+              <span class="coin-time">2026-5-10 09:10</span>
+              <span class="coin-amt coin-gain">+100</span>
+            </div>
+            <div class="coin-reason">退还 - 本局流局</div>
+            <div class="coin-bal">余额 1,100</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="desc-area">
+        <h3 style="font-size:17px;font-weight:600;color:#1e293b;margin-bottom:14px;">页面布局解析</h3>
+        <ul class="anno-list">
+          <li data-num="1"><strong>门店标识</strong> — 顶部展示当前门店名称（如「朝阳店」），本页仅展示该门店下的竞猜币流水</li>
+          <li data-num="2"><strong>头行</strong> — 左侧时间（YYYY-M-D HH:MM），右侧金额（<span style="color:#73d13d;font-weight:600">gain 绿色 +N</span> / <span style="color:#ff7875;font-weight:600">spend 红色 −N</span>），字号加粗醒目</li>
+          <li data-num="3"><strong>原因行</strong> — 简洁文字描述交易来源，如「每日签到」「下注 - 胜负竞猜」「结算收益 - 胜负竞猜」「退还 - 本局流局」</li>
+          <li data-num="4"><strong>余额行</strong> — 灰色小字显示交易后余额，如「余额 1,200」，此余额为当前门店账户余额</li>
+        </ul>
+        <h3 style="font-size:15px;font-weight:600;color:#6366f1;margin:20px 0 10px;">常见流水原因</h3>
+        <div class="info-duo">
+          <div class="info-block green">
+            <p class="block-title">📈 收入（gain）</p>
+            <p class="block-text">每日签到<br>结算收益 - 胜负竞猜<br>退还 - 本局流局</p>
+          </div>
+          <div class="info-block amber">
+            <p class="block-title">📉 支出（spend）</p>
+            <p class="block-text">下注 - 胜负竞猜<br>下注 - 元素之王<br>下注 - 精准总分</p>
+          </div>
+        </div>
+        <div class="rule-box info" style="margin-top:16px;">
+          <p class="rule-title">💡 数据说明</p>
+          <p class="rule-text">
+            接口 <code>GET /api/betting/coin-log?storeId={storeId}&limit=80</code>，最多拉取 80 条。<br>
+            每条流水写入 <code>user_coin_logs</code> 表，含 kind / amount / reason / balance_after / session_id / store_id 字段。<br>
+            数据范围限定在当前门店，余额亦为该门店账户余额。
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>

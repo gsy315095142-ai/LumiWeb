@@ -1,0 +1,54 @@
+<!-- ═══════ 微信登录 ═══════ -->
+  <div class="card">
+    <div class="card-title">🔑 微信登录 · 唯一登录方式</div>
+    <div class="overview-desc" style="margin-bottom:20px">
+      系统仅支持 <strong>微信小程序登录</strong> 这一种登录方式。所有用户（普通用户和管理员）都通过微信一键登录进入系统。管理员身份不在登录环节区分，而是在登录后通过<strong>白名单机制</strong>自动判定。
+    </div>
+    <div class="login-single">
+      <div class="login-single-card">
+        <div class="login-single-header">
+          <div class="login-single-icon">💬</div>
+          <div>
+            <div class="login-single-title">
+              微信一键登录
+              <span class="login-single-badge">🔑 唯一入口</span>
+            </div>
+            <div class="login-single-subtitle">适用角色：所有用户（user + admin）</div>
+          </div>
+        </div>
+        <div class="login-single-desc">
+          调用 <strong>uni.login({ provider: 'weixin' })</strong> 获取微信临时 code，发送到后端 <strong>POST /api/auth/login-wechat</strong>，后端通过 <strong>jscode2session</strong> 换取 OpenID，自动查找或创建用户，并查询 <strong>store_admins 白名单表</strong> 判定角色。用户完全无感知，无需输入任何信息。
+        </div>
+        <div class="login-single-steps">
+          <div class="method-step"><span class="step-num">1</span><span>用户点击「微信登录 🎮」按钮</span></div>
+          <div class="method-step"><span class="step-num">2</span><span>调用 uni.login({ provider: 'weixin' }) 获取临时 code</span></div>
+          <div class="method-step"><span class="step-num">3</span><span>POST /api/auth/login-wechat { code } → 后端换取 openid</span></div>
+          <div class="method-step"><span class="step-num">4</span><span>后端查找/创建用户 → 查询 store_admins 白名单 → 判定角色</span></div>
+          <div class="method-step"><span class="step-num">5</span><span>签发 JWT（含 role + storeIds）→ 返回 { accessToken, user, managedStores }</span></div>
+          <div class="method-step"><span class="step-num">6</span><span>前端持久化 token + userInfo + managedStores → reLaunch 跳转至选择门店页</span></div>
+        </div>
+        <div class="whitelist-flow">
+          <div class="whitelist-flow-title">🛡️ 身份判定流程</div>
+          <div class="wf-steps">
+            <div class="wf-node wf-wx">💬 微信登录</div>
+            <span class="wf-arrow">→</span>
+            <div class="wf-node wf-oid">🔑 获取 OpenID</div>
+            <span class="wf-arrow">→</span>
+            <div class="wf-node">📋 查询白名单表</div>
+          </div>
+          <div class="wf-branch">
+            <div class="wf-branch-item bi-admin">
+              <strong>✅ 命中 → admin</strong><br>
+              role 升级为 admin，附带关联门店列表 storeIds=[...]<br>
+              例：张三管理「杭州西湖店」和「上海浦东店」
+            </div>
+            <div class="wf-branch-item bi-user">
+              <strong>⬜ 未命中 → user</strong><br>
+              角色为普通用户（选手/观众），managedStores 为空<br>
+              通过行为区分选手与观众，无需额外角色
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

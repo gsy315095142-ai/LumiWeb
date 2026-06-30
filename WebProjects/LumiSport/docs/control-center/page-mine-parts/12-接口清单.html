@@ -1,0 +1,52 @@
+﻿<!-- ==================== 12. 接口清单 ==================== -->
+  <div class="card">
+    <h2><span class="icon">🔗</span>接口清单</h2>
+    <p style="color:#64748b;font-size:14px;margin-bottom:16px;">
+      个人中心涉及的 8 个后端接口，均需登录鉴权：
+    </p>
+    <table class="rank-table">
+      <thead><tr><th>接口</th><th>方法</th><th>用途</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="api-path">/api/auth/profile</td>
+          <td><span class="api-method get">GET</span></td>
+          <td style="color:#64748b;">获取用户资料（昵称、角色）</td>
+        </tr>
+        <tr>
+          <td class="api-path">/api/auth/profile</td>
+          <td><span class="api-method put">PUT</span></td>
+          <td style="color:#64748b;">更新用户资料（昵称）</td>
+        </tr>
+        <tr>
+          <td class="api-path">/api/betting/wallet</td>
+          <td><span class="api-method get">GET</span></td>
+          <td style="color:#64748b;">竞猜币余额（余额 + 签到状态）</td>
+        </tr>
+        <tr>
+          <td class="api-path">/api/betting/daily-check-in</td>
+          <td><span class="api-method post">POST</span></td>
+          <td style="color:#64748b;">每日签到</td>
+        </tr>
+        <tr>
+          <td class="api-path">/api/betting/my-summary</td>
+          <td><span class="api-method get">GET</span></td>
+          <td style="color:#64748b;">竞猜汇总（段位 + 收益 + 局数）</td>
+        </tr>
+        <tr>
+          <td class="api-path">/api/betting/my-history</td>
+          <td><span class="api-method get">GET</span></td>
+          <td style="color:#64748b;">过往竞猜明细（limit=50）</td>
+        </tr>
+        <tr>
+          <td class="api-path">/api/betting/coin-log</td>
+          <td><span class="api-method get">GET</span></td>
+          <td style="color:#64748b;">竞猜币流水（limit=80）</td>
+        </tr>
+        <tr>
+          <td class="api-path">/api/betting/leaderboard</td>
+          <td><span class="api-method get">GET</span></td>
+          <td style="color:#64748b;">竞猜排行榜（take=50）</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

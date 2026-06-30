@@ -1,0 +1,69 @@
+<!-- 12. 前端参数速查 -->
+  <div class="card">
+    <h2><span class="icon">⚙️</span>关键参数速查</h2>
+    <table class="api-table">
+      <thead><tr><th>参数</th><th>值</th><th>位置</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr>
+          <td style="font-weight:600;color:#1e293b;">弹幕最大长度</td>
+          <td style="color:#ea580c;">80 字</td>
+          <td>DTO / 前端</td>
+          <td>前端 maxlength=80，后端 @MaxLength(80)，数据库 varchar(120)</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;color:#1e293b;">轮询间隔</td>
+          <td style="color:#ea580c;">2.8 秒</td>
+          <td>前端 SessionDanmakuLayer.vue</td>
+          <td>setInterval 2800ms</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;color:#1e293b;">单次拉取上限</td>
+          <td style="color:#ea580c;">50 条</td>
+          <td>前端 + 后端</td>
+          <td>limit=50，后端最大允许 100</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;color:#1e293b;">首次展示条数</td>
+          <td style="color:#ea580c;">最多 8 条</td>
+          <td>前端</td>
+          <td>首次拉取超过 8 条只展示最后 8 条，避免历史消息刷屏</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;color:#1e293b;">泳道数量</td>
+          <td style="color:#ea580c;">3 条</td>
+          <td>前端</td>
+          <td>laneRound % 3，垂直间距 40rpx</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;color:#1e293b;">滑动时长</td>
+          <td style="color:#ea580c;">11~16 秒</td>
+          <td>前端</td>
+          <td>11 + Math.random() * 5，随机错落</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;color:#1e293b;">屏幕最大条数</td>
+          <td style="color:#ea580c;">16 条</td>
+          <td>前端</td>
+          <td>flying 数组超过 16 时裁剪最早的</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;color:#1e293b;">自动清理时间</td>
+          <td style="color:#ea580c;">16 秒</td>
+          <td>前端</td>
+          <td>setTimeout 16s 后从 flying 数组移除</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;color:#1e293b;">敏感词提示</td>
+          <td style="color:#ea580c;">弹幕内容包含敏感词，请修改后重试</td>
+          <td>后端</td>
+          <td>DANMAKU_SENSITIVE_REJECT_MESSAGE 常量</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;color:#1e293b;">默认词库路径</td>
+          <td style="color:#ea580c;">config/danmaku-sensitive-words.txt</td>
+          <td>后端</td>
+          <td>相对项目根目录，每行一词，# 开头为注释</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

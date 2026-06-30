@@ -1,0 +1,37 @@
+<!-- 8. 敏感词过滤 -->
+  <div class="card">
+    <h2><span class="icon">🛡️</span>敏感词过滤系统</h2>
+    <p style="color:#64748b;font-size:14px;margin-bottom:16px;">
+      后端 <code style="background:rgba(37,99,235,0.08);color:#3b82f6;padding:2px 6px;border-radius:4px;font-size:12px;">SensitiveWordFilterService</code> 在服务启动时自动加载敏感词库，对弹幕内容做<strong style="color:#1e293b;">子串匹配</strong>：
+    </p>
+
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-icon">📁</div>
+        <div class="feat-name">文件词库</div>
+        <div class="feat-desc">通过环境变量 <code style="background:rgba(139,92,246,0.08);color:#7c3aed;padding:1px 4px;border-radius:3px;font-size:11px;">DANMAKU_SENSITIVE_WORDS_FILE</code> 指定词库文件路径，默认使用 <code style="background:rgba(139,92,246,0.08);color:#7c3aed;padding:1px 4px;border-radius:3px;font-size:11px;">config/danmaku-sensitive-words.txt</code>，每行一个词，<code>#</code> 开头为注释行。</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">🔧</div>
+        <div class="feat-name">环境变量词库</div>
+        <div class="feat-desc">通过 <code style="background:rgba(139,92,246,0.08);color:#7c3aed;padding:1px 4px;border-radius:3px;font-size:11px;">DANMAKU_SENSITIVE_WORDS</code> 逗号分隔传入敏感词，与文件词库合并去重。</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">🔍</div>
+        <div class="feat-name">子串匹配 + 大小写不敏感</div>
+        <div class="feat-desc">对弹幕正文做<strong>子串包含</strong>检查（非全文精确匹配）。ASCII 字母忽略大小写，中文精确匹配。词库按长度降序排列，优先匹配长词减少误报。</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">🚫</div>
+        <div class="feat-name">命中即拒绝</div>
+        <div class="feat-desc">命中敏感词时返回 HTTP 400，提示「弹幕内容包含敏感词，请修改后重试」，弹幕不会被存入数据库。</div>
+      </div>
+    </div>
+
+    <div class="rule-box warn" style="margin-top:20px;">
+      <p class="rule-title">⚠️ 词库为空时不拦截</p>
+      <p class="rule-text">
+        如果既未配置文件词库也未配置环境变量词库，服务启动时打印警告：<strong>「弹幕敏感词库为空，将不拦截任何词」</strong>。此行为是为了方便本地开发调试，<strong style="color:#ea580c;">生产环境务必配置词库</strong>。可通过将 <code style="background:rgba(139,92,246,0.08);color:#7c3aed;padding:1px 4px;border-radius:3px;font-size:11px;">DANMAKU_SENSITIVE_WORDS_FILE</code> 显式设为空字符串来禁用文件词库。
+      </p>
+    </div>
+  </div>

@@ -1,0 +1,28 @@
+<div class="card">
+    <h2><span class="icon">📊</span>赔率计算机制</h2>
+    <h3 style="font-size:16px;font-weight:600;color:#6366f1;margin-bottom:12px;">⚔️ 胜负盘：动态赔率</h3>
+    <p style="color:#64748b;font-size:14px;margin-bottom:16px;">
+      胜负盘的赔率不是固定的，而是根据双方选手的<strong>积分（Rating）</strong>实时计算：
+    </p>
+    <div style="background:#1e293b;border-radius:8px;padding:16px 20px;margin-bottom:16px;font-family:monospace;font-size:14px;color:#a5b4fc;text-align:center;">
+      预期胜率 = <span style="color:#60a5fa;">myRating</span> / ( <span style="color:#60a5fa;">myRating</span> + <span style="color:#f87171;">enemyRating</span> )<br>
+      赔率 = <span style="color:#fb923c;">( 1 / 预期胜率 )</span> × <span style="color:#c084fc;">( 1 − 10% 手续费 )</span><br>
+      <span style="font-size:12px;color:#64748b;">最终结果钳位在 1.1 ~ 2.0 之间；开赛瞬间锁定为 lockedOdds</span>
+    </div>
+    <ul style="font-size:14px;color:#475569;padding-left:20px;line-height:2.2;margin-bottom:24px;">
+      <li><strong style="color:#1e293b;">强者低赔、弱者高赔</strong> — 积分越高的选手，预期胜率越高，赔率越低（最低 1.1）；弱势方赔率可高达 2.0</li>
+      <li><strong style="color:#1e293b;">10% 手续费</strong> — 从赔付中抽取 10% 作为平台费用（<code>REF_ODDS_FEE_RATE = 0.1</code>）</li>
+      <li><strong style="color:#1e293b;">赔率钳制</strong> — 下限 1.1（<code>REF_MIN_WIN_ODDS</code>），上限 2.0（<code>REF_MAX_WIN_ODDS</code>）</li>
+      <li><strong style="color:#1e293b;">实时浮动 → 开赛锁定</strong> — 报名/竞猜阶段赔率随积分实时浮动；管理员点击「开赛」瞬间锁定为 <code>lockedRedOdds</code> / <code>lockedBlueOdds</code></li>
+    </ul>
+    <h3 style="font-size:16px;font-weight:600;color:#6366f1;margin-bottom:12px;">🎲 其余玩法：固定赔率</h3>
+    <table class="rank-table">
+      <thead><tr><th>玩法</th><th>固定赔率</th><th>常量</th><th>下注 100 币收益</th></tr></thead>
+      <tbody>
+        <tr><td style="font-weight:600;color:#1e293b;">元素之王</td><td style="color:#ea580c;">3 倍</td><td style="font-size:11px;color:#94a3b8;">ODDS_ELEMENT_KING</td><td>300 竞猜币</td></tr>
+        <tr><td style="font-weight:600;color:#1e293b;">躺平之王</td><td style="color:#ea580c;">3 倍</td><td style="font-size:11px;color:#94a3b8;">ODDS_KNOCKDOWN_KING</td><td>300 竞猜币</td></tr>
+        <tr><td style="font-weight:600;color:#1e293b;">精准总分</td><td style="color:#ea580c;">20 倍</td><td style="font-size:11px;color:#94a3b8;">ODDS_PRECISE_TOTAL</td><td>2,000 竞猜币</td></tr>
+        <tr><td style="font-weight:600;color:#1e293b;">精准分差</td><td style="color:#ea580c;">15 倍</td><td style="font-size:11px;color:#94a3b8;">ODDS_PRECISE_DIFF</td><td>1,500 竞猜币</td></tr>
+      </tbody>
+    </table>
+  </div>

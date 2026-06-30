@@ -1,0 +1,74 @@
+﻿<!-- ==================== 6. 我的竞猜数据 ==================== -->
+  <div class="card">
+    <h2><span class="icon">📊</span>我的竞猜数据 · betting-my</h2>
+
+    <!-- 示意图：赛博朋克青色主题，匹配 betting-my.vue 真实布局 -->
+    <div class="illus-row" style="gap:32px;align-items:flex-start;margin-bottom:28px;">
+      <div class="phone-frame">
+        <div class="cyber-nav">
+          <span class="cyber-back">‹ 返回</span>
+          <span class="cyber-title">我的竞猜</span>
+          <span style="width:60px"></span>
+        </div>
+        <div class="cyber-body">
+          <!-- 门店标识 -->
+          <div class="cyber-card" style="display:flex;align-items:center;gap:6px;padding:8px 12px;margin-bottom:8px;font-size:12px;color:rgba(160,200,220,0.7);">
+            <span>🏪</span><span>朝阳店</span>
+          </div>
+          <!-- 段位卡 -->
+          <div class="cyber-card tier-sim">
+            <span class="sim-tier-icon">🥇</span>
+            <span class="sim-tier-name">黄金预言家</span>
+            <span class="sim-tier-hint">累计竞猜收益 ≥ 10,000</span>
+          </div>
+          <!-- 数据行 -->
+          <div class="cyber-card data-sim">
+            <div class="sim-row"><span class="sim-label">竞猜币余额</span><span class="sim-val">1,200</span></div>
+            <div class="sim-row"><span class="sim-label">累计竞猜收益</span><span class="sim-val">12,500</span></div>
+            <div class="sim-row" style="border:none;"><span class="sim-label">已结算局数</span><span class="sim-val">36</span></div>
+          </div>
+          <!-- 脚注 -->
+          <div class="sim-footnote">「累计竞猜收益」仅统计猜中项的收益，平局退还不计入段位。</div>
+        </div>
+      </div>
+
+      <div class="desc-area">
+        <h3 style="font-size:17px;font-weight:600;color:#1e293b;margin-bottom:14px;">页面布局解析</h3>
+        <ul class="anno-list">
+          <li data-num="1"><strong>导航栏</strong> — 标题「我的竞猜」，左上角返回按钮（青色 ‹ 返回）</li>
+          <li data-num="2"><strong>门店标识</strong> — 顶部展示当前门店名称（如「朝阳店」），所有数据均归属该门店</li>
+          <li data-num="3"><strong>段位卡</strong> — 居中大号段位图标（如 🥇）+ 段位名称（如「黄金预言家」）+ 当前门槛文案</li>
+          <li data-num="4"><strong>数据卡</strong> — 三行 key-value 布局：竞猜币余额、累计竞猜收益、已结算局数，均为当前门店数据</li>
+          <li data-num="5"><strong>脚注</strong> — 灰色小字，说明「累计竞猜收益」仅统计猜中项，平局退还不计入段位</li>
+        </ul>
+        <div class="rule-box info" style="margin-top:16px;">
+          <p class="rule-title">💡 数据来源</p>
+          <p class="rule-text">
+            接口 <code>GET /api/betting/my-summary?storeId={storeId}</code><br>
+            段位由后端 <code>betting-tier.util.ts</code> 按当前门店的 <code>totalBettingWinnings</code> 自动匹配，前端只做展示。
+          </p>
+        </div>
+        <div class="rule-box warn" style="margin-top:12px;">
+          <p class="rule-title">🏪 门店隔离说明</p>
+          <p class="rule-text">
+            段位按<strong>门店</strong>独立计算：同一用户在不同门店的累计收益不同，段位可能不同。<br>
+            竞猜币余额、已结算局数等均限定在当前门店范围内。
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-size:16px;font-weight:600;color:#6366f1;margin:0 0 12px;">🏆 预言家段位体系</h3>
+    <p style="color:#64748b;font-size:14px;margin-bottom:12px;">
+      按<strong>当前门店</strong>的累计竞猜收益（<code>totalBettingWinnings</code>）自动判定，<strong>只升不降</strong>，匹配最大满足阈值：
+    </p>
+    <div class="tier-bar">
+      <div class="tier-item"><span class="tier-icon">🔮</span><span class="tier-name">新手</span><span class="tier-threshold">0+</span></div>
+      <div class="tier-item"><span class="tier-icon">🥉</span><span class="tier-name">青铜</span><span class="tier-threshold">2,500+</span></div>
+      <div class="tier-item"><span class="tier-icon">🥈</span><span class="tier-name">白银</span><span class="tier-threshold">5,000+</span></div>
+      <div class="tier-item"><span class="tier-icon">🥇</span><span class="tier-name">黄金</span><span class="tier-threshold">10,000+</span></div>
+      <div class="tier-item"><span class="tier-icon">💎</span><span class="tier-name">钻石</span><span class="tier-threshold">20,000+</span></div>
+      <div class="tier-item"><span class="tier-icon">👑</span><span class="tier-name">铂金</span><span class="tier-threshold">50,000+</span></div>
+      <div class="tier-item"><span class="tier-icon">🏆</span><span class="tier-name">王者</span><span class="tier-threshold">100,000+</span></div>
+    </div>
+  </div>

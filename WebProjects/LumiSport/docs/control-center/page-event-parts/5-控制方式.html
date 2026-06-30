@@ -1,0 +1,36 @@
+<!-- 控制方式（互斥） -->
+  <div class="card">
+    <div class="card-title">🎮 控制方式</div>
+    <div class="control-row">
+      <div class="ctrl-card">
+        <span class="ctrl-icon">📱</span>
+        <div class="ctrl-name">小程序管理端</div>
+        <div class="ctrl-desc">远程操控全流程<br>实时状态查看</div>
+      </div>
+      <div class="ctrl-sep">XOR</div>
+      <div class="ctrl-card">
+        <span class="ctrl-icon">🖥️</span>
+        <div class="ctrl-name">PC / Server 控制台</div>
+        <div class="ctrl-desc">本地 UI 直控<br>PC 操控开关开启时生效</div>
+      </div>
+    </div>
+
+    <div class="ctrl-mode-list">
+      <div class="ctrl-mode-item">
+        <h4>📱 小程序管理模式 <span class="mode-badge default">默认</span></h4>
+        <p>
+          <strong style="color:#1e293b;">PC 操控开关 = 关闭</strong>时，<strong style="color:#16a34a;">仅小程序管理端</strong>可操控赛事流程（配置、报名、竞猜、开赛、结算等）。Server 端仅展示画面，不接受操控指令。
+        </p>
+      </div>
+      <div class="ctrl-mode-item">
+        <h4>🖥️ PC 控制台模式 <span class="mode-badge optional">需手动开启</span></h4>
+        <p>
+          <strong style="color:#1e293b;">PC 操控开关 = 开启</strong>时，<strong style="color:#6366f1;">仅 PC / Server 端</strong>可操控赛事流程。此时小程序管理端的操控按钮将禁用，仅保留状态查看功能。
+        </p>
+      </div>
+    </div>
+
+    <div class="ctrl-footer-note">
+      两端 <span>互斥控制 · 同一时刻仅一端可操控</span>，状态数据始终实时同步
+    </div>
+  </div>

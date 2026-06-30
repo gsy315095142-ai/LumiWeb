@@ -1,0 +1,20 @@
+<!-- 3. 弹幕实时演示 -->
+  <div class="card">
+    <h2><span class="icon">🎮</span>弹幕效果演示</h2>
+    <p style="color:#64748b;font-size:14px;margin-bottom:16px;">
+      以下模拟弹幕飘屏效果，你可以输入文字并点击「发送」体验：
+    </p>
+    <div class="danmaku-demo" id="danmakuDemo">
+      <span class="demo-label">LIVE DEMO</span>
+    </div>
+    <div class="demo-input-bar">
+      <input type="text" id="demoInput" placeholder="输入弹幕内容…" maxlength="80">
+      <button id="demoSendBtn" onclick="sendDemoDanmaku()">发送</button>
+    </div>
+    <div class="rule-box info" style="margin-top:16px;">
+      <p class="rule-title">💡 弹幕飘屏参数</p>
+      <p class="rule-text">
+        每条弹幕分配到 3 条泳道之一（轮询分配），滑动时长 <strong>11~16 秒</strong>（随机），屏幕上最多同时显示 <strong>16 条</strong>弹幕，超出自裁最早的。
+      </p>
+    </div>
+  </div>

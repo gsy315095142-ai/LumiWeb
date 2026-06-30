@@ -27,8 +27,8 @@ echo.
 echo  portal              !START_URL!
 echo  LumiMagic S1        http://127.0.0.1:!PORT!/WebProjects/LumiMagic_Season_01/LumiMagic_Season_01.html
 echo  LumiSport           http://127.0.0.1:!PORT!/WebProjects/LumiSport/LumiSport.html
-echo  mock guessing 0618  http://127.0.0.1:!PORT!/WebProjects/LumiSport/events/mock-guessing-20260618/mock-guessing-20260618.html
-echo  control center      http://127.0.0.1:!PORT!/WebProjects/LumiSport/control-center/control-center.html
+echo  mock guessing 0618  http://127.0.0.1:!PORT!/WebProjects/LumiSport/showcase/events/mock-guessing-20260618/mock-guessing-20260618.html
+echo  control center      http://127.0.0.1:!PORT!/WebProjects/LumiSport/docs/control-center/control-center.html
 echo  LumiMagic S2        http://127.0.0.1:!PORT!/WebProjects/LumiMagic_Season_02/LumiMagic_Season_02.html
 echo.
 echo  Ctrl+C to stop

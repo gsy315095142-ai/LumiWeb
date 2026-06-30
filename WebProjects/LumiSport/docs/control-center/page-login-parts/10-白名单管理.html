@@ -1,0 +1,41 @@
+<!-- ═══════ 白名单管理 ═══════ -->
+  <div class="card">
+    <div class="card-title">📋 白名单管理机制</div>
+    <div class="token-section">
+      <div class="token-desc">
+        管理员不是通过单独的登录入口进入系统，而是通过<strong>后台配置白名单</strong>的方式产生。运营人员在后台系统中将某个微信用户的 OpenID 与一家或多家门店进行绑定，绑定后该用户下次登录即成为对应门店的管理员。白名单的增删<strong>即时生效</strong>。
+      </div>
+      <div class="token-flow">
+        <div class="token-flow-item">
+          <div class="token-flow-icon">➕</div>
+          <div class="token-flow-content">
+            <div class="token-flow-title">添加管理员</div>
+            <div class="token-flow-detail">
+              后台 POST /api/admin/store-admins { user_id, store_id }<br>
+              将用户的 OpenID 与门店 ID 绑定，用户下次登录时自动识别为管理员
+            </div>
+          </div>
+        </div>
+        <div class="token-flow-item">
+          <div class="token-flow-icon">🔗</div>
+          <div class="token-flow-content">
+            <div class="token-flow-title">多门店关联</div>
+            <div class="token-flow-detail">
+              同一用户可在 store_admins 表中有多条记录，对应不同门店<br>
+              例：张三 → 杭州西湖店 + 上海浦东店
+            </div>
+          </div>
+        </div>
+        <div class="token-flow-item">
+          <div class="token-flow-icon">🗑️</div>
+          <div class="token-flow-content">
+            <div class="token-flow-title">移除管理员</div>
+            <div class="token-flow-detail">
+              后台 DELETE /api/admin/store-admins/:id<br>
+              白名单变更后即时生效，用户下次登录或刷新 Token 时更新权限
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

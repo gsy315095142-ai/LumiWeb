@@ -1,0 +1,43 @@
+<!-- 6. 轮询机制 -->
+  <div class="card">
+    <h2><span class="icon">🔄</span>轮询机制详解</h2>
+    <p style="color:#64748b;font-size:14px;margin-bottom:16px;">
+      弹幕采用 <strong style="color:#1e293b;">HTTP 短轮询</strong>（非 WebSocket），以 <code style="background:rgba(37,99,235,0.08);color:#3b82f6;padding:2px 6px;border-radius:4px;font-size:12px;">afterId</code> 实现增量拉取：
+    </p>
+    <table class="api-table">
+      <thead><tr><th>阶段</th><th>行为</th><th>拉取数量</th></tr></thead>
+      <tbody>
+        <tr>
+          <td style="font-weight:600;color:#1e293b;">首次进入</td>
+          <td>afterId=0，拉取该场次<strong>最近 N 条</strong>（按 id DESC 取再反转为时间正序）</td>
+          <td><code>limit=50</code>，前端只展示最后 <strong>8 条</strong>（避免刷屏）</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;color:#1e293b;">增量轮询</td>
+          <td>每 <strong>2.8 秒</strong> 请求一次，where id > afterId，按 id ASC</td>
+          <td><code>limit=50</code>，全部展示</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;color:#1e293b;">发送成功</td>
+          <td>POST 成功后立即更新 afterId，自己的弹幕立即飘屏（不等轮询）</td>
+          <td>1 条</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;color:#1e293b;">切换场次</td>
+          <td>重置 afterId=0，清空弹幕数组，重新首次拉取</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;color:#1e293b;">离开页面</td>
+          <td>onUnmounted 停止轮询计时器，释放资源</td>
+          <td>—</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="rule-box info">
+      <p class="rule-title">💡 为什么用轮询而不是 WebSocket？</p>
+      <p class="rule-text">
+        弹幕消息频率较低（非高并发直播场景），2.8 秒轮询延迟在可接受范围内。HTTP 轮询的优势：<strong>实现简单、无需维护长连接、兼容性好</strong>（小程序 WebSocket 在后台切回时可能断连需额外处理）。如果未来弹幕量增大，可平滑升级为 WebSocket 方案。
+      </p>
+    </div>
+  </div>

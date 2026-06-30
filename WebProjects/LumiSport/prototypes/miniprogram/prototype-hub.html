@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LumiSport 小程序交互原型</title>
+<link rel="stylesheet" href="../../docs/business-flow/nav.css">
+<style>
+  body { background: #12121f; color: #f8fafc; }
+  .container {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 48px 24px 64px;
+  }
+  .hero {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .hero-badge {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #a78bfa;
+    background: rgba(124, 58, 237, 0.15);
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 16px;
+  }
+  .hero-icon { font-size: 48px; margin-bottom: 12px; }
+  .hero h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .hero p {
+    font-size: 15px;
+    color: rgba(248, 250, 252, 0.6);
+    line-height: 1.7;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+  .flow-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+  }
+  .flow-card {
+    display: block;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 16px;
+    padding: 28px 24px;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: transform 0.2s, border-color 0.2s, background 0.2s;
+  }
+  .flow-card:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(167, 139, 250, 0.35);
+  }
+  .flow-card-icon { font-size: 36px; margin-bottom: 14px; }
+  .flow-card h2 {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .flow-card p {
+    font-size: 13px;
+    color: rgba(248, 250, 252, 0.55);
+    line-height: 1.6;
+  }
+  .flow-card-arrow {
+    margin-top: 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #a78bfa;
+  }
+  .footer-note {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 12px;
+    color: rgba(248, 250, 252, 0.35);
+  }
+  .footer-note a {
+    color: #a78bfa;
+    text-decoration: none;
+  }
+  .site-nav {
+    background: rgba(18, 18, 31, 0.92);
+    border-bottom-color: rgba(255, 255, 255, 0.06);
+  }
+  .site-nav-brand { color: #f8fafc; }
+  .site-nav-back { color: rgba(248, 250, 252, 0.55); }
+  .site-nav-back:hover { background: rgba(255, 255, 255, 0.06); color: #a78bfa; }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="site-nav-inner">
+    <a class="site-nav-brand" href="prototype-hub.html">
+      <span class="brand-icon">📱</span> LumiSport 原型
+    </a>
+    <a class="site-nav-back" href="../../LumiSport.html">← 返回项目</a>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="hero">
+    <div class="hero-badge">交互原型</div>
+    <div class="hero-icon">🏟️</div>
+    <h1>LumiSport 小程序原型</h1>
+    <p>模拟微信小程序的手机端交互原型，包含用户端与管理员端，可用于演示预测、报名、兑换与赛事管理流程。</p>
+  </div>
+
+  <div class="flow-grid">
+    <a class="flow-card" href="client.html">
+      <div class="flow-card-icon">👤</div>
+      <h2>客户端原型</h2>
+      <p>首页预测与报名、门店/厅切换、预测币与礼品点数、预测提交、我的记录等用户侧功能。</p>
+      <div class="flow-card-arrow">打开客户端 →</div>
+    </a>
+
+    <a class="flow-card" href="admin.html">
+      <div class="flow-card-icon">🛡️</div>
+      <h2>管理员端原型</h2>
+      <p>场次管理、扫码兑换、商品管理、报名队列、账单统计等门店运营侧功能。</p>
+      <div class="flow-card-arrow">打开管理员端 →</div>
+    </a>
+  </div>
+
+  <p class="footer-note">通过 <a href="../../LumiSport.html">Lumi 竞技大空间</a> 项目门户访问 · <a href="../../docs/business-flow/business-flow.html">查看业务流程说明</a></p>
+</div>
+
+</body>
+</html>

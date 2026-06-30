@@ -1,0 +1,67 @@
+<!-- ═══════ Token 持久化 ═══════ -->
+  <div class="card">
+    <div class="card-title">🔑 Token 持久化与 JWT 鉴权</div>
+    <div class="token-section">
+      <div class="token-desc">
+        登录成功后，后端签发 <strong>JWT 令牌</strong>（有效期默认 7 天），前端将 <strong>accessToken</strong>、<strong>userInfo</strong>（含 role）和 <strong>managedStores</strong>（门店列表）分别持久化到微信小程序 Storage。后续请求自动携带 <strong>Authorization: Bearer &lt;token&gt;</strong>。
+      </div>
+      <div class="jwt-payload">
+        <span class="jc">// JWT Payload 结构</span><br>
+        {<br>
+        &nbsp;&nbsp;<span class="jk">"sub"</span>: <span class="jn">1</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="jc">// 用户 ID</span><br>
+        &nbsp;&nbsp;<span class="jk">"role"</span>: <span class="js">"user"</span> | <span class="js">"admin"</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="jc">// 角色（白名单判定）</span><br>
+        &nbsp;&nbsp;<span class="jk">"storeIds"</span>: [<span class="jn">1</span>, <span class="jn">3</span>],&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="jc">// 管理的门店 ID（仅 admin）</span><br>
+        &nbsp;&nbsp;<span class="jk">"mp_openid"</span>: <span class="js">"oX1234..."</span>,&nbsp;&nbsp;&nbsp;<span class="jc">// 微信 OpenID</span><br>
+        &nbsp;&nbsp;<span class="jk">"iat"</span>: <span class="jn">1710000000</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="jc">// 签发时间</span><br>
+        &nbsp;&nbsp;<span class="jk">"exp"</span>: <span class="jn">1710086400</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="jc">// 过期时间</span><br>
+        }
+      </div>
+      <div class="storage-table-wrap">
+        <div class="st-title">💾 本地存储键值</div>
+        <table class="field-table">
+          <thead>
+            <tr><th>键名</th><th>内容</th><th>说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>token</td><td>JWT accessToken</td><td>用于请求鉴权，Bearer Token</td></tr>
+            <tr><td>userInfo</td><td>{ id, nickname, role, mp_openid }</td><td>用户基本信息，role 由白名单判定</td></tr>
+            <tr><td>managedStores</td><td>[{ id, name }]</td><td>管理的门店列表，仅 admin 有值</td></tr>
+            <tr><td>currentStoreId</td><td>number</td><td>当前选中的门店 ID</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="token-flow">
+        <div class="token-flow-item">
+          <div class="token-flow-icon">💾</div>
+          <div class="token-flow-content">
+            <div class="token-flow-title">写入时机：登录成功后</div>
+            <div class="token-flow-detail">
+              setToken → Storage('token')<br>
+              setUserInfo → Storage('userInfo') { id, nickname, role, mp_openid }<br>
+              setManagedStores → Storage('managedStores') [{ id, name }]
+            </div>
+          </div>
+        </div>
+        <div class="token-flow-item">
+          <div class="token-flow-icon">🔍</div>
+          <div class="token-flow-content">
+            <div class="token-flow-title">校验时机：每次打开小程序</div>
+            <div class="token-flow-detail">
+              App.vue → userStore.checkAutoLogin() → fetchProfile()<br>
+              成功：恢复登录态 + 刷新白名单信息 &nbsp;|&nbsp; 失败（401）：清除 token + 跳回登录页
+            </div>
+          </div>
+        </div>
+        <div class="token-flow-item">
+          <div class="token-flow-icon">🗑️</div>
+          <div class="token-flow-content">
+            <div class="token-flow-title">清除时机：退出登录 / token 失效</div>
+            <div class="token-flow-detail">
+              userStore.logout() → clearAuth() → 移除 token + userInfo + managedStores<br>
+              → reLaunchSafe('/pages/login/index')
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>弹幕：实时互动</title>
+<link rel="stylesheet" href="page-danmaku.css">
+</head>
+<body>
+
+<div class="img-overlay" id="imgOverlay">
+  <img id="overlayImg" src="" alt="zoom">
+  <div class="zoom-hint">click anywhere to close</div>
+</div>
+
+<div class="container">
+
+  <div class="page-header">
+    <h1>💬 弹幕：实时互动</h1>
+    <p class="subtitle">所有角色在赛事主页实时发送和查看弹幕消息，为比赛营造氛围、增强参与感</p>
+  </div>
+
+  <div id="parts-mount"></div>
+
+</div>
+
+<script src="page-danmaku-utils.js"></script>
+<script src="page-danmaku-demo.js"></script>
+<script>
+(function() {
+  var PARTS = [
+    '1-页面定位.html',
+    '2-功能概览.html',
+    '3-弹幕实时演示.html',
+    '4-交互流程.html',
+    '5-前端组件详解.html',
+    '6-轮询机制.html',
+    '7-后端接口.html',
+    '8-敏感词过滤.html',
+    '9-数据库设计.html',
+    '10-角色权限.html',
+    '11-弹幕生命周期.html',
+    '12-前端参数速查.html',
+    '13-代码结构.html'
+  ];
+  var mount = document.getElementById('parts-mount');
+  var loaded = 0;
+
+  DanmakuUtils.initOverlay();
+
+  PARTS.forEach(function(file, idx) {
+    fetch('page-danmaku-parts/' + file)
+      .then(function(r) { return r.text(); })
+      .then(function(html) {
+        window['__danmaku_part_' + idx] = html;
+        loaded++;
+        if (loaded === PARTS.length) {
+          for (var i = 0; i < PARTS.length; i++) {
+            var div = document.createElement('div');
+            div.innerHTML = '\n' + window['__danmaku_part_' + i] + '\n';
+            while (div.firstChild) {
+              mount.appendChild(div.firstChild);
+            }
+          }
+          DanmakuDemo.init();
+        }
+      })
+      .catch(function(err) {
+        console.error('Failed to load ' + file, err);
+        var p = document.createElement('p');
+        p.style.cssText = 'color:#dc2626;padding:20px;text-align:center;';
+        p.textContent = '加载失败: ' + file;
+        mount.appendChild(p);
+      });
+  });
+})();
+</script>
+
+</body>
+</html>

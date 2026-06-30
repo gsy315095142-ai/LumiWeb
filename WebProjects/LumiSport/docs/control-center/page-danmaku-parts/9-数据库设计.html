@@ -1,0 +1,31 @@
+<!-- 9. 数据库设计 -->
+  <div class="card">
+    <h2><span class="icon">🗄️</span>数据库设计</h2>
+    <p style="color:#64748b;font-size:14px;margin-bottom:16px;">
+      弹幕存储在 <code style="background:rgba(139,92,246,0.08);color:#7c3aed;padding:1px 4px;border-radius:3px;font-size:12px;">session_danmaku</code> 表中，以场次为维度索引，级联跟随场次和用户删除：
+    </p>
+    <table class="db-table">
+      <thead><tr><th>字段</th><th>类型</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td><code>id</code></td><td>INT, AUTO_INCREMENT, PK</td><td>弹幕唯一 ID，用于增量拉取的游标</td></tr>
+        <tr><td><code>session_id</code></td><td>INT, NOT NULL, FK</td><td>关联 game_sessions.id，<strong style="color:#ea580c;">ON DELETE CASCADE</strong>（场次删除时弹幕级联删除）</td></tr>
+        <tr><td><code>user_id</code></td><td>INT, NOT NULL, FK</td><td>关联 users.id，<strong style="color:#ea580c;">ON DELETE CASCADE</strong>（用户删除时弹幕级联删除）</td></tr>
+        <tr><td><code>content</code></td><td>VARCHAR(120), NOT NULL</td><td>弹幕正文（前端限制 80 字，数据库预留 120 字符余量）</td></tr>
+        <tr><td><code>created_at</code></td><td>DATETIME(6), AUTO</td><td>创建时间，精度到微秒</td></tr>
+      </tbody>
+    </table>
+    <h3 style="font-size:14px;font-weight:600;color:#7c3aed;margin:20px 0 8px;">索引</h3>
+    <table class="db-table">
+      <thead><tr><th>索引名</th><th>字段</th><th>用途</th></tr></thead>
+      <tbody>
+        <tr><td><code>IDX_session_danmaku_session_id</code></td><td>session_id</td><td>按场次查询弹幕</td></tr>
+        <tr><td><code>IDX_session_danmaku_session_created</code></td><td>session_id, created_at</td><td>按场次 + 时间排序查询</td></tr>
+      </tbody>
+    </table>
+    <div class="rule-box info" style="margin-top:12px;">
+      <p class="rule-title">💡 数据库 VARCHAR(120) vs 前后端 80 字限制</p>
+      <p class="rule-text">
+        数据库字段为 <code>varchar(120)</code>，DTO 层 <code>@MaxLength(80)</code> 限制输入，Service 层二次校验 <code>content.length > 80</code>。数据库多预留 40 字符是为了未来可能的长度调整，无需立即执行 DDL 变更。
+      </p>
+    </div>
+  </div>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>用户兑换奖品流程 · 新版小程序迭代</title>
+<link rel="stylesheet" href="nav.css">
+<link rel="stylesheet" href="prize-redemption.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="site-nav-inner">
+    <a class="site-nav-brand" href="01-客户筹码兑换流程.html">
+      <span class="brand-icon">🎮</span> LumiSport
+    </a>
+    <div class="site-nav-links">
+      <a class="site-nav-link" href="01-客户筹码兑换流程.html">
+        <span class="link-icon">🪙</span> 筹码兑换
+      </a>
+      <a class="site-nav-link" href="02-选手报名与观众竞猜流程.html">
+        <span class="link-icon">🎮</span> 报名竞猜
+      </a>
+      <a class="site-nav-link active" href="03-用户兑换奖品流程.html">
+        <span class="link-icon">🎁</span> 奖品兑换
+      </a>
+    </div>
+    <a class="site-nav-back" href="../../LumiSport.html">← 返回项目</a>
+  </div>
+</nav>
+
+<div class="container">
+
+  <div class="header">
+    <div class="header-badge">新版小程序迭代</div>
+    <div class="header-icon">🎁</div>
+    <h1>用户兑换奖品流程</h1>
+    <p>柜台挑选奖品 → 取奖后用户扫码兑换 → 工作人员确认扣币 → 取走奖品</p>
+  </div>
+
+  <!-- 要点摘要 -->
+  <div class="card">
+    <div class="card-title">📋 要点摘要</div>
+    <div class="rule-grid">
+      <div class="rule-item">
+        <div class="rule-label">发生场景</div>
+        <div class="rule-value">用户至<strong>奖品柜台</strong>，现场挑选心仪奖品</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-label">用户扫码</div>
+        <div class="rule-value">工作人员取出实物后，由用户扫描奖品条形码并<em>自主确认兑换</em></div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-label">扣费规则</div>
+        <div class="rule-value">用户确认兑换后，系统按标价扣减<em>兑换币</em></div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-label">日志确认</div>
+        <div class="rule-value">工作人员在管理端查看<em>兑换日志</em>，确认扣币成功</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-label">完成交付</div>
+        <div class="rule-value">扣币成功后，用户<strong>取走奖品</strong>，流程结束</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-label">操作端</div>
+        <div class="rule-value">扫码兑换由用户在小程序完成；工作人员取奖并查看<em>管理端日志</em>确认</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 兑换币消耗示意 -->
+  <div class="card">
+    <div class="card-title">⚖️ 兑换逻辑</div>
+    <div class="coin-flow">
+      <div class="coin-box balance">
+        <div class="coin-icon">💰</div>
+        <div class="coin-name">用户兑换币余额</div>
+        <div class="coin-detail">例：剩余 5,000</div>
+      </div>
+      <div class="coin-arrow">−</div>
+      <div class="coin-box prize">
+        <div class="coin-icon">🎁</div>
+        <div class="coin-name">奖品标价</div>
+        <div class="coin-detail">例：精品周边 800</div>
+      </div>
+      <div class="coin-arrow">=</div>
+      <div class="coin-box deduct">
+        <div class="coin-icon">✅</div>
+        <div class="coin-name">扣币完成</div>
+        <div class="coin-detail">余额变为 4,200</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 四步总览 -->
+  <div class="card">
+    <div class="card-title">🔄 流程总览</div>
+    <div class="flow-horizontal">
+      <div class="flow-step">
+        <div class="flow-step-circle">1</div>
+        <span class="flow-step-icon">🛒</span>
+        <div class="flow-step-title">来到柜台</div>
+        <div class="flow-step-sub">挑选奖品</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-step-circle">2</div>
+        <span class="flow-step-icon">📱</span>
+        <div class="flow-step-title">用户扫码</div>
+        <div class="flow-step-sub">自主确认兑换</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-step-circle">3</div>
+        <span class="flow-step-icon">📋</span>
+        <div class="flow-step-title">查看日志</div>
+        <div class="flow-step-sub">确认扣币</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-step-circle">4</div>
+        <span class="flow-step-icon">🎁</span>
+        <div class="flow-step-title">取走奖品</div>
+        <div class="flow-step-sub">流程结束</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 分步详解 -->
+  <div class="card">
+    <div class="card-title">📍 分步详解</div>

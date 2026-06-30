@@ -1,0 +1,38 @@
+<!-- ═══════ 用户角色与权限 ═══════ -->
+  <div class="card">
+    <div class="card-title">👥 用户角色与权限</div>
+    <div class="role-section">
+      <div class="role-card">
+        <div class="role-badge rb-user">🟢 user</div>
+        <div class="role-name">普通用户</div>
+        <div class="role-origin">身份来源：<strong>白名单未命中</strong>，登录后默认角色</div>
+        <div class="role-desc">选手与观众为同一角色，通过行为（是否报名）区分。</div>
+        <div class="role-perms">
+          <div class="role-perm"><span class="perm-icon">✅</span> 报名参赛（选红/蓝方）</div>
+          <div class="role-perm"><span class="perm-icon">✅</span> 查看当前场次信息</div>
+          <div class="role-perm"><span class="perm-icon">✅</span> 竞猜下注</div>
+          <div class="role-perm"><span class="perm-icon">✅</span> 查看竞猜历史 / 排行</div>
+          <div class="role-perm"><span class="perm-icon">✅</span> 弹幕互动</div>
+          <div class="role-perm"><span class="perm-icon">❌</span> <span style="color:#94a3b8">无法访问管理员页面</span></div>
+        </div>
+      </div>
+      <div class="role-card">
+        <div class="role-badge rb-admin">🔴 admin</div>
+        <div class="role-name">管理员（门店管理员）</div>
+        <div class="role-origin">身份来源：<strong>store_admins 白名单命中</strong>，可管理一家或多家门店</div>
+        <div class="role-desc">通过后台将用户 OpenID 与门店绑定产生。管理员身份互斥：<strong style="color:#d97706;">不能报名参赛或参与竞猜</strong>（当前代码中 <code style="background:rgba(217,119,6,0.08);color:#d97706;padding:1px 5px;border-radius:3px;font-size:12px;">PlayerJoinService.register</code> 未做角色校验，<strong style="color:#d97706;">⚠️ 待实现</strong>）。</div>
+        <div class="role-perms">
+          <div class="role-perm"><span class="perm-icon">✅</span> 创建 / 管理场次（仅限白名单关联门店）</div>
+          <div class="role-perm"><span class="perm-icon">✅</span> 驱动赛事流程（报名→比赛→结算）</div>
+          <div class="role-perm"><span class="perm-icon">✅</span> 录入结算分数</div>
+          <div class="role-perm"><span class="perm-icon">✅</span> 查看竞猜大盘池（全量明细）</div>
+          <div class="role-perm"><span class="perm-icon">✅</span> 门店页右上角显示「管理」入口</div>
+          <div class="role-perm"><span class="perm-icon">❌</span> <span style="color:#94a3b8">不能报名参赛</span> <span class="pending-tag">⚠️ 待实现</span></div>
+          <div class="role-perm"><span class="perm-icon">❌</span> <span style="color:#94a3b8">不能参与竞猜下注</span> <span class="pending-tag">⚠️ 待实现</span></div>
+        </div>
+        <div class="multistore-note">
+          🏪 <strong>多门店管理</strong>：一个管理员可关联多家门店（store_admins 表中多条记录）。需要操作门店相关功能时（如创建赛事），前端展示门店选择器让管理员选择当前操作门店。
+        </div>
+      </div>
+    </div>
+  </div>

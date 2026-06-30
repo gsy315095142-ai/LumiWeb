@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>匹配：选手报名</title>
+<link rel="stylesheet" href="page-join.css">
+</head>
+<body>
+
+<!-- 图片放大遮罩（全局复用） -->
+<div class="img-overlay" id="imgOverlay">
+  <img id="overlayImg" src="" alt="zoom">
+  <div class="zoom-hint">click anywhere to close</div>
+</div>
+
+<!-- 主容器，模块动态挂载点 -->
+<div class="container" id="app"></div>
+
+<!-- 公共工具（最先加载） -->
+<script src="page-join-utils.js"></script>
+
+<!-- 各业务模块（顺序即渲染顺序） -->
+<script src="page-join-header.js"></script>
+<script src="page-join-viewer.js"></script>
+<script src="page-join-player.js"></script>           <!-- 🤺 选手：选边报名 -->
+<script src="page-join-admin.js"></script>             <!-- 🛡️ 管理员：报名阶段 -->
+<script src="page-join-player-confirmed.js"></script>  <!-- ✅ 选手：审核通过 -->
+<script src="page-join-summary.js"></script>
+
+<!-- 启动渲染 -->
+<script>
+(function () {
+  'use strict';
+
+  JoinUtils.initOverlay();
+
+  var app = document.getElementById('app');
+
+  JoinHeader.render(app);            // 页头 + 定位 + 流程
+  JoinViewer.render(app);            // 观众视角
+  JoinPlayerSignup.render(app);      // 选手选边报名
+  JoinAdmin.render(app);             // 管理员审核 ← 在审核通过之前
+  JoinPlayerConfirmed.render(app);   // 选手审核通过 ← 在管理员之后
+  JoinSummary.render(app);           // 对比表 + 状态流转 + 规则
+})();
+</script>
+</body>
+</html>

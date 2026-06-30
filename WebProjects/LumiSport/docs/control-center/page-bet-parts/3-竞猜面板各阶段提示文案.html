@@ -1,0 +1,17 @@
+<div class="card">
+    <h2><span class="icon">💬</span>竞猜面板各阶段提示文案</h2>
+    <p style="color:#64748b;font-size:14px;margin-bottom:16px;">
+      根据当前赛事进度，竞猜面板顶部展示不同的提示文案，引导观众了解当前状态：
+    </p>
+    <table class="rank-table">
+      <thead><tr><th>阶段场景</th><th>提示文案</th><th>常量名</th></tr></thead>
+      <tbody>
+        <tr><td style="font-weight:600;color:#1e293b;">报名中，选手未齐人</td><td style="color:#64748b;">当前为报名阶段；待红蓝双方选手均通过审核就位后，将开放观众竞猜</td><td style="font-size:11px;color:#94a3b8;">PRE_REGISTRATION_PHASE_HINT</td></tr>
+        <tr><td style="font-weight:600;color:#1e293b;">双方已就位，管理员未开竞猜</td><td style="color:#64748b;">双方选手已定；请管理员在「场次管理」流程操作中点击「开启竞猜」后，观众方可下注</td><td style="font-size:11px;color:#94a3b8;">ADMIN_GUESSING_NOT_OPEN_HINT</td></tr>
+        <tr><td style="font-weight:600;color:#1e293b;">实力悬殊（>80%）</td><td style="color:#d97706;">红蓝均已就位，但实力悬殊过大（参考：任一侧预期胜率高于 80%），本场暂不开放竞猜下注</td><td style="font-size:11px;color:#94a3b8;">LOPSIDED_BETTING_PAUSED_HINT</td></tr>
+        <tr><td style="font-weight:600;color:#1e293b;">竞猜已开放</td><td style="color:#16a34a;">竞猜已开放：下注后请以开赛结果为准（若临场不齐人等，开赛时仍可流局作废并退还）</td><td style="font-size:11px;color:#94a3b8;">PRE_START_BETTING_HINT</td></tr>
+        <tr><td style="font-weight:600;color:#1e293b;">管理员未开启竞猜（通用）</td><td style="color:#64748b;">管理员尚未开启竞猜；请在管理人员开启后再下注</td><td style="font-size:11px;color:#94a3b8;">BETTING_GUESSING_CLOSED_MESSAGE</td></tr>
+        <tr><td style="font-weight:600;color:#1e293b;">开赛流局退款通知</td><td style="color:#ea580c;">开赛时未满足条件（未齐人或实力悬殊），本场押注已作废，竞猜币已全额退还</td><td style="font-size:11px;color:#94a3b8;">MATCH_START_VOID_BANNER_TEXT</td></tr>
+      </tbody>
+    </table>
+  </div>

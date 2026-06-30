@@ -1,0 +1,55 @@
+<!-- 5. 前端组件详解 -->
+  <div class="card">
+    <h2><span class="icon">📱</span>前端组件详解</h2>
+    <p style="color:#64748b;font-size:14px;margin-bottom:24px;">
+      弹幕组件 <code style="background:rgba(37,99,235,0.08);color:#3b82f6;padding:2px 6px;border-radius:4px;font-size:12px;">SessionDanmakuLayer.vue</code> 挂载在赛事主页（event.vue）中，包含两个区域：
+    </p>
+
+    <!-- 飘屏区 -->
+    <div class="illus-row">
+      <div class="desc-area" style="width:100%;">
+        <h3>🎬 飘屏区域（dm-fly-layer）</h3>
+        <ul class="anno-list">
+          <li data-num="1">
+            <strong>两种定位模式</strong> — <code style="background:rgba(37,99,235,0.08);color:#3b82f6;padding:2px 6px;border-radius:4px;font-size:12px;">flyAnchorInline=true</code> 时以 <strong style="color:#6366f1;">absolute</strong> 铺满父级赛事模块锚点，仅覆盖 VS/赔率卡区域，不挡底部 Tab；<code style="background:rgba(37,99,235,0.08);color:#3b82f6;padding:2px 6px;border-radius:4px;font-size:12px;">flyAnchorInline=false</code>（默认）时以 <strong style="color:#6366f1;">fixed</strong> 定位在导航栏下方
+          </li>
+          <li data-num="2">
+            <strong>3 泳道轮询分配</strong> — 每条新弹幕按 <code style="background:rgba(37,99,235,0.08);color:#3b82f6;padding:2px 6px;border-radius:4px;font-size:12px;">laneRound % 3</code> 分配到 0/1/2 泳道，垂直间距 40rpx，避免重叠
+          </li>
+          <li data-num="3">
+            <strong>随机滑速</strong> — 每条弹幕的 <code style="background:rgba(37,99,235,0.08);color:#3b82f6;padding:2px 6px;border-radius:4px;font-size:12px;">animationDuration</code> 为 11 + random(5) 秒，即 11~16 秒不等，营造自然错落感
+          </li>
+          <li data-num="4">
+            <strong>自动清理</strong> — 每条弹幕 16 秒后自动从数组中移除；数组上限 16 条，超出时裁剪最早的
+          </li>
+          <li data-num="5">
+            <strong>文字样式</strong> — 白色文字 + 黑色阴影（text-shadow），确保在各种背景上可读；字号 24rpx，不干扰主要赛事信息
+          </li>
+          <li data-num="6">
+            <strong>pointer-events: none</strong> — 飘屏层不拦截触摸事件，不影响下方赛事模块的正常交互
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 输入栏 -->
+    <div class="illus-row">
+      <div class="desc-area" style="width:100%;">
+        <h3>⌨️ 底部输入栏（dm-input-bar）</h3>
+        <ul class="anno-list">
+          <li data-num="1">
+            <strong>fixed 固定底部</strong> — 输入栏始终贴在屏幕底部（z-index: 95），适配安全区（safe-area-inset-bottom）
+          </li>
+          <li data-num="2">
+            <strong>输入框</strong> — <code style="background:rgba(37,99,235,0.08);color:#3b82f6;padding:2px 6px;border-radius:4px;font-size:12px;">maxlength="80"</code>，placeholder 为「发条弹幕…」，confirm-type="send" 支持键盘确认键发送
+          </li>
+          <li data-num="3">
+            <strong>发送按钮</strong> — 发送中（sending=true）或输入为空时禁用；发送成功后自动清空输入框
+          </li>
+          <li data-num="4">
+            <strong>青蓝配色</strong> — 白色背景 + 蓝色聚焦边框 + 渐变发送按钮，与浅色主题统一
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>

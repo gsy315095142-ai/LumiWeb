@@ -1,0 +1,107 @@
+﻿<!-- ==================== 16. 过往战绩增强版（规划中） ==================== -->
+  <div class="card card-planned">
+    <h2><span class="icon">🎮</span>过往战绩（增强版）<span class="badge-planned">规划中</span></h2>
+    <p class="planned-hint">作为独立子页面，展示当前门店下的参赛历史记录，支持玩法筛选与积分变化追踪。对标「过往竞猜」。</p>
+
+    <div class="illus-row" style="gap:32px;align-items:flex-start;margin-bottom:28px;">
+      <div class="phone-frame" style="width:300px;">
+        <div class="cyber-nav">
+          <span class="cyber-back">‹ 返回</span>
+          <span class="cyber-title">过往战绩</span>
+          <span style="width:60px"></span>
+        </div>
+        <div class="cyber-body">
+          <!-- 门店标识 -->
+          <div class="cyber-card" style="display:flex;align-items:center;gap:6px;padding:8px 12px;margin-bottom:4px;font-size:12px;color:rgba(160,200,220,0.7);">
+            <span>🏪</span><span>朝阳店</span>
+          </div>
+          <!-- 筛选栏 -->
+          <div class="filter-bar">
+            <span class="filter-chip active">全部</span>
+            <span class="filter-chip">🏒冰球</span>
+            <span class="filter-chip">🥊拳王</span>
+            <span class="filter-chip">🤺击剑</span>
+          </div>
+          <!-- 卡片1：胜利 -->
+          <div class="cyber-card hist2-sim">
+            <div class="hist2-head">
+              <span class="hist2-time">2026-5-11 14:30</span>
+              <span class="hist2-result win">胜利</span>
+            </div>
+            <div class="hist2-match">🏒 疾速冰球 · 周末争霸</div>
+            <div class="hist2-vs">我(红方) vs 对手</div>
+            <div class="hist2-score">5 : 3</div>
+            <div class="hist2-rating">
+              <span class="rt-label">积分</span>
+              <span class="rt-before">837.50</span>
+              <span class="rt-arrow">→</span>
+              <span class="rt-after up">850.00</span>
+              <span class="rt-delta up">+12.50</span>
+            </div>
+          </div>
+          <!-- 卡片2：失败 -->
+          <div class="cyber-card hist2-sim">
+            <div class="hist2-head">
+              <span class="hist2-time">2026-5-10 16:00</span>
+              <span class="hist2-result lose">失败</span>
+            </div>
+            <div class="hist2-match">🥊 烈焰拳王 · 周末争霸</div>
+            <div class="hist2-vs">对手 vs 我(蓝方)</div>
+            <div class="hist2-score">5 : 2</div>
+            <div class="hist2-rating">
+              <span class="rt-label">积分</span>
+              <span class="rt-before">936.50</span>
+              <span class="rt-arrow">→</span>
+              <span class="rt-after down">928.30</span>
+              <span class="rt-delta down">-8.20</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="desc-area">
+        <h3 style="font-size:17px;font-weight:600;color:#1e293b;margin-bottom:14px;">设计说明</h3>
+        <ul class="anno-list">
+          <li data-num="1"><strong>门店标识</strong> — 顶部展示当前门店名称（如「朝阳店」），本页仅展示该门店下的参赛战绩</li>
+          <li data-num="2"><strong>玩法筛选栏</strong> — 水平标签：「全部 / 🏒冰球 / 🥊拳王 / 🤺击剑」，在当前门店范围内快速切换</li>
+          <li data-num="3"><strong>结果标签</strong> — <span style="color:#73d13d;font-weight:600">绿色「胜利」</span> / <span style="color:#ff7875;font-weight:600">红色「失败」</span> / <span style="color:#ffc069;font-weight:600">橙色「平局」</span></li>
+          <li data-num="4"><strong>积分变化行</strong> — 展示 <span style="color:#7ee8ff">旧积分 → 新积分</span> + 差值（<span style="color:#73d13d">+N</span> / <span style="color:#ff7875">-N</span>），积分变化归属当前门店</li>
+          <li data-num="5"><strong>对阵简化</strong> — 突出「我」的视角：「我(红方) vs 对手」，直观清晰</li>
+          <li data-num="6"><strong>独立子页面</strong> — 支持滚动分页加载、玩法筛选，完整的页面体验</li>
+        </ul>
+        <div class="rule-box info" style="margin-top:16px;">
+          <p class="rule-title">💡 数据来源</p>
+          <p class="rule-text">
+            接口 <code>GET /api/player/match-history?storeId={storeId}&gameType=all</code>，支持 <code>gameType</code> 筛选参数，支持分页加载。<br>
+            数据范围限定在当前门店，不会展示其他门店的参赛记录。
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<style>
+/* === 过往战绩增强版模拟 === */
+.filter-bar { display:flex; gap:6px; margin-bottom:8px; overflow-x:auto; padding-bottom:2px; }
+.filter-chip { display:inline-block; padding:4px 10px; border-radius:12px; font-size:11px; color:rgba(200,235,255,0.65); background:rgba(0,20,35,0.6); border:1px solid rgba(0,255,255,0.1); white-space:nowrap; cursor:pointer; }
+.filter-chip.active { color:#e8fdff; background:rgba(0,255,255,0.12); border-color:rgba(0,255,255,0.35); }
+.hist2-sim { display:flex; flex-direction:column; gap:5px; padding:10px 12px; }
+.hist2-head { display:flex; justify-content:space-between; align-items:center; }
+.hist2-time { font-size:11px; color:rgba(160,200,220,0.65); }
+.hist2-result { font-size:12px; font-weight:600; padding:1px 8px; border-radius:4px; }
+.hist2-result.win { color:#73d13d; background:rgba(20,60,30,0.4); }
+.hist2-result.lose { color:#ff7875; background:rgba(60,20,25,0.4); }
+.hist2-match { font-size:11px; color:rgba(220,245,255,0.9); }
+.hist2-vs { font-size:11px; color:rgba(220,235,255,0.88); }
+.hist2-score { font-size:14px; font-weight:700; color:#e8fdff; }
+.hist2-rating { display:flex; align-items:center; gap:4px; margin-top:4px; padding-top:6px; border-top:1px solid rgba(0,255,255,0.1); font-size:11px; }
+.rt-label { color:rgba(160,200,220,0.55); }
+.rt-before { color:rgba(160,200,220,0.7); }
+.rt-arrow { color:rgba(160,200,220,0.4); }
+.rt-after { font-weight:600; }
+.rt-after.up { color:#73d13d; }
+.rt-after.down { color:#ff7875; }
+.rt-delta { font-weight:600; padding:1px 6px; border-radius:4px; font-size:10px; }
+.rt-delta.up { color:#73d13d; background:rgba(20,60,30,0.4); }
+.rt-delta.down { color:#ff7875; background:rgba(60,20,25,0.4); }
+</style>

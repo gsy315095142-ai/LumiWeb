@@ -1,0 +1,158 @@
+﻿<!-- ==================== 17. 积分变动记录（规划中） ==================== -->
+  <div class="card card-planned">
+    <h2><span class="icon">📊</span>积分变动记录<span class="badge-planned">规划中</span></h2>
+    <p class="planned-hint">类似「竞猜币流水」，记录每场比赛后的积分变化。支持按玩法筛选，对标「过往战绩增强版」。</p>
+
+    <div class="illus-row" style="gap:32px;align-items:flex-start;margin-bottom:28px;">
+      <div class="phone-frame" style="width:300px;">
+        <div class="cyber-nav">
+          <span class="cyber-back">‹ 返回</span>
+          <span class="cyber-title">积分变动</span>
+          <span style="width:60px"></span>
+        </div>
+        <div class="cyber-body">
+          <!-- 门店标识 -->
+          <div class="cyber-card" style="display:flex;align-items:center;gap:6px;padding:8px 12px;margin-bottom:4px;font-size:12px;color:rgba(160,200,220,0.7);">
+            <span>🏪</span><span>朝阳店</span>
+          </div>
+          <!-- 玩法筛选栏 -->
+          <div class="filter-bar">
+            <span class="filter-chip active">全部</span>
+            <span class="filter-chip">🏒冰球</span>
+            <span class="filter-chip">🥊拳王</span>
+            <span class="filter-chip">🤺击剑</span>
+          </div>
+          <!-- 条目1：胜利加分 -->
+          <div class="cyber-card rat-sim">
+            <div class="rat-row1">
+              <span class="rat-time">2026-5-11 14:30</span>
+              <span class="rat-amt rat-up">+12.50</span>
+            </div>
+            <div class="rat-cause">🏒 疾速冰球 · 胜利（5:3）</div>
+            <div class="rat-bal">积分 850.00</div>
+          </div>
+          <!-- 条目2：失败扣分 -->
+          <div class="cyber-card rat-sim">
+            <div class="rat-row1">
+              <span class="rat-time">2026-5-10 16:00</span>
+              <span class="rat-amt rat-down">−8.20</span>
+            </div>
+            <div class="rat-cause">🥊 烈焰拳王 · 失败（2:5）</div>
+            <div class="rat-bal">积分 928.30</div>
+          </div>
+          <!-- 条目3：平局 -->
+          <div class="cyber-card rat-sim">
+            <div class="rat-row1">
+              <span class="rat-time">2026-5-9 10:15</span>
+              <span class="rat-amt rat-draw">+0.00</span>
+            </div>
+            <div class="rat-cause">🤺 雷霆击剑 · 平局（3:3）</div>
+            <div class="rat-bal">积分 936.50</div>
+          </div>
+          <!-- 条目4：胜利加分 -->
+          <div class="cyber-card rat-sim">
+            <div class="rat-row1">
+              <span class="rat-time">2026-5-8 15:20</span>
+              <span class="rat-amt rat-up">+15.80</span>
+            </div>
+            <div class="rat-cause">🥊 烈焰拳王 · 胜利（5:1）</div>
+            <div class="rat-bal">积分 936.50</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="desc-area">
+        <h3 style="font-size:17px;font-weight:600;color:#1e293b;margin-bottom:14px;">设计说明</h3>
+        <ul class="anno-list">
+          <li data-num="1"><strong>门店标识</strong> — 顶部展示当前门店名称（如「朝阳店」），本页仅展示该门店下的积分变动</li>
+          <li data-num="2"><strong>玩法筛选栏</strong> — 水平标签：「全部 / 🏒冰球 / 🥊拳王 / 🤺击剑」，在当前门店范围内筛选</li>
+          <li data-num="3"><strong>头行</strong> — 左侧时间，右侧积分变化（<span style="color:#73d13d;font-weight:600">+N 绿色</span> / <span style="color:#ff7875;font-weight:600">−N 红色</span> / <span style="color:#ffc069">0 橙色</span>）</li>
+          <li data-num="4"><strong>原因行</strong> — emoji玩法 + 结果 + 比分，如「🏒 疾速冰球 · 胜利（5:3）」</li>
+          <li data-num="5"><strong>余额行</strong> — 灰色小字，显示变动后该门店下该玩法的积分值</li>
+        </ul>
+
+        <h3 style="font-size:15px;font-weight:600;color:#6366f1;margin:20px 0 10px;">积分计算规则</h3>
+        <div style="background:#1e293b;border-radius:8px;padding:16px 20px;margin-bottom:16px;font-family:monospace;font-size:13px;color:#a5b4fc;line-height:2;">
+          <span style="color:#64748b;">// 常量</span><br>
+          SCORE_RATE = <span style="color:#fbbf24;">20</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#64748b;">// 每场变动基数</span><br>
+          INIT_RATING = <span style="color:#fbbf24;">100</span>&nbsp;&nbsp;&nbsp;<span style="color:#64748b;">// 初始积分</span><br>
+          MIN_RATING  = <span style="color:#fbbf24;">1</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#64748b;">// 积分下限</span><br><br>
+          <span style="color:#64748b;">// 胜负结算</span><br>
+          sum = redRating + blueRating<br>
+          redDelta = SCORE_RATE × (blueRating / sum)<br>
+          blueDelta = SCORE_RATE × (redRating / sum)<br><br>
+          <span style="color:#64748b;">// 胜方 +delta，败方 -delta；平局双方 ±0</span>
+        </div>
+
+        <div class="info-duo">
+          <div class="info-block green">
+            <p class="block-title">📈 胜方加分</p>
+            <p class="block-text">
+              delta = 20 × (对手积分 / 双方积分之和)<br><br>
+              <strong>对手积分占比越高，加分越多</strong> — 即"以弱胜强"获得更多积分奖励
+            </p>
+          </div>
+          <div class="info-block amber">
+            <p class="block-title">📉 败方扣分</p>
+            <p class="block-text">
+              delta = 20 × (自己积分 / 双方积分之和)<br><br>
+              <strong>自己积分占比越高，扣分越多</strong> — 即"强输弱"扣除更多积分惩罚
+            </p>
+          </div>
+        </div>
+
+        <ul style="font-size:13px;color:#475569;padding-left:20px;line-height:2.2;margin-top:16px;">
+          <li><strong style="color:#1e293b;">积分按门店独立</strong> — 不同门店的积分各自独立计算，同一用户在不同门店的积分互不影响</li>
+          <li><strong style="color:#1e293b;">积分按玩法独立</strong> — 冰球、拳王、击剑各自独立计算和存储（<code>user_game_ratings</code> 表按 <code>store_id + gameType</code> 区分）</li>
+          <li><strong style="color:#1e293b;">平局不变动</strong> — 比分为平局时双方 <code>ratingChange = 0</code></li>
+          <li><strong style="color:#1e293b;">积分下限为 1</strong> — 扣分后不低于 <code>MIN_RATING = 1</code>，不会变成 0 或负数</li>
+          <li><strong style="color:#1e293b;">双方变动不对等</strong> — 胜方加分与败方扣分的数值通常不相等（各自 delta 独立计算）</li>
+          <li><strong style="color:#1e293b;">赔率也基于积分</strong> — 胜负盘赔率 = <code>(1 / 预期胜率) × (1 - 10%手续费)</code>，预期胜率 = 自己积分 / 双方积分之和</li>
+        </ul>
+
+        <div class="rule-box info" style="margin-top:16px;">
+          <p class="rule-title">💡 举例说明</p>
+          <p class="rule-text">
+            红方积分 <strong>100</strong>，蓝方积分 <strong>100</strong>（初始状态）：<br>
+            sum = 200，redDelta = 20 × (100/200) = <strong>10</strong>，blueDelta = 20 × (100/200) = <strong>10</strong><br>
+            红方胜利 → 红方 <span style="color:#16a34a;">+10</span> 变成 110，蓝方 <span style="color:#dc2626;">−10</span> 变成 90<br><br>
+            红方积分 <strong>150</strong>，蓝方积分 <strong>80</strong>（实力悬殊）：<br>
+            sum = 230，redDelta = 20 × (80/230) ≈ <strong>6.96</strong>，blueDelta = 20 × (150/230) ≈ <strong>13.04</strong><br>
+            红方胜利 → 红方仅 <span style="color:#16a34a;">+6.96</span>（强者赢弱者加分少）<br>
+            蓝方胜利 → 蓝方 <span style="color:#16a34a;">+13.04</span>（弱者赢强者加分多），红方 <span style="color:#dc2626;">−6.96</span>
+          </p>
+        </div>
+
+        <div class="rule-box info" style="margin-top:12px;">
+          <p class="rule-title">💡 数据来源</p>
+          <p class="rule-text">
+            后端结算时已记录 <code>redRatingBefore → redRatingAfter</code>，前端需新增接口 <code>GET /api/player/rating-log?storeId={storeId}</code> 聚合流水，支持 <code>gameType</code> 筛选参数。<br>
+            表结构可复用 <code>user_coin_logs</code> 的模式，新建 <code>user_rating_logs</code> 表。<br>
+            积分计算逻辑详见 <code>player-rating.service.ts</code> → <code>applyReferenceRatingSettlement</code>，常量定义见 <code>player-rating.util.ts</code>。<br>
+            数据范围限定在当前门店，不会展示其他门店的积分变动。
+          </p>
+        </div>
+
+        <div class="rule-box warn" style="margin-top:12px;">
+          <p class="rule-title">🏪 门店隔离说明</p>
+          <p class="rule-text">
+            积分按<strong>门店 + 玩法</strong>双重独立：同一用户在不同门店的同一玩法积分不同，变动记录仅展示当前门店数据。<br>
+            参赛所得积分仅计入当场门店，不会跨店汇总或影响其他门店积分。
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<style>
+/* === 积分变动记录模拟 === */
+.rat-sim { display:flex; flex-direction:column; gap:4px; padding:8px 12px; }
+.rat-row1 { display:flex; justify-content:space-between; align-items:center; }
+.rat-time { font-size:11px; color:rgba(160,200,220,0.65); }
+.rat-amt { font-size:14px; font-weight:700; }
+.rat-amt.rat-up { color:#73d13d; }
+.rat-amt.rat-down { color:#ff7875; }
+.rat-amt.rat-draw { color:#ffc069; }
+.rat-cause { font-size:12px; color:rgba(220,245,255,0.92); line-height:1.4; }
+.rat-bal { font-size:10px; color:rgba(160,200,220,0.55); }
+</style>

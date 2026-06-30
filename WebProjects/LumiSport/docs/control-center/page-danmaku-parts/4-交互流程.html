@@ -1,0 +1,27 @@
+<!-- 4. 交互流程 -->
+  <div class="card">
+    <h2><span class="icon">🔄</span>交互流程</h2>
+    <p style="color:#64748b;font-size:14px;margin-bottom:16px;">
+      弹幕功能从组件挂载到用户发送消息的完整流程：
+    </p>
+    <div class="flow-strip">
+      <div class="flow-step"><span class="step-label">进入赛事主页</span></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step"><span class="step-label">组件挂载 · 首次拉取</span></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step"><span class="step-label">开始轮询（2.8s）</span></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step"><span class="step-label">新消息飘屏展示</span></div>
+    </div>
+    <div class="flow-strip" style="margin-top:8px;">
+      <div class="flow-step"><span class="step-label">用户输入文字</span></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step"><span class="step-label">点击发送 / 回车</span></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step"><span class="step-label">POST 发送请求</span></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step"><span class="step-label">成功后清空输入框</span></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step"><span class="step-label">立即飘屏展示</span></div>
+    </div>
+  </div>

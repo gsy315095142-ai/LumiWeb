@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>预测数值计算 · 积分 / 赔率 / 胜负模拟</title>
+<meta name="description" content="LumiSport 竞猜预测数值实验台：可编辑双方初始积分、抽水比例、每局变动系数、赔率上下限，并以 30 行链式胜负模拟推演选手积分与赔率走向。">
+<link rel="stylesheet" href="value-calc.css">
+</head>
+<body>
+
+<header class="head">
+  <div class="head-glow"></div>
+  <div class="head-inner">
+    <a class="head-back" href="../../LumiSport.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      返回 LumiSport
+    </a>
+    <div class="head-badge">PREDICTION DATA LAB · 预测数值实验台</div>
+    <h1 class="head-title">积分 · 赔率 · <span class="accent">胜负链式模拟</span></h1>
+    <p class="head-sub">调整下方任意参数，30 行胜负模拟会实时重算。每行的初始积分来自上一行的最终积分 —— 拨动"胜负结果"，即可看到一条选手积分与赔率随连胜 / 连败演化的完整轨迹。</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- 参数 -->
+  <section class="card">
+    <div class="card-title"><span class="no">1</span>可编辑参数</div>
+    <div class="card-sub">这些是整张模拟表的全局前提，修改后第 1 行的初始积分与所有派生数值都会联动重算。</div>
+    <div class="params">
+      <div class="param">
+        <label>红方初始积分</label>
+        <div class="row"><input type="number" id="p_redInit" value="100" step="1" min="1"></div>
+        <div class="hint">第 1 局红方的起始 Rating</div>
+      </div>
+      <div class="param">
+        <label>蓝方初始积分</label>
+        <div class="row"><input type="number" id="p_blueInit" value="100" step="1" min="1"></div>
+        <div class="hint">第 1 局蓝方的起始 Rating</div>
+      </div>
+      <div class="param">
+        <label>抽水比例 <span class="unit">(0~1)</span></label>
+        <div class="row"><input type="number" id="p_fee" value="0.1" step="0.01" min="0" max="0.99"></div>
+        <div class="hint">平台抽水，赔率 ×(1 − 抽水)。0.1 = 10%</div>
+      </div>
+      <div class="param">
+        <label>每局变动系数</label>
+        <div class="row"><input type="number" id="p_scoreRate" value="20" step="1" min="0"></div>
+        <div class="hint">每局在红蓝之间重新分配的总积分量</div>
+      </div>
+      <div class="param">
+        <label>赔率上限</label>
+        <div class="row"><input type="number" id="p_maxOdds" value="2.0" step="0.1" min="1"></div>
+        <div class="hint">单侧赔率的封顶值</div>
+      </div>
+      <div class="param">
+        <label>赔率下限</label>
+        <div class="row"><input type="number" id="p_minOdds" value="1.1" step="0.1" min="1"></div>
+        <div class="hint">单侧赔率的保底值</div>
+      </div>
+      <div class="param">
+        <label>积分下限</label>
+        <div class="row"><input type="number" id="p_minRating" value="1" step="1" min="0"></div>
+        <div class="hint">积分经清洗后不低于该值</div>
+      </div>
+      <div class="param">
+        <label>悬殊阈值 <span class="unit">(预期胜率)</span></label>
+        <div class="row"><input type="number" id="p_voidRate" value="0.8" step="0.05" min="0.5" max="1"></div>
+        <div class="hint">任一方预期胜率超过此值即标记"实力悬殊"</div>
+      </div>
+    </div>
+    <div class="toolbar">
+      <button class="btn" id="btnAllRed">全部红方胜</button>
+      <button class="btn" id="btnAllBlue">全部蓝方胜</button>
+      <button class="btn ghost" id="btnAlt">红蓝交替胜</button>
+      <button class="btn ghost" id="btnReset">重置参数与结果</button>
+      <span class="toolbar-note" id="rowCount">共 30 行模拟</span>
+    </div>
+  </section>
+
+  <!-- 公式 -->
+  <div class="formula">
+    <span class="ftitle">计算公式（与 LumiSport 后端一致）</span>
+    · 预期胜率：<code>红胜率 = max(1,红积分) / (max(1,红积分) + max(1,蓝积分))</code>，蓝胜率同理。<br>
+    · 赔率：<code>赔率 = clamp( (1 / 该侧胜率) × (1 − 抽水比例), 赔率下限, 赔率上限 )</code>，保留两位小数。<br>
+    · 积分结算（非平局，记 <code>S = 红积分 + 蓝积分</code>）：<code>Δ红 = 变动系数 × (蓝积分 / S)</code>，<code>Δ蓝 = 变动系数 × (红积分 / S)</code>。<br>
+    &nbsp;&nbsp;红胜 → 红 +Δ红、蓝 −Δ蓝；蓝胜 → 蓝 +Δ蓝、红 −Δ红；平局 → 双方不变。结果经 <code>max(积分下限, 四舍五入两位)</code> 清洗。
+  </div>
+
+  <!-- 模拟表 -->
+  <section class="card">
+    <div class="card-title"><span class="no">2</span>红蓝胜负链式模拟</div>
+    <div class="card-sub">只需切换每行的「胜负结果」。每行的红 / 蓝初始积分自动继承上一行的最终积分，赔率随积分实时变化。</div>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>局数</th>
+            <th>红方初始<span class="th-sub">继承上行</span></th>
+            <th>蓝方初始<span class="th-sub">继承上行</span></th>
+            <th>红预期胜率</th>
+            <th>蓝预期胜率</th>
+            <th>红赔率</th>
+            <th>蓝赔率</th>
+            <th>胜负结果<span class="th-sub">可切换</span></th>
+            <th>红方新积分<span class="th-sub">Δ变化</span></th>
+            <th>蓝方新积分<span class="th-sub">Δ变化</span></th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+    <div class="legend">
+      <span><i class="dot" style="background:var(--red)"></i>红方</span>
+      <span><i class="dot" style="background:var(--blue)"></i>蓝方</span>
+      <span><i class="dot" style="background:var(--green)"></i>积分上升</span>
+      <span><i class="dot" style="background:var(--gold)"></i>实力悬殊（超阈值，真实场景会流局退款）</span>
+    </div>
+  </section>
+
+</div>
+
+<script src="value-calc.js"></script>
+</body>
+</html>

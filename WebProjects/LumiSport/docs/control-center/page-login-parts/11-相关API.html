@@ -1,0 +1,20 @@
+<!-- ═══════ API ═══════ -->
+  <div class="card">
+    <div class="card-title">📡 相关 API 接口</div>
+    <div class="api-table-wrap">
+      <table class="field-table api-table">
+        <thead>
+          <tr><th>接口</th><th>方法</th><th>说明</th><th>鉴权</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>/api/auth/login-wechat</td><td>POST</td><td>微信登录：传入 { code }，返回 { accessToken, user, managedStores }</td><td>否</td></tr>
+          <tr><td>/api/auth/profile</td><td>GET</td><td>获取当前用户资料（含门店列表），失败则触发退出登录</td><td>JWT</td></tr>
+          <tr><td>/api/auth/profile</td><td>PUT</td><td>更新用户资料（昵称），角色/门店不可通过此接口修改</td><td>JWT</td></tr>
+          <tr><td>/api/player/check-in</td><td>POST</td><td>每日签到：领取 +100 竞猜币，Asia/Shanghai 自然日限一次</td><td>JWT</td></tr>
+          <tr><td>/api/admin/store-admins</td><td>GET</td><td>查询白名单列表（支持按门店/用户筛选）</td><td>超管</td></tr>
+          <tr><td>/api/admin/store-admins</td><td>POST</td><td>添加管理员-门店绑定 { user_id, store_id }</td><td>超管</td></tr>
+          <tr><td>/api/admin/store-admins/:id</td><td>DELETE</td><td>移除单条管理员-门店绑定</td><td>超管</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

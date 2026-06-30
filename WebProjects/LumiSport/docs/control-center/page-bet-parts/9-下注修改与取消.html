@@ -1,0 +1,28 @@
+<div class="card">
+    <h2><span class="icon">💰</span>下注、修改与取消</h2>
+    <div class="flow-strip">
+      <div class="flow-step"><span class="step-label">选择玩法</span></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step"><span class="step-label">输入金额（≥10币）</span></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step"><span class="step-label">确认下注</span></div>
+      <span class="flow-arrow">⇄</span>
+      <div class="flow-step"><span class="step-label">可修改 / 取消</span></div>
+    </div>
+    <table class="rank-table" style="margin-top:20px;">
+      <thead><tr><th>操作</th><th>效果</th><th>竞猜币变化</th></tr></thead>
+      <tbody>
+        <tr><td style="font-weight:600;color:#1e293b;">首次下注</td><td>创建该玩法的下注记录</td><td style="color:#ea580c;">扣除下注额</td></tr>
+        <tr><td style="font-weight:600;color:#1e293b;">修改下注（同一类型）</td><td><strong>覆盖</strong>之前的金额和选项，不是叠加</td><td style="color:#ea580c;">多退少补</td></tr>
+        <tr><td style="font-weight:600;color:#1e293b;">取消下注</td><td>删除该玩法的下注记录</td><td style="color:#16a34a;">全额退还</td></tr>
+      </tbody>
+    </table>
+    <div class="rule-box info" style="margin-top:12px;">
+      <p class="rule-title">💡 覆盖机制</p>
+      <p class="rule-text">同一类型（如胜负盘）重复下注会<strong>覆盖</strong>之前的金额和选项，不是叠加。取消下注则全额退还。不同类型（如胜负盘 + 精准总分）之间互不影响，可各自持有下注。</p>
+    </div>
+    <div class="rule-box warn">
+      <p class="rule-title">⚠️ 开赛后不可修改</p>
+      <p class="rule-text">管理员点击「开赛」后，所有下注<strong>立即锁定</strong>，无法再修改、取消或新增。</p>
+    </div>
+  </div>

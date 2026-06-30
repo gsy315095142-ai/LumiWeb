@@ -1,0 +1,36 @@
+<!-- 10. 角色权限 -->
+  <div class="card">
+    <h2><span class="icon">👥</span>角色与权限</h2>
+    <p style="color:#64748b;font-size:14px;margin-bottom:16px;">
+      弹幕功能的角色权限非常简单——<strong style="color:#1e293b;">所有已登录用户均可发送和查看弹幕</strong>，不区分管理员/选手/观众：
+    </p>
+    <table class="api-table">
+      <thead><tr><th>角色</th><th>查看弹幕</th><th>发送弹幕</th><th>管理弹幕</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="role-tag admin">管理员</span></td>
+          <td style="color:#16a34a;">✓ 可查看</td>
+          <td style="color:#16a34a;">✓ 可发送</td>
+          <td style="color:#64748b;">✗ 无独立管理（无删除/屏蔽接口）</td>
+        </tr>
+        <tr>
+          <td><span class="role-tag player">选手</span></td>
+          <td style="color:#16a34a;">✓ 可查看</td>
+          <td style="color:#16a34a;">✓ 可发送</td>
+          <td style="color:#64748b;">—</td>
+        </tr>
+        <tr>
+          <td><span class="role-tag viewer">观众</span></td>
+          <td style="color:#16a34a;">✓ 可查看</td>
+          <td style="color:#16a34a;">✓ 可发送</td>
+          <td style="color:#64748b;">—</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="rule-box info" style="margin-top:12px;">
+      <p class="rule-title">💡 为什么所有角色都能发弹幕？</p>
+      <p class="rule-text">
+        弹幕是轻量级的<strong>氛围互动工具</strong>，而非核心业务操作（如竞猜下注）。允许所有人参与能最大化现场气氛，与"赛事无门槛互动"的产品定位一致。后端仅校验 JWT 有效性（<code>@UseGuards(JwtAuthGuard)</code>），不检查角色字段。
+      </p>
+    </div>
+  </div>

@@ -1,0 +1,32 @@
+<!-- 13. 代码结构 -->
+  <div class="card">
+    <h2><span class="icon">📁</span>代码结构一览</h2>
+    <p style="color:#64748b;font-size:14px;margin-bottom:16px;">
+      弹幕功能涉及的前后端文件：
+    </p>
+
+    <h3 style="font-size:15px;font-weight:600;color:#16a34a;margin-bottom:10px;">📂 后端（NestJS）</h3>
+    <table class="api-table" style="margin-bottom:24px;">
+      <thead><tr><th>文件</th><th>职责</th></tr></thead>
+      <tbody>
+        <tr><td><code>modules/danmaku/danmaku.controller.ts</code></td><td>路由：GET 拉取 + POST 发送</td></tr>
+        <tr><td><code>modules/danmaku/danmaku.service.ts</code></td><td>业务逻辑：发送（校验+存储）、拉取（增量查询）</td></tr>
+        <tr><td><code>modules/danmaku/danmaku.types.ts</code></td><td>TypeScript 类型定义（DanmakuMessagePayload、DanmakuListPayload）</td></tr>
+        <tr><td><code>modules/danmaku/dto/create-danmaku.dto.ts</code></td><td>发送弹幕入参校验（sessionId + content）</td></tr>
+        <tr><td><code>modules/danmaku/dto/list-danmaku.dto.ts</code></td><td>拉取弹幕入参校验（sessionId + afterId + limit）</td></tr>
+        <tr><td><code>modules/danmaku/entities/session-danmaku.entity.ts</code></td><td>TypeORM 实体：session_danmaku 表映射</td></tr>
+        <tr><td><code>modules/danmaku/sensitive-word-filter.service.ts</code></td><td>敏感词过滤服务：加载词库 + 子串匹配</td></tr>
+        <tr><td><code>migrations/1721000000000-SessionDanmaku.ts</code></td><td>数据库迁移：创建 session_danmaku 表 + 索引 + 外键</td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="font-size:15px;font-weight:600;color:#3b82f6;margin-bottom:10px;">📂 前端（uni-app Vue3）</h3>
+    <table class="api-table">
+      <thead><tr><th>文件</th><th>职责</th></tr></thead>
+      <tbody>
+        <tr><td><code>api/danmaku.ts</code></td><td>API 封装：getDanmakuApi（GET）+ postDanmakuApi（POST）</td></tr>
+        <tr><td><code>pages/player/components/danmaku/SessionDanmakuLayer.vue</code></td><td>弹幕组件：飘屏层 + 输入栏 + 轮询逻辑</td></tr>
+        <tr><td><code>pages/player/event.vue</code></td><td>赛事主页：引用 SessionDanmakuLayer 组件，传入 sessionId</td></tr>
+      </tbody>
+    </table>
+  </div>

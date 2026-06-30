@@ -1,0 +1,29 @@
+<!-- ═══════ 用户初始化与经济系统 ═══════ -->
+  <div class="card">
+    <div class="card-title">💰 用户初始化与经济系统</div>
+    <div class="overview-desc" style="margin-bottom:4px">
+      新用户首次登录后，系统自动完成经济账户初始化。<strong>竞猜币</strong>为虚拟货币，用于竞猜下注；<strong>积分</strong>按玩法独立统计，用于排名。
+    </div>
+    <div class="economy-grid">
+      <div class="economy-item">
+        <span class="economy-item-icon">🪙</span>
+        <div class="economy-item-title">竞猜币（虚拟货币）</div>
+        <div class="economy-item-desc">
+          新用户初始 <strong>0 竞猜币</strong>。<br>
+          获取方式：每日签到领取 +100（Asia/Shanghai 时区自然日限一次）。<br>
+          消耗方式：竞猜下注扣除，猜对按赔率返还 + 盈利。<br>
+          字段：<code>coins</code>，签到接口 <code>POST /api/player/check-in</code> 已实现。
+        </div>
+      </div>
+      <div class="economy-item">
+        <span class="economy-item-icon">📊</span>
+        <div class="economy-item-title">积分（按玩法独立）</div>
+        <div class="economy-item-desc">
+          三种竞技玩法各自独立积分：<br>
+          <code>hockey</code> 冰球 · <code>boxing</code> 拳击 · <code>fencing</code> 击剑<br><br>
+          每种玩法初始 <strong>100 分</strong>，按比赛结果增减。<br>
+          常量：<code>RANKING_INITIAL_SCORE</code>
+        </div>
+      </div>
+    </div>
+  </div>

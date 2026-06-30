@@ -1,0 +1,43 @@
+﻿<!-- ==================== 5. 每日签到 ==================== -->
+  <div class="card">
+    <h2><span class="icon">📅</span>每日签到</h2>
+    <p style="color:#64748b;font-size:14px;margin-bottom:16px;">
+      用户在<strong>当前门店</strong>下每日可签到领取竞猜币，作为参与竞猜的基础资金来源：
+    </p>
+    <div class="flow-strip">
+      <div class="flow-step"><span class="step-label">点击「签到 +100」</span></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step"><span class="step-label">锁定当前门店</span></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step"><span class="step-label">后端防重复校验</span></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step"><span class="step-label">coins += 100</span></div>
+    </div>
+    <div class="flow-strip" style="margin-top:8px;">
+      <div class="flow-step"><span class="step-label">写入 coin_log</span></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step"><span class="step-label">刷新竞猜币余额</span></div>
+    </div>
+    <div class="info-duo">
+      <div class="info-block green">
+        <p class="block-title">🪙 签到奖励</p>
+        <p class="block-text">每次签到获得 <strong>+100 竞猜币</strong><br>常量：<code>DAILY_CHECK_IN_COINS = 100</code><br>币值归入<strong>当前门店</strong>账户</p>
+      </div>
+      <div class="info-block blue">
+        <p class="block-title">⏰ 签到规则</p>
+        <p class="block-text">按 <strong>Asia/Shanghai</strong> 自然日限制<br><strong>每门店</strong>每日可签到一次<br>幂等：重复签到返回「今日已签到」</p>
+      </div>
+    </div>
+    <div class="rule-box warn">
+      <p class="rule-title">⚠️ 并发安全</p>
+      <p class="rule-text">
+        后端使用<strong>行级锁</strong> <code>SELECT ... FOR UPDATE</code> + 事务保证同一用户在同一门店下不会重复签到。通过 <code>lastCheckInYmd</code> 字段（YYYY-MM-DD 格式）判断该门店今日是否已签到。
+      </p>
+    </div>
+    <div class="rule-box info" style="margin-top:12px;">
+      <p class="rule-title">🏪 门店隔离说明</p>
+      <p class="rule-text">
+        签到以<strong>用户 + 门店 + 日期</strong>为维度去重。用户在同一天可以在不同门店各签到一次，每个门店独立发放 +100 竞猜币至该门店竞猜币余额。
+      </p>
+    </div>
+  </div>

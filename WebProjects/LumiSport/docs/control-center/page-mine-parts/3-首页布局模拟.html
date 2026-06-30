@@ -1,0 +1,109 @@
+﻿<!-- ==================== 3. 首页布局模拟 ==================== -->
+  <div class="card">
+    <h2><span class="icon">📱</span>个人中心首页布局</h2>
+    <p style="color:#64748b;font-size:14px;margin-bottom:20px;">
+      以下是 mine.vue 的页面布局模拟，展示各区域的位置与内容：
+    </p>
+    <div class="mock-screen">
+      <div class="mock-nav">
+        <span>← 返回</span>
+        <span class="nav-title">我的</span>
+        <span style="width:36px;"></span>
+      </div>
+      <div class="mock-body">
+        <!-- 个人资料 -->
+        <div class="mock-section">
+          <div class="mock-profile">
+            <div class="mp-name">昵称 / 未设置昵称</div>
+            <div class="mp-btn">修改昵称</div>
+          </div>
+        </div>
+        <!-- 当前门店（只读展示） -->
+        <div class="mock-section" style="padding:4px 16px 8px;">
+          <div style="display:flex;align-items:center;gap:6px;font-size:13px;color:#6366f1;flex-wrap:wrap;">
+            <span style="font-size:14px;">🏪</span>
+            <span style="font-weight:600;">当前门店</span>
+            <span style="background:#eef2ff;padding:2px 10px;border-radius:6px;font-weight:600;color:#4f46e5;">朝阳店</span>
+            <span style="font-size:11px;color:#94a3b8;">（竞猜币与积分按门店独立）</span>
+          </div>
+        </div>
+        <!-- 竞猜区 -->
+        <div class="mock-section">
+          <div class="sec-label">竞猜</div>
+          <div class="mock-betting">
+            <div class="mb-row">
+              <span class="mb-label">竞猜币</span>
+              <span class="mb-value">1,200</span>
+            </div>
+            <div class="mb-row">
+              <span></span>
+              <span class="mock-btn-checkin">签到 +100</span>
+            </div>
+            <div class="mb-row">
+              <span class="mb-label">我的竞猜数据</span>
+              <span class="mb-arrow">›</span>
+            </div>
+            <div class="mb-row">
+              <span class="mb-label">过往竞猜</span>
+              <span class="mb-arrow">›</span>
+            </div>
+            <div class="mb-row">
+              <span class="mb-label">竞猜币流水</span>
+              <span class="mb-arrow">›</span>
+            </div>
+            <div class="mb-row">
+              <span class="mb-label">竞猜排行</span>
+              <span class="mb-arrow">›</span>
+            </div>
+          </div>
+        </div>
+        <!-- 参赛区 -->
+        <div class="mock-section">
+          <div class="sec-label">参赛</div>
+          <div class="mock-links">
+            <div class="ml-row">
+              <span>我的参赛数据</span>
+              <span class="ml-arrow">›</span>
+            </div>
+            <div class="ml-row">
+              <span>过往战绩</span>
+              <span class="ml-arrow">›</span>
+            </div>
+            <div class="ml-row">
+              <span>积分变动记录</span>
+              <span class="ml-arrow">›</span>
+            </div>
+            <div class="ml-row">
+              <span>积分排行榜</span>
+              <span class="ml-arrow">›</span>
+            </div>
+          </div>
+        </div>
+        <!-- 重选门店 -->
+        <div class="mock-switch-store" style="padding:0 16px 8px;">
+          <div style="display:flex;align-items:center;justify-content:center;gap:6px;padding:10px 0;border:1px solid #c7d2fe;border-radius:8px;font-size:14px;color:#6366f1;cursor:pointer;">
+            <span>🏪</span><span>重选门店</span>
+          </div>
+        </div>
+        <!-- 退出 -->
+        <div class="mock-logout">退出登录</div>
+      </div>
+    </div>
+    <div class="rule-box info">
+      <p class="rule-title">💡 数据加载策略</p>
+      <p class="rule-text">
+        <strong>onMounted</strong>：初始化导航栏 + 获取用户资料 + 读取当前门店信息 + 加载当前门店竞猜币余额<br>
+        <strong>onShow</strong>：每次页面可见时重新刷新竞猜币余额和用户资料，确保余额与昵称为最新状态<br>
+        <strong>门店变更</strong>：从「选择门店」页面返回后，若门店发生变化，重新拉取该门店的竞猜币余额与签到状态
+      </p>
+    </div>
+    <div class="rule-box warn" style="margin-top:12px;">
+      <p class="rule-title">🏪 门店隔离规则</p>
+      <p class="rule-text">
+        <strong>竞猜币</strong>：每个门店独立账户，余额互不影响；签到、下注、收益均在当前门店下操作。<br>
+        <strong>积分</strong>：每个门店独立计算，参赛所得积分仅计入当场门店；段位、排行均按门店维度展示。<br>
+        <strong>数据范围</strong>：竞猜区与参赛区的所有子页面（流水、排行、战绩等）仅展示当前选中门店的数据，不会跨店汇总。<br>
+        <strong>门店切换</strong>：本页仅只读展示当前门店，不可直接切换；需点击「重选门店」跳转至选择门店页面完成切换。
+      </p>
+    </div>
+  </div>

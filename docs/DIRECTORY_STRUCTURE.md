@@ -1,6 +1,6 @@
 # LumiWeb 目录结构规划
 
-> 文档版本：v1.1 · 2026-06-15 · **迁移已于 2026-06-15 落地（Phase 1–4）**  
+> 文档版本：v1.2 · 2026-06-30 · **LumiSport 重构为 4 桶结构，business-flow/control-center 已并入单仓库（2026-06-30）**  
 > 用途：统一 LumiWeb 静态站点目录、命名与部署约定；新对话可直接阅读本文继续实施迁移。
 
 ---
@@ -62,24 +62,51 @@ LumiWeb/
     │       ├── group/
     │       └── stats/
     │
-    ├── LumiSport/                          # 竞技大空间
-    │   ├── LumiSport.html                  # ★ 项目 hub（与目录同名）
-    │   ├── control-center/                 # Git 仓库 · 控制中心文档（原 LumiSportWeb）
-    │   │   ├── control-center.html         # 控制中心入口
-    │   │   ├── page-login.html
-    │   │   ├── page-login-parts/
-    │   │   └── ...（其余 page-* 保持现有模式）
-    │   ├── business-flow/                  # Git 仓库 · 业务流程说明（原 Design_LumiSport）
-    │   │   └── business-flow.html
-    │   ├── miniprogram/
-    │   │   ├── prototype-hub.html
-    │   │   └── ...
-    │   └── warmup-docs/
-    │       ├── common-rules.html
-    │       ├── blazing-boxer.html
-    │       ├── speed-hockey.html
-    │       ├── thunder-fencing.html
-    │       └── magic-party.html
+    ├── LumiSport/                          # 竞技大空间（4 桶结构）
+    │   ├── LumiSport.html                  # ★ 项目 hub（与目录同名，卡片分 4 段）
+    │   ├── prototypes/                      # ① 可交互原型
+    │   │   └── miniprogram/
+    │   │       ├── prototype-hub.html
+    │   │       └── ...
+    │   ├── tools/                           # ② 工具
+    │   │   └── value-calc/                  # 预测数值计算
+    │   │       ├── value-calc.html
+    │   │       ├── value-calc.css
+    │   │       └── value-calc.js
+    │   ├── docs/                            # ③ 设计 / 业务 / 规则文档
+    │   │   ├── control-center/              # 已并入单仓库（内部文档名暂保留中文）
+    │   │   │   ├── control-center.html
+    │   │   │   ├── page-login.html
+    │   │   │   ├── page-login-parts/
+    │   │   │   └── ...（其余 page-* 保持现有模式）
+    │   │   ├── business-flow/               # 已并入单仓库
+    │   │   │   └── business-flow.html
+    │   │   ├── warmup/                       # 原 warmup-docs
+    │   │   │   ├── common-rules.html
+    │   │   │   ├── blazing-boxer.html
+    │   │   │   ├── speed-hockey.html
+    │   │   │   ├── thunder-fencing.html
+    │   │   │   ├── magic-party.html
+    │   │   │   ├── waiting-scene.png
+    │   │   │   └── *-figures/                # 图片英文名 fig-1.* … fig-N.*
+    │   │   └── optimization/                 # 优化迭代文档
+    │   │       ├── optimization-list.html
+    │   │       ├── optimization-list.md
+    │   │       ├── blazing-boxer-feedback.md
+    │   │       ├── registration-prediction-doc-mapping.md
+    │   │       └── registration-flow/
+    │   │           ├── registration-flow.html
+    │   │           └── registration-flow.md
+    │   └── showcase/                         # ④ 对外展示 / 营销
+    │       ├── hall-of-fame/
+    │       │   ├── hall-of-fame.html
+    │       │   ├── images/
+    │       │   └── videos/
+    │       └── events/
+    │           └── mock-guessing-20260618/
+    │               ├── mock-guessing-20260618.html
+    │               ├── render.bat
+    │               └── ...
     │
     └── LumiMagic_Season_02/                # 魔法学院 · 第二季（占位）
         └── LumiMagic_Season_02.html        # ★ 项目 hub（Coming Soon）
@@ -148,8 +175,8 @@ LumiWeb/
 所有入口 URL 均带明确文件名，例如：
 
 - `/WebProjects/LumiSport/LumiSport.html`  
-- `/WebProjects/LumiSport/control-center/control-center.html`  
-- `/WebProjects/LumiSport/business-flow/business-flow.html`  
+- `/WebProjects/LumiSport/docs/control-center/control-center.html`  
+- `/WebProjects/LumiSport/docs/business-flow/business-flow.html`  
 
 路径即文档，无歧义。若将来需要短 URL，可在服务器做 rewrite（如 `/LumiSport/` → `LumiSport.html`），**源码仍保持语义文件名**。
 
@@ -173,10 +200,13 @@ docs/                 # 可选，内部文档可不传
 | 魔法学院 S1 hub | `/WebProjects/LumiMagic_Season_01/LumiMagic_Season_01.html` |
 | 魔法学院 · 登录模块 | `/WebProjects/LumiMagic_Season_01/modules/login/login.html` |
 | 竞技大空间 hub | `/WebProjects/LumiSport/LumiSport.html` |
-| 控制中心 | `/WebProjects/LumiSport/control-center/control-center.html` |
-| 业务流程 | `/WebProjects/LumiSport/business-flow/business-flow.html` |
-| 小程序原型 | `/WebProjects/LumiSport/miniprogram/prototype-hub.html` |
-| 热身 · 通用规则 | `/WebProjects/LumiSport/warmup-docs/common-rules.html` |
+| 控制中心 | `/WebProjects/LumiSport/docs/control-center/control-center.html` |
+| 业务流程 | `/WebProjects/LumiSport/docs/business-flow/business-flow.html` |
+| 小程序原型 | `/WebProjects/LumiSport/prototypes/miniprogram/prototype-hub.html` |
+| 工具 · 预测数值计算 | `/WebProjects/LumiSport/tools/value-calc/value-calc.html` |
+| 热身 · 通用规则 | `/WebProjects/LumiSport/docs/warmup/common-rules.html` |
+| 优化迭代清单 | `/WebProjects/LumiSport/docs/optimization/optimization-list.html` |
+| 荣誉殿堂 | `/WebProjects/LumiSport/showcase/hall-of-fame/hall-of-fame.html` |
 | 魔法学院 S2 占位 | `/WebProjects/LumiMagic_Season_02/LumiMagic_Season_02.html` |
 
 ### 4.3 根门户链接示例
@@ -320,28 +350,16 @@ magic-xxx-loader.js        # 注入 DOM
 
 ---
 
-## 7. Git 子仓库
+## 7. Git 单仓库（已并仓）
 
-独立仓库嵌在 `LumiSport/` 下，父仓库 `.gitignore`：
+`business-flow`、`control-center` 原为两个独立 Git 仓库，已于 2026-06-30 **以文件快照方式并入 LumiWeb 单一仓库**：
 
-```gitignore
-WebProjects/LumiSport/business-flow/
-WebProjects/LumiSport/control-center/
-```
+- 删除各自的 `.git`，断开与原远程仓库的关联（不保留各自提交历史）。
+- 移入 `WebProjects/LumiSport/docs/` 下，作为普通文件由 LumiWeb 父仓库统一跟踪。
+- 父仓库 `.gitignore` 已移除对这两个目录的忽略规则。
 
-| 子项目 | 仓库目录 | 远程 |
-|--------|----------|------|
-| 业务流程说明 | `LumiSport/business-flow/` | `Design_LumiSport.git` |
-| 控制中心文档 | `LumiSport/control-center/` | `LumiSportSpace_Design.git` |
-
-在 control-center 仓库中提交：
-
-```bash
-cd WebProjects/LumiSport/control-center
-git status
-git commit -m "..."
-git push
-```
+> 现位置：`LumiSport/docs/business-flow/`、`LumiSport/docs/control-center/`。
+> 备注：这两个目录内部的页面片段 / 文档暂保留中文文件名（如 `page-*-parts/` 与 `小程序需求文档/`），仅修正了跨目录与返回 hub 的链接；后续如需彻底英文化，需同步更新各 `page-*.html` 的 `PARTS` 数组及相关引用。
 
 ---
 

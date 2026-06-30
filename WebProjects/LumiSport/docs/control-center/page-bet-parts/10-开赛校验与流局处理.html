@@ -1,0 +1,24 @@
+<div class="card">
+    <h2><span class="icon">⚠️</span>开赛校验与流局处理</h2>
+    <p style="color:#64748b;font-size:14px;margin-bottom:16px;">
+      管理员点击「开赛」（<code>adminStartMatch</code>）瞬间，系统进行两项校验。任一不通过则触发流局：
+    </p>
+    <div class="game-card-grid">
+      <div class="game-card">
+        <div class="game-icon">👤</div>
+        <div class="game-name">选手不齐</div>
+        <div class="game-desc">任一方无正式选手（<code>redUserId</code> 或 <code>blueUserId</code> 为空）时，比赛无法开始。所有已下注押注<strong style="color:#ea580c;">作废并全额退还</strong>。</div>
+      </div>
+      <div class="game-card">
+        <div class="game-icon">⚡</div>
+        <div class="game-name">实力过于悬殊</div>
+        <div class="game-desc">任一方预期胜率 <strong style="color:#ea580c;">超过 80%</strong> 时，判定为实力悬殊。所有竞猜<strong style="color:#ea580c;">全额退还</strong>。</div>
+      </div>
+    </div>
+    <div class="rule-box warn">
+      <p class="rule-title">⚠️ 流局后果与代码细节</p>
+      <p class="rule-text">
+        满足流局条件时：所有已下注押注<strong>作废并全额退还</strong>，赔率置为 null，<code>betsVoidedAtMatchStart</code> 设为 <strong>true</strong>。竞猜区顶部展示通知：<span style="color:#ea580c;">「开赛时未满足条件（未齐人或实力悬殊），本场押注已作废，竞猜币已全额退还」</span>。
+      </p>
+    </div>
+  </div>

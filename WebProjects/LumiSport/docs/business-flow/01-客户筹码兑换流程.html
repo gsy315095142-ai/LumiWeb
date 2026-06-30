@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>客户筹码兑换流程 · 新版小程序迭代</title>
+<link rel="stylesheet" href="nav.css">
+<link rel="stylesheet" href="chip-exchange.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="site-nav-inner">
+    <a class="site-nav-brand" href="01-客户筹码兑换流程.html">
+      <span class="brand-icon">🎮</span> LumiSport
+    </a>
+    <div class="site-nav-links">
+      <a class="site-nav-link active" href="01-客户筹码兑换流程.html">
+        <span class="link-icon">🪙</span> 筹码兑换
+      </a>
+      <a class="site-nav-link" href="02-选手报名与观众竞猜流程.html">
+        <span class="link-icon">🎮</span> 报名竞猜
+      </a>
+      <a class="site-nav-link" href="03-用户兑换奖品流程.html">
+        <span class="link-icon">🎁</span> 奖品兑换
+      </a>
+    </div>
+    <a class="site-nav-back" href="../../LumiSport.html">← 返回项目</a>
+  </div>
+</nav>
+
+<div class="container">
+
+  <div class="header">
+    <div class="header-badge">新版小程序迭代</div>
+    <div class="header-icon">🪙</div>
+    <h1>客户筹码兑换流程</h1>
+    <p>酒店入住领取实体筹码 → 酒吧扫码登录 → 出示动态身份码 → 店员核销兑换游戏币</p>
+  </div>
+
+  <!-- 核心规则 -->
+  <div class="card">
+    <div class="card-title">📋 业务规则摘要</div>
+    <div class="rule-grid">
+      <div class="rule-item">
+        <div class="rule-label">登记场景</div>
+        <div class="rule-value">酒店式<strong>入住登记</strong>，前台发放实体筹码</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-label">兑换比例</div>
+        <div class="rule-value">固定 <em>1 : 1</em>，单枚筹码面额 <em>1000</em></div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-label">身份码</div>
+        <div class="rule-value"><em>动态二维码</em>，有时效，防截图复用</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-label">门店隔离</div>
+        <div class="rule-value">筹码与游戏币均按<strong>所属门店</strong>独立核算</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-label">核销端</div>
+        <div class="rule-value">酒吧店员使用小程序<strong>管理端扫码</strong></div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-label">核销结果</div>
+        <div class="rule-value">发放游戏币 + <strong>回收实体筹码</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 兑换关系 -->
+  <div class="card">
+    <div class="card-title">⚖️ 兑换关系</div>
+    <div class="exchange-bar">
+      <div class="exchange-box physical">
+        <div class="exchange-icon">🟡</div>
+        <div class="exchange-name">实体筹码 × 1</div>
+        <div class="exchange-detail">面额 1000 · 前台发放</div>
+      </div>
+      <div class="exchange-arrow">⇄ 1 : 1</div>
+      <div class="exchange-box digital">
+        <div class="exchange-icon">💎</div>
+        <div class="exchange-name">游戏币 +1000</div>
+        <div class="exchange-detail">写入当前门店钱包</div>
+      </div>
+    </div>
+    <div class="exchange-ratio">例：客户持有 <strong>3 枚</strong> 筹码 → 核销后获得 <strong>3000</strong> 游戏币（需店员确认枚数并回收实体筹码）</div>
+  </div>
+
+  <!-- 四步总览 -->
+  <div class="card">
+    <div class="card-title">🔄 流程总览</div>
+    <div class="flow-horizontal">
+      <div class="flow-step">
+        <div class="flow-step-circle">1</div>
+        <span class="flow-step-icon">🏨</span>
+        <div class="flow-step-title">前台入住登记</div>
+        <div class="flow-step-sub">登记入住<br>领取实体筹码</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-step-circle">2</div>
+        <span class="flow-step-icon">📱</span>
+        <div class="flow-step-title">抵达酒吧</div>
+        <div class="flow-step-sub">扫码进入<br>微信小程序</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-step-circle">3</div>
+        <span class="flow-step-icon">🪪</span>
+        <div class="flow-step-title">出示身份码</div>
+        <div class="flow-step-sub">打开动态<br>身份二维码</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-step-circle">4</div>
+        <span class="flow-step-icon">✅</span>
+        <div class="flow-step-title">店员扫码核销</div>
+        <div class="flow-step-sub">发放游戏币<br>回收筹码</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 分步详解 -->
+  <div class="card">
+    <div class="card-title">📍 分步详解</div>
+    <div class="flow-pages">
+
+      <div class="flow-page-item">
+        <div class="flow-page-visual">
+          <div class="scene scene-hotel">
+            <span class="scene-label">Step 01 · 酒店前台</span>
+            <div class="chips">
+              <div class="chip-stack">
+                <div class="chip">1K</div>
+                <div class="chip">1K</div>
+              </div>
+              <div class="chip">1K</div>
+            </div>
+            <div class="desk"></div>
+          </div>
+        </div>
+        <div class="flow-page-text">
+          <div class="flow-page-num">01</div>
+          <div class="flow-page-label">前台入住登记，获取筹码</div>
+          <div class="flow-page-desc">
+            客户抵达酒店，在前台完成<strong>入住登记</strong>。前台按规则发放<strong>实体筹码</strong>（单枚面额 1000），筹码与<strong>当前门店</strong>绑定，仅可在该门店酒吧兑换。
+          </div>
+          <div class="flow-tags">
+            <span class="tag">角色：客户 · 前台</span>
+            <span class="tag store">门店隔离</span>
+            <span class="tag highlight">产出：实体筹码</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-page-item">
+        <div class="flow-page-visual">
+          <div class="scene scene-bar">
+            <span class="scene-label">Step 02 · 酒吧</span>
+            <div class="bar-sign">🍸 LumiSport 酒吧区</div>
+            <div class="phone-mini">
+              <div class="phone-notch"></div>
+              <div class="phone-screen">
+                <div class="mp-title">LumiSport Space</div>
+                <div class="scan-icon">📷</div>
+                <div class="scan-hint">扫描门店小程序码</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flow-page-text">
+          <div class="flow-page-num">02</div>
+          <div class="flow-page-label">抵达酒吧，扫码登录小程序</div>
+          <div class="flow-page-desc">
+            客户前往<strong>同门店酒吧</strong>，扫描吧台或入口的小程序码，唤起微信小程序并完成<strong>微信一键登录</strong>。登录后进入该门店上下文，后续游戏币将写入此门店钱包。
+          </div>
+          <div class="flow-tags">
+            <span class="tag">角色：客户</span>
+            <span class="tag store">绑定当前门店</span>
+            <span class="tag">微信授权登录</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-page-item">
+        <div class="flow-page-visual">
+          <div class="scene scene-identity">
+            <span class="scene-label">Step 03 · 客户小程序</span>
+            <div class="qr-wrap">
+              <img src="assets/qr-placeholder.svg" class="qr-grid" alt="" aria-hidden="true">
+            </div>
+            <div class="identity-meta">
+              <div class="nick">客户昵称 · 身份码</div>
+              <div class="store">🏪 当前门店：XX 竞技空间</div>
+            </div>
+          </div>
+        </div>
+        <div class="flow-page-text">
+          <div class="flow-page-num">03</div>
+          <div class="flow-page-label">出示小程序上的身份码</div>
+          <div class="flow-page-desc">
+            客户在小程序内打开<strong>身份码页</strong>，展示<strong>动态二维码</strong>供店员扫描。二维码定期刷新，降低截图转发风险；码内携带用户与门店信息，供核销校验。
+          </div>
+          <div class="flow-tags">
+            <span class="tag highlight">动态二维码</span>
+            <span class="tag">有时效</span>
+            <span class="tag store">含门店信息</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-page-item">
+        <div class="flow-page-visual">
+          <div class="scene scene-exchange">
+            <span class="scene-label scene-label--center">Step 04 · 核销</span>
+            <div class="customer-phone">
+              <div class="mini-screen">
+                <span class="role-tag">客户</span>
+                <div>🪪 身份码</div>
+                <div class="mini-qr-icon">▣</div>
+              </div>
+            </div>
+            <div class="scan-line">📷→</div>
+            <div class="staff-phone">
+              <div class="mini-screen">
+                <span class="role-tag">管理端</span>
+                <div>扫码核销</div>
+                <div class="success">✓ 兑换成功</div>
+                <div class="coins">+1000 游戏币</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flow-page-text">
+          <div class="flow-page-num">04</div>
+          <div class="flow-page-label">店员扫身份码，发放游戏币，回收筹码</div>
+          <div class="flow-page-desc">
+            酒吧工作人员使用小程序<strong>管理端</strong>扫描客户身份码，确认兑换枚数（按 1:1 比例），系统向客户<strong>当前门店钱包</strong>增加对应游戏币，同时店员<strong>现场回收实体筹码</strong>，完成线下与线上的闭环。
+          </div>
+          <div class="flow-tags">
+            <span class="tag">角色：酒吧店员</span>
+            <span class="tag highlight">管理端扫码</span>
+            <span class="tag highlight">1 筹码 = 1000 币</span>
+            <span class="tag">回收实体筹码</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- 角色矩阵 -->
+  <div class="card">
+    <div class="card-title">👥 各角色在流程中的职责</div>
+    <div class="role-matrix">
+      <div class="matrix-header matrix-header-corner"></div>
+      <div class="matrix-header">步骤 1<br>入住登记</div>
+      <div class="matrix-header">步骤 2<br>扫码登录</div>
+      <div class="matrix-header">步骤 3<br>出示身份码</div>
+      <div class="matrix-header">步骤 4<br>扫码核销</div>
+
+      <div class="matrix-role role-customer">
+        <span class="role-icon">🧑</span>
+        <span class="role-name">客户</span>
+      </div>
+      <div class="matrix-cell role-customer">
+        <span class="cell-action">办理入住</span>
+        <span class="cell-action">领取筹码</span>
+      </div>
+      <div class="matrix-cell role-customer">
+        <span class="cell-action">扫小程序码</span>
+        <span class="cell-action">微信登录</span>
+      </div>
+      <div class="matrix-cell role-customer">
+        <span class="cell-action">打开身份码页</span>
+        <span class="cell-action">展示动态码</span>
+      </div>
+      <div class="matrix-cell role-customer">
+        <span class="cell-action">确认到账</span>
+        <span class="cell-action">交付筹码</span>
+      </div>
+
+      <div class="matrix-role role-front">
+        <span class="role-icon">🏨</span>
+        <span class="role-name">前台</span>
+      </div>
+      <div class="matrix-cell role-front">
+        <span class="cell-action">入住登记</span>
+        <span class="cell-action">发放实体筹码</span>
+      </div>
+      <div class="matrix-cell role-front empty">
+        <span class="cell-action">—</span>
+      </div>
+      <div class="matrix-cell role-front empty">
+        <span class="cell-action">—</span>
+      </div>
+      <div class="matrix-cell role-front empty">
+        <span class="cell-action">—</span>
+      </div>
+
+      <div class="matrix-role role-staff">
+        <span class="role-icon">🛡️</span>
+        <span class="role-name">酒吧店员</span>
+      </div>
+      <div class="matrix-cell role-staff empty">
+        <span class="cell-action">—</span>
+      </div>
+      <div class="matrix-cell role-staff empty">
+        <span class="cell-action">—</span>
+      </div>
+      <div class="matrix-cell role-staff empty">
+        <span class="cell-action">—</span>
+      </div>
+      <div class="matrix-cell role-staff">
+        <span class="cell-action">管理端扫码</span>
+        <span class="cell-action">确认枚数</span>
+        <span class="cell-action">发放游戏币</span>
+        <span class="cell-action">回收筹码</span>
+      </div>
+    </div>
+    <div class="footer-note">
+      本页为流程示意 · 独立文档 · 不涉及现有页面导航<br>
+      筹码与游戏币均按 <span>门店隔离</span>，跨店不可混用
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>

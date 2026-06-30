@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>选手报名与观众竞猜流程 · 新版小程序迭代</title>
+<link rel="stylesheet" href="nav.css">
+<link rel="stylesheet" href="player-registration-betting.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="site-nav-inner">
+    <a class="site-nav-brand" href="01-客户筹码兑换流程.html">
+      <span class="brand-icon">🎮</span> LumiSport
+    </a>
+    <div class="site-nav-links">
+      <a class="site-nav-link" href="01-客户筹码兑换流程.html">
+        <span class="link-icon">🪙</span> 筹码兑换
+      </a>
+      <a class="site-nav-link active" href="02-选手报名与观众竞猜流程.html">
+        <span class="link-icon">🎮</span> 报名竞猜
+      </a>
+      <a class="site-nav-link" href="03-用户兑换奖品流程.html">
+        <span class="link-icon">🎁</span> 奖品兑换
+      </a>
+    </div>
+    <a class="site-nav-back" href="../../LumiSport.html">← 返回项目</a>
+  </div>
+</nav>
+
+<div class="container">
+
+  <div class="header">
+    <div class="header-badge">新版小程序迭代</div>
+    <div class="header-icon">🎮</div>
+    <h1>选手报名与观众竞猜流程</h1>
+    <p>工作人员开启报名 → 选手小程序排队报名 → 轮到后上台 → 进入竞猜环节</p>
+  </div>
+
+  <!-- 阶段划分 -->
+  <div class="card">
+    <div class="card-title">📌 流程阶段</div>
+    <div class="phase-row">
+      <div class="phase-block a">
+        <div class="phase-label">阶段 A · 选手报名（步骤 1–3）</div>
+        <div class="phase-desc">酒吧工作人员启动竞技场次并开放报名；意向选手在小程序内<strong>提交报名并查看排队队列</strong>（需消耗 <strong>100 游戏币</strong>），轮到本人后再上台参与比赛；<strong>获胜</strong>可获得游戏币与兑换币奖励。</div>
+      </div>
+      <div class="phase-block b">
+        <div class="phase-label">阶段 B · 观众竞猜（步骤 4–6）</div>
+        <div class="phase-desc">工作人员推进至竞猜环节；观众在小程序内查看双方<strong>积分与赔率</strong>，选择红/蓝胜负并快捷押注。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 规则摘要 -->
+  <div class="card">
+    <div class="card-title">📋 要点摘要</div>
+    <div class="rule-grid">
+      <div class="rule-item">
+        <div class="rule-label">报名费用</div>
+        <div class="rule-value">选手报名需消耗 <em>100 游戏币</em>，提交时从账户扣减</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-label">获胜奖励</div>
+        <div class="rule-value">比赛获胜可获得<em>游戏币</em>与<em>兑换币</em>奖励</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-label">场次控制</div>
+        <div class="rule-value">工作人员通过小程序<em>管理端</em>启动游戏、开放报名</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-label">选手登记</div>
+        <div class="rule-value">小程序内<em>一键报名</em>，查看排队队列，轮到后上台</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-label">竞猜开放</div>
+        <div class="rule-value">由工作人员操控小程序<em>进入竞猜环节</em></div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-label">观众参与</div>
+        <div class="rule-value">未参赛用户可竞猜<em>红蓝胜负</em>，查看积分与赔率</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-label">界面原则</div>
+        <div class="rule-value">竞猜页<em>极简</em>：选边 + 快捷押注额度</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-label">选手限制</div>
+        <div class="rule-value">已登记选手<em>不可</em>参与本场竞猜</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 选手报名与奖励 -->
+  <div class="card">
+    <div class="card-title">🎮 选手报名与奖励</div>
+    <div class="player-reward-flow">
+      <div class="reward-box cost">
+        <div class="reward-icon">🪙</div>
+        <div class="reward-name">报名消耗</div>
+        <div class="reward-detail">100 游戏币</div>
+      </div>
+      <div class="reward-arrow">→</div>
+      <div class="reward-box play">
+        <div class="reward-icon">🎤</div>
+        <div class="reward-name">上台参赛</div>
+        <div class="reward-detail">排队轮到后比赛</div>
+      </div>
+      <div class="reward-arrow">→</div>
+      <div class="reward-box win">
+        <div class="reward-icon">🏆</div>
+        <div class="reward-name">获胜奖励</div>
+        <div class="reward-detail">游戏币 + 兑换币</div>
+      </div>
+    </div>
+    <p class="reward-note">报名费用在小程序提交报名时扣减；兑换币可用于奖品柜台换礼品（见流程 03）</p>
+  </div>
+
+  <!-- 六步总览 -->
+  <div class="card">
+    <div class="card-title">🔄 流程总览（6 步）</div>
+    <div class="flow-horizontal">
+      <div class="flow-step">
+        <div class="flow-step-circle">1</div>
+        <span class="flow-step-icon">⚙️</span>
+        <div class="flow-step-title">启动游戏</div>
+        <div class="flow-step-sub">开放报名</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-step-circle">2</div>
+        <span class="flow-step-icon">📝</span>
+        <div class="flow-step-title">小程序报名</div>
+        <div class="flow-step-sub">查看排队队列</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-step-circle">3</div>
+        <span class="flow-step-icon">🎤</span>
+        <div class="flow-step-title">轮到上台</div>
+        <div class="flow-step-sub">参与比赛</div>
+      </div>
+      <div class="flow-step phase-b">
+        <div class="flow-step-circle">4</div>
+        <span class="flow-step-icon">🎰</span>
+        <div class="flow-step-title">进入竞猜</div>
+        <div class="flow-step-sub">工作人员推进</div>
+      </div>
+      <div class="flow-step phase-b">
+        <div class="flow-step-circle">5</div>
+        <span class="flow-step-icon">📊</span>
+        <div class="flow-step-title">观众下注</div>
+        <div class="flow-step-sub">看积分赔率</div>
+      </div>
+      <div class="flow-step phase-b">
+        <div class="flow-step-circle">6</div>
+        <span class="flow-step-icon">👆</span>
+        <div class="flow-step-title">选边押注</div>
+        <div class="flow-step-sub">快捷选额度</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 分步详解 -->
+  <div class="card">
+    <div class="card-title">📍 分步详解</div>
+    <div class="flow-pages">
+
+      <div class="flow-page-item">
+        <div class="flow-page-visual">
+          <div class="scene scene-admin">
+            <span class="scene-label">Step 01 · 管理端</span>
+            <div class="phone-frame">
+              <div class="phone-notch"></div>
+              <div class="admin-screen">
+                <div class="screen-title">场次管理</div>
+                <button class="admin-btn primary">🏒 启动疾速冰球</button>
+                <button class="admin-btn success">开放选手报名</button>
+                <button class="admin-btn outline">查看当前状态</button>
+                <div class="admin-status">● 状态：报名中</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flow-page-text">
+          <div class="flow-page-num">01</div>
+          <div class="flow-page-label">工作人员启动竞技游戏，开放报名</div>
+          <div class="flow-page-desc">
+            酒吧工作人员在小程序<strong>管理端</strong>选择竞技玩法（如疾速冰球、烈焰拳王等），创建或推进当前场次，并点击<strong>「开放选手报名」</strong>，将场次状态切换为可报名。
+          </div>
+          <div class="flow-tags">
+            <span class="tag staff">角色：酒吧工作人员</span>
+            <span class="tag staff">管理端操作</span>
+            <span class="tag highlight">场次 → 报名中</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-page-item">
+        <div class="flow-page-visual">
+          <div class="scene scene-signup">
+            <span class="scene-label">Step 02 · 用户小程序</span>
+            <div class="phone-frame phone-frame--user">
+              <div class="phone-notch"></div>
+              <div class="user-screen">
+                <div class="screen-title">选手报名</div>
+                <div class="signup-fee">报名消耗 100 游戏币</div>
+                <button class="user-btn signed">✓ 已提交报名</button>
+                <div class="queue-panel">
+                  <div class="queue-title">报名队列 · 3 人</div>
+                  <div class="queue-item done">1. 玩家A</div>
+                  <div class="queue-item active">2. 你 · 下一位</div>
+                  <div class="queue-item">3. 玩家C</div>
+                </div>
+                <div class="turn-banner">🎤 即将轮到您，请准备上台</div>
+              </div>
+            </div>
+            <div class="signup-arrow">→</div>
+            <div class="stage-hint">
+              <div class="stage-hint-icon">🏟️</div>
+              <div class="stage-hint-label">轮到后<br>上台比赛</div>
+            </div>
+          </div>
+        </div>
+        <div class="flow-page-text">
+          <div class="flow-page-num">02</div>
+          <div class="flow-page-label">选手在小程序报名，查看排队队列</div>
+          <div class="flow-page-desc">
+            有意向参赛的用户在小程序内点击<strong>「我要报名」</strong>，系统扣除 <strong>100 游戏币</strong> 报名费用，并将其加入本场<strong>报名队列</strong>。用户可实时查看排队顺序与前方人数；<strong>轮到本人时</strong>会收到提示，再前往竞技舞台参与比赛。若最终<strong>获胜</strong>，可获得游戏币与兑换币奖励。
+          </div>
+          <div class="flow-tags">
+            <span class="tag player">角色：意向选手</span>
+            <span class="tag highlight">100 游戏币报名</span>
+            <span class="tag highlight">排队队列</span>
+            <span class="tag">获胜有奖</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-page-item">
+        <div class="flow-page-visual">
+          <div class="scene scene-stage">
+            <span class="scene-label">Step 03 · 竞技舞台</span>
+            <div class="stage-platform">
+              <div class="stage-user">🧑</div>
+              <div class="stage-label">选手上台</div>
+            </div>
+            <div class="stage-callout">
+              <div class="stage-callout-title">✓ 已轮到您</div>
+              <div class="stage-callout-sub">请上台参与比赛</div>
+            </div>
+          </div>
+        </div>
+        <div class="flow-page-text">
+          <div class="flow-page-num">03</div>
+          <div class="flow-page-label">轮到选手后，上台参与比赛</div>
+          <div class="flow-page-desc">
+            当排队轮至该用户时，小程序推送<strong>「请上台」</strong>通知。选手前往竞技舞台就位，由工作人员确认身份并登记为<strong>红方/蓝方选手</strong>。登记完成后不可再参与本场竞猜。
+          </div>
+          <div class="flow-tags">
+            <span class="tag player">轮到后上台</span>
+            <span class="tag staff">工作人员确认</span>
+            <span class="tag">红方 / 蓝方</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-page-item">
+        <div class="flow-page-visual">
+          <div class="scene scene-betting-open">
+            <span class="scene-label">Step 04 · 管理端</span>
+            <div class="phone-frame">
+              <div class="phone-notch"></div>
+              <div class="admin-screen">
+                <div class="screen-title">场次管理</div>
+                <div class="roster-status">
+                  <div class="roster-pill red">🔴 红方 ✓</div>
+                  <div class="roster-pill blue">🔵 蓝方 ✓</div>
+                </div>
+                <button class="admin-btn success">进入竞猜环节</button>
+                <div class="admin-status">● 状态：竞猜中</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flow-page-text">
+          <div class="flow-page-num">04</div>
+          <div class="flow-page-label">工作人员操控小程序，进入竞猜环节</div>
+          <div class="flow-page-desc">
+            当红蓝双方选手就绪后，工作人员在管理端点击<strong>「进入竞猜环节」</strong>（或等价操作），场次状态切换为竞猜开放。此时观众端可见对阵信息与下注入口，系统开始展示动态赔率。
+          </div>
+          <div class="flow-tags">
+            <span class="tag staff">工作人员推进</span>
+            <span class="tag highlight">场次 → 竞猜中</span>
+            <span class="tag audience">观众端解锁</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-page-item">
+        <div class="flow-page-visual">
+          <div class="scene scene-audience">
+            <span class="scene-label">Step 05 · 观众端</span>
+            <div class="bet-preview-screen">
+              <div class="vs-row">
+                <div class="fighter red">
+                  <div class="fighter-name">🔴 红方</div>
+                  <div class="fighter-stat">积分 1280</div>
+                </div>
+                <div class="vs-text">VS</div>
+                <div class="fighter blue">
+                  <div class="fighter-name">🔵 蓝方</div>
+                  <div class="fighter-stat">积分 1150</div>
+                </div>
+              </div>
+              <div class="odds-bar">
+                <div class="odds-item">
+                  <div class="label">红方赔率</div>
+                  <div class="val">1.45×</div>
+                </div>
+                <div class="odds-item">
+                  <div class="label">蓝方赔率</div>
+                  <div class="val">1.72×</div>
+                </div>
+              </div>
+              <div class="bet-preview-hint">猜胜负 · 押游戏币</div>
+            </div>
+          </div>
+        </div>
+        <div class="flow-page-text">
+          <div class="flow-page-num">05</div>
+          <div class="flow-page-label">观众竞猜红蓝胜负，查看积分与赔率</div>
+          <div class="flow-page-desc">
+            观众在小程序<strong>竞猜页</strong>查看当前对阵：红方/蓝方选手昵称、各自<strong>玩法积分</strong>，以及基于积分计算的<strong>动态赔率</strong>。观众选择认为会获胜的一方进行押注（使用已兑换的游戏币）。
+          </div>
+          <div class="flow-tags">
+            <span class="tag audience">角色：观众</span>
+            <span class="tag">查看积分</span>
+            <span class="tag">查看赔率</span>
+            <span class="tag highlight">胜负竞猜</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-page-item">
+        <div class="flow-page-visual">
+          <div class="scene scene-bet-ui">
+            <span class="scene-label">Step 06 · 竞猜界面</span>
+            <div class="bet-ui-screen">
+              <div class="bet-ui-title">猜哪方获胜？</div>
+              <div class="side-pick">
+                <div class="side-btn red">
+                  <span class="side-label">押</span>
+                  🔴 红方胜
+                </div>
+                <div class="side-btn blue">
+                  <span class="side-label">押</span>
+                  🔵 蓝方胜
+                </div>
+              </div>
+              <div class="amount-hint">快捷押注额度</div>
+              <div class="amount-row">
+                <div class="amount-chip">10</div>
+                <div class="amount-chip active">50</div>
+                <div class="amount-chip">100</div>
+                <div class="amount-chip">200</div>
+              </div>
+              <button class="bet-submit">确认押注 50</button>
+            </div>
+            <div class="ui-note">界面极简：选边 + 点选额度</div>
+          </div>
+        </div>
+        <div class="flow-page-text">
+          <div class="flow-page-num">06</div>
+          <div class="flow-page-label">极简竞猜：选红蓝 + 快捷押注</div>
+          <div class="flow-page-desc">
+            竞猜界面保持<strong>简单直观</strong>：用户只需两步——① 点击<strong>红方胜</strong>或<strong>蓝方胜</strong>；② 点选预设的<strong>快捷押注额度</strong>（如 10 / 50 / 100 / 200），一键确认下注。无需复杂玩法选项，降低观赛参与门槛。
+          </div>
+          <div class="flow-tags">
+            <span class="tag highlight">红 / 蓝 二选一</span>
+            <span class="tag highlight">快捷额度按钮</span>
+            <span class="tag audience">一键确认押注</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 角色矩阵 -->
+  <div class="card">
+    <div class="card-title">👥 各角色在流程中的职责</div>
+    <div class="role-matrix">
+      <div class="matrix-header matrix-header-corner"></div>
+      <div class="matrix-header">1<br>启动报名</div>
+      <div class="matrix-header">2<br>小程序报名</div>
+      <div class="matrix-header">3<br>轮到上台</div>
+      <div class="matrix-header">4<br>进入竞猜</div>
+      <div class="matrix-header">5<br>查看对阵</div>
+      <div class="matrix-header">6<br>选边押注</div>
+
+      <div class="matrix-role role-staff">
+        <span class="role-icon">🛡️</span>
+        <span class="role-name">工作人员</span>
+      </div>
+      <div class="matrix-cell role-staff"><span class="cell-action">启动游戏</span><span class="cell-action">开放报名</span></div>
+      <div class="matrix-cell role-staff"><span class="cell-empty">—</span></div>
+      <div class="matrix-cell role-staff"><span class="cell-action">确认选手到位</span></div>
+      <div class="matrix-cell role-staff"><span class="cell-action">进入竞猜环节</span></div>
+      <div class="matrix-cell role-staff"><span class="cell-empty">—</span></div>
+      <div class="matrix-cell role-staff"><span class="cell-empty">—</span></div>
+
+      <div class="matrix-role role-player">
+        <span class="role-icon">🎮</span>
+        <span class="role-name">选手</span>
+      </div>
+      <div class="matrix-cell role-player"><span class="cell-empty">—</span></div>
+      <div class="matrix-cell role-player"><span class="cell-action">支付 100 游戏币</span><span class="cell-action">小程序报名</span><span class="cell-action">查看排队队列</span></div>
+      <div class="matrix-cell role-player"><span class="cell-action">收到轮到通知</span><span class="cell-action">上台参赛</span></div>
+      <div class="matrix-cell role-player"><span class="cell-action">等待开赛</span></div>
+      <div class="matrix-cell role-player"><span class="cell-empty">—</span></div>
+      <div class="matrix-cell role-player"><span class="cell-action">不可竞猜</span></div>
+
+      <div class="matrix-role role-audience">
+        <span class="role-icon">👀</span>
+        <span class="role-name">观众</span>
+      </div>
+      <div class="matrix-cell role-audience"><span class="cell-empty">—</span></div>
+      <div class="matrix-cell role-audience"><span class="cell-empty">—</span></div>
+      <div class="matrix-cell role-audience"><span class="cell-empty">—</span></div>
+      <div class="matrix-cell role-audience"><span class="cell-empty">—</span></div>
+      <div class="matrix-cell role-audience"><span class="cell-action">查看积分</span><span class="cell-action">查看赔率</span></div>
+      <div class="matrix-cell role-audience"><span class="cell-action">选红/蓝</span><span class="cell-action">快捷押注</span></div>
+    </div>
+    <div class="footer-note">
+      本页为流程示意 · 独立文档 · 与「筹码兑换流程」衔接：观众押注使用已兑换的<strong>游戏币</strong><br>
+      步骤 1–3 为<strong>报名阶段</strong>，步骤 4–6 为<strong>竞猜阶段</strong>，由工作人员在管理端推进
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>

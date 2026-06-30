@@ -1,0 +1,36 @@
+<!-- 2. 功能概览 -->
+  <div class="card">
+    <h2><span class="icon">✨</span>功能概览</h2>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-icon">🎬</div>
+        <div class="feat-name">飘屏弹幕层</div>
+        <div class="feat-desc">弹幕以半透明白色文字从右向左滑动飘过，模拟经典弹幕效果。3 条泳道轮流分配，互不遮挡。</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">⌨️</div>
+        <div class="feat-name">底部输入栏</div>
+        <div class="feat-desc">固定在屏幕底部的输入条，用户可输入文字并发送。支持键盘确认键直接发送（confirm-type="send"）。</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">🔄</div>
+        <div class="feat-name">增量轮询</div>
+        <div class="feat-desc">每 2.8 秒向后端拉取增量消息（afterId），首次进入拉取最近 8 条。无需 WebSocket，实现简单稳定。</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">🛡️</div>
+        <div class="feat-name">敏感词过滤</div>
+        <div class="feat-desc">服务端校验敏感词，命中时拒绝发送并提示。支持文件词库和环境变量配置，大小写不敏感。</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">🏷️</div>
+        <div class="feat-name">按场次隔离</div>
+        <div class="feat-desc">每条弹幕绑定 sessionId，切换场次时清空弹幕层并重新拉取。场次被删除时弹幕级联删除。</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">👤</div>
+        <div class="feat-name">显示昵称</div>
+        <div class="feat-desc">弹幕以「昵称：内容」格式展示，发送者身份一目了然。昵称取自用户昵称字段。</div>
+      </div>
+    </div>
+  </div>

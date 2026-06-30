@@ -1,0 +1,54 @@
+<!-- ═══════ 登录页 UI ═══════ -->
+  <div class="card">
+    <div class="card-title">🎨 登录页 UI 元素</div>
+    <div class="screenshot-layout">
+      <div>
+        <div class="phone-frame">
+          <img src="./mini-login.png" alt="登录页截图" onclick="zoomImg(this.src)">
+        </div>
+        <div class="phone-label">小程序 · 登录页</div>
+      </div>
+      <div class="annotation-area">
+        <div class="annotation-intro">
+          登录页采用<strong>赛博朋克</strong>视觉风格：深色底 + 青色/品红霓虹光晕，卡片绝对居中。页面仅保留<strong>微信登录</strong>一个入口，所有用户统一从此进入：
+        </div>
+        <div class="annotation-list">
+          <div class="annotation-item">
+            <div class="annotation-dot ad-decor">✨</div>
+            <div class="annotation-content">
+              <div class="annotation-label">品牌标题 <span class="annotation-tag tag-decor">装饰</span></div>
+              <div class="annotation-desc">「LumiSportSpace」文字，带青白渐变溜光动画 + 发光投影，固定展示不可交互</div>
+            </div>
+          </div>
+          <div class="annotation-item">
+            <div class="annotation-dot ad-decor">🎮</div>
+            <div class="annotation-content">
+              <div class="annotation-label">玩法图标行 <span class="annotation-tag tag-decor">装饰</span></div>
+              <div class="annotation-desc">4 个圆形图标：🥌 疾速冰球、🥊 烈焰拳王、🤺 雷霆击剑、✨ 魔法派对，每个图标有独立的主题色光环，仅展示不可交互</div>
+            </div>
+          </div>
+          <div class="annotation-item">
+            <div class="annotation-dot ad-action">💬</div>
+            <div class="annotation-content">
+              <div class="annotation-label">微信登录按钮 <span class="annotation-tag tag-user">所有用户</span> <span class="annotation-tag tag-unique">唯一入口</span></div>
+              <div class="annotation-desc">绿色渐变主按钮「微信登录 🎮」，点击触发 uni.login → 获取临时 code → 后端换 token 流程。管理员与普通用户使用同一按钮</div>
+            </div>
+          </div>
+          <div class="annotation-item">
+            <div class="annotation-dot ad-feedback">⚠️</div>
+            <div class="annotation-content">
+              <div class="annotation-label">全局错误提示 <span class="annotation-tag tag-feedback">反馈</span></div>
+              <div class="annotation-desc">登录失败时底部显示红色提示条（如「微信登录失败」「服务端未配置微信小程序 AppID/AppSecret」），自动清除</div>
+            </div>
+          </div>
+          <div class="annotation-item">
+            <div class="annotation-dot ad-whitelist">🛡️</div>
+            <div class="annotation-content">
+              <div class="annotation-label">角色自动判定 <span class="annotation-tag tag-whitelist">白名单</span> <span class="annotation-tag tag-action">后台</span></div>
+              <div class="annotation-desc">登录成功后，后端自动查询 store_admins 白名单表，命中则返回 role=admin + managedStores 门店列表，前端无需手动选择角色</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

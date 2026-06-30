@@ -1,0 +1,17 @@
+<div class="card">
+    <h2><span class="icon">⚙️</span>关键规则汇总</h2>
+    <ul style="font-size:14px;color:#475569;padding-left:20px;line-height:2.2;">
+      <li><strong style="color:#1e293b;">最低下注 10 币</strong> — 单次最低 <code>BET_MIN_AMOUNT = 10</code> 竞猜币</li>
+      <li><strong style="color:#1e293b;">每日签到 100 币</strong> — 新用户初始 0 币，签到获取初始资金，Asia/Shanghai 自然日限一次</li>
+      <li><strong style="color:#1e293b;">参赛者禁猜</strong> — <code>mySide</code> 或 <code>myPendingSide</code> 任一非空即禁止竞猜</li>
+      <li><strong style="color:#1e293b;">管理员手动开启竞猜</strong> — 竞猜非自动开放，需管理员点击「开启竞猜」按钮</li>
+      <li><strong style="color:#1e293b;">实力悬殊拦截</strong> — 开启竞猜时，若预期胜率 > 80%，系统拒绝；开赛时再检一次，触发流局退款</li>
+      <li><strong style="color:#1e293b;">同一类型覆盖</strong> — 重复下注同一玩法会覆盖之前金额和选项，非叠加；不同类型互相独立</li>
+      <li><strong style="color:#1e293b;">竞猜阶段内自由修改</strong> — 开赛前可随时修改金额、更换选项或取消下注，差额多退少补</li>
+      <li><strong style="color:#1e293b;">开赛锁定赔率</strong> — 管理员开赛瞬间，胜负盘动态赔率锁定为 <code>lockedOdds</code></li>
+      <li><strong style="color:#1e293b;">开赛流局退款</strong> — 开赛时未齐人或实力悬殊 → 全额退还所有押注，<code>betsVoidedAtMatchStart = true</code></li>
+      <li><strong style="color:#1e293b;">胜负盘平局退款</strong> — 若比赛结果为平局，胜负盘所有下注全额退还</li>
+      <li><strong style="color:#1e293b;">系统自动结算</strong> — 比赛结束后系统根据比分自动结算，猜中者获得「下注额 × 赔率」，未猜中者扣除全部</li>
+      <li><strong style="color:#1e293b;">预言家段位</strong> — 按累计竞猜派奖（<code>totalBettingWinnings</code>）自动晋升，7 个段位从 🔮 到 🏆</li>
+    </ul>
+  </div>

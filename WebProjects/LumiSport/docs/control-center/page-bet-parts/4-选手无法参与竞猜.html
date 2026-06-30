@@ -1,0 +1,37 @@
+<div class="card">
+    <h2><span class="icon">🚫</span>选手：无法参与竞猜</h2>
+    <p style="color:#64748b;font-size:14px;margin-bottom:24px;">
+      已报名参赛的选手，在竞猜阶段无法对本场进行任何下注操作。待审核状态的选手理论上也不可竞猜（<code>myPendingSide</code> 非空同样被拦截），不过实际场景中待审选手存在说明双方选手尚未确定，此时竞猜本就无法开启：
+    </p>
+    <div class="illus-row">
+      <div>
+        <div class="phone-frame">
+          <img src="bet-player-blocked.png" alt="选手无法竞猜提示" onclick="zoomImg(this.src)" onerror="this.alt='截图加载失败';this.style.height='400px';this.style.background='#e2e8f0';">
+        </div>
+        <div class="phone-label">🚫 选手视角（无法竞猜）</div>
+      </div>
+      <div class="desc-area">
+        <h3><span class="role-tag player">选手</span> 竞猜阶段时</h3>
+        <ul class="anno-list">
+          <li data-num="1">
+            <strong>竞猜面板不可操作</strong> — 已报名的选手无法进入竞猜下注界面，系统给出「参赛者不可竞猜」的拦截提示
+          </li>
+          <li data-num="2">
+            <strong>参赛者身份标识</strong> — 界面顶部明确显示当前用户为「红方选手」或「蓝方选手」，与观众身份区分
+          </li>
+          <li data-num="3">
+            <strong>撤销参赛后可竞猜</strong> — 如果选手在比赛开始前撤销参赛，身份恢复为观众后即可正常参与竞猜
+          </li>
+          <li data-num="4">
+            <strong>不影响其他场次</strong> — 选手仅被禁止对本场竞猜；其他场次（如有）仍可正常以观众身份参与
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="rule-box warn">
+      <p class="rule-title">⚠️ 参赛者竞猜限制（代码层面）</p>
+      <p class="rule-text">
+        代码中 <code>mySide</code>（正式选手）和 <code>myPendingSide</code>（待审核）<strong>任一非空</strong>都阻止竞猜。不过实际业务上，待审选手存在意味着双方选手尚未确定，管理员无法开启竞猜，因此理论上不会出现「竞猜已开放但有待审选手试图下注」的场景——此处拦截主要是防御性兜底。
+      </p>
+    </div>
+  </div>

@@ -1,0 +1,23 @@
+<div class="card">
+    <h2><span class="icon">🔄</span>竞猜流程概览</h2>
+    <p style="color:#64748b;font-size:14px;margin-bottom:16px;">
+      竞猜环节从管理员开启竞猜到系统结算，经历以下步骤：
+    </p>
+    <div class="flow-strip">
+      <div class="flow-step"><span class="step-label">管理员开启竞猜</span></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step"><span class="step-label">观众选择玩法下注</span></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step"><span class="step-label">管理员开赛</span></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step"><span class="step-label">比赛进行中</span></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step"><span class="step-label">系统自动结算</span></div>
+    </div>
+    <div class="rule-box info">
+      <p class="rule-title">💡 开放条件</p>
+      <p class="rule-text">
+        竞猜功能需要<strong>管理员手动点击「开启竞猜」</strong>后才会开放。前提条件是红蓝双方至少各有 1 名通过审核的正式选手（<code>redUserId</code> / <code>blueUserId</code> 非空），且任一方预期胜率不超过 80%（<code>START_MATCH_VOID_MAX_WIN_RATE = 0.8</code>）。在此之前，观众只能看到竞猜面板但无法操作。
+      </p>
+    </div>
+  </div>

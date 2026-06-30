@@ -1,0 +1,92 @@
+﻿<!-- ==================== 15. 我的参赛数据（规划中） ==================== -->
+  <div class="card card-planned">
+    <h2><span class="icon">📈</span>我的参赛数据<span class="badge-planned">规划中</span></h2>
+    <p class="planned-hint">此模块为规划中功能，以下为设计预览。对标「我的竞猜数据」，为参赛侧提供综合实力概览。</p>
+
+    <div class="illus-row" style="gap:32px;align-items:flex-start;margin-bottom:28px;">
+      <div class="phone-frame" style="width:300px;">
+        <div class="cyber-nav">
+          <span class="cyber-back">‹ 返回</span>
+          <span class="cyber-title">我的参赛</span>
+          <span style="width:60px"></span>
+        </div>
+        <div class="cyber-body">
+          <!-- 门店标识 -->
+          <div class="cyber-card" style="display:flex;align-items:center;gap:6px;padding:8px 12px;margin-bottom:8px;font-size:12px;color:rgba(160,200,220,0.7);">
+            <span>🏪</span><span>朝阳店</span>
+          </div>
+          <!-- 综合概览 -->
+          <div class="cyber-card summary-sim">
+            <div class="sum-top">综合概览</div>
+            <div class="sum-grid">
+              <div class="sum-cell"><span class="sum-val">128</span><span class="sum-lbl">总场次</span></div>
+              <div class="sum-cell"><span class="sum-val">62%</span><span class="sum-lbl">总胜率</span></div>
+              <div class="sum-cell"><span class="sum-val">2,450</span><span class="sum-lbl">综合积分</span></div>
+            </div>
+          </div>
+          <!-- 玩法1：冰球 -->
+          <div class="cyber-card game-sim">
+            <div class="game-head"><span class="game-emoji">🏒</span><span class="game-name">疾速冰球</span></div>
+            <div class="sim-row"><span class="sim-label">积分</span><span class="sim-val">850</span></div>
+            <div class="sim-row"><span class="sim-label">场次 / 胜场</span><span class="sim-val">42 / 28</span></div>
+            <div class="sim-row" style="border:none;"><span class="sim-label">胜率 / 连胜</span><span class="sim-val">67% / 5</span></div>
+          </div>
+          <!-- 玩法2：拳王 -->
+          <div class="cyber-card game-sim">
+            <div class="game-head"><span class="game-emoji">🥊</span><span class="game-name">烈焰拳王</span></div>
+            <div class="sim-row"><span class="sim-label">积分</span><span class="sim-val">920</span></div>
+            <div class="sim-row"><span class="sim-label">场次 / 胜场</span><span class="sim-val">56 / 33</span></div>
+            <div class="sim-row" style="border:none;"><span class="sim-label">胜率 / 连胜</span><span class="sim-val">59% / 3</span></div>
+          </div>
+          <!-- 玩法3：击剑 -->
+          <div class="cyber-card game-sim">
+            <div class="game-head"><span class="game-emoji">🤺</span><span class="game-name">雷霆击剑</span></div>
+            <div class="sim-row"><span class="sim-label">积分</span><span class="sim-val">680</span></div>
+            <div class="sim-row"><span class="sim-label">场次 / 胜场</span><span class="sim-val">30 / 18</span></div>
+            <div class="sim-row" style="border:none;"><span class="sim-label">胜率 / 连胜</span><span class="sim-val">60% / 4</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="desc-area">
+        <h3 style="font-size:17px;font-weight:600;color:#1e293b;margin-bottom:14px;">设计说明</h3>
+        <ul class="anno-list">
+          <li data-num="1"><strong>门店标识</strong> — 顶部展示当前门店名称（如「朝阳店」），所有参赛数据均归属该门店</li>
+          <li data-num="2"><strong>综合概览卡</strong> — 三栏展示当前门店下的总场次、总胜率、综合积分，一眼掌握整体实力</li>
+          <li data-num="3"><strong>分玩法卡片</strong> — 每项玩法独立卡片，展示该门店的积分、场次/胜场、胜率/连胜</li>
+          <li data-num="4"><strong>三项玩法</strong> — 🏒疾速冰球 / 🥊烈焰拳王 / 🤺雷霆击剑，与赛事模块一一对应</li>
+          <li data-num="5"><strong>数据来源</strong> — 后端已有 <code>rating</code> 字段，前端需新增汇总接口 <code>GET /api/player/my-stats?storeId={storeId}</code></li>
+        </ul>
+        <div class="rule-box info" style="margin-top:16px;">
+          <p class="rule-title">💡 设计依据</p>
+          <p class="rule-text">
+            PRD 明确提到「个人中心不直接展示三项玩法积分」为待改进项。本模块对标「我的竞猜数据」的段位卡 + 数据行结构，补齐参赛侧缺失的数据概览能力。
+          </p>
+        </div>
+        <div class="rule-box warn" style="margin-top:12px;">
+          <p class="rule-title">🏪 门店隔离说明</p>
+          <p class="rule-text">
+            积分、场次、胜率等均按<strong>门店</strong>独立统计：同一用户在不同门店的参赛数据互不影响，综合积分为当前门店下三项玩法积分之和。
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<style>
+/* === 规划中模块通用 === */
+.card-planned { border-style: dashed !important; border-image: linear-gradient(90deg, #fb923c, #fbbf24) 1 !important; background: rgba(251,146,60,0.02) !important; }
+.badge-planned { display:inline-block; margin-left:10px; padding:2px 10px; border-radius:4px; font-size:11px; font-weight:600; background:rgba(251,146,60,0.15); color:#ea580c; vertical-align:middle; letter-spacing:0.5px; }
+.planned-hint { font-size:13px; color:#d97706; margin-bottom:20px; padding:8px 14px; background:rgba(251,191,36,0.06); border-radius:8px; border:1px dashed rgba(251,191,36,0.2); }
+/* === 我的参赛数据模拟 === */
+.summary-sim { padding:14px 12px; text-align:center; }
+.sum-top { font-size:12px; font-weight:600; color:rgba(180,240,255,0.85); margin-bottom:10px; }
+.sum-grid { display:flex; justify-content:space-around; }
+.sum-cell { display:flex; flex-direction:column; align-items:center; gap:2px; }
+.sum-cell .sum-val { font-size:18px; font-weight:700; color:#7ee8ff; }
+.sum-cell .sum-lbl { font-size:10px; color:rgba(160,200,220,0.55); }
+.game-sim { padding:10px 12px; }
+.game-head { display:flex; align-items:center; gap:6px; margin-bottom:6px; }
+.game-emoji { font-size:16px; }
+.game-name { font-size:13px; font-weight:600; color:#e8fdff; }
+</style>

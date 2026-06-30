@@ -1,0 +1,139 @@
+﻿<!-- ==================== 18. 积分排行榜（规划中） ==================== -->
+  <div class="card card-planned">
+    <h2><span class="icon">🏅</span>积分排行榜<span class="badge-planned">规划中</span></h2>
+    <p class="planned-hint">类似「竞猜排行」，按单项或综合积分的门店排名。补齐参赛侧的社交竞争能力。</p>
+
+    <div class="illus-row" style="gap:32px;align-items:flex-start;margin-bottom:28px;">
+      <div class="phone-frame" style="width:300px;">
+        <div class="cyber-nav">
+          <span class="cyber-back">‹ 返回</span>
+          <span class="cyber-title">积分排行</span>
+          <span style="width:60px"></span>
+        </div>
+        <div class="cyber-body">
+          <!-- 门店标识 -->
+          <div class="cyber-card" style="display:flex;align-items:center;gap:6px;padding:8px 12px;margin-bottom:4px;font-size:12px;color:rgba(160,200,220,0.7);">
+            <span>🏪</span><span>朝阳店</span>
+          </div>
+          <!-- 筛选栏 -->
+          <div class="filter-bar">
+            <span class="filter-chip active">综合</span>
+            <span class="filter-chip">🏒冰球</span>
+            <span class="filter-chip">🥊拳王</span>
+            <span class="filter-chip">🤺击剑</span>
+          </div>
+          <!-- Top1 -->
+          <div class="cyber-card rl-sim">
+            <div class="rl-row">
+              <span class="rl-pos rl-gold">1</span>
+              <div class="rl-mid">
+                <span class="rl-name">不败战神</span>
+                <span class="rl-info">综合 · 128场 · 胜率72%</span>
+              </div>
+              <div class="rl-right">
+                <span class="rl-score">4,820</span>
+                <span class="rl-score-lbl">积分</span>
+              </div>
+            </div>
+          </div>
+          <!-- Top2 -->
+          <div class="cyber-card rl-sim">
+            <div class="rl-row">
+              <span class="rl-pos rl-gold">2</span>
+              <div class="rl-mid">
+                <span class="rl-name">格斗之王</span>
+                <span class="rl-info">综合 · 96场 · 胜率68%</span>
+              </div>
+              <div class="rl-right">
+                <span class="rl-score">3,650</span>
+                <span class="rl-score-lbl">积分</span>
+              </div>
+            </div>
+          </div>
+          <!-- Top3 -->
+          <div class="cyber-card rl-sim">
+            <div class="rl-row">
+              <span class="rl-pos rl-gold">3</span>
+              <div class="rl-mid">
+                <span class="rl-name">冰球高手</span>
+                <span class="rl-info">综合 · 74场 · 胜率65%</span>
+              </div>
+              <div class="rl-right">
+                <span class="rl-score">2,910</span>
+                <span class="rl-score-lbl">积分</span>
+              </div>
+            </div>
+          </div>
+          <!-- Top4 -->
+          <div class="cyber-card rl-sim">
+            <div class="rl-row">
+              <span class="rl-pos">4</span>
+              <div class="rl-mid">
+                <span class="rl-name">小明</span>
+                <span class="rl-info">综合 · 56场 · 胜率62%</span>
+              </div>
+              <div class="rl-right">
+                <span class="rl-score">2,450</span>
+                <span class="rl-score-lbl">积分</span>
+              </div>
+            </div>
+          </div>
+          <!-- Top5 -->
+          <div class="cyber-card rl-sim">
+            <div class="rl-row">
+              <span class="rl-pos">5</span>
+              <div class="rl-mid">
+                <span class="rl-name">路人甲</span>
+                <span class="rl-info">综合 · 42场 · 胜率55%</span>
+              </div>
+              <div class="rl-right">
+                <span class="rl-score">1,780</span>
+                <span class="rl-score-lbl">积分</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="desc-area">
+        <h3 style="font-size:17px;font-weight:600;color:#1e293b;margin-bottom:14px;">设计说明</h3>
+        <ul class="anno-list">
+          <li data-num="1"><strong>门店标识</strong> — 顶部展示当前门店名称（如「朝阳店」），排行榜为该门店内排名</li>
+          <li data-num="2"><strong>玩法筛选</strong> — 水平标签：「综合 / 🏒冰球 / 🥊拳王 / 🤺击剑」，可查看当前门店下单项玩法排名</li>
+          <li data-num="3"><strong>排名序号</strong> — <span style="color:#ffc069;font-weight:600">前 3 名金色高亮</span>，与竞猜排行视觉一致</li>
+          <li data-num="4"><strong>用户信息</strong> — 双行：用户名 + 「综合 · N场 · 胜率N%」，均为当前门店数据</li>
+          <li data-num="5"><strong>积分数值</strong> — 右侧大号青色数字 + 灰色「积分」标签，积分为该门店下数值</li>
+          <li data-num="6"><strong>自己排名高亮</strong> — 当前行加青色边框背景，快速找到自己位置</li>
+        </ul>
+        <div class="rule-box info" style="margin-top:16px;">
+          <p class="rule-title">💡 与竞猜排行对比</p>
+          <p class="rule-text">
+            竞猜排行按 <code>totalBettingWinnings</code> 排序；积分排行按 <code>rating</code> 排序。<br>
+            竞猜排行有段位图标，积分排行有场次数和胜率——两者侧重点不同但布局对称。<br>
+            接口设计：<code>GET /api/player/leaderboard?storeId={storeId}&gameType=all&take=50</code>
+          </p>
+        </div>
+        <div class="rule-box warn" style="margin-top:12px;">
+          <p class="rule-title">🏪 门店隔离说明</p>
+          <p class="rule-text">
+            积分排行榜按<strong>门店</strong>维度独立排名：不同门店有各自的排行榜，积分数值、场次数、胜率均限定在当前门店范围内统计。<br>
+            用户在不同门店的排名可能完全不同。
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<style>
+/* === 积分排行榜模拟 === */
+.rl-sim { padding:8px 10px; }
+.rl-row { display:flex; align-items:center; gap:8px; }
+.rl-pos { width:22px; font-size:14px; font-weight:700; color:rgba(200,235,255,0.75); text-align:center; flex-shrink:0; }
+.rl-pos.rl-gold { color:#ffc069; }
+.rl-mid { flex:1; min-width:0; display:flex; flex-direction:column; gap:2px; }
+.rl-name { font-size:12px; color:#e8fdff; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.rl-info { font-size:10px; color:rgba(160,200,220,0.55); }
+.rl-right { display:flex; flex-direction:column; align-items:flex-end; gap:2px; flex-shrink:0; }
+.rl-score { font-size:14px; font-weight:700; color:#7ee8ff; }
+.rl-score-lbl { font-size:9px; color:rgba(160,200,220,0.45); }
+</style>

@@ -1,0 +1,48 @@
+﻿<!-- ==================== 2. 页面结构与导航 ==================== -->
+  <div class="card">
+    <h2><span class="icon">🗺️</span>页面结构总览</h2>
+    <div class="page-map">
+      <div class="page-map-title">个人中心导航图</div>
+      <div class="map-tree">
+        <span class="page-name">TabBar「我的」</span> ── mine.vue（个人中心首页）<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;├── MineProfileCard &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ 修改昵称（弹窗）<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;├── 当前门店展示 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ <strong>只读</strong>，数据按此门店隔离<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;├── MineBettingSection &nbsp;&nbsp;&nbsp;&nbsp;→ <strong>竞猜区域（当前门店）</strong><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├── 签到按钮 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ 签到 +100 竞猜币（当前门店）<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├── 「我的竞猜数据」&nbsp;&nbsp;&nbsp;&nbsp;→ <span class="sub-tag">子页面</span> <span class="route">/pages/player/betting-my</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├── 「过往竞猜」&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ <span class="sub-tag">子页面</span> <span class="route">/pages/player/betting-history</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├── 「竞猜币流水」&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ <span class="sub-tag">子页面</span> <span class="route">/pages/player/betting-coin-log</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;└── 「竞猜排行」&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ <span class="sub-tag">子页面</span> <span class="route">/pages/player/betting-rank</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;├── MineLinksSection「参赛」→ <strong>参赛区域（当前门店）</strong><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├── 「我的参赛数据」&nbsp;&nbsp;&nbsp;&nbsp;→ <span class="sub-tag">子页面</span> <span class="route">/pages/player/match-my</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├── 「过往战绩」&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ <span class="sub-tag">子页面</span> <span class="route">/pages/player/match-history</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;├── 「积分变动记录」&nbsp;&nbsp;&nbsp;&nbsp;→ <span class="sub-tag">子页面</span> <span class="route">/pages/player/score-log</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;└── 「积分排行榜」&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ <span class="sub-tag">子页面</span> <span class="route">/pages/player/score-rank</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;├── 「重选门店」按钮 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ <span class="sub-tag">跳转</span> <span class="route">/pages/store/select</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;└── 退出登录按钮
+      </div>
+    </div>
+    <table class="rank-table">
+      <thead><tr><th>页面 / 组件</th><th>路由</th><th>类型</th><th>数据范围</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td style="font-weight:600;color:#1e293b;">个人中心</td><td class="api-path">mine.vue（TabBar）</td><td>Tab 页</td><td style="color:#6366f1;">当前门店</td><td style="color:#64748b;">聚合入口，展示当前门店数据</td></tr>
+        <tr><td style="font-weight:600;color:#1e293b;">我的竞猜数据</td><td class="api-path">/pages/player/betting-my</td><td>子页面</td><td style="color:#6366f1;">当前门店</td><td style="color:#64748b;">段位 + 统计概览</td></tr>
+        <tr><td style="font-weight:600;color:#1e293b;">过往竞猜</td><td class="api-path">/pages/player/betting-history</td><td>子页面</td><td style="color:#6366f1;">当前门店</td><td style="color:#64748b;">逐局竞猜明细</td></tr>
+        <tr><td style="font-weight:600;color:#1e293b;">竞猜币流水</td><td class="api-path">/pages/player/betting-coin-log</td><td>子页面</td><td style="color:#6366f1;">当前门店</td><td style="color:#64748b;">收支明细</td></tr>
+        <tr><td style="font-weight:600;color:#1e293b;">竞猜排行</td><td class="api-path">/pages/player/betting-rank</td><td>子页面</td><td style="color:#6366f1;">当前门店</td><td style="color:#64748b;">门店排行榜</td></tr>
+        <tr><td style="font-weight:600;color:#1e293b;">我的参赛数据</td><td class="api-path">/pages/player/match-my</td><td>子页面</td><td style="color:#6366f1;">当前门店</td><td style="color:#64748b;">参赛统计概览</td></tr>
+        <tr><td style="font-weight:600;color:#1e293b;">过往战绩</td><td class="api-path">/pages/player/match-history</td><td>子页面</td><td style="color:#6366f1;">当前门店</td><td style="color:#64748b;">参赛历史记录，支持玩法筛选</td></tr>
+        <tr><td style="font-weight:600;color:#1e293b;">积分变动记录</td><td class="api-path">/pages/player/score-log</td><td>子页面</td><td style="color:#6366f1;">当前门店</td><td style="color:#64748b;">积分流水</td></tr>
+        <tr><td style="font-weight:600;color:#1e293b;">积分排行榜</td><td class="api-path">/pages/player/score-rank</td><td>子页面</td><td style="color:#6366f1;">当前门店</td><td style="color:#64748b;">门店积分排名</td></tr>
+        <tr><td style="font-weight:600;color:#1e293b;">重选门店</td><td class="api-path">/pages/store/select</td><td>跳转页面</td><td style="color:#94a3b8;">全局</td><td style="color:#64748b;">切换当前门店</td></tr>
+      </tbody>
+    </table>
+    <div class="rule-box info" style="margin-top:16px;">
+      <p class="rule-title">🏪 门店数据隔离说明</p>
+      <p class="rule-text">
+        以上所有子页面的数据均限定在<strong>当前选中门店</strong>范围内，不会跨店汇总。<br>
+        竞猜币余额、签到状态、竞猜记录、段位、积分、排行等均按门店维度独立维护。<br>
+        用户需通过「重选门店」跳转至选择门店页面完成门店切换，返回后自动刷新所有数据。
+      </p>
+    </div>
+  </div>

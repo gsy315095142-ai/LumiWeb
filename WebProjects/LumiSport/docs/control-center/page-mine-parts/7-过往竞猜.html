@@ -1,0 +1,86 @@
+﻿<!-- ==================== 7. 过往竞猜 ==================== -->
+  <div class="card">
+    <h2><span class="icon">📜</span>过往竞猜 · betting-history</h2>
+
+    <div class="illus-row" style="gap:32px;align-items:flex-start;margin-bottom:28px;">
+      <div class="phone-frame" style="width:300px;">
+        <div class="cyber-nav">
+          <span class="cyber-back">‹ 返回</span>
+          <span class="cyber-title">过往竞猜</span>
+          <span style="width:60px"></span>
+        </div>
+        <div class="cyber-body">
+          <!-- 门店标识 -->
+          <div class="cyber-card" style="display:flex;align-items:center;gap:6px;padding:8px 12px;margin-bottom:8px;font-size:12px;color:rgba(160,200,220,0.7);">
+            <span>🏪</span><span>朝阳店</span>
+          </div>
+          <!-- 卡片1：猜中 -->
+          <div class="cyber-card hist-sim">
+            <div class="hist-head">
+              <span class="hist-time">5/11 14:30</span>
+              <span class="hist-net hist-pos">+150</span>
+            </div>
+            <div class="hist-match">第 3 局 · 疾速冰球 · 周末争霸</div>
+            <div class="hist-score">🔵 小明 5 : 3 大壮 🔴</div>
+            <div class="hist-sum">本金 200 · 发放 350 · 猜中收益累计 150</div>
+            <div class="hist-details">
+              <div class="hist-detail hit">
+                <span class="hd-type">胜负盘</span>
+                <span class="hd-my">我选: 红方胜</span>
+                <span class="hd-res">红方胜</span>
+                <span class="hd-won">+150</span>
+              </div>
+              <div class="hist-detail miss">
+                <span class="hd-type">精准总分</span>
+                <span class="hd-my">预测: 6</span>
+                <span class="hd-res">实际: 8</span>
+                <span class="hd-lost">-50</span>
+              </div>
+            </div>
+          </div>
+          <!-- 卡片2：退还 -->
+          <div class="cyber-card hist-sim">
+            <div class="hist-head">
+              <span class="hist-time">5/10 10:15</span>
+              <span class="hist-net">0</span>
+            </div>
+            <div class="hist-match">第 1 局 · 烈焰拳王</div>
+            <div class="hist-score">🔵 张三 2 : 2 李四 🔴</div>
+            <div class="hist-sum">本金 100 · 发放 100 · 猜中收益累计 0</div>
+            <div class="hist-details">
+              <div class="hist-detail draw">
+                <span class="hd-type">胜负盘</span>
+                <span class="hd-my">我选: 红方胜</span>
+                <span class="hd-res">平局</span>
+                <span class="hd-refund">退100</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="desc-area">
+        <h3 style="font-size:17px;font-weight:600;color:#1e293b;margin-bottom:14px;">页面布局解析</h3>
+        <ul class="anno-list">
+          <li data-num="1"><strong>门店标识</strong> — 顶部展示当前门店名称（如「朝阳店」），本页仅展示该门店下的竞猜记录</li>
+          <li data-num="2"><strong>头行</strong> — 左侧时间（M/D HH:MM），右侧净收益（<span style="color:#73d13d">正数绿色 +N</span> / <span style="color:#ff7875">负数红色 -N</span> / 灰色 0）</li>
+          <li data-num="3"><strong>赛事行</strong> — 「第 X 局 · 游戏类型 · 赛事名」，如「疾速冰球 · 周末争霸」</li>
+          <li data-num="4"><strong>对阵行</strong> — 🔵蓝方名 比分:比分 红方名🔴，直观展示对阵结果</li>
+          <li data-num="5"><strong>汇总行</strong> — 灰色小字：「本金 X · 发放 Y · 猜中收益累计 Z」</li>
+          <li data-num="6"><strong>明细区</strong> — 分隔线下按竞猜类型逐项展示，三种颜色编码：
+            <br>&nbsp;&nbsp;&nbsp;<span style="display:inline-block;padding:1px 8px;border-radius:4px;font-size:12px;background:rgba(20,60,30,0.55);color:#95de64;border:1px solid rgba(82,196,26,0.35)">猜中 hit</span>
+            <span style="display:inline-block;padding:1px 8px;border-radius:4px;font-size:12px;background:rgba(60,20,25,0.5);color:#ff9c9c;border:1px solid rgba(255,77,79,0.35);margin-left:4px">未中 miss</span>
+            <span style="display:inline-block;padding:1px 8px;border-radius:4px;font-size:12px;background:rgba(50,40,10,0.55);color:#ffc069;border:1px solid rgba(250,173,20,0.35);margin-left:4px">退还 draw</span>
+          </li>
+        </ul>
+        <div class="rule-box info" style="margin-top:16px;">
+          <p class="rule-title">💡 数据说明</p>
+          <p class="rule-text">
+            接口 <code>GET /api/betting/my-history?storeId={storeId}&limit=50</code>，最多拉取 50 条。<br>
+            每条明细展示：竞猜类型名、我的选择、结果描述，以及猜中收益 / 输掉 / 退还金额。<br>
+            数据范围限定在当前门店，不会展示其他门店的竞猜记录。
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>

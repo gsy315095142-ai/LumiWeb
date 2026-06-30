@@ -1,0 +1,54 @@
+<!-- ═══════ 选择门店页 ═══════ -->
+  <div class="card">
+    <div class="card-title">🏪 选择门店页</div>
+    <div class="screenshot-layout">
+      <div>
+        <div class="phone-frame">
+          <img src="./mini-store.png" alt="选择门店页截图" onclick="zoomImg(this.src)">
+        </div>
+        <div class="phone-label">小程序 · 选择门店页</div>
+      </div>
+      <div class="annotation-area">
+        <div class="annotation-intro">
+          登录成功后跳转至<strong>选择门店页</strong>（pages/index/index）。所有用户（包括管理员）均需选择门店。该页面承担三个职责：<strong>确认门店</strong>、<strong>角色路由</strong>、<strong>退出登录</strong>。
+        </div>
+        <div class="annotation-list">
+          <div class="annotation-item">
+            <div class="annotation-dot ad-nav">📌</div>
+            <div class="annotation-content">
+              <div class="annotation-label">导航栏 <span class="annotation-tag tag-action">固定</span></div>
+              <div class="annotation-desc">标题「选择门店」，左侧返回按钮。管理员登录时（role=admin）右侧显示「管理」文字按钮</div>
+            </div>
+          </div>
+          <div class="annotation-item">
+            <div class="annotation-dot ad-store">🏪</div>
+            <div class="annotation-content">
+              <div class="annotation-label">门店卡片 <span class="annotation-tag tag-action">交互</span></div>
+              <div class="annotation-desc">显示门店名称「LumiLab竞技大空间」+「当前」标签；点击选中高亮边框。当前版本仅一个固定门店</div>
+            </div>
+          </div>
+          <div class="annotation-item">
+            <div class="annotation-dot ad-action">🚀</div>
+            <div class="annotation-content">
+              <div class="annotation-label">进入按钮 <span class="annotation-tag tag-action">主入口</span></div>
+              <div class="annotation-desc">绿色主按钮，选中门店后可点击，switchTab 跳转至赛事主页（pages/player/event）</div>
+            </div>
+          </div>
+          <div class="annotation-item">
+            <div class="annotation-dot ad-feedback">🚪</div>
+            <div class="annotation-content">
+              <div class="annotation-label">退出登录按钮 <span class="annotation-tag tag-action">交互</span></div>
+              <div class="annotation-desc">红色描边按钮，仅登录状态下显示。点击调用 userStore.logout() 清除 token + userInfo + managedStores 并跳回登录页</div>
+            </div>
+          </div>
+          <div class="annotation-item">
+            <div class="annotation-dot ad-admin">🛡️</div>
+            <div class="annotation-content">
+              <div class="annotation-label">「管理」入口 <span class="annotation-tag tag-admin">admin only</span></div>
+              <div class="annotation-desc">当 JWT 中 role === 'admin' 时，导航栏右侧出现「管理」按钮，点击 navigateTo 进入管理员操控台（pages/player/admin）。管理员仅能操作白名单关联的门店</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

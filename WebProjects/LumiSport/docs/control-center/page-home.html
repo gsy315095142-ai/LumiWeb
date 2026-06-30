@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>首页：赛事选择</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Inter', -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: #f0f2f8;
+  color: #1e293b;
+  line-height: 1.7;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+.page-header h1 {
+  font-size: 32px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 8px;
+}
+.page-header .subtitle {
+  color: #64748b;
+  font-size: 15px;
+}
+
+.card {
+  background: #ffffff;
+  border: 1px solid rgba(99,102,241,0.12);
+  border-top: 2px solid;
+  border-image: linear-gradient(90deg, #6366f1, #0891b2) 1;
+  border-radius: 16px;
+  padding: 32px;
+  margin-bottom: 32px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.card:hover {
+  border-color: rgba(99,102,241,0.25);
+  box-shadow: 0 2px 8px rgba(99,102,241,0.06);
+}
+.card h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.card h2 .icon { font-size: 22px; }
+
+.illus-row {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+  margin-bottom: 36px;
+}
+.illus-row:last-child { margin-bottom: 0; }
+
+.phone-frame {
+  flex-shrink: 0;
+  width: 280px;
+  background: #e2e8f0;
+  border-radius: 28px;
+  border: 3px solid #cbd5e1;
+  padding: 12px 10px 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+  position: relative;
+}
+.phone-frame::before {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 5px;
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+.phone-frame img {
+  width: 100%;
+  border-radius: 16px;
+  display: block;
+  cursor: zoom-in;
+  transition: filter 0.2s;
+}
+.phone-frame img:hover {
+  filter: brightness(1.04);
+}
+.phone-label {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.desc-area { flex: 1; min-width: 0; }
+.desc-area h3 { font-size: 17px; font-weight: 600; color: #1e293b; margin-bottom: 14px; }
+
+.anno-list { list-style: none; }
+.anno-list li {
+  position: relative;
+  padding: 10px 0 10px 24px;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+  font-size: 14px;
+  color: #475569;
+  transition: background 0.2s;
+}
+.anno-list li:last-child { border-bottom: none; }
+.anno-list li:hover { background: rgba(99,102,241,0.04); border-radius: 6px; }
+.anno-list li::before {
+  content: attr(data-num);
+  position: absolute;
+  left: 0; top: 10px;
+  width: 18px; height: 18px;
+  background: rgba(99,102,241,0.10);
+  color: #6366f1;
+  border-radius: 50%;
+  font-size: 11px; font-weight: 600;
+  display: flex; align-items: center; justify-content: center;
+}
+.anno-list li strong { color: #1e293b; font-weight: 600; }
+
+.img-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.70);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+  backdrop-filter: blur(8px);
+  animation: overlayIn 0.25s ease;
+}
+.img-overlay.active { display: flex; }
+@keyframes overlayIn { from { opacity: 0; } to { opacity: 1; } }
+.img-overlay img {
+  max-width: 92vw; max-height: 90vh; border-radius: 12px;
+  box-shadow: 0 0 60px rgba(99,102,241,0.10);
+  animation: imgZoomIn 0.3s ease;
+}
+@keyframes imgZoomIn { from { transform: scale(0.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.img-overlay .zoom-hint {
+  position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
+  font-size: 12px; color: rgba(255,255,255,0.5); letter-spacing: 1px;
+}
+
+.role-tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; }
+.role-tag.admin { background: rgba(234,88,12,0.10); color: #ea580c; }
+.role-tag.player { background: rgba(22,163,74,0.10); color: #16a34a; }
+.role-tag.viewer { background: rgba(37,99,235,0.10); color: #2563eb; }
+
+.rule-box { border-radius: 12px; padding: 16px 20px; margin-top: 20px; }
+.rule-box p.rule-title { font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+.rule-box p.rule-text { font-size: 13px; color: #64748b; line-height: 1.8; }
+.rule-box p.rule-text strong { font-weight: 600; }
+.rule-box.warn { background: rgba(234,88,12,0.04); border: 1px solid rgba(234,88,12,0.12); }
+.rule-box.warn p.rule-title { color: #ea580c; }
+.rule-box.warn p.rule-text strong { color: #475569; }
+.rule-box.info { background: rgba(99,102,241,0.04); border: 1px solid rgba(99,102,241,0.12); }
+.rule-box.info p.rule-title { color: #6366f1; }
+.rule-box.info p.rule-text strong { color: #475569; }
+.rule-box.pending { background: rgba(217,119,6,0.04); border: 1px solid rgba(217,119,6,0.12); }
+.rule-box.pending p.rule-title { color: #d97706; }
+.rule-box.pending p.rule-text strong { color: #475569; }
+
+@media (max-width: 700px) {
+  .illus-row { flex-direction: column; align-items: center; }
+  .phone-frame { width: 240px; }
+  .desc-area { width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<div class="img-overlay" id="imgOverlay">
+  <img id="overlayImg" src="" alt="zoom">
+  <div class="zoom-hint">click anywhere to close</div>
+</div>
+
+<div class="container">
+
+  <div class="page-header">
+    <h1>🏟️ 首页：赛事选择</h1>
+    <p class="subtitle">选择门店后进入的赛事主页 — 三种角色、两个 Tab、完整赛事生命周期</p>
+  </div>
+
+  <!-- 1. 页面定位 -->
+  <div class="card">
+    <h2><span class="icon">📖</span>页面定位</h2>
+    <p style="color:#475569;font-size:15px;margin-bottom:16px;">
+      「首页：赛事选择」是用户<strong style="color:#1e293b;">选择门店后</strong>进入的核心阶段。在此阶段，管理员负责配置玩法项目与模式，选手等待报名开放，观众等待竞猜开放。
+    </p>
+    <p style="color:#64748b;font-size:14px;">
+      管理员通过赛事主页导航栏的「管理」按钮进入独立的<strong style="color:#1e293b;">场次管理页面</strong>（admin.vue），在此完成玩法选择、确认玩法、开放报名等操作。选手和观众则留在赛事主页（event.vue）等待状态推进。
+    </p>
+  </div>
+
+  <!-- 2. 管理员：场次管理页面 -->
+  <div class="card">
+    <h2><span class="icon">🛡️</span>管理员：场次管理页面</h2>
+    <p style="color:#64748b;font-size:14px;margin-bottom:24px;">
+      管理员点击赛事主页导航栏的「管理」按钮后，进入独立的场次管理页面。页面结构随当前阶段动态变化：
+    </p>
+
+    <div class="illus-row">
+      <div>
+        <div class="phone-frame">
+          <img src="event-admin-waiting.png" alt="管理员场次管理 - 玩法配置" onclick="zoomImg(this.src)" onerror="this.alt='截图加载失败';this.style.height='400px';this.style.background='#e2e8f0';">
+        </div>
+        <div class="phone-label">🛡️ 场次管理页面（玩法配置阶段）</div>
+      </div>
+      <div class="desc-area">
+        <h3><span class="role-tag admin">管理员</span> 玩法配置阶段的界面</h3>
+        <ul class="anno-list">
+          <li data-num="1">
+            <strong>场次流程进度条</strong> — 顶部显示 6 步流程：玩法配置 → 等待报名 → 报名中 → 竞猜中 → 比赛中 → 已结算。当前步骤高亮显示，下方提示当前阶段操作指引
+          </li>
+          <li data-num="2">
+            <strong>场次名称输入框</strong> — 可自定义赛事名称，如「春季友谊赛」。最多 <strong style="color:#d97706;">20 个字符</strong>，可为空（nullable）；开启下一轮时若不填，后端自动命名为「第N局」。（代码中数据库字段为 varchar(200)，前端 20 字符限制待实现）
+          </li>
+          <li data-num="3">
+            <strong>玩法项目切换按钮</strong> — 三个按钮：冰球 / 拳王 / 击剑。点击切换时有二次确认弹窗
+          </li>
+          <li data-num="4">
+            <strong>冰球大师模式开关</strong> — 仅当玩法选为「冰球」时显示。开启后结算时由 Server 自动上报冰/火/风球出现次数。<strong style="color:#d97706;">切换到非冰球玩法时开关值保留但隐藏</strong>，切回冰球后恢复显示原设置（isMasterMode 与 gameType 为独立字段）
+          </li>
+          <li data-num="5">
+            <strong>Server 端玩法切换</strong> — 点击玩法按钮切换时，不仅前端配置变化，Server 端（Unity 大屏）也会同步跳转到对应玩法的匹配界面。<strong style="color:#d97706;">⚠️ 待调整</strong>：当前 Server 端的模式切换在匹配页面操作，将改为统一收归到首页（玩法配置阶段）
+          </li>
+          <li data-num="6">
+            <strong>「确认玩法」按钮</strong> — 填写完玩法配置后点击此按钮，系统创建首局场次并进入「等待报名」阶段。此时 Unity Server 端会自动跳转进入对应玩法的匹配页面，等待选手就位
+          </li>
+          <li data-num="7">
+            <strong>确认后界面变化</strong> — 点击「确认玩法」后：配置字段自动锁定为只读；出现顶部 Tab 栏（场次管理 / 竞猜大盘池）；流程操作区出现「重选玩法」和「开始报名」两个按钮
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="rule-box warn">
+      <p class="rule-title">⚠️ 配置锁定规则</p>
+      <p class="rule-text">
+        场次名称、玩法项目、冰球大师模式<strong>在点击「确认玩法」后自动锁定</strong>，进入等待报名阶段后不可修改。如需修改，必须通过「重选玩法」退回到玩法配置阶段。进入报名阶段后，「重选玩法」按钮消失，只能通过「重新等待报名」退回。
+      </p>
+    </div>
+
+    <div class="rule-box info">
+      <p class="rule-title">💡 场次名称自动命名规则</p>
+      <p class="rule-text">
+        管理员每次点击「再来一局」进入新一轮时，若<strong>不填写</strong>场次名称，后端会自动命名为「第N局」（N 为当前轮次序号）。例如第 1 局不填则自动命名为「第1局」，第 3 局不填则为「第3局」。管理员可随时在配置阶段手动修改为自定义名称（如「春季友谊赛 · 决赛」），最长 <strong>20 个字符</strong>。
+      </p>
+    </div>
+
+    <div class="rule-box pending">
+      <p class="rule-title">🚧 Server 端模式切换将改为首页</p>
+      <p class="rule-text">
+        当前 Server 端（Unity 大屏）的模式切换操作位于<strong>匹配页面</strong>，将在后续版本中调整为<strong>首页</strong>（玩法配置阶段），使管理员在小程序端确认玩法时，Server 端即同步切换到对应游戏界面，避免两端操作不一致。匹配页面将仅保留匹配/比赛功能。
+      </p>
+    </div>
+  </div>
+
+  <!-- 3. 赛事主页子Tab详解 -->
+  <div class="card">
+    <h2><span class="icon">📑</span>赛事主页子 Tab 详解</h2>
+    <p style="color:#64748b;font-size:14px;margin-bottom:20px;">
+      选手和观众在赛事主页底部看到的两个子 Tab：
+    </p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+      <div style="background:rgba(99,102,241,0.04);border:1px solid rgba(99,102,241,0.12);border-radius:12px;padding:20px;">
+        <h3 style="font-size:16px;font-weight:600;color:#6366f1;margin-bottom:12px;">🎰 我要竞猜</h3>
+        <p style="font-size:14px;color:#475569;margin-bottom:12px;">竞猜操作与排行榜</p>
+        <ul style="font-size:13px;color:#64748b;padding-left:16px;line-height:2;">
+          <li>信息条：昵称 + 金币余额</li>
+          <li><strong style="color:#475569;">胜负盘</strong> — 押红/蓝方获胜（所有游戏）</li>
+          <li><strong style="color:#475569;">精准总分</strong> — 猜最终总得分（所有游戏）</li>
+          <li><strong style="color:#475569;">精准分差</strong> — 猜红蓝分差（所有游戏）</li>
+          <li><strong style="color:#475569;">元素之王</strong> — 猜冰/火/风球最多者（仅冰球大师模式）</li>
+          <li><strong style="color:#475569;">躺平之王</strong> — 猜双方倒地总次数（仅拳王）</li>
+          <li>竞猜收益排行榜 → 更多跳转</li>
+        </ul>
+        <p style="font-size:12px;color:#94a3b8;margin-top:12px;">
+          ⚠️ 需管理员开启竞猜后才能下注；已参赛选手不可下胜负盘
+        </p>
+      </div>
+      <div style="background:rgba(22,163,74,0.04);border:1px solid rgba(22,163,74,0.12);border-radius:12px;padding:20px;">
+        <h3 style="font-size:16px;font-weight:600;color:#16a34a;margin-bottom:12px;">🤺 我要参赛</h3>
+        <p style="font-size:14px;color:#475569;margin-bottom:12px;">报名操作与排行榜</p>
+        <ul style="font-size:13px;color:#64748b;padding-left:16px;line-height:2;">
+          <li>信息条：昵称 + 三玩法积分</li>
+          <li><strong style="color:#475569;">状态提示</strong> — 当前能否操作的文案</li>
+          <li><strong style="color:#475569;">选边</strong> — 蓝/红阵营二选一</li>
+          <li><strong style="color:#475569;">提交报名</strong> — 进入待审核状态</li>
+          <li><strong style="color:#475569;">撤销报名</strong> — 取消已提交的报名</li>
+          <li>排行榜（可切换玩法查看）</li>
+        </ul>
+        <p style="font-size:12px;color:#94a3b8;margin-top:12px;">
+          ⚠️ 仅报名阶段可操作；提交后需管理员审核通过才成为正式选手
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. 选手视角 -->
+  <div class="card">
+    <h2><span class="icon">🤺</span>选手：赛事主页（等待报名开放）</h2>
+    <p style="color:#64748b;font-size:14px;margin-bottom:24px;">
+      选手留在赛事主页，等待管理员确认玩法并开放报名。此时无法进行任何操作：
+    </p>
+
+    <div class="illus-row">
+      <div>
+        <div class="phone-frame">
+          <img src="event-player-waiting.png" alt="选手视角 - 等待报名" onclick="zoomImg(this.src)" onerror="this.alt='截图加载失败';this.style.height='400px';this.style.background='#e2e8f0';">
+        </div>
+        <div class="phone-label">🤺 选手视角（等待阶段）</div>
+      </div>
+      <div class="desc-area">
+        <h3><span class="role-tag player">选手</span> 等待报名开放时</h3>
+        <ul class="anno-list">
+          <li data-num="1">
+            <strong>导航栏无「管理」按钮</strong> — 普通用户（user 角色）看不到管理入口
+          </li>
+          <li data-num="2">
+            <strong>本场对阵模块显示「新的赛事即将开始……」</strong> — 尚无对阵信息，等待管理员操作
+          </li>
+          <li data-num="3">
+            <strong>信息条显示个人积分</strong> — 展示昵称 + 三种玩法的积分（默认 100 分）
+          </li>
+          <li data-num="4">
+            <strong>「我要参赛」Tab 显示等待提示</strong> — 「新一轮报名尚未开始（待管理员开放报名）」，蓝/红选边按钮灰色不可操作
+          </li>
+          <li data-num="5">
+            <strong>排行榜可浏览</strong> — 即使无法参赛，仍可查看各玩法的积分排名
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. 观众视角 -->
+  <div class="card">
+    <h2><span class="icon">👥</span>观众：赛事主页（无法押注）</h2>
+    <p style="color:#64748b;font-size:14px;margin-bottom:24px;">
+      观众同样留在赛事主页，但切换到「我要竞猜」Tab 查看竞猜面板。此时竞猜尚未开启，无法进行押注：
+    </p>
+
+    <div class="illus-row">
+      <div>
+        <div class="phone-frame">
+          <img src="event-viewer-waiting.png" alt="观众视角 - 无法押注" onclick="zoomImg(this.src)" onerror="this.alt='截图加载失败';this.style.height='400px';this.style.background='#e2e8f0';">
+        </div>
+        <div class="phone-label">👥 观众视角（等待阶段）</div>
+      </div>
+      <div class="desc-area">
+        <h3><span class="role-tag viewer">观众</span> 无法押注时</h3>
+        <ul class="anno-list">
+          <li data-num="1">
+            <strong>「我要竞猜」Tab 显示竞猜面板</strong> — 但由于管理员尚未开启竞猜，所有玩法卡片显示不可下注状态
+          </li>
+          <li data-num="2">
+            <strong>信息条显示金币余额</strong> — 展示昵称 + 当前竞猜币余额
+          </li>
+          <li data-num="3">
+            <strong>竞猜玩法根据当前游戏类型动态显示</strong> — 胜负盘、精准总分、精准分差所有游戏均有；元素之王仅冰球大师模式；躺平之王仅拳王。全部需要等待管理员开启竞猜后才会开放
+          </li>
+          <li data-num="4">
+            <strong>竞猜收益排行榜预览可见</strong> — 按累计竞猜收益（totalBettingWinnings）降序排列，展示排名与段位图标
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function zoomImg(src) {
+  var overlay = document.getElementById('imgOverlay');
+  var img = document.getElementById('overlayImg');
+  img.src = src;
+  overlay.classList.add('active');
+}
+
+document.getElementById('imgOverlay').addEventListener('click', function() {
+  this.classList.remove('active');
+});
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    document.getElementById('imgOverlay').classList.remove('active');
+  }
+});
+</script>
+
+</body>
+</html>

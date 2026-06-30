@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>竞技大空间 · 控制中心</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Inter', -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: #f0f2f8;
+  color: #1e293b;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Top Nav ── */
+.top-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  height: 56px;
+  background: rgba(15,15,26,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 0 16px;
+}
+.nav-brand {
+  position: absolute;
+  left: 24px;
+  font-size: 16px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #818cf8, #c084fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.nav-back {
+  position: absolute;
+  right: 24px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #9ca3af;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+.nav-back:hover { color: #c4b5fd; }
+
+/* ── 通用 Tab 按钮 ── */
+.nav-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #9ca3af;
+  cursor: pointer;
+  transition: all 0.25s;
+  text-decoration: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  user-select: none;
+}
+.nav-tab:hover {
+  color: #d1d5db;
+  background: rgba(255,255,255,0.04);
+}
+.nav-tab.active {
+  color: #a5b4fc;
+  background: rgba(129,140,248,0.1);
+  border-color: rgba(129,140,248,0.2);
+}
+.nav-tab .tab-icon { font-size: 15px; }
+.nav-tab .arrow {
+  font-size: 10px;
+  opacity: 0.5;
+  transition: transform 0.25s;
+  margin-left: 2px;
+}
+
+/* ── 分组下拉 ── */
+.nav-group {
+  position: relative;
+}
+.nav-group:hover .nav-group-trigger .arrow {
+  transform: rotate(180deg);
+  opacity: 0.8;
+}
+
+.nav-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) scale(0.96);
+  transform-origin: top center;
+  min-width: 180px;
+  background: rgba(20,20,38,0.98);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 6px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.45);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+  z-index: 1001;
+}
+.nav-group:hover .nav-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) scale(1);
+}
+
+/* 下拉箭头指示 */
+.nav-dropdown::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 10px;
+  height: 10px;
+  background: rgba(20,20,38,0.98);
+  border-left: 1px solid rgba(255,255,255,0.08);
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #9ca3af;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.dropdown-item:hover {
+  color: #e0e0e0;
+  background: rgba(255,255,255,0.06);
+}
+.dropdown-item.active {
+  color: #a5b4fc;
+  background: rgba(129,140,248,0.12);
+}
+.dropdown-sep {
+  height: 1px;
+  background: rgba(255,255,255,0.06);
+  margin: 4px 8px;
+}
+
+/* ── iframe ── */
+.frame-wrap {
+  flex: 1;
+  margin-top: 56px;
+  position: relative;
+}
+.frame-wrap iframe {
+  width: 100%;
+  height: calc(100vh - 56px);
+  border: none;
+  display: none;
+}
+.frame-wrap iframe.visible { display: block; }
+
+/* ── 响应式：小屏品牌隐藏 ── */
+@media (max-width: 640px) {
+  .nav-brand { display: none; }
+  .nav-back { right: 8px; font-size: 11px; }
+  .top-nav { justify-content: center; gap: 4px; padding: 0 8px; }
+  .nav-tab { padding: 8px 10px; font-size: 12px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-brand">🏟️ 竞技大空间</div>
+
+  <!-- 直接入口：赛事流程总览 -->
+  <a class="nav-tab active" data-page="page-event" onclick="switchPage('page-event', this)">
+    <span class="tab-icon">🔄</span>赛事流程
+  </a>
+
+  <!-- 分组：赛事阶段 -->
+  <div class="nav-group">
+    <a class="nav-tab nav-group-trigger">
+      <span class="tab-icon">🎮</span>赛事阶段 <span class="arrow">▾</span>
+    </a>
+    <div class="nav-dropdown">
+      <a class="dropdown-item" data-page="page-home" onclick="switchPage('page-home', this)">
+        🏟️ 赛事选择
+      </a>
+      <div class="dropdown-sep"></div>
+      <a class="dropdown-item" data-page="page-waiting" onclick="switchPage('page-waiting', this)">
+        ⏳ 开放报名
+      </a>
+      <a class="dropdown-item" data-page="page-join" onclick="switchPage('page-join', this)">
+        🤺 选手报名
+      </a>
+      <a class="dropdown-item" data-page="page-bet" onclick="switchPage('page-bet', this)">
+        🎰 参与押注
+      </a>
+      <div class="dropdown-sep"></div>
+      <a class="dropdown-item" data-page="page-match" onclick="switchPage('page-match', this)">
+        ⚔️ 进行比赛
+      </a>
+      <a class="dropdown-item" data-page="page-result" onclick="switchPage('page-result', this)">
+        🏆 胜负结算
+      </a>
+    </div>
+  </div>
+
+  <!-- 分组：页面设计 -->
+  <div class="nav-group">
+    <a class="nav-tab nav-group-trigger">
+      <span class="tab-icon">📱</span>页面设计 <span class="arrow">▾</span>
+    </a>
+    <div class="nav-dropdown">
+      <a class="dropdown-item" data-page="page-login" onclick="switchPage('page-login', this)">
+        🔐 登录与门店
+      </a>
+      <a class="dropdown-item" data-page="page-danmaku" onclick="switchPage('page-danmaku', this)">
+        💬 弹幕互动
+      </a>
+      <a class="dropdown-item" data-page="page-mine" onclick="switchPage('page-mine', this)">
+        👤 个人中心
+      </a>
+    </div>
+  </div>
+
+  <!-- 直接入口：待开发功能 -->
+  <a class="nav-tab" data-page="page-todo" onclick="switchPage('page-todo', this)">
+    <span class="tab-icon">📋</span>待开发功能
+  </a>
+
+  <a class="nav-back" href="../../LumiSport.html">← 返回项目</a>
+</nav>
+
+<div class="frame-wrap">
+  <iframe id="page-event" class="visible" src="page-event.html"></iframe>
+  <iframe id="page-login" src="page-login.html"></iframe>
+  <iframe id="page-home" src="page-home.html"></iframe>
+  <iframe id="page-waiting" src="page-waiting.html"></iframe>
+  <iframe id="page-join" src="page-join.html"></iframe>
+  <iframe id="page-bet" src="page-bet.html"></iframe>
+  <iframe id="page-match" src="page-match.html"></iframe>
+  <iframe id="page-result" src="page-result.html"></iframe>
+  <iframe id="page-danmaku" src="page-danmaku.html"></iframe>
+  <iframe id="page-mine" src="page-mine.html"></iframe>
+  <iframe id="page-todo" src="page-todo.html"></iframe>
+</div>
+
+<script>
+function switchPage(pageId, el) {
+  // 隐藏所有 iframe
+  document.querySelectorAll('.frame-wrap iframe').forEach(function(f) { f.classList.remove('visible'); });
+  // 清除所有 active
+  document.querySelectorAll('.nav-tab, .dropdown-item').forEach(function(t) { t.classList.remove('active'); });
+  // 显示目标 iframe
+  document.getElementById(pageId).classList.add('visible');
+  // 标记当前项 active
+  el.classList.add('active');
+  // 如果是下拉菜单项，同步高亮父级分组按钮
+  if (el.classList.contains('dropdown-item')) {
+    var group = el.closest('.nav-group');
+    if (group) {
+      group.querySelector('.nav-group-trigger').classList.add('active');
+    }
+  }
+}
+</script>
+</body>
+</html>

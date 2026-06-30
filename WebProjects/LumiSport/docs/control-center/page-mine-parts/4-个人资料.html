@@ -1,0 +1,19 @@
+﻿<!-- ==================== 4. 个人资料 ==================== -->
+  <div class="card">
+    <h2><span class="icon">👤</span>个人资料 · MineProfileCard</h2>
+    <p style="color:#64748b;font-size:14px;margin-bottom:20px;">
+      展示用户昵称和角色，支持点击「修改昵称」弹窗编辑：
+    </p>
+    <ul class="anno-list">
+      <li data-num="1"><strong>昵称展示</strong> — 来自 <code>userStore.userInfo.nickname</code>，为空时显示「未设置昵称」</li>
+      <li data-num="2"><strong>角色标识</strong> — <code>admin</code> 显示「管理员」，<code>user</code> 显示「用户」</li>
+      <li data-num="3"><strong>修改昵称弹窗</strong> — 输入框预填当前昵称（trimmed），最大长度 100 字符，允许清空</li>
+      <li data-num="4"><strong>保存逻辑</strong> — 调用 <code>PUT /api/auth/profile</code>，成功 Toast「已保存」并关闭弹窗，失败 Toast 错误信息</li>
+    </ul>
+    <div class="rule-box info">
+      <p class="rule-title">💡 交互细节</p>
+      <p class="rule-text">
+        点击蒙层（mask）可关闭弹窗（等同于取消）。保存中按钮处于 disabled 状态，防止重复提交。允许将昵称清空为空字符串。
+      </p>
+    </div>
+  </div>
