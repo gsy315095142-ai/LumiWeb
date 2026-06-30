@@ -77,7 +77,7 @@ function switchTab(t){
   else if(t==='admin'){pageStack=['admin'];navigateTo('admin',adminTitle(),false);}
   else if(t==='mine'){pageStack=['mine'];navigateTo('mine','👤 我的',false);}
 }
-function goSub(s){var titles={betHistory:'📋 竞猜记录',battleHistory:'⚔️ 比赛记录',betting:'🎯 竞猜',exchangeHistory:'📦 兑换记录',clientExchange:'📦 兑换商品'};pageStack.push(s);navigateTo(s,titles[s]||s,true)}
+function goSub(s){var titles={betHistory:'📋 预测记录',battleHistory:'⚔️ 比赛记录',betting:'🎯 预测',exchangeHistory:'📦 兑换记录',clientExchange:'📦 兑换商品'};pageStack.push(s);navigateTo(s,titles[s]||s,true)}
 // 从管理中心进入二级管理页
 function goAdminSub(page){
   var titles={adminGiveCoin:'📲 发放货币',adminMatches:'📷 场次管理',adminStore:'📦 商品管理',adminBills:'📋 账单管理'};
@@ -88,13 +88,13 @@ function goClientExchange(){ goSub('clientExchange'); }
 function goBack(){
   if(pageStack.length<=1)return;
   pageStack.pop();var p=pageStack[pageStack.length-1];
-  var titles={home:'🏟️ LumiSport',mine:'👤 我的',admin:adminTitle(),betHistory:'📋 竞猜记录',battleHistory:'⚔️ 比赛记录',betting:'🎯 竞猜',exchangeHistory:'📦 兑换记录',adminGiveCoin:'📲 发放货币',adminMatches:'📷 场次管理',adminStore:'📦 商品管理',adminBills:'📋 账单管理',clientExchange:'📦 兑换商品'};
+  var titles={home:'🏟️ LumiSport',mine:'👤 我的',admin:adminTitle(),betHistory:'📋 预测记录',battleHistory:'⚔️ 比赛记录',betting:'🎯 预测',exchangeHistory:'📦 兑换记录',adminGiveCoin:'📲 发放货币',adminMatches:'📷 场次管理',adminStore:'📦 商品管理',adminBills:'📋 账单管理',clientExchange:'📦 兑换商品'};
   var isSub=(p==='betHistory'||p==='battleHistory'||p==='betting'||p==='exchangeHistory'||p==='adminGiveCoin'||p==='adminMatches'||p==='adminStore'||p==='adminBills'||p==='clientExchange');
   navigateTo(p,titles[p]||p,isSub);
 }
 function updateQRState(){
   var blur=document.getElementById('qrBlur'),tag=document.getElementById('statusTag'),tip=document.getElementById('qrTip');
-  if(isAdmin){if(blur)blur.classList.add('hidden');if(tag)tag.textContent='未登记';if(tag)tag.className='status-tag status-none';if(tip)tip.textContent='兑换请出示此码'}
+  if(isAdmin){if(blur)blur.classList.add('hidden');if(tag)tag.textContent='未登记';if(tag)tag.className='status-tag status-none';if(tip)tip.textContent='领取预测币请出示此码'}
   else{if(blur)blur.classList.remove('hidden');if(tag)tag.textContent='未登录';if(tag)tag.className='status-tag status-none';if(tip)tip.textContent='登录后出示身份码'}
 }
 function showLogin(){document.getElementById('loginModal').classList.remove('hidden')}
@@ -103,7 +103,7 @@ function doLogin(){
   document.getElementById('loginModal').classList.add('hidden');
   var blurs=document.querySelectorAll('.qr-blur');for(var bi=0;bi<blurs.length;bi++)blurs[bi].classList.add('hidden');
   var tag=document.getElementById('statusTag');if(tag)tag.textContent='未登记';if(tag)tag.className='status-tag status-none';
-  var tip=document.getElementById('qrTip');if(tip)tip.textContent='兑换请出示此码';
+  var tip=document.getElementById('qrTip');if(tip)tip.textContent='领取预测币请出示此码';
   var lp=document.getElementById('loginPrompt');if(lp)lp.classList.add('hidden');
   var pc=document.getElementById('profileCard');if(pc)pc.classList.remove('hidden');
   var lo=document.getElementById('logoutBtn');if(lo)lo.classList.remove('hidden');
@@ -111,7 +111,7 @@ function doLogin(){
   var mba=document.getElementById('menuBattle');if(mba)mba.classList.remove('hidden');
   var mex=document.getElementById('menuExchange');if(mex)mex.classList.remove('hidden');
   var at=document.getElementById('tabBtn-admin');if(at)at.classList.remove('hidden');
-  // 更新兑换值显示
+  // 更新礼品点数显示
   if(typeof updateClientExchangeCoinDisplay==='function')updateClientExchangeCoinDisplay();
   if(typeof updateAllCoinDisplays==='function')updateAllCoinDisplays();
   if(typeof updateCoinHudVisibility==='function')updateCoinHudVisibility();
@@ -157,8 +157,8 @@ function updateVenueLabels(){
 
 function showCoinHelp(type){
   var t=document.getElementById('coinHelpTitle'),c=document.getElementById('coinHelpContent');
-  if(type==='coin'){t.innerHTML='💰 游戏币说明';c.innerHTML='<b>获得方式</b><br>• 管理员发放<br>• 活动赠送<br><br><b>消耗途径</b><br>• 参与竞猜下注（猜中不返还）<br>• 报名支付费用'}
-  else{t.innerHTML='💎 兑换值说明';c.innerHTML='<b>获得方式</b><br>• 竞猜猜中奖励<br>• 活动赠送<br><br><b>消耗途径</b><br>• 兑换门店商品<br>• 兑换限定道具'}
+  if(type==='coin'){t.innerHTML='💰 预测币说明';c.innerHTML='<b>获得方式</b><br>• 管理员发放<br>• 活动赠送<br><br><b>消耗途径</b><br>• 参与预测提交（猜中不返还）<br>• 报名支付费用'}
+  else{t.innerHTML='💎 礼品点数说明';c.innerHTML='<b>获得方式</b><br>• 预测命中奖励<br>• 活动赠送<br><br><b>消耗途径</b><br>• 兑换门店商品<br>• 兑换限定道具'}
   document.getElementById('coinHelpModal').classList.remove('hidden');
 }
 
@@ -172,7 +172,7 @@ function updateCoinHudVisibility() {
   else hud.classList.add('hidden');
 }
 
-// 初始化兑换值显示（兼容旧调用）
+// 初始化礼品点数显示（兼容旧调用）
 function initMyExchangeCoinDisplay() {
   if (typeof updateAllCoinDisplays === 'function') updateAllCoinDisplays();
 }
@@ -180,15 +180,15 @@ function initMyExchangeCoinDisplay() {
 // ========== 账单管理 ==========
 var billsData = [
   {date:'2026-06-12', time:'21:35', user:'小明', type:'发放', desc:'管理员发放', amt:'+200', coin:'💰'},
-  {date:'2026-06-12', time:'21:30', user:'阿强', type:'下注', desc:'竞猜下注 · 雷霆击剑', amt:'-500', coin:'💰'},
+  {date:'2026-06-12', time:'21:30', user:'阿强', type:'预测提交', desc:'预测提交 · 雷霆击剑', amt:'-500', coin:'💰'},
   {date:'2026-06-12', time:'21:25', user:'大飞', type:'兑换', desc:'兑换 🏡鸡尾酒', amt:'-80', coin:'💎'},
   {date:'2026-06-12', time:'21:20', user:'杰哥', type:'结算', desc:'猜中结算 · 雷霆击剑', amt:'+900', coin:'💎'},
   {date:'2026-06-12', time:'21:15', user:'老王', type:'发放', desc:'管理员发放', amt:'+100', coin:'💰'},
   {date:'2026-06-12', time:'21:10', user:'小明', type:'结算', desc:'猜中结算 · 烈焰拳王', amt:'+720', coin:'💎'},
-  {date:'2026-06-12', time:'21:05', user:'阿豪', type:'下注', desc:'竞猜下注 · 疾速冰球', amt:'-200', coin:'💰'},
+  {date:'2026-06-12', time:'21:05', user:'阿豪', type:'预测提交', desc:'预测提交 · 疾速冰球', amt:'-200', coin:'💰'},
   {date:'2026-06-12', time:'21:00', user:'杰哥', type:'兑换', desc:'兑换 🖈威士忌', amt:'-50', coin:'💎'},
   {date:'2026-06-11', time:'23:50', user:'阿强', type:'发放', desc:'签到领取', amt:'+100', coin:'💰'},
-  {date:'2026-06-11', time:'23:45', user:'大飞', type:'下注', desc:'竞猜下注 · 烈焰拳王', amt:'-300', coin:'💰'},
+  {date:'2026-06-11', time:'23:45', user:'大飞', type:'预测提交', desc:'预测提交 · 烈焰拳王', amt:'-300', coin:'💰'},
   {date:'2026-06-11', time:'23:30', user:'小明', type:'兑换', desc:'兑换 🏎红酒', amt:'-60', coin:'💎'},
   {date:'2026-06-11', time:'23:20', user:'老王', type:'发放', desc:'管理员发放', amt:'+50', coin:'💰'}
 ];

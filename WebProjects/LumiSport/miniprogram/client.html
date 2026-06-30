@@ -56,13 +56,13 @@
         </div>
         <div class="hotel-ad" id="hotelAd">
           <div class="hotel-ad-badge">🏨 兰陵大酒店</div>
-          <div class="hotel-ad-title">住客专享 · 入住即送1000游戏币</div>
+          <div class="hotel-ad-title">住客专享 · 入住即送1000预测币</div>
           <div class="hotel-ad-desc">前台领取实体筹码，扫码兑换即时到账</div>
         </div>
-        <div class="ad-tag" id="adTag">今夜精彩赛事 · 参与竞猜赢好礼</div>
+        <div class="ad-tag" id="adTag">今夜精彩赛事 · 参与预测赢好礼</div>
       </div>
       <div class="home-actions">
-        <button class="home-action-btn act-bet" onclick="goBetting()"><span class="ha-icon">🎯</span><span class="ha-text">竞猜</span><span class="ha-sub">观赛下注赢兑换值</span></button>
+        <button class="home-action-btn act-bet" onclick="goBetting()"><span class="ha-icon">🎯</span><span class="ha-text">预测</span><span class="ha-sub">观赛预测提交赢礼品点数</span></button>
         <button class="home-action-btn act-signup" onclick="openSignupModal()"><span class="ha-icon">✋</span><span class="ha-text">报名</span><span class="ha-sub">上场参赛排队</span></button>
       </div>
     </div>
@@ -89,16 +89,16 @@
       <div class="login-prompt" id="loginPrompt"><div class="hint-icon">🔐</div><div class="hint-text">登录后可查看个人信息</div><button class="btn btn-primary" onclick="showLogin()" style="background:#07c160;">🔽 一键登录</button></div>
       <div class="profile-card hidden" id="profileCard">
         <div class="profile-top"><div class="profile-avatar">👁</div><div class="profile-info"><div class="profile-nick-row"><div class="profile-nick-block"><span class="profile-nick">战神阿飞</span><span class="profile-store" id="profileStoreName">🏡 兰陵酒吧</span></div><button type="button" class="profile-scan-btn" onclick="openExchangeScanModal()" title="扫一扫兑换" aria-label="扫一扫兑换"><span class="profile-scan-icon"></span></button></div><div class="profile-uid">ID: Lumi_0821</div></div></div>
-        <div class="qr-section"><div class="qr-box" id="qrBox2"><div class="qr-inner"></div><div class="qr-blur" id="qrBlurMine"></div></div><p class="qr-tip">兑换请出示此码</p></div>
+        <div class="qr-section"><div class="qr-box" id="qrBox2"><div class="qr-inner"></div><div class="qr-blur" id="qrBlurMine"></div></div><p class="qr-tip">领取预测币请出示此码</p></div>
       </div>
-      <div class="menu-btn hidden" id="menuBet" onclick="goSub('betHistory')"><span class="menu-left">📵 竞猜记录</span><span class="menu-arrow">→</span></div>
+      <div class="menu-btn hidden" id="menuBet" onclick="goSub('betHistory')"><span class="menu-left">📵 预测记录</span><span class="menu-arrow">→</span></div>
       <div class="menu-btn hidden" id="menuBattle" onclick="goSub('battleHistory')"><span class="menu-left">⚔️ 比赛记录</span><span class="menu-arrow">→</span></div>
       <div class="menu-btn hidden" id="menuExchange" onclick="goSub('exchangeHistory')"><span class="menu-left">📦 兑换记录</span><span class="menu-arrow">→</span></div>
       <button class="logout-btn hidden" id="logoutBtn" onclick="doLogout()">退出登录</button>
     </div>
     <div class="page" id="page-clientExchange"><div class="section-title" style="color:#fff;">📦 兑换商品</div><div id="clientExchangeBody"></div></div>
     <div class="page" id="page-exchangeHistory"><div class="section-title">兑换记录</div><div id="exchangeHistoryList"></div></div>
-    <div class="page" id="page-betHistory"><div class="rank-card" id="prophetCard"></div><div class="section-title">竞猜记录</div><div id="betHistoryList"></div></div>
+    <div class="page" id="page-betHistory"><div class="rank-card" id="prophetCard"></div><div class="section-title">预测记录</div><div id="betHistoryList"></div></div>
     <div class="page" id="page-battleHistory"><div class="section-title">比赛记录</div><div class="battle-item"><div class="battle-top"><span style="font-weight:600;">⚔️ 雷霆击剑 · 雷霆击剑厅</span><span class="result-win">🎳 胜</span></div><div class="battle-detail">📅 2026-06-12 &nbsp; 🕐 20:30 &nbsp;|&nbsp; 🔴 本人 vs 🔵 <span class="player-nick-link" onclick="showPlayerStats('疾风小刀')">疾风小刀</span> &nbsp;|&nbsp; 积分 +24</div></div><div class="battle-item"><div class="battle-top"><span style="font-weight:600;">🔥 烈焰拳王 · 烈焰拳王厅</span><span class="result-lose">📃 负</span></div><div class="battle-detail">📅 2026-06-12 &nbsp; 🕐 19:15 &nbsp;|&nbsp; 🔴 本人 vs 🔵 <span class="player-nick-link" onclick="showPlayerStats('深海巨鲨')">深海巨鲨</span> &nbsp;|&nbsp; 积分 -18</div></div><div class="battle-item"><div class="battle-top"><span style="font-weight:600;">🏒 疾速冰球 · 疾速冰球厅</span><span class="result-win">🎳 胜</span></div><div class="battle-detail">📅 2026-06-11 &nbsp; 🕐 18:00 &nbsp;|&nbsp; 🔵 本人 vs 🔴 <span class="player-nick-link" onclick="showPlayerStats('荒野狼王')">荒野狼王</span> &nbsp;|&nbsp; 积分 +30</div></div></div>
   </div>
   <div class="tab-bar">

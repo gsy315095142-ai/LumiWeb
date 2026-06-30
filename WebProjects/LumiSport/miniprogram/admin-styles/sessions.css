@@ -1,4 +1,4 @@
-/* 管理员端 - 报名队列 · 对阵 · 竞猜 · 场次流程 */
+/* 管理员端 - 报名队列 · 对阵 · 预测 · 场次流程 */
 .reg-player { display:flex; align-items:center; padding:8px 0; border-bottom:1px solid var(--border); gap:8px; }
 .reg-player:last-child { border-bottom:none; }
 .reg-player .info { flex:1; }
@@ -159,3 +159,15 @@
 .warmup-dot{width:8px;height:8px;border-radius:50%;background:rgba(100,116,139,0.35);border:1px solid rgba(148,163,184,0.4);flex-shrink:0;box-sizing:border-box}
 .warmup-dot.done{background:rgba(16,185,129,0.85);border-color:#34d399}
 .warmup-dot.current{background:rgba(251,146,60,0.9);border-color:#fdba74;box-shadow:0 0 6px rgba(251,146,60,0.55)}
+
+/* ===== 实时支持度共用进度条（步骤4 预测中） ===== */
+.support-bar-section { margin: 4px 0; }
+.support-bar-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; font-size:0.78em; font-weight:600; color:#fff; }
+.support-refresh-tag { font-size:0.68em; color:var(--accent2); background:rgba(124,58,237,0.12); padding:2px 8px; border-radius:10px; font-weight:400; animation:support-pulse 2s ease-in-out infinite; }
+@keyframes support-pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+.support-bar-track { position:relative; height:34px; background:rgba(255,255,255,0.04); border-radius:10px; overflow:hidden; border:1px solid var(--border); }
+.support-bar-fill { position:absolute; top:0; height:100%; display:flex; align-items:center; min-width:0; transition:width 0.5s ease; }
+.support-bar-red { left:0; background:linear-gradient(90deg, rgba(239,68,68,0.3), rgba(239,68,68,0.55)); border-radius:10px 0 0 10px; justify-content:flex-start; padding-left:8px; }
+.support-bar-blue { right:0; background:linear-gradient(270deg, rgba(59,130,246,0.3), rgba(59,130,246,0.55)); border-radius:0 10px 10px 0; justify-content:flex-end; padding-right:8px; }
+.support-pct-text { font-size:0.72em; font-weight:700; color:#fff; text-shadow:0 1px 3px rgba(0,0,0,0.5); white-space:nowrap; }
+.support-bar-legend { display:flex; justify-content:space-between; margin-top:6px; font-size:0.7em; font-weight:600; }

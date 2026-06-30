@@ -1,9 +1,9 @@
 /**
- * LumiSport 客户端 - 竞猜/报名 入口与初始化
- * 依赖：客户端.js + 客户端-竞猜-*.js
+ * LumiSport 客户端 - 预测/报名 入口与初始化
+ * 依赖：客户端.js + 客户端-预测-*.js
  */
 
-// 首页入口：竞猜跳转页 / 报名弹窗
+// 首页入口：预测跳转页 / 报名弹窗
 function goBetting() {
   if (!isLoggedIn) { window._pendingHome = 'betting'; if (typeof showLogin === 'function') showLogin(); return; }
   if (typeof goSub === 'function') goSub('betting');

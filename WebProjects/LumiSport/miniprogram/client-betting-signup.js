@@ -110,7 +110,7 @@ function toggleSignup() {
     var info = signupInfo[selectedZone];
     if (!info) { toastMsg('当前大厅暂无可报名场次'); return; }
     var fee = info.fee || 0;
-    if (fee > 0 && myGameCoin < fee) { toastMsg('游戏币余额不足，报名需 ' + fee + ' 💰'); return; }
+    if (fee > 0 && myGameCoin < fee) { toastMsg('预测币余额不足，报名需 ' + fee + ' 💰'); return; }
     if (fee > 0 && typeof showConfirm === 'function') {
       showConfirm('报名「' + info.game + '」需支付报名费 ' + fee + ' 💰（当前余额 ' + myGameCoin.toLocaleString() + ' 💰），确认报名？', doSignup);
     } else {
@@ -124,7 +124,7 @@ function doSignup() {
   var info = signupInfo[zone];
   if (!info) { toastMsg('当前大厅暂无可报名场次'); return; }
   var fee = info.fee || 0;
-  if (myGameCoin < fee) { toastMsg('游戏币余额不足，报名需 ' + fee + ' 💰'); return; }
+  if (myGameCoin < fee) { toastMsg('预测币余额不足，报名需 ' + fee + ' 💰'); return; }
   if (!signupQueues[zone]) signupQueues[zone] = [];
   var q = signupQueues[zone];
   var exists = q.some(function (p) { return p.name === '本人'; });

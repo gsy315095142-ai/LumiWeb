@@ -1,5 +1,5 @@
 /**
- * LumiSport 客户端 - 竞猜记录 / 预言家段位 / 兑换记录
+ * LumiSport 客户端 - 预测记录 / 预言家段位 / 兑换记录
  */
 
 function getMyBet(mid, side) {
@@ -9,7 +9,7 @@ function getMyBet(mid, side) {
 
 function myBetTag(mid, side) {
   var amt = getMyBet(mid, side);
-  return amt > 0 ? '<div class="my-bet-tag">已下注 ' + amt + ' 💰</div>' : '';
+  return amt > 0 ? '<div class="my-bet-tag">已预测提交 ' + amt + ' 💰</div>' : '';
 }
 
 function renderBetHistory() {
@@ -37,7 +37,7 @@ function renderBetHistory() {
     if (next) { pct = Math.min(100, Math.round(total / next.min * 100)); note = '距' + next.name + '还差 ' + (next.min - total) + ' 场'; }
     else { pct = 100; note = '🏆 已达最高段位'; }
     cardEl.innerHTML = '<div class="rank-icon">' + cur.icon + '</div><div class="rank-name">' + cur.name + '</div>'
-      + '<div class="rank-note" style="margin-top:6px;">竞猜 ' + total + ' 场 · 猜中 ' + wins + ' 场 · 胜率 ' + rate + '%</div>'
+      + '<div class="rank-note" style="margin-top:6px;">预测 ' + total + ' 场 · 猜中 ' + wins + ' 场 · 胜率 ' + rate + '%</div>'
       + '<div class="rank-bar"><div class="rank-fill" style="width:' + pct + '%;"></div></div>'
       + '<div class="rank-note">' + note + '</div>';
   }

@@ -1,5 +1,5 @@
 /**
- * 管理员端扫码 - 弹窗内发放游戏币
+ * 管理员端扫码 - 弹窗内发放预测币
  */
 
 function renderGiveContent(ct) {
@@ -48,14 +48,20 @@ function onCustomGive() {
 function confirmGiveCoin() {
   if (giveIsCustom) {
     var v = parseInt(document.getElementById('customGiveAmt').value) || 0;
-    if (v < 1) return toastMsg('请输入有效的游戏币数量');
+    if (v < 1) return toastMsg('请输入有效的预测币数量');
     giveCoinAmt = v;
   }
   if (!giveCoinAmt) return toastMsg('请选择或输入发放金额');
   var reason = document.getElementById('giveReason').value;
   var note = document.getElementById('giveReasonNote').value.trim();
   var desc = reason ? (reason + (note ? '(' + note + ')' : '')) : '';
-  toastMsg('已发放 ' + giveCoinAmt + ' 游戏币给 ' + scannedUser.name + (desc ? ' · ' + desc : ''));
+  var userName = scannedUser.name;
+  var amt = giveCoinAmt;
+  toastMsg('已发放 ' + amt + ' 预测币给 ' + userName + (desc ? ' · ' + desc : ''));
+
+  // 发放成功后自动加入匹配报名玩家池（积分以发放金额模拟）
+  addToGrantedPool(userName, amt, amt);
+
   document.getElementById('scanAction').value = '';
   document.getElementById('scanActionContent').innerHTML = '';
   giveCoinAmt = 0;

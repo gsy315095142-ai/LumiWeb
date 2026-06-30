@@ -70,7 +70,7 @@
   .zone-row { display:flex; justify-content:center; }
   .zone-select-big { font-size:1.05em; font-weight:700; color:#fff; padding-top:8px; padding-bottom:8px; padding-right:30px; background-color:rgba(255,255,255,0.08); }
 
-  /* 首页 竞猜/报名 入口大按钮 */
+  /* 首页 预测/报名 入口大按钮 */
   .home-actions { display:flex; gap:12px; margin-top:14px; }
   .home-action-btn { flex:1; display:flex; flex-direction:column; align-items:center; gap:4px; padding:20px 12px; border-radius:16px; border:none; cursor:pointer; color:#fff; }
   .home-action-btn .ha-icon { font-size:1.8em; }

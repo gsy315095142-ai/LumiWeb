@@ -23,9 +23,9 @@ function navigateTo(page, title) {
   if(typeof updateCoinHudVisibility==='function')updateCoinHudVisibility();
 }
 function switchTab(t){pageStack=[t];var titles={home:'🏟️ LumiSport',mine:'👤 我的'};navigateTo(t,titles[t])}
-function goSub(s){pageStack.push(s);var titles={betHistory:'📋 竞猜记录',battleHistory:'⚔️ 比赛记录',betting:'🎯 竞猜',exchangeHistory:'📦 兑换记录',clientExchange:'📦 兑换商品'};navigateTo(s,titles[s])}
+function goSub(s){pageStack.push(s);var titles={betHistory:'📋 预测记录',battleHistory:'⚔️ 比赛记录',betting:'🎯 预测',exchangeHistory:'📦 兑换记录',clientExchange:'📦 兑换商品'};navigateTo(s,titles[s])}
 function goClientExchange(){ goSub('clientExchange'); }
-function goBack(){if(pageStack.length<=1)return;pageStack.pop();var p=pageStack[pageStack.length-1];var titles={home:'🏟️ LumiSport',mine:'👤 我的',betHistory:'📋 竞猜记录',battleHistory:'⚔️ 比赛记录',betting:'🎯 竞猜',exchangeHistory:'📦 兑换记录',clientExchange:'📦 兑换商品'};navigateTo(p,titles[p])}
+function goBack(){if(pageStack.length<=1)return;pageStack.pop();var p=pageStack[pageStack.length-1];var titles={home:'🏟️ LumiSport',mine:'👤 我的',betHistory:'📋 预测记录',battleHistory:'⚔️ 比赛记录',betting:'🎯 预测',exchangeHistory:'📦 兑换记录',clientExchange:'📦 兑换商品'};navigateTo(p,titles[p])}
 function showLogin(){document.getElementById('loginModal').classList.remove('hidden')}
 function doLogin(){
   isLoggedIn=true;document.getElementById('loginModal').classList.add('hidden');
@@ -67,8 +67,8 @@ function closeConfirm(ok){document.getElementById('confirmModal').classList.add(
 
 function showCoinHelp(type){
   var t=document.getElementById('coinHelpTitle'),c=document.getElementById('coinHelpContent');
-  if(type==='coin'){t.innerHTML='💰 游戏币说明';c.innerHTML='<b>获得方式</b><br>• 管理员发放<br>• 活动赠送<br><br><b>消耗途径</b><br>• 参与竞猜下注（猜中不返还）<br>• 报名支付费用'}
-  else{t.innerHTML='💎 兑换值说明';c.innerHTML='<b>获得方式</b><br>• 竞猜猜中奖励<br>• 活动赠送<br><br><b>消耗途径</b><br>• 兑换门店商品<br>• 兑换限定道具'}
+  if(type==='coin'){t.innerHTML='💰 预测币说明';c.innerHTML='<b>获得方式</b><br>• 管理员发放<br>• 活动赠送<br><br><b>消耗途径</b><br>• 参与预测提交（猜中不返还）<br>• 报名支付费用'}
+  else{t.innerHTML='💎 礼品点数说明';c.innerHTML='<b>获得方式</b><br>• 预测命中奖励<br>• 活动赠送<br><br><b>消耗途径</b><br>• 兑换门店商品<br>• 兑换限定道具'}
   document.getElementById('coinHelpModal').classList.remove('hidden');
 }
 

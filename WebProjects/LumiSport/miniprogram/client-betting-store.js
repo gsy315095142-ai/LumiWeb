@@ -19,7 +19,7 @@ function updateProfileStoreDisplay() {
   if (el && typeof clientStore !== 'undefined') el.textContent = clientStore;
 }
 
-// 同步所有「门店名/大厅下拉」副本（首页 + 竞猜页共用）
+// 同步所有「门店名/大厅下拉」副本（首页 + 预测页共用）
 function syncStoreChrome() {
   var vns = document.querySelectorAll('.venue-name');
   for (var i = 0; i < vns.length; i++) vns[i].textContent = clientStore;

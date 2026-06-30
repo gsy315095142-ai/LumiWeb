@@ -18,15 +18,11 @@
 .toggle-row { display:flex; align-items:center; justify-content:space-between; padding:10px 0; }
 .toggle-row span { color:#fff; }
 
-/* 报名弹窗（客户端 / 管理员端玩家视图共用） */
+/* 报名弹窗 */
 .signup-modal { text-align:left; max-height:80vh; overflow-y:auto; color:#fff; }
 .signup-modal-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
 .signup-modal-head h3 { margin:0; color:#fff; text-align:left; }
-.signup-modal .sp-game,
-.signup-modal .sp-lbl,
-.signup-modal .sp-q-time,
-.signup-modal .queue-title,
-.signup-modal .queue-empty { color:rgba(255,255,255,0.85); }
+.signup-modal .sp-game,.signup-modal .sp-lbl,.signup-modal .sp-q-time,.signup-modal .queue-title,.signup-modal .queue-empty { color:rgba(255,255,255,0.85); }
 .signup-modal .player-nick-link { color:#fff; }
 .signup-modal .queue-item.signup-queue-me { background:rgba(7,193,96,0.08); border-radius:8px; padding:7px 6px; margin:0 -6px; }
 .modal-close { cursor:pointer; color:rgba(255,255,255,0.6); font-size:1.1em; padding:0 4px; }
@@ -43,7 +39,7 @@
 .exchange-scan-modal { text-align:left; max-height:80vh; overflow-y:auto; color:#fff; }
 .exchange-scan-modal .signup-modal-head h3 { color:#fff; text-align:left; }
 
-/* 报名排队列表（弹窗内，不依赖 sessions.css） */
+/* 报名排队列表 */
 .signup-modal .queue-title { font-size:0.72em; color:rgba(255,255,255,0.85); margin:14px 0 6px; border-top:1px solid var(--border); padding-top:10px; }
 .signup-modal .queue-list { display:flex; flex-direction:column; }
 .signup-modal .queue-item { display:flex; align-items:center; gap:8px; padding:7px 0; border-bottom:1px solid var(--border); }
@@ -63,3 +59,55 @@
 .exchange-success-modal .es-cost { font-size:0.92em; color:#ddd; margin-bottom:8px; }
 .exchange-success-modal .es-hint { font-size:0.72em; color:var(--muted); line-height:1.5; }
 
+/* 匹配报名 - 模式切换 */
+.signup-mode-toggle { display: flex; gap: 8px; margin-bottom: 12px; }
+.signup-mode-toggle .mode-btn { flex: 1; padding: 10px 0; border-radius: 10px; border: 1px solid var(--border); background: rgba(255,255,255,0.04); color: var(--muted); font-size: 0.85em; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.signup-mode-toggle .mode-btn.active { background: linear-gradient(135deg, rgba(124,58,237,0.25), rgba(167,139,250,0.15)); border-color: var(--accent2); color: #fff; }
+
+/* 玩家池 */
+.match-pool-info { display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: rgba(255,255,255,0.04); border-radius: 10px; border: 1px solid var(--border); margin-bottom: 8px; }
+.match-pool-info .pool-label { font-size: 0.8em; font-weight: 600; color: #c4b5fd; }
+.match-pool-info .pool-count { font-size: 0.78em; color: #fbbf24; font-weight: 700; }
+.match-pool-list { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; max-height: 120px; overflow-y: auto; }
+.match-pool-list .pool-tag { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; background: rgba(124,58,237,0.12); border: 1px solid rgba(124,58,237,0.25); border-radius: 20px; font-size: 0.72em; color: #fff; }
+.match-pool-list .pool-tag small { color: var(--muted); font-weight: 500; }
+.match-empty-pool { text-align: center; padding: 16px 8px; color: var(--muted); font-size: 0.78em; background: rgba(255,255,255,0.02); border-radius: 10px; border: 1px dashed var(--border); margin-bottom: 12px; }
+
+/* 轮播动画 */
+.match-lottery { text-align: center; padding: 24px 0 16px; }
+.match-lottery .lottery-text { font-size: 1.3em; font-weight: 800; color: #fbbf24; min-height: 40px; line-height: 40px; letter-spacing: 2px; text-shadow: 0 0 20px rgba(251,191,36,0.4); animation: lotteryPulse 0.3s ease-in-out infinite alternate; }
+@keyframes lotteryPulse { from { text-shadow: 0 0 12px rgba(251,191,36,0.3); } to { text-shadow: 0 0 24px rgba(251,191,36,0.6); } }
+
+/* 匹配结果 */
+.match-result-area { margin-top: 12px; padding: 14px; background: linear-gradient(135deg, rgba(124,58,237,0.08), rgba(251,191,36,0.05)); border: 1px solid var(--border); border-radius: 14px; }
+.match-result-area.hidden { display: none; }
+.match-vs-row { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 10px; }
+.match-player-card { flex: 1; text-align: center; padding: 12px 8px; border-radius: 12px; border: 1px solid var(--border); background: rgba(255,255,255,0.03); }
+.match-player-red { border-color: rgba(239,68,68,0.35); background: rgba(239,68,68,0.06); }
+.match-player-blue { border-color: rgba(59,130,246,0.35); background: rgba(59,130,246,0.06); }
+.match-player-side { font-size: 0.78em; font-weight: 700; margin-bottom: 6px; }
+.match-player-red .match-player-side { color: #ef4444; }
+.match-player-blue .match-player-side { color: #3b82f6; }
+.match-player-name { font-size: 0.9em; font-weight: 700; color: #fff; margin-bottom: 8px; word-break: break-all; }
+.match-vs { font-size: 1.3em; font-weight: 900; color: var(--accent); text-shadow: 0 0 10px rgba(251,191,36,0.3); flex-shrink: 0; }
+.rematch-btn { font-size: 0.65em; padding: 3px 10px; border: 1px solid var(--border); color: var(--muted); }
+.rematch-btn:hover { border-color: var(--accent2); color: #fff; }
+
+/* 竞猜倒计时 */
+.countdown-bar-wrap { width: 100%; height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; margin: 8px 0 4px; overflow: hidden; }
+.countdown-bar { height: 100%; border-radius: 3px; transition: width 1s linear, background 0.5s; }
+.countdown-text { text-align: center; font-size: 0.85em; font-weight: 700; color: #fbbf24; margin-bottom: 8px; }
+.countdown-expired { text-align: center; font-size: 0.9em; font-weight: 700; color: #ef4444; padding: 10px 0; }
+.btn-accent { background: linear-gradient(135deg, #f59e0b, #fbbf24); color: #1a1a2e; border: none; font-weight: 700; }
+
+/* 可折叠已报名玩家列表 */
+.player-list-fold { margin-top: 10px; border-top: 1px solid var(--border); }
+.player-list-head { padding: 8px 4px; font-size: 0.78em; color: #c4b5fd; font-weight: 600; cursor: pointer; user-select: none; display: flex; align-items: center; gap: 6px; }
+.player-list-head:hover { color: #fff; }
+.player-list-body { padding: 4px 0; max-height: 200px; overflow-y: auto; }
+.player-list-item { display: flex; align-items: center; gap: 6px; padding: 4px 6px; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 0.75em; }
+.player-list-item:last-child { border-bottom: none; }
+.pli-idx { color: var(--muted); width: 20px; flex-shrink: 0; }
+.pli-name { color: #fff; flex: 1; }
+.pli-time { color: var(--muted); font-size: 0.85em; }
+.player-list-empty { text-align: center; padding: 10px; color: var(--muted); font-size: 0.72em; }

@@ -1,5 +1,5 @@
 /**
- * LumiSport 客户端 - 竞猜下注 UI 与逻辑
+ * LumiSport 客户端 - 预测提交 UI 与逻辑
  */
 
 function initMatchState() {
@@ -47,29 +47,29 @@ function renderBettingMatches() {
     return true;
   });
   if (filtered.length === 0) {
-    container.innerHTML = '<div style="text-align:center;padding:40px 0;color:var(--muted);font-size:0.85em;">📭 当前区域暂无竞猜中的比赛</div>';
+    container.innerHTML = '<div style="text-align:center;padding:40px 0;color:var(--muted);font-size:0.85em;">📭 当前区域暂无预测中的比赛</div>';
     return;
   }
   var html = '';
   filtered.forEach(function (m) {
     var st = matchState[m.id] || { side: null, amt: 0, isCustom: false, placed: false };
-    html += '<div class="match-card" data-match="' + m.id + '"><div class="match-header"><span class="match-label">⚡ 当前场次</span><span class="countdown cd-bet">🟡 竞猜中</span></div><div class="match-game">' + m.game + '</div><div class="match-meta">🕐 <span>' + m.time + '</span> &nbsp;·&nbsp; 📷 <span>' + m.zone + '</span></div><div class="vs-row">';
-    html += '<div class="player-box red" onclick="selectBet(this,\'red\',\'' + m.id + '\')"><div class="player-avatar red-av">🔴</div><div class="player-nick player-nick-link" onclick="event.stopPropagation();showPlayerStats(\'' + m.red + '\')">' + m.red + '</div><div class="odds-tag odds-red">赔率 ' + m.redOdds.toFixed(2) + '</div></div><div class="vs-divider">VS</div>';
-    html += '<div class="player-box blue" onclick="selectBet(this,\'blue\',\'' + m.id + '\')"><div class="player-avatar blue-av">🔵</div><div class="player-nick player-nick-link" onclick="event.stopPropagation();showPlayerStats(\'' + m.blue + '\')">' + m.blue + '</div><div class="odds-tag odds-blue">赔率 ' + m.blueOdds.toFixed(2) + '</div></div></div>';
+    html += '<div class="match-card" data-match="' + m.id + '"><div class="match-header"><span class="match-label">⚡ 当前场次</span><span class="countdown cd-bet">🟡 预测中</span></div><div class="match-game">' + m.game + '</div><div class="match-meta">🕐 <span>' + m.time + '</span> &nbsp;·&nbsp; 📷 <span>' + m.zone + '</span></div><div class="vs-row">';
+    html += '<div class="player-box red" onclick="selectBet(this,\'red\',\'' + m.id + '\')"><div class="player-avatar red-av">🔴</div><div class="player-nick player-nick-link" onclick="event.stopPropagation();showPlayerStats(\'' + m.red + '\')">' + m.red + '</div><div class="odds-tag odds-red">奖励系数 ' + m.redOdds.toFixed(2) + '</div></div><div class="vs-divider">VS</div>';
+    html += '<div class="player-box blue" onclick="selectBet(this,\'blue\',\'' + m.id + '\')"><div class="player-avatar blue-av">🔵</div><div class="player-nick player-nick-link" onclick="event.stopPropagation();showPlayerStats(\'' + m.blue + '\')">' + m.blue + '</div><div class="odds-tag odds-blue">奖励系数 ' + m.blueOdds.toFixed(2) + '</div></div></div>';
     if (st.placed) {
       var pOdds = st.side === 'red' ? m.redOdds : m.blueOdds;
       var pWho = st.side === 'red' ? ('🔴 ' + m.red) : ('🔵 ' + m.blue);
       var pTotal = Math.floor(st.amt * pOdds);
-      html += '<div class="bet-placed"><div class="bet-placed-row">✅ 已下注 ' + pWho + '</div>';
-      html += '<div class="bet-placed-amt">下注 ' + st.amt + ' 💰 · 赔率 ' + pOdds.toFixed(2) + 'x</div>';
+      html += '<div class="bet-placed"><div class="bet-placed-row">✅ 已预测提交 ' + pWho + '</div>';
+      html += '<div class="bet-placed-amt">预测提交 ' + st.amt + ' 💰 · 奖励系数 ' + pOdds.toFixed(2) + 'x</div>';
       html += '<div class="bet-placed-profit">猜中可获得：' + pTotal + ' 💎</div>';
-      html += '<button class="btn bet-cancel-btn" onclick="cancelBet(\'' + m.id + '\')">取消下注</button></div></div>';
+      html += '<button class="btn bet-cancel-btn" onclick="cancelBet(\'' + m.id + '\')">取消预测提交</button></div></div>';
       return;
     }
-    html += '<div class="bet-section"><label>💰 下注（游戏币）<span style="font-size:0.78em;color:var(--muted);"> · 单次上限 ' + MAX_BET + '</span></label>';
+    html += '<div class="bet-section"><label>💰 预测提交（预测币）<span style="font-size:0.78em;color:var(--muted);"> · 单次上限 ' + MAX_BET + '</span></label>';
     html += '<div class="bet-chips" id="chips-' + m.id + '"><span class="bet-chip" onclick="setChipBet(\'' + m.id + '\',10)">10</span><span class="bet-chip" onclick="setChipBet(\'' + m.id + '\',50)">50</span><span class="bet-chip" onclick="setChipBet(\'' + m.id + '\',100)">100</span><span class="bet-chip" onclick="setChipBet(\'' + m.id + '\',' + MAX_BET + ')">' + MAX_BET + '</span><span class="bet-chip" onclick="useCustom(\'' + m.id + '\')">自定义</span></div>';
     html += '<div id="customArea-' + m.id + '" class="hidden"><input class="bet-input" id="customInput-' + m.id + '" type="number" placeholder="手动输入金额（10~' + MAX_BET + '）" min="10" max="' + MAX_BET + '" step="1" oninput="onCustomInput(\'' + m.id + '\')"><div class="bet-hint" id="hint-' + m.id + '"></div></div>';
-    html += '<button class="btn" style="margin-top:8px;width:100%;background:rgba(255,255,255,0.06);color:#999;border:1px solid var(--border);" id="betBtn-' + m.id + '" disabled onclick="placeBet(\'' + m.id + '\')">🎉 确认下注</button></div></div>';
+    html += '<button class="btn" style="margin-top:8px;width:100%;background:rgba(255,255,255,0.06);color:#999;border:1px solid var(--border);" id="betBtn-' + m.id + '" disabled onclick="placeBet(\'' + m.id + '\')">🎉 确认预测提交</button></div></div>';
   });
   container.innerHTML = html;
   Object.keys(matchState).forEach(function (mid) {
@@ -159,9 +159,9 @@ function onCustomInput(mid) {
   if (iv > MAX_BET) {
     inp.value = MAX_BET;
     iv = MAX_BET;
-    hint.textContent = '单次最高下注 ' + MAX_BET + ' 游戏币，已自动调整';
+    hint.textContent = '单次最高预测提交 ' + MAX_BET + ' 预测币，已自动调整';
   } else if (iv < 10 && inp.value) {
-    hint.textContent = '最低下注 10 游戏币';
+    hint.textContent = '最低预测提交 10 预测币';
   } else {
     hint.textContent = '';
   }
@@ -184,13 +184,13 @@ function doPlaceBet(mid) {
   if (!s.side) return toastMsg('请先选择一方选手');
   if (s.isCustom) {
     var v = parseInt(document.getElementById('customInput-' + mid).value) || 0;
-    if (v < 10) return toastMsg('最低下注 10 游戏币');
-    if (v > MAX_BET) return toastMsg('单次最高下注 ' + MAX_BET + ' 游戏币');
+    if (v < 10) return toastMsg('最低预测提交 10 预测币');
+    if (v > MAX_BET) return toastMsg('单次最高预测提交 ' + MAX_BET + ' 预测币');
     s.amt = v;
   }
-  if (!s.amt) return toastMsg('请选择或输入下注金额');
-  if (s.amt > MAX_BET) return toastMsg('单次最高下注 ' + MAX_BET + ' 游戏币');
-  if (typeof myGameCoin !== 'undefined' && myGameCoin < s.amt) return toastMsg('游戏币余额不足');
+  if (!s.amt) return toastMsg('请选择或输入预测提交金额');
+  if (s.amt > MAX_BET) return toastMsg('单次最高预测提交 ' + MAX_BET + ' 预测币');
+  if (typeof myGameCoin !== 'undefined' && myGameCoin < s.amt) return toastMsg('预测币余额不足');
   if (typeof myGameCoin !== 'undefined') {
     myGameCoin -= s.amt;
     if (typeof updateAllCoinDisplays === 'function') updateAllCoinDisplays();
@@ -200,7 +200,7 @@ function doPlaceBet(mid) {
   myBets[mid][s.side] += s.amt;
   s.placed = true;
   renderBettingMatches();
-  toastMsg('✅ 下注成功');
+  toastMsg('✅ 预测提交成功');
 }
 
 function cancelBet(mid) {
@@ -213,5 +213,5 @@ function cancelBet(mid) {
   matchState[mid] = { side: null, amt: 0, isCustom: false, placed: false };
   if (myBets[mid]) myBets[mid] = { red: 0, blue: 0 };
   renderBettingMatches();
-  toastMsg('已取消下注');
+  toastMsg('已取消预测提交');
 }

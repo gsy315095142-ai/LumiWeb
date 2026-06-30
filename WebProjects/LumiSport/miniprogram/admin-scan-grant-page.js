@@ -1,5 +1,5 @@
 /**
- * 管理员端扫码 - 发放游戏币专属页（adminGiveCoin Tab）
+ * 管理员端扫码 - 发放预测币专属页（adminGiveCoin Tab）
  */
 
 function renderAdminGiveCoin() {
@@ -7,9 +7,9 @@ function renderAdminGiveCoin() {
   if (!el) return;
   var h = '';
   if (!givePageUser) {
-    h += '<div class="card give-scan-card"><div class="give-scan-frame"><div class="give-scan-icon">📲</div><p style="color:var(--muted);font-size:0.82em;margin:10px 0 16px;text-align:center;">扫描用户「我的」页身份码<br>确认后发放游戏币</p><button class="btn btn-purple btn-block" onclick="scanGivePageUser()">📲 扫描用户身份码</button></div></div>';
+    h += '<div class="card give-scan-card"><div class="give-scan-frame"><div class="give-scan-icon">📲</div><p style="color:var(--muted);font-size:0.82em;margin:10px 0 16px;text-align:center;">扫描用户「我的」页身份码<br>确认后发放预测币</p><button class="btn btn-purple btn-block" onclick="scanGivePageUser()">📲 扫描用户身份码</button></div></div>';
   } else {
-    h += '<div class="card"><h3>👤 用户信息</h3><div class="scan-user-info" style="margin:0;"><div class="avatar">👁</div><div class="name">' + givePageUser.name + '</div><div class="scan-user-coins"><span style="color:#fbbf24;">💰 游戏币 <strong>' + givePageUser.gameCoin + '</strong></span><span style="color:#c4b5fd;">💎 兑换值 <strong>' + givePageUser.exCoin + '</strong></span></div></div><button class="btn btn-outline btn-sm btn-block" style="margin-top:10px;color:#fff;" onclick="rescanGivePageUser()">🔄 重新扫描</button></div>';
+    h += '<div class="card"><h3>👤 用户信息</h3><div class="scan-user-info" style="margin:0;"><div class="avatar">👁</div><div class="name">' + givePageUser.name + '</div><div class="scan-user-coins"><span style="color:#fbbf24;">💰 预测币 <strong>' + givePageUser.gameCoin + '</strong></span><span style="color:#c4b5fd;">💎 礼品点数 <strong>' + givePageUser.exCoin + '</strong></span></div></div><button class="btn btn-outline btn-sm btn-block" style="margin-top:10px;color:#fff;" onclick="rescanGivePageUser()">🔄 重新扫描</button></div>';
     h += '<div class="card"><h3>💰 发放金额</h3><div class="bet-chips" id="givePageChips"><span class="bet-chip" onclick="setGivePageCoin(100)">100</span><span class="bet-chip" onclick="setGivePageCoin(200)">200</span><span class="bet-chip" onclick="setGivePageCoin(500)">500</span><span class="bet-chip" onclick="setGivePageCoin(1000)">1000</span><span class="bet-chip" onclick="useCustomGivePage()">自定义</span></div>';
     h += '<div id="givePageCustomArea" class="hidden" style="margin-top:8px;"><input class="input" id="givePageCustomAmt" type="number" placeholder="手动输入金额" min="1" step="1" oninput="onCustomGivePage()"><div class="bet-hint" id="givePageHint"></div></div>';
     h += '<div style="margin-top:12px;"><label class="form-label">发放理由 <span style="color:var(--muted);">选填</span></label><select class="select" id="givePageReason"><option value="">请选择理由</option><option>酒店入住</option><option>购买套餐</option><option>活动奖励</option><option>签到奖励</option><option>新手福利</option><option>补偿发放</option><option>其他</option></select></div>';
@@ -74,7 +74,7 @@ function confirmGivePageCoin() {
   if (!givePageUser) return toastMsg('请先扫描用户身份码');
   if (givePageIsCustom) {
     var v = parseInt(document.getElementById('givePageCustomAmt').value) || 0;
-    if (v < 1) return toastMsg('请输入有效的游戏币数量');
+    if (v < 1) return toastMsg('请输入有效的预测币数量');
     givePageAmt = v;
   }
   if (!givePageAmt) return toastMsg('请选择或输入发放金额');
@@ -84,9 +84,13 @@ function confirmGivePageCoin() {
   var note = noteEl ? noteEl.value.trim() : '';
   var userName = givePageUser.name;
   var amt = givePageAmt;
-  showConfirm('确定向 ' + userName + ' 发放 ' + amt + ' 💰 游戏币吗？', function () {
+  showConfirm('确定向 ' + userName + ' 发放 ' + amt + ' 💰 预测币吗？', function () {
     var desc = reason ? (reason + (note ? '(' + note + ')' : '')) : '管理员发放';
-    toastMsg('✅ 已发放 ' + amt + ' 游戏币给 ' + userName + (reason ? ' · ' + desc : ''));
+    toastMsg('✅ 已发放 ' + amt + ' 预测币给 ' + userName + (reason ? ' · ' + desc : ''));
+
+    // 发放成功后自动加入匹配报名玩家池
+    addToGrantedPool(userName, amt, amt);
+
     givePageUser = null;
     givePageAmt = 0;
     givePageIsCustom = false;
