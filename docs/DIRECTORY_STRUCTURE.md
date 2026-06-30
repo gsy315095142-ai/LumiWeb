@@ -105,7 +105,7 @@ LumiWeb/
     │       └── events/
     │           └── mock-guessing-20260618/
     │               ├── mock-guessing-20260618.html
-    │               ├── render.bat
+    │               ├── value-calc.html         # 事件微站内嵌的数值推算副本
     │               └── ...
     │
     └── LumiMagic_Season_02/                # 魔法学院 · 第二季（占位）
@@ -322,7 +322,7 @@ docs/                 # 可选，内部文档可不传
 | `11-相关API.html` | `11-related-apis.html` |
 | `12-页脚.html` | `12-footer.html` |
 
-其余 `page-bet-parts`、`page-danmaku-parts`、`page-event-parts`、`page-mine-parts` 按同一规则：**保留序号 + 英文 kebab-case**，并更新对应 `page-*.html` 中的 `PARTS` 数组。
+其余 `page-bet-parts`、`page-danmaku-parts`、`page-mine-parts` 按同一规则：**保留序号 + 英文 kebab-case**，并更新对应 `page-*.html` 中的 `PARTS` 数组。（注：`page-event` 已改为 `page-event-p1.js … p5.js` 加载，原 `page-event-parts/` 已移除。）
 
 ---
 
