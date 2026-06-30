@@ -274,6 +274,20 @@ body {
   color: var(--text-secondary);
 }
 
+.doc-card-version {
+  flex-shrink: 0;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  color: var(--text-secondary);
+  background: var(--bg-card-hover);
+  border: 1px solid var(--card-border);
+  border-radius: 999px;
+  padding: 3px 9px;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.85;
+}
+
 .doc-card-arrow {
   flex-shrink: 0;
   color: var(--text-secondary);
@@ -348,8 +362,30 @@ body {
     <p class="project-header-desc">大空间多人竞技对战平台，支持实时赛事管理与观赛互动。这里汇集了项目相关的文档与工具入口。</p>
   </div>
 
-  <div class="section-label">文档列表</div>
   <div class="doc-list">
+
+    <div class="doc-section-label">对外展示</div>
+
+    <a href="showcase/hall-of-fame/hall-of-fame.html" class="doc-card doc-card-featured">
+      <div class="doc-card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+          <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+          <path d="M4 22h16"/>
+          <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+          <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+          <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
+        </svg>
+      </div>
+      <div class="doc-card-info">
+        <div class="doc-card-title">荣誉殿堂</div>
+        <div class="doc-card-meta">历届公司内测 · 疾速冰球 / 烈焰拳王 / 雷霆击剑冠军</div>
+      </div>
+      <div class="doc-card-version">v1.0.260630</div>
+      <div class="doc-card-arrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+    </a>
 
     <div class="doc-section-label">可交互原型</div>
 
@@ -364,6 +400,7 @@ body {
         <div class="doc-card-title">LumiSport 小程序交互原型</div>
         <div class="doc-card-meta">客户端 · 管理员端 · 竞猜报名与赛事管理</div>
       </div>
+      <div class="doc-card-version">v1.0.260630</div>
       <div class="doc-card-arrow">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </div>
@@ -389,6 +426,7 @@ body {
         <div class="doc-card-title">预测数值计算</div>
         <div class="doc-card-meta">竞猜数值实验台 · 积分 / 赔率 / 胜负链式模拟</div>
       </div>
+      <div class="doc-card-version">v1.0.260625</div>
       <div class="doc-card-arrow">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </div>
@@ -396,56 +434,22 @@ body {
 
     <div class="doc-section-label">设计 / 业务 / 文档</div>
 
-    <a href="docs/control-center/control-center.html" class="doc-card">
+    <a href="docs/optimization/registration-flow/registration-flow.html" class="doc-card">
       <div class="doc-card-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-          <polyline points="14 2 14 8 20 8"/>
-          <line x1="16" y1="13" x2="8" y2="13"/>
-          <line x1="16" y1="17" x2="8" y2="17"/>
-          <polyline points="10 9 9 9 8 9"/>
+          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          <line x1="12" y1="11" x2="12" y2="17"/>
+          <line x1="9" y1="14" x2="15" y2="14"/>
         </svg>
       </div>
       <div class="doc-card-info">
-        <div class="doc-card-title">Lumi竞技大空间小程序&服务端对接</div>
-        <div class="doc-card-meta">控制中心 · 赛事管理与观赛互动</div>
+        <div class="doc-card-title">报名与预测流程 · 迭代说明</div>
+        <div class="doc-card-meta">选手池 · 主动报名 / 随机匹配 · 预测时长 · 进度比拼</div>
       </div>
-      <div class="doc-card-arrow">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </div>
-    </a>
-
-    <a href="docs/business-flow/business-flow.html" class="doc-card">
-      <div class="doc-card-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-          <polyline points="14 2 14 8 20 8"/>
-          <line x1="16" y1="13" x2="8" y2="13"/>
-          <line x1="16" y1="17" x2="8" y2="17"/>
-          <polyline points="10 9 9 9 8 9"/>
-        </svg>
-      </div>
-      <div class="doc-card-info">
-        <div class="doc-card-title">LumiSport 业务流程说明</div>
-        <div class="doc-card-meta">筹码兑换 · 报名竞猜 · 奖品兑换</div>
-      </div>
-      <div class="doc-card-arrow">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </div>
-    </a>
-
-    <a href="docs/warmup/common-rules.html" class="doc-card">
-      <div class="doc-card-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-          <path d="M2 17l10 5 10-5"/>
-          <path d="M2 12l10 5 10-5"/>
-        </svg>
-      </div>
-      <div class="doc-card-info">
-        <div class="doc-card-title">LumiSport 热身设计</div>
-        <div class="doc-card-meta">热身流程 · 烈焰拳王 / 疾速冰球 / 雷霆击剑 / 魔法派对</div>
-      </div>
+      <div class="doc-card-version">v1.0.260630</div>
       <div class="doc-card-arrow">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </div>
@@ -465,48 +469,65 @@ body {
         <div class="doc-card-title">竞技大空间优化迭代清单</div>
         <div class="doc-card-meta">06.29 - 07.03 开发周期 · 通用全局 / 疾速冰球 / 烈焰拳王 / 雷霆击剑 / 魔法学院</div>
       </div>
+      <div class="doc-card-version">v1.0.260628</div>
       <div class="doc-card-arrow">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </div>
     </a>
 
-    <a href="docs/optimization/registration-flow/registration-flow.html" class="doc-card">
+    <a href="docs/control-center/control-center.html" class="doc-card">
       <div class="doc-card-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-          <circle cx="9" cy="7" r="4"/>
-          <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
-          <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-          <line x1="12" y1="11" x2="12" y2="17"/>
-          <line x1="9" y1="14" x2="15" y2="14"/>
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="16" y1="13" x2="8" y2="13"/>
+          <line x1="16" y1="17" x2="8" y2="17"/>
+          <polyline points="10 9 9 9 8 9"/>
         </svg>
       </div>
       <div class="doc-card-info">
-        <div class="doc-card-title">报名与预测流程 · 迭代说明</div>
-        <div class="doc-card-meta">选手池 · 主动报名 / 随机匹配 · 预测时长 · 进度比拼</div>
+        <div class="doc-card-title">Lumi竞技大空间小程序&服务端对接</div>
+        <div class="doc-card-meta">控制中心 · 赛事管理与观赛互动</div>
       </div>
+      <div class="doc-card-version">v1.0.260615</div>
       <div class="doc-card-arrow">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </div>
     </a>
 
-    <div class="doc-section-label">对外展示</div>
-
-    <a href="showcase/hall-of-fame/hall-of-fame.html" class="doc-card doc-card-featured">
+    <a href="docs/business-flow/business-flow.html" class="doc-card">
       <div class="doc-card-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
-          <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
-          <path d="M4 22h16"/>
-          <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
-          <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
-          <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="16" y1="13" x2="8" y2="13"/>
+          <line x1="16" y1="17" x2="8" y2="17"/>
+          <polyline points="10 9 9 9 8 9"/>
         </svg>
       </div>
       <div class="doc-card-info">
-        <div class="doc-card-title">荣誉殿堂</div>
-        <div class="doc-card-meta">历届公司内测 · 疾速冰球 / 烈焰拳王 / 雷霆击剑冠军</div>
+        <div class="doc-card-title">LumiSport 业务流程说明</div>
+        <div class="doc-card-meta">筹码兑换 · 报名竞猜 · 奖品兑换</div>
       </div>
+      <div class="doc-card-version">v1.0.260615</div>
+      <div class="doc-card-arrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+    </a>
+
+    <a href="docs/warmup/common-rules.html" class="doc-card">
+      <div class="doc-card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+          <path d="M2 17l10 5 10-5"/>
+          <path d="M2 12l10 5 10-5"/>
+        </svg>
+      </div>
+      <div class="doc-card-info">
+        <div class="doc-card-title">LumiSport 热身设计</div>
+        <div class="doc-card-meta">热身流程 · 烈焰拳王 / 疾速冰球 / 雷霆击剑 / 魔法派对</div>
+      </div>
+      <div class="doc-card-version">v1.0.260615</div>
       <div class="doc-card-arrow">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </div>
