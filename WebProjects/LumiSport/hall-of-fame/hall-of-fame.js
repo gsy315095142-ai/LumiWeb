@@ -4,23 +4,15 @@
   const dotsEl = document.getElementById('dots');
   const prevBtn = document.getElementById('prevBtn');
   const nextBtn = document.getElementById('nextBtn');
-  const statsEl = document.getElementById('stats-bar');
   if (!track || typeof EDITIONS === 'undefined' || typeof GAME_TYPES === 'undefined') return;
 
   const ROMAN = { 1: 'Ⅰ', 2: 'Ⅱ', 3: 'Ⅲ', 4: 'Ⅳ', 5: 'Ⅴ', 6: 'Ⅵ', 7: 'Ⅶ', 8: 'Ⅷ', 9: 'Ⅸ', 10: 'Ⅹ' };
+  const GAME_KEYS = Object.keys(GAME_TYPES);
 
   function hexToRgba(hex, a) {
     const n = parseInt(hex.slice(1), 16);
     return `rgba(${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255}, ${a})`;
   }
-
-  /* ===== 顶部统计 ===== */
-  const totalChampions = EDITIONS.reduce(function (sum, ed) { return sum + ed.games.length; }, 0);
-  statsEl.innerHTML = [
-    `<div class="stat-chip"><span class="num">${EDITIONS.length}</span> 届内测</div>`,
-    `<div class="stat-chip"><span class="num">${totalChampions}</span> 位项目冠军</div>`,
-    `<div class="stat-chip"><span class="num">${Object.keys(GAME_TYPES).length}</span> 大竞技玩法</div>`,
-  ].join('');
 
   /* ===== 生成每届幻灯片 ===== */
   function editionHtml(ed, isLatest) {
@@ -33,10 +25,15 @@
       const runner = ed.runners && ed.runners[gameId];
       const runnerLabel = ed.runnerLabel || '亚军';
 
+      /* 玩法在 GAME_TYPES 中的顺序即左→中→右的列位 */
+      const col = GAME_KEYS.indexOf(gameId) + 1;
+
       const vars = [
         `--game-accent:${game.accent}`,
-        `--game-bg:${hexToRgba(game.accent, 0.1)}`,
-        `--game-glow:${hexToRgba(game.accent, 0.3)}`,
+        `--game-bg:${hexToRgba(game.accent, 0.16)}`,
+        `--game-glow:${hexToRgba(game.accent, 0.7)}`,
+        `--game-glow-soft:${hexToRgba(game.accent, 0.35)}`,
+        `grid-column:${col}`,
       ].join(';');
 
       const runnerHtml = runner
@@ -73,7 +70,7 @@
             </div>
           </div>
         </div>
-        <div class="champion-cards">${cardsHtml}</div>
+        <div class="champion-cards${ed.games.length === 1 ? ' is-single' : ''}">${cardsHtml}</div>
       </div>`;
   }
 

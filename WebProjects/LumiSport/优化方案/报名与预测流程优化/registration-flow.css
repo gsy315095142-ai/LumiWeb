@@ -1,0 +1,228 @@
+/* 报名与预测流程 · 迭代说明 — 文档页扩展样式 */
+
+:root {
+  --project-color: #22D3EE;
+  --project-color-light: #67E8F9;
+  --project-color-bg: rgba(34, 211, 238, 0.1);
+  --project-color-border: rgba(34, 211, 238, 0.22);
+  --red-team: #F87171;
+  --blue-team: #60A5FA;
+}
+
+.glow-orb-1 { background: rgba(34, 211, 238, 0.07) !important; }
+.glow-orb-2 { background: rgba(124, 58, 237, 0.08) !important; }
+
+.container { padding-top: 32px; }
+
+/* ===== 章节 ===== */
+.doc-section {
+  margin-bottom: 40px;
+  animation: fadeInUp 0.8s ease both;
+}
+.doc-section--bare {
+  margin-bottom: 24px;
+}
+.doc-section:nth-of-type(1) { animation-delay: 0.28s; }
+.doc-section:nth-of-type(2) { animation-delay: 0.32s; }
+.doc-section:nth-of-type(3) { animation-delay: 0.36s; }
+.doc-section:nth-of-type(4) { animation-delay: 0.4s; }
+.doc-section:nth-of-type(5) { animation-delay: 0.44s; }
+.doc-section:nth-of-type(6) { animation-delay: 0.48s; }
+.doc-section:nth-of-type(7) { animation-delay: 0.52s; }
+.doc-section:nth-of-type(8) { animation-delay: 0.56s; }
+.doc-section:nth-of-type(9) { animation-delay: 0.6s; }
+.doc-section:nth-of-type(10) { animation-delay: 0.64s; }
+
+.section-header {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 18px; padding-bottom: 12px;
+  border-bottom: 1px solid var(--card-border);
+}
+.section-num {
+  width: 32px; height: 32px; border-radius: 9px; flex-shrink: 0;
+  background: var(--project-color-bg);
+  border: 1px solid var(--project-color-border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 800; color: var(--project-color-light);
+}
+.section-title { font-size: 18px; font-weight: 800; }
+
+.subsection-title {
+  font-size: 14px; font-weight: 700;
+  color: var(--text-secondary);
+  margin: 20px 0 12px;
+  padding-left: 10px;
+  border-left: 3px solid var(--project-color-border);
+}
+
+.section-intro {
+  font-size: 14px; line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
+.section-intro.mb-sm { margin-bottom: 14px; }
+
+.text-primary { color: var(--text-primary); }
+.text-accent { color: var(--project-color-light); }
+
+.req-list.mt { margin-top: 16px; }
+
+/* ===== 概述列表 ===== */
+.overview-list {
+  list-style: none; display: flex; flex-direction: column; gap: 10px;
+}
+.overview-list li {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 14px; line-height: 1.65; color: var(--text-secondary);
+}
+.overview-list li::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--project-color-light); flex-shrink: 0; margin-top: 8px;
+}
+
+/* ===== 需求条目 ===== */
+.req-list { display: flex; flex-direction: column; gap: 10px; }
+
+.req-item {
+  padding: 14px 18px;
+  background: var(--bg-card); border: 1px solid var(--card-border);
+  border-radius: 12px; transition: border-color 0.25s;
+}
+.req-item:hover { border-color: var(--card-border-hover); }
+
+.req-body { min-width: 0; }
+.req-text {
+  font-size: 14px; line-height: 1.65; color: var(--text-primary);
+}
+
+/* ===== 提示块 ===== */
+.note-block {
+  margin-top: 14px; padding: 12px 16px;
+  background: rgba(251, 191, 36, 0.06);
+  border: 1px solid rgba(251, 191, 36, 0.18);
+  border-radius: 10px;
+  font-size: 13px; line-height: 1.65; color: var(--text-secondary);
+}
+.note-block strong { color: var(--accent-light); }
+.note-block.info {
+  background: var(--project-color-bg);
+  border-color: var(--project-color-border);
+}
+.note-block.info strong { color: var(--project-color-light); }
+
+.platform-tag {
+  display: inline-block; margin-top: 10px;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.5px;
+  padding: 3px 10px; border-radius: 999px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--card-border);
+  color: var(--text-muted);
+}
+
+/* ===== 按钮对照表 ===== */
+.btn-table-wrap { overflow-x: auto; }
+
+.data-table {
+  width: 100%; border-collapse: collapse;
+  font-size: 13px;
+}
+.data-table th,
+.data-table td {
+  padding: 11px 14px;
+  border: 1px solid var(--card-border);
+  text-align: left; vertical-align: top;
+}
+.data-table th {
+  background: rgba(255,255,255,0.04);
+  font-weight: 700; color: var(--text-secondary);
+  font-size: 12px; letter-spacing: 0.3px;
+}
+.data-table td { color: var(--text-primary); line-height: 1.55; }
+
+.btn-pill {
+  display: inline-block;
+  font-size: 12px; font-weight: 700;
+  padding: 3px 10px; border-radius: 6px;
+  background: var(--project-color-bg);
+  border: 1px solid var(--project-color-border);
+  color: var(--project-color-light);
+  white-space: nowrap;
+}
+
+/* ===== 模式规则 ===== */
+.rule-list {
+  list-style: none; margin-top: 14px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.rule-list li {
+  font-size: 13px; line-height: 1.6; color: var(--text-secondary);
+  padding-left: 16px; position: relative;
+}
+.rule-list li::before {
+  content: '•'; position: absolute; left: 0;
+  color: var(--project-color-light); font-weight: 700;
+}
+
+/* ===== 流程图 ===== */
+.flow-diagram {
+  background: rgba(0,0,0,0.25);
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  padding: 24px 20px;
+  overflow-x: auto;
+}
+.flow-diagram pre {
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  font-size: 12.5px; line-height: 1.7;
+  color: var(--text-secondary);
+  white-space: pre;
+  margin: 0;
+}
+.flow-diagram .highlight { color: var(--project-color-light); }
+
+/* ===== 双模式对比 ===== */
+.mode-split {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  margin: 16px 0;
+}
+.mode-card {
+  padding: 16px; border-radius: 12px;
+  border: 1px solid var(--card-border);
+  background: var(--bg-card);
+}
+.mode-card h4 {
+  font-size: 13px; font-weight: 800; margin-bottom: 10px;
+}
+.mode-card.manual h4 { color: var(--blue-team); }
+.mode-card.random h4 { color: var(--red-team); }
+.mode-card ul {
+  list-style: none; display: flex; flex-direction: column; gap: 6px;
+}
+.mode-card li {
+  font-size: 12px; color: var(--text-secondary); line-height: 1.5;
+  padding-left: 14px; position: relative;
+}
+.mode-card li::before {
+  content: '→'; position: absolute; left: 0;
+  color: var(--text-muted); font-size: 11px;
+}
+
+/* ===== 公式高亮 ===== */
+.formula-box {
+  margin-top: 12px; padding: 12px 16px;
+  background: rgba(124, 58, 237, 0.08);
+  border: 1px solid rgba(167, 139, 250, 0.2);
+  border-radius: 10px;
+  font-size: 13px; color: var(--text-secondary);
+}
+.formula-box code {
+  font-family: ui-monospace, Consolas, monospace;
+  color: #C4B5FD; font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .container { padding-top: 20px; }
+  .mode-split { grid-template-columns: 1fr; }
+  .section-title { font-size: 16px; }
+  .flow-diagram pre { font-size: 11px; }
+}

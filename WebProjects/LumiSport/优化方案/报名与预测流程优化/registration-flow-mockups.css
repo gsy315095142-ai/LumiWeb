@@ -1,0 +1,617 @@
+/* 报名与预测流程 · 界面示意图（参考 Lumi_Sport_Space_Wechat cyber 风格） */
+
+.mockup-wrap {
+  margin: 24px 0 8px;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.22);
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  overflow-x: auto;
+}
+
+.mockup-wrap-title {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--project-color-light);
+  margin-bottom: 16px;
+}
+
+.mockup-row {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.mockup-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.mockup-row--full {
+  width: 100%;
+}
+
+.mockup-row--full .mk-screen-device {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+/* ===== 设备外壳 ===== */
+.mk-device { flex-shrink: 0; }
+
+.mk-device-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.mk-phone {
+  width: 260px;
+  border-radius: 28px;
+  padding: 10px;
+  background: linear-gradient(145deg, #1a1a2e, #0d0d18);
+  border: 2px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+}
+
+.mk-screen-device {
+  width: min(100%, 420px);
+  flex: 1;
+  min-width: 300px;
+}
+
+.mk-screen-wide {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid rgba(0, 255, 255, 0.2);
+  box-shadow: 0 0 32px rgba(0, 255, 255, 0.08);
+}
+
+.mk-screen {
+  border-radius: 20px;
+  overflow: hidden;
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+}
+
+.cyber-bg {
+  background-color: #030308;
+  background-image:
+    radial-gradient(ellipse 120% 70% at 50% -10%, rgba(0, 255, 255, 0.14), transparent 55%),
+    radial-gradient(ellipse 80% 60% at 110% 80%, rgba(255, 0, 180, 0.08), transparent 50%),
+    linear-gradient(165deg, #0a0514 0%, #030308 50%, #050510 100%);
+}
+
+.mk-status {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 14px 2px;
+  font-size: 10px;
+  color: rgba(200, 235, 255, 0.5);
+  flex-shrink: 0;
+}
+
+.mk-nav {
+  text-align: center;
+  padding: 8px 12px 10px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #e8fdff;
+  border-bottom: 1px solid rgba(0, 255, 255, 0.12);
+  flex-shrink: 0;
+  position: relative;
+}
+
+.mk-nav .mk-badge {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 9px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(16, 185, 129, 0.25);
+  color: #6ee7b7;
+  font-weight: 700;
+}
+
+.mk-body {
+  flex: 1;
+  padding: 10px 12px 14px;
+  overflow: hidden;
+}
+
+/* ===== Cyber 卡片 / 按钮 ===== */
+.mk-card {
+  background: rgba(6, 8, 22, 0.88);
+  border-radius: 10px;
+  border: 1px solid rgba(0, 255, 255, 0.22);
+  box-shadow: 0 0 24px rgba(0, 255, 255, 0.06);
+  padding: 12px;
+  margin-bottom: 10px;
+}
+
+.mk-card-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #7ee8ff;
+  margin-bottom: 8px;
+}
+
+.mk-btn {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 8px;
+  cursor: default;
+}
+
+.mk-btn-primary {
+  background: linear-gradient(90deg, #0099cc, #00c8e8);
+  color: #041820;
+}
+
+.mk-btn-cyan {
+  background: rgba(0, 32, 48, 0.75);
+  color: #7ee8ff;
+  border: 1px solid rgba(0, 255, 255, 0.35);
+}
+
+.mk-btn-green {
+  background: linear-gradient(135deg, #059669, #10b981);
+  color: #fff;
+}
+
+.mk-btn-purple {
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  color: #fff;
+}
+
+.mk-btn-orange {
+  background: linear-gradient(135deg, #ea580c, #f97316);
+  color: #fff;
+}
+
+.mk-btn-outline {
+  background: transparent;
+  color: rgba(200, 235, 255, 0.7);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+.mk-btn-sm {
+  padding: 6px 10px;
+  font-size: 10px;
+  width: auto;
+  display: inline-block;
+  margin-right: 6px;
+  margin-bottom: 0;
+}
+
+.mk-btn-row {
+  display: flex;
+  gap: 8px;
+}
+
+.mk-btn-row .mk-btn {
+  flex: 1;
+  width: auto;
+  margin-bottom: 0;
+  font-size: 10px;
+  padding: 8px 6px;
+}
+
+.mk-hint {
+  font-size: 10px;
+  color: rgba(160, 200, 220, 0.6);
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+/* ===== 用户信息 / 扫码 ===== */
+.mk-user-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.mk-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(0, 255, 255, 0.12);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.mk-user-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: #e8fdff;
+}
+
+.mk-coins {
+  display: flex;
+  gap: 10px;
+  font-size: 10px;
+  margin-top: 4px;
+}
+
+.mk-coins span { color: rgba(200, 235, 255, 0.75); }
+.mk-coins .gold { color: #fbbf24; }
+.mk-coins .purple { color: #c4b5fd; }
+
+.mk-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 8px 0;
+}
+
+.mk-chip {
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 10px;
+  font-weight: 600;
+  background: rgba(0, 255, 255, 0.08);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  color: #7ee8ff;
+}
+
+.mk-chip.active {
+  background: rgba(0, 200, 232, 0.25);
+  border-color: #00c8e8;
+  color: #e8fdff;
+}
+
+/* ===== Toast ===== */
+.mk-toast {
+  margin: 12px 8px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: rgba(16, 185, 129, 0.18);
+  border: 1px solid rgba(52, 211, 153, 0.4);
+  text-align: center;
+  animation: mk-toast-in 0.5s ease;
+}
+
+.mk-toast-title {
+  font-size: 13px;
+  font-weight: 800;
+  color: #6ee7b7;
+  margin-bottom: 4px;
+}
+
+.mk-toast-sub {
+  font-size: 11px;
+  color: rgba(200, 235, 255, 0.8);
+}
+
+@keyframes mk-toast-in {
+  from { opacity: 0; transform: translateY(-12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== 对阵模块 ===== */
+.mk-hero {
+  background: rgba(6, 8, 22, 0.88);
+  border-radius: 10px;
+  border: 1px solid rgba(0, 255, 255, 0.28);
+  border-left: 3px solid rgba(0, 240, 255, 0.55);
+  box-shadow: 0 0 32px rgba(0, 255, 255, 0.1);
+  padding: 12px;
+  margin-bottom: 10px;
+}
+
+.mk-hero-label {
+  display: block;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 800;
+  color: #f0faff;
+  margin-bottom: 6px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(0, 255, 255, 0.12);
+}
+
+.mk-hero-meta {
+  font-size: 10px;
+  color: rgba(180, 220, 235, 0.55);
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.mk-vs-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 8px;
+}
+
+.mk-side {
+  flex: 1;
+  text-align: center;
+  padding: 10px 6px;
+  border-radius: 8px;
+}
+
+.mk-side.blue {
+  background: rgba(59, 130, 246, 0.08);
+  border: 1px solid rgba(59, 130, 246, 0.25);
+}
+
+.mk-side.red {
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+}
+
+.mk-side-tag {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-bottom: 4px;
+}
+
+.mk-side.blue .mk-side-tag { background: rgba(59, 130, 246, 0.2); color: #93c5fd; }
+.mk-side.red .mk-side-tag { background: rgba(239, 68, 68, 0.2); color: #fca5a5; }
+
+.mk-side-name {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  color: #e8fdff;
+  min-height: 18px;
+}
+
+.mk-side-name.jumping {
+  animation: mk-name-jump 0.4s ease infinite alternate;
+}
+
+@keyframes mk-name-jump {
+  0% { opacity: 0.4; transform: translateY(0); }
+  100% { opacity: 1; transform: translateY(-3px); }
+}
+
+.mk-vs {
+  font-size: 11px;
+  font-weight: 800;
+  color: rgba(180, 220, 235, 0.45);
+}
+
+.mk-reg-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 6px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 600;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(52, 211, 153, 0.3);
+  color: #6ee7b7;
+  cursor: default;
+}
+
+.mk-reg-badge::after {
+  content: '▾';
+  font-size: 9px;
+  opacity: 0.8;
+}
+
+.mk-dropdown {
+  margin-top: 8px;
+  padding: 8px;
+  border-radius: 8px;
+  background: rgba(4, 10, 22, 0.92);
+  border: 1px solid rgba(0, 255, 255, 0.15);
+}
+
+.mk-dropdown-item {
+  font-size: 10px;
+  color: rgba(220, 245, 255, 0.88);
+  padding: 5px 6px;
+  border-bottom: 1px solid rgba(0, 255, 255, 0.06);
+}
+
+.mk-dropdown-item:last-child { border-bottom: none; }
+
+/* ===== 选手池列表 ===== */
+.mk-pool-list { margin-top: 8px; }
+
+.mk-pool-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 6px;
+  font-size: 10px;
+  color: rgba(220, 245, 255, 0.9);
+  border-bottom: 1px solid rgba(0, 255, 255, 0.08);
+}
+
+.mk-pool-score {
+  font-size: 9px;
+  color: #fbbf24;
+  font-weight: 600;
+}
+
+/* ===== 弹窗 ===== */
+.mk-modal-overlay {
+  position: relative;
+  margin-top: 10px;
+  padding: 16px 10px;
+  background: rgba(0, 0, 0, 0.55);
+  border-radius: 10px;
+}
+
+.mk-modal {
+  background: rgba(6, 8, 22, 0.95);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  border-radius: 12px;
+  padding: 14px;
+  text-align: center;
+}
+
+.mk-modal-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #e8fdff;
+  margin-bottom: 8px;
+}
+
+.mk-modal-text {
+  font-size: 11px;
+  color: rgba(180, 220, 235, 0.7);
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.mk-modal-btns {
+  display: flex;
+  gap: 8px;
+}
+
+.mk-modal-btns .mk-btn { flex: 1; margin-bottom: 0; }
+
+/* ===== 预测进度条 ===== */
+.mk-progress-block { margin: 10px 0; }
+
+.mk-progress-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.mk-progress-labels .blue { color: #60a5fa; }
+.mk-progress-labels .red { color: #f87171; }
+
+.mk-progress-track {
+  height: 10px;
+  border-radius: 5px;
+  overflow: hidden;
+  display: flex;
+  background: rgba(239, 68, 68, 0.25);
+}
+
+.mk-progress-blue {
+  background: linear-gradient(90deg, #2563eb, #60a5fa);
+  transition: width 0.3s;
+}
+
+.mk-progress-red { flex: 1; background: linear-gradient(90deg, #f87171, #dc2626); }
+
+.mk-progress-pct {
+  text-align: center;
+  font-size: 10px;
+  color: rgba(180, 220, 235, 0.6);
+  margin-top: 6px;
+}
+
+/* ===== 倒计时 ===== */
+.mk-countdown {
+  text-align: center;
+  padding: 14px;
+  margin: 10px 0;
+  border-radius: 10px;
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+}
+
+.mk-countdown-num {
+  font-size: 28px;
+  font-weight: 900;
+  color: #fbbf24;
+  font-family: ui-monospace, Consolas, monospace;
+}
+
+.mk-countdown-label {
+  font-size: 10px;
+  color: rgba(251, 191, 36, 0.8);
+  margin-top: 4px;
+}
+
+/* ===== 下拉选择 ===== */
+.mk-select-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.mk-select-row .mk-btn { flex: 1; margin-bottom: 0; }
+
+.mk-select {
+  flex-shrink: 0;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 10px;
+  font-weight: 600;
+  background: rgba(0, 8, 20, 0.85);
+  border: 1px solid rgba(0, 255, 255, 0.35);
+  color: #7ee8ff;
+}
+
+/* ===== 投屏宽屏 ===== */
+.mk-screen-body {
+  padding: 16px 20px;
+  min-height: 200px;
+}
+
+.mk-screen-title {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 800;
+  color: #f0faff;
+  margin-bottom: 4px;
+}
+
+.mk-screen-sub {
+  text-align: center;
+  font-size: 11px;
+  color: rgba(180, 220, 235, 0.5);
+  margin-bottom: 16px;
+}
+
+.mk-screen .mk-vs-row { max-width: 360px; margin: 0 auto; }
+
+.mk-screen .mk-side-name { font-size: 15px; }
+
+.mk-alert {
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  text-align: center;
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #fca5a5;
+  margin-top: 10px;
+}
+
+@media (max-width: 640px) {
+  .mk-phone { width: 240px; }
+  .mk-screen { min-height: 380px; }
+  .mockup-row { gap: 14px; }
+}
